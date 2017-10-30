@@ -10,7 +10,7 @@ Each project has its own sub-repository with scripts and a README.md containing 
 3. In case there are several scripts, the order in which they should be run.
 
 4. What script 1 does and what its output looks like. And why.
-  *If applicable: What script 2 does and what the output looks like. And why.
-  *If applicable: ...
-  *If applicable: What script n-1 does and what the output looks like. And why.
-  *If applicable: What script n does and what the output looks like. And why.
+ *If applicable: What script 2 does and what the output looks like. And why.
+ *If applicable: ...
+ *If applicable: What script n-1 does and what the output looks like. And why.
+ *If applicable: What script n does and what the output looks like. And why.
