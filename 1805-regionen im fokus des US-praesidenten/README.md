@@ -16,7 +16,7 @@
    * The script `stateOfUnion.R` creates different versions of the text corpus for the bash script, and processes and visualizes data extracted with the bash-script.
   
 6. References
-  * Data sources: [R-library `sotu`](https://github.com/statsmaths/sotu), the White House [https://www.whitehouse.gov/briefings-statements/], [The American Presidency Project](http://www.presidency.ucsb.edu/sou.php), see point 3. above
+  * Data sources: [R-library `sotu`](https://github.com/statsmaths/sotu), the [White House] (https://www.whitehouse.gov/briefings-statements/), [The American Presidency Project](http://www.presidency.ucsb.edu/sou.php), see point 3. above
   * Code: R Core Team (2017), [R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria](http://www.R-project.org)
 
 
