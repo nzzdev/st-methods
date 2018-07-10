@@ -1,0 +1,33 @@
+Country,Teamname,MatchesPlayed,AttemptedClearances,ClearancesCompletionPerc,ClearancesCompletionAbs,Tackles,TacklesWon,TacklesSuffered,Saves
+USA,USA,4,69,77%,53,82,48,73,27
+GER,Germany,7,104,85%,88,110,91,125,24
+ALG,Algeria,4,82,85%,69,97,51,70,23
+SUI,Switzerland,4,82,74%,60,77,65,97,22
+COL,Colombia,5,56,84%,47,85,55,72,22
+CRC,Costa Rica,5,81,77%,62,104,39,63,21
+NGA,Nigeria,4,74,90%,66,83,55,89,21
+ARG,Argentina,7,98,87%,85,118,75,107,19
+NED,Netherlands,7,93,88%,81,92,72,96,18
+CHI,Chile,4,74,83%,61,83,60,89,18
+ECU,Ecuador,3,37,92%,34,44,22,34,18
+CMR,Cameroon,3,41,88%,36,38,33,45,15
+BIH,Bosnia and Herzegovina,3,39,72%,28,60,52,75,13
+BEL,Belgium,5,59,95%,56,61,43,55,13
+IRN,Iran,3,67,84%,56,72,18,31,12
+KOR,Korea Republic,3,38,85%,32,42,31,41,12
+ITA,Italy,3,33,73%,24,37,31,47,12
+GHA,Ghana,3,28,86%,24,31,25,30,12
+GRE,Greece,4,54,78%,42,84,66,98,11
+HON,Honduras,3,36,89%,32,69,37,55,11
+AUS,Australia,3,32,88%,28,47,17,36,11
+BRA,Brazil,7,93,79%,73,141,95,134,10
+FRA,France,5,50,82%,41,65,43,67,10
+MEX,Mexico,4,68,77%,52,68,46,65,10
+URU,Uruguay,4,58,82%,47,84,28,36,10
+RUS,Russia,3,32,91%,29,33,31,39,10
+CIV,Côte d'Ivoire,3,51,85%,43,60,42,60,8
+JPN,Japan,3,23,83%,19,44,24,38,8
+ESP,Spain,3,29,87%,25,31,26,38,7
+POR,Portugal,3,21,67%,14,35,22,35,7
+ENG,England,3,39,83%,32,33,35,45,6
+CRO,Croatia,3,35,100%,35,59,21,35,5

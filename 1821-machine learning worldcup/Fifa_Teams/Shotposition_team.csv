@@ -1,0 +1,33 @@
+Country,Teamname,MatchesPlayed,Attempts,AttemptsOnTargetInsideArea,AttemptsOnTargetOutsideArea
+BRA,Brazil,7,111,37,35
+ARG,Argentina,7,105,35,28
+GER,Germany,7,98,47,24
+BEL,Belgium,5,91,29,29
+FRA,France,5,90,43,14
+NED,Netherlands,7,90,37,27
+SUI,Switzerland,4,65,15,25
+GHA,Ghana,3,59,14,10
+GRE,Greece,4,58,15,15
+COL,Colombia,5,57,19,19
+POR,Portugal,3,53,12,16
+NGA,Nigeria,4,50,11,21
+URU,Uruguay,4,49,11,18
+BIH,Bosnia and Herzegovina,3,47,16,14
+CIV,Côte d'Ivoire,3,47,15,17
+JPN,Japan,3,46,7,21
+MEX,Mexico,4,46,11,11
+CRO,Croatia,3,41,18,5
+USA,USA,4,41,14,13
+CMR,Cameroon,3,40,8,9
+ENG,England,3,39,8,11
+RUS,Russia,3,39,8,15
+CHI,Chile,4,38,14,5
+CRC,Costa Rica,5,38,10,8
+KOR,Korea Republic,3,37,13,11
+ALG,Algeria,4,37,15,7
+ESP,Spain,3,35,16,7
+HON,Honduras,3,33,5,12
+ITA,Italy,3,31,4,12
+ECU,Ecuador,3,29,8,10
+AUS,Australia,3,27,10,4
+IRN,Iran,3,22,6,6

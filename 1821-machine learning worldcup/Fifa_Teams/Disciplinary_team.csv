@@ -1,0 +1,33 @@
+Country,Teamname,MatchesPlayed,Yellow,YellowRed,Red,FoulsCommitted,FoulsSuffered,FoulsCausingPenalty
+URU,Uruguay,4,8,0,1,74,63,0
+BEL,Belgium,5,7,0,1,86,60,1
+ECU,Ecuador,3,5,0,1,49,28,0
+CMR,Cameroon,3,4,0,1,37,37,0
+CRO,Croatia,3,4,0,1,48,27,1
+ITA,Italy,3,3,0,1,41,49,0
+POR,Portugal,3,2,0,1,46,35,1
+CRC,Costa Rica,5,10,1,0,94,75,1
+GRE,Greece,4,6,1,0,61,82,0
+HON,Honduras,3,5,1,0,46,46,1
+BRA,Brazil,7,14,0,0,123,129,2
+NED,Netherlands,7,11,0,0,126,82,2
+MEX,Mexico,4,8,0,0,53,50,1
+ARG,Argentina,7,8,0,0,80,116,0
+CIV,Côte d'Ivoire,3,7,0,0,49,36,1
+CHI,Chile,4,7,0,0,61,80,0
+GHA,Ghana,3,6,0,0,43,43,0
+KOR,Korea Republic,3,6,0,0,36,42,0
+AUS,Australia,3,6,0,0,50,39,0
+ALG,Algeria,4,6,0,0,69,55,0
+GER,Germany,7,6,0,0,91,100,0
+FRA,France,5,5,0,0,62,67,0
+COL,Colombia,5,5,0,0,91,84,0
+IRN,Iran,3,4,0,0,49,40,0
+JPN,Japan,3,4,0,0,46,47,1
+ENG,England,3,4,0,0,37,44,0
+RUS,Russia,3,4,0,0,38,34,0
+USA,USA,4,4,0,0,49,56,0
+ESP,Spain,3,3,0,0,28,45,0
+BIH,Bosnia and Herzegovina,3,3,0,0,41,34,0
+SUI,Switzerland,4,3,0,0,67,65,1
+NGA,Nigeria,4,3,0,0,57,43,0

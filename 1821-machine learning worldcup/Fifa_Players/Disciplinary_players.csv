@@ -1,0 +1,549 @@
+Country,Spielername,MatchesPlayed,Yellow,YellowRed,Red,FoulsCommitted,FoulsSuffered,FoulsCausingPenalty
+ECU,Antonio VALENCIA,3,1,0,1,11,2,0
+BEL,Steven DEFOUR,1,0,0,1,2,1,0
+CMR,Alexandre SONG,2,0,0,1,3,3,0
+POR,PEPE,2,0,0,1,4,3,0
+URU,Maximiliano PEREIRA,3,0,0,1,3,6,0
+ITA,Claudio MARCHISIO,3,0,0,1,7,5,0
+CRO,Ante REBIC,3,0,0,1,3,0,0
+BRA,Thiago Silva,6,3,0,0,5,6,1
+URU,Diego LUGANO,1,2,0,0,1,3,0
+HON,Wilson PALACIOS,2,0,1,0,3,8,1
+AUS,Tim CAHILL,2,2,0,0,7,1,0
+CIV,Didier ZOKORA,2,2,0,0,1,0,0
+GHA,Sulley Muntari,2,2,0,0,5,6,0
+NED,Klaas Jan HUNTELAAR,3,2,0,0,3,0,0
+AUS,Mile JEDINAK,3,2,0,0,6,4,0
+GRE,Konstantinos KATSOURANIS,3,0,1,0,5,1,0
+CHI,Francisco SILVA,3,2,0,0,10,9,0
+NED,Jonathan de Guzman,3,2,0,0,8,0,0
+ITA,Mario BALOTELLI,3,2,0,0,8,3,0
+MEX,Jose VAZQUEZ,3,2,0,0,6,3,0
+BEL,Toby ALDERWEIRELD,4,2,0,0,7,6,0
+CRC,Óscar Duarte,4,0,1,0,9,2,0
+CHI,Eugenio MENA,4,2,0,0,5,3,0
+FRA,Yohan Cabaye,4,2,0,0,9,3,0
+MEX,Rafael MARQUEZ,4,2,0,0,3,5,1
+MEX,Paul Aguilar,4,2,0,0,7,8,0
+CRC,Giancarlo GONZALEZ,5,2,0,0,4,4,0
+NED,Robin VAN PERSIE,6,2,0,0,18,7,0
+GER,Bastian SCHWEINSTEIGER,6,2,0,0,12,16,0
+BRA,LUIZ GUSTAVO,6,2,0,0,15,14,0
+NED,Bruno MARTINS INDI,6,2,0,0,11,3,0
+ARG,Marcos ROJO,6,2,0,0,7,6,0
+GER,Benedikt HOEWEDES,7,2,0,0,10,6,0
+CRC,Esteban Granados,0,1,0,0,0,0,0
+ALG,Liassine CADAMURO,0,1,0,0,0,0,0
+IRN,Karim ANSARI FARD,1,1,0,0,1,0,0
+ITA,Mattia DE SCIGLIO,1,1,0,0,3,0,0
+GHA,Abdul MAJEED WARIS,1,1,0,0,3,3,0
+HON,Jerry Palacios,1,1,0,0,1,1,0
+CRO,EDUARDO,1,1,0,0,0,0,0
+AUS,Mark MILLIGAN,1,1,0,0,2,0,0
+SUI,Gelson FERNANDES,1,1,0,0,2,0,0
+URU,Walter GARGANO,1,1,0,0,2,0,0
+JPN,Masato Morishige,1,1,0,0,2,1,0
+BRA,DANTE,1,1,0,0,1,0,0
+HON,Luis GARRIDO,2,1,0,0,1,2,0
+BIH,Haris MEDUNJANIN,2,1,0,0,1,0,0
+CMR,Dany Nounkeu,2,1,0,0,2,0,0
+JPN,Yasuyuki KONNO,2,1,0,0,5,1,1
+ESP,Iker CASILLAS,2,1,0,0,0,0,0
+RUS,Aleksey KOZLOV,2,1,0,0,4,0,0
+GRE,Andreas SAMARIS,2,1,0,0,2,4,0
+CMR,Edgar SALLI,2,1,0,0,2,2,0
+CRC,Johnny ACOSTA,2,1,0,0,1,3,0
+BEL,Moussa DEMBELE,2,1,0,0,5,5,0
+GHA,Harrison Afful,2,1,0,0,3,3,0
+ALG,Djamel MESBAH,2,1,0,0,5,2,0
+HON,Jerry BENGTSON,3,1,0,0,6,2,0
+USA,Geoff CAMERON,3,1,0,0,3,4,0
+CMR,Eyong ENOH,3,1,0,0,8,4,0
+GHA,Mohammed RABIU,3,1,0,0,8,2,0
+CRO,Dejan LOVREN,3,1,0,0,5,2,1
+KOR,HONG Jeongho,3,1,0,0,1,1,0
+KOR,SON Heungmin,3,1,0,0,3,5,0
+KOR,KOO Jacheol,3,1,0,0,5,6,0
+CIV,Ismael TIOTE,3,1,0,0,5,3,0
+ECU,Jefferson MONTERO,3,1,0,0,3,4,0
+CRO,Ivan Rakitic,3,1,0,0,5,0,0
+CRO,Vedran Corluka,3,1,0,0,3,3,0
+RUS,Dmitry Kombarov,3,1,0,0,4,5,0
+ENG,Raheem Sterling,3,1,0,0,6,4,0
+ECU,Juan PAREDES,3,1,0,0,3,5,0
+ECU,Frickson ERAZO,3,1,0,0,1,0,0
+GHA,Jordan Ayew,3,1,0,0,3,1,0
+KOR,LEE Yong,3,1,0,0,4,2,0
+ENG,Adam Lallana,3,1,0,0,2,2,0
+RUS,Oleg Shatov,3,1,0,0,2,2,0
+RUS,Denis Glushakov,3,1,0,0,5,2,0
+BIH,Muhamed BESIC,3,1,0,0,10,2,0
+ENG,Ross Barkley,3,1,0,0,2,1,0
+ECU,Enner Valencia,3,1,0,0,6,7,0
+CIV,Serey DIE,3,1,0,0,6,2,0
+URU,José María Giménez,3,1,0,0,5,4,0
+ALG,Nabil GHILAS,3,1,0,0,2,0,0
+USA,Kyle BECKERMAN,3,1,0,0,6,4,0
+IRN,Javad NEKOUNAM,3,1,0,0,2,2,0
+COL,Fredy GUARIN,3,1,0,0,6,1,0
+POR,JOAO MOUTINHO,3,1,0,0,6,5,0
+CMR,Stéphane M'Bia,3,1,0,0,5,7,0
+CHI,Mauricio Pinilla,3,1,0,0,2,1,0
+ESP,Xabi Alonso,3,1,0,0,5,2,0
+CIV,Souleymane BAMBA,3,1,0,0,4,1,0
+POR,JOAO PEREIRA,3,1,0,0,2,1,1
+CIV,Didier Drogba,3,1,0,0,6,6,0
+ENG,Steven Gerrard,3,1,0,0,2,0,0
+ALG,Madjid BOUGUERRA,3,1,0,0,1,2,0
+IRN,Masoud Shojaei,3,1,0,0,6,7,0
+HON,Victor BERNARDEZ,3,1,0,0,5,2,0
+HON,Maynor FIGUEROA,3,1,0,0,8,5,0
+ARG,Martín Demichelis,3,1,0,0,4,2,0
+USA,Omar Gonzalez,3,1,0,0,2,2,0
+HON,Boniek GARCIA,3,1,0,0,2,8,0
+IRN,Andranik TIMOTIAN,3,1,0,0,12,3,0
+AUS,Matthew SPIRANOVIC,3,1,0,0,5,3,0
+CIV,Salomon Kalou,3,1,0,0,7,2,0
+ESP,Sergio RAMOS,3,1,0,0,4,3,0
+BIH,Emir SPAHIC,3,1,0,0,3,3,0
+BRA,JÔ,3,1,0,0,1,2,0
+KOR,KI Sungyueng,3,1,0,0,5,6,0
+CHI,Arturo VIDAL,3,1,0,0,8,9,0
+JPN,Makoto HASEBE,3,1,0,0,3,5,0
+JPN,Maya YOSHIDA,3,1,0,0,5,5,0
+KOR,Han Kook-Young,3,1,0,0,3,2,0
+ALG,Nabil BENTALEB,3,1,0,0,3,1,0
+CRC,Jose CUBERO,4,1,0,0,3,1,0
+COL,Carlos SANCHEZ,4,1,0,0,4,3,0
+URU,Egidio AREVALO,4,1,0,0,8,6,0
+URU,Martin CACERES,4,1,0,0,6,6,0
+MEX,Andres GUARDADO,4,1,0,0,7,6,0
+GRE,Vasileios TOROSIDIS,4,1,0,0,6,6,0
+SUI,Johan DJOUROU,4,1,0,0,5,3,1
+URU,Fernando MUSLERA,4,1,0,0,0,1,0
+URU,Diego GODIN,4,1,0,0,6,9,0
+MEX,Hector MORENO,4,1,0,0,4,1,0
+NGA,John Obi MIKEL,4,1,0,0,11,7,0
+FRA,Patrice Evra,4,1,0,0,5,6,0
+CRC,Michael UMANA,4,1,0,0,4,2,0
+GRE,Dimitrios SALPINGIDIS,4,1,0,0,4,6,0
+BEL,Vincent KOMPANY,4,1,0,0,4,1,0
+USA,Jermaine JONES,4,1,0,0,8,11,0
+BRA,Dani ALVES,4,1,0,0,4,6,0
+COL,Mario YEPES,4,1,0,0,2,2,0
+NGA,Juwon OSHANIWA,4,1,0,0,7,4,0
+GRE,Sokratis PAPASTATHOPOULOS,4,1,0,0,5,5,0
+GRE,Georgios SAMARAS,4,1,0,0,7,21,0
+ALG,Rafik HALLICHE,4,1,0,0,4,0,0
+BEL,Axel WITSEL,4,1,0,0,4,12,0
+GRE,Konstantinos MANOLAS,4,1,0,0,6,6,0
+CHI,Charles ARANGUIZ,4,1,0,0,3,5,0
+SUI,Granit XHAKA,4,1,0,0,7,3,0
+NGA,Kenneth OMERUO,4,1,0,0,3,3,0
+BRA,Neymar,5,1,0,0,8,18,0
+CRC,Yeltsin TEJEDA,5,1,0,0,6,2,0
+BEL,Jan VERTONGHEN,5,1,0,0,4,3,1
+FRA,Blaise Matuidi,5,1,0,0,9,9,0
+FRA,Paul Pogba,5,1,0,0,6,10,0
+GER,Sami KHEDIRA,5,1,0,0,6,7,0
+CRC,Bryan RUIZ,5,1,0,0,12,10,0
+CRC,Junior Díaz,5,1,0,0,8,10,1
+BRA,FERNANDINHO,5,1,0,0,14,7,0
+COL,Pablo ARMERO,5,1,0,0,8,4,0
+CRC,Keylor NAVAS,5,1,0,0,0,3,0
+ARG,Sergio Agüero,5,1,0,0,4,3,0
+ARG,Angel DI MARIA,5,1,0,0,3,10,0
+COL,James RODRIGUEZ,5,1,0,0,10,12,0
+BEL,Eden HAZARD,5,1,0,0,6,10,0
+BRA,Hulk,6,1,0,0,8,14,0
+NED,Daley Blind,7,1,0,0,10,5,0
+BRA,Oscar,7,1,0,0,9,13,0
+NED,Stefan DE VRIJ,7,1,0,0,10,2,1
+BRA,Ramires,7,1,0,0,9,6,0
+ARG,Ezequiel GARAY,7,1,0,0,8,1,0
+ARG,Lucas BIGLIA,7,1,0,0,6,9,0
+GER,Philipp LAHM,7,1,0,0,3,9,0
+NED,Arjen ROBBEN,7,1,0,0,10,28,0
+BRA,JULIO CESAR,7,1,0,0,1,1,1
+ARG,Javier MASCHERANO,7,1,0,0,9,17,0
+USA,Brad DAVIS,1,0,0,0,1,0,0
+CIV,Kolo TOURÉ,1,0,0,0,2,1,0
+GHA,Michael ESSIEN,1,0,0,0,1,0,0
+CMR,Samuel ETOO,1,0,0,0,0,1,0
+ENG,Frank Lampard,1,0,0,0,1,2,0
+CRC,Roy MILLER,1,0,0,0,2,1,0
+ALG,Hassan Yebda,1,0,0,0,1,0,0
+CMR,Jean MAKOUN,1,0,0,0,0,2,0
+POR,VIEIRINHA,1,0,0,0,1,0,0
+ESP,JUANFRAN,1,0,0,0,1,2,0
+ENG,James Milner,1,0,0,0,1,0,0
+BRA,MAXWELL,1,0,0,0,1,0,0
+CMR,Landry N'Guémo,1,0,0,0,2,6,0
+BEL,Anthony Vanden Borre,1,0,0,0,1,1,0
+FRA,Rio Mavuba,1,0,0,0,1,0,0
+JPN,Toshihiro AOYAMA,1,0,0,0,2,0,0
+URU,Jorge FUCILE,1,0,0,0,1,0,0
+GHA,Daniel Opare,1,0,0,0,3,2,0
+POR,FABIO COENTRAO,1,0,0,0,1,0,0
+ESP,Javi MARTÍNEZ,1,0,0,0,1,1,0
+ESP,Juan Mata,1,0,0,0,1,0,0
+ENG,Ben FOSTER,1,0,0,0,0,1,0
+NED,Paul Verhaegh,1,0,0,0,1,1,0
+FRA,Bacary SAGNA,1,0,0,0,0,1,0
+ITA,Ignazio ABATE,1,0,0,0,3,2,0
+COL,Carlos VALDES,1,0,0,0,2,0,0
+BEL,Nicolas LOMBAERTS,1,0,0,0,2,0,0
+BEL,Thomas VERMAELEN,1,0,0,0,1,0,0
+ESP,Gerard Piqué,1,0,0,0,1,1,0
+CRC,Dave MYRIE,1,0,0,0,0,1,0
+ESP,David Villa,1,0,0,0,2,2,0
+POR,Ruben AMORIM,1,0,0,0,2,1,0
+MEX,Carlos Peña,1,0,0,0,0,1,0
+ECU,Joao Rojas,1,0,0,0,1,0,0
+HON,Mario MARTINEZ,1,0,0,0,0,1,0
+HON,Osman CHAVEZ,1,0,0,0,0,1,0
+SUI,Valentin STOCKER,1,0,0,0,1,0,0
+CIV,Didier Konan,1,0,0,0,0,1,0
+NED,Leroy FER,1,0,0,0,1,0,0
+ITA,Leonardo BONUCCI,1,0,0,0,0,1,0
+CMR,Henri BEDIMO,1,0,0,0,1,2,0
+NGA,Ramon AZEEZ,1,0,0,0,0,2,0
+FRA,Lucas DIGNE,1,0,0,0,1,4,0
+USA,John Brooks,1,0,0,0,0,1,0
+BIH,Anel HADZIC,1,0,0,0,1,0,0
+ENG,Rickie Lambert,1,0,0,0,1,0,0
+COL,Eder BALANTA,1,0,0,0,2,0,0
+AUS,Ivan FRANJIC,1,0,0,0,0,1,0
+USA,Julian GREEN,1,0,0,0,0,1,0
+NGA,Ruben GABRIEL,1,0,0,0,2,0,0
+GER,Julian DRAXLER,1,0,0,0,1,0,0
+BIH,Ognjen VRANJES,1,0,0,0,1,2,0
+BIH,Avdija VRSAJEVIC,1,0,0,0,1,0,0
+CRO,Sammir,1,0,0,0,2,1,0
+GRE,Panagiotis GLYKOS,1,0,0,0,0,1,0
+NGA,Godfrey OBOABONA,1,0,0,0,1,0,0
+ENG,Chris Smalling,1,0,0,0,4,0,0
+ENG,Phil JONES,1,0,0,0,2,3,0
+SUI,Michael LANG,1,0,0,0,1,0,0
+ARG,Hugo CAMPAGNARO,1,0,0,0,0,2,0
+MEX,Javier AQUINO,1,0,0,0,0,1,0
+CIV,Max Gradel,1,0,0,0,2,2,0
+CMR,Allan Nyom,1,0,0,0,0,1,0
+ARG,Ricardo ALVAREZ,1,0,0,0,0,2,0
+ENG,Luke SHAW,1,0,0,0,1,3,0
+COL,Carlos Bacca,1,0,0,0,2,1,0
+COL,Carlos Carbonero,1,0,0,0,2,2,0
+CIV,Giovanni Sio,1,0,0,0,2,1,1
+ECU,Renato Ibarra,1,0,0,0,2,1,0
+ALG,Riyad MAHREZ,1,0,0,0,3,3,0
+FRA,Morgan SCHNEIDERLIN,1,0,0,0,0,1,0
+CRO,Marcelo BROZOVIC,1,0,0,0,1,0,0
+BEL,Adnan JANUZAJ,1,0,0,0,1,2,0
+ITA,Marco PAROLO,2,0,0,0,0,1,0
+BIH,Tino Sven SUSIC,2,0,0,0,2,1,0
+GHA,Fatawu DAUDA,2,0,0,0,0,1,0
+BIH,Sead KOLASINAC,2,0,0,0,4,2,0
+POR,William,2,0,0,0,7,1,0
+USA,Chris Wondolowski,2,0,0,0,1,1,0
+ECU,Carlos GRUEZO,2,0,0,0,2,1,0
+KOR,JI Dongwon,2,0,0,0,2,0,0
+HON,Andy Najar,2,0,0,0,0,2,0
+CRO,Šime VRSALJKO,2,0,0,0,5,1,0
+ENG,Jack Wilshere,2,0,0,0,1,2,0
+ARG,José Basanta,2,0,0,0,3,1,0
+ECU,Oswaldo MINDA,2,0,0,0,2,0,0
+ALG,Mehdi MOSTEFA,2,0,0,0,5,2,0
+ENG,Jordan Henderson,2,0,0,0,1,1,0
+ECU,Michael ARROYO,2,0,0,0,2,1,0
+BIH,Izet Hajrovic,2,0,0,0,2,3,0
+SUI,Fabian SCHAER,2,0,0,0,1,1,0
+ALG,Faouzi GHOULAM,2,0,0,0,2,0,0
+RUS,Andrey ESHCHENKO,2,0,0,0,1,0,0
+ITA,Marco VERRATTI,2,0,0,0,4,4,0
+NED,Jordy CLASIE,2,0,0,0,2,1,0
+RUS,Maksim Kanunnikov,2,0,0,0,4,2,0
+GRE,Ioannis Fetfazidis,2,0,0,0,3,0,0
+BIH,Senad LULIC,2,0,0,0,2,1,0
+ESP,Diego COSTA,2,0,0,0,1,2,0
+CRO,Mario MANDZUKIC,2,0,0,0,3,2,0
+BIH,Edin VISCA,2,0,0,0,1,0,0
+BIH,Toni SUNJIC,2,0,0,0,2,1,0
+ALG,Saphir TAIDER,2,0,0,0,4,7,0
+AUS,Adam TAGGART,2,0,0,0,1,0,0
+CRO,Nikica Jelavic,2,0,0,0,4,0,0
+ESP,PEDRO,2,0,0,0,2,6,0
+CMR,Joel Matip,2,0,0,0,3,1,0
+CMR,Vincent Aboubakar,2,0,0,0,1,1,0
+KOR,KIM Shinwook,2,0,0,0,1,4,0
+ESP,Sergio BUSQUETS,2,0,0,0,1,3,0
+ENG,Leighton Baines,2,0,0,0,2,1,0
+ITA,Ciro IMMOBILE,2,0,0,0,3,1,0
+NED,Joel VELTMAN,2,0,0,0,2,0,0
+ESP,Koke,2,0,0,0,0,2,0
+NGA,Michael BABATUNDE,2,0,0,0,3,2,0
+URU,Gaston RAMIREZ,2,0,0,0,3,1,0
+AUS,Oliver BOZANIC,2,0,0,0,2,2,0
+ESP,Santi Cazorla,2,0,0,0,0,2,0
+HON,Juan Carlos GARCIA,2,0,0,0,1,3,0
+AUS,James TROISI,2,0,0,0,1,1,0
+CMR,Benoit ASSOU EKOTTO,2,0,0,0,3,1,0
+GRE,Lazaros CHRISTODOULOPOULOS,2,0,0,0,0,4,0
+BIH,Sejad SALIHOVIC,2,0,0,0,0,1,0
+FRA,Loïc Rémy,2,0,0,0,0,1,0
+BIH,Mensur MUJDZA,2,0,0,0,4,2,0
+ENG,Phil Jagielka,2,0,0,0,1,1,0
+HON,Emilio IZAGUIRRE,2,0,0,0,2,0,0
+GHA,Mubarak WAKASO,2,0,0,0,2,1,0
+BIH,Zvjezdan MISIMOVIC,2,0,0,0,0,3,0
+RUS,Igor DENISOV,2,0,0,0,1,2,0
+HON,Marvin CHAVEZ,2,0,0,0,3,2,0
+MEX,Carlos SALCIDO,2,0,0,0,3,0,0
+POR,VARELA,2,0,0,0,1,1,0
+URU,Luis SUAREZ,2,0,0,0,7,2,0
+ESP,César AZPILICUETA,2,0,0,0,2,0,0
+CMR,Aurélien Chedjou,2,0,0,0,1,1,0
+GHA,Emmanuel Agyemang Badu,2,0,0,0,1,3,0
+JPN,Yuya OSAKO,2,0,0,0,3,3,0
+CRC,Michael BARRANTES,2,0,0,0,2,1,0
+ENG,Danny Welbeck,2,0,0,0,1,3,0
+NGA,Victor MOSES,2,0,0,0,4,3,0
+POR,Ricardo Costa,2,0,0,0,3,2,0
+ITA,Daniele DE ROSSI,2,0,0,0,3,2,0
+CHI,Jean Beausejour,2,0,0,0,1,0,0
+POR,RAUL MEIRELES,2,0,0,0,2,0,0
+CRO,Danijel Pranjic,2,0,0,0,1,1,0
+KOR,PARK Chuyoung,2,0,0,0,4,1,0
+ESP,Cesc FABREGAS,2,0,0,0,1,0,0
+ENG,Glen Johnson,2,0,0,0,1,3,0
+GHA,Kevin-Prince BOATENG,2,0,0,0,2,0,0
+KOR,JUNG Sungryong,2,0,0,0,0,1,0
+AUS,Matt McKAY,2,0,0,0,3,2,0
+SUI,Steve VON BERGEN,2,0,0,0,0,2,0
+GER,Lukas PODOLSKI,2,0,0,0,0,1,0
+URU,Diego FORLAN,2,0,0,0,1,0,0
+NGA,Shola AMEOBI,2,0,0,0,2,1,0
+JPN,Yasuhito ENDO,2,0,0,0,2,0,0
+ITA,Antonio Cassano,2,0,0,0,0,3,0
+CIV,Boubacar BARRY,3,0,0,0,0,1,0
+CRO,Stipe PLETIKOSA,3,0,0,0,0,1,0
+JPN,Yoshito OKUBO,3,0,0,0,4,7,0
+BRA,Maicon,3,0,0,0,2,4,0
+ECU,Jorge GUAGUA,3,0,0,0,4,3,0
+AUS,Alex WILKINSON,3,0,0,0,4,0,0
+ITA,Thiago MOTTA,3,0,0,0,0,3,0
+ITA,Andrea PIRLO,3,0,0,0,2,10,0
+AUS,Mark BRESCIANO,3,0,0,0,4,2,0
+ESP,Andrés INIESTA,3,0,0,0,3,8,0
+ESP,Fernando Torres,3,0,0,0,2,3,0
+ECU,Walter AYOVI,3,0,0,0,4,1,0
+RUS,Sergey IGNASHEVICH,3,0,0,0,2,3,0
+RUS,Vasily Berezutski,3,0,0,0,1,1,0
+RUS,Aleksandr Kerzhakov,3,0,0,0,1,2,0
+CRO,Ivica Olic,3,0,0,0,6,0,0
+IRN,Ashkan DEJAGAH,3,0,0,0,3,6,0
+ENG,Wayne Rooney,3,0,0,0,3,6,0
+CIV,Yaya Touré,3,0,0,0,1,4,0
+COL,Abel AGUILAR,3,0,0,0,6,3,0
+CIV,Arthur BOKA,3,0,0,0,3,2,0
+ESP,David SILVA,3,0,0,0,0,5,0
+POR,MIGUEL VELOSO,3,0,0,0,1,3,0
+COL,Adrián Ramos,3,0,0,0,6,2,0
+POR,Cristiano Ronaldo,3,0,0,0,2,10,0
+CRO,Darijo Srna,3,0,0,0,4,3,0
+CHI,Jorge VALDIVIA,3,0,0,0,1,3,0
+IRN,Amir Hossein Sadeghi,3,0,0,0,2,1,0
+GHA,Asamoah Gyan,3,0,0,0,3,8,0
+POR,BRUNO ALVES,3,0,0,0,5,1,0
+ITA,Andrea BARZAGLI,3,0,0,0,3,1,0
+CMR,Pierre Webó,3,0,0,0,1,0,0
+ITA,Giorgio CHIELLINI,3,0,0,0,1,9,0
+KOR,LEE Keunho,3,0,0,0,0,1,0
+KOR,YUN Sukyoung,3,0,0,0,3,5,0
+HON,Carlo COSTLY,3,0,0,0,6,4,0
+ECU,Christian NOBOA,3,0,0,0,6,1,0
+CIV,Gervinho,3,0,0,0,1,4,0
+ITA,Matteo DARMIAN,3,0,0,0,4,4,0
+JPN,Shinji OKAZAKI,3,0,0,0,8,7,0
+KOR,LEE Chungyong,3,0,0,0,3,3,0
+JPN,Atsuto UCHIDA,3,0,0,0,1,3,0
+JPN,Shinji KAGAWA,3,0,0,0,2,3,0
+POR,Nani,3,0,0,0,5,2,0
+CRO,Luka Modric,3,0,0,0,2,7,0
+IRN,Mehrdad POOLADI,3,0,0,0,2,6,0
+IRN,Pejman MONTAZERI,3,0,0,0,3,2,0
+ECU,Felipe Caicedo,3,0,0,0,2,1,0
+SUI,Blerim DZEMAILI,3,0,0,0,3,1,0
+RUS,Aleksandr Samedov,3,0,0,0,1,6,0
+CMR,Charles ITANDJE,3,0,0,0,0,1,0
+CRC,Randall BRENES,3,0,0,0,4,0,0
+ALG,Carl MEDJANI,3,0,0,0,8,3,0
+BRA,Hernanes,3,0,0,0,4,2,0
+JPN,Keisuke HONDA,3,0,0,0,2,10,0
+HON,Jorge CLAROS,3,0,0,0,1,3,0
+URU,Alvaro PEREIRA,3,0,0,0,7,5,0
+RUS,Victor FAYZULIN,3,0,0,0,1,7,0
+BIH,Edin DZEKO,3,0,0,0,5,5,0
+BIH,Vedad IBISEVIC,3,0,0,0,0,1,0
+BIH,Miralem PJANIC,3,0,0,0,2,7,0
+URU,Nicolás Lodeiro,3,0,0,0,2,0,0
+RUS,Alan Dzagoev,3,0,0,0,2,0,0
+ECU,Alexander DOMINGUEZ,3,0,0,0,0,1,0
+HON,Roger ESPINOZA,3,0,0,0,4,1,0
+IRN,Khosro HEYDARI,3,0,0,0,1,1,0
+AUS,Jason DAVIDSON,3,0,0,0,7,5,0
+AUS,Ryan McGOWAN,3,0,0,0,2,3,0
+AUS,Tommy OAR,3,0,0,0,1,5,0
+ENG,Daniel Sturridge,3,0,0,0,2,7,0
+CMR,Nicolas N'Koulou,3,0,0,0,1,0,0
+JPN,Yuto NAGATOMO,3,0,0,0,5,1,0
+GHA,Kwadwo ASAMOAH,3,0,0,0,1,6,0
+GHA,André Ayew,3,0,0,0,2,4,0
+CMR,Benjamin Moukandjo,3,0,0,0,3,4,0
+ALG,El Arabi SOUDANI,3,0,0,0,3,6,0
+GHA,John Boye,3,0,0,0,1,1,0
+CMR,Eric Maxim Choupo-Moting,3,0,0,0,1,0,0
+GHA,Jonathan Mensah,3,0,0,0,1,1,0
+GER,Shkodran MUSTAFI,3,0,0,0,1,0,0
+ENG,Gary Cahill,3,0,0,0,3,4,0
+ESP,Jordi ALBA,3,0,0,0,1,3,0
+ALG,Medhi LACEN,3,0,0,0,2,2,0
+AUS,Mathew LECKIE,3,0,0,0,4,5,0
+GRE,Konstantinos MITROGLOU,3,0,0,0,1,0,0
+MEX,Marco FABIAN,3,0,0,0,1,1,0
+ARG,Enzo PEREZ,3,0,0,0,0,3,0
+COL,Santiago Arias,3,0,0,0,1,0,0
+COL,Jackson MARTINEZ,3,0,0,0,4,5,0
+USA,DeAndre YEDLIN,3,0,0,0,0,1,0
+ALG,Yacine BRAHIMI,3,0,0,0,6,6,0
+CIV,Serge AURIER,3,0,0,0,4,5,0
+RUS,Aleksandr Kokorin,3,0,0,0,9,2,0
+GRE,Panagiotis KONE,3,0,0,0,2,5,0
+CRO,Ivan Perišic,3,0,0,0,3,5,0
+POR,Éder,3,0,0,0,4,5,0
+IRN,Reza Ghoochannejhad,3,0,0,0,17,10,0
+BRA,BERNARD,3,0,0,0,2,2,0
+COL,Juan Quintero,3,0,0,0,1,1,0
+JPN,Hotaru YAMAGUCHI,3,0,0,0,2,1,0
+CIV,Wilfried BONY,3,0,0,0,5,1,0
+ALG,Abdelmoumene DJABOU,3,0,0,0,2,5,0
+GHA,Christian ATSU,3,0,0,0,4,1,0
+ALG,Esseid BELKALEM,3,0,0,0,1,2,0
+IRN,Alireza HAGHIGHI,3,0,0,0,0,1,0
+COL,Víctor Ibarbo,3,0,0,0,7,6,0
+HON,Brayan BECKELES,3,0,0,0,3,1,0
+CRO,Mateo Kovacic,3,0,0,0,1,1,0
+GER,Christoph KRAMER,3,0,0,0,1,0,0
+ALG,Aïssa Mandi,3,0,0,0,4,3,0
+KOR,KIM Younggwon,3,0,0,0,2,5,0
+IRN,Alireza JAHAN BAKHSH,3,0,0,0,0,1,0
+AUS,Ben HALLORAN,3,0,0,0,1,5,0
+NGA,Ahmed MUSA,4,0,0,0,3,2,0
+NED,Memphis Depay,4,0,0,0,3,5,0
+CHI,Felipe GUTIÉRREZ,4,0,0,0,5,4,0
+SUI,Josip DRMIC,4,0,0,0,4,6,0
+ALG,Islam SLIMANI,4,0,0,0,8,2,0
+FRA,Mathieu Debuchy,4,0,0,0,8,4,0
+FRA,Laurent Koscielny,4,0,0,0,2,1,0
+SUI,Admir MEHMEDI,4,0,0,0,3,7,0
+USA,Graham ZUSI,4,0,0,0,2,3,0
+GRE,Jose CHOLEVAS,4,0,0,0,8,6,0
+BEL,Kevin DE BRUYNE,4,0,0,0,4,1,0
+BEL,Nacer Chadli,4,0,0,0,5,0,0
+BEL,Romelu LUKAKU,4,0,0,0,3,0,0
+MEX,Miguel LAYUN,4,0,0,0,1,3,0
+NGA,Emmanuel Emenike,4,0,0,0,3,3,0
+USA,Matt BESLER,4,0,0,0,1,5,0
+NGA,Ogenyi ONAZI,4,0,0,0,7,6,0
+FRA,Moussa Sissoko,4,0,0,0,4,2,0
+ALG,Sofiane FEGHOULI,4,0,0,0,5,8,0
+ARG,Federico FERNANDEZ,4,0,0,0,4,8,0
+SUI,Xherdan SHAQIRI,4,0,0,0,11,17,0
+GRE,Ioannis MANIATIS,4,0,0,0,5,6,0
+ALG,Rais MBOLHI,4,0,0,0,0,1,0
+MEX,Héctor Herrera,4,0,0,0,7,5,0
+COL,Teofilo GUTIERREZ,4,0,0,0,7,2,0
+SUI,Ricardo RODRIGUEZ,4,0,0,0,3,5,0
+USA,Fabian Johnson,4,0,0,0,1,4,0
+SUI,Haris SEFEROVIC,4,0,0,0,4,1,0
+FRA,Mathieu Valbuena,4,0,0,0,7,7,0
+USA,Alejandro Bedoya,4,0,0,0,7,1,0
+BEL,Kevin MIRALLAS,4,0,0,0,4,1,0
+NED,Jeremain LENS,4,0,0,0,9,5,0
+URU,Christian Stuani,4,0,0,0,5,5,0
+CHI,Gonzalo JARA,4,0,0,0,7,2,0
+COL,Juan ZUNIGA,4,0,0,0,4,14,0
+COL,Alexander MEJÍA,4,0,0,0,4,0,0
+GRE,Theofanis GEKAS,4,0,0,0,1,0,0
+CHI,Marcelo DIAZ,4,0,0,0,5,2,0
+USA,Michael BRADLEY,4,0,0,0,8,3,0
+MEX,Giovani DOS SANTOS,4,0,0,0,3,6,0
+URU,Cristian RODRIGUEZ,4,0,0,0,5,10,0
+SUI,Valon BEHRAMI,4,0,0,0,8,5,0
+MEX,Javier HERNANDEZ,4,0,0,0,2,6,0
+CHI,Mauricio ISLA,4,0,0,0,4,7,0
+CHI,Alexis SANCHEZ,4,0,0,0,7,24,0
+MEX,Oribe PERALTA,4,0,0,0,6,4,0
+GRE,Orestis KARNEZIS,4,0,0,0,0,1,0
+CHI,Gary MEDEL,4,0,0,0,3,7,0
+SUI,Gokhan INLER,4,0,0,0,8,6,0
+URU,Edinson CAVANI,4,0,0,0,8,3,0
+CRC,Marcos URENA,4,0,0,0,3,1,0
+CHI,Eduardo VARGAS,4,0,0,0,0,1,0
+NGA,Efe AMBROSE,4,0,0,0,1,4,0
+URU,Alvaro GONZALEZ,4,0,0,0,4,2,0
+FRA,Mamadou SAKHO,4,0,0,0,0,1,0
+NGA,Peter ODEMWINGIE,4,0,0,0,8,4,0
+MEX,Francisco RODRIGUEZ,4,0,0,0,3,0,0
+CHI,Claudio BRAVO,4,0,0,0,0,3,0
+USA,Clint Dempsey,4,0,0,0,5,6,0
+COL,Cristian ZAPATA,4,0,0,0,4,4,0
+SUI,Diego BENAGLIO,4,0,0,0,0,1,0
+SUI,Stephan LICHTSTEINER,4,0,0,0,6,7,0
+NGA,Vincent ENYEAMA,4,0,0,0,0,1,0
+NGA,Joseph YOBO,4,0,0,0,2,1,0
+USA,DaMarcus BEASLEY,4,0,0,0,4,9,0
+GRE,Georgios KARAGOUNIS,4,0,0,0,6,9,0
+CRC,Christian BOLANOS,5,0,0,0,14,4,0
+GER,Miroslav KLOSE,5,0,0,0,8,5,0
+BRA,WILLIAN,5,0,0,0,2,2,0
+NED,Dirk KUYT,5,0,0,0,4,0,0
+COL,David OSPINA,5,0,0,0,0,2,0
+NED,Nigel de Jong,5,0,0,0,8,5,0
+CRC,Celso BORGES,5,0,0,0,4,2,0
+ARG,Rodrigo PALACIO,5,0,0,0,5,0,0
+BEL,Marouane FELLAINI,5,0,0,0,19,4,0
+FRA,Karim Benzema,5,0,0,0,2,4,0
+FRA,Hugo LLORIS,5,0,0,0,0,3,0
+CRC,Cristian GAMBOA,5,0,0,0,9,8,0
+CRC,Joel CAMPBELL,5,0,0,0,9,20,0
+COL,Juan CUADRADO,5,0,0,0,9,19,0
+NED,Daryl JANMAAT,5,0,0,0,8,1,1
+BEL,Daniel VAN BUYTEN,5,0,0,0,3,4,0
+BEL,Dries MERTENS,5,0,0,0,6,5,0
+BEL,Thibaut COURTOIS,5,0,0,0,0,1,0
+FRA,Raphaël VARANE,5,0,0,0,0,1,0
+FRA,Olivier Giroud,5,0,0,0,5,5,0
+FRA,Antoine Griezmann,5,0,0,0,3,4,0
+BEL,Divock ORIGI,5,0,0,0,5,3,0
+BRA,PAULINHO,6,0,0,0,9,2,0
+GER,Mario GOETZE,6,0,0,0,6,4,0
+GER,Mats HUMMELS,6,0,0,0,4,2,0
+GER,Andre SCHUERRLE,6,0,0,0,7,2,0
+ARG,Ezequiel LAVEZZI,6,0,0,0,2,12,0
+BRA,FRED,6,0,0,0,6,7,0
+BRA,Marcelo,6,0,0,0,10,12,0
+GER,Per MERTESACKER,6,0,0,0,3,3,0
+ARG,Fernando GAGO,6,0,0,0,6,11,0
+NED,Wesley SNEIJDER,6,0,0,0,7,6,0
+ARG,Pablo ZABALETA,7,0,0,0,8,5,0
+GER,Manuel NEUER,7,0,0,0,0,2,0
+NED,Ron VLAAR,7,0,0,0,5,3,0
+ARG,Lionel MESSI,7,0,0,0,6,18,0
+ARG,Gonzalo HIGUAIN,7,0,0,0,5,6,0
+GER,Toni KROOS,7,0,0,0,7,15,0
+BRA,DAVID LUIZ,7,0,0,0,12,11,0
+GER,Mesut OEZIL,7,0,0,0,4,8,0
+GER,Jerome BOATENG,7,0,0,0,4,3,0
+GER,Thomas MUELLER,7,0,0,0,14,17,0
+NED,Georginio Wijnaldum,7,0,0,0,6,9,0
+NED,Jasper CILLESSEN,7,0,0,0,0,1,0

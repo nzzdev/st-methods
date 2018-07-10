@@ -1,0 +1,33 @@
+Country,Teamname,MatchesPlayed,Attempts,AttemptsOnTarget,AttemptsOffTarget,Woodwork
+BRA,Brazil,7,111,72,39,0
+ARG,Argentina,7,105,63,42,2
+GER,Germany,7,98,71,27,1
+BEL,Belgium,5,91,58,33,2
+NED,Netherlands,7,90,64,26,4
+FRA,France,5,90,57,33,5
+SUI,Switzerland,4,65,40,25,1
+GHA,Ghana,3,59,24,35,0
+GRE,Greece,4,58,30,28,4
+COL,Colombia,5,57,38,19,0
+POR,Portugal,3,53,28,25,2
+NGA,Nigeria,4,50,32,18,0
+URU,Uruguay,4,49,29,20,0
+BIH,Bosnia and Herzegovina,3,47,30,17,0
+CIV,Côte d'Ivoire,3,47,30,17,0
+JPN,Japan,3,46,28,18,0
+MEX,Mexico,4,46,22,24,1
+USA,USA,4,41,27,14,0
+CRO,Croatia,3,41,23,18,0
+CMR,Cameroon,3,40,17,23,2
+RUS,Russia,3,39,23,16,0
+ENG,England,3,39,19,20,1
+CHI,Chile,4,38,19,19,1
+CRC,Costa Rica,5,38,18,20,0
+KOR,Korea Republic,3,37,24,13,0
+ALG,Algeria,4,37,22,15,0
+ESP,Spain,3,35,23,12,0
+HON,Honduras,3,33,17,16,1
+ITA,Italy,3,31,16,15,2
+ECU,Ecuador,3,29,18,11,0
+AUS,Australia,3,27,14,13,0
+IRN,Iran,3,22,12,10,1

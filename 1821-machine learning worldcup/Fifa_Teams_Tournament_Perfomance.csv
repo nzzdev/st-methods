@@ -1,0 +1,33 @@
+Country,Teamname,StageCurrent,PointsCurrentGroup,PointsCurrentTotal,StageLast,PointsLastGroup,PointsLastTotal
+ALG,Algeria,2,4,7,1,1,1
+ARG,Argentina,5,9,21,3,9,15
+AUS,Australia,1,0,0,1,4,4
+BEL,Belgium,3,9,15,0,0,0
+BIH,Bosnia and Herzegovina,1,3,3,0,0,0
+BRA,Brazil,4,7,16,3,7,13
+CHI,Chile,2,6,9,2,6,9
+CIV,Côte d'Ivoire,1,3,3,1,4,4
+CMR,Cameroon,1,0,0,1,0,0
+COL,Colombia,3,9,15,0,0,0
+CRC,Costa Rica,3,7,13,0,0,0
+CRO,Croatia,1,3,3,0,0,0
+ECU,Ecuador,1,4,4,0,0,0
+ENG,England,1,1,1,2,5,8
+ESP,Spain,1,3,3,6,6,21
+FRA,France,3,7,13,1,1,1
+GER,Germany,6,7,22,4,6,15
+GHA,Ghana,1,1,1,3,4,10
+GRE,Greece,2,4,7,1,3,3
+HON,Honduras,1,0,0,1,1,1
+IRN,Iran,1,1,1,0,0,0
+ITA,Italy,1,3,3,1,2,2
+JPN,Japan,1,1,1,2,6,9
+KOR,Korea Republic,1,1,1,2,4,7
+MEX,Mexico,2,7,10,2,4,7
+NED,Netherlands,4,9,18,5,9,21
+NGA,Nigeria,2,4,7,1,1,1
+POR,Portugal,1,4,4,2,5,8
+RUS,Russia,1,2,2,0,0,0
+SUI,Switzerland,2,6,9,1,4,4
+URU,Uruguay,2,6,9,4,7,16
+USA,USA,2,4,7,2,5,8

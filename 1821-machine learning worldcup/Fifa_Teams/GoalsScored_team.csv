@@ -1,0 +1,33 @@
+Country,Teamname,MatchesPlayed,GoalsFor,GoalsScored,GoalsAgainst,Penalties,OwnGoalsFor,OpenPlayGoals,SetPieceGoals
+GER,Germany,7,18,18,4,1,0,15,3
+NED,Netherlands,7,15,15,4,2,0,13,2
+COL,Colombia,5,12,12,4,2,0,9,3
+BRA,Brazil,7,11,11,14,1,0,8,3
+FRA,France,5,10,8,3,1,2,8,2
+ARG,Argentina,7,8,7,4,0,1,7,1
+ALG,Algeria,4,7,7,7,1,0,4,3
+SUI,Switzerland,4,7,7,7,0,0,5,2
+CRO,Croatia,3,6,5,6,0,1,5,1
+CHI,Chile,4,6,6,4,0,0,6,0
+BEL,Belgium,5,6,6,3,0,0,6,0
+MEX,Mexico,4,5,5,3,0,0,4,1
+USA,USA,4,5,5,6,0,0,4,1
+CRC,Costa Rica,5,5,5,2,0,0,4,1
+BIH,Bosnia and Herzegovina,3,4,4,4,0,0,4,0
+CIV,Côte d'Ivoire,3,4,4,5,0,0,4,0
+GHA,Ghana,3,4,4,6,0,0,4,0
+ESP,Spain,3,4,4,7,1,0,3,1
+POR,Portugal,3,4,3,7,0,1,4,0
+URU,Uruguay,4,4,4,6,1,0,2,2
+ECU,Ecuador,3,3,3,3,0,0,1,2
+KOR,Korea Republic,3,3,3,6,0,0,3,0
+AUS,Australia,3,3,3,9,1,0,2,1
+GRE,Greece,4,3,3,5,1,0,2,1
+NGA,Nigeria,4,3,3,5,0,0,3,0
+ITA,Italy,3,2,2,3,0,0,2,0
+RUS,Russia,3,2,2,3,0,0,2,0
+ENG,England,3,2,2,4,0,0,2,0
+JPN,Japan,3,2,2,6,0,0,2,0
+IRN,Iran,3,1,1,4,0,0,1,0
+HON,Honduras,3,1,1,8,0,0,1,0
+CMR,Cameroon,3,1,1,9,0,0,1,0
