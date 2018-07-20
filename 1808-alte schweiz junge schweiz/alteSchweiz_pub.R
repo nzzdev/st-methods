@@ -1,4 +1,5 @@
-# NZZ Storytelling, script for the following article: 
+# NZZ Storytelling, script for the following main article: 
+# https://www.nzz.ch/schweiz/schweiz-alterung-gemeinden-ld.1351100
 # questions and comments: alexandra.kohler@nzz.ch or marie-jose.kolly@nzz.ch
 
 
