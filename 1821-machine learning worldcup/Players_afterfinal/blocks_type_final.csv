@@ -1,0 +1,605 @@
+Default1,Default2,Flag,minsPlayed,outfielderBlock,outfielderBlockedPass,passCrossBlockedDefensive,player-link,rating   sorted
+1,6,be,518,,3,,Eden Hazard,8.53
+2,3,co,300,2,,,Yerry Mina,8.35
+3,4,es,390,,,1,Isco,8.29
+4,5,br,450,1,1,,Neymar,8.25
+5,1,eg,90,,,,Essam El Hadary,8.23
+6,6,ng,576,,4,6,Kieran Trippier,7.96
+7,4,ar,360,,7,,Lionel Messi,7.87
+8,1,tn,90,,,,Oussama Haddadi,7.82
+9,3,ng,270,,6,1,Wilfred Ndidi,7.77
+10,7,fr,534,,3,,Kylian Mbappé,7.75
+11,4,uy,344,,,,Edinson Cavani,7.75
+12,2,br,77,,,,Douglas Costa,7.73
+13,1,hr,90,,,,Lovre Kalinic,7.73
+14,4,pt,360,1,1,,Cristiano Ronaldo,7.73
+15,1,be,86,,,,Adnan Januzaj,7.67
+16,6,ng,573,,3,,Harry Kane,7.67
+17,4,br,330,1,6,,Casemiro,7.66
+18,6,be,540,,2,,Kevin De Bruyne,7.65
+19,1,pl,80,,2,,Rafal Kurzawa,7.61
+20,3,kr,270,,,,Cho Hyun-Woo,7.60
+21,5,br,436,,4,,Coutinho,7.60
+22,1,pl,90,,,,Lukasz Fabianski,7.57
+23,5,se,450,13,,,Andreas Granqvist,7.54
+24,1,cr,90,1,,,Kendall Waston,7.53
+25,6,hr,609,1,5,,Mario Mandzukic,7.53
+26,3,ng,270,,2,3,Oghenekaro Etebo,7.52
+27,4,uy,360,2,1,,José Giménez,7.52
+28,7,fr,571,,4,,Antoine Griezmann,7.51
+29,4,dk,390,,,,Kasper Schmeichel,7.51
+30,4,ru,402,,8,,Aleksandr Golovin,7.50
+31,6,fr,539,1,3,,Paul Pogba,7.49
+32,3,tn,264,,2,,Wahbi Khazri,7.49
+33,7,hr,694,,3,1,Luka Modric,7.48
+34,3,de,270,,,,Toni Kroos,7.47
+35,2,rs,180,,1,2,Branislav Ivanovic,7.47
+36,3,is,270,,5,,Gylfi Sigurdsson,7.44
+37,3,kr,270,,2,2,Son Heung-Min,7.43
+38,5,ru,472,2,3,5,Mario Fernandes,7.42
+39,5,ru,333,1,3,,Artem Dzyuba,7.39
+40,3,ng,208,,2,,Ahmed Musa,7.39
+41,5,se,434,3,10,,Viktor Claesson,7.38
+42,5,be,450,3,2,1,Thomas Meunier,7.36
+43,4,mx,317,,4,,Hirving Lozano,7.34
+44,3,sn,247,,2,,M'Baye Niang,7.34
+45,7,hr,638,2,4,3,Ivan Rakitic,7.33
+46,2,cr,113,,,,Joel Campbell,7.32
+47,3,sa,270,,2,,Salem Al Dawsari,7.32
+48,5,br,450,5,,,Thiago Silva,7.31
+49,2,kr,180,3,2,,Ki Sung-yueng,7.31
+50,1,pa,21,,,,Felipe Baloy,7.30
+51,4,mx,360,,,,Guillermo Ochoa,7.29
+52,4,co,331,,,,Juan Cuadrado,7.29
+53,5,uy,450,1,1,1,Diego Godín,7.28
+54,4,se,352,4,5,1,Mikael Lustig,7.28
+55,7,ng,646,8,2,,John Stones,7.28
+56,5,ru,304,,3,,Denis Cheryshev,7.27
+57,2,be,97,,1,,Thorgan Hazard,7.25
+58,4,dk,390,2,1,2,Henrik Dalsgaard,7.23
+59,5,ru,510,4,6,,Roman Zobnin,7.23
+60,7,ng,645,5,3,,Harry Maguire,7.22
+61,3,rs,269,1,1,,Aleksandar Mitrovic,7.22
+62,1,fr,90,,1,,Djibril Sidibe,7.22
+63,1,tn,90,,4,,Ghilane Chaalali,7.22
+64,2,es,160,,,,Nacho,7.21
+65,3,pe,259,,,1,André Carrillo,7.20
+66,1,fr,90,,,,Presnel Kimpembe,7.18
+67,3,au,270,,5,1,Aaron Mooy,7.17
+68,5,br,450,5,2,,Miranda,7.17
+69,4,br,280,,6,2,Marcelo,7.16
+70,5,be,316,4,3,1,Marouane Fellaini,7.15
+71,3,pl,270,1,,,Grzegorz Krychowiak,7.14
+72,2,ng,180,,,,Kenneth Omeruo,7.14
+73,7,fr,630,4,2,,Raphael Varane,7.14
+74,4,dk,390,1,4,1,Christian Eriksen,7.14
+75,4,co,310,,1,,Juan Quintero,7.14
+76,1,ma,82,,1,,Amine Harit,7.13
+77,6,hr,547,,6,,Ante Rebic,7.13
+78,7,be,630,,,,Thibaut Courtois,7.12
+79,3,kr,270,1,1,,Lee Jae-Sung,7.12
+80,7,hr,632,2,4,,Ivan Perisic,7.12
+81,4,es,320,,2,1,Diego Costa,7.12
+82,1,fr,90,,,,Steve Mandanda,7.11
+83,3,ar,216,,2,,Éver Banega,7.11
+84,3,pe,270,2,,1,Luis Advíncula,7.10
+85,6,be,476,,,,Romelu Lukaku,7.10
+86,4,ch,351,1,1,,Xherdan Shaqiri,7.10
+87,5,uy,450,1,2,,Luis Suárez,7.09
+88,3,cr,255,1,,,Cristian Gamboa,7.09
+89,2,br,170,1,2,1,Filipe Luís,7.09
+90,1,ma,18,,,,Youssef En-Nesyri,7.09
+91,3,rs,263,,3,3,Dusan Tadic,7.08
+92,6,fr,540,2,3,4,Benjamin Pavard,7.08
+93,4,ch,360,,3,1,Ricardo Rodríguez,7.07
+94,4,pt,360,,7,,Raphael Guerreiro,7.07
+95,6,hr,630,4,1,,Domagoj Vida,7.06
+96,3,hr,103,,2,,Milan Badelj,7.06
+97,4,mx,315,,1,,Carlos Vela,7.06
+98,2,de,180,,1,,Mats Hummels,7.05
+99,3,ma,256,,3,,Nordin Amrabat,7.05
+100,1,uy,90,,1,1,Sebastián Coates,7.05
+101,4,jp,308,4,,,Yuya Osako,7.05
+102,4,jp,292,,5,,Takashi Inui,7.04
+103,5,ru,510,6,2,2,Ilya Kutepov,7.04
+104,7,fr,595,1,11,3,N'Golo Kanté,7.04
+105,3,ir,270,,,,Alireza Beiranvand,7.03
+106,3,ng,270,3,8,1,Victor Moses,7.03
+107,4,pt,360,1,2,2,Pepe,7.03
+108,6,hr,607,2,1,,Sime Vrsaljko,7.03
+109,2,tn,156,,1,,Hamdi Nagguez,7.03
+110,1,pl,90,,1,,Artur Jedrzejczyk,7.02
+111,1,ng,90,3,1,,Gary Cahill,7.02
+112,1,sn,90,,1,,Lamine Gassama,7.02
+113,1,kr,90,2,2,,Yun Young-Sun,7.02
+114,4,es,390,1,2,,Sergio Busquets,7.02
+115,5,ng,495,2,1,2,Kyle Walker,7.01
+116,3,kr,270,,,3,Lee Yong,7.01
+117,4,dk,368,2,4,,Thomas Delaney,7.00
+118,3,ir,270,1,1,,Ramin Rezaeian,6.99
+119,4,br,360,,4,3,Fagner,6.99
+120,3,au,270,1,3,,Mile Jedinak,6.99
+121,3,co,152,,1,,James Rodríguez,6.98
+122,4,es,390,1,,2,Gerard Piqué,6.98
+123,2,eg,180,,1,,Mohamed Salah,6.98
+124,4,ar,360,2,1,2,Nicolás Otamendi,6.98
+125,3,pe,208,1,1,,Paolo Guerrero,6.98
+126,3,sa,270,,2,1,Salman Al Faraj,6.98
+127,4,co,390,,,,David Ospina,6.98
+128,3,be,270,2,,,Dedryck Boyata,6.97
+129,7,fr,590,1,4,7,Lucas Hernández,6.97
+130,5,se,400,1,2,,Ola Toivonen,6.97
+131,2,uy,180,,1,,Guillermo Varela,6.97
+132,5,ru,510,6,1,,Sergei Ignashevich,6.96
+133,6,be,328,,3,1,Nacer Chadli,6.96
+134,5,se,421,2,5,,Albin Ekdal,6.96
+135,3,jp,47,,,,Keisuke Honda,6.96
+136,5,br,362,,3,2,Willian,6.96
+137,3,pt,185,,5,1,João Moutinho,6.96
+138,3,rs,270,5,,,Nikola Milenkovic,6.94
+139,3,dk,269,2,8,,Yussuf Poulsen,6.94
+140,4,mx,335,3,6,7,Jesús Gallardo,6.94
+141,2,de,136,,,,Julian Draxler,6.94
+142,3,jp,246,1,3,1,Genki Haraguchi,6.93
+143,4,pt,360,1,4,1,José Fonte,6.93
+144,6,be,540,3,6,,Axel Witsel,6.93
+145,3,sa,244,,,,Abdullah Otayf,6.93
+146,5,se,417,2,2,,Emil Forsberg,6.93
+147,6,ng,528,,5,1,Jesse Lingard,6.93
+148,2,de,180,,1,,Mesut Özil,6.93
+149,6,be,540,8,1,2,Toby Alderweireld,6.93
+150,5,se,428,1,4,1,Marcus Berg,6.93
+151,3,pl,225,4,,1,Jan Bednarek,6.93
+152,2,ma,180,1,2,,Nabil Dirar,6.93
+153,3,is,264,,2,,Alfred Finnbogason,6.92
+154,2,ma,141,,1,1,Khalid Boutaïb,6.92
+155,5,br,407,,7,,Gabriel Jesus,6.92
+156,2,de,165,,3,,Jonas Hector,6.92
+157,3,eg,270,4,1,1,Ahmed Hegazi,6.91
+158,3,uy,123,,1,,Carlos Sánchez,6.90
+159,3,co,182,1,3,1,Mateus Uribe,6.90
+160,3,pe,138,,1,,Pedro Aquino,6.90
+161,2,ar,146,,3,1,Eduardo Salvio,6.90
+162,2,se,95,,,,Pontus Jansson,6.90
+163,4,co,390,5,2,,Davinson Sánchez,6.89
+164,4,ng,274,,1,,Ruben Loftus-Cheek,6.89
+165,4,jp,341,2,5,,Gaku Shibasaki,6.89
+166,3,ch,267,4,3,2,Stephan Lichtsteiner,6.88
+167,4,mx,360,2,9,1,Héctor Herrera,6.88
+168,6,be,540,2,3,,Jan Vertonghen,6.88
+169,3,de,270,,2,,Joshua Kimmich,6.87
+170,3,rs,270,,,,Vladimir Stojkovic,6.87
+171,5,uy,365,1,4,,Rodrigo Bentancur,6.87
+172,1,co,90,,,,Óscar Murillo,6.87
+173,4,co,386,2,1,2,Santiago Arias,6.87
+174,4,ru,267,,2,1,Yuri Gazinskiy,6.86
+175,5,uy,304,6,2,3,Lucas Torreira,6.86
+176,3,ar,270,1,1,2,Gabriel Mercado,6.86
+177,3,sn,196,,2,,Moussa Wagué,6.86
+178,3,rs,270,4,4,,Nemanja Matic,6.86
+179,1,sn,81,,1,,Badou Ndiaye,6.86
+180,3,tn,270,,,1,Fakhreddine Ben Youssef,6.86
+181,3,ng,268,,2,,John Obi Mikel,6.86
+182,3,sn,270,2,2,,Salif Sané,6.86
+183,2,uy,86,,1,,Giorgian de Arrascaeta,6.86
+184,3,ng,270,2,,,Leon Balogun,6.85
+185,3,ir,270,2,1,,Sardar Azmoun,6.85
+186,3,ru,222,,2,,Yuri Zhirkov,6.85
+187,4,jp,360,4,1,2,Maya Yoshida,6.85
+188,1,ir,68,,,,Masoud Shojaei,6.85
+189,4,ch,360,2,2,1,Manuel Akanji,6.85
+190,3,kr,270,4,,,Kim Young-Gwon,6.84
+191,4,ch,360,2,1,,Granit Xhaka,6.84
+192,3,pe,270,1,1,1,Miguel Trauco,6.84
+193,5,se,450,,,,Robin Olsen,6.84
+194,4,es,284,,2,,Andrés Iniesta,6.84
+195,4,jp,360,1,,1,Hiroki Sakai,6.84
+196,3,jp,270,3,,,Gen Shoji,6.83
+197,2,rs,180,2,1,,Dusko Tosic,6.83
+198,1,sn,80,,1,,Keita,6.83
+199,2,pe,135,,,1,Ánderson Santamaría,6.82
+200,2,ru,42,,1,,Alan Dzagoev,6.82
+201,3,rs,270,1,1,,Aleksandar Kolarov,6.82
+202,2,pl,180,1,3,,Jacek Goralski,6.82
+203,5,uy,416,1,7,1,Matías Vecino,6.82
+204,3,ar,226,1,,1,Marcos Rojo,6.82
+205,3,pt,116,,,,Ricardo Quaresma,6.82
+206,5,se,450,2,4,1,Ludwig Augustinsson,6.81
+207,4,mx,330,,,,Chicharito,6.81
+208,1,g,90,,,,Rami Bedoui,6.81
+209,4,be,175,,1,,Youri Tielemans,6.81
+210,7,fr,546,,3,,Olivier Giroud,6.81
+211,3,cr,270,,,,Keylor Navas,6.81
+212,3,sn,270,,5,1,Sadio Mané,6.81
+213,2,mx,180,1,1,1,Hugo Ayala,6.81
+214,3,eg,239,1,4,2,Trézéguet,6.80
+215,5,ng,463,,5,1,Ashley Young,6.80
+216,1,g,90,1,,1,Rouzbeh Cheshmi,6.80
+217,3,co,269,1,4,,Wilmar Barrios,6.80
+218,4,dk,232,,5,,Pione Sisto,6.80
+219,4,es,327,1,4,,David Silva,6.80
+220,2,ir,55,,,,Milad Mohammadi,6.80
+221,2,ir,166,3,4,,Saeid Ezatolahi,6.80
+222,3,es,229,1,,,Koke,6.79
+223,3,ch,270,2,,1,Fabian Schär,6.79
+224,2,tn,114,1,,,Dylan Bronn,6.79
+225,3,ch,253,,1,,Steven Zuber,6.78
+226,3,au,270,,1,1,Trent Sainsbury,6.78
+227,6,be,300,,1,,Dries Mertens,6.78
+228,6,fr,540,2,2,1,Samuel Umtiti,6.78
+229,4,dk,390,2,2,1,Simon Kjaer,6.78
+230,4,uy,301,,1,5,Diego Laxalt,6.78
+231,5,br,354,,3,,Paulinho,6.78
+232,5,fr,336,,4,,Blaise Matuidi,6.77
+233,3,cr,270,,3,,Celso Borges,6.77
+234,2,rs,171,1,2,1,Luka Milivojevic,6.77
+235,2,ma,180,1,4,1,Romain Saïss,6.77
+236,4,co,377,,,,Radamel Falcao,6.76
+237,6,hr,459,,4,,Marcelo Brozovic,6.75
+238,2,is,180,1,,1,Kári Árnason,6.74
+239,3,dk,270,1,,2,Jens Stryger Larsen,6.74
+240,5,hr,183,1,2,,Mateo Kovacic,6.73
+241,3,es,230,,,1,Daniel Carvajal,6.73
+242,3,ma,265,,5,,Hakim Ziyech,6.73
+243,2,kr,96,,,3,Hong Chul,6.73
+244,7,hr,651,6,3,,Dejan Lovren,6.72
+245,4,es,390,1,1,,Sergio Ramos,6.72
+246,3,kr,203,,3,,Hwang Hee-Chan,6.72
+247,3,de,207,,5,1,Thomas Müller,6.72
+248,5,ng,482,2,3,1,Jordan Henderson,6.71
+249,1,ch,90,,,,Johan Djourou,6.71
+250,2,pl,180,,,3,Maciej Rybus,6.71
+251,3,au,270,,5,1,Mathew Leckie,6.71
+252,5,be,376,4,1,,Vincent Kompany,6.71
+253,4,ar,360,,4,1,Javier Mascherano,6.71
+254,4,mx,314,,3,1,Miguel Layún,6.71
+255,4,ar,178,,3,,Sergio Agüero,6.71
+256,4,mx,360,11,2,1,Carlos Salcedo,6.70
+257,3,jp,232,,,,Shinji Kagawa,6.70
+258,2,es,94,,,,Thiago Alcántara,6.70
+259,3,ir,266,,3,,Vahid Amiri,6.69
+260,1,jp,90,1,,,Tomoaki Makino,6.69
+261,2,sa,136,,3,,Hussain Al-Mogahwi,6.69
+262,4,dk,307,3,1,,Andreas Christensen,6.68
+263,5,ng,364,,10,3,Dele Alli,6.68
+264,6,hr,511,1,3,2,Ivan Strinic,6.68
+265,3,dk,219,1,1,1,Lasse Schöne,6.68
+266,1,de,90,,1,,Antonio Rüdiger,6.67
+267,2,is,153,,,,Johann Berg Gudmundsson,6.67
+268,4,pt,360,,,1,William Carvalho,6.67
+269,3,pt,270,2,2,3,Cédric Soares,6.66
+270,1,ng,79,1,,,Trent Alexander-Arnold,6.66
+271,4,es,390,,1,3,Jordi Alba,6.66
+272,3,ar,237,,,,Ángel Di María,6.66
+273,4,co,390,,4,2,Johan Mojica,6.65
+274,4,ch,134,,,,Breel Embolo,6.65
+275,1,fr,90,,,,Thomas Lemar,6.65
+276,3,dk,163,,,,Andreas Cornelius,6.64
+277,3,pe,270,1,,1,Christian Ramos,6.64
+278,4,pt,261,,3,,João Mário,6.64
+279,2,ma,180,2,1,,Medhi Benatia,6.64
+280,3,g,202,,4,3,Mehdi Taremi,6.64
+281,3,be,113,,,,Michy Batshuayi,6.64
+282,4,ch,326,1,2,,Blerim Dzemaili,6.64
+283,3,ma,228,1,2,,Younès Belhanda,6.64
+284,4,mx,307,,5,,Andrés Guardado,6.64
+285,3,kr,127,1,2,1,Jung Woo-Young,6.63
+286,2,ch,114,,1,,Mario Gavranovic,6.63
+287,1,tn,15,,,,Mouez Hassen,6.63
+288,4,se,360,2,2,,Victor Lindelöf,6.62
+289,4,jp,360,1,4,2,Yuto Nagatomo,6.62
+290,5,uy,293,1,3,1,Nahitan Nández,6.62
+291,1,de,63,,,,Leon Goretzka,6.62
+292,4,be,239,,2,1,Yannick Carrasco,6.62
+293,2,cr,180,,1,,Óscar Duarte,6.62
+294,5,uy,450,,4,3,Martín Cáceres,6.62
+295,2,pe,150,2,1,1,Renato Tapia,6.62
+296,5,ru,359,,3,,Aleksandr Samedov,6.61
+297,4,ch,311,1,3,1,Valon Behrami,6.61
+298,3,au,226,,,,Tomas Rogic,6.61
+299,6,fr,540,,,,Hugo Lloris,6.60
+300,3,rs,270,1,3,,Sergej Milinkovic-Savic,6.60
+301,1,pl,90,,1,,Thiago Cionek,6.60
+302,3,ir,171,,1,,Alireza Jahanbakhsh,6.60
+303,3,cr,270,4,2,,Giancarlo González,6.60
+304,1,pa,90,,,,Adolfo Machado,6.59
+305,3,dk,219,,1,1,Zanka,6.59
+306,2,pa,108,,1,,Ricardo Avila,6.59
+307,1,tn,49,,,,Yohan Benalouane,6.59
+308,2,pe,130,,,,Jefferson Farfán,6.59
+309,6,ng,456,,3,,Raheem Sterling,6.59
+310,1,tn,90,,,,Aymen Mathlouthi,6.58
+311,1,br,90,,1,,Danilo,6.58
+312,1,be,90,1,,,Leander Dendoncker,6.58
+313,3,eg,232,,1,,Abdallah El Said,6.58
+314,2,pl,170,1,,,Michal Pazdan,6.58
+315,3,pe,242,,1,2,Edison Flores,6.57
+316,3,is,270,,,,Hannes Thór Halldórsson,6.57
+317,3,dk,212,,2,1,Nicolai Jørgensen,6.57
+318,1,de,90,2,,,Niklas Süle,6.57
+319,3,ma,270,,1,,Achraf Hakimi,6.57
+320,4,pt,238,,5,,Bernardo Silva,6.57
+321,3,ir,178,,,1,Karim Ansarifard,6.56
+322,3,pl,169,,3,2,Bartosz Bereszynski,6.56
+323,3,tn,270,1,1,,Ellyes Skhiri,6.56
+324,4,ar,208,,2,1,Maximiliano Meza,6.56
+325,3,eg,270,,2,1,Mohamed Shafy,6.56
+326,3,pe,270,,,,Pedro Gallese,6.56
+327,3,sa,270,1,2,,Yasir Al Shahrani,6.55
+328,1,hr,90,,,,Duje Caleta-Car,6.55
+329,3,ir,270,3,4,1,Morteza Pouraliganji,6.55
+330,2,tn,166,,,,Farouk Ben Mustapha,6.55
+331,3,au,270,,,,Mark Milligan,6.54
+332,7,ng,690,,,,Jordan Pickford,6.54
+333,4,hr,119,,,2,Vedran Corluka,6.54
+334,3,sn,270,,5,1,Idrissa Gueye,6.54
+335,2,de,118,,1,,Sami Khedira,6.54
+336,3,ir,215,2,,1,Ehsan Haji Safi,6.53
+337,4,mx,267,3,3,1,Edson Álvarez,6.53
+338,3,is,253,,1,1,Aron Gunnarsson,6.53
+339,3,ng,270,,,,Francis Uzoho,6.53
+340,1,pa,45,,,,Harold Cummings,6.53
+341,1,de,59,,,,Ilkay Gündogan,6.53
+342,1,is,71,,2,,Jón Dadi Bödvarsson,6.53
+343,3,tn,182,,2,,Naim Sliti,6.53
+344,3,ir,260,1,5,,Omid Ebrahimi,6.53
+345,4,ng,220,,2,,Fabian Delph,6.53
+346,4,pt,245,,,1,Gonçalo Guedes,6.53
+347,3,se,132,2,1,,Gustav Svensson,6.53
+348,3,is,226,3,2,1,Ragnar Sigurdsson,6.53
+349,5,fr,141,1,,,Steven N'Zonzi,6.53
+350,5,ru,510,,,,Igor Akinfeev,6.52
+351,3,br,50,,,,Renato Augusto,6.52
+352,4,jp,360,,,,Eiji Kawashima,6.52
+353,2,g,85,,,,Ju Se-Jong,6.52
+354,3,sn,270,,,,Ismaila Sarr,6.51
+355,3,ng,226,,2,,Brian Idowu,6.51
+356,1,pe,27,,,1,Paolo Hurtado,6.51
+357,4,br,82,,2,,Roberto Firmino,6.51
+358,3,ma,270,,3,,Moubarak Boussoufa,6.51
+359,3,de,211,,3,,Marco Reus,6.51
+360,2,sn,152,,,,Alfred N'Diaye,6.50
+361,2,cr,180,,2,3,Bryan Oviedo,6.50
+362,3,is,270,4,1,2,Hördur Björgvin Magnússon,6.50
+363,4,hr,200,,1,,Josip Pivaric,6.50
+364,3,eg,147,1,2,2,Amr Warda,6.50
+365,3,mx,270,2,,,Héctor Moreno,6.50
+366,3,eg,209,,3,,Marwan Mohsen,6.49
+367,7,hr,332,,,,Andrej Kramaric,6.49
+368,2,co,91,,2,,Luis Muriel,6.49
+369,3,cr,246,,3,,David Guzmán,6.49
+370,3,de,88,,,,Mario Gomez,6.49
+371,2,is,115,5,4,,Sverrir Ingi Ingason,6.49
+372,2,pl,100,2,,,Kamil Glik,6.48
+373,2,ng,180,,2,,Phil Jones,6.48
+374,3,pl,213,,2,,Kamil Grosicki,6.48
+375,3,ng,148,,3,,Kelechi Iheanacho,6.48
+376,2,cr,106,,1,,Francisco Calvo,6.48
+377,3,pl,259,,1,,Piotr Zielinski,6.47
+378,1,dk,36,,,,William Kvist,6.47
+379,3,es,69,,,,Iago Aspas,6.46
+380,3,ch,112,,1,,Josip Drmic,6.46
+381,3,sn,270,1,1,,Kalidou Koulibaly,6.46
+382,3,au,270,,,,Mat Ryan,6.45
+383,4,pt,360,,,,Rui Patrício,6.45
+384,3,eg,270,,3,4,Ahmed Fathy,6.45
+385,3,is,270,3,,2,Birkir Már Saevarsson,6.45
+386,6,hr,630,,1,,Danijel Subasic,6.45
+387,3,kr,270,5,,,Jang Hyun-Soo,6.45
+388,3,sa,270,3,5,,Mohammed Al-Burayk,6.45
+389,4,se,318,2,2,,Sebastian Larsson,6.44
+390,3,pl,270,,1,,Robert Lewandowski,6.44
+391,2,pa,30,,,,Abdiel Arroyo,6.44
+392,2,g,98,,,,Daniel Colindres,6.44
+393,5,uy,450,,,,Fernando Muslera,6.43
+394,1,kr,28,,,,Park Joo-Ho,6.43
+395,1,eg,40,,1,,Sam Morsy,6.43
+396,3,sa,270,1,2,1,Osama Hawsawi,6.43
+397,2,rs,97,,,1,Antonio Rukavina,6.43
+398,1,dk,120,,5,,Jonas Knudsen,6.42
+399,1,pa,90,,,,Luis Ovalle,6.42
+400,5,fr,195,,3,1,Corentin Tolisso,6.42
+401,3,is,270,2,1,,Birkir Bjarnason,6.42
+402,3,pe,262,,1,1,Christian Cueva,6.41
+403,2,kr,146,,2,,Moon Seon-Min,6.41
+404,3,de,19,,,,Julian Brandt,6.41
+405,1,pt,5,,,,Manuel Fernandes,6.40
+406,4,be,178,2,2,,Mousa Dembélé,6.40
+407,5,br,450,,,,Alisson,6.40
+408,2,de,172,3,,,Jérôme Boateng,6.40
+409,2,kr,128,,2,,Koo Ja-Cheol,6.39
+410,2,jp,68,,,,Takashi Usami,6.39
+411,2,eg,180,,,,Mohamed El-Shenawy,6.39
+412,5,ru,304,,3,1,Daler Kuzyaev,6.38
+413,3,rs,167,,,,Filip Kostic,6.38
+414,3,au,270,,4,,Josh Risdon,6.37
+415,3,tn,270,2,4,2,Yassine Meriah,6.37
+416,1,kr,11,,,,Ko Yo-Han,6.37
+417,4,fr,166,,4,,Ousmane Dembélé,6.37
+418,3,tn,225,1,5,,Anice Badri,6.36
+419,3,g,230,1,1,,Tarek Hamed,6.36
+420,2,au,139,,,,Andrew Nabbout,6.36
+421,3,rs,170,,,,Adem Ljajic,6.35
+422,3,pa,222,,,,Edgar Bárcenas,6.35
+423,1,ng,45,,,,Tyronne Ebuehi,6.35
+424,1,jp,82,,1,,Yoshinori Muto,6.35
+425,3,pe,182,,,,Yotún,6.35
+426,2,pe,136,2,1,1,Alberto Rodríguez,6.35
+427,3,mx,84,,1,1,Rafael Márquez,6.34
+428,3,be,132,1,1,,Thomas Vermaelen,6.33
+429,4,ch,360,,,,Yann Sommer,6.33
+430,3,cr,270,,2,,Bryan Ruiz,6.33
+431,3,ma,188,2,1,,Manuel da Costa,6.32
+432,1,hr,90,,1,,Tin Jedvaj,6.32
+433,3,de,270,,,,Manuel Neuer,6.32
+434,2,sn,66,,1,,Mame Biram Diouf,6.32
+435,3,ma,266,,3,,Karim El Ahmadi,6.31
+436,3,g,190,3,,,Majid Hosseini,6.31
+437,5,br,156,1,2,,Fernandinho,6.31
+438,1,sa,90,,1,,Motaz Hawsawi,6.31
+439,4,ar,350,1,3,1,Nicolás Tagliafico,6.31
+440,2,tn,131,2,,,Syam Ben Youssef,6.31
+441,3,sn,270,,,,Khadim N'Diaye,6.30
+442,3,sn,254,,3,1,Youssouf Sabaly,6.30
+443,1,pt,31,,1,,Gelson Martins,6.30
+444,1,g,16,,1,,Mohammed Kanno,6.30
+445,3,es,130,,,,Marco Asensio,6.30
+446,3,de,266,,4,,Timo Werner,6.30
+447,3,sn,118,,,,Cheikhou Kouyaté,6.29
+448,1,au,37,,1,,Tim Cahill,6.29
+449,3,ng,270,,1,1,William Troost-Ekong,6.29
+450,4,jp,278,1,5,,Makoto Hasebe,6.28
+451,1,ru,75,,,,Vladimir Granat,6.28
+452,2,cr,150,,1,,Johan Venegas,6.28
+453,2,ma,31,,,,Faycal Fajr,6.28
+454,3,ng,123,,,,Odion Ighalo,6.27
+455,1,de,79,,,,Marvin Plattenhardt,6.27
+456,1,tn,90,,,,Saif-Eddine Khaoui,6.27
+457,1,de,31,,,,Sebastian Rudy,6.27
+458,2,pa,163,,1,,Blas Pérez,6.27
+459,6,ng,248,1,,,Eric Dier,6.26
+460,1,co,70,,,,José Izquierdo,6.26
+461,5,uy,165,,1,,Cristian Rodríguez,6.26
+462,6,fr,69,,2,,Nabil Fekir,6.25
+463,2,se,93,1,1,4,Emil Krafth,6.24
+464,4,dk,250,,2,1,Martin Braithwaite,6.24
+465,3,tn,195,,2,,Ferjani Sassi,6.24
+466,5,ng,204,,2,2,Danny Rose,6.24
+467,3,jp,68,,4,,Shinji Okazaki,6.24
+468,2,is,180,,2,,Emil Hallfredsson,6.24
+469,5,ru,220,,4,,Fedor Smolov,6.23
+470,1,co,32,,,,Abel Aguilar,6.23
+471,2,ma,98,,,,Ayoub El Kaabi,6.23
+472,1,ar,54,,,,Lucas Biglia,6.23
+473,2,es,84,,1,1,Lucas Vázquez,6.23
+474,2,is,117,,1,1,Rúrik Gíslason,6.23
+475,3,pt,156,,3,,Adrien Silva,6.23
+476,6,ng,211,,3,,Marcus Rashford,6.23
+477,2,sn,37,,1,,Cheikh N'Doye,6.22
+478,4,co,176,1,1,1,Jefferson Lerma,6.22
+479,1,mx,35,,1,,Jonathan dos Santos,6.22
+480,2,pl,29,,,,Lukasz Teodorczyk,6.22
+481,1,ar,90,1,1,,Marcos Acuña,6.22
+482,3,es,23,,,,Rodrigo Moreno,6.22
+483,2,pl,74,,,,Dawid Kownacki,6.22
+484,2,ch,50,,,,Denis Zakaria,6.21
+485,2,cr,121,,,,Marco Ureña,6.21
+486,3,au,44,,2,,Jackson Irvine,6.20
+487,1,ng,90,,1,,Abdullahi Shehu,6.19
+488,1,g,13,,,,Ahmed Khalil,6.19
+489,2,ru,89,1,,,Aleksandr Erokhin,6.18
+490,1,fr,40,,2,,Benjamin Mendy,6.18
+491,1,hr,25,,,,Filip Bradaric,6.18
+492,3,au,210,,2,1,Robbie Kruse,6.18
+493,3,au,60,1,1,,Daniel Arzani,6.18
+494,4,ng,157,,3,,Jamie Vardy,6.17
+495,3,g,243,,3,,Jose Luis Rodriguez,6.17
+496,3,pa,249,1,1,,Gabriel Gómez,6.16
+497,3,ar,132,,2,,Gonzalo Higuaín,6.16
+498,3,co,90,,,,Carlos Bacca,6.16
+499,2,mx,35,,1,,Jesús Manuel Corona,6.16
+500,1,ru,60,,,,Aleksey Miranchuk,6.15
+501,3,sa,156,,,,Hattan Bahebri,6.15
+502,3,cr,270,2,1,2,Johnny Acosta,6.15
+503,3,ch,143,,,,Haris Seferovic,6.15
+504,1,ng,11,,,,Danny Welbeck,6.14
+505,2,rs,17,,,,Nemanja Radonjic,6.14
+506,3,ng,64,,,1,Alex Iwobi,6.13
+507,3,eg,270,2,,,Ali Gabr,6.13
+508,1,rs,16,,,,Andrija Zivkovic,6.13
+509,4,ru,334,1,3,3,Fedor Kudryashov,6.13
+510,2,pl,173,,1,1,Lukasz Piszczek,6.13
+511,3,ar,195,,1,,Enzo Pérez,6.13
+512,1,ar,45,,,,Federico Fazio,6.12
+513,1,uy,17,,,,Jonathan Urretaviscaya,6.12
+514,3,hr,82,,1,,Marko Pjaca,6.12
+515,2,sa,30,,,,Mohannad Aseri,6.12
+516,1,sa,90,2,1,,Ali Albulayhi,6.10
+517,1,mx,25,,,,Marco Fabián,6.10
+518,3,ma,270,,,,Munir Mohamedi,6.10
+519,4,se,37,,1,,Isaac Thelin,6.10
+520,2,se,33,,,,Martin Olsson,6.10
+521,3,au,270,,1,,Aziz Behich,6.09
+522,3,eg,244,1,3,,Mohamed Elneny,6.09
+523,2,se,29,,,,Oscar Hiljemark,6.09
+524,1,pe,11,,,,Wilder Cartagena,6.09
+525,3,pa,270,,,,Jaime Penedo,6.08
+526,1,ma,16,,,,Mehdi Carcela-González,6.08
+527,1,tn,16,,,,Mohamed Ben Amor,6.08
+528,3,ir,29,,1,,Saman Ghoddos,6.07
+529,2,uy,75,,,,Cristhian Stuani,6.07
+530,2,kr,44,,1,,Lee Seung-Woo,6.06
+531,3,pt,116,,,1,André Silva,6.06
+532,4,ar,154,,1,,Cristian Pavón,6.06
+533,2,pa,73,,1,,Gabriel Torres,6.06
+534,2,uy,32,,,,Maxi Gómez,6.05
+535,2,is,17,1,,,Ari Freyr Skúlason,6.05
+536,1,tn,1,,,,Bassem Srarfi,6.04
+537,2,pt,88,,2,,Bruno Fernandes,6.04
+538,1,pl,46,,1,,Jakub Blaszczykowski,6.04
+539,2,sn,26,,,,Moussa Konaté,6.04
+540,3,is,39,,,,Björn Sigurdarson,6.03
+541,1,dk,22,,,,Michael Krohn-Dehli,6.03
+542,2,cr,67,,,,Christian Bolaños,6.03
+543,2,pe,13,,,,Raúl Ruidíaz,6.03
+544,3,eg,56,,,,Ramadan Sobhi,6.02
+545,2,se,37,,,1,John Guidetti,6.02
+546,2,mx,55,,1,1,Raúl Jiménez,6.02
+547,1,se,16,,,,Jimmy Durmaz,6.01
+548,2,g,146,,1,1,Kim Min-Woo,6.01
+549,1,kr,66,,,,Kim Shin-Wook,6.01
+550,2,ng,3,,,,Simy,6.01
+551,1,rs,1,,,,Aleksandar Prijovic,6.00
+552,1,is,1,,,,Arnór Ingvi Traustason,6.00
+553,1,co,4,,,,Cristián Zapata,6.00
+554,1,g,1,,,,Ian Smith,6.00
+555,1,rs,1,,,,Luka Jovic,6.00
+556,1,dk,1,,,,Lukas Lerager,6.00
+557,1,br,1,,,,Marquinhos,6.00
+558,1,cr,1,,,,Rándall Azofeifa,6.00
+559,3,jp,109,,,,Hotaru Yamaguchi,5.99
+560,1,jp,90,,1,,Gotoku Sakai,5.99
+561,2,pa,180,,2,,Armando Cooper,5.99
+562,3,pa,270,3,1,,Fidel Escobar,5.98
+563,1,co,1,,,,Miguel Borja,5.98
+564,1,cr,9,,,,Rodney Wallace,5.98
+565,1,dk,31,,,,Viktor Fischer,5.98
+566,1,pl,10,,,,Slawomir Peszko,5.96
+567,3,au,95,,1,,Tomi Juric,5.96
+568,1,mx,13,,,,Giovani dos Santos,5.95
+569,1,rs,90,,,,Milos Veljkovic,5.95
+570,3,eg,44,,,,Kahraba,5.95
+571,1,sn,4,,,,Diafra Sakho,5.94
+572,1,mx,1,,,,Oribe Peralta,5.94
+573,1,pt,90,,3,,Ricardo Pereira,5.94
+574,3,pa,236,1,1,,Román Torres,5.94
+575,1,ma,14,,,,Sofyan Amrabat,5.93
+576,1,sa,90,1,,,Omar Hawsawi,5.92
+577,1,dk,16,,,,Kasper Dolberg,5.91
+578,2,sa,97,,1,,Mohammed Al Sahlawi,5.91
+579,1,sa,90,,,,Yasser Al-Mosailem,5.89
+580,1,is,5,,,,Albert Gudmundsson,5.88
+581,3,pa,243,,3,,Aníbal Godoy,5.88
+582,1,fr,1,,,,Florian Thauvin,5.88
+583,3,sa,183,,1,,Fahad Al Muwallad,5.88
+584,3,ch,102,,2,4,Michael Lang,5.87
+585,2,sa,85,,1,,Yahya Al Shehri,5.86
+586,1,sa,90,,,,Mohammed Al Owais,5.83
+587,1,tn,5,,,,Saber Khalifa,5.82
+588,1,pl,73,,,,Arkadiusz Milik,5.80
+589,1,ar,22,,,,Paulo Dybala,5.80
+590,1,pa,27,,,,Ismael Diaz,5.77
+591,2,pa,51,,,,Luis Tejada,5.77
+592,3,co,172,,,,Carlos Sánchez,5.76
+593,2,ma,18,,,,Aziz Bouhaddouz,5.76
+594,2,pa,180,,,1,Eric Davis,5.75
+595,2,sa,134,,,,Taiseer Al Jassam,5.74
+596,2,pa,180,,,,Michael Murillo,5.69
+597,1,cr,7,,,,Yeltsin Tejeda,5.68
+598,4,es,390,,,,David De Gea,5.63
+599,2,ar,180,,,,Willy Caballero,5.59
+600,2,tn,180,1,2,1,Ali Maâloul,5.49
+601,2,pl,180,,,,Wojciech Szczesny,5.38
+602,2,ar,180,,,,Franco Armani,5.28
+603,1,sa,90,,,,Abdullah Al-Mayoof,5.15
+604,1,ru,36,,,,Igor Smolnikov,4.34
