@@ -1,5 +1,5 @@
 # NZZ Storytelling, script for the NZZ hurricane maps and the following article: 
-# https://www.nzz.ch/international/wie-die-nzz-hurrikan-prognosen-darstellt-und-warum-hurrikan-prognosen-wie-man-unsicherheit-sichtbar-macht-ld.1394033
+# https://www.nzz.ch/international/warum-die-gaengigste-hurrikan-visualisierung-problematisch-ist-und-was-die-nzz-an-ihrer-stelle-macht-ld.1394033
 # questions and comments: marie-jose.kolly@nzz.ch
 
 # This script leads, step by step, to a hurricane-map based on geojson files to be used with the NZZ Storytelling Toolbox Q as well as to .svg- and .pdf-versions that can be adapted for graphics to be printed on paper. 
