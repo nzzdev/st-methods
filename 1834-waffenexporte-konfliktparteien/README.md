@@ -15,8 +15,8 @@
   * Data sources: [Swiss State Secretariat for Economic Affairs (Seco)](https://www.seco.admin.ch/seco/de/home/Aussenwirtschaftspolitik_Wirtschaftliche_Zusammenarbeit/Wirtschaftsbeziehungen/exportkontrollen-und-sanktionen/ruestungskontrolle-und-ruestungskontrollpolitik--bwrp-/zahlen-und-statistiken0.html), [Uppsala Conflict Data Program](http://ucdp.uu.se/), see point 3. above
   * Code: R Core Team (2017), [R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria](http://www.R-project.org)
   
-6. License
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />1834-waffenexporte-konfliktparteien by NZZ Visuals is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. The code that reads and processes weapon export data was written by [SRF Data](https://github.com/srfdata/2017-02-kriegsmaterial) and added to our script. 
+6. License<br>
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This project (1834-waffenexporte-konfliktparteien) by NZZ Visuals is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. The code that reads and processes weapon export data was written by [SRF Data](https://github.com/srfdata/2017-02-kriegsmaterial) and added to our script. 
 
 
 We exclude liability for any damages or losses that may arise from using the materials made available by NZZ Storytelling. We do not guarantee that the information therein is adequate, complete or up to date.
