@@ -1,6 +1,6 @@
 # st-methods
 
-This is where NZZ Storytelling describes methods and code used for our articles. 
+This is where NZZ Visuals describes methods and code used for our articles. 
 Each project has its own sub-repository with scripts and a README.md containing the following information:
 
 1. A concise summary of what the scripts do, and what for. 
