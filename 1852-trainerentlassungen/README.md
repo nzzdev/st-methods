@@ -14,7 +14,6 @@
   * [Method: Flepp, Raphael and Franck, Egon P., The Role of Boards’ Misperceptions in the Relation Between Managerial Turnover and Performance: Evidence From European Football (January 9, 2019). UZH Business Working Paper Series, No. 380](https://ssrn.com/abstract=3312801)
   
 6. License<br>
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This project (1834-waffenexporte-konfliktparteien) by NZZ Visuals is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. The code that reads and processes weapon export data was written by [SRF Data](https://github.com/srfdata/2017-02-kriegsmaterial) and added to our script. 
-
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This project (1852-trainerentlassungen) by NZZ Visuals is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
 
 We exclude liability for any damages or losses that may arise from using the materials made available by NZZ Visuals. We do not guarantee that the information therein is adequate, complete or up to date.
