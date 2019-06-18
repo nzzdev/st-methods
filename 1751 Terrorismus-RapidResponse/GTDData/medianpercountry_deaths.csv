@@ -1,0 +1,206 @@
+country,region,year,deaths,casualties,incidentno
+India,South Asia,1993.0,332.0,871.5,145.0
+Colombia,South America,1993.0,129.5,286.5,124.5
+Pakistan,South Asia,1993.0,121.0,411.0,44.0
+Philippines,Southeast Asia,1993.0,115.0,343.0,53.0
+United Kingdom,Western Europe,1993.0,41.5,106.0,82.5
+Sri Lanka,South Asia,1993.0,25.5,62.5,17.0
+Turkey,Middle East & North Africa,1993.0,25.0,124.5,33.5
+Lebanon,Middle East & North Africa,1993.0,18.5,68.5,18.5
+Russia,Eastern Europe,1993.0,18.0,45.0,16.5
+Israel,Middle East & North Africa,1993.0,16.0,98.0,27.0
+Thailand,Southeast Asia,1993.0,15.0,53.5,11.0
+Uganda,Sub-Saharan Africa,1993.0,12.0,16.0,5.0
+Afghanistan,South Asia,1993.0,11.0,51.5,4.5
+Algeria,Middle East & North Africa,1993.0,10.0,16.5,9.5
+Iraq,Middle East & North Africa,1993.0,9.5,35.0,5.5
+West Bank and Gaza Strip,Middle East & North Africa,1993.0,9.5,31.0,19.5
+Spain,Western Europe,1993.0,9.5,63.0,42.0
+Bangladesh,South Asia,1993.0,8.0,45.0,10.5
+Peru,South America,1993.0,7.0,16.0,4.0
+Myanmar,Southeast Asia,1993.0,7.0,19.5,3.0
+Sudan,Sub-Saharan Africa,1993.0,7.0,14.0,3.5
+Iran,Middle East & North Africa,1993.0,6.0,13.0,7.0
+South Africa,Sub-Saharan Africa,1993.0,5.0,22.5,11.0
+Somalia,Sub-Saharan Africa,1993.0,5.0,6.5,2.0
+Guatemala,Central America & Caribbean,1993.0,4.0,5.5,4.0
+United States,North America,1993.0,3.5,16.5,33.5
+Nigeria,Sub-Saharan Africa,1993.0,3.5,5.0,3.0
+France,Western Europe,1993.0,3.0,14.0,33.5
+Ethiopia,Sub-Saharan Africa,1993.0,3.0,5.5,2.0
+Kenya,Sub-Saharan Africa,1993.0,2.5,3.0,2.0
+Indonesia,Southeast Asia,1993.0,2.0,5.0,3.0
+Mexico,North America,1993.0,2.0,3.0,3.5
+Angola,Sub-Saharan Africa,1993.0,1.5,2.5,1.5
+Egypt,Middle East & North Africa,1993.0,1.0,8.0,2.0
+Ireland,Western Europe,1993.0,1.0,1.0,3.0
+Argentina,South America,1993.0,1.0,2.0,9.5
+Burundi,Sub-Saharan Africa,1993.0,1.0,1.5,0.5
+Greece,Western Europe,1993.0,1.0,4.5,20.5
+Italy,Western Europe,1993.0,0.5,3.0,7.0
+Vietnam,Southeast Asia,1993.0,0.0,0.0,0.0
+Yemen,Middle East & North Africa,1993.0,0.0,2.5,3.5
+Portugal,Western Europe,1993.0,0.0,0.0,0.0
+Panama,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Poland,Eastern Europe,1993.0,0.0,0.0,0.0
+Yugoslavia,Eastern Europe,1993.0,0.0,0.0,0.0
+Western Sahara,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Wallis and Futuna,Australasia & Oceania,1993.0,0.0,0.0,0.0
+Papua New Guinea,Australasia & Oceania,1993.0,0.0,0.0,0.0
+Norway,Western Europe,1993.0,0.0,0.0,0.0
+West Germany (FRG),Western Europe,1993.0,0.0,0.0,0.0
+Paraguay,South America,1993.0,0.0,0.0,0.0
+People's Republic of the Congo,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Trinidad and Tobago,Central America & Caribbean,1993.0,0.0,0.0,0.0
+North Korea,East Asia,1993.0,0.0,0.0,0.0
+North Yemen,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Republic of the Congo,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Mauritius,South Asia,1993.0,0.0,0.0,0.0
+Moldova,Eastern Europe,1993.0,0.0,0.0,0.0
+Montenegro,Eastern Europe,1993.0,0.0,0.0,0.0
+Morocco,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Mozambique,Sub-Saharan Africa,1993.0,0.0,0.5,1.0
+Zambia,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Namibia,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Nepal,South Asia,1993.0,0.0,3.0,1.5
+Netherlands,Western Europe,1993.0,0.0,0.0,2.0
+New Caledonia,Australasia & Oceania,1993.0,0.0,0.0,0.0
+New Hebrides,Australasia & Oceania,1993.0,0.0,0.0,0.0
+New Zealand,Australasia & Oceania,1993.0,0.0,0.0,0.0
+Nicaragua,Central America & Caribbean,1993.0,0.0,0.0,1.0
+Niger,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Zaire,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Qatar,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Rhodesia,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Venezuela,South America,1993.0,0.0,0.0,4.0
+Suriname,South America,1993.0,0.0,0.0,0.0
+South Yemen,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Soviet Union,Eastern Europe,1993.0,0.0,0.0,0.0
+United Arab Emirates,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Ukraine,Eastern Europe,1993.0,0.0,0.0,0.0
+St. Kitts and Nevis,Central America & Caribbean,1993.0,0.0,0.0,0.0
+St. Lucia,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Turkmenistan,Central Asia,1993.0,0.0,0.0,0.0
+Swaziland,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+South Sudan,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Sweden,Western Europe,1993.0,0.0,0.0,1.0
+Switzerland,Western Europe,1993.0,0.0,0.0,1.5
+Syria,Middle East & North Africa,1993.0,0.0,0.0,1.0
+Taiwan,East Asia,1993.0,0.0,0.0,0.0
+Tajikistan,Central Asia,1993.0,0.0,0.0,0.0
+Tanzania,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Tunisia,Middle East & North Africa,1993.0,0.0,0.0,0.0
+South Vietnam,Southeast Asia,1993.0,0.0,0.0,0.0
+South Korea,East Asia,1993.0,0.0,0.0,0.0
+Togo,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Seychelles,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Romania,Eastern Europe,1993.0,0.0,0.0,0.0
+Vatican City,Western Europe,1993.0,0.0,0.0,0.0
+Rwanda,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Saudi Arabia,Middle East & North Africa,1993.0,0.0,0.0,1.0
+Senegal,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Serbia,Eastern Europe,1993.0,0.0,0.0,0.0
+Serbia-Montenegro,Eastern Europe,1993.0,0.0,0.0,0.0
+Vanuatu,Australasia & Oceania,1993.0,0.0,0.0,0.0
+Uruguay,South America,1993.0,0.0,0.0,0.0
+Sierra Leone,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Singapore,Southeast Asia,1993.0,0.0,0.0,0.0
+Slovak Republic,Eastern Europe,1993.0,0.0,0.0,0.0
+Martinique,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Slovenia,Eastern Europe,1993.0,0.0,0.0,0.0
+Solomon Islands,Australasia & Oceania,1993.0,0.0,0.0,0.0
+Uzbekistan,Central Asia,1993.0,0.0,0.0,0.0
+Mauritania,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Libya,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Malta,Western Europe,1993.0,0.0,0.0,0.0
+Cyprus,Western Europe,1993.0,0.0,0.0,1.0
+Canada,North America,1993.0,0.0,0.0,1.0
+Central African Republic,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Chad,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Chile,South America,1993.0,0.0,1.0,6.5
+China,East Asia,1993.0,0.0,1.5,1.0
+Comoros,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Costa Rica,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Croatia,Eastern Europe,1993.0,0.0,0.0,0.0
+Cuba,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Czech Republic,Eastern Europe,1993.0,0.0,0.0,0.0
+Mali,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Czechoslovakia,Eastern Europe,1993.0,0.0,0.0,0.0
+Democratic Republic of the Congo,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Denmark,Western Europe,1993.0,0.0,0.0,0.0
+Djibouti,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Dominica,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Dominican Republic,Central America & Caribbean,1993.0,0.0,0.0,0.0
+East Germany (GDR),Eastern Europe,1993.0,0.0,0.0,0.0
+East Timor,Southeast Asia,1993.0,0.0,0.0,0.0
+Ecuador,South America,1993.0,0.0,1.0,2.0
+Cameroon,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Cambodia,Southeast Asia,1993.0,0.0,0.0,0.0
+Burkina Faso,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Bulgaria,Eastern Europe,1993.0,0.0,0.0,0.0
+Andorra,Western Europe,1993.0,0.0,0.0,0.0
+Antigua and Barbuda,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Armenia,Central Asia,1993.0,0.0,0.0,0.0
+Australia,Australasia & Oceania,1993.0,0.0,0.0,1.0
+Austria,Western Europe,1993.0,0.0,0.0,1.0
+Azerbaijan,Central Asia,1993.0,0.0,0.0,0.0
+Bahamas,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Bahrain,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Barbados,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Belarus,Eastern Europe,1993.0,0.0,0.0,0.0
+Belgium,Western Europe,1993.0,0.0,0.0,1.0
+Belize,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Benin,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Bhutan,South Asia,1993.0,0.0,0.0,0.0
+Bolivia,South America,1993.0,0.0,0.0,1.0
+Bosnia-Herzegovina,Eastern Europe,1993.0,0.0,0.0,0.0
+Botswana,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Brazil,South America,1993.0,0.0,1.0,2.0
+Brunei,Southeast Asia,1993.0,0.0,0.0,0.0
+El Salvador,Central America & Caribbean,1993.0,0.0,1.0,2.0
+Equatorial Guinea,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Eritrea,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Ivory Coast,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Japan,East Asia,1993.0,0.0,0.0,2.0
+Jordan,Middle East & North Africa,1993.0,0.0,0.5,1.0
+Kazakhstan,Central Asia,1993.0,0.0,0.0,0.0
+Kosovo,Eastern Europe,1993.0,0.0,0.0,0.0
+Kuwait,Middle East & North Africa,1993.0,0.0,0.0,1.0
+Kyrgyzstan,Central Asia,1993.0,0.0,0.0,0.0
+Laos,Southeast Asia,1993.0,0.0,0.0,0.0
+Latvia,Eastern Europe,1993.0,0.0,0.0,0.0
+Lesotho,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Liberia,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Albania,Eastern Europe,1993.0,0.0,0.0,0.0
+Lithuania,Eastern Europe,1993.0,0.0,0.0,0.0
+Luxembourg,Western Europe,1993.0,0.0,0.0,0.0
+Macau,East Asia,1993.0,0.0,0.0,0.0
+Macedonia,Eastern Europe,1993.0,0.0,0.0,0.0
+Madagascar,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Malawi,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Malaysia,Southeast Asia,1993.0,0.0,0.0,0.0
+Maldives,South Asia,1993.0,0.0,0.0,0.0
+Jamaica,Central America & Caribbean,1993.0,0.0,0.0,0.0
+International,Middle East & North Africa,1993.0,0.0,0.0,0.0
+Estonia,Eastern Europe,1993.0,0.0,0.0,0.0
+Iceland,Western Europe,1993.0,0.0,0.0,0.0
+Falkland Islands,South America,1993.0,0.0,0.0,0.0
+Fiji,Australasia & Oceania,1993.0,0.0,0.0,0.0
+Finland,Western Europe,1993.0,0.0,0.0,0.0
+French Guiana,South America,1993.0,0.0,0.0,0.0
+French Polynesia,Australasia & Oceania,1993.0,0.0,0.0,0.0
+Gabon,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Gambia,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Georgia,Central Asia,1993.0,0.0,0.5,1.0
+Germany,Western Europe,1993.0,0.0,0.0,1.0
+Ghana,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Grenada,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Guadeloupe,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Guinea,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Guinea-Bissau,Sub-Saharan Africa,1993.0,0.0,0.0,0.0
+Guyana,South America,1993.0,0.0,0.0,0.0
+Haiti,Central America & Caribbean,1993.0,0.0,0.0,0.0
+Honduras,Central America & Caribbean,1993.0,0.0,1.5,1.0
+Hong Kong,East Asia,1993.0,0.0,0.0,0.0
+Hungary,Eastern Europe,1993.0,0.0,0.0,0.0
+Zimbabwe,Sub-Saharan Africa,1993.0,0.0,0.0,1.0
