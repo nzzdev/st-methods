@@ -29,7 +29,7 @@ Pygments==2.2.0
 pyparsing==2.2.0
 python-dateutil==2.6.1
 request==0.0.22
-requests==2.18.4
+requests==2.20.0
 scipy==1.0.0
 simplegeneric==0.8.1
 six==1.11.0
