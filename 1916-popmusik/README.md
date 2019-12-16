@@ -1,6 +1,7 @@
 # 1916-popmusik
 
-1. R-Script that scrapes, formats, analyses and visualizes the Swiss single and album charts since 1968 and 1983, respectively. Clean datasets and raw html files are provided as well for convenience.
+1. R-Script that scrapes, formats, analyses and visualizes the Swiss single and album charts since 1968 and 1983, respectively. Clean datasets 
+are provided as well for convenience.
 
 2. Results in the following piece:
   * [Und plötzlich dominieren wenige Superhits die Schweizer Charts](https://www.nzz.ch/feuilleton/schweizer-charts-und-ploetzlich-dominieren-wenige-superhits-ld.1488251)
