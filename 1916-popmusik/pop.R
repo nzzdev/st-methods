@@ -7,7 +7,7 @@
 ##Preparation
 rm(list=ls(all=TRUE))
 dev.off()
-setwd("~/Library/Mobile Documents/com~apple~CloudDocs/NZZ/Pop2")
+# setwd("~/Library/Mobile Documents/com~apple~CloudDocs/NZZ/Pop2") # set your own wd
 options(stringsAsFactors=F) # Das automatische Bilden von Faktoren in dataframes verhindern
 
 #Packages
