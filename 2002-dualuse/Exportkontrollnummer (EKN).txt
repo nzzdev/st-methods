@@ -1,0 +1,9 @@
+Nummer, Definition
+5A002, Krypto-Hardware
+5D002a1, Krypto-Software
+5D002b, Krypto-Software
+5D002c1, Krypto-Software
+7A005, Krypto-Satelliten-Empfang-Hardware
+7D005, Krypto-Software für Satelliten
+7E001, Schlüsselmanagement-Software
+
