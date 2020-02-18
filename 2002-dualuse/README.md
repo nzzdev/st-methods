@@ -1,22 +1,15 @@
-# 1916-popmusik
+# Dualuse analyse
 
-1. Content: R-Script that scrapes, formats, analyses and visualises the Swiss single and album charts since 1968 and 1983, respectively. Clean datasets are provided as well for convenience.
+1. Content: Python script that combines the dual use raw data published by [SECO from 1997 to 2019](https://www.seco.admin.ch/seco/de/home/Aussenwirtschaftspolitik_Wirtschaftliche_Zusammenarbeit/Wirtschaftsbeziehungen/exportkontrollen-und-sanktionen/industrieprodukte--dual-use--und-besondere-militaerische-gueter/statistik/2015.html).
 
 2. Results in the following piece:
-  * [Und plötzlich dominieren wenige Superhits die Schweizer Charts](https://www.nzz.ch/feuilleton/schweizer-charts-und-ploetzlich-dominieren-wenige-superhits-ld.1488251)
-  * Publication date: 2019-12-05
-  * In recent years, the swiss single charts have increasingly been dominated by single songs and artists, while the opposite is true for the album charts, where the average lifespan of an entry has decreased. The articles looks at some of the longest-leading songs and theorizes on the causes of these trends. Additionally, the lifespan of the average hit ist shown, along with some examples of late bloomers and recurring appearances in the Top 100.
-  
-3. Source: The data is scraped from hitparade.ch, which gets it from GfK Entertainment AG.
+  * [Diese Länder bestellten Schweizer Krypto-Technik für 500 Millionen Franken](hhttps://edit.nzz.ch/articles/1541135/edit/add)
+  * Publication date: 2020-02-20
+  * Considering there are only few companies that sold devices like the one's Crypto AG did, we can assume that the majority of the sales listed in the database provided by SECO will refer to sales (or possible sales) made by Crypto AG
 
-4. Methods: The hitparade.ch website was scraped, the data was formatted using regual expressions. Simple summary statistics were used. Median was used as a measure of central tendency for robustness.
+3. Source: SECO.
 
-5. One script was used: It gets the data from hitparade.ch, saves it in .html files and then turns it into a usable data frame. In the published script, this part is commented out and a clean .csv containing all data at publication is provided. The script then calculates the yearly median lifespan of songs and albums at the top of the charts and the median trajectory of a number 1 hit. It then visualizes these findings, along with specific cases of single songs.
-  
-6. References
-  * Data source: [hitparade.ch](https://www.https://hitparade.ch/charts)
-  * Methods: [Our methods section](https://www.nzz.ch/feuilleton/schweizer-charts-und-ploetzlich-dominieren-wenige-superhits-ld.1488251#subtitle-die-methodik-im-detail)
-  * Code: 
-    * R Core Team (2019), [R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria](http://www.R-project.org)
+4. Methods: After combining the xls files the data was cleaned using Pandas and visualised to work on the maps and charts using matplotlib.
 
-We exclude liability for any damages or losses that may arise from using the materials made available by NZZ Visuals. We do not guarantee that the information therein is adequate, complete or up to date.
+5. References
+  * See above.
