@@ -20,7 +20,7 @@
 
 * Data sources: JHU, Canton of Zurich, linked in pieces/script accordingly. Population figures are [World Bank](https://data.worldbank.org/indicator/SP.POP.TOTL) / [Federal Statistical Office](https://www.bfs.admin.ch/bfs/de/home/statistiken/bevoelkerung/stand-entwicklung/bevoelkerung.assetdetail.9486033.html)
 * Methods: linked above
-* Code: 
+* Tools: 
     * R Core Team (2019), [R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria](http://www.R-project.org)
 
 We exclude liability for any damages or losses that may arise from using the materials made available by NZZ Visuals. We do not guarantee that the information therein is adequate, complete or up to date.
