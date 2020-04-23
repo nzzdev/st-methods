@@ -80,7 +80,7 @@ length(aff)-1 # This number minus 1 (because of others, this is the Diamond Prin
 # SCHWEIZ (NEW PROCESS)
 
 jhu_ch <- filter(all_ctry, Ort == "Switzerland")  %>% 
-  select("Datum", "Tote", "gegenwärtig Infizierte")
+  select("Datum", "Tote", "gegenwärtig Infizierte", "Genesene")
 
 kant_dec <- kant %>%
   select(date, abbreviation_canton_and_fl, ncumul_deceased) %>%
@@ -124,7 +124,7 @@ colnames(kant_com) <- c("Datum", "Tote", "Infizierte")
 
 jhu_ch_mod <- jhu_ch %>% 
   filter(Datum < "2020-03-24") %>%
-  mutate(Infizierte = Tote+`gegenwärtig Infizierte`) %>%
+  mutate(Infizierte = Genesene+`gegenwärtig Infizierte`) %>%
   select(Datum, Tote, Infizierte)
 
 ch <- rbind(jhu_ch_mod, kant_com) %>%
