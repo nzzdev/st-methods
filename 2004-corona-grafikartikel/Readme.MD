@@ -12,7 +12,7 @@
 4. Non-trivial methods: 
 * Method for calculating an estimate of recovered patients described here: https://www.nzz.ch/coronavirus-wie-viele-patienten-sind-wirklich-genesen-ld.1552519
 
-* Our Assumptions for recovery:
+* Our assumptions for recovery:
     * 75% of patientes have recovered after 14 days
     * an aditional 10% of patientes have recovered after 21 days
     * an aditional 10% of patientes have recovered after 28 days
