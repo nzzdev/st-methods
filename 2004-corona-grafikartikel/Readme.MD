@@ -13,16 +13,16 @@
 * Method for calculating an estimate of recovered patients described here: https://www.nzz.ch/coronavirus-wie-viele-patienten-sind-wirklich-genesen-ld.1552519
 
 * Our Assumptions for recovery:
- -	75% of patientes have recovered after 14 days
- -	an aditional 10% of patientes have recovered after 21 days
- -	an aditional 10% of patientes have recovered after 28 days
- -	the remaining 5% of patientes have recovered after 42 days
+    * 75% of patientes have recovered after 14 days
+    * an aditional 10% of patientes have recovered after 21 days
+    * an aditional 10% of patientes have recovered after 28 days
+    * the remaining 5% of patientes have recovered after 42 days
 
-* Sources for estimations: 
- - BL: https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/amt-fur-gesundheit/medizinische-dienste/kantonsarztlicher-dienst/aktuelles/covid-19-faelle-kanton-basel-landschaft/pdf/konzept-geheilte-bl.pdf/@@download/file/Konzept_Geheilte_BL.pdf
- - WHO: https://www.who.int/docs/default-source/coronaviruse/who-china-joint-mission-on-covid-19-final-report.pdf
- - ECDC: https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-eighth-update-8-april-2020.pdf
- - Lancet: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext#figures
+* Sources for estimations:
+    * BL: https://www.baselland.ch/politik-und-behorden/direktionen/volkswirtschafts-und-gesundheitsdirektion/amt-fur-gesundheit/medizinische-dienste/kantonsarztlicher-dienst/aktuelles/covid-19-faelle-kanton-basel-landschaft/pdf/konzept-geheilte-bl.pdf/@@download/file/Konzept_Geheilte_BL.pdf
+    * WHO: https://www.who.int/docs/default-source/coronaviruse/who-china-joint-mission-on-covid-19-final-report.pdf
+    * ECDC: https://www.ecdc.europa.eu/sites/default/files/documents/covid-19-rapid-risk-assessment-coronavirus-disease-2019-eighth-update-8-april-2020.pdf
+    * Lancet: https://www.thelancet.com/journals/laninf/article/PIIS1473-3099(20)30243-7/fulltext#figures
 
 * doubling time method by J.M. Spicer http://rstudio-pubs-static.s3.amazonaws.com/10369_9e0e4a116538489baa18908c1690293c.html
   
