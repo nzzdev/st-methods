@@ -1,0 +1,252 @@
+Ort,Land,Continent
+Azerbaijan,Azerbaijan,Asien
+Belarus,Belarus,Europa
+Brazil,Brazil,Südamerika
+Denmark,Denmark,Europa
+Estonia,Estonia,Europa
+Georgia,Georgia,Europa
+Greece,Greece,Europa
+Iceland,Iceland,Europa
+Lithuania,Lithuania,Europa
+Mexico,Mexico,Nordamerika
+Netherlands,Netherlands,Europa
+New Zealand,New Zealand,Ozeanien
+Nigeria,Nigeria,Afrika
+North Macedonia,North Macedonia,Europa
+Norway,Norway,Europa
+Pakistan,Pakistan,Asien
+Romania,Romania,Europa
+San Marino,San Marino,Europa
+Afghanistan,Afghanistan,Asien
+Algeria,Algeria,Afrika
+Anhui,China,China
+Australia,Australia,Ozeanien
+Austria,Austria,Europa
+Bahrain,Bahrain,Asien
+Beijing,China,China
+Belgium,Belgium,Europa
+Cambodia,Cambodia,Asien
+Canada,Canada,Nordamerika
+Chongqing,China,China
+Croatia,Croatia,Europa
+Egypt,Egypt,Afrika
+Finland,Finland,Europa
+France,France,Europa
+Fujian,China,China
+Gansu,China,China
+Germany,Germany,Europa
+Guangdong,China,China
+Guangxi,China,China
+Guizhou,China,China
+Hainan,China,China
+Hebei,China,China
+Heilongjiang,China,China
+Henan,China,China
+Hong Kong,Hong Kong,Asien
+Hubei,China,China
+Hunan,China,China
+India,India,Asien
+Inner Mongolia,China,China
+Iran,Iran,Asien
+Iraq,Iraq,Asien
+Israel,Israel,Asien
+Italy,Italy,Europa
+Japan,Japan,Asien
+Jiangsu,China,China
+Jiangxi,China,China
+Jilin,China,China
+Kuwait,Kuwait,Asien
+Lebanon,Lebanon,Asien
+Liaoning,China,China
+Macau,Macau,Asien
+Malaysia,Malaysia,Asien
+Nepal,Nepal,Asien
+Ningxia,China,China
+Oman,Oman,Asien
+Cruise Ship,Cruise Ship,Andere
+Philippines,Philippines,Asien
+Qinghai,China,China
+Russia,Russia,Asien
+Shaanxi,China,China
+Shandong,China,China
+Shanghai,China,China
+Shanxi,China,China
+Sichuan,China,China
+Singapore,Singapore,Asien
+South Korea,South Korea,Asien
+Spain,Spain,Europa
+Sri Lanka,Sri Lanka,Asien
+Sweden,Sweden,Europa
+Switzerland,Switzerland,Europa
+Taiwan,Taiwan,Asien
+Thailand,Thailand,Asien
+Tianjin,China,China
+Tibet,China,China
+UK,UK,Europa
+United Arab Emirates,United Arab Emirates,Asien
+USA,US,Nordamerika
+Vietnam,Vietnam,Asien
+Xinjiang,China,China
+Yunnan,China,China
+Zhejiang,China,China
+Ireland,Ireland,Europa
+Luxembourg,Luxembourg,Europa
+Monaco,Monaco,Europa
+Qatar,Qatar,Asien
+Armenia,Armenia,Asien
+Czech Republic,Czech Republic,Europa
+Dominican Republic,Dominican Republic,Zentralamerika
+Ecuador,Ecuador,Südamerika
+Andorra,Andorra,Europa
+Indonesia,Indonesia,Asien
+Latvia,Latvia,Europa
+Morocco,Morocco,Afrika
+Portugal,Portugal,Europa
+Saudi Arabia,Saudi Arabia,Asien
+Senegal,Senegal,Afrika
+Argentina,Argentina,Südamerika
+Chile,Chile,Südamerika
+Jordan,Jordan,Asien
+Ukraine,Ukraine,Europa
+Argentina,Argentina,Südamerika
+Chile,Chile,Südamerika
+Faroe Islands,Faroe Islands,Europa
+Gibraltar,Gibraltar,Europa
+Hungary,Hungary,Europa
+Jordan,Jordan,Asien
+Liechtenstein,Liechtenstein,Europa
+Poland,Poland,Europa
+Saint Barthelemy,Saint Barthelemy,Zentralamerika
+Tunisia,Tunisia,Afrika
+Ukraine,Ukraine,Europa
+Bosnia and Herzegovina,Bosnia and Herzegovina,Europa
+Palestine,Palestine,Asien
+Slovenia,Slovenia,Europa
+South Africa,South Africa,Afrika
+Bhutan,Bhutan,Asien
+Cameroon,Cameroon,Afrika
+Colombia,Colombia,Südamerika
+Costa Rica,Costa Rica,Zentralamerika
+Peru,Peru,Südamerika
+Serbia,Serbia,Europa
+Slovakia,Slovakia,Europa
+Togo,Togo,Afrika
+Vatican City,Vatican City,Europa
+French Guiana,French Guiana,Südamerika
+Malta,Malta,Europa
+Martinique,Martinique,Zentralamerika
+Albania,Albania,Europa
+Bangladesh,Bangladesh,Asien
+Brunei,Brunei,Asien
+Bulgaria,Bulgaria,Europa
+Burkina Faso,Burkina Faso,Afrika
+Channel Islands,Channel Islands,Europa
+Cyprus,Cyprus,Europa
+Holy See,Holy See,Europa
+Hong Kong SAR,Hong Kong SAR,Asien
+Iran (Islamic Republic of),Iran (Islamic Republic of),Asien
+Macao SAR,Macao SAR,Asien
+Maldives,Maldives,Asien
+Mongolia,Mongolia,Asien
+occupied Palestinian territory,occupied Palestinian territory,Asien
+Panama,Panama,Südamerika
+Paraguay,Paraguay,Südamerika
+Republic of Korea,Republic of Korea,Asien
+Republic of Moldova,Republic of Moldova,Europa
+Russian Federation,Russian Federation,Asien
+Saint Martin,Saint Martin,Zentralamerika
+Taipei and environs,Taipei and environs,Asien
+Viet Nam,Viet Nam,Asien
+Congo (Kinshasa),Congo (Kinshasa),Afrika
+Cote d'Ivoire,Cote d'Ivoire,Afrika
+Cruise Ship,Cruise Ship,Andere
+Czechia,Czechia,Europa
+"Korea, South","Korea, South",Asien
+Moldova,Moldova,Europa
+Reunion,Reunion,Zentralamerika
+Taiwan*,Taiwan*,Asien
+Turkey,Turkey,Asien
+United Kingdom,United Kingdom,Europa
+Bolivia,Bolivia,Südamerika
+Honduras,Honduras,Südamerika
+Jamaica,Jamaica,Zentralamerika
+Cuba,Cuba,Zentralamerika
+Guyana,Guyana,Südamerika
+Gabon,Gabon,Afrika
+Ghana,Ghana,Afrika
+Kenya,Kenya,Afrika
+Trinidad and Tobago,Trinidad and Tobago,Afrika
+Antigua and Barbuda,Antigua and Barbuda,Zentralamerika
+Aruba,Aruba,Zentralamerika
+Cayman Islands,Cayman Islands,Zentralamerika
+Central African Republic,Central African Republic,Afrika
+Congo (Brazzaville),Congo (Brazzaville),Afrika
+Curacao,Curacao,Zentralamerika
+Equatorial Guinea,Equatorial Guinea,Zentralamerika
+Eswatini,Eswatini,Afrika
+Ethiopia,Ethiopia,Afrika
+Guadeloupe,Guadeloupe,Zentralamerika
+Guatemala,Guatemala,Zentralamerika
+Guernsey,Guernsey,Europa
+Guinea,Guinea,Afrika
+Jersey,Jersey,Europa
+Kazakhstan,Kazakhstan,Asien
+Kosovo,Kosovo,Europa
+Mauritania,Mauritania,Afrika
+Namibia,Namibia,Afrika
+Rwanda,Rwanda,Afrika
+Saint Lucia,Saint Lucia,Zentralamerika
+Saint Vincent and the Grenadines,Saint Vincent and the Grenadines,Zentralamerika
+Seychelles,Seychelles,Afrika
+Sudan,Sudan,Afrika
+Suriname,Suriname,Afrika
+Uruguay,Uruguay,Südamerika
+Uzbekistan,Uzbekistan,Asien
+Venezuela,Venezuela,Südamerika
+Benin,Benin,Afrika
+Greenland,Greenland,Nordamerika
+Guam,Guam,Ozeanien
+Liberia,Liberia,Afrika
+Mayotte,Mayotte,Afrika
+Puerto Rico,Puerto Rico,Zentralamerika
+Republic of the Congo,Republic of the Congo,Afrika
+Somalia,Somalia,Afrika
+Tanzania,Tanzania,Afrika
+Bahamas,Bahamas,Zentralamerika
+Barbados,Barbados,Zentralamerika
+Montenegro,Montenegro,Europa
+The Gambia,The Gambia,Afrika
+Djibouti,Djibouti,Afrika
+"Gambia, The","Gambia, The",Afrika
+Kyrgyzstan,Kyrgyzstan,Asien
+Mauritius,Mauritius,Afrika
+Zambia,Zambia,Afrika
+Angola,Angola,Afrika
+"Bahamas, The","Bahamas, The",Zentralamerika
+Cabo Verde,Cabo Verde,Afrika
+Chad,Chad,Afrika
+El Salvador,El Salvador,Zentralamerika
+Fiji,Fiji,Ozeanien
+Haiti,Haiti,Zentralamerika
+Madagascar,Madagascar,Afrika
+Nicaragua,Nicaragua,Zentralamerika
+Niger,Niger,Afrika
+Papua New Guinea,Papua New Guinea,Ozeanien
+Zimbabwe,Zimbabwe,Afrika
+Cape Verde,Cape Verde,Afrika
+Dominica,Dominica,Zentralamerika
+East Timor,East Timor,Asien
+Eritrea,Eritrea,Afrika
+Grenada,Grenada,Zentralamerika
+Mozambique,Mozambique,Afrika
+Syria,Syria,Asien
+Timor-Leste,Timor-Leste,Asien
+Uganda,Uganda,Afrika
+Belize,Belize,Zentralamerika
+Gambia,Gambia,Afrika
+Guinea-Bissau,Guinea-Bissau,Afrika
+Laos,Laos,Asien
+Libya,Libya,Afrika
+Mali,Mali,Afrika
+Saint Kitts and Nevis,Saint Kitts and Nevis,Zentralamerika
+West Bank and Gaza,West Bank and Gaza,Asien
