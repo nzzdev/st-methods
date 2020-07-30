@@ -1,8 +1,5 @@
 # Coronavirus cases in Swiss municipalities
 
-This is where NZZ Visuals describes methods and code used for our articles. 
-Each project has its own sub-repository with scripts and a README.md containing the following information:
-
 1. This folder contains: 
  * Data on the per capita prevalence of confirmed coronavirus cases in the 2222 municipalities of Switzerland
  * A script that formats data provided by the Swiss Federal Office of Public Health (FOPH), see below
