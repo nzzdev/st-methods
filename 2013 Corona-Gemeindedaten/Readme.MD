@@ -18,6 +18,6 @@ Each project has its own sub-repository with scripts and a README.md containing 
 
 6. References:
   * Data: FOPH, not published because of privacy regulations
-  * Software:[R](http://www.R-project.org), [QGIS](http://www.qgis.org)
+  * Software: [R](http://www.R-project.org), [QGIS](http://www.qgis.org)
 
 We exclude liability for any damages or losses that may arise from using the materials made available by NZZ Storytelling. We do not guarantee that the information therein is adequate, complete or up to date.
