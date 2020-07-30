@@ -6,7 +6,7 @@
 
 2. Results are published here:
   * [Die Schweizer Corona-Hochburgen: Diese Gemeinden haben die meisten Fälle pro Kopf verzeichnet](https://www.nzz.ch/ld.1564581)
-  * Published on 2020-08-30
+  * Published on 2020-07-30
   * The article presents the data mentioned above, highlights some heavily affected municipalities, regions and cities and puts them into context.
   
 3. Process: Dummy data (fictional values, real structure) provided by the FOPH was analysed using R. The existing dataset was formatted to get a value for every day and every municipality, then the values were separated into categories using Jenks natural breaks, and every municipality was assigned a category. The final dataset contains only date, municipality and category. The script was then used by the FOPH on the real data and the NZZ was only given the categories, not the precise figures. Additionally, a dataset was generated for cities (municipalities with over 10'000 residents) with the precise cumulative number of cases per 1000 inhabitants and given to the NZZ, this data was deemed to be in compliance with privacy rules by the FOPH.
