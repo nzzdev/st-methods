@@ -1,0 +1,58 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Update California
+
+on:
+  # Schedule makes this bot run in regular intervals, without any interventions
+  # This will run it on 07:05 every day (05:05 GMT)
+  schedule: 
+    - cron: '5 5 * * *'
+  
+  # This will enable a button within GitHub that allows the workflow to be executed manually
+  workflow_dispatch:
+
+# Environment variables
+env:
+  # The URL where the data should be downloaded.
+  # Usually the 24h Shapefiles from https://firms.modaps.eosdis.nasa.gov/active_fire/#firms-shapefile
+  DATA_URL: https://firms2.modaps.eosdis.nasa.gov/data/active_fire/c6/shapes/zips/MODIS_C6_USA_contiguous_and_Hawaii_24h.zip
+  
+  # The filename that should be extracted
+  FILENAME: MODIS_C6_USA_contiguous_and_Hawaii_24h
+
+  # The ID of the Q chart that should be updated
+  QID: 6d5dfa85d3d67a928ec2d1903d39b280
+
+  # The URL of the Q server
+  # This can be used to switch between the production (https://q-server.st.nzz.ch)
+  # and the staging server (https://q-server.st-staging.nzz.ch)
+  Q_SERVER_BASE_URL: https://q-server.st.nzz.ch
+
+  # The LivingDocs username, as stored in the Github secrets
+  LD_USERNAME: ${{ secrets.PROD_USR }}
+
+  # The password for the account, as stored in the Github secrets
+  PASSWORD: ${{ secrets.PROD_PWD }}
+
+  # Which points to use, based on their confidence
+  CONFIDENCE: 80
+
+  # How large to draw the marker
+  MARKER_RADIUS: 10
+  
+  # Any notes that should be added to the chart
+  NOTES: Jede der markierten Flächen weist mit einer bestimmten Wahrscheinlichkeit ein oder mehrere aktive Feuer oder sonstige thermische Anomalien (z. B. Vulkane) auf.
+
+defaults:
+  run:
+    # must be set to the directory of the bot within the repository
+    working-directory: bots/wildfire/
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn install
+      - run: yarn start

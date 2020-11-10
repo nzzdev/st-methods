@@ -7,6 +7,9 @@ const unzipper = require("unzipper");
 const ProxyAgent = require("simple-proxy-agent");
 Intl = require('intl')
 
+/**
+ * Retrieves the authentication token from the Q server.
+ */
 async function getBearerToken() {
   if (!process.env.Q_SERVER_AUTH) {
     let password;
@@ -44,6 +47,12 @@ async function getBearerToken() {
   }
 }
 
+/**
+ * Retrieves the Q object from the server.
+ * 
+ * @param {string} itemUrl 
+ * @param {string} bearer 
+ */
 async function getItem(itemUrl, bearer) {
   const response = await fetch(`${itemUrl}/${process.env.QID}`, {
     headers: {
@@ -55,6 +64,13 @@ async function getItem(itemUrl, bearer) {
   }
 }
 
+/**
+ * Save the Q object on the server.
+ * 
+ * @param {string} itemUrl 
+ * @param {string} bearer 
+ * @param {object} item 
+ */
 async function saveItem(itemUrl, bearer, item) {
   delete item.updatedDate;
   const response = await fetch(itemUrl, {
@@ -123,6 +139,18 @@ async function getGeojsons() {
   }
 }
 
+/**
+ * Appends the current date to the provided note.
+ * 
+ * The default text reads:
+ * 
+ * > Jede Hotspot- / Aktivfeuererkennung stellt die Mitte
+ * > eines ungefähr 1km langen Pixels dar, auf dem ein 
+ * > oder mehrere Feuer oder andere thermische Anomalien 
+ * > (z. B. Vulkane) angezeigt werden.
+ * 
+ * @param {string=} text - The note to show below the chart. Make sure to end it with a period.
+ */
 function formatNote(
   text = "Jede Hotspot- / Aktivfeuererkennung stellt die Mitte eines ungefähr 1km langen Pixels dar, auf dem ein oder mehrere Feuer oder andere thermische Anomalien (z. B. Vulkane) angezeigt werden."
 ) {

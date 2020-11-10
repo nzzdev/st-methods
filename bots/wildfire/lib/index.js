@@ -50,7 +50,6 @@ function getGeojsonsWithAttributes(geojsons, bbox) {
 async function getQItem() {
   const bearer = await helpers.getBearerToken();
   const item = await helpers.getItem(itemUrl, bearer);
-  console.log(item);
   return item;
 }
 
@@ -78,6 +77,9 @@ async function updateQItem(geojsons, item) {
   }
 }
 
+/**
+ * Main function, called when executing this file.
+ */
 async function main() {
   try {
     // first, get the original item
