@@ -19,3 +19,4 @@ During development, use the command `yarn run dev` to start the bot locally. It 
 The workflow definitions go into the `.github/workflows` directory.
 
 A documented examples has been provided in `./workflow_examples`.
+A documented examples has been provided in `./workflow_examples`.
