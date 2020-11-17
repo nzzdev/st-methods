@@ -9,6 +9,7 @@
         "vega": "^5.17"
   },
   "scripts": {
-    "start": "node ./run.js"
+    "generate": "node ./run.js",
+    "update": "node ./run.js && Q update-item"
   }
 }
