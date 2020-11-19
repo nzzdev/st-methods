@@ -11,6 +11,7 @@ const assert = require('assert')
 const COLORS = ["#edece1", "#dfcca9", "#daa878", "#d97e55", "#d64b47"]
 const BREAKS = 5
 
+// Register the Robinson projection which is not included in Vega by default
 vega.projection("robinson", geo.geoRobinson)
 
 // Download the CSV from https://experience.arcgis.com/experience/3a056fc8839d47969ef59949e9984a71
@@ -40,14 +41,18 @@ function createDirectory(dir) {
     assert(fs.existsSync(dir), `Directory ${dir} could not be created`)
 }
 
-function getEURegionsTopoJSON(file) {
-    // Only accepts existing files
-    assert(fs.existsSync(file), `TopoJSON file ${file} doesn't exist`)
+function readJSON(file) {
+        // Only accepts existing files
+        assert(fs.existsSync(file), `TopoJSON file ${file} doesn't exist`)
 
-    let json = JSON.parse(fs.readFileSync(file, "utf-8"))
+        return JSON.parse(fs.readFileSync(file, "utf-8"))
+}
+
+function getEURegionsTopoJSON(file) {
+    json = readJSON(file)
 
     // Guarantees a TopoJSON
-    assert(json["type"] == "Topology", "Not a TopoJSON file")
+    assert(json["type"] == "Topology", "JSON file does'nt exist")
 
     // Guarantees a "regions"-layer
     assert(json['objects']['regions'])
@@ -56,10 +61,7 @@ function getEURegionsTopoJSON(file) {
 }
 
 function getSpec(filename) {
-    // Only accepts existing files
-    assert(fs.existsSync(filename), `Vega file ${filename} doesn't exist`)
-
-    let spec = JSON.parse(fs.readFileSync(filename, 'utf8'));
+    let spec = readJSON(filename)
 
     // Guarantees a Vega-Spec
     assert(spec['$schema'] == 'https://vega.github.io/schema/vega/v5.json')
@@ -70,13 +72,10 @@ function getSpec(filename) {
     assert(spec.data[1])
     assert(spec.scales[1])
 
-
     return spec
 }
 
-
 // Import and join the data from a CSV to the TopoJSON.
-// TODO: Plausibility check and error if bad
 function joinCSVToTopoJSON(csv, topojson) {
     data = arquero.from(csv)
 
@@ -117,7 +116,7 @@ function getBreaks(data, breakCount) {
     return jenks.jenks(_d, breakCount)
 }
 
-
+// Builds the JSON-fragment to populate legend-data
 function getLegend(breaks, colors) {
     let _help = []
     for(let i=1; i<breaks.length; i++) {
@@ -130,6 +129,7 @@ function getLegend(breaks, colors) {
     return addLabels(_help)
 }
 
+// Adds labels to the first and last legend data entry
 function addLabels(legendData) {
     legendData[0] = {...legendData[0],
         "label": {
@@ -152,6 +152,7 @@ function addLabels(legendData) {
     return legendData
 }
 
+// Inserts the legend-data and the corresponding scale into the spec
 function addLegendToSpec(legend, spec) {
     spec["data"][1]['values'] = legend
     spec['scales'][1]['domain'] = [Math.min.apply(this, legend.map(d => d.from)), Math.max.apply(this, legend.map(d => d.to))]
@@ -167,94 +168,94 @@ function generateSVGfromSpec(filepath, spec) {
     view.toSVG()
       .then(function(svg) {
         fs.writeFile(filepath, svg, function (err) {
-            if (err) return console.log(err);
+            if (err) throw(err);
           });
       })
-      .catch(function(err) { console.error(err); });    
 }
 
+// Returns null because it writes to a file
+function updateLastUpdated() {
+    let qConfig = readJSON("q.config.json")
+    let text = `Die unterschiedlich grossen Gruppen kommen durch ein statistisches Verfahren zustande, welches die Werte so in Gruppen einteilt, dass die Unterschiede zwischen den Regionen möglichst gut sichtbar werden (Jenks Natural Breaks). Letzte Aktualisierung am ${dateTodayFormatted()}`
+
+    qConfig.items[0].item.notes = text
+
+    fs.writeFileSync("q.config.json", JSON.stringify(qConfig, null, 4))
+}
+
+
+function dateTodayFormatted() {
+    let ts = new Date()
+    return `${ts.getDay()}. ${ts.getMonth()}. ${ts.getFullYear()}`
+}
+
+
+function combineDataIntoSpec(mapData, csv, specFile) {
+    let spec = addMapDataToSpec(
+        mapData,
+        getSpec(specFile)
+    )
+    spec = addBreaksToSpec(
+        getBreaks(csv, BREAKS), 
+        spec
+    )
+    
+    spec = addLegendToSpec(
+        getLegend(
+            getBreaks(csv, BREAKS),
+            COLORS
+        ), 
+        spec
+    )
+
+    return spec
+}
+
+// This is the pipeline that combines different data files with a Vega spec, generates SVGs and PNGs from these
 async function main() {
+    
+    // Load the necessary data
     let csv = await downloadCSV("https://www.arcgis.com/sharing/rest/content/items/54d73d4fd4d94a0c8a9651bc4cd59be0/data")
     let euRegions = await getEURegionsTopoJSON("eu-regions.json")
     let mapData = joinCSVToTopoJSON(csv, euRegions)
 
+    // Create directories for output files
     createDirectory('svgs');
     createDirectory('pngs')
 
-    ///////
+    // Create final specs
+    let mw = combineDataIntoSpec(mapData, csv, "mw.vg.json")
+    let cw = combineDataIntoSpec(mapData, csv, "cw.vg.json")
+    let fw = combineDataIntoSpec(mapData, csv, "fw.vg.json")
 
-    let mw = addMapDataToSpec(
-        mapData,
-        getSpec('mw.vg.json')
-    )
-    mw = addBreaksToSpec(
-            getBreaks(csv, BREAKS), 
-        mw)
-    
-    mw = addLegendToSpec(
-                getLegend(
-                    getBreaks(csv, BREAKS),
-                    COLORS
-                ), 
-            mw)
-
-    ////////
-    let cw = addMapDataToSpec(
-        mapData,
-        getSpec('cw.vg.json')
-    )
-    cw = addBreaksToSpec(
-        getBreaks(csv, BREAKS), 
-    cw)
-
-    cw = addLegendToSpec(
-        getLegend(
-            getBreaks(csv, BREAKS),
-            COLORS
-        ), 
-    cw)
-
-
-  /////////
-  let fw = addMapDataToSpec(
-        mapData,
-        getSpec('fw.vg.json')
-    )
-    fw = addBreaksToSpec(
-        getBreaks(csv, BREAKS), 
-    fw)
-
-    fw = addLegendToSpec(
-        getLegend(
-            getBreaks(csv, BREAKS),
-            COLORS
-        ), 
-    fw)
-/*
+   // Generate SVGs
    generateSVGfromSpec('svgs/mw.svg', mw)
    generateSVGfromSpec('svgs/cw.svg', cw)
    generateSVGfromSpec('svgs/fw.svg', fw)
 
+   // Generate PNGs
    svgexport.render([ {
     "input" : ["svgs/mw.svg"],
     "output": [ ["pngs/mw.png", "2x"] ]
-},
-{
+    },
+    {
     "input" : ["svgs/cw.svg"],
     "output": [ ["pngs/cw.png", "2x"] ]
-},
-{
+    },
+    {
     "input" : ["svgs/fw.svg"],
     "output": [ ["pngs/fw.png", "2x"] ]
-}])
+    }])
 
-*/
+    // Update Timestamp
+    updateLastUpdated()
     
 }
 
 main()
 
 
+// Check if an URL is valid
 function validURL(str) {
     var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
       '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
