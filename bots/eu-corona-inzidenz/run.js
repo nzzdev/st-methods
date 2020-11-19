@@ -6,6 +6,7 @@ const csvtojson = require('csvtojson');
 const arquero = require('arquero')
 const jenks = require('./jenks');
 const svgexport = require("svgexport")
+const assert = require('assert')
 
 const COLORS = ["#edece1", "#dfcca9", "#daa878", "#d97e55", "#d64b47"]
 const BREAKS = 5
@@ -13,25 +14,64 @@ const BREAKS = 5
 vega.projection("robinson", geo.geoRobinson)
 
 // Download the CSV from https://experience.arcgis.com/experience/3a056fc8839d47969ef59949e9984a71
-// TODO: Error-handling
 async function downloadCSV(url) {
-    return csvtojson().fromStream(
+    assert(validURL(url), "URL is not valid")
+
+
+    let json = await csvtojson().fromStream(
         request.get(url)
     )
+
+    // Check if the schema is correct
+    // The faction guarantees a list of JSON-objects
+    // with these properties
+    assert(json[0]['UID'], "Property 'UID' is missing in data")
+    assert(json[0]['Incidence7day'], "Property 'Incidence7day is missing in data")
+    return json
 }
 
 function createDirectory(dir) {
+
     if (!fs.existsSync(dir)){
         fs.mkdirSync(dir);
     }
+
+    // The function guarantees that the directory exists
+    assert(fs.existsSync(dir), `Directory ${dir} could not be created`)
 }
 
 function getEURegionsTopoJSON(file) {
-    return JSON.parse(fs.readFileSync(file, "utf-8"))
+    // Only accepts existing files
+    assert(fs.existsSync(file), `TopoJSON file ${file} doesn't exist`)
+
+    let json = JSON.parse(fs.readFileSync(file, "utf-8"))
+
+    // Guarantees a TopoJSON
+    assert(json["type"] == "Topology", "Not a TopoJSON file")
+
+    // Guarantees a "regions"-layer
+    assert(json['objects']['regions'])
+
+    return json
 }
 
 function getSpec(filename) {
-    return JSON.parse(fs.readFileSync(filename, 'utf8'));
+    // Only accepts existing files
+    assert(fs.existsSync(filename), `Vega file ${filename} doesn't exist`)
+
+    let spec = JSON.parse(fs.readFileSync(filename, 'utf8'));
+
+    // Guarantees a Vega-Spec
+    assert(spec['$schema'] == 'https://vega.github.io/schema/vega/v5.json')
+
+    // Guarantees important properties in the Vega-Spec
+    assert(spec.data[0])
+    assert(spec.scales[0])
+    assert(spec.data[1])
+    assert(spec.scales[1])
+
+
+    return spec
 }
 
 
@@ -39,6 +79,12 @@ function getSpec(filename) {
 // TODO: Plausibility check and error if bad
 function joinCSVToTopoJSON(csv, topojson) {
     data = arquero.from(csv)
+
+    // Plausibility checks
+    assert(data.rollup({"min": d => arquero.op.min(d['Incidence7day'])}).objects()[0].min >= 0)
+    assert(data.rollup({"max": d => arquero.op.max(d["Incidence7day"])}).objects()[0].max <= 100000)
+    assert(data.groupby("UID").count().objects().length <= 673, "Region(s) added")
+    assert(data.groupby("UID").count().objects().length >= 673, "Region(s) removed")
 
     topojson.objects.regions.geometries.forEach(geom => {
         geom.properties["Incidence7day"] = Number(
@@ -60,7 +106,6 @@ function addMapDataToSpec(data, spec) {
 }
 
 // Adds an array with color breaks to the proper scale
-// TODO: Match number of colors and number of breaks
 function addBreaksToSpec(breaks, spec) {
     spec.scales[0].domain = breaks
     return spec
@@ -185,7 +230,7 @@ async function main() {
             COLORS
         ), 
     fw)
-
+/*
    generateSVGfromSpec('svgs/mw.svg', mw)
    generateSVGfromSpec('svgs/cw.svg', cw)
    generateSVGfromSpec('svgs/fw.svg', fw)
@@ -202,7 +247,20 @@ async function main() {
     "input" : ["svgs/fw.svg"],
     "output": [ ["pngs/fw.png", "2x"] ]
 }])
+
+*/
     
 }
 
 main()
+
+
+function validURL(str) {
+    var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
+      '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
+    return !!pattern.test(str);
+  }
