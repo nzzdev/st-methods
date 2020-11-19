@@ -2,13 +2,13 @@
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "A choropleth map depicting Coronavirus prevalence in Europe. 2020.",
   "width": 870,
-  "height": 800,
+  "height": 820,
   "background": "#fff",
   "padding": {"top": 30},
   "signals": [
-      {"name": "x", "value": 19, "bind": {"input": "range", "min": 10, "max": 50, "step": 1}},
+      {"name": "x", "value": 17, "bind": {"input": "range", "min": 10, "max": 50, "step": 1}},
       {"name": "y", "value": 60, "bind": {"input": "range", "min": 10, "max": 100, "step": 1}},
-      {"name": "scale", "value": 1100, "bind": {"input": "range", "min": 300, "max": 2000, "step": 1}}
+      {"name": "scale", "value": 1150, "bind": {"input": "range", "min": 300, "max": 2000, "step": 1}}
   ],
   "autosize": "none",
 
@@ -41,8 +41,13 @@
     },
     {
       "name": "laender",
-      "url": "https://gist.githubusercontent.com/jonasoesch/b3413e6c3d238765f7c97c4ad9578b14/raw/bea7583f10f64fe6e8af0ad99592db87e29c00ec/eu-laender.topo.json",
+      "url": "https://gist.githubusercontent.com/jonasoesch/b3413e6c3d238765f7c97c4ad9578b14/raw/973874ecb1f5c50fc265555014a696607c1b0785/eu-laender.topo.json",
       "format": {"type": "topojson", "feature": "eu-laender"}
+    },
+    {
+      "name": "contested",
+      "url": "https://gist.githubusercontent.com/jonasoesch/fcc4f2703998031de24caf2c8c06d711/raw/f19983d723fa3995cca0b4a559ae7b2655ab6fa9/contested-borders.topo.json",
+      "format": {"type": "topojson", "feature": "contested"}
     }
   ],
 
@@ -66,7 +71,7 @@
       "name": "legende",
       "type": "linear",
       "domain": [0, 1660.73],
-      "range": [200, 570]
+      "range": [250, 620]
     }
   ],
 
@@ -91,7 +96,21 @@
       "encode": {
         "enter": { 
           "stroke": {"value": "#fff"},
-          "strokeWidth": {"value": 0.6}
+          "strokeWidth": {"value": 1}
+          }
+      },
+      "transform": [
+        { "type": "geoshape", "projection": "projection" }
+      ]
+    },
+        {
+      "type": "shape",
+      "from": {"data": "contested"},
+      "encode": {
+        "enter": { 
+          "stroke": {"value": "#fff"},
+          "strokeDash": [{"value": [2,6]}],
+          "strokeWidth": {"value": 1}
           }
       },
       "transform": [
@@ -102,7 +121,7 @@
       "type": "rect",
       "encode": {
         "enter": {
-          "width": {"value": 630},
+          "width": {"value": 870},
           "height": {"value": 50},
           "x": {"value": 0},
           "y": {"value": -30},
@@ -185,5 +204,3 @@
     }
   }
 }
-
-

@@ -173,6 +173,7 @@ function generateSVGfromSpec(filepath, spec) {
       })
 }
 
+// Updates the q.config to include the timestamp of today
 // Returns null because it writes to a file
 function updateLastUpdated() {
     let qConfig = readJSON("q.config.json")
@@ -183,10 +184,10 @@ function updateLastUpdated() {
     fs.writeFileSync("q.config.json", JSON.stringify(qConfig, null, 4))
 }
 
-
+// Today's date, nicely formatted as 19. 11. 2020
 function dateTodayFormatted() {
     let ts = new Date()
-    return `${ts.getDay()}. ${ts.getMonth()}. ${ts.getFullYear()}`
+    return `${ts.getDate()}. ${ts.getMonth()+1}. ${ts.getFullYear()}`
 }
 
 
