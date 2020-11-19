@@ -38,6 +38,11 @@
       "transform": [
         {"type": "filter", "expr": "datum.label != null"}
       ]
+    },
+    {
+      "name": "laender",
+      "url": "https://gist.githubusercontent.com/jonasoesch/b3413e6c3d238765f7c97c4ad9578b14/raw/bea7583f10f64fe6e8af0ad99592db87e29c00ec/eu-laender.topo.json",
+      "format": {"type": "topojson", "feature": "eu-laender"}
     }
   ],
 
@@ -74,6 +79,19 @@
           "fill": {"scale": "color", "field": "properties.Incidence7day"},
           "stroke": {"value": "#fff"},
           "strokeWidth": {"value": 0.2}
+          }
+      },
+      "transform": [
+        { "type": "geoshape", "projection": "projection" }
+      ]
+    },
+    {
+      "type": "shape",
+      "from": {"data": "laender"},
+      "encode": {
+        "enter": { 
+          "stroke": {"value": "#fff"},
+          "strokeWidth": {"value": 0.6}
           }
       },
       "transform": [
@@ -167,4 +185,5 @@
     }
   }
 }
+
 
