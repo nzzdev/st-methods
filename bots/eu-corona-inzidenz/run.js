@@ -178,8 +178,10 @@ function generateSVGfromSpec(filepath, spec) {
 
 }
 
+// Fonts klappen noch nicht
 function addFontStyle(svg) {
-    return svg.replace("</svg>", "<style>@font-face { font-family: 's-font'; src: url('https://assets.static-nzz.ch/nzz/8.21.4/static/fonts/gt-america-standard-regular.woff2');}</style></svg>")
+    return svg
+    //return svg.replace("</svg>", "<style>@font-face { font-family: 's-font'; src: url('https://assets.static-nzz.ch/nzz/8.21.4/static/fonts/gt-america-standard-regular.woff2');}</style></svg>")
 }
 
 // Updates the q.config to include the timestamp of today
