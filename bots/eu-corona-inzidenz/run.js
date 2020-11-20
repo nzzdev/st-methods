@@ -5,8 +5,8 @@ const request = require('superagent');
 const csvtojson = require('csvtojson');
 const arquero = require('arquero')
 const jenks = require('./jenks');
-const svgexport = require("svgexport")
-const assert = require('assert')
+const svgexport = require("svgexport");
+const assert = require('assert');
 
 const COLORS = ["#edece1", "#dfcca9", "#daa878", "#d97e55", "#d64b47"]
 const BREAKS = 5
@@ -170,10 +170,16 @@ function generateSVGfromSpec(filepath, spec) {
 
     view.toSVG()
       .then(function(svg) {
+        svg = addFontStyle(svg);
         fs.writeFile(filepath, svg, function (err) {
             if (err) throw(err);
           });
       })
+
+}
+
+function addFontStyle(svg) {
+    return svg.replace("</svg>", "<style>@font-face { font-family: 's-font'; src: url('https://assets.static-nzz.ch/nzz/8.21.4/static/fonts/gt-america-standard-regular.woff2');}</style></svg>")
 }
 
 // Updates the q.config to include the timestamp of today
@@ -247,6 +253,7 @@ async function main() {
    generateSVGfromSpec('svgs/mw.svg', mw)
    generateSVGfromSpec('svgs/cw.svg', cw)
    generateSVGfromSpec('svgs/fw.svg', fw)
+
 
    // Generate PNGs
    svgexport.render([ {

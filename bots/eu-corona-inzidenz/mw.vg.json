@@ -154,16 +154,17 @@
           "x": {"field": "position", "scale": "legende", "offset": {"signal": "if(datum.align == 'left', -4, if(datum.align == 'right', 4, 0))"}},
           "y": {"value": -15},
           "text": {"field": "name"},
-          "align": {"field": "align"}
+          "align": {"field": "align"},
+          "font": {"value": "s-font"}
         }
       }
     }
   ],
   "config": {
     "axis": {
-      "labelFont": "GT America",
+      "labelFont": "s-font",
       "labelFontSize": 12,
-      "titleFont": "GT America",
+      "titleFont": "s-font",
       "titleFontSize": 14,
       "titleFontWeight": 400,
       "gridColor": "#d4d6dd",
