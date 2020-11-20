@@ -1,41 +1,42 @@
 {
-  "items": [
-    {
-      "environments": [
+    "items": [
         {
-          "name": "production",
-          "id": "e5f36c5b6678075b3043c6ea118b7be8"
-        }
-      ],
-      "item": {
-        "images": {
-          "variants": [
-            {
-              "images": [
+            "environments": [
                 {
-                  "path": "./pngs/mw.png"
+                    "name": "production",
+                    "id": "e5f36c5b6678075b3043c6ea118b7be8"
                 }
-              ]
-            },
-            {
-              "minWidth": 495,
-              "images": [
-                {
-                  "path": "./pngs/cw.png"
+            ],
+            "item": {
+                "notes": "Die unterschiedlich grossen Gruppen kommen durch ein statistisches Verfahren zustande, welches die Werte so in Gruppen einteilt, dass die Unterschiede zwischen den Regionen möglichst gut sichtbar werden (Jenks Natural Breaks). Letzte Aktualisierung am 20. 11. 2020",
+                "images": {
+                    "variants": [
+                        {
+                            "images": [
+                                {
+                                    "path": "./pngs/mw.png"
+                                }
+                            ]
+                        },
+                        {
+                            "minWidth": 495,
+                            "images": [
+                                {
+                                    "path": "./pngs/cw.png"
+                                }
+                            ]
+                        },
+                        {
+                            "minWidth": 810,
+                            "images": [
+                                {
+                                    "path": "./pngs/fw.png"
+                                }
+                            ]
+                        }
+                    ]
                 }
-              ]
-            },
-            {
-              "minWidth": 810,
-              "images": [
-                {
-                  "path": "./pngs/fw.png"
-                }
-              ]
             }
-          ]
         }
-      }
-    }
-  ]
+    ]
 }

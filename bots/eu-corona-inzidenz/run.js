@@ -126,36 +126,39 @@ function getLegend(breaks, colors) {
             "color": colors[i-1]
         })
     }
-    return addLabels(_help)
+    return _help
 }
 
-// Adds labels to the first and last legend data entry
-function addLabels(legendData) {
-    legendData[0] = {...legendData[0],
-        "label": {
-            "name": `${legendData[0].from}`,
-            "position": legendData[0].from,
-            "align": "left"
-        }
-    }
+// Generate the JSON-fragemnt to populate the legendLabels-data
+function getLabels(legendData) {
 
-    let last = legendData.length-1
+    _help = [
+        {"name": Math.round(legendData[0].from), "position": legendData[0].from, "align": "left"}
+    ]
 
-    legendData[last] = {...legendData[last],
-        "label": {
-            "name": `${legendData[last].to}`,
-            "position": legendData[last].to,
-            "align": "right"
-        }
-    }
+    legendData.forEach(segement => {
+        _help.push({
+            "name": Math.round(segement.to),
+            "position": segement.to,
+            "align": "center"
+        })
+    })
 
-    return legendData
+    _help[_help.length-1].align = "right"
+
+    return _help
 }
 
 // Inserts the legend-data and the corresponding scale into the spec
 function addLegendToSpec(legend, spec) {
     spec["data"][1]['values'] = legend
     spec['scales'][1]['domain'] = [Math.min.apply(this, legend.map(d => d.from)), Math.max.apply(this, legend.map(d => d.to))]
+    return spec
+}
+
+// Inserts the legendLabels-data. The scale is the same as with the Legend.
+function addLegendLabelsToSpec(labels, spec) {
+    spec["data"][2]['values'] = labels
     return spec
 }
 
@@ -208,6 +211,17 @@ function combineDataIntoSpec(mapData, csv, specFile) {
         ), 
         spec
     )
+
+    spec = addLegendLabelsToSpec(
+        getLabels(
+            getLegend(
+                getBreaks(csv, BREAKS),
+                COLORS
+            )
+        ), 
+        spec
+    )
+
 
     return spec
 }

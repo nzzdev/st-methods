@@ -15,22 +15,20 @@
     {
       "name": "legende",
       "values": [
-        {"from": 0, "to": 76.88, "color": "#edece1", 
-                  "label": {"name": "0", "position": 0, "align": "left"}},
+        {"from": 0, "to": 76.88, "color": "#edece1"},
         {"from": 76.88, "to": 160.21, "color": "#e2d7bb"},
         {"from": 160.21, "to": 257.2, "color": "#ddc197"},
         {"from": 257.2, "to": 394.02, "color": "#daa878"},
         {"from": 394.02, "to": 600.01, "color": "#da8d5f"},
         {"from": 600.01, "to": 960.86, "color": "#d96f4e"},
-        {"from": 960.86, "to": 1660.73, "color": "#d64b47", 
-                  "label": {"name": "1660.73", "position": 1660.73, "align": "right"}}
+        {"from": 960.86, "to": 1660.73, "color": "#d64b47"}
       ]
     },
     {
       "name": "legendeLabels",
-      "source": "legende",
-      "transform": [
-        {"type": "filter", "expr": "datum.label != null"}
+      "values": [
+        {"name": "0", "position": 0, "align": "left"},
+        {"name": "1660", "position": 1660.73, "align": "right"}
       ]
     },
     {
@@ -140,8 +138,8 @@
       "from": {"data": "legendeLabels"},
       "encode": {
         "enter": {
-          "x": {"field": "label.position", "scale": "legende"},
-          "x2": {"field": "label.position", "scale": "legende"},
+          "x": {"field": "position", "scale": "legende"},
+          "x2": {"field": "position", "scale": "legende"},
           "y": {"value": 10},
           "y2": {"value": -10},
           "stroke": {"value": "#b6b6be"}
@@ -153,10 +151,10 @@
       "from": {"data": "legendeLabels"},
       "encode": {
         "enter": {
-          "x": {"field": "label.position", "scale": "legende", "offset": {"signal": "if(datum.label.align == 'left', -2, 2)"}},
+          "x": {"field": "position", "scale": "legende", "offset": {"signal": "if(datum.align == 'left', -4, if(datum.align == 'right', 4, 0))"}},
           "y": {"value": -15},
-          "text": {"signal": "round(datum.label.name)"},
-          "align": {"field": "label.align"}
+          "text": {"field": "name"},
+          "align": {"field": "align"}
         }
       }
     }
