@@ -170,18 +170,11 @@ function generateSVGfromSpec(filepath, spec) {
 
     view.toSVG()
       .then(function(svg) {
-        svg = addFontStyle(svg);
         fs.writeFile(filepath, svg, function (err) {
             if (err) throw(err);
           });
       })
 
-}
-
-// Fonts klappen noch nicht
-function addFontStyle(svg) {
-    font = fs.readFileSync("font.bin")
-    return svg.replace("</svg>", "<style>@font-face { font-family: 's-font'; src: url('data:application/font-woff;charset=utf-8;base64,"+font+"');}</style></svg>")
 }
 
 // Updates the q.config to include the timestamp of today
@@ -256,19 +249,28 @@ async function main() {
    generateSVGfromSpec('svgs/cw.svg', cw)
    generateSVGfromSpec('svgs/fw.svg', fw)
 
+   let styles = "";
+
+   // Get NZZ font-face definitions
+   const response = await request.get("https://context-service.st.nzz.ch/stylesheet/fonts/nzz.ch.css");
+   if(response) {
+    styles = response.text;
+    // correct shorthand version of links (// -> https://)
+    styles = styles.replace(/\/\//g, "https://");
+   }
 
    // Generate PNGs
    svgexport.render([ {
     "input" : ["svgs/mw.svg"],
-    "output": [ ["pngs/mw.png", "2x"] ]
+    "output": [ ["pngs/mw.png", "2x", styles] ]
     },
     {
     "input" : ["svgs/cw.svg"],
-    "output": [ ["pngs/cw.png", "2x"] ]
+    "output": [ ["pngs/cw.png", "2x", styles] ]
     },
     {
     "input" : ["svgs/fw.svg"],
-    "output": [ ["pngs/fw.png", "2x"] ]
+    "output": [ ["pngs/fw.png", "2x", styles] ]
     }])
 
     // Update Timestamp
