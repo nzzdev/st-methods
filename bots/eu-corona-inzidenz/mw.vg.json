@@ -155,16 +155,16 @@
           "y": {"value": -15},
           "text": {"field": "name"},
           "align": {"field": "align"},
-          "font": {"value": "s-font"}
+          "font": {"value": "nzz-sans-serif"}
         }
       }
     }
   ],
   "config": {
     "axis": {
-      "labelFont": "s-font",
+      "labelFont": "nzz-sans-serif",
       "labelFontSize": 12,
-      "titleFont": "s-font",
+      "titleFont": "nzz-sans-serif",
       "titleFontSize": 14,
       "titleFontWeight": 400,
       "gridColor": "#d4d6dd",
@@ -175,6 +175,7 @@
     },
     "text": {
           "fontSize": 14,
+          "fontWeight": 100,
           "fill": "#05032d"
       },
   "locale": {
