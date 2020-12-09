@@ -86,12 +86,14 @@ function joinCSVToTopoJSON(csv, topojson) {
     assert(data.groupby("UID").count().objects().length >= 673, "Region(s) removed")
 
     topojson.objects.regions.geometries.forEach(geom => {
-        geom.properties["Incidence7day"] = Number(
-          data
+       let incidence = data
             .params({ id: geom.properties.UID })
             .filter((d, $) => d.UID == $.id)
-            .objects()[0]["Incidence7day"]
-        );
+            .objects()
+
+        if(incidence.length>0) {
+            geom.properties["Incidence7day"] = Number(incidence[0]["Incidence7day"]);
+        }
       })
     
       return topojson
@@ -231,7 +233,7 @@ function combineDataIntoSpec(mapData, csv, specFile) {
 async function main() {
     
     // Load the necessary data
-    let csv = await downloadCSV("https://www.arcgis.com/sharing/rest/content/items/54d73d4fd4d94a0c8a9651bc4cd59be0/data")
+    let csv = await downloadCSV("https://arcgis.com/sharing/rest/content/items/54d73d4fd4d94a0c8a9651bc4cd59be0/data")
     let euRegions = await getEURegionsTopoJSON("eu-regions.json")
     let mapData = joinCSVToTopoJSON(csv, euRegions)
 
