@@ -82,8 +82,8 @@ function joinCSVToTopoJSON(csv, topojson) {
     // Plausibility checks
     assert(data.rollup({"min": d => arquero.op.min(d['Incidence7day'])}).objects()[0].min >= 0)
     assert(data.rollup({"max": d => arquero.op.max(d["Incidence7day"])}).objects()[0].max <= 100000)
-    assert(data.groupby("UID").count().objects().length <= 673, "Region(s) added")
-    assert(data.groupby("UID").count().objects().length >= 673, "Region(s) removed")
+    assert(data.groupby("UID").count().objects().length <= 674, "Region(s) added")
+    assert(data.groupby("UID").count().objects().length >= 674, "Region(s) removed")
 
     topojson.objects.regions.geometries.forEach(geom => {
        let incidence = data
