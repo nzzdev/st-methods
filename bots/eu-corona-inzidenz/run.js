@@ -168,7 +168,7 @@ function addLegendLabelsToSpec(labels, spec) {
 function generateSVGfromSpec(filepath, spec) {
     let view = new vega.View(vega.parse(spec), {renderer: 'none'});
 
-    //fs.writeFileSync("out.vg.json", JSON.stringify(spec, null, 2))
+    fs.writeFileSync("out.vg.json", JSON.stringify(spec, null, 2))
 
     view.toSVG()
       .then(function(svg) {
@@ -198,18 +198,21 @@ function dateTodayFormatted() {
 
 
 function combineDataIntoSpec(mapData, csv, specFile) {
+
+    let breaks = getBreaks(csv, BREAKS)
+
     let spec = addMapDataToSpec(
         mapData,
         getSpec(specFile)
     )
     spec = addBreaksToSpec(
-        getBreaks(csv, BREAKS), 
+        breaks, 
         spec
     )
     
     spec = addLegendToSpec(
         getLegend(
-            getBreaks(csv, BREAKS),
+            breaks,
             COLORS
         ), 
         spec
@@ -218,7 +221,7 @@ function combineDataIntoSpec(mapData, csv, specFile) {
     spec = addLegendLabelsToSpec(
         getLabels(
             getLegend(
-                getBreaks(csv, BREAKS),
+                [breaks[0], breaks[breaks.length-1]],
                 COLORS
             )
         ), 
