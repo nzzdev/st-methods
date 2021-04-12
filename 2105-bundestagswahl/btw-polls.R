@@ -53,7 +53,7 @@ names(party_colors_de_nzz) <- names(party_colors_de)
 # quick and dirty ggplot w/ loess estimations - look into mcp and bcp, kalman
 ggplot(polls_btw, aes(date, value, color = party)) +
   geom_point(alpha = 0.2, size = 0.5) +
-  geom_smooth(method="loess", span = .075, se = F, size = 0.5) +
+  geom_smooth(method="loess", span = .05, se = F, size = 0.5) +
   scale_color_manual(breaks = names(party_colors_de_nzz), values=unname(party_colors_de_nzz)) + 
   theme_minimal() + theme(legend.position="top")
 
@@ -80,7 +80,7 @@ for (j in 1:length(unique(polls_btw$party))){
 polls_loess_temp <- polls_btw %>% 
   filter(party == unique(polls_btw$party)[j], pollster != "lastElection") %>%
   mutate(date_num = as.numeric(date)) %>%
-  mutate(loess = predict(loess(value ~ date_num, data =., span = 0.075))) %>%
+  mutate(loess = predict(loess(value ~ date_num, data =., span = 0.05))) %>%
   select(date, party, loess) %>%
   unique() %>%
   mutate(pollster = "average") %>%
