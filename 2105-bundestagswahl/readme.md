@@ -19,3 +19,5 @@ We exclude liability for any damages or losses that may arise from using the mat
 ---
 
 [LOESS](https://en.wikipedia.org/wiki/Local_regression) method was removed on 2021-04-14 due to suboptimal regression at the most recent data points and comprehensibility issues.
+
+Old code remains in the script (commented out) for reference
