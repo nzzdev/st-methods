@@ -7,8 +7,40 @@ library(tidyverse)
 library(clipr)
 library(coalitions)
 library(jsonlite)
+library(reticulate)
+library(zoo)
 
+# #Q-CLI function
+# updateChart <- function(id, title="", subtitle="", notes="", data=list()){
+#   qConfig <- fromJSON("q.config.json", simplifyDataFrame = TRUE)
+#   for (item in qConfig$items){
+#     index = 0
+#     for(environment in qConfig$items$environments){
+#       index = index + 1
+#       if(environment$id == id) {
+#         if (title != "") {
+#           qConfig$items$item$title[[index]] <- title
+#         }
+#         if (subtitle != "") {
+#           qConfig$items$item$subtitle[[index]] <- subtitle
+#         }
+#         if (notes != "") {
+#           qConfig$items$item$notes[[index]] <- notes
+#         }
+#         if (length(data) > 0) {
+#           qConfig$items$item$data[[index]] <- rbind(names(data), as.matrix(data))
+#         }
+#         print(paste0("Successfully updated item with id ", id))
+#       }
+#     }
+#   }
+#   qConfig <- toJSON(qConfig, pretty = TRUE)
+#   write(qConfig, "q.config.json")
+# }
+
+# change working directory if necessary
 setwd("~/NZZ-Mediengruppe/NZZ Visuals - Dokumente/Projekte/_2021/2105 Bundestagswahl/data")
+# setwd("~/OneDrive - NZZ-Mediengruppe/Projekte/_2021/2105 Bundestagswahl/data")
 
 # read in polls
 # quick and dirty, get "real date" and maybe error margins from respondents
@@ -37,7 +69,7 @@ polls_btw <- polls_btw_all %>%
 
 moe <- polls_btw_all %>%
   arrange(date) %>%
-  filter(date >= last(date)-30) %>%
+  tail(70) %>%
   mutate(ci = 100*1.96*sqrt((value/100)*(1-(value/100)))/sqrt((60400000-1)*respondents/(60400000-respondents))) %>%
   group_by(party) %>%
   summarise(mean_ci = mean(ci))
@@ -50,12 +82,12 @@ moe <- polls_btw_all %>%
 party_colors_de_nzz <- c("#0a0a0a", "#c31906","#66a622", "#d1cc00", "#8440a3","#d28b00" ,"#0084c7", "#616161")
 names(party_colors_de_nzz) <- names(party_colors_de)
 
-# quick and dirty ggplot w/ loess estimations - look into mcp and bcp, kalman
-ggplot(polls_btw, aes(date, value, color = party)) +
-  geom_point(alpha = 0.2, size = 0.5) +
-  geom_smooth(method="loess", span = .05, se = F, size = 0.5) +
-  scale_color_manual(breaks = names(party_colors_de_nzz), values=unname(party_colors_de_nzz)) + 
-  theme_minimal() + theme(legend.position="top")
+# # quick and dirty ggplot w/ loess estimations - look into mcp and bcp, kalman
+# ggplot(polls_btw, aes(date, value, color = party)) +
+#   geom_point(alpha = 0.2, size = 0.5) +
+#   geom_smooth(method="loess", span = .05, se = F, size = 0.5) +
+#   scale_color_manual(breaks = names(party_colors_de_nzz), values=unname(party_colors_de_nzz)) + 
+#   theme_minimal() + theme(legend.position="top")
 
 #prep for json, add last election values
 polls_btw_json <- polls_btw %>%
@@ -72,49 +104,87 @@ polls_btw_json <- polls_btw %>%
 #           afd = 12.6, 
 #           others = 5)
 
-#add loess estimation to json in loop
-polls_loess <- tibble()
+# #add loess estimation to json in loop
+# polls_loess <- tibble()
+# 
+# for (j in 1:length(unique(polls_btw$party))){
+#   
+# polls_loess_temp <- polls_btw %>% 
+#   filter(party == unique(polls_btw$party)[j], pollster != "lastElection") %>%
+#   mutate(date_num = as.numeric(date)) %>%
+#   mutate(loess = predict(loess(value ~ date_num, data =., span = 0.05))) %>%
+#   select(date, party, loess) %>%
+#   unique() %>%
+#   mutate(pollster = "average") %>%
+#   rename(value = loess) 
+# 
+# polls_loess <- rbind(polls_loess, polls_loess_temp)
+# }
+#   
+# # plot loess only for comparison
+# ggplot(polls_loess, aes(date, value, color = party)) +
+#   geom_line() +  
+#   geom_point(data = polls_btw, alpha = .2, size = .5) +
+#   scale_color_manual(breaks = names(party_colors_de_nzz), values=unname(party_colors_de_nzz)) + 
+#   theme_minimal() + theme(legend.position="top")
+# 
+# #add loess to json
+# polls_loess_json <- polls_loess %>% 
+#   spread(party, value) %>%
+#   select(pollster, date, cdu, spd, greens, fdp, left, afd, others)
+# 
+# polls_btw_finaljson <- rbind(polls_btw_json, polls_loess_json) %>%
+#   arrange(date)
+# 
+# polls_btw_finaljson_eng <- rbind(polls_btw_json, polls_loess_json) %>%
+#   arrange(date)
+# #rename
+# colnames(polls_btw_finaljson) <- c("institute", "date", "Union", "SPD", "Grüne", "FDP", "Linke", "AfD", "Übrige")
+# 
+# #write to file
+# write_json(polls_btw_finaljson, "lineChart.json", pretty = F)
 
-for (j in 1:length(unique(polls_btw$party))){
-  
-polls_loess_temp <- polls_btw %>% 
-  filter(party == unique(polls_btw$party)[j], pollster != "lastElection") %>%
-  mutate(date_num = as.numeric(date)) %>%
-  mutate(loess = predict(loess(value ~ date_num, data =., span = 0.05))) %>%
-  select(date, party, loess) %>%
-  unique() %>%
-  mutate(pollster = "average") %>%
-  rename(value = loess) 
+#rolling avg instead of loess
 
-polls_loess <- rbind(polls_loess, polls_loess_temp)
-}
-  
-# plot loess only for comparison
-ggplot(polls_loess, aes(date, value, color = party)) +
+polls_ra <- polls_btw %>%
+  arrange(date, party) %>%
+  group_by(party) %>%
+  mutate(value = rollmean(value, 10, NA, align = "right")) %>%
+  select(-pollster) %>%
+  group_by(date, party) %>%
+  summarise(value = mean(value), polnr = first(polnr), .groups = "drop") %>%
+  add_column(pollster = "average") %>%
+  drop_na()
+
+ggplot(polls_ra, aes(date, value, color = party)) +
   geom_line() +   
+  geom_point(data = polls_btw, alpha = .2, size = .5) +
   scale_color_manual(breaks = names(party_colors_de_nzz), values=unname(party_colors_de_nzz)) + 
   theme_minimal() + theme(legend.position="top")
 
-#add loess to json
-polls_loess_json <- polls_loess %>% 
+polls_ra_json <- rbind(polls_btw, polls_ra) %>%
+  arrange(date) %>% 
   spread(party, value) %>%
   select(pollster, date, cdu, spd, greens, fdp, left, afd, others)
 
-polls_btw_finaljson <- rbind(polls_btw_json, polls_loess_json) %>%
-  arrange(date)
+polls_ra_json_eng <- rbind(polls_btw, polls_ra) %>%
+  arrange(date) %>% 
+  spread(party, value) %>%
+  select(pollster, date, cdu, spd, greens, fdp, left, afd, others)
 
-polls_btw_finaljson_eng <- rbind(polls_btw_json, polls_loess_json) %>%
-  arrange(date)
 #rename
-colnames(polls_btw_finaljson) <- c("institute", "date", "Union", "SPD", "Grüne", "FDP", "Linke", "AfD", "Übrige")
+colnames(polls_ra_json) <- c("institute", "date", "Union", "SPD", "Grüne", "FDP", "Linke", "AfD", "Übrige")
 
 #write to file
-write_json(polls_btw_finaljson, "lineChart.json", pretty = F)
+write_json(polls_ra_json, "lineChart.json", pretty = F)
+
+# #Q-CLI-Test
+# updateChart(id = "ee88b54c80ed813aef019181c8ce2641",data = polls_loess_json[,2:9])
 
 #### Comparison Chart ####
 
 #reformat line chart data
-polls_bars_json <- polls_btw_finaljson_eng %>%
+polls_bars_json <- polls_ra_json_eng %>%
     add_row(pollster = "lastElection",
             date = as.Date("2017-09-24"),
             cdu = 32.9,
@@ -142,23 +212,36 @@ polls_bars_json$party[polls_bars_json$party == "left"] <- "Linke"
 polls_bars_json$party[polls_bars_json$party == "fdp"] <- "FDP"
 polls_bars_json$party[polls_bars_json$party == "afd"] <- "AfD"
 polls_bars_json$party[polls_bars_json$party == "others"] <- "Übrige"
+
 #write
 write_json(polls_bars_json, "projectionChart.json", pretty = F)
-
 
 #Koalitionen
 
 #get best guess from loess
-koalitionen <- polls_loess %>%
+koalitionen <- polls_ra %>%
   filter(date == max(date)) %>%
   filter(party != "others" & value > 5) %>% #remove parties < 5%
   mutate(value_5pct = 100*value/sum(value)) %>%
-  mutate(seats = round(value_5pct*709/100, 0)) %>% #project to 598 seats
+  mutate(seats = round(value_5pct*709/100, 0)) %>% #project to 709 seats
   select(party, seats)
 
 #enter to q manually
 koalitionen
 browseURL("https://q.st.nzz.ch/editor/coalition_calculation/5a185919e8abb7921435a6114ddc04be")
-browseURL("https://q.st.nzz.ch/editor/coalition_calculation/4d49811bb12bc13788c30c9a190f6ed1")
+browseURL("https://q.st.nzz.ch/editor/coalition_calculation/7cb623419fe8752639a90386fb2af63d")
+
+
+#Wichtige Themen
+#if the script fails, run btw-polls-problem-poll.py directly 
+
+#path to your python3 installation, e.g. /Library/Frameworks/Python.framework/Versions/3.8/bin/python3.8
+use_python("/usr/local/bin/python3")
+
+#run once
+#py_install("pandas")
+#py_install("openpyxl")
+
+source_python("./btw-polls-problem-poll.py")
 
 #fin
