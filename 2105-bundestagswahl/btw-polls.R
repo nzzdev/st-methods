@@ -10,40 +10,11 @@ library(jsonlite)
 library(reticulate)
 library(zoo)
 
-# #Q-CLI function
-# updateChart <- function(id, title="", subtitle="", notes="", data=list()){
-#   qConfig <- fromJSON("q.config.json", simplifyDataFrame = TRUE)
-#   for (item in qConfig$items){
-#     index = 0
-#     for(environment in qConfig$items$environments){
-#       index = index + 1
-#       if(environment$id == id) {
-#         if (title != "") {
-#           qConfig$items$item$title[[index]] <- title
-#         }
-#         if (subtitle != "") {
-#           qConfig$items$item$subtitle[[index]] <- subtitle
-#         }
-#         if (notes != "") {
-#           qConfig$items$item$notes[[index]] <- notes
-#         }
-#         if (length(data) > 0) {
-#           qConfig$items$item$data[[index]] <- rbind(names(data), as.matrix(data))
-#         }
-#         print(paste0("Successfully updated item with id ", id))
-#       }
-#     }
-#   }
-#   qConfig <- toJSON(qConfig, pretty = TRUE)
-#   write(qConfig, "q.config.json")
-# }
-
 # change working directory if necessary
 setwd("~/NZZ-Mediengruppe/NZZ Visuals - Dokumente/Projekte/_2021/2105 Bundestagswahl/data")
 # setwd("~/OneDrive - NZZ-Mediengruppe/Projekte/_2021/2105 Bundestagswahl/data")
 
 # read in polls
-# quick and dirty, get "real date" and maybe error margins from respondents
 pollsters <- coalitions:::.pollster_df %>%
   add_row(pollster = "yougov", address = "https://www.wahlrecht.de/umfragen/yougov.htm")
 
