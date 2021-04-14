@@ -1,6 +1,6 @@
 # 2105-bundestagswahl
 
-Summary: Downloads data from wahlrecht.de using the coalitions R package, performs averaging, calculates margins of error based on number of poll participants and party strength. Prepares polling data for publications in q.tools
+Summary: R script downloads data from wahlrecht.de using the coalitions R package, performs averaging, calculates margins of error based on number of poll participants and party strength. Prepares polling data for publications in q.tools. Python script is used within the R script to fetch polling data on most important issues.
 
 Published here: [So stark verliert die Union nach der Korruptionsaffäre an Rückhalt – die neuesten Umfragen zur Bundestagswahl 2021](https://www.nzz.ch/ld.1605950) on 2021-03-17 (updated regularly)
   
