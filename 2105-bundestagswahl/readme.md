@@ -11,7 +11,7 @@ Methods:
 
 References:
   * Data: [Wahlrecht.de](http://wahlrecht.de)
-  * Software: [R](http://www.R-project.org)
+  * Software: [R](http://www.R-project.org), [Python](https://www.python.org/)
   * Methods: [MOE](https://goodcalculators.com/margin-of-error-calculator/)
 
 We exclude liability for any damages or losses that may arise from using the materials made available by NZZ Storytelling. We do not guarantee that the information therein is adequate, complete or up to date.
