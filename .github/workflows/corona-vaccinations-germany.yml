@@ -29,8 +29,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14"
-      - run: npm install -g npx
-      - run: npx @nzz/q-cli update-item
+      - run: npm install @nzz/q-cli
+      - run: Q update-item
         env:
           Q_PRODUCTION_SERVER: https://q-server.st.nzz.ch/
           Q_PRODUCTION_USERNAME: ${{ secrets.Q_PRODUCTION_USERNAME }}
