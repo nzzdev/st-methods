@@ -1,4 +1,4 @@
-name: Update corona-vaccinations-germany
+name: Update Corona Vaccinations Germany
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
@@ -15,21 +15,21 @@ jobs:
         working-directory: bots/corona-vaccinations-germany/
     steps:
       - uses: actions/checkout@v2
-      - name: setup python
+      - name: Setup python
         uses: actions/setup-python@v2
         with:
           python-version: "3.x"
-      - name: install python packages
+      - name: Install python packages
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: execute python script
+      - name: Execute python script
         run: python rki_vaccination_herd_immunity.py
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
           node-version: "14"
-      - run: npm install @nzz/q-cli
+      - run: npm install -g @nzz/q-cli
       - run: Q update-item
         env:
           Q_PRODUCTION_SERVER: https://q-server.st.nzz.ch/
