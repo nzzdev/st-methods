@@ -1,0 +1,31 @@
+{
+ "items": [
+  {
+   "environments": [
+    {
+     "name": "production",
+     "id": "dd4b1de66b3907bb65164669b0cca8dd"
+    }
+   ],
+   "item": {
+    "title": "Bisher haben 17,8 Prozent mindestens eine Impfdose erhalten",
+    "subtitle": "Anteil der geimpften Bevölkerung in Prozent",
+    "notes": "Herdenimmunität bei zirka 70% (in Grau)<br>Stand: 15. 04. 2021",
+    "data": [
+     [
+      "",
+      "vollständig",
+      "einfach",
+      "Ziel"
+     ],
+     [
+      "",
+      "6.3",
+      "11.5",
+      "52.2"
+     ]
+    ]
+   }
+  }
+ ]
+}

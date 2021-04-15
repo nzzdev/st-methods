@@ -1,0 +1,37 @@
+name: Update Corona Vaccinations Germany
+
+on:
+  # Schedule makes this bot run in regular intervals, without any interventions
+  # This will run it on 12:10 MEZ every day (11:10 GMT)
+  schedule:
+    - cron: "10 11 * * 1-5"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bots/corona-vaccinations-germany/
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.x"
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Execute python script
+        run: python rki_vaccination_herd_immunity.py
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "14"
+      - run: npm install -g @nzz/q-cli
+      - run: Q update-item
+        env:
+          Q_PRODUCTION_SERVER: https://q-server.st.nzz.ch/
+          Q_PRODUCTION_USERNAME: ${{ secrets.Q_PRODUCTION_USERNAME }}
+          Q_PRODUCTION_PASSWORD: ${{ secrets.Q_PRODUCTION_PASSWORD }}
