@@ -70,7 +70,7 @@ if __name__ == '__main__':
         # set source data and save
         url = 'https://impfdashboard.de/static/data/germany_vaccinations_by_state.tsv'
         if not os.path.exists('data'):
-            s.makedirs('data')
+            os.makedirs('data')
         with open(os.path.join('data', 'germany_vaccinations_by_state.tsv'), 'wb') as f:
             f.write(download_data(url).read())
         url = 'https://impfdashboard.de/static/data/germany_vaccinations_timeseries_v2.tsv'
