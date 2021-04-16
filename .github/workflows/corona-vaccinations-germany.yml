@@ -26,7 +26,7 @@ jobs:
       - name: Execute python script
         run: python rki_vaccinations_daily/rki_vaccinations_daily.py
       - name: Execute python script
-        run: python rki_vaccination_herd_immunity/rki_vaccination_herd_immunity.py
+        run: python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity.py
       - name: Execute python script
         run: python rki_vaccinations_nursing_home/rki_vaccinations_nursing_home.py
       - name: Execute python script
