@@ -51,8 +51,13 @@ def updateChart(id, title="", subtitle="", notes="", data=pd.DataFrame()):
                     item.get('item').update({'notes': notes})
                 if data.size > 0:
                     # reset_index() and T (for transpose) are used to bring column names into the first row
-                    item.get('item').update({'data': data.applymap(
-                        str).reset_index(drop=False).T.reset_index().T.apply(list, axis=1).to_list()})
+                    transformed_data = data.applymap(str).reset_index(
+                        drop=False).T.reset_index().T.apply(list, axis=1).to_list()
+                    if 'table' in item.get('item').get('data'):
+                        item.get('item').get('data').update(
+                            {'table': transformed_data})
+                    else:
+                        item.get('item').update({'data': transformed_data})
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
 
