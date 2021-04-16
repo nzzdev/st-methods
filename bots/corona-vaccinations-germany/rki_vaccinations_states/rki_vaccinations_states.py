@@ -64,6 +64,9 @@ def updateChart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q 
 
 if __name__ == '__main__':
     try:
+        # set working directory, change if necessary
+        os.chdir(os.path.dirname(__file__))
+
         # set source data and save
         url = 'https://impfdashboard.de/static/data/germany_vaccinations_by_state.tsv'
         if not os.path.exists('data'):
