@@ -2,9 +2,9 @@ name: Update Corona Vaccinations Germany
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 0 and 30 past every hour from 9 through 15
+  # This will run at minute 0 and 30 past every hour from 9 through 15 CEST (7 - 13 GMT)
   schedule:
-    - cron: "0,30 9-15 * * *"
+    - cron: "0,30 7-13 * * *"
   workflow_dispatch:
 
 jobs:
