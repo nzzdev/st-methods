@@ -19,14 +19,14 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: "3.x"
-      - name: Install python packages
+      - name: Install python packages and run scripts
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - run: python rki_vaccinations_daily/rki_vaccinations_daily.py
-      - run: python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity.py
-      - run: python rki_vaccinations_nursing_home/rki_vaccinations_nursing_home.py
-      - run: python rki_vaccinations_states/rki_vaccinations_states.py
+          python rki_vaccinations_daily/rki_vaccinations_daily.py
+          python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity.py
+          python rki_vaccinations_nursing_home/rki_vaccinations_nursing_home.py
+          python rki_vaccinations_states/rki_vaccinations_states.py
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
