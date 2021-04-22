@@ -113,7 +113,7 @@ if __name__ == '__main__':
         # show percentage total (copy to chart title later)
         title_percent = df2.iat[0, 0]+df2.iat[0, 1]
         title_chart = 'Bisher haben ' + \
-            str(title_percent).replace('.', ',') + \
+            str(title_percent.round(1)).replace('.', ',') + \
             ' Prozent mindestens eine Impfdose erhalten'
 
         # show date in chart notes
