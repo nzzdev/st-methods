@@ -33,7 +33,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: "14"
-      - run: npm install -g @nzz/q-cli@1.4.7
+      - run: npm install -g @nzz/q-cli
       - run: Q update-item
         env:
           Q_PRODUCTION_SERVER: https://q-server.st.nzz.ch/
