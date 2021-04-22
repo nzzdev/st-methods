@@ -2,9 +2,9 @@ name: Update DE Corona Data
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 0 and 30 past every hour from 9 through 15 CEST (7 - 15 GMT)
+  # This will run at minute 0 and 30 past every hour from 8 through 15 CEST (6 - 13 GMT)
   schedule:
-    - cron: "0,30 7-15 * * *"
+    - cron: "0,30 6-13 * * *"
   workflow_dispatch:
 
 jobs:
