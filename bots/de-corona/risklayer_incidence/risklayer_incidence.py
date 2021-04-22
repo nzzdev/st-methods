@@ -73,7 +73,7 @@ if __name__ == '__main__':
             'type': 'service_account',
             'project_id': 'nzz-risklayer-sheet',
             'private_key_id': os.environ['GSPREAD_PRIVATE_KEY_ID'],
-            'private_key': os.environ['GSPREAD_PRIVATE_KEY'],
+            'private_key': os.environ['GSPREAD_PRIVATE_KEY'].replace('\\n', '\n'),
             'client_email': 'view-risklayer-sheet@nzz-risklayer-sheet.iam.gserviceaccount.com',
             'client_id': '117834230046379590580',
             'auth_uri': 'https://accounts.google.com/o/oauth2/auth',
