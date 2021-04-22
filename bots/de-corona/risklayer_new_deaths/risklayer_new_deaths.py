@@ -26,7 +26,7 @@ def download_sheet(sh, name):  # function for sheet download
             except gspread.exceptions.APIError as e:
                 print('Script failed twice (check source):', e)
         else:
-            print('Other HTTP error (not 429 or 500):', e)
+            print('Other HTTP error:', e)
     except gspread.exceptions.APIError as e:
         print('Other URL error:', e)
 
