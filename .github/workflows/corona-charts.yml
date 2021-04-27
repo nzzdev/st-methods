@@ -20,7 +20,7 @@ jobs:
         with:
           r-version: "4.x"
       - name: Cache R packages
-      - uses: actions/cache@v2
+        uses: actions/cache@v2
         with:
           path: ~/.local/share/renv
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
