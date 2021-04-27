@@ -19,6 +19,9 @@ jobs:
         uses: r-lib/actions/setup-r@master
         with:
           r-version: "4.x"
+      - name: Install system dependencies
+        run: |
+          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
       - name: Cache R packages
         uses: actions/cache@v2
         with:
