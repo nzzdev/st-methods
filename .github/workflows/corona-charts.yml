@@ -35,6 +35,16 @@ jobs:
         env:
           GSPREAD_PRIVATE_KEY_ID: ${{ secrets.GSPREAD_PRIVATE_KEY_ID }}
           GSPREAD_PRIVATE_KEY: ${{ secrets.GSPREAD_PRIVATE_KEY }}
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: "4.x"
+      - name: Install R packages
+        run: |
+          R -e 'install.packages("reticulate", "clipr", "tidyverse", "jsonlite")'
+      - name: Run R scripts
+        run: |
+          Rscript owid_vaccinations_worldwide/owid_vaccinations_worldwide.R
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
