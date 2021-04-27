@@ -41,7 +41,7 @@ jobs:
           r-version: "4.x"
       - name: Install R packages
         run: |
-          chmod +w $R_LIBS_USER
+          chmod -R +w $R_LIBS_USER
           R -e 'install.packages("tidyverse", "jsonlite")'
       - name: Run R scripts
         run: |
