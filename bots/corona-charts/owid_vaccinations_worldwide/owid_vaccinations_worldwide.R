@@ -4,14 +4,13 @@
 rm(list = ls(all = TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen = 999)
 library(tidyverse)
-library(here)
 
 # import helper functions
-source(here("./helpers.R"))
+source("./helpers.R")
 
 # read-in
 owid_raw <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
-pop <- read_csv(here("./owid_vaccinations_worldwide/countries_pop.csv")) %>%
+pop <- read_csv("./owid_vaccinations_worldwide/countries_pop.csv") %>%
   add_row(name = "European Union", `2018` = 446777673, name_ger = "EU") %>%
   add_row(name = "World", `2018` = 7591945270.5, name_ger = "Welt")
 
@@ -94,7 +93,7 @@ vacc_sum <- owid_pop %>%
   ungroup() %>%
   select(name_ger, location, iso_code, total_vaccinations, people_vaccinated, people_fully_vaccinated)
 
-over65 <- read_csv(here("./owid_vaccinations_worldwide/API_SP.POP.65UP.TO.ZS_DS2_en_csv_v2_1929265.csv"), skip = 3) %>%
+over65 <- read_csv("./owid_vaccinations_worldwide/API_SP.POP.65UP.TO.ZS_DS2_en_csv_v2_1929265.csv", skip = 3) %>%
   select(`Country Code`, `2019`) %>%
   rename(iso_code = `Country Code`, percentage_above64 = `2019`) %>%
   mutate(percentage_above64 = round(percentage_above64, 1))

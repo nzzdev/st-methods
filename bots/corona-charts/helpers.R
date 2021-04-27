@@ -1,10 +1,9 @@
 library(jsonlite)
-library(here)
 
 # Q helper function
 update_chart <- function(id, title = "", subtitle = "", notes = "", data = list()) {
   # read qConfig file
-  qConfig <- fromJSON(here("./q.config.json"), simplifyDataFrame = TRUE)
+  qConfig <- fromJSON("./q.config.json", simplifyDataFrame = TRUE)
 
   # update chart properties
   for (item in qConfig$items) {
@@ -31,5 +30,5 @@ update_chart <- function(id, title = "", subtitle = "", notes = "", data = list(
 
   # write qConfig file
   qConfig <- toJSON(qConfig, pretty = TRUE)
-  write(qConfig, here("./q.config.json"))
+  write(qConfig, "./q.config.json")
 }
