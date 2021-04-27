@@ -114,4 +114,6 @@ vacc_final$iso_code[vacc_final$location == "EU"] <- "EU"
 vacc_final$people_fully_vaccinated[vacc_final$location == "Welt"] <- NA
 vacc_final$people_fully_vaccinated[vacc_final$location == "EU"] <- NA
 
-update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = "Stand: 27. 4. 2021")
+notes_string = paste("Stand:", format(Sys.Date, "%d.%m.%Y"), sep=" ")
+
+update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = notes_string)
