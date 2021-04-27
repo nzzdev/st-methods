@@ -41,6 +41,7 @@ jobs:
           r-version: "4.x"
       - name: Install R packages
         run: |
+          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
           chmod -R +w $R_LIBS_USER
           R -e 'install.packages("tidyverse", "jsonlite", dependencies=TRUE, type="source", repos="https://cloud.r-project.org", lib=Sys.getenv("R_LIBS_USER"))'
       - name: Run R scripts
