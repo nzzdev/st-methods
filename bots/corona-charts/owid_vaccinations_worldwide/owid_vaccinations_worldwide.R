@@ -4,8 +4,6 @@
 rm(list = ls(all = TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen = 999)
 library(tidyverse)
-library(clipr)
-library(reticulate)
 
 # import helper functions
 source("../helpers.R")
