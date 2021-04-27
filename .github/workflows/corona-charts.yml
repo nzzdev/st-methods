@@ -20,18 +20,17 @@ jobs:
         with:
           r-version: "4.x"
       - name: Cache R packages
-        id: cache-r-packages
-        uses: actions/cache@v2
+      - uses: actions/cache@v2
         with:
-          path: ${{ env.R_LIBS_USER }}
-          key: r-tidyverse-jsonlite
-      - name: Install R packages
-        if: steps.cache-r-packages.outputs.cache-hit != 'true'
+          path: ~/.local/share/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+      - name: Restore R packages
+        shell: Rscript {0}
         run: |
-          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
-          chmod -R +w $R_LIBS_USER
-          Rscript -e 'install.packages("tidyverse", lib=Sys.getenv("R_LIBS_USER"))'
-          Rscript -e 'install.packages("jsonlite", lib=Sys.getenv("R_LIBS_USER"))'
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
       - name: Run R scripts
         run: |
           Rscript owid_vaccinations_worldwide/owid_vaccinations_worldwide.R
