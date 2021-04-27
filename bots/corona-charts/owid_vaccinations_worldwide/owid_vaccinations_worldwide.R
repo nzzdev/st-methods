@@ -4,44 +4,14 @@
 rm(list = ls(all = TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen = 999)
 library(tidyverse)
-library(jsonlite)
+library(here)
 
-# Q helper function
-update_chart <- function(id, title = "", subtitle = "", notes = "", data = list()) {
-  # read qConfig file
-  qConfig <- fromJSON("../q.config.json", simplifyDataFrame = TRUE)
-
-  # update chart properties
-  for (item in qConfig$items) {
-    index <- 0
-    for (environment in qConfig$items$environments) {
-      index <- index + 1
-      if (environment$id == id) {
-        if (title != "") {
-          qConfig$items$item$title[[index]] <- title
-        }
-        if (subtitle != "") {
-          qConfig$items$item$subtitle[[index]] <- subtitle
-        }
-        if (notes != "") {
-          qConfig$items$item$notes[[index]] <- notes
-        }
-        if (length(data) > 0) {
-          qConfig$items$item$data[[index]] <- rbind(names(data), as.matrix(data))
-        }
-        print(paste0("Successfully updated item with id ", id))
-      }
-    }
-  }
-
-  # write qConfig file
-  qConfig <- toJSON(qConfig, pretty = TRUE)
-  write(qConfig, "../q.config.json")
-}
+# import helper functions
+source(here("./helpers.R"))
 
 # read-in
 owid_raw <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
-pop <- read_csv("countries_pop.csv") %>%
+pop <- read_csv(here("./owid_vaccinations_worldwide/countries_pop.csv")) %>%
   add_row(name = "European Union", `2018` = 446777673, name_ger = "EU") %>%
   add_row(name = "World", `2018` = 7591945270.5, name_ger = "Welt")
 
@@ -124,7 +94,7 @@ vacc_sum <- owid_pop %>%
   ungroup() %>%
   select(name_ger, location, iso_code, total_vaccinations, people_vaccinated, people_fully_vaccinated)
 
-over65 <- read_csv("API_SP.POP.65UP.TO.ZS_DS2_en_csv_v2_1929265.csv", skip = 3) %>%
+over65 <- read_csv(here("./owid_vaccinations_worldwide/API_SP.POP.65UP.TO.ZS_DS2_en_csv_v2_1929265.csv"), skip = 3) %>%
   select(`Country Code`, `2019`) %>%
   rename(iso_code = `Country Code`, percentage_above64 = `2019`) %>%
   mutate(percentage_above64 = round(percentage_above64, 1))

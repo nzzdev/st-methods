@@ -11,3 +11,4 @@ __pycache__
 .Renviron
 .Rproj.user/
 .Ruserdata
+*.Rproj

@@ -20,14 +20,17 @@ jobs:
         with:
           r-version: "4.x"
       - name: Cache R packages
+        id: cache-r-packages
         uses: actions/cache@v1
         with:
           path: ${{ env.R_LIBS_USER }}
           key: r-tidyverse-jsonlite
       - name: Install R packages
+        if: steps.cache-r-packages.outputs.cache-hit != 'true'
         run: |
           sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
           chmod -R +w $R_LIBS_USER
+          Rscript -e 'install.packages("here", lib=Sys.getenv("R_LIBS_USER"))'
           Rscript -e 'install.packages("tidyverse", lib=Sys.getenv("R_LIBS_USER"))'
           Rscript -e 'install.packages("jsonlite", lib=Sys.getenv("R_LIBS_USER"))'
       - name: Run R scripts
