@@ -4,9 +4,40 @@
 rm(list = ls(all = TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen = 999)
 library(tidyverse)
+library(jsonlite)
 
-# import helper functions
-source("../helpers.R")
+# Q helper function
+update_chart <- function(id, title = "", subtitle = "", notes = "", data = list()) {
+  # read qConfig file
+  qConfig <- fromJSON("../q.config.json", simplifyDataFrame = TRUE)
+
+  # update chart properties
+  for (item in qConfig$items) {
+    index <- 0
+    for (environment in qConfig$items$environments) {
+      index <- index + 1
+      if (environment$id == id) {
+        if (title != "") {
+          qConfig$items$item$title[[index]] <- title
+        }
+        if (subtitle != "") {
+          qConfig$items$item$subtitle[[index]] <- subtitle
+        }
+        if (notes != "") {
+          qConfig$items$item$notes[[index]] <- notes
+        }
+        if (length(data) > 0) {
+          qConfig$items$item$data[[index]] <- rbind(names(data), as.matrix(data))
+        }
+        print(paste0("Successfully updated item with id ", id))
+      }
+    }
+  }
+
+  # write qConfig file
+  qConfig <- toJSON(qConfig, pretty = TRUE)
+  write(qConfig, "../q.config.json")
+}
 
 # read-in
 owid_raw <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
@@ -112,6 +143,6 @@ vacc_final$iso_code[vacc_final$location == "EU"] <- "EU"
 vacc_final$people_fully_vaccinated[vacc_final$location == "Welt"] <- NA
 vacc_final$people_fully_vaccinated[vacc_final$location == "EU"] <- NA
 
-notes_string = paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep=" ")
+notes_string <- paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
 
 update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = notes_string)
