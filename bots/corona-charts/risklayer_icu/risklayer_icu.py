@@ -90,9 +90,10 @@ if __name__ == '__main__':
         notes_chart = 'Rund die Hälfte der im Jahr 2020 mechanisch beatmeten Covid-19-Intensivpatienten ist gestorben. Bei nicht mechanisch beatmeten lag die Mortalitätsrate zwischen 10 und 38 Prozent.<br>Stand: ' + \
             timestamp_str
 
-        # insert id and subtitle manually and run function
+        # insert id manually and run function
         update_chart(id='245e5a30acb9ffa8e53b336e6b83c7bc',
                      data=df, notes=notes_chart)
+        sleep(5)
 
     except:
         raise

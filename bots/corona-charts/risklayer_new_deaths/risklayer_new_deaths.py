@@ -87,9 +87,10 @@ if __name__ == '__main__':
         notes_chart = 'Bei einem tödlichen Verlauf liegen zwischen Beginn der Symptome und Tod im Mittel 18 Tage.<br>Stand: ' + \
             timestamp_str
 
-        # insert id and subtitle manually and run function
+        # insert id manually and run function
         update_chart(id='d6e523e17e1d929e6277292aea28b903',
                      data=df, notes=notes_chart)
+        sleep(5)
 
     except:
         raise

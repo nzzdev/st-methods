@@ -87,9 +87,10 @@ if __name__ == '__main__':
         notes_chart = 'Risklayer bezieht seine Zahlen direkt aus den Veröffentlichungen der Gesundheitsämter der Kreise und Städte. Wegen des veralteten Meldesystems sind diese Daten aktueller als jene vom RKI.<br>Stand: ' + \
             timestamp_str
 
-        # insert id and subtitle manually and run function
+        # insert id manually and run function
         update_chart(id='beb6de8405dcbea50a354dc453822c18',
                      data=df, notes=notes_chart)
+        sleep(5)
 
     except:
         raise
