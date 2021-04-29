@@ -57,9 +57,9 @@ if __name__ == '__main__':
 
         # Notbremse on the 22th of April in dfmap?
         # starting from the the 20th of April, comes into effect two days later
-        dfmap['Wert'] = 'unter 100'
+        dfmap['Wert'] = 'keine Notbremse'
         dfmap['Wert'][(df.iloc[:, 414] >= 100) & (
-            df.iloc[:, 413] >= 100) & (df.iloc[:, 412] >= 100)] = 'über 100'
+            df.iloc[:, 413] >= 100) & (df.iloc[:, 412] >= 100)] = 'Notbremse'
 
         # Notbremse on the 22th of April in dftable?
         # starting from the the 20th of April, comes into effect two days later
@@ -75,14 +75,14 @@ if __name__ == '__main__':
         for i in range(415, df.shape[1]):
             # update every AGS (j)
             for j in range(dfmap.shape[0]):
-                if dfmap['Wert'][j] == 'über 100':
+                if dfmap['Wert'][j] == 'Notbremse':
                     if (df.iloc[j, i] < 100) & (df.iloc[j, i-1] < 100) & (df.iloc[j, i-2] < 100) & (df.iloc[j, i-3] < 100) & (df.iloc[j, i-4] < 100):
-                        dfmap['Wert'][j] = 'unter 100'
+                        dfmap['Wert'][j] = 'keine Notbremse'
                         dftable['Notbremse'][j] = '✖'
                         # dfmap['Gilt ab'][j] = df.columns[i]
                 else:
                     if (df.iloc[j, i] >= 100) & (df.iloc[j, i-1] >= 100) & (df.iloc[j, i-2] >= 100):
-                        dfmap['Wert'][j] = 'über 100'
+                        dfmap['Wert'][j] = 'Notbremse'
                         dftable['Notbremse'][j] = '✔'
                         # dfmap['Gilt ab'][j] = df.columns[i]
 
@@ -108,7 +108,7 @@ if __name__ == '__main__':
         title_map = notbremse + ' Regionen sind derzeit von der Notbremse betroffen'
         subtitle_table = 'Am ' + timestamp_str2 + ' waren ' + \
             notbremse + ' Kreise und Städte von der Notbremse betroffen'
-        notes_chart = 'Die Grafik zeigt, ob gemäss Gesetz die Notbremse (demnächst) gezogen werden muss, nicht ob sie vor Ort bereits in Kraft ist. Den Bundesländern steht es frei, strengere Massnahmen zu verhängen. Gelockert werden darf erst, wenn die 7-Tage-Inzidenz fünf Werktage in Folge unter 100 liegt. Massgeblich für die Notbremse sind die Zahlen vom RKI. Stand: ' + \
+        notes_chart = 'Die Grafik zeigt, ob gemäss Gesetz die Notbremse (demnächst) gezogen werden muss, nicht ob sie vor Ort bereits in Kraft ist. Den Bundesländern steht es frei, strengere Massnahmen zu verhängen. Gelockert werden darf erst, wenn die 7-Tage-Inzidenz fünf Werktage in Folge keine Notbremse liegt. Massgeblich für die Notbremse sind die Zahlen vom RKI. Stand: ' + \
             timestamp_str
 
         # insert id manually and run function
