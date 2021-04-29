@@ -108,7 +108,7 @@ if __name__ == '__main__':
         title_map = notbremse + ' Regionen sind derzeit von der Notbremse betroffen'
         subtitle_table = 'Am ' + timestamp_str2 + ' waren ' + \
             notbremse + ' Kreise und Städte von der Notbremse betroffen'
-        notes_chart = 'Die Grafik zeigt, ob gemäss Gesetz die Notbremse (demnächst) gezogen werden muss, nicht ob sie vor Ort bereits in Kraft ist. Den Bundesländern steht es frei, strengere Massnahmen zu verhängen. Gelockert werden darf erst, wenn die 7-Tage-Inzidenz fünf Werktage in Folge keine Notbremse liegt. Massgeblich für die Notbremse sind die Zahlen vom RKI. Stand: ' + \
+        notes_chart = 'Die Grafik zeigt, ob gemäss Gesetz die Notbremse (demnächst) gezogen werden muss, nicht ob sie vor Ort bereits in Kraft ist. Gelockert werden darf erst, wenn die 7-Tage-Inzidenz fünf Werktage in Folge keine Notbremse liegt. Massgeblich für die Notbremse sind die Zahlen vom RKI. Stand: ' + \
             timestamp_str
 
         # insert id manually and run function
