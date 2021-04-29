@@ -58,13 +58,13 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python rki_notbremse/rki_notbremse.py
-          python risklayer_incidence/risklayer_incidence.py
           python rki_vaccinations_daily/rki_vaccinations_daily.py
           python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity.py
-          python risklayer_icu/risklayer_icu.py
           python rki_vaccinations_nursing_home/rki_vaccinations_nursing_home.py
           python rki_vaccinations_states/rki_vaccinations_states.py
+          python rki_notbremse/rki_notbremse.py
+          python risklayer_icu/risklayer_icu.py
+          python risklayer_incidence/risklayer_incidence.py
           python risklayer_new_deaths/risklayer_new_deaths.py
         env:
           GSPREAD_PRIVATE_KEY_ID: ${{ secrets.GSPREAD_PRIVATE_KEY_ID }}
