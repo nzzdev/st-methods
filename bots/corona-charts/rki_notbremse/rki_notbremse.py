@@ -112,10 +112,10 @@ if __name__ == '__main__':
             timestamp_str
 
         # insert id manually and run function
-        updateChart(id='530c9a2b291a3ac848e9dc471a762204',
-                    data=dfmap, notes=notes_chart, title=title_map)
-        updateChart(id='050befd50ccb2f5f9080d4bba4df423d',
-                    data=dftable, notes=notes_chart, subtitle=subtitle_table)
+        update_chart(id='530c9a2b291a3ac848e9dc471a762204',
+                     data=dfmap, notes=notes_chart, title=title_map)
+        update_chart(id='050befd50ccb2f5f9080d4bba4df423d',
+                     data=dftable, notes=notes_chart, subtitle=subtitle_table)
 
     except:
         raise
