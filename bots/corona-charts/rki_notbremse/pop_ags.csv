@@ -1,0 +1,402 @@
+﻿ID,Region,Bewohner
+01001,Flensburg,90164
+01002,Kiel,246794
+01003,Lübeck,216530
+01004,Neumünster,80196
+01051,Dithmarschen,133193
+01053,Herzogtum Lauenburg,198019
+01054,Nordfriesland,165951
+01055,Ostholstein,200539
+01056,Pinneberg,316103
+01057,Plön,128686
+01058,Rendsburg-Eckernförde,274098
+01059,Schleswig-Flensburg,201156
+01060,Segeberg,277175
+01061,Steinburg,131013
+01062,Stormarn,244156
+02000,Hamburg,1847253
+03101,Braunschweig,249406
+03102,Salzgitter,104291
+03103,Wolfsburg,124371
+03151,Gifhorn,176523
+03153,Goslar,136292
+03154,Helmstedt,91297
+03155,Northeim,132285
+03157,Peine,134801
+03158,Wolfenbüttel,119622
+03159,Göttingen,326041
+03241,Region Hannover,1157115
+03251,Diepholz,217089
+03252,Hameln-Pyrmont,148549
+03254,Hildesheim,275817
+03255,Holzminden,70458
+03256,Nienburg (Weser),121390
+03257,Schaumburg,157820
+03351,Celle,179011
+03352,Cuxhaven,198038
+03353,Harburg,254431
+03354,Lüchow-Dannenberg,48412
+03355,Lüneburg,184139
+03356,Osterholz,113928
+03357,Rotenburg (Wümme),163782
+03358,Heidekreis,140673
+03359,Stade,204512
+03360,Uelzen,92389
+03361,Verden,137133
+03401,Delmenhorst,77559
+03402,Emden,49913
+03403,Oldenburg (Oldb),169077
+03404,Osnabrück,165251
+03405,Wilhelmshaven,76089
+03451,Ammerland,124859
+03452,Aurich,189694
+03453,Cloppenburg,170682
+03454,Emsland,326954
+03455,Friesland,98704
+03456,Grafschaft Bentheim,137162
+03457,Leer,170756
+03458,Oldenburg,130890
+03459,Osnabrück (Landkreis),358080
+03460,Vechta,142814
+03461,Wesermarsch,88583
+03462,Wittmund,56926
+04011,Bremen,567559
+04012,Bremerhaven,113643
+05111,Düsseldorf,621877
+05112,Duisburg,498686
+05113,Essen,582760
+05114,Krefeld,227417
+05116,Mönchengladbach,261034
+05117,Mülheim an der Ruhr,170632
+05119,Oberhausen,210764
+05120,Remscheid,111338
+05122,Solingen,159245
+05124,Wuppertal,355100
+05154,Kleve,312465
+05158,Mettmann,485570
+05162,Rhein-Kreis Neuss,451730
+05166,Viersen,298863
+05170,Wesel,459976
+05314,Bonn,329673
+05315,Köln,1087863
+05316,Leverkusen,163729
+05334,Städteregion Aachen,557026
+05358,Düren,264638
+05362,Rhein-Erft-Kreis,470615
+05366,Euskirchen,193656
+05370,Heinsberg,255555
+05374,Oberbergischer Kreis,272057
+05378,Rheinisch-Bergischer Kreis,283271
+05382,Rhein-Sieg-Kreis,600764
+05512,Bottrop,117565
+05513,Gelsenkirchen,259645
+05515,Münster,315293
+05554,Borken,371339
+05558,Coesfeld,220586
+05562,Recklingha.,614137
+05566,Steinfurt,448220
+05570,Warendorf,277840
+05711,Bielefeld,334195
+05754,Gütersloh,364938
+05758,Herford,250578
+05762,Höxter,140251
+05766,Lippe,347514
+05770,Minden-Lübbecke,310409
+05774,Paderborn,307839
+05911,Bochum,365587
+05913,Dortmund,588250
+05914,Hagen,188686
+05915,Hamm,179916
+05916,Herne,156449
+05954,Ennepe-Ruhr-Kreis,324106
+05958,Hochsauerlandkreis,259777
+05962,Märkischer Kreis,410222
+05966,Olpe,133955
+05970,Siegen-Wittgenstein,276944
+05974,Soest,301785
+05978,Unna,394891
+06411,Darmstadt,159878
+06412,Frankfurt am Main,763380
+06413,Offenbach am Main,130280
+06414,Wiesbaden,278474
+06431,Bergstraße,270340
+06432,Darmstadt-Dieburg,297844
+06433,Groß-Gerau,275726
+06434,Hochtaunuskreis,236914
+06435,Main-Kinzig-Kreis,420552
+06436,Main-Taunus-Kreis,238558
+06437,Odenwaldkreis,96703
+06438,Offenbach,355813
+06439,Rheingau-Taunus-Kreis,187160
+06440,Wetteraukreis,308339
+06531,Gießen,270688
+06532,Lahn-Dill-Kreis,253319
+06533,Limburg-Weilburg,171912
+06534,Marburg-Biedenkopf,247084
+06535,Vogelsbergkreis,105643
+06611,Kassel,202137
+06631,Fulda,223145
+06632,Hersfeld-Rotenburg,120719
+06633,Kassel (Landkreis),236764
+06634,Schwalm-Eder-Kreis,179673
+06635,Waldeck-Frankenberg,156406
+06636,Werra-Meißner-Kreis,100629
+07111,Koblenz,114052
+07131,Ahrweiler,130086
+07132,Altenkirchen (Westerwald),128805
+07133,Bad Kreuznach,158345
+07134,Birkenfeld,80951
+07135,Cochem-Zell,61375
+07137,Mayen-Koblenz,214434
+07138,Neuwied,182811
+07140,Rhein-Hunsrück-Kreis,103163
+07141,Rhein-Lahn-Kreis,122297
+07143,Westerwaldkreis,201904
+07211,Trier,111528
+07231,Bernkastel-Wittlich,112483
+07232,Eifelkreis Bitburg-Prüm,99058
+07233,Vulkaneifel,60646
+07235,Trier-Saarburg,149398
+07311,Frankenthal (Pfalz),48762
+07312,Kaiserslautern,100030
+07313,Landau in der Pfalz,46881
+07314,Ludwigshafen am Rhein,172253
+07315,Mainz,218578
+07316,Neustadt an der Weinstraße,53264
+07317,Pirmasens,40231
+07318,Speyer,50561
+07319,Worms,83542
+07320,Zweibrücken,34193
+07331,Alzey-Worms,129687
+07332,Bad Dürkheim,132671
+07333,Donnersbergkreis,75325
+07334,Germersheim,129013
+07335,Kaiserslautern (Landkreis),105979
+07336,Kusel,70219
+07337,Südliche Weinstraße,110521
+07338,Rhein-Pfalz-Kreis,154609
+07339,Mainz-Bingen,211417
+07340,Südwestpfalz,94831
+08111,Stuttgart,635911
+08115,Böblingen,392807
+08116,Esslingen,535024
+08117,Göppingen,258145
+08118,Ludwigsburg,545423
+08119,Rems-Murr-Kreis,427248
+08121,Heilbronn,126592
+08125,Heilbronn (Landkreis),344456
+08126,Hohenlohekreis,112655
+08127,Schwäbisch Hall,196761
+08128,Main-Tauber-Kreis,132399
+08135,Heidenheim,132777
+08136,Ostalbkreis,314025
+08211,Baden-Baden,55185
+08212,Karlsruhe,312060
+08215,Karlsruhe (Landkreis),445101
+08216,Rastatt,231420
+08221,Heidelberg,161485
+08222,Mannheim,310658
+08225,Neckar-Odenwald-Kreis,143633
+08226,Rhein-Neckar-Kreis,548355
+08231,Pforzheim,125957
+08235,Calw,159201
+08236,Enzkreis,199556
+08237,Freudenstadt,118243
+08311,Freiburg im Breisgau,231195
+08315,Breisgau-Hochschwarzwald,263601
+08316,Emmendingen,166408
+08317,Ortenaukreis,430953
+08325,Rottweil,139878
+08326,Schwarzwald-Baar-Kreis,212506
+08327,Tuttlingen,140766
+08335,Konstanz,286305
+08336,Lörrach,228736
+08337,Waldshut,171003
+08415,Reutlingen,287034
+08416,Tübingen,228678
+08417,Zollernalbkreis,189363
+08421,Ulm,126790
+08425,Alb-Donau-Kreis,197076
+08426,Biberach,201282
+08435,Bodenseekreis,217470
+08436,Ravensburg,285424
+08437,Sigmaringen,130849
+09161,Ingolstadt,137392
+09162,München,1484226
+09163,Rosenheim,63551
+09171,Altötting,111516
+09172,Berchtesgadener Land,105929
+09173,Bad Tölz-Wolfratshausen,127917
+09174,Dachau,154899
+09175,Ebersberg,143649
+09176,Eichstätt,132881
+09177,Erding,138182
+09178,Freising,180007
+09179,Fürstenfeldbruck,219311
+09180,Garmisch-Partenkirchen,88424
+09181,Landsberg am Lech,120302
+09182,Miesbach,100010
+09183,Mühldorf a. Inn,115872
+09184,München (Landkreis),350473
+09185,Neuburg-Schrobenhausen,97303
+09186,Pfaffenhofen a.d. Ilm,128227
+09187,Rosenheim (Landkreis),261330
+09188,Starnberg,136667
+09189,Traunstein,177319
+09190,Weilheim-Schongau,135478
+09261,Landshut,73411
+09262,Passau,52803
+09263,Straubing,47791
+09271,Deggendorf,119478
+09272,Freyung-Grafenau,78362
+09273,Kelheim,123058
+09274,Landshut (Landkreis),159895
+09275,Passau (Landkreis),192656
+09276,Regen,77410
+09277,Rottal-Inn,121502
+09278,Straubing-Bogen,101120
+09279,Dingolfing-Landau,96683
+09361,Amberg,42207
+09362,Regensburg,153094
+09363,Weiden i.d. OPf.,42743
+09371,Amberg-Sulzbach,103049
+09372,Cham,127998
+09373,Neumarkt i.d. OPf.,134573
+09374,Neustadt a.d. Waldnaab,94450
+09375,Regensburg (Landkreis),194070
+09376,Schwandorf,147872
+09377,Tirschenreuth,72046
+09461,Bamberg,77373
+09462,Bayreuth,74783
+09463,Coburg,41072
+09464,Hof,45825
+09471,Bamberg (Landkreis),147163
+09472,Bayreuth (Landkreis),103664
+09473,Coburg (Landkreis),86747
+09474,Forchheim,116203
+09475,Hof (Landkreis),94801
+09476,Kronach,66743
+09477,Kulmbach,71566
+09478,Lichtenfels,66776
+09479,Wunsiedel i. Fichtelgebirge,72655
+09561,Ansbach,41798
+09562,Erlangen,112528
+09563,Fürth,128497
+09564,Nürnberg,518370
+09565,Schwabach,40981
+09571,Ansbach (Landkreis),184591
+09572,Erlangen-Höchstadt,137262
+09573,Fürth (Landkreis),117853
+09574,Nürnberger Land,170792
+09575,Neustadt a.d. Aisch-Bad Windsheim,101014
+09576,Roth,126749
+09577,Weißenburg-Gunzenhausen,94734
+09661,Aschaffenburg,71002
+09662,Schweinfurt,53426
+09663,Würzburg,127934
+09671,Aschaffenburg (Landkreis),174200
+09672,Bad Kissingen,103235
+09673,Rhön-Grabfeld,79635
+09674,Haßberge,84384
+09675,Kitzingen,91155
+09676,Miltenberg,128743
+09677,Main-Spessart,126158
+09678,Schweinfurt (Landkreis),115445
+09679,Würzburg (Landkreis),162302
+09761,Augsburg,296582
+09762,Kaufbeuren,44398
+09763,Kempten (Allgäu),69151
+09764,Memmingen,44100
+09771,Aichach-Friedberg,134655
+09772,Augsburg (Landkreis),253468
+09773,Dillingen a.d. Donau,96562
+09774,Günzburg,127027
+09775,Neu-Ulm,175204
+09776,Lindau (Bodensee),81981
+09777,Ostallgäu,141182
+09778,Unterallgäu,145341
+09779,Donau-Ries,133783
+09780,Oberallgäu,156008
+10041,Regionalverband Saarbrücken,328714
+10042,Merzig-Wadern,103243
+10043,Neunkirchen,131408
+10044,Saarlouis,194319
+10045,Saarpfalz-Kreis,142196
+10046,St. Wendel,87007
+11000,Berlin,3669491
+12051,Brandenburg an der Havel,72184
+12052,Cottbus,99678
+12053,Frankfurt (Oder),57751
+12054,Potsdam,180334
+12060,Barnim,185244
+12061,Dahme-Spreewald,170791
+12062,Elbe-Elster,101827
+12063,Havelland,162996
+12064,Märkisch-Oderland,195751
+12065,Oberhavel,212914
+12066,Oberspreewald-Lausitz,109371
+12067,Oder-Spree,178803
+12068,Ostprignitz-Ruppin,98861
+12069,Potsdam-Mittelmark,216566
+12070,Prignitz,76158
+12071,Spree-Neiße,113720
+12072,Teltow-Fläming,169997
+12073,Uckermark,118947
+13003,Rostock,209191
+13004,Schwerin,95653
+13071,Mecklenburgische Seenplatte,258074
+13072,Rostock (Landkreis),215794
+13073,Vorpommern-Rügen,224702
+13074,Nordwestmecklenburg,157322
+13075,Vorpommern-Greifswald,235623
+13076,Ludwigslust-Parchim,211779
+14511,Chemnitz,246334
+14521,Erzgebirgskreis,334948
+14522,Mittelsachsen,304099
+14523,Vogtlandkreis,225997
+14524,Zwickau,315002
+14612,Dresden,556780
+14625,Bautzen,299758
+14626,Görlitz,252725
+14627,Meißen,241717
+14628,Sächsische Schweiz-Osterzgebirge,245586
+14713,Leipzig,593145
+14729,Leipzig (Landkreis),258139
+14730,Nordsachsen,197741
+15001,Dessau-Roßlau,80103
+15002,Halle (Saale),238762
+15003,Magdeburg,237565
+15081,Altmarkkreis Salzwedel,83173
+15082,Anhalt-Bitterfeld,158486
+15083,Börde,170923
+15084,Burgenlandkreis,178846
+15085,Harz,213310
+15086,Jerichower Land,89589
+15087,Mansfeld-Südharz,134942
+15088,Saalekreis,183815
+15089,Salzlandkreis,189125
+15090,Stendal,111190
+15091,Wittenberg,124953
+16051,Erfurt,213981
+16052,Gera,93125
+16053,Jena,111343
+16054,Suhl,36789
+16055,Weimar,65228
+16056,Eisenach,42250
+16061,Eichsfeld,100006
+16062,Nordhausen,83416
+16063,Wartburgkreis,118974
+16064,Unstrut-Hainich-Kreis,102232
+16065,Kyffhäuserkreis,74212
+16066,Schmalkalden-Meiningen,124916
+16067,Gotha,134908
+16068,Sömmerda,69427
+16069,Hildburghausen,63197
+16070,Ilm-Kreis,106249
+16071,Weimarer Land,82156
+16072,Sonneberg,57717
+16073,Saalfeld-Rudolstadt,103199
+16074,Saale-Holzland-Kreis,82950
+16075,Saale-Orla-Kreis,80312
+16076,Greiz,97398
+16077,Altenburger Land,89393

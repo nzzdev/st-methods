@@ -62,6 +62,7 @@ jobs:
           python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity.py
           python rki_vaccinations_nursing_home/rki_vaccinations_nursing_home.py
           python rki_vaccinations_states/rki_vaccinations_states.py
+          python rki_notbremse/rki_notbremse.py
           python risklayer_icu/risklayer_icu.py
           python risklayer_incidence/risklayer_incidence.py
           python risklayer_new_deaths/risklayer_new_deaths.py
