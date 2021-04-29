@@ -58,14 +58,14 @@ if __name__ == '__main__':
         # Notbremse on the 22th of April in dfmap?
         # starting from the the 20th of April, comes into effect two days later
         dfmap['Wert'] = 'keine Notbremse'
-        dfmap['Wert'][(df.iloc[:, 414] >= 100) & (
-            df.iloc[:, 413] >= 100) & (df.iloc[:, 412] >= 100)] = 'Notbremse'
+        dfmap['Wert'][(df.iloc[:, 414] > 100) & (
+            df.iloc[:, 413] > 100) & (df.iloc[:, 412] > 100)] = 'Notbremse'
 
         # Notbremse on the 22th of April in dftable?
         # starting from the the 20th of April, comes into effect two days later
         dftable['Notbremse'] = '✖'
-        dftable['Notbremse'][(df.iloc[:, 414] >= 100) & (
-            df.iloc[:, 413] >= 100) & (df.iloc[:, 412] >= 100)] = '✔'
+        dftable['Notbremse'][(df.iloc[:, 414] > 100) & (
+            df.iloc[:, 413] > 100) & (df.iloc[:, 412] > 100)] = '✔'
 
         # When does the Notbremse come into effect? (placeholder)
         # dfmap['Gilt ab'] = 'current day + 2 days'
@@ -81,7 +81,7 @@ if __name__ == '__main__':
                         dftable['Notbremse'][j] = '✖'
                         # dfmap['Gilt ab'][j] = df.columns[i]
                 else:
-                    if (df.iloc[j, i] >= 100) & (df.iloc[j, i-1] >= 100) & (df.iloc[j, i-2] >= 100):
+                    if (df.iloc[j, i] > 100) & (df.iloc[j, i-1] > 100) & (df.iloc[j, i-2] > 100):
                         dfmap['Wert'][j] = 'Notbremse'
                         dftable['Notbremse'][j] = '✔'
                         # dfmap['Gilt ab'][j] = df.columns[i]
