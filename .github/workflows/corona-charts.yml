@@ -69,12 +69,14 @@ jobs:
         env:
           GSPREAD_PRIVATE_KEY_ID: ${{ secrets.GSPREAD_PRIVATE_KEY_ID }}
           GSPREAD_PRIVATE_KEY: ${{ secrets.GSPREAD_PRIVATE_KEY }}
-      - name: Use Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
           node-version: "14"
-      - run: npm install -g @nzz/q-cli
-      - run: Q update-item
+      - name: Install node packages
+        run: npm install -g @nzz/q-cli
+      - name: Run Q cli
+        run: Q update-item
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_USERNAME: ${{ secrets.Q_PRODUCTION_USERNAME }}
