@@ -107,7 +107,7 @@ if __name__ == '__main__':
         # set chart titles and notes
         # title_map = notbremse + ' Regionen sind derzeit von der Notbremse betroffen'
         subtitle_chart = 'Am ' + timestamp_str2 + ' lagen ' + \
-            notbremse + ' Kreise und Städte drei Tage in Folge über dem Inzidenzwert von 100 und noch keine fünf Tage in Folge darunter'
+            notbremse + ' Kreise und Städte 3 Tage in Folge über dem Inzidenzwert von 100 und noch keine 5 Tage in Folge darunter'
         notes_chart = 'Die Grafik zeigt, ob die Notbremse gemäss RKI-Inzidenz (demnächst) greift, nicht ob sie vor Ort bereits in Kraft ist. Der Berechnung liegen korrigierte Inzidenzwerte zugrunde inklusive Nachmeldungen. Gelockert werden darf, wenn die 7-Tage-Inzidenz fünf Werktage in Folge unter 100 lag. Stand: ' + \
             timestamp_str
 
