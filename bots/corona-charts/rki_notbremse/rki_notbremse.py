@@ -48,9 +48,6 @@ if __name__ == '__main__':
         # remove last row with German incidence and Berlin districts
         df = df[:-1]
         df = df.drop(df.index[325:337])
-        df.to_csv('out.csv', index=True)
-        # add current incidence in df of table chart
-        dftable['Inzidenz'] = df.iloc[:, -1]
 
         # create new df for choropleth map
         dfmap = df[[]].copy()
@@ -63,9 +60,9 @@ if __name__ == '__main__':
 
         # Notbremse on the 22th of April in dftable?
         # starting from the the 20th of April, comes into effect two days later
-        dftable['Notbremse'] = '✖'
+        dftable['Notbremse'] = '⠀✖⠀'  # with braille blank
         dftable['Notbremse'][(df.iloc[:, 414] > 100) & (
-            df.iloc[:, 413] > 100) & (df.iloc[:, 412] > 100)] = '✔'
+            df.iloc[:, 413] > 100) & (df.iloc[:, 412] > 100)] = '⠀✔⠀'  # with braille blank
 
         # When does the Notbremse come into effect? (placeholder)
         # dfmap['Gilt ab'] = 'current day + 2 days'
@@ -78,31 +75,47 @@ if __name__ == '__main__':
                 if dfmap['Wert'][j] == 'Notbremse':
                     if (df.iloc[j, i] < 100) & (df.iloc[j, i-1] < 100) & (df.iloc[j, i-2] < 100) & (df.iloc[j, i-3] < 100) & (df.iloc[j, i-4] < 100):
                         dfmap['Wert'][j] = 'keine Notbremse'
-                        dftable['Notbremse'][j] = '✖'
+                        dftable['Notbremse'][j] = '⠀✖⠀'  # with braille blank
                         # dfmap['Gilt ab'][j] = df.columns[i]
                 else:
                     if (df.iloc[j, i] > 100) & (df.iloc[j, i-1] > 100) & (df.iloc[j, i-2] > 100):
                         dfmap['Wert'][j] = 'Notbremse'
-                        dftable['Notbremse'][j] = '✔'
+                        dftable['Notbremse'][j] = '⠀✔⠀'  # with braille blank
                         # dfmap['Gilt ab'][j] = df.columns[i]
+
+        # add current incidence in df of table chart
+        dftable['Inzidenz_tmp'] = df.iloc[:, -1]
+
+        # calculate trend and add to new Inzidenz column
+        dftable['Trend'] = (
+            ((df.iloc[:, -1] - df.iloc[:, -3]) / df.iloc[:, -3]) * 100)
+        dftable['Trend_arrow'] = ''
+        dftable['Trend_arrow'][(dftable['Trend'] < -5)] = ' ↓'
+        dftable['Trend_arrow'][(dftable['Trend'] > 5)] = ' ↑'
+        dftable['Inzidenz_tmp'] = dftable['Inzidenz_tmp'].round(0).astype(int)
+        dftable['Inzidenz'] = dftable['Inzidenz_tmp'].astype(
+            str) + dftable['Trend_arrow']
 
         # sort dftable by pop
         dftable.sort_values(
             dftable.columns[1], inplace=True, ascending=False)
 
-        # drop pop and delete old df from memory
+        # drop some columns and delete old df from memory
         del [[df]]
+        del dftable['Trend']
+        del dftable['Trend_arrow']
+        del dftable['Inzidenz_tmp']
         del dftable['Bewohner']
         gc.collect()
-
-        # round incidence
-        dftable['Inzidenz'] = dftable['Inzidenz'].round(0).astype(int)
 
         # drop AGS and make region name the row index
         dftable.set_index('Region', inplace=True)
 
+        # change order of columns
+        dftable = dftable[['Inzidenz', 'Notbremse']]
+
         # number of regions with Notbremse on
-        notbremse = (dftable['Notbremse'] == '✔').sum().astype(str)
+        notbremse = (dfmap['Wert'] == 'Notbremse').sum().astype(str)
 
         # set chart titles and notes
         # title_map = notbremse + ' Regionen sind derzeit von der Notbremse betroffen'
