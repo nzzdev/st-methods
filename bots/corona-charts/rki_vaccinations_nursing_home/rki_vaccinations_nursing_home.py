@@ -36,7 +36,7 @@ if __name__ == '__main__':
         timestamp_str = df2.loc[0, 'date']
         timestamp_dt = datetime.strptime(
             timestamp_str, '%Y-%m-%d') + timedelta(days=1)
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # delete date value
         df2.loc[0, 'date'] = ''
@@ -46,7 +46,7 @@ if __name__ == '__main__':
                          'indikation_pflegeheim_voll': 'vollständig geimpft'}).set_index('')
 
         # show date in chart notes
-        notes_chart = 'Laut dem Statistischen Bundesamt (StBA) lebten in Deutschland im Jahr 2019 rund 820 000 Menschen in Pflege- und Altersheimen. In die Statistik zu «geimpften Pflegeheimbewohnern» des RKI fliessen allerdings inzwischen auch Zahlen von geimpften Menschen ein, die gemäss der Definition des StBA keine Pflegeheimbewohner sind.<br>Stand: ' + \
+        notes_chart = 'Laut dem Statistischen Bundesamt (StBA) lebten in Deutschland im Jahr 2019 rund 820 000 Menschen in Pflege- und Altersheimen. In die Statistik zu «geimpften Pflegeheimbewohnern» des RKI fliessen allerdings inzwischen auch Zahlen von geimpften Menschen ein, die gemäss der Definition des StBA keine Pflegeheimbewohner sind.<br>Stand: ' + \
             timestamp_str
 
         # insert id and subtitle manually and run function

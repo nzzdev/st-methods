@@ -32,8 +32,8 @@ if __name__ == '__main__':
         timestamp_str = df.columns[-1]
         timestamp_dt = datetime.strptime(
             timestamp_str, '%Y-%m-%dT%H:%M:%S+%f') + timedelta(days=1)
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
-        timestamp_str2 = format_date(timestamp_dt, 'd. MMMM', locale='de_DE')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        timestamp_str2 = format_date(timestamp_dt, 'd. MMMM', locale='de_DE')
 
         # clean AGS and add leading zero to numerical AGS values with <5 characters
         df.index = df.index.str.replace('_7di', '')

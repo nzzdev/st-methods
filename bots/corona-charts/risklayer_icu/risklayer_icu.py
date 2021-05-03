@@ -84,7 +84,7 @@ if __name__ == '__main__':
         timestamp_str = df.index[-1]
         timestamp_dt = datetime.strptime(
             timestamp_str, '%d.%m.%Y') + timedelta(days=1)
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # show date in chart notes
         notes_chart = 'Rund die Hälfte der im Jahr 2020 mechanisch beatmeten Covid-19-Intensivpatienten ist gestorben. Bei nicht mechanisch beatmeten lag die Mortalitätsrate zwischen 10 und 38 Prozent.<br>Stand: ' + \

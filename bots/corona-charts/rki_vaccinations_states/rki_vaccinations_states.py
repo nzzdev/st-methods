@@ -39,7 +39,7 @@ if __name__ == '__main__':
         timestamp_str = dfde.loc[0, 'date']
         timestamp_dt = datetime.strptime(
             timestamp_str, '%Y-%m-%d') + timedelta(days=1)
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # get percentagedfdes for germany
         de_first = (dfde['impf_quote_erst'].values[0] * 100).round(1)

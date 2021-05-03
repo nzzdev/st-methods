@@ -36,7 +36,7 @@ if __name__ == '__main__':
         timestamp_str = df2.loc[0, 'date']
         timestamp_dt = datetime.strptime(
             timestamp_str, '%Y-%m-%d') + timedelta(days=1)
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # delete date value in df
         df2.loc[0, 'date'] = ''

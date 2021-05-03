@@ -81,7 +81,7 @@ if __name__ == '__main__':
         timestamp_str = df.index[-1]
         timestamp_dt = datetime.strptime(
             timestamp_str, '%d.%m.%Y') + timedelta(days=1)
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # show date in chart notes
         notes_chart = 'Bei einem tödlichen Verlauf liegen zwischen Beginn der Symptome und Tod im Mittel 18 Tage.<br>Stand: ' + \

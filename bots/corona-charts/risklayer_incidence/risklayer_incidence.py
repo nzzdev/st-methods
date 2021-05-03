@@ -81,7 +81,7 @@ if __name__ == '__main__':
         timestamp_str = df.index[-1]
         timestamp_dt = datetime.strptime(
             timestamp_str, '%d.%m.%Y') + timedelta(days=1)
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # show date in chart notes
         notes_chart = 'Risklayer bezieht seine Zahlen direkt aus den Veröffentlichungen der Gesundheitsämter der Kreise und Städte. Wegen des veralteten Meldesystems sind diese Daten aktueller als jene vom RKI.<br>Stand: ' + \
