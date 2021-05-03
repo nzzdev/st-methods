@@ -83,7 +83,7 @@ if __name__ == '__main__':
        # get date for chart notes and add one day
         timestamp_str = df.index[-1]
         timestamp_dt = datetime.strptime(
-            timestamp_str, '%d.%m.%Y') + timedelta(days=1)
+            timestamp_str, '%d.%m.%Y')  # + timedelta(days=1)
         timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # show date in chart notes
