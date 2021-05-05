@@ -115,12 +115,17 @@ if __name__ == '__main__':
         dftable = dftable[['Inzidenz', 'Notbremse']]
 
         # number of regions with Notbremse on
+        notbremse = (dfmap['Wert'] == 'Notbremse').sum()
+        # calculate difference between 24th of April and now
+        notbremse_diff = 366 - notbremse
+        notbremse_diff = notbremse_diff.astype(str)
         notbremse = (dfmap['Wert'] == 'Notbremse').sum().astype(str)
 
         # set chart titles and notes
         # title_map = notbremse + ' Regionen sind derzeit von der Notbremse betroffen'
         subtitle_chart = 'Am ' + timestamp_str2 + ' lagen ' + \
-            notbremse + ' Kreise und Städte 3 Tage in Folge über dem Inzidenzwert von 100 und noch keine 5 Tage in Folge darunter'
+            notbremse + ' Kreise und Städte 3 Tage in Folge über dem Inzidenzwert von 100 und noch keine 5 Tage in Folge darunter - das sind ' + \
+            notbremse_diff + ' weniger als noch Ende April'
         notes_chart = 'Die Grafik zeigt, ob die Notbremse gemäss RKI-Inzidenz (demnächst) greift, nicht ob sie vor Ort bereits in Kraft ist. Der Berechnung liegen korrigierte Werte zugrunde inklusive Nachmeldungen. Stand: ' + \
             timestamp_str
 
