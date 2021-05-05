@@ -117,7 +117,7 @@ if __name__ == '__main__':
         # number of regions with Notbremse on
         notbremse = (dfmap['Wert'] == 'Notbremse').sum()
         # calculate difference between 24th of April and now
-        notbremse_diff = 366 - notbremse
+        notbremse_diff = 367 - notbremse
         notbremse_diff = notbremse_diff.astype(str)
         notbremse = (dfmap['Wert'] == 'Notbremse').sum().astype(str)
 
