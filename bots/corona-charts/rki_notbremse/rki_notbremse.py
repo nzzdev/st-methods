@@ -51,12 +51,19 @@ if __name__ == '__main__':
 
         # create new df for choropleth map
         dfmap = df[[]].copy()
+        dfedumap = df[[]].copy()
 
         # Notbremse on the 22th of April in dfmap?
         # starting from the the 20th of April, comes into effect two days later
         dfmap['Wert'] = 'keine Notbremse'
         dfmap['Wert'][(df.iloc[:, 414] > 100) & (
             df.iloc[:, 413] > 100) & (df.iloc[:, 412] > 100)] = 'Notbremse'
+
+        # Notbremse for schools on the 22th of April in dfedumap?
+        # starting from the the 20th of April, comes into effect two days later
+        dfedumap['Wert'] = 'Schulen offen'
+        dfedumap['Wert'][(df.iloc[:, 414] > 165) & (
+            df.iloc[:, 413] > 165) & (df.iloc[:, 412] > 165)] = 'Schulen geschlossen'
 
         # Notbremse on the 22th of April in dftable?
         # starting from the the 20th of April, comes into effect two days later
@@ -77,10 +84,17 @@ if __name__ == '__main__':
                         dfmap['Wert'][j] = 'keine Notbremse'
                         dftable['Notbremse'][j] = '⠀✖⠀'  # with braille blank
                         # dfmap['Gilt ab'][j] = df.columns[i]
+                if dfedumap['Wert'][j] == 'Schulen geschlossen':
+                    if (df.iloc[j, i] < 165) & (df.iloc[j, i-1] < 165) & (df.iloc[j, i-2] < 165) & (df.iloc[j, i-3] < 165) & (df.iloc[j, i-4] < 165):
+                        dfedumap['Wert'][j] = 'Schulen offen'
+                        # dfmap['Gilt ab'][j] = df.columns[i]
                 else:
                     if (df.iloc[j, i] > 100) & (df.iloc[j, i-1] > 100) & (df.iloc[j, i-2] > 100):
                         dfmap['Wert'][j] = 'Notbremse'
                         dftable['Notbremse'][j] = '⠀✔⠀'  # with braille blank
+                        # dfmap['Gilt ab'][j] = df.columns[i]
+                    if (df.iloc[j, i] > 165) & (df.iloc[j, i-1] > 165) & (df.iloc[j, i-2] > 165):
+                        dfedumap['Wert'][j] = 'Schulen geschlossen'
                         # dfmap['Gilt ab'][j] = df.columns[i]
 
         # add current incidence in df of table chart
@@ -121,17 +135,26 @@ if __name__ == '__main__':
         notbremse_diff = notbremse_diff.astype(str)
         notbremse = (dfmap['Wert'] == 'Notbremse').sum().astype(str)
 
+        # number of regions with schools closed
+        schools = (dfedumap['Wert'] == 'Schulen geschlossen').sum().astype(str)
+
         # set chart titles and notes
         # title_map = notbremse + ' Regionen sind derzeit von der Notbremse betroffen'
         subtitle_chart = 'Am ' + timestamp_str2 + ' lagen ' + \
             notbremse + ' Kreise und Städte 3 Tage in Folge über dem Inzidenzwert von 100 und noch keine 5 Tage in Folge darunter - das sind ' + \
             notbremse_diff + ' weniger als noch Ende April'
+        subtitle_chart2 = 'Am ' + timestamp_str2 + ' lagen ' + \
+            schools + ' Kreise und Städte 3 Tage in Folge über dem Inzidenzwert von 165 und noch keine 5 Tage in Folge darunter'
         notes_chart = 'Die Grafik zeigt, ob die Notbremse gemäss RKI-Inzidenz (demnächst) greift, nicht ob sie vor Ort bereits in Kraft ist. Der Berechnung liegen korrigierte Werte zugrunde inklusive Nachmeldungen. Stand: ' + \
+            timestamp_str
+        notes_chart2 = 'Der Berechnung liegen korrigierte Inzidenzwerte zugrunde inklusive Nachmeldungen. Stand: ' + \
             timestamp_str
 
         # insert id manually and run function
         update_chart(id='530c9a2b291a3ac848e9dc471a762204',
                      data=dfmap, notes=notes_chart, subtitle=subtitle_chart)
+        update_chart(id='4c6603c3b465e2d11eb5b22d736dadcc',
+                     data=dfedumap, notes=notes_chart2, subtitle=subtitle_chart2)
         update_chart(id='050befd50ccb2f5f9080d4bba4df423d',
                      data=dftable, notes=notes_chart, subtitle=subtitle_chart)
 
