@@ -54,8 +54,10 @@ if __name__ == '__main__':
 
         # caluclate vaccination rates in new columns
         df['Gesamt'] = ((df['vaccinationsTotal'] / df['pop']) * 100).round(1)
-        df['1. Dose'] = ((df['peopleFirstTotal'] / df['pop']) * 100).round(1)
-        df['2. Dose'] = ((df['peopleFullTotal'] / df['pop']) * 100).round(1)
+        df['erste Dose'] = (
+            (df['peopleFirstTotal'] / df['pop']) * 100).round(1)
+        df['vollständig'] = (
+            (df['peopleFullTotal'] / df['pop']) * 100).round(1)
 
         # drop unwanted columns with absolute values
         df.drop(['vaccinationsTotal', 'peopleFirstTotal',
@@ -63,7 +65,7 @@ if __name__ == '__main__':
 
         # add data for Germany at the top
         de = [{'code': 'Deutschland', 'Gesamt': de_total,
-               'erste Dose': de_first, 'vollständig geimpft': de_full}]
+               'erste Dose': de_first, 'vollständig': de_full}]
         df = pd.concat(
             [pd.DataFrame(de), df], ignore_index=True)
 
