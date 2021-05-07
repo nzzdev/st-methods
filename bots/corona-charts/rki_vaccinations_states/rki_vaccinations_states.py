@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
         # add data for Germany at the top
         de = [{'code': 'Deutschland', 'Gesamt': de_total,
-               '1. Dose': de_first, '2. Dose': de_full}]
+               'erste Dose': de_first, 'vollständig geimpft': de_full}]
         df = pd.concat(
             [pd.DataFrame(de), df], ignore_index=True)
 

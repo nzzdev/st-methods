@@ -37,8 +37,8 @@ if __name__ == '__main__':
         timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # rename first column and set as index
-        df = df.rename(columns={'date': '', 'dosen_erst_differenz_zum_vortag': 'Erstimpfungen',
-                       'dosen_zweit_differenz_zum_vortag': 'Zweitimpfungen'}).set_index('')
+        df = df.rename(columns={'date': '', 'dosen_erst_differenz_zum_vortag': 'erste Dose',
+                       'dosen_zweit_differenz_zum_vortag': 'vollständig geimpft'}).set_index('')
 
         # change date format
         df.index = pd.to_datetime(

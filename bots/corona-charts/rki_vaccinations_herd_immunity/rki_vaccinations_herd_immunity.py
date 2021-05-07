@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
         # rename first column and set as index
         df2 = df2.rename(columns={
-            'date': '', 'impf_quote_voll': 'vollständig', 'impf_quote_erst': 'einfach'}).set_index('')
+            'date': '', 'impf_quote_voll': 'vollständig geimpft', 'impf_quote_erst': 'erste Dose'}).set_index('')
 
         # show percentage total (copy to chart title later)
         title_percent = df2.iat[0, 0]+df2.iat[0, 1]
