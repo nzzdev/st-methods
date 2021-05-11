@@ -102,12 +102,11 @@ vacc_final <- vacc_sum %>%
   left_join(over65, by = "iso_code") %>%
   full_join(vacc_proj_date, by = "location") %>%
   filter(location %in% solid_ctry) %>%
-  select(-location) %>%
+  rename(location_en = location) %>%
   rename(location = name_ger)
 
 vacc_final$iso_code[vacc_final$location == "Welt"] <- "Welt"
 vacc_final$iso_code[vacc_final$location == "EU"] <- "EU"
-
 
 vacc_final$people_fully_vaccinated[vacc_final$location == "Welt"] <- NA
 vacc_final$people_fully_vaccinated[vacc_final$location == "EU"] <- NA
