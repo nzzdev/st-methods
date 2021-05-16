@@ -1,4 +1,4 @@
-# Sociographic analysis of covid infection rates in Germany
+# Sociodemographic analysis of covid infection rates in Germany
 
 Data and R script for replication of regression analysis of [this piece](https://www.nzz.ch/international/deutschland/diese-gruppen-infizieren-sich-am-haeufigsten-mit-corona-und-lassen-sich-seltener-impfen-ld.1624457)
 
