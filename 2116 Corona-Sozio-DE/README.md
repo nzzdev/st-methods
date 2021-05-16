@@ -4,4 +4,4 @@ Data and R script for replication of regression analysis of [this piece](https:/
 
 Data sources:
 
- * Data sources: [Stadt Köln](https://www.stadt-koeln.de/politik-und-verwaltung/statistik/statistische-daten-thematische-karte), [Statistisches Landesamt Baden-Wüttemberg](https://www.statistik-bw.de/), [Statistisches Landesamt Baden-Wüttemberg](https://www.statistik-bw.de/), [INKAR](https://www.inkar.de/), [ Ministerium für Soziales, Gesundheit und Integration Baden-Württemberg](https://sozialministerium.baden-wuerttemberg.de/de/service/presse/pressemitteilung/pid/impfungen-erreichen-noch-nicht-alle-gesellschaftlichen-gruppen-gleichermassen/)
+ * Data sources: [Stadt Köln](https://www.stadt-koeln.de/politik-und-verwaltung/statistik/statistische-daten-thematische-karte), [Statistisches Landesamt Baden-Wüttemberg](https://www.statistik-bw.de/), [INKAR](https://www.inkar.de/), [ Ministerium für Soziales, Gesundheit und Integration Baden-Württemberg](https://sozialministerium.baden-wuerttemberg.de/de/service/presse/pressemitteilung/pid/impfungen-erreichen-noch-nicht-alle-gesellschaftlichen-gruppen-gleichermassen/)
