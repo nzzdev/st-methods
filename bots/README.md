@@ -9,7 +9,7 @@ This directory contains scripts that automate the update process of charts. Typi
 - Develop the script in your preferred language
 - Try to run and update the chart locally using Q cli (see [wiki post](https://wiki.nzzmg.ch/confluence/pages/viewpage.action?spaceKey=RED&title=Q+Grafiken+automatisiert+aktualisieren) for more details)
 - Setup the [Github Actions workflow file](https://docs.github.com/en/actions/quickstart) (use the [corona-charts workflow](../.github/workflows/corona-charts.yml) as reference)
-- Run the Github Actions manually using the run workflow button in the Actions Tab on Github
+- Run the Github Action manually using the run workflow button in the Actions Tab on Github
 - The action is now set up and will run on the schedule defined in the workflow file
 
 ## What should be considered when developing a new automated script
@@ -18,23 +18,20 @@ This directory contains scripts that automate the update process of charts. Typi
 
 A script typically uses external dependencies for things like data fetching, data analysis or manipulation json data. To make these dependencies available within Github Actions a dependency manager is required. It is recommended to use the following dependency managers:
 
-- R
-  - [renv](https://rstudio.github.io/renv/articles/renv.html)
-    - Install renv: `install.packages("renv")`
-    - Initialize new project: `renv::init()`
-    - Save depenencies to lockfile: `renv::snapshot()`
-    - Restore dependencies: `renv::restore()`
-- Python
-  - [Pip](https://pip.pypa.io/en/stable/installing/)
-    - Install pip: `python -m pip install --upgrade pip setuptools wheel`
-    - Save depenencies to requirements file: `pip freeze > requirements.txt`
-    - Restore dependencies: `pip install -r requirements.txt`
-- JavaScript
-  - [npm](https://www.npmjs.com/get-npm)
-    - Install npm: `npm install npm@latest -g`
-    - Initialize new project: `npm init`
-    - Save depenencies to lockfile: `npm install --save <dependency-name>`
-    - Restore dependencies: `npm install`
+- R: [renv](https://rstudio.github.io/renv/articles/renv.html)
+  - Install renv: `install.packages("renv")`
+  - Initialize new project: `renv::init()`
+  - Save dependencies to lockfile: `renv::snapshot()`
+  - Restore dependencies: `renv::restore()`
+- Python: [Pip](https://pip.pypa.io/en/stable/installing/)
+  - Install pip: `python -m pip install --upgrade pip setuptools wheel`
+  - Save dependencies to requirements file: `pip freeze > requirements.txt`
+  - Restore dependencies: `pip install -r requirements.txt`
+- JavaScript: [npm](https://www.npmjs.com/get-npm)
+  - Install npm: `npm install npm@latest -g`
+  - Initialize new project: `npm init`
+  - Save dependencies to lockfile: `npm install --save <dependency-name>`
+  - Restore dependencies: `npm install`
 
 ### Create a separate script for each dataset
 
