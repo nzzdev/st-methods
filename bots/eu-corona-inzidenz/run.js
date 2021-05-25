@@ -82,8 +82,10 @@ function joinCSVToTopoJSON(csv, topojson) {
     // Plausibility checks
     assert(data.rollup({"min": d => arquero.op.min(d['Incidence7day'])}).objects()[0].min >= 0)
     assert(data.rollup({"max": d => arquero.op.max(d["Incidence7day"])}).objects()[0].max <= 100000)
-    assert(data.groupby("UID").count().objects().length <= 674, "Region(s) added")
-    assert(data.groupby("UID").count().objects().length >= 674, "Region(s) removed")
+
+    // Ignored regions: ['IE', 'NO011', 'NO012_NO031_NO032', 'TRx01', 'TRx02', 'TRx03', 'TRx04', 'TRx05', 'TRx06', 'TRx07', 'TRx08', 'TRx09', 'TRx10', 'TRx11', 'TRx12']
+    assert(data.groupby("UID").count().objects().length <= 675, "Region(s) added")
+    assert(data.groupby("UID").count().objects().length >= 675, "Region(s) removed")
 
     topojson.objects.regions.geometries.forEach(geom => {
        let incidence = data
@@ -91,12 +93,13 @@ function joinCSVToTopoJSON(csv, topojson) {
             .filter((d, $) => d.UID == $.id)
             .objects()
 
+
         if(incidence.length>0) {
             geom.properties["Incidence7day"] = Number(incidence[0]["Incidence7day"]);
         }
       })
     
-      return topojson
+          return topojson
 }
 
 // Add the new TopoJSON to the imported spec
