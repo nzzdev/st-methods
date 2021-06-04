@@ -67,9 +67,9 @@ if __name__ == '__main__':
 
         # Notbremse on the 22th of April in dftable?
         # starting from the the 20th of April, comes into effect two days later
-        dftable['Notbremse'] = '⠀✖⠀'  # with braille blank
+        dftable['Notbremse'] = '	‍	✖	‍	'  # with	‍	blank
         dftable['Notbremse'][(df.iloc[:, 414] > 100) & (
-            df.iloc[:, 413] > 100) & (df.iloc[:, 412] > 100)] = '⠀✔⠀'  # with braille blank
+            df.iloc[:, 413] > 100) & (df.iloc[:, 412] > 100)] = '	‍	✔	‍	'  # with	‍	blank
 
         # When does the Notbremse come into effect? (placeholder)
         # dfmap['Gilt ab'] = 'current day + 2 days'
@@ -82,7 +82,7 @@ if __name__ == '__main__':
                 if dfmap['Wert'][j] == 'Notbremse':
                     if (df.iloc[j, i] < 100) & (df.iloc[j, i-1] < 100) & (df.iloc[j, i-2] < 100) & (df.iloc[j, i-3] < 100) & (df.iloc[j, i-4] < 100):
                         dfmap['Wert'][j] = 'keine Notbremse'
-                        dftable['Notbremse'][j] = '⠀✖⠀'  # with braille blank
+                        dftable['Notbremse'][j] = '	‍	✖	‍	'  # with	‍	blank
                         # dfmap['Gilt ab'][j] = df.columns[i]
                 if dfedumap['Wert'][j] == 'Schulen geschlossen':
                     if (df.iloc[j, i] < 165) & (df.iloc[j, i-1] < 165) & (df.iloc[j, i-2] < 165) & (df.iloc[j, i-3] < 165) & (df.iloc[j, i-4] < 165):
@@ -91,7 +91,7 @@ if __name__ == '__main__':
                 else:
                     if (df.iloc[j, i] > 100) & (df.iloc[j, i-1] > 100) & (df.iloc[j, i-2] > 100):
                         dfmap['Wert'][j] = 'Notbremse'
-                        dftable['Notbremse'][j] = '⠀✔⠀'  # with braille blank
+                        dftable['Notbremse'][j] = '	‍	✔	‍	'  # with	‍	blank
                         # dfmap['Gilt ab'][j] = df.columns[i]
                     if (df.iloc[j, i] > 165) & (df.iloc[j, i-1] > 165) & (df.iloc[j, i-2] > 165):
                         dfedumap['Wert'][j] = 'Schulen geschlossen'
