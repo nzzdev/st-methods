@@ -45,7 +45,7 @@ if __name__ == '__main__':
             df.index, format='%Y-%m-%d').strftime('%d.%m.%Y')
 
        # show date in chart notes
-        notes_chart = '¹inkl. Impfstoff von J&J, von dem nur eine Dose nötig ist. Stand: ' + \
+        notes_chart = '¹inkl. Impfstoff von J&J, von dem nur eine Dose nötig ist.<br>Stand: ' + \
             timestamp_str
         print
         # insert id and subtitle manually and run function
