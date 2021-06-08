@@ -38,14 +38,14 @@ if __name__ == '__main__':
 
         # rename first column and set as index
         df = df.rename(columns={'date': '', 'dosen_erst_differenz_zum_vortag': 'erste Dose',
-                       'dosen_zweit_differenz_zum_vortag': 'vollständig geimpft'}).set_index('')
+                       'dosen_zweit_differenz_zum_vortag': 'vollständig geimpft¹'}).set_index('')
 
         # change date format
         df.index = pd.to_datetime(
             df.index, format='%Y-%m-%d').strftime('%d.%m.%Y')
 
        # show date in chart notes
-        notes_chart = 'Stand: ' + \
+        notes_chart = '¹inkl. Impfstoff von J&J, von dem nur eine Dose nötig ist.<br>Stand: ' + \
             timestamp_str
         print
         # insert id and subtitle manually and run function
