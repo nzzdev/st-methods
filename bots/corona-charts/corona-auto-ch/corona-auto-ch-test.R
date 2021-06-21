@@ -9,8 +9,7 @@ library(tidyverse)
 source("./helpers.R")
 
 # read in additional data
-# pop <- read_csv("./corona-auto-ch/pop_kant.csv")
-pop <- read_csv("pop_kant.csv")
+pop <- read_csv("./corona-auto-ch/pop_kant.csv")
 
 #### Update R eth estimate ####
 
