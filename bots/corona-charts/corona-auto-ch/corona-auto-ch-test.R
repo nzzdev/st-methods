@@ -46,11 +46,12 @@ eth_cantons <- read_csv("https://raw.githubusercontent.com/covid-19-Re/dailyRe-D
   filter(data_type == "Confirmed cases" & estimate_type == "Cori_slidingWindow") %>%
   group_by(region) %>%
   filter(date == last(date)) %>%
-  select(region, median_R_highHPD,median_R_lowHPD,median_R_mean) %>%
-  arrange (desc(median_R_mean)) %>%
-  left_join(pop[,1:2], by = c("region" = "ktabk"))
+  ungroup() %>%
+  left_join(pop[,1:2], by = c("region" = "ktabk")) %>%
+  select(kt, median_R_highHPD,median_R_lowHPD,median_R_mean) %>%
+  arrange(desc(median_R_mean))
 
-eth_cantons_title <- paste0("Der Kanton ", eth_cantons[1,5], " verzeichnet den höchsten R-Wert")
+eth_cantons_title <- paste0("Der Kanton ", eth_cantons[1,1], " verzeichnet den höchsten R-Wert")
 eth_cantons_notes <- paste0("Die Daten liegen in einem 95%-Konfidenzintervall. Wir zeigen nur die R-Werte für die zehn grössten Kantone.",
                             " In kleinen Kantonen ist der Unsicherheitsbereich teilweise sehr gross, so dass keine verlässlichen Aussagen möglich sind.",
                             " Die neusten Schätzungen der Kantone liegen in der Regel einige Tage hinter der nationalen Schätzung.<br> Stand: ",
