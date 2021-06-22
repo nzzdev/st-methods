@@ -130,9 +130,6 @@ bag_cases_ravg <- bag_cases %>%
   mutate(ravg_cases = round(rollmean(entries, 7, fill = 0, align = "right"),0)) %>%
   select(datum, ravg_cases) 
 
-write_clip(roll_ch_bag_cases)
-tail(roll_ch_bag_cases)
-
 #q-cli update
 update_chart(id = "93b53396ee7f90b1271f620a0472c112", data = bag_cases_ravg)
 
@@ -344,9 +341,6 @@ bag_cases_bez <- read_csv(bag_data$sources$individual$csv$extraGeoUnits$cases$bi
   select(-period_end_date) %>%
   arrange(geoRegion)
 
-write_clip(bag_cases_bez)
-browseURL("https://q.st.nzz.ch/editor/choropleth/1dc855a085bcadbf7a93ebf5b584336e")
-
 bag_cases_bez_dates <- read_csv(bag_data$sources$individual$csv$extraGeoUnits$cases$biweekly) %>%
   filter(period_end_date == max(period_end_date), geoRegion == "CH") %>%
   select(period_start_date, period_end_date)
@@ -444,9 +438,6 @@ vaccchart_pctfull_notes <- paste0("In einigen Kantonen wurden mehr Impfdosen aus
                                   " als offiziell in den Lieferangaben ausgewiesen ist.<br>Stand: ",
                                   ch_vacc_date)
 
-write_clip(vaccchart_pctfull)
-browseURL("https://q.st.nzz.ch/editor/chart/f8559c7bb8bfc74e70234e717e0e1f8e")
-
 update_chart(id = "f8559c7bb8bfc74e70234e717e0e1f8e", 
              data = vaccchart_pctfull, 
              notes = vaccchart_pctfull_notes)
@@ -520,9 +511,6 @@ ch_vacc_vdr <- ch_vacc %>%
 
 ch_vacc_vdr$`An Kantone verteilt`[ch_vacc_vdr$`An Kantone verteilt`< 0] <- 0
 tail(ch_vacc_vdr,1)
-write_clip(ch_vacc_vdr)
-
-browseURL("https://q.st.nzz.ch/editor/chart/ce1529d1facf24bb5bef83a3df033bfc")
 
 update_chart(id = "ce1529d1facf24bb5bef83a3df033bfc", 
              data = ch_vacc_vdr)
@@ -607,9 +595,7 @@ ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
 # #how many times faster need the vaccinations to happen?
 # ch_vacc_goalspeed/ch_vacc_esti$mean
 
-#write to Q
-write_clip(ch_vacc_hi2)
-browseURL("https://q.st.nzz.ch/editor/chart/37fc5e48506c4cd050bac04346238a2d")
+#write to Q-cli
 
 update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
              data = ch_vacc_hi2,
