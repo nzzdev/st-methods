@@ -2,13 +2,13 @@
   "name": "wildfire_bot",
   "private": true,
   "dependencies": {
-    "@turf/turf": "^5.1.6",
-    "fs-extra": "^9.0.1",
+    "@turf/turf": "^6.4.0",
+    "fs-extra": "^10.0.0",
     "intl": "^1.2.5",
     "node-fetch": "^2.6.1",
-    "promptly": "^3.0.3",
+    "promptly": "^3.2.0",
     "shapefile": "^0.6.6",
-    "simple-proxy-agent": "^1.0.8",
+    "simple-proxy-agent": "^1.1.0",
     "unzipper": "^0.10.11"
   },
   "scripts": {
