@@ -1,5 +1,6 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+# This workflow will update a map of California with thermic anomalies – i.e. wildfires
+# The map can be found here: https://q.st.nzz.ch/item/6d5dfa85d3d67a928ec2d1903d39b280
+# Responsible for this bot: kaspar.manz@nzz.ch
 
 name: Update California Wildfires
 
