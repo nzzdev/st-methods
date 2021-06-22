@@ -25,7 +25,7 @@ async function getBearerToken() {
     }
 
     const response = await fetch(
-      `${process.env.Q_SERVER_BASE_URL}/authenticate`,
+      `${process.env.Q_SERVER_BASE_URL}authenticate`,
       {
         method: 'POST',
         body: JSON.stringify({

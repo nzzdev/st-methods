@@ -2,7 +2,7 @@ const path = require("path");
 const turf = require("@turf/turf");
 const helpers = require(path.join(__dirname, "helpers.js"));
 
-const itemUrl = `${process.env.Q_SERVER_BASE_URL}/item`;
+const itemUrl = `${process.env.Q_SERVER_BASE_URL}item`;
 
 /**
  * Prepare the GeoJSON data for display within Q.

@@ -25,8 +25,9 @@ env:
   QID: 6d5dfa85d3d67a928ec2d1903d39b280
 
   # The URL of the Q server
-  # This can be used to switch between the production (https://q-server.st.nzz.ch)
-  # and the staging server (https://q-server.st-staging.nzz.ch)
+  # This can be used to switch between the production (https://q-server.st.nzz.ch/)
+  # and the staging server (https://q-server.st-staging.nzz.ch/)
+  # Stored with closing slash
   Q_SERVER_BASE_URL: ${{ secrets.Q_PRODUCTION_SERVER }}
 
   # The authentification token
@@ -40,7 +41,7 @@ env:
   MARKER_RADIUS: 10
 
   # Any notes that should be added to the chart
-  NOTES:
+  NOTES: >-
     Jede der markierten Flächen weist mit einer bestimmten Wahrscheinlichkeit
     ein oder mehrere aktive Feuer oder sonstige thermische Anomalien (z. B.
     Vulkane) auf.
