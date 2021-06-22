@@ -71,7 +71,7 @@ async function updateQItem(geojsons, item) {
   if (response && response._rev) {
     console.log(`Q-Item ${process.env.QID} successfully updated.`);
   } else {
-    console.log(
+    throw new Error(
       `An error occured while updateding the Q-Item ${process.env.QID}. Make sure that you don't have the Q-Item open in your browser.`
     );
   }
@@ -94,7 +94,8 @@ async function main() {
     );
     await updateQItem(geojsonsWithAttributes, qItem);
   } catch (error) {
-    console.log(error);
+    console.error(error.message);
+    process.exit(1)
   }
 }
 
