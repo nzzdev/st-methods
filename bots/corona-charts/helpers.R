@@ -21,7 +21,9 @@ update_chart <- function(id, title = "", subtitle = "", notes = "", data = list(
           qConfig$items$item$notes[[index]] <- notes
         }
         if (length(data) > 0) {
-          qConfig$items$item$data[[index]] <- rbind(names(data), as.matrix(data))
+          # as.matrix adds extra spaces when converting numbers to strings sapply(data, as.character)
+          # trims extra characters. See also https://stackoverflow.com/questions/15618527/why-does-as-matrix-add-extra-spaces-when-converting-numeric-to-character
+          qConfig$items$item$data[[index]] <- rbind(names(data), as.matrix(sapply(data, as.character)))
         }
         print(paste0("Successfully updated item with id ", id))
       }
