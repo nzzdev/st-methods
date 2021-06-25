@@ -101,6 +101,11 @@ bag_tests <- read_csv(bag_data$sources$individual$csv$daily$test) %>%
 bag_testPcrAntigen <- read_csv(bag_data$sources$individual$csv$daily$testPcrAntigen) %>% 
   select("geoRegion", "datum", "entries", "nachweismethode", "pos_anteil")
 
+bag_cert <- subset(read_csv(bag_data$sources$individual$csv$daily$covidCertificates), type_variant != 'all', select = c("geoRegion", "date", "type_variant", "sumTotal"))
+
+bag_var <- subset(read.csv(bag_data$sources$individual$csv$daily$virusVariantsWgs), select = c("variant_type", "date", "prct", "prct_lower_ci", "prct_upper_ci", "prct_mean7d", "entries"), geoRegion == 'CHFL' )
+
+
 
 # Total cases in CH since 2020-02-24 and recovery calculation
 
@@ -354,6 +359,41 @@ bag_cases_bez_notes <- paste0("Zeitraum: ",
 update_chart(id = "e7ab74f261f39c7b670954aaed6de280", data = bag_hosp_cap_regions, notes = bag_hosp_cap_regions_notes)
 
 
+### Variants ###
+
+bag_var_delta <- bag_var %>%
+  mutate(date = as.Date(date)) %>%
+  filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date))  %>%
+  drop_na(prct) %>%
+  mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
+         prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"), 
+         prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right"))  %>%
+  drop_na(prct_mean7d) %>%
+  select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
+  filter(date >= '2021-05-01') %>%
+  rename(" " = "prct_lower_7", "Konfidenzintervall" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
+
+bag_var_delta_notes <- paste0("Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
+                        " Die Tageswerte sind mit einem oberen und einem unteren Wert eingegrenzt, welche eine Wahrscheinlichkeit von 95 Prozent abbilden.<br> Stand der Schätzung: ",
+                               format(max(bag_var_delta$datum), , format = "%d. %m. %Y"))
+
+update_chart(id = "dc697b19f4ecaf842746e444a46761b4", data = bag_var_delta, notes = bag_var_delta_notes)
+
+
+### Certificates ###
+
+bag_cert <- bag_cert %>% 
+  select(-geoRegion) %>%
+  spread(type_variant, sumTotal) %>%
+  rename('Genesen' = 'recovered', 'Getested' = 'tested', 'Geimpft' = 'vaccinated')
+
+update_chart(id = "15326b5086f1007b7c67825700c2d149", data = bag_cert)
+
+
+
+
+
+
 #### CH Vaccinations ####
 # update on TUE and FRI, check if new BAG vacc data are there, if not read in again later
 
@@ -376,6 +416,16 @@ ch_vacc_rec <- read_csv(bag_data$sources$individual$csv$vaccDosesDelivered) %>%
   filter(type == "COVID19VaccDosesReceived") %>%
   select(geoRegion, date,pop, sumTotal) %>%
   drop_na()
+
+ch_vacc_vacc <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$vaccDosesAdministered) %>%
+  select(date, vaccine, sumTotal) %>%
+  spread(vaccine, sumTotal) 
+
+ch_vacc_vacc <- ch_vacc_vacc %>%
+  rename('COVID-`19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
+
+update_chart(id = "e5aee99aec92ee1365613b671ef405f7", data = ch_vacc_vacc)
+
 
 ch_vacc_date <- format(last(ch_vacc_adm$date), format = "%d. %m. %Y") #which is the last date available?
 
