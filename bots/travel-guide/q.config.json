@@ -24,13 +24,13 @@
                     {
                         "loadSyncBeforeInit": false,
                         "file": {
-                            "path": "./data/countriesInformation.json"
+                            "path": "./countriesInformation.json"
                         }
                     },
                     {
                         "loadSyncBeforeInit": false,
                         "file": {
-                            "path": "./data/tripsInformation.json"
+                            "path": "./tripsInformation.json"
                         }
                     }
                 ]
