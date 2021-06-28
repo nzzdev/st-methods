@@ -1,0 +1,24 @@
+name: Update Travel Guide
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bots/travel-guide/
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Run update script
+        run: npm run update-production
+        env:
+          Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
+          Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
+          SHERPA_API_KEY: ${{ secrets.SHERPA_API_KEY }}
+          SHERPA_API_URL: requirements-api.sandbox.joinsherpa.com
