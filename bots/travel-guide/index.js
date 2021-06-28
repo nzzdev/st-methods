@@ -19,6 +19,7 @@ async function main() {
   try {
     countriesInformation = await fetchCountriesInformation(language, originCountries);
     countriesInformation = setCountriesInformation(countriesInformation, originCountries);
+    updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
   } finally {
@@ -33,6 +34,7 @@ async function main() {
   try {
     tripsInformation = await fetchTripsInformation(language, originCountries, destinationCountries, destinationCountriesToExclude, travelDate);
     tripsInformation = setTripsInformations(tripsInformation);
+    updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
   } finally {
@@ -40,8 +42,6 @@ async function main() {
     writeFile("tripsInformation", tripsInformation);
     console.log("------------------------------$");
   }
-
-  updateLastUpdatedAt();
 }
 
 main();
