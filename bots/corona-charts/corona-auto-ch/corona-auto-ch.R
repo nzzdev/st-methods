@@ -374,7 +374,7 @@ update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e",
 #   filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date))  %>%
 #   drop_na(prct) %>%
 #   mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
-#          prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"), 
+#          prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
 #          prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right"))  %>%
 #   drop_na(prct_mean7d) %>%
 #   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
@@ -397,9 +397,6 @@ bag_cert <- bag_cert %>%
   rename('Genesen' = 'recovered', 'Getested' = 'tested', 'Geimpft' = 'vaccinated')
 
 update_chart(id = "15326b5086f1007b7c67825700c2d149", data = bag_cert)
-
-
-
 
 
 
@@ -518,7 +515,7 @@ vaccchart_pctpop2 <- vaccchart_pctpop %>%
   select(-bar)
 
 update_chart(id = "5e2bb3f16c0802559ccdf474af11f453", 
-             data = vaccchart_pctpop, 
+             data = vaccchart_pctpop2, 
              notes = paste0("Stand: ", ch_vacc_date))
 
 # second doses
