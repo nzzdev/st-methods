@@ -11,7 +11,12 @@ async function main() {
   let countriesInformation = [];
   let tripsInformation = [];
 
-  updateId();
+  try {
+    updateId();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 
   console.log("------------------------------$");
   
@@ -28,7 +33,7 @@ async function main() {
     updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
-    process.exit(1)
+    process.exit(1);
   } finally {
     console.log("------------------------------$");
   }
@@ -40,18 +45,23 @@ async function main() {
     tripsInformation = await fetchTripsInformation(language, originCountries, destinationCountries, destinationCountriesToExclude, travelDate);
     tripsInformation = setTripsInformations(tripsInformation);
 
-    console.log(`${tripsInformation.length}/${originCountries.length * destinationCountries.length - destinationCountriesToExclude.length - 2} tripsInformation downloaded.`)
+    console.log(`${tripsInformation.length}/${originCountries.length * (destinationCountries.length - destinationCountriesToExclude.length) - 2} tripsInformation downloaded.`)
 
     writeFile("tripsInformation", tripsInformation);
     updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
-    process.exit(1)
+    process.exit(1);
   } finally {
     console.log("------------------------------$");
   }
 
-  updateFiles();
+  try {
+    updateFiles();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }
 
 main();

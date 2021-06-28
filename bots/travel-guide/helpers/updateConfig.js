@@ -1,9 +1,10 @@
 const fs = require("fs");
+const fetch = require("node-fetch");
 
 async function getItem() {
-  const response = await fetch(`${process.env.Q_PRODUCTION_SERVER}/${process.env.Q_PRODUCTION_ID}`, {
+  const response = await fetch(`${process.env["Q_PRODUCTION_SERVER"]}item/${process.env["Q_PRODUCTION_ID"]}`, {
     headers: {
-      Authorization: `Bearer ${process.env.Q_PRODUCTION_ACCESSTOKEN}`,
+      Authorization: `Bearer ${process.env["Q_PRODUCTION_ACCESSTOKEN"]}`,
     },
   })
 
@@ -40,7 +41,7 @@ function updateId() {
   let qConfig = readJSON("q.config.json");
 
   qConfig.items[0].environments = [
-    { "name": "production", "id": `${process.env.Q_PRODUCTION_ID}` }
+    { "name": "production", "id": `${process.env["Q_PRODUCTION_ID"]}` }
   ];
 
   fs.writeFileSync("q.config.json", JSON.stringify(qConfig, null, 4));
