@@ -11,7 +11,12 @@ async function main() {
   let countriesInformation = [];
   let tripsInformation = [];
 
-  updateId();
+  try {
+    updateId();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 
   console.log("------------------------------$");
   
@@ -28,7 +33,7 @@ async function main() {
     updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
-    process.exit(1)
+    process.exit(1);
   } finally {
     console.log("------------------------------$");
   }
@@ -46,12 +51,17 @@ async function main() {
     updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
-    process.exit(1)
+    process.exit(1);
   } finally {
     console.log("------------------------------$");
   }
 
-  updateFiles();
+  try {
+    updateFiles();
+  } catch (error) {
+    console.error(error);
+    process.exit(1);
+  }
 }
 
 main();
