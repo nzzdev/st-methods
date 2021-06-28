@@ -45,7 +45,7 @@ async function main() {
     tripsInformation = await fetchTripsInformation(language, originCountries, destinationCountries, destinationCountriesToExclude, travelDate);
     tripsInformation = setTripsInformations(tripsInformation);
 
-    console.log(`${tripsInformation.length}/${originCountries.length * (destinationCountries.length + destinationCountriesToExclude.length) - 2} tripsInformation downloaded.`)
+    console.log(`${tripsInformation.length}/${originCountries.length * (destinationCountries.length - destinationCountriesToExclude.length) - 2} tripsInformation downloaded.`)
 
     writeFile("tripsInformation", tripsInformation);
     updateLastUpdatedAt();
