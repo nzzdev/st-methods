@@ -105,15 +105,12 @@ bag_cert <- read_csv(bag_data$sources$individual$csv$daily$covidCertificates) %>
   filter(type_variant != 'all') %>%
   select("geoRegion", "date", "type_variant", "sumTotal")
 
-bag_var <- read_csv(bag_data$sources$individual$csv$daily$virusVariantsWgs) %>%
+bag_var <- read.csv(bag_data$sources$individual$csv$daily$virusVariantsWgs)%>%
   filter(geoRegion == 'CHFL') %>%
   select("variant_type", "date", "prct", "prct_lower_ci", "prct_upper_ci", "prct_mean7d", "entries")
 
 
-
-
 # Total cases in CH since 2020-02-24 and recovery calculation
-
 bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
   filter(geoRegion == 'CHFL') %>%
   mutate(Infizierte = sumTotal.x -sumTotal.y) %>%
@@ -367,27 +364,26 @@ update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e",
              data = bag_cases_bez, 
              notes = bag_cases_bez_notes)
 
-# ### Variants ###
-# 
-# bag_var_delta <- bag_var %>%
-#   mutate(date = as.Date(date)) %>%
-#   filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date))  %>%
-#   drop_na(prct) %>%
-#   mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
-#          prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
-#          prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right"))  %>%
-#   drop_na(prct_mean7d) %>%
-#   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
-#   filter(date >= '2021-05-01') %>%
-#   rename(" " = "prct_lower_7", "Konfidenzintervall" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
-# 
-# bag_var_delta_notes <- paste0("Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
-#                         " Die Tageswerte sind mit einem oberen und einem unteren Wert eingegrenzt,",
-#                         " welche eine Wahrscheinlichkeit von 95 Prozent abbilden.<br> Stand der Schätzung: ",
-#                                format(max(bag_var_delta$date), , format = "%d. %m. %Y"))
-# 
-# update_chart(id = "dc697b19f4ecaf842746e444a46761b4", data = bag_var_delta, notes = bag_var_delta_notes)
-# 
+### Variants ###
+
+bag_var_delta <- bag_var %>%
+  mutate(date = as.Date(date)) %>%
+  filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date))  %>%
+  drop_na(prct) %>%
+  mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
+         prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
+         prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right"))  %>%
+  drop_na(prct_mean7d) %>%
+  select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
+  filter(date >= '2021-05-01') %>%
+  rename(" " = "prct_lower_7", "Konfidenzintervall" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
+
+bag_var_delta_notes <- paste0("Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
+                        " Die Tageswerte sind mit einem oberen und einem unteren Wert eingegrenzt,",
+                        " welche eine Wahrscheinlichkeit von 95 Prozent abbilden.<br> Stand der Schätzung: ",
+                               format(max(bag_var_delta$date), , format = "%d. %m. %Y"))
+
+update_chart(id = "dc697b19f4ecaf842746e444a46761b4", data = bag_var_delta, notes = bag_var_delta_notes)
 
 ### Certificates ###
 
