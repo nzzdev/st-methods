@@ -6,10 +6,10 @@ function writeFile(fileName, data) {
     
     console.log("Exporting as JSON file...");
 
-    fs.writeFile(`data/${fileName}.json`, JSON.stringify(data), (error) => {
+    fs.writeFile(`${fileName}.json`, JSON.stringify(data), (error) => {
       if (error) throw new Error(
         `${error}
-         data/${fileName}.json`
+         ${fileName}.json`
       );
     });
   } catch (error) {
