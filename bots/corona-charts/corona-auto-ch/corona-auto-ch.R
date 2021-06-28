@@ -363,8 +363,9 @@ bag_cases_bez_notes <- paste0("Zeitraum: ",
                               format(bag_cases_bez_dates$period_end_date, format = "%d. %m. %Y"),
                               ". Die Zahlen werden alle 2 Wochen aktualisiert.")
 
-update_chart(id = "e7ab74f261f39c7b670954aaed6de280", data = bag_hosp_cap_regions, notes = bag_hosp_cap_regions_notes)
-
+update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e", 
+             data = bag_cases_bez, 
+             notes = bag_cases_bez_notes)
 
 # ### Variants ###
 # 
