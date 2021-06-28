@@ -2,7 +2,7 @@ const {originCountries, destinationCountriesToExclude, destinationCountries} = r
 const {fetchCountriesInformation, fetchTripsInformation} = require("./helpers/fetchInformation")
 const {setCountriesInformation, setTripsInformations} = require("./helpers/setInformation")
 const {writeFile} = require("./helpers/exportJSON")
-const {updateLastUpdatedAt} = require("./helpers/updateConfig")
+const {updateFiles, updateId, updateLastUpdatedAt} = require("./helpers/updateConfig")
 
 async function main() {
   const language = "de-DE";
@@ -10,6 +10,8 @@ async function main() {
 
   let countriesInformation = [];
   let tripsInformation = [];
+
+  updateId();
 
   console.log("------------------------------$");
   
@@ -19,12 +21,15 @@ async function main() {
   try {
     countriesInformation = await fetchCountriesInformation(language, originCountries);
     countriesInformation = setCountriesInformation(countriesInformation, originCountries);
+
+    console.log(`${countriesInformation.length}/${originCountries.length} countriesInformation downloaded.`)
+
+    writeFile("countriesInformation", countriesInformation);
     updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
+    process.exit(1)
   } finally {
-    console.log(`${countriesInformation.length}/${originCountries.length} countriesInformation downloaded.`)
-    writeFile("countriesInformation", countriesInformation);
     console.log("------------------------------$");
   }
 
@@ -34,14 +39,19 @@ async function main() {
   try {
     tripsInformation = await fetchTripsInformation(language, originCountries, destinationCountries, destinationCountriesToExclude, travelDate);
     tripsInformation = setTripsInformations(tripsInformation);
+
+    console.log(`${tripsInformation.length}/${originCountries.length * destinationCountries.length - destinationCountriesToExclude.length - 2} tripsInformation downloaded.`)
+
+    writeFile("tripsInformation", tripsInformation);
     updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
+    process.exit(1)
   } finally {
-    console.log(`${tripsInformation.length}/${originCountries.length * destinationCountries.length - destinationCountriesToExclude.length - 2} tripsInformation downloaded.`)
-    writeFile("tripsInformation", tripsInformation);
     console.log("------------------------------$");
   }
+
+  updateFiles();
 }
 
 main();
