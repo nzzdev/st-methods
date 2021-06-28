@@ -1,0 +1,11 @@
+{
+  "name": "travel-guide",
+  "version": "1.0.0",
+  "dependencies": {
+    "@nzz/q-cli": "^1.x"
+  },
+  "scripts": {
+    "update-production": "node ./index.js && Q update-item -e production",
+    "update-staging": "node ./index.js && Q update-item -e staging"
+  }
+}
