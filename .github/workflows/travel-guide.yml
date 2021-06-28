@@ -22,5 +22,6 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
+          Q_PRODUCTION_ID: 3a9abac92d258dff5f305f2fd069a439
           SHERPA_API_KEY: ${{ secrets.SHERPA_API_KEY }}
           SHERPA_API_URL: requirements-api.sandbox.joinsherpa.com
