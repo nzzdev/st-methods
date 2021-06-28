@@ -101,9 +101,14 @@ bag_tests <- read_csv(bag_data$sources$individual$csv$daily$test) %>%
 bag_testPcrAntigen <- read_csv(bag_data$sources$individual$csv$daily$testPcrAntigen) %>% 
   select("geoRegion", "datum", "entries", "nachweismethode", "pos_anteil")
 
-bag_cert <- subset(read_csv(bag_data$sources$individual$csv$daily$covidCertificates), type_variant != 'all', select = c("geoRegion", "date", "type_variant", "sumTotal"))
+bag_cert <- read_csv(bag_data$sources$individual$csv$daily$covidCertificates) %>%
+  filter(type_variant != 'all') %>%
+  select("geoRegion", "date", "type_variant", "sumTotal")
 
-bag_var <- subset(read.csv(bag_data$sources$individual$csv$daily$virusVariantsWgs), select = c("variant_type", "date", "prct", "prct_lower_ci", "prct_upper_ci", "prct_mean7d", "entries"), geoRegion == 'CHFL' )
+bag_var <- read_csv(bag_data$sources$individual$csv$daily$virusVariantsWgs) %>%
+  filter(geoRegion == 'CHFL') %>%
+  select("variant_type", "date", "prct", "prct_lower_ci", "prct_upper_ci", "prct_mean7d", "entries")
+
 
 
 
@@ -272,7 +277,9 @@ bag_hosp_cap_ch <- subset(bag_hosp_cap, geoRegion == 'CH', select = c('datum', '
 update_chart(id = "bd30a27068812f7ec2474f10e427300c", data = bag_hosp_cap_ch)
 
 
-bag_hosp_cap_cantons <- subset(bag_hosp_cap, datum == max(datum) & geoRegion != 'CHFL' & geoRegion != 'CH' & geoRegion != 'FL', select = c('geoRegion', 'Auslastung', 'Kapazität', 'Patienten mit Covid-19', 'Andere Patienten', 'Freie Betten'))
+bag_hosp_cap_cantons <- bag_hosp_cap %>%
+  filter(datum == max(datum), geoRegion != 'CHFL' & geoRegion != 'CH' & geoRegion != 'FL') %>%
+  select('geoRegion', 'Auslastung', 'Kapazität', 'Patienten mit Covid-19', 'Andere Patienten', 'Freie Betten')
 
 bag_hosp_cap_cantons$region <- ""
 bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'GE' | 
@@ -374,7 +381,8 @@ bag_var_delta <- bag_var %>%
   rename(" " = "prct_lower_7", "Konfidenzintervall" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
 
 bag_var_delta_notes <- paste0("Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
-                        " Die Tageswerte sind mit einem oberen und einem unteren Wert eingegrenzt, welche eine Wahrscheinlichkeit von 95 Prozent abbilden.<br> Stand der Schätzung: ",
+                        " Die Tageswerte sind mit einem oberen und einem unteren Wert eingegrenzt,",
+                        " welche eine Wahrscheinlichkeit von 95 Prozent abbilden.<br> Stand der Schätzung: ",
                                format(max(bag_var_delta$datum), , format = "%d. %m. %Y"))
 
 update_chart(id = "dc697b19f4ecaf842746e444a46761b4", data = bag_var_delta, notes = bag_var_delta_notes)
