@@ -1,4 +1,5 @@
 const fs = require("fs");
+const fetch = require("node-fetch");
 
 async function getItem() {
   const response = await fetch(`${process.env.Q_PRODUCTION_SERVER}/${process.env.Q_PRODUCTION_ID}`, {
