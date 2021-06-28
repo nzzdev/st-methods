@@ -1,0 +1,40 @@
+{
+    "items": [
+        {
+            "environments": [
+                {
+                    "name": "staging",
+                    "id": "e9046b127bd99afc9cd208b94d45e544"
+                },
+                {
+                    "name": "production",
+                    "id": "3a9abac92d258dff5f305f2fd069a439"
+                }
+            ],
+            "item": {
+                "data": [
+                    [
+                        "lastUpdatedAt"
+                    ],
+                    [
+                        "2021-06-28T09:56:47.220Z"
+                    ]
+                ],
+                "files": [
+                    {
+                        "loadSyncBeforeInit": false,
+                        "file": {
+                            "path": "./data/countriesInformation.json"
+                        }
+                    },
+                    {
+                        "loadSyncBeforeInit": false,
+                        "file": {
+                            "path": "./data/tripsInformation.json"
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+}
