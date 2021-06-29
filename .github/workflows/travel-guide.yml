@@ -2,9 +2,9 @@ name: Update Travel Guide
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run every hour from 5 through 21 CEST
+  # This will run every hour
   schedule:
-    - cron: "0 3-19 * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -28,4 +28,4 @@ jobs:
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
           Q_PRODUCTION_ID: 3a9abac92d258dff5f305f2fd069a439
           SHERPA_API_KEY: ${{ secrets.SHERPA_API_KEY }}
-          SHERPA_API_URL: requirements-api.sandbox.joinsherpa.com
+          SHERPA_API_URL: requirements-api.joinsherpa.com
