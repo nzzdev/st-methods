@@ -368,14 +368,13 @@ update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e",
 
 bag_var_delta <- bag_var %>%
   mutate(date = as.Date(date)) %>%
-  filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date))  %>%
+  filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date)) %>%
   drop_na(prct) %>%
   mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
          prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
-         prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right"))  %>%
-  drop_na(prct_mean7d) %>%
+         prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right")) %>%
   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
-  filter(date >= '2021-05-01') %>%
+  filter(date >= '2021-04-01') %>%
   rename(" " = "prct_lower_7", "Konfidenzintervall" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
 
 bag_var_delta_notes <- paste0("Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
