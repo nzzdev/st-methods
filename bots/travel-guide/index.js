@@ -46,7 +46,7 @@ async function main() {
   if (process.exitCode === 1) return;
   try {
     tripsInformation = await fetchTripsInformation(language, originCountries, destinationCountries, destinationCountriesToExclude, travelDate);
-    // tripsInformation = setTripsInformations(tripsInformation);
+    tripsInformation = setTripsInformations(tripsInformation);
 
     console.log(`${tripsInformation.length}/${originCountries.length * (destinationCountries.length - destinationCountriesToExclude.length) - 2} tripsInformation downloaded.`)
 
