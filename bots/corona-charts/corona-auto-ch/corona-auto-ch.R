@@ -389,7 +389,7 @@ update_chart(id = "dc697b19f4ecaf842746e444a46761b4", data = bag_var_delta, note
 bag_cert <- bag_cert %>% 
   select(-geoRegion) %>%
   spread(type_variant, sumTotal) %>%
-  rename('Genesen' = 'recovered', 'Getested' = 'tested', 'Geimpft' = 'vaccinated')
+  rename('Genesen' = 'recovered', 'Getestet' = 'tested', 'Geimpft' = 'vaccinated')
 
 update_chart(id = "15326b5086f1007b7c67825700c2d149", data = bag_cert)
 
@@ -522,7 +522,7 @@ vacc_ch_2nd <- ch_vacc %>%
          second_pct = ncumul_fully_vacc*100/pop) %>%
   select(kt, second_pct, first_pct) %>%
   arrange(desc(second_pct)) %>%
-  rename("Vollständig geimpft" = second_pct, "Nur erste Dosis erhalten" = first_pct)
+  rename("Vollständig geimpft" = second_pct, "Teilweise geimpft" = first_pct)
 
 update_chart(id = "54381c24b03b4bb9d1017bb91511e21d", 
              data = vacc_ch_2nd, 
