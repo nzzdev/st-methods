@@ -11,11 +11,12 @@ async function main() {
   let countriesInformation = [];
   let tripsInformation = [];
 
+  if (process.exitCode === 1) return;
   try {
     updateId();
   } catch (error) {
     console.error(error);
-    process.exit(1);
+    process.exitCode = 1;
   }
 
   console.log("------------------------------$");
@@ -23,6 +24,7 @@ async function main() {
   //------------------------------$
   // 01 Countries Information
   //------------------------------$
+  if (process.exitCode === 1) return;
   try {
     countriesInformation = await fetchCountriesInformation(language, originCountries);
     countriesInformation = setCountriesInformation(countriesInformation, originCountries);
@@ -33,7 +35,7 @@ async function main() {
     updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
-    process.exit(1);
+    process.exitCode = 1;
   } finally {
     console.log("------------------------------$");
   }
@@ -41,9 +43,10 @@ async function main() {
   //------------------------------$
   // 02 Trips Information
   //------------------------------$
+  if (process.exitCode === 1) return;
   try {
     tripsInformation = await fetchTripsInformation(language, originCountries, destinationCountries, destinationCountriesToExclude, travelDate);
-    tripsInformation = setTripsInformations(tripsInformation);
+    // tripsInformation = setTripsInformations(tripsInformation);
 
     console.log(`${tripsInformation.length}/${originCountries.length * (destinationCountries.length - destinationCountriesToExclude.length) - 2} tripsInformation downloaded.`)
 
@@ -51,16 +54,17 @@ async function main() {
     updateLastUpdatedAt();
   } catch (error) {
     console.error(error);
-    process.exit(1);
+    process.exitCode = 1;
   } finally {
     console.log("------------------------------$");
   }
 
+  if (process.exitCode === 1) return;
   try {
     updateFiles();
   } catch (error) {
     console.error(error);
-    process.exit(1);
+    process.exitCode = 1;
   }
 }
 
