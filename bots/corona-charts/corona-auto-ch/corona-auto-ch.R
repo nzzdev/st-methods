@@ -531,13 +531,16 @@ update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
 ### Schweiz geimpft nach Altersgruppen
 
 vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersons) %>%
-  filter(geoRegion == 'CHFL', type == "COVID19FullyVaccPersons") %>%
+  filter(geoRegion == 'CHFL', type %in% c("COVID19FullyVaccPersons", "COVID19PartiallyVaccPersons")) %>%
   filter(date ==last(date)) %>%
-  select(altersklasse_covid19, per100PersonsTotal) %>%
-  rename('Altersklasse' = altersklasse_covid19, "Vollständig geimpfte Personen" = per100PersonsTotal) %>%
-  filter(`Vollständig geimpfte Personen` > 1) %>%
-  mutate(`Vollständig geimpfte Personen` = round(`Vollständig geimpfte Personen`, 1)) %>%
-  arrange(desc(`Vollständig geimpfte Personen`))
+  select(altersklasse_covid19, per100PersonsTotal,type) %>%
+  spread(type,per100PersonsTotal) %>%
+  rename('Altersklasse' = altersklasse_covid19, 
+         "Vollständig geimpft" = COVID19FullyVaccPersons,
+         "Teilweise geimpft" = COVID19PartiallyVaccPersons) %>%
+  mutate(`Vollständig geimpft` = round(`Vollständig geimpft`, 1),
+         `Teilweise geimpft` = round(`Teilweise geimpft`, 1)) %>%
+  arrange(desc(`Altersklasse`))
 
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
