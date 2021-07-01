@@ -47,7 +47,7 @@ if __name__ == '__main__':
         df2['impf_quote_voll'] = (df2['impf_quote_voll'] * 100).round(1)
 
         # create new column "Ziel" and calculate gap between status quo and herd immunity
-        df2['Ziel'] = (70 - (df2['impf_quote_voll'] +
+        df2['Ziel'] = (80 - (df2['impf_quote_voll'] +
                              df2['impf_quote_erst'])).round(1)
 
         # rearrange columns
@@ -59,12 +59,14 @@ if __name__ == '__main__':
 
         # show percentage total (copy to chart title later)
         title_percent = df2.iat[0, 0]+df2.iat[0, 1]
-        title_chart = 'Bisher haben ' + \
-            str(title_percent.round(1)).replace('.', ',') + \
-            ' Prozent mindestens eine Impfdose erhalten'
+        title_percent_full = df2.iat[0, 0]
+        title_chart = str(title_percent.round(1)).replace('.', ',') + \
+            ' Prozent haben mindestens eine Impfdose erhalten, ' + \
+            str(title_percent_full.round(1)).replace('.', ',') + \
+            ' Prozent sind vollständig immun'
 
         # show date in chart notes
-        notes_chart = 'Impfquote von 70 Prozent in Grau. Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten. <br>Stand: ' + \
+        notes_chart = 'Impfquote von 80 Prozent in Grau. Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten. <br>Stand: ' + \
             timestamp_str
 
         # run function
