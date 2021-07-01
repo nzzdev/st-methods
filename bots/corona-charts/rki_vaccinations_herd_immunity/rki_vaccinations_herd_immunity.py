@@ -61,9 +61,9 @@ if __name__ == '__main__':
         title_percent = df2.iat[0, 0]+df2.iat[0, 1]
         title_percent_full = df2.iat[0, 0]
         title_chart = str(title_percent.round(1)).replace('.', ',') + \
-            ' Prozent haben mindestens eine Impfdose erhalten, ' + \
+            ' Prozent sind geimpft, ' + \
             str(title_percent_full.round(1)).replace('.', ',') + \
-            ' Prozent sind vollständig immun'
+            ' Prozent vollständig immun'
 
         # show date in chart notes
         notes_chart = 'Impfquote von 80 Prozent in Grau. Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten. <br>Stand: ' + \
