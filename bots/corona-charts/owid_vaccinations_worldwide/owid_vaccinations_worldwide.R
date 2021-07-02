@@ -8,7 +8,6 @@ library(tidyverse)
 # import helper functions
 source("./helpers.R")
 
-setwd("~/Documents/GitHub/st-methods/bots/corona-charts/")
 # read-in
 owid_raw <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
 pop <- read_csv("./owid_vaccinations_worldwide/countries_pop.csv") %>%
