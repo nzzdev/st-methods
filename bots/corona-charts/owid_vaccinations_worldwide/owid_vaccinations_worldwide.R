@@ -74,15 +74,16 @@ for (i in 1:length(solid_ctry)) {
   proj_raw <- tibble(dates_proj, vacc_proj_mean)
   proj_raw_lag <- tibble(dates_proj_lag, vacc_proj_mean_lag)
 
-  herd_immunity_140 <- first(owid_pop$`2018`[owid_pop$location == solid_ctry[i]] * 1.4)
-  herd_immunity_70pct <- herd_immunity_140 / 2
+  herd_immunity_dosis <- first(owid_pop$`2018`[owid_pop$location == solid_ctry[i]] * 1.6)
+  herd_immunity_pct <- herd_immunity_dosis / 2
+  herd_immunity_goal <- 80
 
-  herd_immunity_date <- first(proj_raw$dates_proj[vacc_proj_mean > herd_immunity_140])
-  herd_immunity_previous_date <- first(proj_raw_lag$dates_proj_lag[vacc_proj_mean_lag > herd_immunity_140])
+  herd_immunity_date <- first(proj_raw$dates_proj[vacc_proj_mean > herd_immunity_dosis])
+  herd_immunity_previous_date <- first(proj_raw_lag$dates_proj_lag[vacc_proj_mean_lag > herd_immunity_dosis])
 
   location <- solid_ctry[i]
 
-  vacc_proj_temp <- tibble(location, herd_immunity_140, herd_immunity_70pct, herd_immunity_date, herd_immunity_previous_date)
+  vacc_proj_temp <- tibble(location, herd_immunity_dosis, herd_immunity_pct, herd_immunity_date, herd_immunity_previous_date, herd_immunity_goal)
   vacc_proj_date <- rbind(vacc_proj_date, vacc_proj_temp)
 }
 
@@ -111,5 +112,5 @@ vacc_final$iso_code[vacc_final$location == "EU"] <- "EU"
 vacc_final$people_fully_vaccinated[vacc_final$location == "Welt"] <- NA
 vacc_final$people_fully_vaccinated[vacc_final$location == "EU"] <- NA
 
-notes_string <- paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
+notes_string <- paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
 update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = notes_string)
