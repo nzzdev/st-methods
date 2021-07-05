@@ -93,8 +93,12 @@ if __name__ == '__main__':
             timestamp_str
 
         # insert id manually and run function
-        update_chart(id='245e5a30acb9ffa8e53b336e6b83c7bc',
-                     data=df, notes=notes_chart)
+        if df > 0:
+            try:
+                updateChart(id='245e5a30acb9ffa8e53b336e6b83c7bc',
+                            data=df, notes=notes_chart)
 
+            except:
+                raise
     except:
-        raise
+        pass
