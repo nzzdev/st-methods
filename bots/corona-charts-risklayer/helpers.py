@@ -6,26 +6,54 @@ from urllib.request import urlopen
 from time import sleep
 
 
-def download_data(url):  # function for data download
+def download_sheet(sh, name):  # function for sheet download
     try:
-        return urlopen(url)
-    except HTTPError as e:
-        if e.code == 429:  # too many requests
+        wsh = sh.worksheet(name)
+        return wsh
+    except gspread.exceptions.APIError as e:
+        if e.response.status_code == 429:
             sleep(5)
             try:
-                return urlopen(url)
-            except HTTPError as e:
-                print('Script failed twice (IP blacklisted?):', e.reason)
-        elif e.code == 500:  # internal server error
+                wsh = sh.worksheet(name)
+                return wsh
+            except gspread.exceptions.APIError as e:
+                print('Script failed twice (blacklisted?):', e)
+        elif e.response.status_code > 499:
             sleep(20)
             try:
-                return urlopen(url)
-            except HTTPError as e:
-                print('Script failed twice (check source):', e.reason)
+                wsh = sh.worksheet(name)
+                return wsh
+            except gspread.exceptions.APIError as e:
+                print('Script failed twice (check source):', e)
         else:
-            print('Other HTTP error:', e.reason)
-    except URLError as e:
-        print('Other URL error:', e.reason)
+            print('Other HTTP error:', e)
+    except gspread.exceptions.APIError as e:
+        print('Other URL error:', e)
+
+
+def get_sheet(wsh, name):  # function for sheet data download
+    try:
+        cells = wsh.get(name)
+        return cells
+    except gspread.exceptions.APIError as e:
+        if e.response.status_code == 429:
+            sleep(5)
+            try:
+                cells = wsh.get(name)
+                return cells
+            except gspread.exceptions.APIError as e:
+                print('Script failed twice (blacklisted?):', e)
+        elif e.response.status_code > 499:
+            sleep(20)
+            try:
+                cells = wsh.get(name)
+                return cells
+            except gspread.exceptions.APIError as e:
+                print('Script failed twice (check source):', e)
+        else:
+            print('Other HTTP error:', e)
+    except gspread.exceptions.APIError as e:
+        print('Other URL error:', e)
 
 
 def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q helper function
