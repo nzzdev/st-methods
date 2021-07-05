@@ -1,6 +1,5 @@
 import pandas as pd
 import json
-import gspread
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 from time import sleep
