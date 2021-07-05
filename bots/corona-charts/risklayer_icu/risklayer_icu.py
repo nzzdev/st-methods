@@ -15,6 +15,11 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
+        # read backup data and update
+        dfbackup = pd.read_csv('./data/risklayer_icu.csv', delimiter='\t',
+                               encoding='utf-8', index_col=0)
+        updateChart(id='245e5a30acb9ffa8e53b336e6b83c7bc', data=dfbackup)
+
         # create dict with Google API keys instead of using JSON file
         google_secrets = {
             'type': 'service_account',
@@ -92,13 +97,16 @@ if __name__ == '__main__':
         notes_chart = 'Rund die Hälfte der im Jahr 2020 mechanisch beatmeten Covid-19-Intensivpatienten ist gestorben. Bei nicht mechanisch beatmeten lag die Mortalitätsrate zwischen 10 und 38 Prozent.<br>Stand: ' + \
             timestamp_str
 
-        # insert id manually and run function
-        if df > 0:
-            try:
-                updateChart(id='245e5a30acb9ffa8e53b336e6b83c7bc',
-                            data=df, notes=notes_chart)
+        # backup df
+        df.to_csv('./data/risklayer_icu.csv',
+                  index=True, encoding='utf-8')
 
-            except:
-                raise
+        # insert id and subtitle manually and run function
+        if df.empty:
+            pass
+        else:
+            updateChart(id='245e5a30acb9ffa8e53b336e6b83c7bc',
+                        data=df, notes=notes_chart)
+
     except:
         pass

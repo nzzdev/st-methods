@@ -15,6 +15,11 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
+        # read backup data and update
+        dfbackup = pd.read_csv('./data/risklayer_incidence.csv', delimiter='\t',
+                               encoding='utf-8', index_col=0)
+        updateChart(id='beb6de8405dcbea50a354dc453822c18', data=dfbackup)
+
         # create dict with Google API keys instead of using JSON file
         google_secrets = {
             'type': 'service_account',
@@ -89,13 +94,15 @@ if __name__ == '__main__':
         notes_chart = 'Risklayer bezieht seine Zahlen direkt aus den Veröffentlichungen der Gesundheitsämter der Kreise und Städte. Wegen des veralteten Meldesystems sind diese Daten aktueller als jene vom RKI.<br>Stand: ' + \
             timestamp_str
 
-        # insert id manually and run function
-        if df > 0:
-            try:
-                updateChart(id='beb6de8405dcbea50a354dc453822c18',
-                            data=df, notes=notes_chart)
+        # backup df
+        df.to_csv('./data/risklayer_incidence.csv',
+                  index=True, encoding='utf-8')
 
-            except:
-                raise
+        # insert id and subtitle manually and run function
+        if df.empty:
+            pass
+        else:
+            updateChart(id='beb6de8405dcbea50a354dc453822c18',
+                        data=df, notes=notes_chart)
     except:
         pass
