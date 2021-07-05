@@ -18,7 +18,7 @@ if __name__ == '__main__':
         # read backup data and update
         dfbackup = pd.read_csv('./data/risklayer_incidence.csv', delimiter='\t',
                                encoding='utf-8', index_col=0)
-        updateChart(id='beb6de8405dcbea50a354dc453822c18', data=dfbackup)
+        update_chart(id='beb6de8405dcbea50a354dc453822c18', data=dfbackup)
 
         # create dict with Google API keys instead of using JSON file
         google_secrets = {
@@ -102,7 +102,7 @@ if __name__ == '__main__':
         if df.empty:
             pass
         else:
-            updateChart(id='beb6de8405dcbea50a354dc453822c18',
-                        data=df, notes=notes_chart)
+            update_chart(id='beb6de8405dcbea50a354dc453822c18',
+                         data=df, notes=notes_chart)
     except:
         pass
