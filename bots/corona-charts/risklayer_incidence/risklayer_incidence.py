@@ -35,13 +35,15 @@ if __name__ == '__main__':
         # key from risklayer spreadsheet
         sh = gc.open_by_key('1wg-s4_Lz2Stil6spQEYFdZaBEp8nWW26gVyfHqvcl8s')
 
-        # open spreadsheet and select worksheet
+        # open spreadsheet and select worksheet with function in helpers.py
         wsh = download_sheet(sh, 'Curve')
 
         # B:B date column
-        dt = wsh.get('B:B')
+        cells = get_sheet(wsh, 'B:B')
+        dt = cells
         # F:F new cases 7 day mvg avg, O:O 7-day incidence, T:T new deaths 7 day mvg avg, Y:Y ICU patients
-        cases = wsh.get('O:O')
+        cells = get_sheet(wsh, 'O:O')
+        cases = cells
 
         df1 = pd.DataFrame(data=dt)
         df2 = pd.DataFrame(data=cases)
@@ -90,7 +92,7 @@ if __name__ == '__main__':
         # insert id manually and run function
         update_chart(id='beb6de8405dcbea50a354dc453822c18',
                      data=df, notes=notes_chart)
-        sleep(5)
+        sleep(2)
 
     except:
         raise

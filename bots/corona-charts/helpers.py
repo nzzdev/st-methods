@@ -53,6 +53,31 @@ def download_sheet(sh, name):  # function for sheet download
         print('Other URL error:', e)
 
 
+def get_sheet(wsh, name):  # function for sheet data download
+    try:
+        cells = wsh.get(name)
+        return cells
+    except gspread.exceptions.APIError as e:
+        if e.response.status_code == 429:
+            sleep(5)
+            try:
+                cells = wsh.get(name)
+                return cells
+            except gspread.exceptions.APIError as e:
+                print('Script failed twice (blacklisted?):', e)
+        elif e.response.status_code > 499:
+            sleep(20)
+            try:
+                cells = wsh.get(name)
+                return cells
+            except gspread.exceptions.APIError as e:
+                print('Script failed twice (check source):', e)
+        else:
+            print('Other HTTP error:', e)
+    except gspread.exceptions.APIError as e:
+        print('Other URL error:', e)
+
+
 def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q helper function
     # read qConfig file
     json_file = open('../q.config.json')
