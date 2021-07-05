@@ -15,11 +15,6 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
-        # read backup data and update
-        dfbackup = pd.read_csv('./data/risklayer_new_deaths.csv', delimiter='\t',
-                               encoding='utf-8', index_col=0)
-        update_chart(id='d6e523e17e1d929e6277292aea28b903', data=dfbackup)
-
         # create dict with Google API keys instead of using JSON file
         google_secrets = {
             'type': 'service_account',
@@ -94,16 +89,9 @@ if __name__ == '__main__':
         notes_chart = 'Bei einem tödlichen Verlauf liegen zwischen Beginn der Symptome und Tod im Mittel 18 Tage.<br>Stand: ' + \
             timestamp_str
 
-        # backup df
-        df.to_csv('./data/risklayer_new_deaths.csv',
-                  index=True, encoding='utf-8')
-
         # insert id and subtitle manually and run function
-        if df.empty:
-            pass
-        else:
-            update_chart(id='d6e523e17e1d929e6277292aea28b903',
-                         data=df, notes=notes_chart)
+        update_chart(id='d6e523e17e1d929e6277292aea28b903',
+                     data=df, notes=notes_chart)
 
     except:
         pass
