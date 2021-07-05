@@ -31,6 +31,7 @@ def download_data(url):  # function for data download
 def download_sheet(sh, name):  # function for sheet download
     try:
         wsh = sh.worksheet(name)
+        sleep(1)
         return wsh
     except gspread.exceptions.APIError as e:
         if e.response.status_code == 429:
@@ -56,6 +57,7 @@ def download_sheet(sh, name):  # function for sheet download
 def get_sheet(wsh, name):  # function for sheet data download
     try:
         cells = wsh.get(name)
+        sleep(1)
         return cells
     except gspread.exceptions.APIError as e:
         if e.response.status_code == 429:

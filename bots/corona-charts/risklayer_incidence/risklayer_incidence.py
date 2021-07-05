@@ -92,7 +92,6 @@ if __name__ == '__main__':
         # insert id manually and run function
         update_chart(id='beb6de8405dcbea50a354dc453822c18',
                      data=df, notes=notes_chart)
-        sleep(2)
 
     except:
         raise
