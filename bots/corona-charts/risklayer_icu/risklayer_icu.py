@@ -43,7 +43,7 @@ if __name__ == '__main__':
         dt = cells
         # D:D all patients
         cells = get_sheet(wsh, 'D:D')
-        cases = cells
+        patients = cells
 
         df1 = pd.DataFrame(data=dt)
         df2 = pd.DataFrame(data=patients)
