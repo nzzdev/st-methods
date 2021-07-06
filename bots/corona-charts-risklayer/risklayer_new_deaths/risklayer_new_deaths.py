@@ -1,8 +1,8 @@
-import os
-import pandas as pd
-import gspread
-from datetime import datetime, timedelta
 from time import sleep
+from datetime import datetime, timedelta
+import gspread
+import pandas as pd
+import os
 import sys
 
 
@@ -94,4 +94,4 @@ if __name__ == '__main__':
                      data=df, notes=notes_chart)
 
     except:
-        pass
+        raise

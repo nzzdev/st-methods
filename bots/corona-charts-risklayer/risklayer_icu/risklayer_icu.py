@@ -97,4 +97,4 @@ if __name__ == '__main__':
                      data=df, notes=notes_chart)
 
     except:
-        pass
+        raise
