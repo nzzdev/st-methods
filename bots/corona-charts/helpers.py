@@ -1,6 +1,5 @@
 import pandas as pd
 import json
-import gspread
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 from time import sleep
@@ -26,31 +25,6 @@ def download_data(url):  # function for data download
             print('Other HTTP error:', e.reason)
     except URLError as e:
         print('Other URL error:', e.reason)
-
-
-def download_sheet(sh, name):  # function for sheet download
-    try:
-        wsh = sh.worksheet(name)
-        return wsh
-    except gspread.exceptions.APIError as e:
-        if e.response.status_code == 429:
-            sleep(5)
-            try:
-                wsh = sh.worksheet(name)
-                return wsh
-            except gspread.exceptions.APIError as e:
-                print('Script failed twice (blacklisted?):', e)
-        elif e.response.status_code > 499:
-            sleep(20)
-            try:
-                wsh = sh.worksheet(name)
-                return wsh
-            except gspread.exceptions.APIError as e:
-                print('Script failed twice (check source):', e)
-        else:
-            print('Other HTTP error:', e)
-    except gspread.exceptions.APIError as e:
-        print('Other URL error:', e)
 
 
 def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q helper function

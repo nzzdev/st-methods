@@ -37,6 +37,7 @@ jobs:
       - name: Run R scripts
         run: |
           Rscript owid_vaccinations_worldwide/owid_vaccinations_worldwide.R
+          Rscript corona-auto-ch/corona-auto-ch.R
       - name: Setup python
         uses: actions/setup-python@v2
         with:
@@ -60,15 +61,8 @@ jobs:
         run: |
           python rki_vaccinations_daily/rki_vaccinations_daily.py
           python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity.py
-          python rki_vaccinations_nursing_home/rki_vaccinations_nursing_home.py
           python rki_vaccinations_states/rki_vaccinations_states.py
           python rki_notbremse/rki_notbremse.py
-          python risklayer_icu/risklayer_icu.py
-          python risklayer_incidence/risklayer_incidence.py
-          python risklayer_new_deaths/risklayer_new_deaths.py
-        env:
-          GSPREAD_PRIVATE_KEY_ID: ${{ secrets.GSPREAD_PRIVATE_KEY_ID }}
-          GSPREAD_PRIVATE_KEY: ${{ secrets.GSPREAD_PRIVATE_KEY }}
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -79,5 +73,4 @@ jobs:
         run: Q update-item
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
-          Q_PRODUCTION_USERNAME: ${{ secrets.Q_PRODUCTION_USERNAME }}
-          Q_PRODUCTION_PASSWORD: ${{ secrets.Q_PRODUCTION_PASSWORD }}
+          Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}

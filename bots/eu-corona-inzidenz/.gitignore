@@ -1,6 +1,6 @@
 node_modules/
-package-lock.json
 pngs/
 svgs/
 .DS_Store
 .vscode
+out.vg.json

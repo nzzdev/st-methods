@@ -106,7 +106,9 @@ if __name__ == '__main__':
         dftable['Trend_arrow'] = ''
         dftable['Trend_arrow'][(dftable['Trend'] < -5)] = ' ↓'
         dftable['Trend_arrow'][(dftable['Trend'] > 5)] = ' ↑'
-        dftable['Inzidenz_tmp'] = dftable['Inzidenz_tmp'].round(0).astype(int)
+        dftable['Inzidenz_tmp'] = dftable['Inzidenz_tmp'].round(
+            0).astype(int).clip(lower=0)  # trim negative numbers
+
         dftable['Inzidenz'] = dftable['Inzidenz_tmp'].astype(
             str) + dftable['Trend_arrow']
 

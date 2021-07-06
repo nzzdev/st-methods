@@ -19,9 +19,8 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: "14"
-      - run: npm install
+      - run: npm ci
       - run: npm run update
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
-          Q_PRODUCTION_USERNAME: ${{ secrets.Q_PRODUCTION_USERNAME }}
-          Q_PRODUCTION_PASSWORD: ${{ secrets.Q_PRODUCTION_PASSWORD }}
+          Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
