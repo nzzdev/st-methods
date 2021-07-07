@@ -380,9 +380,7 @@ bag_var_delta <- bag_var %>%
 bag_var_delta_notes <- paste0("Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
                         " Die Tageswerte sind mit einem oberen und einem unteren Wert eingegrenzt,",
                         " welche eine Wahrscheinlichkeit von 95 Prozent abbilden.", 
-                        "Prognose = weniger als 20 Sequenzierungen pro Tag.",
-                        "<br> Stand der Schätzung: ",
-                               format(max(bag_var_delta$date), , format = "%d. %m. %Y"))
+                        " Prognose = weniger als 20 Sequenzierungen pro Tag.")
 
 update_chart(id = "dc697b19f4ecaf842746e444a46761b4", data = bag_var_delta, notes = bag_var_delta_notes)
 
