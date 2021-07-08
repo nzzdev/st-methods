@@ -27,7 +27,7 @@ if __name__ == '__main__':
         # read vaccination and population data
         df = pd.read_csv('./data/germany_vaccinations_by_state.tsv',
                          delimiter='\t', encoding='utf-8')
-        dfpop = pd.read_csv('./pop_states_20193112.csv')
+        dfpop = pd.read_csv('./pop_states_20203112.csv')
         dfde = pd.read_csv('./data/germany_vaccinations_timeseries_v2.tsv',
                            delimiter='\t', encoding='utf-8', usecols=['date', 'impf_quote_erst', 'impf_quote_voll'])
 
