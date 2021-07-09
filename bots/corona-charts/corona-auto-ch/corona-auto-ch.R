@@ -559,11 +559,12 @@ ch_vacc_vdr <- ch_vacc %>%
   add_row(date = as.Date("2021-01-14"), ncumul_vacc_doses = 66000, .after = 1) %>%
   add_row(date = as.Date("2021-01-19"), ncumul_vacc_doses = 110000, .after = 2) %>%
   rename(Verimpft = ncumul_vacc_doses) %>%
-  mutate("An Kantone verteilt" = ncumul_delivered_doses-Verimpft,
-         "in die Schweiz geliefert" = ncumul_rec_doses-ncumul_delivered_doses) %>%
+  mutate("An Kantone verteilt" = case_when(ncumul_delivered_doses-Verimpft >= 0 ~ ncumul_delivered_doses-Verimpft,
+                                           ncumul_delivered_doses-Verimpft < 0 ~ 0),
+         "in die Schweiz geliefert" = case_when(ncumul_rec_doses-(Verimpft+`An Kantone verteilt`) >= 0 ~ ncumul_rec_doses-(Verimpft+`An Kantone verteilt`),
+                                                ncumul_rec_doses-(Verimpft+`An Kantone verteilt`) < 0 ~ 0)) %>%
   select(-c(3:4))
 
-ch_vacc_vdr$`An Kantone verteilt`[ch_vacc_vdr$`An Kantone verteilt`< 0] <- 0
 tail(ch_vacc_vdr,1)
 
 update_chart(id = "ce1529d1facf24bb5bef83a3df033bfc", 
