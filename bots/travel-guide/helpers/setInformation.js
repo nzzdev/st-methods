@@ -194,7 +194,7 @@ function filterItemsByTypeAndCategory(items, type, category) {
     return [];
   }
 }
-
+// Function also used here: https://github.com/nzzdev/Q-custom-code-projects/blob/e1157859121356eaaae17985a67090605360bfaa/2112-travel-guide/src/helpers/helpers.js#L141
 function getCategoryStatus(procedures, vaccinated) {
   if (procedures.length === 0) return null; // undefined not allowed in json
 
@@ -216,7 +216,7 @@ function getCategoryStatus(procedures, vaccinated) {
 
   return null;
 }
-
+// Function also used here: https://github.com/nzzdev/Q-custom-code-projects/blob/e1157859121356eaaae17985a67090605360bfaa/2112-travel-guide/src/helpers/helpers.js#L163
 function hasProcedures(procedures, enforcement, vaccinated) {
   let proceduresByEnforcement = procedures.filter(travelRestriction => travelRestriction.enforcement === enforcement);
   
