@@ -58,7 +58,8 @@ df = df[['Zeitstempel', 'Messwert, Gefahrenstufe:', '2', '3', '4', '5']]
 
 update_chart(
     id = chartid,
-    data = df
+    data = df,
+    notes = "Done!"
 )
 
 print("Done")
