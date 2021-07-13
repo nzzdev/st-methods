@@ -55,7 +55,7 @@ def download_sheet(sh, name):  # function for sheet download
 
 def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q helper function
     # read qConfig file
-    json_file = open('./q.config.json')
+    json_file = open('../q.config.json')
     qConfig = json.load(json_file)
 
     # update chart properties
@@ -80,6 +80,6 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
     # write qConfig file
-    with open('./q.config.json', 'w', encoding='utf-8') as json_file:
+    with open('../q.config.json', 'w', encoding='utf-8') as json_file:
         json.dump(qConfig, json_file, ensure_ascii=False, indent=1)
     json_file.close()
