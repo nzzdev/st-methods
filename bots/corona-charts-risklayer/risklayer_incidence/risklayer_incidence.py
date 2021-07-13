@@ -35,65 +35,62 @@ if __name__ == '__main__':
         # key from risklayer spreadsheet
         sh = gc.open_by_key('1wg-s4_Lz2Stil6spQEYFdZaBEp8nWW26gVyfHqvcl8s')
 
-        # open spreadsheet and select worksheet
-        wsh = download_sheet(sh, 'DIVI')
+        # open spreadsheet and select worksheet with function in helpers.py
+        wsh = download_sheet(sh, 'Curve')
 
         # B:B date column
-        dt = wsh.get('B:B')
-        # D:D all patients
-        patients = wsh.get('D:D')
+        cells = get_sheet(wsh, 'B:B')
+        dt = cells
+        # F:F new cases 7 day mvg avg, O:O 7-day incidence, T:T new deaths 7 day mvg avg, Y:Y ICU patients
+        cells = get_sheet(wsh, 'O:O')
+        cases = cells
 
         df1 = pd.DataFrame(data=dt)
-        df2 = pd.DataFrame(data=patients)
+        df2 = pd.DataFrame(data=cases)
         df = pd.concat([df1, df2], axis=1)
 
-        # drop empty rows + column header (i.e. start at 10.04.2020) and reindex with drop=true
-        df = df.drop([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
-                     ).reset_index(drop=True)
+        # drop first (empty) row + column header and reindex with drop=true
+        df = df.drop([0, 1]).reset_index(drop=True)
 
         # create column header names
         cols = list(df.columns)
         cols[0] = ''
-        cols[1] = 'Patienten'
+        cols[1] = '7-Tage-Inzidenz'
         df.columns = cols
 
         # add year to values in date column
-        df.loc[:265, ''] = df.loc[:265, ''].apply(lambda x: x + '.2020')
-        df.loc[266:, ''] = df.loc[266:, ''].apply(lambda x: x + '.2021')
-        # clean some messy dates
-        df[''] = df[''].str.replace('2020.2020', '2020', regex=False)
+        df.loc[:302, ''] = df.loc[:302, ''].apply(lambda x: x + '2020')
+        df.loc[303:, ''] = df.loc[303:, ''].apply(lambda x: x + '2021')
 
-        # clean numeric values and remove rows with empty values
-        df['Patienten'] = df['Patienten'].str.replace(
-            '.0', '', regex=False).str.replace(',', '', regex=False)
-        df.dropna(subset=['Patienten'], inplace=True)
+        # change thousands and decimal separator and remove rows with empty values
+        df['7-Tage-Inzidenz'] = df['7-Tage-Inzidenz'].str.replace(
+            '.', '', regex=False).str.replace(',', '.', regex=False)
+        df.dropna(subset=['7-Tage-Inzidenz'], inplace=True)
         # nan_value = float('NaN')
         # df.replace('-', nan_value, inplace=True)
 
-        # convert numeric strings to int
-        df['Patienten'] = df['Patienten'].astype(int)
+        # convert 'cases' to float, round, then convert to int
+        df['7-Tage-Inzidenz'] = df['7-Tage-Inzidenz'].astype(
+            float).round().astype(int)
+
+        # drop last row (last value in F:F and S:S is only temporary)
+        df = df.iloc[:-1]
 
         # set date column as index
         df = df.set_index('')
 
-        # fix dates with missing zeros
-        df.index = pd.to_datetime(
-            df.index, format='%d.%m.%Y').strftime('%d.%m.%Y')
-
        # get date for chart notes and add one day
         timestamp_str = df.index[-1]
         timestamp_dt = datetime.strptime(
-            timestamp_str, '%d.%m.%Y')  # + timedelta(days=1)
+            timestamp_str, '%d.%m.%Y') + timedelta(days=1)
         timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # show date in chart notes
-        notes_chart = 'Rund die Hälfte der im Jahr 2020 mechanisch beatmeten Covid-19-Intensivpatienten ist gestorben. Bei nicht mechanisch beatmeten lag die Mortalitätsrate zwischen 10 und 38 Prozent.<br>Stand: ' + \
+        notes_chart = 'Risklayer bezieht seine Zahlen direkt aus den Veröffentlichungen der Gesundheitsämter der Kreise und Städte. Wegen des veralteten Meldesystems sind diese Daten aktueller als jene vom RKI.<br>Stand: ' + \
             timestamp_str
 
-        # insert id manually and run function
-        update_chart(id='245e5a30acb9ffa8e53b336e6b83c7bc',
+        # insert id and subtitle manually and run function
+        update_chart(id='beb6de8405dcbea50a354dc453822c18',
                      data=df, notes=notes_chart)
-        sleep(5)
-
     except:
         raise
