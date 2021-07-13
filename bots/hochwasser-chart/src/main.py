@@ -52,14 +52,16 @@ df['5'] = 406.85
 # Rename
 df = df.rename(columns = {'BAFU_2209_PegelRadarSchacht': 'Messwert, Gefahrenstufe:'})
 
+# Set Index
 df = df.set_index('Zeitstempel')
 
-df = df.head()
+#df.index = pd.to_datetime(df.index)
 
 update_chart(
     id = chartid,
     data = df[['Messwert, Gefahrenstufe:', '2', '3', '4', '5']],
-    notes = "Done!"
+    notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
+      % df.tail(1).iloc[0]['Time'].strftime('%d. %m., %H:%M')
 )
 
 print("Done")
