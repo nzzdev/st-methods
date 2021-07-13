@@ -52,13 +52,13 @@ df['5'] = 406.85
 # Rename
 df = df.rename(columns = {'BAFU_2209_PegelRadarSchacht': 'Messwert, Gefahrenstufe:'})
 
-df = df.head()
+df = df.set_index('Zeitstempel')
 
-df = df[['Zeitstempel', 'Messwert, Gefahrenstufe:', '2', '3', '4', '5']]
+df = df.head()
 
 update_chart(
     id = chartid,
-    data = df,
+    data = df[['Messwert, Gefahrenstufe:', '2', '3', '4', '5']],
     notes = "Done!"
 )
 
