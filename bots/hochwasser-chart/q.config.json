@@ -35,6 +35,18 @@
     "data": [],
     "notes": ""
    }
+  },
+  {
+   "environments": [
+    {
+     "name": "production",
+     "id": "34937bf850cf702a02c3648cdf22ffba"
+    }
+   ],
+   "item": {
+    "data": [],
+    "notes": ""
+   }
   }
  ]
 }

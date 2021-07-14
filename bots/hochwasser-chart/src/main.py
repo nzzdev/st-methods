@@ -123,3 +123,33 @@ update_chart(
     notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
       % get_last_update(df)
 )
+
+#------------------------ Reuss
+# https://q.st.nzz.ch/editor/chart/34937bf850cf702a02c3648cdf22ffba
+
+# Get Data
+url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2152_AbflussPneumatik.csv'
+chartid = '34937bf850cf702a02c3648cdf22ffba'
+df = get_data(url)
+
+# Zeitzone umwandeln
+df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
+
+# Gefahrenzone hinzufügen
+df['Gefahrenstufe 2'] = 280
+df['3'] = 350
+df['4'] = 390
+df['5'] = 430
+
+# Rename
+df = df.rename(columns = {'BAFU_2152_AbflussPneumatik': 'Messwert'})
+
+# Set Index
+df = df.set_index('Zeitstempel')
+
+update_chart(
+    id = chartid,
+    data = df[['Gefahrenstufe 2', '3', '4', '5', 'Messwert']],
+    notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
+      % get_last_update(df)
+)
