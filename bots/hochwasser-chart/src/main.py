@@ -29,9 +29,12 @@ def get_data(url):
     
     return df
 
+def get_last_update(df):
+    return df.tail(1).iloc[0]['Time'].strftime('%d. %m., %H:%M')
 
 
-# ## Zürichsee
+
+#------------------------ Zürichsee
 # https://q.st.nzz.ch/item/6b50824faafb1db49507dbc8cc452e5c
 
 
@@ -55,26 +58,19 @@ df = df.rename(columns = {'BAFU_2209_PegelRadarSchacht': 'Messwert, Gefahrenstuf
 # Set Index
 df = df.set_index('Zeitstempel')
 
-#df.index = pd.to_datetime(df.index)
-
 update_chart(
     id = chartid,
     data = df[['Messwert, Gefahrenstufe:', '2', '3', '4', '5']],
     notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
-      % df.tail(1).iloc[0]['Time'].strftime('%d. %m., %H:%M')
+      % get_last_update(df)
 )
 
-print("Done")
-quit()
-
-# ## Limmat
+#------------------------ Limmat
 # https://q.st.nzz.ch/editor/chart/6b50824faafb1db49507dbc8cc476129
-
-# In[142]:
-
 
 # Get Data
 url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2099_AbflussRadarSchacht.csv'
+chartid = 'bc7500f99eb2b7328406d6abbd18f36a'
 df = get_data(url)
 
 # Zeitzone umwandeln
@@ -89,8 +85,19 @@ df['5'] = 600
 # Rename
 df = df.rename(columns = {'BAFU_2099_AbflussRadarSchacht': 'Messwert, Gefahrenstufe:'})
 
-df[['Zeitstempel', 'Messwert, Gefahrenstufe:', '2', '3', '4', '5']].to_clipboard(index=False)
+# Set Index
+df = df.set_index('Zeitstempel')
 
+update_chart(
+    id = chartid,
+    data = df[['Messwert, Gefahrenstufe:', '2', '3', '4', '5']],
+    notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
+      % get_last_update(df)
+)
+
+
+print("Done")
+quit()
 
 # ## Sihl
 # https://q.st.nzz.ch/item/6b50824faafb1db49507dbc8cc481e93
