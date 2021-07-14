@@ -52,14 +52,14 @@ df['4'] = 406.6
 df['5'] = 406.85
 
 # Rename
-df = df.rename(columns = {'BAFU_2209_PegelRadarSchacht': 'Messwert; Gefahrenstufen:'})
+df = df.rename(columns = {'BAFU_2209_PegelRadarSchacht': 'Messwert; Gefahrenstufe:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Messwert; Gefahrenstufen:', '2', '3', '4', '5']],
+    data = df[['Messwert; Gefahrenstufe:', '2', '3', '4', '5']],
     notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
       % get_last_update(df)
 )
@@ -82,14 +82,14 @@ df['4'] = 530
 df['5'] = 600
 
 # Rename
-df = df.rename(columns = {'BAFU_2099_AbflussRadarSchacht': 'Messwert; Gefahrenstufen:'})
+df = df.rename(columns = {'BAFU_2099_AbflussRadarSchacht': 'Messwert; Gefahrenstufe:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Messwert; Gefahrenstufen:', '2', '3', '4', '5']],
+    data = df[['Messwert; Gefahrenstufe:', '2', '3', '4', '5']],
     notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
       % get_last_update(df)
 )
@@ -142,14 +142,14 @@ df['4'] = 434.45
 df['5'] = 434.75
 
 # Rename
-df = df.rename(columns = {'BAFU_2207_PegelRadar': 'Messwert; Gefahrenstufen:'})
+df = df.rename(columns = {'BAFU_2207_PegelRadar': 'Messwert; Gefahrenstufe:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Messwert; Gefahrenstufen:', '2', '3', '4', '5']],
+    data = df[['Messwert; Gefahrenstufe:', '2', '3', '4', '5']],
     notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
       % get_last_update(df)
 )
