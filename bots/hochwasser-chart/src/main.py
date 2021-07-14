@@ -69,27 +69,27 @@ update_chart(
 
 # Get Data
 url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2099_AbflussRadarSchacht.csv'
-chartid = '6b50824faafb1db49507dbc8cc476129'
+chartid = 'bc7500f99eb2b7328406d6abbd18f36a'
 df = get_data(url)
 
 # Zeitzone umwandeln
 df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
 
 # Gefahrenzone hinzufügen
-df['2'] = 350
+df['Gefahrenstufe 2'] = 350
 df['3'] = 450
 df['4'] = 530
 df['5'] = 600
 
 # Rename
-df = df.rename(columns = {'BAFU_2099_AbflussRadarSchacht': 'Messwert, Gefahrenstufe:'})
+df = df.rename(columns = {'BAFU_2099_AbflussRadarSchacht': 'Messwert'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Messwert, Gefahrenstufe:', '2', '3', '4', '5']],
+    data = df[['Gefahrenstufe 2', '3', '4', '5', 'Messwert']],
     notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
       % get_last_update(df)
 )
