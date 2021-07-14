@@ -46,20 +46,20 @@ df = get_data(url)
 df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
 
 # Gefahrenzone hinzufügen
-df['Gefahrenstufe 2'] = 406.25
+df['2'] = 406.25
 df['3'] = 406.4
 df['4'] = 406.6
 df['5'] = 406.85
 
 # Rename
-df = df.rename(columns = {'BAFU_2209_PegelRadarSchacht': 'Messwert'})
+df = df.rename(columns = {'BAFU_2209_PegelRadarSchacht': 'Messwert; Gefahrenstufen:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Gefahrenstufe 2', '3', '4', '5', 'Messwert']],
+    data = df[['Messwert; Gefahrenstufen:', '2', '3', '4', '5']],
     notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
       % get_last_update(df)
 )
