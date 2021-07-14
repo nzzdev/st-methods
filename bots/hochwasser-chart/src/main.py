@@ -39,7 +39,7 @@ def get_last_update(df):
 
 
 # Get Data
-chartid = 'e733bf4b283720fe5a16bd1f91d0804a'
+chartid = '6b50824faafb1db49507dbc8cc452e5c'
 url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2209_PegelRadarSchacht.csv'
 df = get_data(url)
 
@@ -70,7 +70,7 @@ update_chart(
 
 # Get Data
 url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2099_AbflussRadarSchacht.csv'
-chartid = 'bc7500f99eb2b7328406d6abbd18f36a'
+chartid = '6b50824faafb1db49507dbc8cc476129'
 df = get_data(url)
 
 # Zeitzone umwandeln
@@ -100,7 +100,7 @@ update_chart(
 
 # Get Data
 url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2176_AbflussRadarSchacht.csv'
-chartid = '34937bf850cf702a02c3648cdf1b687b'
+chartid = '6b50824faafb1db49507dbc8cc481e93'
 df = get_data(url)
 
 # Zeitzone umwandeln

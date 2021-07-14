@@ -2,10 +2,8 @@ name: Update Hochwasser Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 0 and 30 past every hour from 7 through 16 CEST (5 - 14 GMT)
-  #schedule:
-    #- cron: "0,30 5-14 * * *"
-  #  - cron: "0 0 * * *"
+  schedule:
+    - cron: "0 6-20 * * *"
   workflow_dispatch:
 
 jobs:
