@@ -60,7 +60,7 @@ df = df.set_index('Zeitstempel')
 update_chart(
     id = chartid,
     data = df[['Messwert; Gefahrenstufen:', '2', '3', '4', '5']],
-    notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
+    notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
       % get_last_update(df)
 )
 
@@ -76,21 +76,21 @@ df = get_data(url)
 df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
 
 # Gefahrenzone hinzufügen
-df['Gefahrenstufe 2'] = 350
+df['2'] = 350
 df['3'] = 450
 df['4'] = 530
 df['5'] = 600
 
 # Rename
-df = df.rename(columns = {'BAFU_2099_AbflussRadarSchacht': 'Messwert'})
+df = df.rename(columns = {'BAFU_2099_AbflussRadarSchacht': 'Messwert; Gefahrenstufen:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Gefahrenstufe 2', '3', '4', '5', 'Messwert']],
-    notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
+    data = df[['Messwert; Gefahrenstufen:', '2', '3', '4', '5']],
+    notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
       % get_last_update(df)
 )
 
@@ -106,21 +106,21 @@ df = get_data(url)
 df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
 
 # Gefahrenzone hinzufügen
-df['Gefahrenstufe 2'] = 100
+df['2'] = 100
 df['3'] = 200
 df['4'] = 300
 df['5'] = 400
 
 # Rename
-df = df.rename(columns = {'BAFU_2176_AbflussRadarSchacht': 'Messwert'})
+df = df.rename(columns = {'BAFU_2176_AbflussRadarSchacht': 'Messwert; Gefahrenstufe:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Gefahrenstufe 2', '3', '4', '5', 'Messwert']],
-    notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
+    data = df[['Messwert; Gefahrenstufe:', '2', '3', '4', '5']],
+    notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
       % get_last_update(df)
 )
 
@@ -136,20 +136,20 @@ df = get_data(url)
 df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
 
 # Gefahrenzone hinzufügen
-df['Gefahrenstufe 2'] = 434
+df['2'] = 434
 df['3'] = 434.25
 df['4'] = 434.45
 df['5'] = 434.75
 
 # Rename
-df = df.rename(columns = {'BAFU_2207_PegelRadar': 'Messwert'})
+df = df.rename(columns = {'BAFU_2207_PegelRadar': 'Messwert; Gefahrenstufen:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Gefahrenstufe 2', '3', '4', '5', 'Messwert']],
-    notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
+    data = df[['Messwert; Gefahrenstufen:', '2', '3', '4', '5']],
+    notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
       % get_last_update(df)
 )
