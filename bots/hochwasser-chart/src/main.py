@@ -124,11 +124,11 @@ update_chart(
       % get_last_update(df)
 )
 
-#------------------------ Reuss
+#------------------------ Vierwaldstättersee
 # https://q.st.nzz.ch/editor/chart/34937bf850cf702a02c3648cdf22ffba
 
 # Get Data
-url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2152_AbflussPneumatik.csv'
+url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2207_PegelRadar.csv'
 chartid = '34937bf850cf702a02c3648cdf22ffba'
 df = get_data(url)
 
@@ -136,13 +136,13 @@ df = get_data(url)
 df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
 
 # Gefahrenzone hinzufügen
-df['Gefahrenstufe 2'] = 280
-df['3'] = 350
-df['4'] = 390
-df['5'] = 430
+df['Gefahrenstufe 2'] = 434
+df['3'] = 434.25
+df['4'] = 434.45
+df['5'] = 434.75
 
 # Rename
-df = df.rename(columns = {'BAFU_2152_AbflussPneumatik': 'Messwert'})
+df = df.rename(columns = {'BAFU_2207_PegelRadar': 'Messwert'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
