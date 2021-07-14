@@ -95,18 +95,12 @@ update_chart(
       % get_last_update(df)
 )
 
-
-print("Done")
-quit()
-
-# ## Sihl
+#------------------------ Sihl
 # https://q.st.nzz.ch/item/6b50824faafb1db49507dbc8cc481e93
-
-# In[143]:
-
 
 # Get Data
 url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2176_AbflussRadarSchacht.csv'
+chartid = '34937bf850cf702a02c3648cdf1b687b'
 df = get_data(url)
 
 # Zeitzone umwandeln
@@ -121,81 +115,12 @@ df['5'] = 400
 # Rename
 df = df.rename(columns = {'BAFU_2176_AbflussRadarSchacht': 'Messwert, Gefahrenstufe:'})
 
-df[['Zeitstempel', 'Messwert, Gefahrenstufe:', '2', '3', '4', '5']].to_clipboard(index=False)
+# Set Index
+df = df.set_index('Zeitstempel')
 
-
-# ## Badewannen
-
-# In[114]:
-
-
-badewanne = 0.18
-
-sihl_m2_gester = 12
-sihl_m2_heute = 29
-
-limmat_m2_gestern = 276
-limmat_m2_heute = 297
-
-
-# In[115]:
-
-
-print("Sihl gestern 12 Uhr: %s Badewannen/s" % round(sihl_m2_gester / badewanne))
-print("Sihl heute 12 Uhr: %s Badewannen/s" % round(sihl_m2_heute / badewanne))
-
-print("Limmat gestern 12 Uhr: %s Badewannen/s" % round(limmat_m2_gestern / badewanne))
-print("Limmat heute 12 Uhr: %s Badewannen/s" % round(limmat_m2_heute / badewanne))
-
-
-# In[133]:
-
-
-# Differenz Gestern 12 Uhr bis heute 12 Uhr
-anstieg = round(df.iloc[-1]['Messwert, Gefahrenstufe:'] - df[df.Time >= '2021-07-12 11:00'].iloc[0]['Messwert, Gefahrenstufe:'], 2)
-
-
-# In[144]:
-
-
-anstieg = 0.05
-lake = 88.66 * 1000 * 1000
-kubik = lake * anstieg
-badewanne = 0.18
-
-round(kubik / badewanne)
-
-
-# In[ ]:
-
-
-
-
-
-# In[125]:
-
-
-pool = 50 * 25 * 2
-
-(lake * anstieg) / pool
-
-
-# In[123]:
-
-
-pool
-
-
-# In[150]:
-
-
-katzensee = 0.84 * 1000 * 1000#kubikmeter
-katzensee = 840000
-kubik / katzensee
-
-
-# In[ ]:
-
-
-
-
+update_chart(
+    id = chartid,
+    data = df[['Messwert, Gefahrenstufe:', '2', '3', '4', '5']],
+    notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
+      % get_last_update(df)
+)
