@@ -106,20 +106,20 @@ df = get_data(url)
 df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
 
 # Gefahrenzone hinzufügen
-df['2'] = 100
+df['Gefahrenstufe 2'] = 100
 df['3'] = 200
 df['4'] = 300
 df['5'] = 400
 
 # Rename
-df = df.rename(columns = {'BAFU_2176_AbflussRadarSchacht': 'Messwert, Gefahrenstufe:'})
+df = df.rename(columns = {'BAFU_2176_AbflussRadarSchacht': 'Messwert'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
 
 update_chart(
     id = chartid,
-    data = df[['Messwert, Gefahrenstufe:', '2', '3', '4', '5']],
+    data = df[['Gefahrenstufe 2', '3', '4', '5', 'Messwert']],
     notes = "Die Daten wurden auf Plausibilität geprüft, können aber Messfehler enthalten. Letzte Messung: %s" 
       % get_last_update(df)
 )
