@@ -38,6 +38,7 @@ jobs:
         run: |
           Rscript owid_vaccinations_worldwide/owid_vaccinations_worldwide.R
           Rscript corona-auto-ch/corona-auto-ch.R
+          Rscript bafu/bafu.R
       - name: Setup python
         uses: actions/setup-python@v2
         with:
