@@ -24,7 +24,7 @@ def get_data(url):
     return df
 
 def get_last_update(df):
-    return df.tail(1).iloc[0]['Time'].astimezone('Europe/Berlin').strftime('%d. %m., %H:%M')
+    return df.tail(1).iloc[0]['Time'].astimezone('Europe/Berlin').strftime('%d. %m., %H:%M Uhr')
 
 
 #------------------------ Zürichsee
