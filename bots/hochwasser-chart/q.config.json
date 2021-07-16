@@ -47,6 +47,18 @@
     "data": [],
     "notes": ""
    }
+  },
+  {
+   "environments": [
+    {
+     "name": "production",
+     "id": "bc7500f99eb2b7328406d6abbdd24b58"
+    }
+   ],
+   "item": {
+    "data": [],
+    "notes": ""
+   }
   }
  ]
 }

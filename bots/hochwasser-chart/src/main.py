@@ -148,3 +148,35 @@ update_chart(
     notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
       % get_last_update(df)
 )
+
+
+#------------------------ Bielersee
+# https://q.st.nzz.ch/editor/chart/bc7500f99eb2b7328406d6abbdd24b58
+
+# Get Data
+url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2208_PegelRadar.csv'
+       
+chartid = 'bc7500f99eb2b7328406d6abbdd24b58'
+df = get_data(url)
+
+# Zeitzone umwandeln
+df['Zeitstempel'] = df['Time'].apply(lambda x: x.astimezone('Europe/Berlin').strftime('%Y-%m-%d %H:%M'))
+
+# Gefahrenzone hinzufügen
+df['2'] = 429.8
+df['3'] = 430.05
+df['4'] = 430.35
+df['5'] = 430.6
+
+# Rename
+df = df.rename(columns = {'BAFU_2208_PegelRadar': 'Messwert; Gefahrenstufe:'})
+
+# Set Index
+df = df.set_index('Zeitstempel')
+
+update_chart(
+    id = chartid,
+    data = df[['Messwert; Gefahrenstufe:', '2', '3', '4', '5']],
+    notes = "Die Messwerte sind Rohdaten, welche Fehler enthalten können.<br />Letzte Messung: %s" 
+      % get_last_update(df)
+)
