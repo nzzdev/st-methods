@@ -419,6 +419,7 @@ ch_vacc_rec <- read_csv(bag_data$sources$individual$csv$vaccDosesDelivered) %>%
   drop_na()
 
 ch_vacc_vacc <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$vaccDosesAdministered) %>%
+  filter(geoRegion == "CHFL") %>%
   select(date, vaccine, sumTotal) %>%
   spread(vaccine, sumTotal) 
 
