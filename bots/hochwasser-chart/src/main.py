@@ -62,7 +62,7 @@ update_chart(
 # https://q.st.nzz.ch/editor/chart/6b50824faafb1db49507dbc8cc476129
 
 # Get Data
-url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2099_AbflussRadarSchacht.csv'
+url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2099_AbflussDrucksondeGewaesser.csv'
 chartid = '6b50824faafb1db49507dbc8cc476129'
 df = get_data(url)
 
@@ -76,7 +76,7 @@ df['4'] = 530
 df['5'] = 600
 
 # Rename
-df = df.rename(columns = {'BAFU_2099_AbflussRadarSchacht': 'Messwert; Gefahrenstufe:'})
+df = df.rename(columns = {'BAFU_2099_AbflussDrucksondeGewaesser': 'Messwert; Gefahrenstufe:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
@@ -122,7 +122,8 @@ update_chart(
 # https://q.st.nzz.ch/editor/chart/34937bf850cf702a02c3648cdf22ffba
 
 # Get Data
-url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2207_PegelRadar.csv'
+url = 'https://www.hydrodaten.admin.ch/lhg/az/dwh/csv/BAFU_2207_PegelDrucksondeSchacht.csv'
+       
 chartid = '34937bf850cf702a02c3648cdf22ffba'
 df = get_data(url)
 
@@ -136,7 +137,7 @@ df['4'] = 434.45
 df['5'] = 434.75
 
 # Rename
-df = df.rename(columns = {'BAFU_2207_PegelRadar': 'Messwert; Gefahrenstufe:'})
+df = df.rename(columns = {'BAFU_2207_PegelDrucksondeSchacht': 'Messwert; Gefahrenstufe:'})
 
 # Set Index
 df = df.set_index('Zeitstempel')
