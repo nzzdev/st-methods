@@ -525,9 +525,9 @@ vacc_ch_2nd <- ch_vacc %>%
   arrange(desc(second_pct)) %>%
   rename("Vollständig geimpft" = second_pct, "Teilweise geimpft" = first_pct)
 
-update_chart(id = "54381c24b03b4bb9d1017bb91511e21d", 
-             data = vacc_ch_2nd, 
-             notes = paste0("Stand: ", ch_vacc_date))
+# update_chart(id = "54381c24b03b4bb9d1017bb91511e21d", 
+#              data = vacc_ch_2nd, 
+#              notes = paste0("Stand: ", ch_vacc_date))
 
 ### Schweiz geimpft nach Altersgruppen
 
