@@ -36,21 +36,24 @@ function setTripsInformations(tripsInformation) {
     let newTripInformation = {};
 
     if (!tripInformation.data) continue;
-    if (!tripInformation.data.attributes.outbound) continue;
     if (tripInformation.data.type.toUpperCase() !== "TRIP") throw new Error("Invalid data type.");
     if (tripInformation.data.attributes.category.toUpperCase() !== "ONE_WAY_TRIP") throw new Error("Invalid attributes category.");
 
+    const outbound = tripInformation.data.attributes.segments.find(segment => segment.segmentType.toUpperCase() === "OUTBOUND");
+
+    if (!outbound) throw new Error("No outbound data.");
+
     newTripInformation.category = tripInformation.data.attributes.category;
-    newTripInformation.origin = tripInformation.data.attributes.outbound.origin.countryCode;
-    newTripInformation.destination = tripInformation.data.attributes.outbound.destination.countryCode;
+    newTripInformation.origin = outbound.origin.countryCode;
+    newTripInformation.destination = outbound.destination.countryCode;
 
     let included = setIncludedInformations(tripInformation.included, false);
     let travelRestrictions = [];
 
-    travelRestrictions.push(...getIncludedInformations(tripInformation.data.attributes.outbound.entryRestrictions, included));
-    travelRestrictions.push(...getIncludedInformations(tripInformation.data.attributes.outbound.travelRestrictions, included));
-    travelRestrictions.push(...getIncludedInformations(tripInformation.data.attributes.outbound.documents, included));
-    travelRestrictions.push(...getIncludedInformations(tripInformation.data.attributes.outbound.exitRestrictions, included));
+    travelRestrictions.push(...getIncludedInformations(outbound.entryRestrictions, included));
+    travelRestrictions.push(...getIncludedInformations(outbound.travelRestrictions, included));
+    travelRestrictions.push(...getIncludedInformations(outbound.documents, included));
+    travelRestrictions.push(...getIncludedInformations(outbound.exitRestrictions, included));
 
     newTripInformation.ppe = filterItemsByTypeAndCategory(travelRestrictions, "PROCEDURE", "PPE");
     newTripInformation.quarantine = filterItemsByTypeAndCategory(travelRestrictions, "PROCEDURE", "QUARANTINE");
