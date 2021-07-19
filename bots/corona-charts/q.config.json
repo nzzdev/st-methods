@@ -282,18 +282,6 @@
       "environments": [
         {
           "name": "production",
-          "id": "54381c24b03b4bb9d1017bb91511e21d"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "674ce1e7cf4282ae2db76136cb301ba1"
         }
       ],
