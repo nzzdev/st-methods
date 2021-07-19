@@ -375,12 +375,10 @@ bag_var_delta <- bag_var %>%
          prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right")) %>%
   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
   filter(date >= '2021-04-01') %>%
-  rename(" " = "prct_lower_7", "Konfidenzintervall" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
+  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
 
-bag_var_delta_notes <- paste0("Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
-                        " Die Tageswerte sind mit einem oberen und einem unteren Wert eingegrenzt,",
-                        " welche eine Wahrscheinlichkeit von 95 Prozent abbilden.", 
-                        " Prognose = weniger als 20 Sequenzierungen pro Tag.")
+bag_var_delta_notes <- paste0("* 95-Prozent-Konfidenzintervall. Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
+                              " Prognose = durchgehend weniger als 20 Sequenzierungen pro Tag.")
 
 update_chart(id = "dc697b19f4ecaf842746e444a46761b4", data = bag_var_delta, notes = bag_var_delta_notes)
 
