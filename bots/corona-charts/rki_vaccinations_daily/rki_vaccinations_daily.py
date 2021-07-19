@@ -30,6 +30,9 @@ if __name__ == '__main__':
         # rearrange columns
         # df2 = df2[['date', 'impf_quote_voll', 'impf_quote_erst', 'Ziel']]
 
+        # only show last six months
+        df = df.tail(180)
+
         # get date for chart notes and add one day
         timestamp_str = df['date'].iloc[-1]
         timestamp_dt = datetime.strptime(
