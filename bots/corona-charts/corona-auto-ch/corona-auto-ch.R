@@ -406,7 +406,7 @@ ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered) %
   select(geoRegion, date, sumTotal, per100PersonsTotal) %>%
   drop_na()
 
-ch_vacc_full <- read_csv(bag_data$sources$individual$csv$vaccPersons) %>%
+ch_vacc_full <- read_csv(bag_data$sources$individual$csv$vaccPersonsV2) %>%
   filter(type == "COVID19FullyVaccPersons") %>%
   select(geoRegion, date, sumTotal) %>%
   drop_na()
@@ -467,8 +467,11 @@ vaccchart_kant <-vacc_pop %>%
   mutate(pct_vacc_doses = round(pct_vacc_doses, 1)) %>%
   arrange(geounit)
 
+vaccchart_kant$pct_vacc_doses[vaccchart_kant$geounit == "OW"] <- NA
+
 vaccchart_kant_notes <- paste0("Die Zahlen beziehen sich auf die verabreichten Impfdosen, nicht auf geimpfte Personen.",
-                               " Eine Person muss im Normalfall zwei Dosen verimpft bekommen.<br> Stand: ", 
+                               " Eine Person muss im Normalfall zwei Dosen verimpft bekommen.",
+                               " Für den Kanton Obwalden werden keine Daten angezeigt, da diese nicht vollständig sind<br>Stand: ", 
                                ch_vacc_date)
 
 update_chart(id = "e039a1c64b33e327ecbbd17543e518d3", data = vaccchart_kant, notes = vaccchart_kant_notes)
@@ -491,7 +494,6 @@ vaccchart_pctfull_notes <- paste0("In einigen Kantonen wurden mehr Impfdosen aus
 update_chart(id = "f8559c7bb8bfc74e70234e717e0e1f8e", 
              data = vaccchart_pctfull, 
              notes = vaccchart_pctfull_notes)
-
 
 vaccchart_pctpop <- vacc_pop %>%
   filter(geounit != "FL" & geounit != "CHFL"  & geounit != "CH") %>%
@@ -516,16 +518,16 @@ update_chart(id = "5e2bb3f16c0802559ccdf474af11f453",
 vacc_ch_2nd <- ch_vacc %>%
   select(geounit, kt, date, pop, ncumul_fully_vacc, ncumul_onlyfirstdoses_vacc) %>%
   drop_na(ncumul_fully_vacc) %>%
-  filter(geounit != "CH" & geounit != "FL" & geounit != "CHFL" & date == last(date)) %>%
+  filter(geounit != "CH" & geounit != "FL" & geounit != "CHFL" &  geounit != "OW" & date == last(date)) %>%
   mutate(first_pct = ncumul_onlyfirstdoses_vacc*100/pop,
          second_pct = ncumul_fully_vacc*100/pop) %>%
   select(kt, second_pct, first_pct) %>%
   arrange(desc(second_pct)) %>%
   rename("Vollständig geimpft" = second_pct, "Teilweise geimpft" = first_pct)
 
-# update_chart(id = "54381c24b03b4bb9d1017bb91511e21d", 
-#              data = vacc_ch_2nd, 
-#              notes = paste0("Stand: ", ch_vacc_date))
+update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
+             data = vacc_ch_2nd,
+             notes = paste0("Für den Kanton Obwalden werden keine Daten angezeigt, da diese nicht vollständig sind. Stand: ", ch_vacc_date))
 
 ### Schweiz geimpft nach Altersgruppen
 
