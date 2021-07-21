@@ -464,7 +464,7 @@ vaccchart_kant <-vacc_pop %>%
   filter(date ==last(date)) %>%
   ungroup() %>%
   select(geounit, pct_vacc_doses) %>%
-  mutate(pct_vacc_doses = round(pct_vacc_doses, 1)) %>%
+  mutate(pct_vacc_doses = round(pct_vacc_doses, 0)) %>%
   arrange(geounit)
 
 vaccchart_kant$pct_vacc_doses[vaccchart_kant$geounit == "OW"] <- NA
