@@ -48,6 +48,9 @@ df['5'] = 406.85
 # Rename
 df = df.rename(columns = {'BAFU_2209_PegelRadarSchacht': 'Messwert; Gefahrenstufe:'})
 
+# Resample (1 Entry per hour)
+df = df.resample('1H', on='Time').first()
+
 # Set Index
 df = df.set_index('Zeitstempel')
 
@@ -77,6 +80,9 @@ df['5'] = 600
 
 # Rename
 df = df.rename(columns = {'BAFU_2099_AbflussDrucksondeGewaesser': 'Messwert; Gefahrenstufe:'})
+
+# Resample (1 Entry per hour)
+df = df.resample('1H', on='Time').first()
 
 # Set Index
 df = df.set_index('Zeitstempel')
@@ -139,6 +145,9 @@ df['5'] = 434.75
 # Rename
 df = df.rename(columns = {'BAFU_2207_PegelDrucksondeSchacht': 'Messwert; Gefahrenstufe:'})
 
+# Resample (1 Entry per hour)
+df = df.resample('1H', on='Time').first()
+
 # Set Index
 df = df.set_index('Zeitstempel')
 
@@ -170,6 +179,9 @@ df['5'] = 430.6
 
 # Rename
 df = df.rename(columns = {'BAFU_2208_PegelRadar': 'Messwert; Gefahrenstufe:'})
+
+# Resample (1 Entry per hour)
+df = df.resample('1H', on='Time').first()
 
 # Set Index
 df = df.set_index('Zeitstempel')
