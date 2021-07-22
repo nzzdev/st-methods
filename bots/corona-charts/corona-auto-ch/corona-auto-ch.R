@@ -432,7 +432,7 @@ vaccchart_kant <- ch_vacc_doses %>%
   select(geoRegion, per100) %>%
   arrange(geoRegion)
 
-vaccchart_kant$pct_vacc_doses[vaccchart_kant$geounit == "OW"] <- NA
+vaccchart_kant$per100[vaccchart_kant$geoRegion == "OW"] <- NA
 
 vaccchart_kant_notes <- paste0("Die Zahlen beziehen sich auf die verabreichten Impfdosen, nicht auf geimpfte Personen.",
                                " Eine Person muss im Normalfall zwei Dosen verimpft bekommen.",
