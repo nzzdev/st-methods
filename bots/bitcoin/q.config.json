@@ -6,7 +6,7 @@
           "name": "production",
           "id": "3ae57b07ddc738d6984ae6d72c027d3d"
         }
-        ],
+      ],
       "item": {
         "notes": "",
         "data": []
@@ -18,7 +18,7 @@
           "name": "production",
           "id": "3ae57b07ddc738d6984ae6d72c0285f7"
         }
-        ],
+      ],
       "item": {
         "notes": "",
         "data": []
@@ -30,7 +30,7 @@
           "name": "production",
           "id": "9640becc888e8a5d878819445105edce"
         }
-        ],
+      ],
       "item": {
         "notes": "",
         "data": []
@@ -42,11 +42,11 @@
           "name": "production",
           "id": "b6873820afc5a1492240edc1b101cdd9"
         }
-        ],
+      ],
       "item": {
         "notes": "",
         "data": []
       }
     }
-    ]
+  ]
 }
