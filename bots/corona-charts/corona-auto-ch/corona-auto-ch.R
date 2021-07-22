@@ -589,12 +589,13 @@ ch_vacc_hi$vacc_proj_goal_ch[ch_vacc_hi$vacc_proj_goal_ch >= herd_immunity_ch] <
 
 colnames(ch_vacc_hi) <- c("Datum",	"Momentante Geschwindigkeit", " ",	"Unsicherheitsbereich*", "Nötige Geschwindigkeit")
 
-ch_past <- cbind(ch_vacc_speed[,c(1,7)], NA, NA, NA)
+ch_past <- cbind(ch_vacc_speed[,c(1,5)], NA, NA, NA)
 
 colnames(ch_past) <- colnames(ch_vacc_hi)
 
 ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
   select(1,3,4,2,5)
+
 
 # #which day?
 # herd_immunity_date_ch
@@ -612,7 +613,7 @@ ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
 
 update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
              data = ch_vacc_hi2,
-             notes = paste0("* 25-Prozent- und 75-Prozent-Quantil des 7-Tage-Schnitts der letzten 14 Tage.<br>Stand: ",
+             notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
                             ch_vacc_date))
 
 #write to renv when adding new packages
