@@ -1,3 +1,4 @@
+
 {
   "items": [
     {
@@ -247,30 +248,6 @@
         {
           "name": "production",
           "id": "e039a1c64b33e327ecbbd17543e518d3"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "f8559c7bb8bfc74e70234e717e0e1f8e"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "5e2bb3f16c0802559ccdf474af11f453"
         }
       ],
       "item": {
