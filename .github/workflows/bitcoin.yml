@@ -27,8 +27,6 @@ jobs:
         with:
           path: ~/.local/share/renv
           key: ${{ runner.os }}-renv-${{ hashFiles('./bots/bitcoin/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
       - name: Restore R packages
         shell: Rscript {0}
         run: |
