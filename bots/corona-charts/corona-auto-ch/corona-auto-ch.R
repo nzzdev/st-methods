@@ -596,6 +596,25 @@ colnames(ch_past) <- colnames(ch_vacc_hi)
 ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
   select(1,3,4,2,5)
 
+#write to Q-cli
+
+update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
+             data = ch_vacc_hi2,
+             notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
+                            ch_vacc_date))
+
+#Vacc pct by dose
+ch_vacc_persons_hist <- ch_vacc_persons %>%
+  filter(geoRegion == "CHFL") %>%
+  mutate(per100 = 100*sumTotal/pop) %>%
+  select(-sumTotal, -geoRegion, -pop) %>%
+  spread(type, per100) %>%
+  select(-COVID19AtLeastOneDosePersons) %>%
+  rename(Vollständig = COVID19FullyVaccPersons, Teilweise = COVID19PartiallyVaccPersons)
+
+update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae", 
+             data = ch_vacc_persons_hist,
+             notes = paste0("Stand: ", ch_vacc_date))
 
 # #which day?
 # herd_immunity_date_ch
@@ -608,13 +627,6 @@ ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
 # 
 # #how many times faster need the vaccinations to happen?
 # ch_vacc_goalspeed/ch_vacc_esti$mean
-
-#write to Q-cli
-
-update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
-             data = ch_vacc_hi2,
-             notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
-                            ch_vacc_date))
 
 #write to renv when adding new packages
 
