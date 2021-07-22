@@ -3,8 +3,8 @@ name: Update Bitcoin Charts
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   # This will run it on 12:10 MEZ every day (11:10 GMT)
-  # schedule:
-  #  - cron: "10 11 * * *"
+  schedule:
+    - cron: "10 11 * * *"
   workflow_dispatch:
 
 jobs:
