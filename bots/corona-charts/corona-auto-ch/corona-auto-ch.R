@@ -589,7 +589,7 @@ ch_vacc_hi$vacc_proj_goal_ch[ch_vacc_hi$vacc_proj_goal_ch >= herd_immunity_ch] <
 
 colnames(ch_vacc_hi) <- c("Datum",	"Momentante Geschwindigkeit", " ",	"Unsicherheitsbereich*", "Nötige Geschwindigkeit")
 
-ch_past <- cbind(ch_vacc_proj[,1:2], NA, NA, NA)
+ch_past <- cbind(ch_vacc_speed[,c(1,7)], NA, NA, NA)
 
 colnames(ch_past) <- colnames(ch_vacc_hi)
 
