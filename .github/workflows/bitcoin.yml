@@ -26,7 +26,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('./renv.lock') }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/bitcoin/renv.lock') }}
           restore-keys: |
             ${{ runner.os }}-renv-
       - name: Restore R packages
