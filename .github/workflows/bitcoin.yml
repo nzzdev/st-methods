@@ -1,0 +1,50 @@
+name: Update Bitcoin Charts
+
+on:
+  # Schedule makes this bot run in regular intervals, without any interventions
+  # This will run it on 12:10 MEZ every day (11:10 GMT)
+  schedule:
+    - cron: "10 11 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bots/bitcoin/
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: "4.0.3"
+      - name: Install system dependencies
+        run: |
+          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/bitcoin/renv.lock') }}
+      - name: Restore R packages
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+      - name: Run R scripts
+        run: |
+          Rscript bitcoin_automated.R
+        env:
+          COINMARKETCAPR_API_KEY: ${{ secrets.COINMARKETCAPR_API_KEY }}
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"
+      - name: Install node packages
+        run: npm install -g @nzz/q-cli
+      - name: Run Q cli
+        run: Q update-item
+        env:
+          Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
+          Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
