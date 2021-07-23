@@ -488,7 +488,7 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
   filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH" & geoRegion != "OW", date == max(date)) %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
   left_join(pop[,c(1:2)], by = c("geoRegion" = "ktabk")) %>%
-  select(-pop, -sumTotal, -geoRegion) %>%
+  select(-pop, -sumTotal, -geoRegion, -date) %>%
   spread(type, per100) %>%
   select(-COVID19AtLeastOneDosePersons) %>%
   rename("Vollständig geimpft" = COVID19FullyVaccPersons, 
