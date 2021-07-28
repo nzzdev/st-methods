@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
         # read relevant columns
         df = pd.read_csv('./data/germany_vaccinations_timeseries_v2.tsv', delimiter='\t', encoding='utf-8',
-                         usecols=['date', 'dosen_erst_differenz_zum_vortag', 'dosen_zweit_differenz_zum_vortag'])
+                         usecols=['date', 'dosen_differenz_zum_vortag', 'dosen_erst_differenz_zum_vortag', 'dosen_zweit_differenz_zum_vortag'])
 
         # rearrange columns
         # df2 = df2[['date', 'impf_quote_voll', 'impf_quote_erst', 'Ziel']]
