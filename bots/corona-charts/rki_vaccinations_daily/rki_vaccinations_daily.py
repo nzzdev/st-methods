@@ -33,6 +33,14 @@ if __name__ == '__main__':
         # only show last six months
         df = df.tail(180)
 
+        # get 7-day average of total vaccinations for chart title
+        mean = df.tail(
+            7)['dosen_differenz_zum_vortag'].mean().round(-3).astype(int)
+        # use thousand seperator and convert to str
+        mean = f'{mean:,}'.replace(',', ' ')
+        # drop column from df
+        df.drop('dosen_differenz_zum_vortag', axis=1, inplace=True)
+
         # get date for chart notes and add one day
         timestamp_str = df['date'].iloc[-1]
         timestamp_dt = datetime.strptime(
@@ -48,12 +56,15 @@ if __name__ == '__main__':
             df.index, format='%Y-%m-%d').strftime('%d.%m.%Y')
 
        # show date in chart notes
-        notes_chart = 'Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten.<br>Stand: ' + \
+        notes_chart = '¹ Sieben-Tage-Schnitt. Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten.<br>Stand: ' + \
             timestamp_str
-        print
+
+        # show 7-day average in chart title
+        title_chart = 'Deutschland verimpft derzeit ' + mean + ' Dosen¹ täglich'
+
         # insert id and subtitle manually and run function
         update_chart(id='dd4b1de66b3907bb65164669b0d3353f',
-                     data=df, notes=notes_chart)
+                     data=df, title=title_chart, notes=notes_chart)
 
     except:
         raise
