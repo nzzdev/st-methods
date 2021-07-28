@@ -60,7 +60,7 @@ if __name__ == '__main__':
             timestamp_str
 
         # show 7-day average in chart title
-        title_chart = 'Deutschland verimpft derzeit im Schnitt ' + mean + ' Dosen¹ pro Tag'
+        title_chart = 'Deutschland verimpft derzeit ' + mean + ' Dosen¹ pro Tag'
 
         # insert id and subtitle manually and run function
         update_chart(id='dd4b1de66b3907bb65164669b0d3353f',
