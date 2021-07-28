@@ -51,6 +51,10 @@ if __name__ == '__main__':
         df = df.rename(columns={'date': '', 'dosen_erst_differenz_zum_vortag': 'erste Dose',
                        'dosen_zweit_differenz_zum_vortag': 'vollständig geimpft'}).set_index('')
 
+        # add row with no values and current date as index for step-after chart
+        df.loc[df.shape[0]] = ['', '']
+        df.rename({df.index[-1]: timestamp_dt}, inplace=True)
+
         # change date format
         df.index = pd.to_datetime(
             df.index, format='%Y-%m-%d').strftime('%d.%m.%Y')
