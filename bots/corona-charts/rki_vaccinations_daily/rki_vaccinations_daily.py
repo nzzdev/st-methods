@@ -56,11 +56,11 @@ if __name__ == '__main__':
             df.index, format='%Y-%m-%d').strftime('%d.%m.%Y')
 
        # show date in chart notes
-        notes_chart = 'Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten.<br>Stand: ' + \
+        notes_chart = '¹ Sieben-Tage-Schnitt. Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten.<br>Stand: ' + \
             timestamp_str
 
         # show 7-day average in chart title
-        title_chart = 'Deutschland verimpft derzeit im Schnitt ' + mean + ' Dosen pro Tag'
+        title_chart = 'Deutschland verimpft derzeit im Schnitt ' + mean + ' Dosen¹ pro Tag'
 
         # insert id and subtitle manually and run function
         update_chart(id='dd4b1de66b3907bb65164669b0d3353f',
