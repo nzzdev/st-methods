@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
         # read relevant columns
         df = pd.read_csv('./data/germany_vaccinations_timeseries_v2.tsv', delimiter='\t', encoding='utf-8',
-                         usecols=['date', 'dosen_differenz_zum_vortag', 'dosen_erst_differenz_zum_vortag', 'dosen_zweit_differenz_zum_vortag'])
+                         usecols=['date', 'dosen_erst_differenz_zum_vortag', 'dosen_zweit_differenz_zum_vortag'])
 
         # rearrange columns
         # df2 = df2[['date', 'impf_quote_voll', 'impf_quote_erst', 'Ziel']]
@@ -33,13 +33,16 @@ if __name__ == '__main__':
         # only show last six months
         df = df.tail(180)
 
-        # get 7-day average of total vaccinations for chart title
-        mean = df.tail(
-            7)['dosen_differenz_zum_vortag'].mean().round(-3).astype(int)
-        # use thousand seperator and convert to str
-        mean = f'{mean:,}'.replace(',', ' ')
-        # drop column from df
-        df.drop('dosen_differenz_zum_vortag', axis=1, inplace=True)
+        # get 7-day average of vaccinations for chart title and notes
+        mean_first = df.tail(
+            7)['dosen_erst_differenz_zum_vortag'].mean()
+        mean_full = df.tail(
+            7)['dosen_zweit_differenz_zum_vortag'].mean()
+        mean = mean_first + mean_full
+        # round, use thousand seperator and convert to str
+        mean = f'{mean.round(-3).astype(int):,}'.replace(',', ' ')
+        mean_first = f'{mean_first.round(-3).astype(int):,}'.replace(',', ' ')
+        mean_full = f'{mean_full.round(-3).astype(int):,}'.replace(',', ' ')
 
         # get date for chart notes and add one day
         timestamp_str = df['date'].iloc[-1]
@@ -60,8 +63,8 @@ if __name__ == '__main__':
             df.index, format='%Y-%m-%d').strftime('%d.%m.%Y')
 
        # show date in chart notes
-        notes_chart = '¹ Sieben-Tage-Schnitt. Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten.<br>Stand: ' + \
-            timestamp_str
+        notes_chart = '¹ Sieben-Tage-Schnitt (erste Dosis: ' + mean_first + ', vollständig geimpft: ' + mean_full + \
+            '). Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten.<br>Stand: ' + timestamp_str
 
         # show 7-day average in chart title
         title_chart = 'Deutschland verimpft derzeit ' + mean + ' Dosen¹ pro Tag'
