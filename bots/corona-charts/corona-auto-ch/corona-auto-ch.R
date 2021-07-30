@@ -432,11 +432,9 @@ vaccchart_kant <- ch_vacc_doses %>%
   select(geoRegion, per100) %>%
   arrange(geoRegion)
 
-vaccchart_kant$per100[vaccchart_kant$geoRegion == "OW"] <- NA
-
 vaccchart_kant_notes <- paste0("Die Zahlen beziehen sich auf die verabreichten Impfdosen, nicht auf geimpfte Personen.",
                                " Eine Person muss im Normalfall zwei Dosen verimpft bekommen.",
-                               " Für den Kanton Obwalden werden keine Daten angezeigt, da diese nicht vollständig sind<br>Stand: ", 
+                               "<br>Stand: ", 
                                ch_vacc_date)
 
 update_chart(id = "e039a1c64b33e327ecbbd17543e518d3", data = vaccchart_kant, notes = vaccchart_kant_notes)
@@ -485,7 +483,7 @@ update_chart(id = "e039a1c64b33e327ecbbd17543e518d3", data = vaccchart_kant, not
 
 # second doses
 vacc_ch_persons_kant <- ch_vacc_persons %>%
-  filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH" & geoRegion != "OW", date == max(date)) %>%
+  filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH", date == max(date)) %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
   left_join(pop[,c(1:2)], by = c("geoRegion" = "ktabk")) %>%
   select(-pop, -sumTotal, -geoRegion, -date) %>%
@@ -497,7 +495,7 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
 
 update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
              data = vacc_ch_persons_kant,
-             notes = paste0("Für den Kanton Obwalden werden keine Daten angezeigt, da diese nicht vollständig sind. Stand: ", ch_vacc_date))
+             notes = paste0("Stand: ", ch_vacc_date))
 
 ### Schweiz geimpft nach Altersgruppen
 
