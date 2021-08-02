@@ -616,8 +616,9 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
   spread(type, sumTotal) %>%
   mutate(n1 = COVID19AtLeastOneDosePersons-lag(COVID19AtLeastOneDosePersons), 
          n2 = COVID19FullyVaccPersons-lag(COVID19FullyVaccPersons,1)) %>%
-  mutate(Erstimpfungen = rollmean(n1, 7, 0, align = "right"),
-         Zweitimpfungen = rollmean(n2, 7, 0, align = "right"))
+  mutate(Erstimpfungen = rollmean(n1, 7, NA, align = "right"),
+         Zweitimpfungen = rollmean(n2, 7, NA, align = "right")) %>%
+  select(date, Erstimpfungen, Zweitimpfungen)
 
 update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae", 
              data = ch_vacc_persons_hist_new,
