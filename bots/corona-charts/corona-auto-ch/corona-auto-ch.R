@@ -610,8 +610,17 @@ ch_vacc_persons_hist <- ch_vacc_persons %>%
   select(-COVID19AtLeastOneDosePersons) %>%
   rename(Vollständig = COVID19FullyVaccPersons, Teilweise = COVID19PartiallyVaccPersons)
 
+ch_vacc_persons_hist_new <- ch_vacc_persons %>%
+  filter(geoRegion == "CHFL") %>%
+  select(-geoRegion, -pop) %>%
+  spread(type, sumTotal) %>%
+  mutate(n1 = COVID19AtLeastOneDosePersons-lag(COVID19AtLeastOneDosePersons), 
+         n2 = COVID19FullyVaccPersons-lag(COVID19FullyVaccPersons,1)) %>%
+  mutate(Erstimpfungen = rollmean(n1, 7, 0, align = "right"),
+         Zweitimpfungen = rollmean(n2, 7, 0, align = "right"))
+
 update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae", 
-             data = ch_vacc_persons_hist,
+             data = ch_vacc_persons_hist_new,
              notes = paste0("Stand: ", ch_vacc_date))
 
 # #which day?
