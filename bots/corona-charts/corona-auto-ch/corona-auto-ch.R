@@ -427,7 +427,7 @@ ch_vacc_manuf <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$v
   filter(geoRegion == "CHFL") %>%
   select(date, vaccine, sumTotal) %>%
   spread(vaccine, sumTotal) %>%
-  rename('COVID-`19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
+  rename('COVID-19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
 
 #Manufacturer of Vaccine
 update_chart(id = "e5aee99aec92ee1365613b671ef405f7", data = ch_vacc_manuf)
