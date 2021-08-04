@@ -57,7 +57,7 @@ eth_cantons_title <- paste0("Der Kanton ", eth_cantons[1,1], " verzeichnet den h
 eth_cantons_notes <- paste0("Die Daten liegen in einem 95%-Konfidenzintervall. Wir zeigen nur die R-Werte für die zehn grössten Kantone.",
                             " In kleinen Kantonen ist der Unsicherheitsbereich teilweise sehr gross, so dass keine verlässlichen Aussagen möglich sind.",
                             " Die neusten Schätzungen der Kantone liegen in der Regel einige Tage hinter der nationalen Schätzung.<br> Stand: ",
-                            format(nth(eth$Datum, -2)-4, format = "%d. %m. %Y"))
+                            gsub("\\b0(\\d)\\b", "\\1", format(nth(eth$Datum, -2)-4, format = "%d. %m. %Y")))
 
 colnames(eth_cantons) <- c("Kanton", "", "Unsicherheitsbereich", "Median")
 
@@ -212,7 +212,7 @@ bag_kanton_choro <- bag_cases %>%
   arrange(geoRegion) %>%
   select(geoRegion, per100k)
 
-bag_kanton_choro_notes <- paste0("Stand: ", format(max(bag_cases$datum), , format = "%d. %m. %Y"))
+bag_kanton_choro_notes <- paste0("Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(bag_cases$datum), format = "%d. %m. %Y")))
 
 update_chart(id = "a2fc71a532ec45c64434712991efb41f", data = bag_kanton_choro, notes = bag_kanton_choro_notes)
 
@@ -342,13 +342,14 @@ bag_hosp_cap_regions <- bag_hosp_cap_cantons %>%
   arrange(desc(`Patienten mit Covid-19`))
 
 # percentages for notes
+
 bag_hosp_cap_regions_notes <- paste0("Schweizweit sind derzeit etwa ", 
                                       last(subset(bag_hosp_cap, geoRegion == 'CH', select = c('datum', 'Auslastung in %'))$'Auslastung in %' ), 
                                       " Prozent der Intensivbetten belegt. Die Covid-19-Patienten machen derzeit rund ", 
                                       round(100*last(subset(bag_hosp_cap, geoRegion == 'CH', select = c('datum', 'Patienten mit Covid-19'))$'Patienten mit Covid-19') / 
                                               last(subset(bag_hosp_cap, geoRegion == 'CH', select = c('datum', 'Auslastung'))$'Auslastung')),
                                       " Prozent der Patienten aus.<br>Stand: ",
-                                     format(max(bag_hosp_cap$datum), format = "%d. %m. %Y"))
+                                     gsub("\\b0(\\d)\\b", "\\1", format(max(bag_hosp_cap$datum), format = "%d. %m. %Y")))
 
 
 update_chart(id = "e7ab74f261f39c7b670954aaed6de280", data = bag_hosp_cap_regions, notes = bag_hosp_cap_regions_notes)
@@ -368,9 +369,9 @@ bag_cases_bez_dates <- read_csv(bag_data$sources$individual$csv$extraGeoUnits$ca
   select(period_start_date, period_end_date)
 
 bag_cases_bez_notes <- paste0("Zeitraum: ", 
-                              format(bag_cases_bez_dates$period_start_date, format = "%d. %m."),
+                              gsub("\\b0(\\d)\\b", "\\1", format(bag_cases_bez_dates$period_start_date, format = "%d. %m.")),
                               " bis ",
-                              format(bag_cases_bez_dates$period_end_date, format = "%d. %m. %Y"),
+                              gsub("\\b0(\\d)\\b", "\\1", format(bag_cases_bez_dates$period_end_date, format = "%d. %m. %Y")),
                               ". Die Zahlen werden alle 2 Wochen aktualisiert.")
 
 update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e", 
@@ -431,8 +432,7 @@ ch_vacc_manuf <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$v
 #Manufacturer of Vaccine
 update_chart(id = "e5aee99aec92ee1365613b671ef405f7", data = ch_vacc_manuf)
 
-ch_vacc_date <- format(last(ch_vacc_adm$date), format = "%d. %m. %Y") #which is the last date available?
-
+ch_vacc_date <-  gsub("\\b0(\\d)\\b", "\\1", format(last(ch_vacc_adm$date), format = "%d. %m. %Y"))
 
 ## Ich habe die folgende Karte aus dem Grafikstück genommen, da sie sich mit einer anderen Grafik doppelt.
 ## Muss aber trotzdem aktualisiert werden für Newsroom (fsl)
