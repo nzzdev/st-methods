@@ -77,9 +77,6 @@ uzh_raw <- read_csv("https://covid-norms.ch/wp-content/uploads/data/complete.csv
   rename(Geimpfte = f300_1_Geimpft, Impfwillige = f300_1_Zustimmung, Unentschlossene = f300_1_Neutral, Ablehnende = f300_1_Ablehnung)
 
 # write
-write_clip(uzh_raw)
-browseURL("https://q.st.nzz.ch/editor/chart/26356a1918b687a3e1a7ff0d5e0b9675")
-
 update_chart(id = "26356a1918b687a3e1a7ff0d5e0b9675", 
              data = uzh_raw)
 
