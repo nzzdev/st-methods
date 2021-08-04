@@ -524,9 +524,17 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
          `Teilweise geimpft` = round(`Teilweise geimpft`, 1)) %>%
   arrange(desc(`Altersklasse`))
 
+vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
+  select(date) %>% 
+  filter(date == max(date)) %>% 
+  mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 1), "%Y-%W-%u")+6) %>%
+  unique() %>%
+  deframe() %>%
+  format(format = "%d. %m. %Y")
+
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
-             notes = paste0("Stand: ", ch_vacc_date))
+             notes = paste0("Die Zahlen werden wöchentlich aktualisiert.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)))
 
 #### Vaccination, delivered, received ####
 
