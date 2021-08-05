@@ -93,7 +93,7 @@ if __name__ == '__main__':
             timestamp_str
 
         # insert id and subtitle manually and run function
-        update_chart(id='245e5a30acb9ffa8e53b336e6b83c7bc',
+        update_chart(id='ab97925bcc5055b33011fb4d3326e163',
                      data=df, notes=notes_chart)
 
     except:
