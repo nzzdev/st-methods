@@ -39,7 +39,7 @@ env:
   CONFIDENCE: 80
 
   # How large to draw the marker
-  MARKER_RADIUS: 0.5
+  MARKER_RADIUS: 2
 
   # Any notes that should be added to the chart
   NOTES: >-
