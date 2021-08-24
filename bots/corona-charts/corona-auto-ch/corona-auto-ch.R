@@ -530,8 +530,6 @@ id_hosp_line <- id_hosp_hist %>%
   select(-4,-2) %>%
   head(-2)
 
-write_clip(id_hosp_line)
-
 update_chart(id = "8d9bea408c789a55ff9d8f19e10a3397", 
              data = id_hosp_line)
 
