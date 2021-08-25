@@ -291,53 +291,22 @@ bag_hosp_cap_cantons <- bag_hosp_cap %>%
   filter(datum == max(datum), geoRegion != 'CHFL' & geoRegion != 'CH' & geoRegion != 'FL') %>%
   select('geoRegion', 'Auslastung', 'Kapazität', 'Patienten mit Covid-19', 'Andere Patienten', 'Freie Betten')
 
-bag_hosp_cap_cantons$region <- ""
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'GE' | 
-                       bag_hosp_cap_cantons$geoRegion == 'VS' |
-                       bag_hosp_cap_cantons$geoRegion == 'VD'
-                     , "region"] <- "Genferseeregion"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'BE' | 
-                       bag_hosp_cap_cantons$geoRegion == 'SO' |
-                       bag_hosp_cap_cantons$geoRegion == 'FR' |
-                       bag_hosp_cap_cantons$geoRegion == 'NE' |
-                       bag_hosp_cap_cantons$geoRegion == 'JU'
-                     , "region"] <- "Espace Mittelland"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'BS' | 
-                       bag_hosp_cap_cantons$geoRegion == 'BL' |
-                       bag_hosp_cap_cantons$geoRegion == 'AG' 
-                     , "region"] <- "Nordwestschweiz"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'ZH'  
-                     , "region"] <- "Zürich"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'SG' | 
-                       bag_hosp_cap_cantons$geoRegion == 'TG' |
-                       bag_hosp_cap_cantons$geoRegion == 'AI' | 
-                       bag_hosp_cap_cantons$geoRegion == 'AR' | 
-                       bag_hosp_cap_cantons$geoRegion == 'GL' |
-                       bag_hosp_cap_cantons$geoRegion == 'GR' |
-                       bag_hosp_cap_cantons$geoRegion == 'SH'
-                     , "region"] <- "Ostschweiz"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'TI'  
-                     , "region"] <- "Tessin"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'LU' | 
-                       bag_hosp_cap_cantons$geoRegion == 'UR' |
-                       bag_hosp_cap_cantons$geoRegion == 'SZ' |
-                       bag_hosp_cap_cantons$geoRegion == 'OW' |
-                       bag_hosp_cap_cantons$geoRegion == 'NW' |
-                       bag_hosp_cap_cantons$geoRegion == 'ZG' 
-                     , "region"] <- "Zentralschweiz"
-
-
 bag_hosp_cap_regions <- bag_hosp_cap_cantons %>%
+  mutate(region = case_when(geoRegion %in% c("GE", "VS", "VD") ~ "Genferseeregion",
+                            geoRegion %in% c("BE", "SO", "FR", "NE", "JU") ~ "Espace Mittelland",
+                            geoRegion %in% c("BS", "BL", "AG") ~ "Nordwestschweiz",
+                            geoRegion == "ZH" ~ "Zürich",
+                            geoRegion %in% c("SG", "TG", "AI", "AR", "GL", "SH", "GR") ~ "Ostschweiz",
+                            geoRegion %in% c("UR", "SZ", "OW", "NW", "LU", "ZG") ~ "Zentralschweiz",
+                            geoRegion == "TI" ~ "Tessin")) %>%
   group_by(region) %>% 
   drop_na()  %>%
   summarise(Auslastung = sum(Auslastung),
             "Kapazität" = sum(`Kapazität`),
             "Patienten mit Covid-19" = sum(`Patienten mit Covid-19`),
             "Andere Patienten" = sum(`Andere Patienten`),
-            "Freie Betten" = sum(`Freie Betten`)) %>% 
-  mutate("Patienten mit Covid-19" = `Patienten mit Covid-19`*100/`Kapazität`,
-    "Andere Patienten" = `Andere Patienten`*100/`Kapazität`,
-    "Freie Betten" = `Freie Betten`*100/`Kapazität`) %>%
+            "Freie Betten" = sum(`Freie Betten`)) %>%
+  mutate_at(4:6, .funs = funs(round(.*100/`Kapazität`,1))) %>%
   select(1, 4:6) %>%
   arrange(desc(`Patienten mit Covid-19`))
 
