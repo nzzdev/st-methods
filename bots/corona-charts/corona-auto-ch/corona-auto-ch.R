@@ -425,8 +425,6 @@ ch_vacc_manuf <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$v
   spread(vaccine, sumTotal) %>%
   rename('COVID-19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
 
-bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons
-
 ch_inf_vacc <- read_csv(bag_data$sources$individual$csv$daily$casesVaccPersons)%>%
   filter(vaccine == "all")
 
@@ -459,7 +457,7 @@ update_chart(id = "ab97925bcc5055b33011fb4d3320012a",
              notes = paste0("Die Zahlen des BAG können unvollständig sein, da der Meldeprozess noch eingeführt wird. ",
                             "Die Zahl der Infektionen bei Geimpften dürften stark unterschätzt sein, da sich Geimpfte ",
                             "weniger testen lassen und so viele Fälle untentdeckt bleiben dürften.<br>Stand: ",
-                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date)-1, format = "%d. %m. %Y"))))
+                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
              
 id_inf_hist <- bag_cases %>%
@@ -493,7 +491,7 @@ update_chart(id = "c041757a38ba1d4e6851aaaee55c6207",
              data = id_hist, 
              notes = paste0("Der Zeitraum ab 1. Juli wurde so gewählt, weil dort bereits eine relativ hohe Impfquote erreicht ist, ",
                             "die Zahlen also weniger auf eine tiefe Impfquote zurückzuführen sind.<br>Stand: ",
-                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date)-1, format = "%d. %m. %Y"))))
+                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
 id_hosp_line <- id_hosp_hist %>%
   mutate_at(2:3, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
