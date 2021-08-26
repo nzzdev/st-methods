@@ -249,8 +249,10 @@ bag_age_deaths  <- bag_deaths_age %>%
   select(datum, altersklasse_covid19, entries) %>%
   spread(altersklasse_covid19, entries) %>%
   mutate(`0–59` = `0 - 9` +  `10 - 19` + `20 - 29` +  `30 - 39` + `40 - 49` +  `50 - 59`, `60–79` = `60 - 69` +  `70 - 79`) %>%
-  select(datum, `0–59`,`60–79`, `80+`) %>%
-  slice(1:n()-1) #incomplete week results
+  select(datum, `0–59`,`60–79`, `80+`) 
+
+# %>%
+#   slice(1:n()-1) #incomplete week results
 
 update_chart(id = "ec163329f1a1a5698ef5d1ee7587b3d6", data = bag_age_deaths)
 
@@ -261,8 +263,10 @@ bag_age_hosps  <- bag_hosp_age %>%
   select(datum, altersklasse_covid19, entries) %>%
   spread(altersklasse_covid19, entries) %>%
   mutate(`0–59` = `0 - 9` +  `10 - 19` + `20 - 29` +  `30 - 39` + `40 - 49` +  `50 - 59`, `60–79` = `60 - 69` +  `70 - 79`) %>%
-  select(datum, `0–59`,`60–79`, `80+`) %>%
-  slice(1:n()-1) #incomplete week results
+  select(datum, `0–59`,`60–79`, `80+`)
+
+# %>%
+#   slice(1:n()-1) #incomplete week results
 
 update_chart(id = "b3423b05ea50c39f8da718719ec3d161", data = bag_age_hosps)
 
