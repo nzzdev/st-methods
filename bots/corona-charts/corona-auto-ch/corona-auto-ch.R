@@ -485,7 +485,7 @@ id_hist <- rbind(id_inf_hist, id_hosp_hist, id_death_hist) %>%
             entries.y = sum(entries.y)) %>%
   mutate("Geimpft" = round(entries.y*100/entries.x,1),
          "Nicht geimpft" = 100-Geimpft) %>%
-  select(-c(2:3))
+  select(1,5,4)
 
 update_chart(id = "c041757a38ba1d4e6851aaaee55c6207", 
              data = id_hist, 
