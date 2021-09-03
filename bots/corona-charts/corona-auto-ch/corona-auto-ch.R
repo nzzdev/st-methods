@@ -107,12 +107,11 @@ df_overview <- data.frame(
   Wert = c(new_infections, new_hosp, new_death, newDoses)
   )
 
-subtitle = paste0("Zuletzt aktualisiert am ", format(max(tmp_death$datum), format = "%d. %m. %Y"))
+subtitle = paste("Zuletzt aktualisiert am ", format(max(tmp_death$datum), format = "%d. %m. %Y"))
 
 # write
-update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e", 
-             data = df_overview,
-             subtitle = subtitle)
+#update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e", 
+#             data = df_overview)
 
 
 #### Update BAG data ####

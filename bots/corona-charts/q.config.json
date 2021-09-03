@@ -441,17 +441,6 @@
         "notes": "",
         "data": []
       }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "2e1103d436e7d4452fc9a58ec507bb2e"
-        }
-      ],
-      "item": {
-        "data": []
-      }
     }
   ]
 }
