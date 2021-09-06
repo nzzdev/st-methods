@@ -26,9 +26,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
+          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
       - name: Restore R packages
         shell: Rscript {0}
         run: |
@@ -50,9 +48,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/corona-charts/requirements.txt') }}
       - name: Install python packages
         run: |
           python -m pip install --upgrade pip

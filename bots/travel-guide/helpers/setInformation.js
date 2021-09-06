@@ -36,21 +36,24 @@ function setTripsInformations(tripsInformation) {
     let newTripInformation = {};
 
     if (!tripInformation.data) continue;
-    if (!tripInformation.data.attributes.outbound) continue;
     if (tripInformation.data.type.toUpperCase() !== "TRIP") throw new Error("Invalid data type.");
     if (tripInformation.data.attributes.category.toUpperCase() !== "ONE_WAY_TRIP") throw new Error("Invalid attributes category.");
 
+    const outbound = tripInformation.data.attributes.segments.find(segment => segment.segmentType.toUpperCase() === "OUTBOUND");
+
+    if (!outbound) throw new Error("No outbound data.");
+
     newTripInformation.category = tripInformation.data.attributes.category;
-    newTripInformation.origin = tripInformation.data.attributes.outbound.origin.countryCode;
-    newTripInformation.destination = tripInformation.data.attributes.outbound.destination.countryCode;
+    newTripInformation.origin = outbound.origin.countryCode;
+    newTripInformation.destination = outbound.destination.countryCode;
 
     let included = setIncludedInformations(tripInformation.included, false);
     let travelRestrictions = [];
 
-    travelRestrictions.push(...getIncludedInformations(tripInformation.data.attributes.outbound.entryRestrictions, included));
-    travelRestrictions.push(...getIncludedInformations(tripInformation.data.attributes.outbound.travelRestrictions, included));
-    travelRestrictions.push(...getIncludedInformations(tripInformation.data.attributes.outbound.documents, included));
-    travelRestrictions.push(...getIncludedInformations(tripInformation.data.attributes.outbound.exitRestrictions, included));
+    travelRestrictions.push(...getIncludedInformations(outbound.entryRestrictions, included));
+    travelRestrictions.push(...getIncludedInformations(outbound.travelRestrictions, included));
+    travelRestrictions.push(...getIncludedInformations(outbound.documents, included));
+    travelRestrictions.push(...getIncludedInformations(outbound.exitRestrictions, included));
 
     newTripInformation.ppe = filterItemsByTypeAndCategory(travelRestrictions, "PROCEDURE", "PPE");
     newTripInformation.quarantine = filterItemsByTypeAndCategory(travelRestrictions, "PROCEDURE", "QUARANTINE");
@@ -59,26 +62,26 @@ function setTripsInformations(tripsInformation) {
     newTripInformation.documents = filterItemsByTypeAndCategory(travelRestrictions, "PROCEDURE", "DOC_REQUIRED");
     newTripInformation.entryRestrictions = filterItemsByTypeAndCategory(travelRestrictions, "RESTRICTION", "NO_ENTRY");
 
-    newTripInformation.mandatoryProcedures = {
+    newTripInformation.categoriesStatus = {
       ppe: {
-        fullyVaccinated: hasMandatoryProcedures(newTripInformation.ppe, true),
-        notVaccinated: hasMandatoryProcedures(newTripInformation.ppe, false)
+        fullyVaccinated: getCategoryStatus(newTripInformation.ppe, true),
+        notVaccinated: getCategoryStatus(newTripInformation.ppe, false)
       },
       quarantine: {
-        fullyVaccinated: hasMandatoryProcedures(newTripInformation.quarantine, true),
-        notVaccinated: hasMandatoryProcedures(newTripInformation.quarantine, false)
+        fullyVaccinated: getCategoryStatus(newTripInformation.quarantine, true),
+        notVaccinated: getCategoryStatus(newTripInformation.quarantine, false)
       },
       covidTest: {
-        fullyVaccinated: hasMandatoryProcedures(newTripInformation.covidTest, true),
-        notVaccinated: hasMandatoryProcedures(newTripInformation.covidTest, false)
+        fullyVaccinated: getCategoryStatus(newTripInformation.covidTest, true),
+        notVaccinated: getCategoryStatus(newTripInformation.covidTest, false)
       },
       healthMeasures: {
-        fullyVaccinated: hasMandatoryProcedures(newTripInformation.healthMeasures, true),
-        notVaccinated: hasMandatoryProcedures(newTripInformation.healthMeasures, false)
+        fullyVaccinated: getCategoryStatus(newTripInformation.healthMeasures, true),
+        notVaccinated: getCategoryStatus(newTripInformation.healthMeasures, false)
       },
       documents: {
-        fullyVaccinated: hasMandatoryProcedures(newTripInformation.documents, true),
-        notVaccinated: hasMandatoryProcedures(newTripInformation.documents, false)
+        fullyVaccinated: getCategoryStatus(newTripInformation.documents, true),
+        notVaccinated: getCategoryStatus(newTripInformation.documents, false)
       }
     };
 
@@ -105,7 +108,7 @@ function setIncludedInformations(includedInformations, includeIncludedProperty) 
     newIncludedItem.description = includedItem.attributes.description;
     // newIncludedItem.directionality = includedItem.attributes.directionality;
     newIncludedItem.documentType = includedItem.attributes.documentType;
-    // newIncludedItem.documentLinks = includedItem.attributes.documentLinks;
+    newIncludedItem.documentLinks = includedItem.attributes.documentLinks;
     newIncludedItem.lastUpdatedAt = includedItem.attributes.lastUpdatedAt;
     newIncludedItem.more = includedItem.attributes.more;
     newIncludedItem.severity = includedItem.attributes.severity;
@@ -194,43 +197,45 @@ function filterItemsByTypeAndCategory(items, type, category) {
     return [];
   }
 }
+// Function also used here: https://github.com/nzzdev/Q-custom-code-projects/blob/e1157859121356eaaae17985a67090605360bfaa/2112-travel-guide/src/helpers/helpers.js#L141
+function getCategoryStatus(procedures, vaccinated) {
+  if (procedures.length === 0) return null; // undefined not allowed in json
 
-function hasMandatoryProcedures(travelRestrictions, vaccinated) {
-  if (travelRestrictions.length === 0) return null; // undefined is not allowed in json
+  if (hasProcedures(procedures, "MANDATORY", vaccinated)) {
+    return "MANDATORY";
+  }
+  if (hasProcedures(procedures, "MAY_BE_REQUIRED", vaccinated)) {
+    return "MAY_BE_REQUIRED";
+  }
+  if (hasProcedures(procedures, "RECOMMENDED", vaccinated)) {
+    return "RECOMMENDED";
+  }
+  if (hasProcedures(procedures, "OPTIONAL", vaccinated)) {
+    return "OPTIONAL";
+  }
+  if (hasProcedures(procedures, "NOT_REQUIRED", vaccinated)) {
+    return "NOT_REQUIRED";
+  }
 
-  let mandatoryProcedures = travelRestrictions.filter(travelRestriction => travelRestriction.enforcement === "MANDATORY");
-  let nonMandatoryProcedures = travelRestrictions.filter(travelRestriction => travelRestriction.enforcement !== "MANDATORY");
+  return null;
+}
+// Function also used here: https://github.com/nzzdev/Q-custom-code-projects/blob/e1157859121356eaaae17985a67090605360bfaa/2112-travel-guide/src/helpers/helpers.js#L163
+function hasProcedures(procedures, enforcement, vaccinated) {
+  let proceduresByEnforcement = procedures.filter(travelRestriction => travelRestriction.enforcement === enforcement);
+  
+  let countVaccinatedTags = proceduresByEnforcement.filter(travelRestriction => travelRestriction.tags && travelRestriction.tags.indexOf("fully_vaccinated") > -1).length;
+  let countNotVaccinatedTags = proceduresByEnforcement.filter(travelRestriction => travelRestriction.tags && travelRestriction.tags.indexOf("not_vaccinated") > -1).length;
+  let countRemainingProcedures = proceduresByEnforcement.length - countVaccinatedTags - countNotVaccinatedTags;
 
-  let countMandatoryVaccinatedTags = mandatoryProcedures.filter(travelRestriction => travelRestriction.tags && travelRestriction.tags.indexOf("fully_vaccinated") > -1).length;
-  let countMandatoryNotVaccinatedTags = mandatoryProcedures.filter(travelRestriction => travelRestriction.tags && travelRestriction.tags.indexOf("not_vaccinated") > -1).length;
-  let countNonMandatoryVaccinatedTags = nonMandatoryProcedures.filter(travelRestriction => travelRestriction.tags && travelRestriction.tags.indexOf("fully_vaccinated") > -1).length;
-  let countNonMandatoryNotVaccinatedTags = nonMandatoryProcedures.filter(travelRestriction => travelRestriction.tags && travelRestriction.tags.indexOf("not_vaccinated") > -1).length;
-  let countRemainingMandatoryProcedures = mandatoryProcedures.length - countMandatoryVaccinatedTags - countMandatoryNotVaccinatedTags;
-  let countRemainingNonMandatoryProcedures = nonMandatoryProcedures.length - countNonMandatoryVaccinatedTags - countNonMandatoryNotVaccinatedTags;
-
-  if (countRemainingMandatoryProcedures > 0) return true;
+  if (countRemainingProcedures > 0) return true;
 
   if (vaccinated) {
-    if (countMandatoryVaccinatedTags > 0) {
-      return true;
-    } else {
-      if (countRemainingNonMandatoryProcedures > 0 || countNonMandatoryVaccinatedTags > 0) {
-        return false;
-      } else {
-        return null;
-      }
-    }
+    if (countVaccinatedTags > 0) return true;
   } else {
-    if (countMandatoryNotVaccinatedTags > 0) {
-      return true;
-    } else {
-      if (countRemainingNonMandatoryProcedures > 0 || countNonMandatoryNotVaccinatedTags > 0) {
-        return false;
-      } else {
-        return null;
-      } 
-    }
+    if (countNotVaccinatedTags > 0) return true;
   }
+
+  return false;
 }
 
 function findIncludedById(id, includedInformations) {
