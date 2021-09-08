@@ -103,16 +103,16 @@ doses_today = filter(ch_vacc_adm, date == max(date), geoRegion == 'CHFL')$sumTot
 newDoses = paste0('+ ', doses_today - doses_yesterday)
 
 df_overview <- data.frame(
-  Indikator = c("Neuinfektionen", "Hospitalisierungen", "Todesfälle", "Verabreichte Impfdosen"),
-  Wert = c(new_infections, new_hosp, new_death, newDoses)
-  )
+  Indikator = c("Neuinfektionen", "Hospitalisierungen", "Todesfälle"),
+  Wert = c(new_infections, new_hosp, new_death)
+)
 
 subtitle = paste("Zuletzt aktualisiert am ", format(max(tmp_death$datum), format = "%d. %m. %Y"))
 
 # write
-#update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e", 
-#             data = df_overview)
-
+update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e", 
+             data = df_overview,
+             subtitle = subtitle)
 
 #### Update BAG data ####
 
