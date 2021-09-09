@@ -34,10 +34,10 @@ eth_title <- case_when(nth(eth$median_R_mean, -2) < 0.7 ~ "Die Reproduktionszahl
 colnames(eth) <- c("Datum", "", "Unsicherheitsbereich*", "Median")
 
 #q-cli update
-update_chart(id = "d84021d6716b1e848bd91a20e2b63cb0", 
-             data = eth, 
-             notes = eth_notes,
-             title = eth_title)
+#update_chart(id = "d84021d6716b1e848bd91a20e2b63cb0", 
+#             data = eth, 
+#             notes = eth_notes,
+#             title = eth_title)
 
 #### Update R eth estimate cantons ####
 
