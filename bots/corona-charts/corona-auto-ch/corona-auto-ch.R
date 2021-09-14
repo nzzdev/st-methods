@@ -103,16 +103,16 @@ doses_today = filter(ch_vacc_adm, date == max(date), geoRegion == 'CHFL')$sumTot
 newDoses = paste0('+ ', doses_today - doses_yesterday)
 
 df_overview <- data.frame(
-  Indikator = c("Neuinfektionen", "Hospitalisierungen", "Todesfälle", "Verabreichte Impfdosen"),
-  Wert = c(new_infections, new_hosp, new_death, newDoses)
-  )
+  Indikator = c("Neuinfektionen", "Hospitalisierungen", "Todesfälle"),
+  Wert = c(new_infections, new_hosp, new_death)
+)
 
 subtitle = paste("Zuletzt aktualisiert am ", format(max(tmp_death$datum), format = "%d. %m. %Y"))
 
 # write
-#update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e", 
-#             data = df_overview)
-
+update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e", 
+             data = df_overview,
+             subtitle = subtitle)
 
 #### Update BAG data ####
 
@@ -295,10 +295,8 @@ bag_age_hosps  <- bag_hosp_age %>%
   select(datum, altersklasse_covid19, entries) %>%
   spread(altersklasse_covid19, entries) %>%
   mutate(`0–59` = `0 - 9` +  `10 - 19` + `20 - 29` +  `30 - 39` + `40 - 49` +  `50 - 59`, `60–79` = `60 - 69` +  `70 - 79`) %>%
-  select(datum, `0–59`,`60–79`, `80+`)
-
-# %>%
-#   slice(1:n()-1) #incomplete week results
+  select(datum, `0–59`,`60–79`, `80+`) %>%
+  slice(1:n()-1) #incomplete week results
 
 update_chart(id = "b3423b05ea50c39f8da718719ec3d161", data = bag_age_hosps)
 
