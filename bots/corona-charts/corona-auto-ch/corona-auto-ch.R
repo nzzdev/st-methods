@@ -80,7 +80,6 @@ uzh_raw <- read_csv("https://covid-norms.ch/wp-content/uploads/data/complete.csv
 update_chart(id = "26356a1918b687a3e1a7ff0d5e0b9675", 
              data = uzh_raw)
 
-
 #### Update BAG data ####
 # Load Data Schema
 
@@ -129,15 +128,18 @@ bag_var <- read.csv(bag_data$sources$individual$csv$daily$virusVariantsWgs)%>%
 
 tmp_cases <- read_csv(bag_data$sources$individual$csv$daily$cases) %>%
   filter(datum == max(datum), geoRegion == 'CHFL')
-new_infections = paste0("+ ", tmp_cases$entries_diff_last)
+
+new_infections <- paste0("+ ", tmp_cases$entries_diff_last)
 
 tmp_hosp <- read_csv(bag_data$sources$individual$csv$daily$hosp) %>%
   filter(datum == max(datum), geoRegion == 'CHFL')
-new_hosp = paste0('+ ', tmp_hosp$entries_diff_last)
+
+new_hosp <- paste0('+ ', tmp_hosp$entries_diff_last)
 
 tmp_death <- read_csv(bag_data$sources$individual$csv$daily$death) %>%
   filter(datum == max(datum), geoRegion == 'CHFL')
-new_death = paste0('+ ', tmp_death$entries_diff_last)
+
+new_death <- paste0('+ ', tmp_death$entries_diff_last)
 
 # ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered)
 # 
@@ -150,7 +152,9 @@ df_overview <- data.frame(
   Wert = c(new_infections, new_hosp, new_death)
 )
 
-subtitle <- paste0("Neue Meldungen des Bundesamtes für Gesundheit vom ", format(max(tmp_death$datum), format = "%d. %m. %Y")," für die Schweiz und Liechtenstein")
+subtitle <- paste0("Neue Meldungen des Bundesamtes für Gesundheit vom ", 
+                   gsub("\\b0(\\d)\\b", "\\1", format(max(tmp_death$datum), format = "%d. %m. %Y")),
+                   " für die Schweiz und Liechtenstein")
 
 # write
 update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e", 
