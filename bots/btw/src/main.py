@@ -42,7 +42,7 @@ for k in root.findall('Kandidat'):
         # Wurde gewählt
 
         #prozent = round(float(k.find('Wahldaten').attrib.get('Prozent')), 2)
-        gebiet = direkt.attrib.get('Gebietsnummer')
+        gebiet = int(direkt.attrib.get('Gebietsnummer'))
         gruppe = direkt.attrib.get('Gruppenname')
         person = k.find('Personendaten')
 
@@ -54,8 +54,8 @@ for k in root.findall('Kandidat'):
         )
 
         # Update dataframe
-        df_wahlkreise.loc[df_wahlkreise['#'] == int(gebiet), 'Gewählt'] = name
-        df_wahlkreise.loc[df_wahlkreise['#'] == int(gebiet), 'Partei'] = translate_party(gruppe)
+        df_wahlkreise.loc[df_wahlkreise['#'] == gebiet, 'Gewählt'] = name
+        df_wahlkreise.loc[df_wahlkreise['#'] == gebiet, 'Partei'] = translate_party(gruppe)
 
 # Set Index (Q needs it)
 df_wahlkreise['#'] = df_wahlkreise['#'].astype(str)
