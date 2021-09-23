@@ -1,4 +1,4 @@
-name: Bundestagswahl
+name: Update Bundestagswahl
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
