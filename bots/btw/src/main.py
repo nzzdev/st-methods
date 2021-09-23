@@ -57,13 +57,15 @@ for k in root.findall('Kandidat'):
         df_wahlkreise.loc[df_wahlkreise['#'] == int(gebiet), 'Gewählt'] = name
         df_wahlkreise.loc[df_wahlkreise['#'] == int(gebiet), 'Partei'] = translate_party(gruppe)
 
-    df_wahlkreise.set_index(df_wahlkreise['#'], inplace=True)
+# Set Index (Q needs it)
+df_wahlkreise['#'] = df_wahlkreise['#'].astype(str)
+df_wahlkreise.set_index('#', inplace=True)
 
-df_wahlkreise.head()
-
-# Update chart
+# Get Timezone and date
 berlin = pytz.timezone('Europe/Berlin')
 now = datetime.datetime.now().astimezone(berlin).strftime('%d. %-m., %H.%M Uhr')
+
+# Update chart
 helpers.update_chart('7e4ecfe5b05ba3a28acf390677a5e57f',
     data = df_wahlkreise,
     notes = "Stand: vorläufiges Endergebnis. Zuletzt aktualisiert: %s" % now)
