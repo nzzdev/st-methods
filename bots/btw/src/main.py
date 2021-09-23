@@ -7,7 +7,7 @@ import datetime, pytz
 
 # Consts
 url = 'https://www.bundeswahlleiter.de/bundestagswahlen/2021/ergebnisse/opendata/daten/gewaehlte_01.xml'
-wahlkreise = Path('../data/wahlkreise.csv')
+wahlkreise = Path('data/wahlkreise.csv')
 
 # Load data
 d = requests.get(url)
