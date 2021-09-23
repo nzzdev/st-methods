@@ -3,11 +3,14 @@ import requests
 import xml.etree.ElementTree as ET
 from pathlib import Path
 import helpers
-import datetime, pytz
+import datetime, pytz, os
+
+# Set Working Directory
+os.chdir(os.path.dirname(__file__))
 
 # Consts
 url = 'https://www.bundeswahlleiter.de/bundestagswahlen/2021/ergebnisse/opendata/daten/gewaehlte_01.xml'
-wahlkreise = Path('data/wahlkreise.csv')
+wahlkreise = Path('../data/wahlkreise.csv')
 
 # Load data
 d = requests.get(url)
