@@ -625,8 +625,8 @@ update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
 ### Schweiz geimpft nach Altersgruppen
 
 vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersons) %>%
-  filter(geoRegion == 'CHFL', type %in% c("COVID19FullyVaccPersons", "COVID19PartiallyVaccPersons")) %>%
-  filter(date ==last(date))%>%
+  filter(geoRegion == 'CHFL', type %in% c("COVID19FullyVaccPersons", "COVID19PartiallyVaccPersons"))%>%
+  filter(date ==last(date), age_group_type == "age_group_AKL10")%>%
   select(altersklasse_covid19, per100PersonsTotal,type) %>%
   spread(type,per100PersonsTotal) %>%
   rename('Altersklasse' = altersklasse_covid19, 
