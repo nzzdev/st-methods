@@ -3,7 +3,7 @@ name: Update Bundestagswahl
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
