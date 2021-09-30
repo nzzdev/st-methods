@@ -14,7 +14,6 @@ os.chdir(os.path.dirname(__file__))
 
 tickers = ["3333.HK"] #Subtitute for the tickers you want
 df = yf.download(tickers,  start = "2021-01-04" , end = date.today() + timedelta(days = 1))
-<<<<<<< Updated upstream
 df = df[['Close']].round(2)
 df.index = df.index.strftime('%Y-%m-%d')
 
