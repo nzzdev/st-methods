@@ -1,3 +1,13 @@
+library(clipr)
+library(tidyverse)
+library(readxl)
+library(httr)
+library(rvest)
+library(RCurl)
+library(zoo)
+library(curl)
+
+
 ####################
 # SECO indicator
 ####################
@@ -188,13 +198,221 @@ sbb <- sbb  %>%
   spread("type", "value")
 
 update_chart(id = "3819150d9ecde64169327d9dd0c610f7", 
+             data = sbb)
+
+
+################################
+# Google & Apple Mobility Data
+################################
+
+URL <- 'https://www.gstatic.com/covid19/mobility/Region_Mobility_Report_CSVs.zip'
+h <- new_handle()
+handle_setopt(h, ssl_verifyhost = 0, ssl_verifypeer=0)
+curl_download(url=URL, "Region_Mobility_Report_CSVs.zip", handle = h)
+unzip("Region_Mobility_Report_CSVs.zip", files = c("2020_CH_Region_Mobility_Report.csv", "2020_AT_Region_Mobility_Report.csv", "2020_DE_Region_Mobility_Report.csv",
+                                                   "2021_CH_Region_Mobility_Report.csv", "2021_AT_Region_Mobility_Report.csv", "2021_DE_Region_Mobility_Report.csv"))
+
+gmr_ch <- rbind(read_csv("2020_CH_Region_Mobility_Report.csv"), read_csv("2021_CH_Region_Mobility_Report.csv"))  %>%
+  filter(is.na(sub_region_1)) %>%
+  mutate(retail_and_recreation_percent_change_from_baseline = rollmean(retail_and_recreation_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         grocery_and_pharmacy_percent_change_from_baseline = rollmean(grocery_and_pharmacy_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         transit_stations_percent_change_from_baseline = rollmean(transit_stations_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         workplaces_percent_change_from_baseline = rollmean(workplaces_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         residential_percent_change_from_baseline = rollmean(residential_percent_change_from_baseline, 7, fill = 0, align = "right")
+         ) %>%
+  filter(date >= '2020-02-21') %>%
+  mutate(Schweiz = (retail_and_recreation_percent_change_from_baseline + grocery_and_pharmacy_percent_change_from_baseline + transit_stations_percent_change_from_baseline + workplaces_percent_change_from_baseline)/4 ) %>%
+  dplyr::select(date, Schweiz)
+
+gmr_at <- rbind(read_csv("2020_AT_Region_Mobility_Report.csv"), read_csv("2021_AT_Region_Mobility_Report.csv"))  %>%
+  filter(is.na(sub_region_1)) %>%
+  mutate(retail_and_recreation_percent_change_from_baseline = rollmean(retail_and_recreation_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         grocery_and_pharmacy_percent_change_from_baseline = rollmean(grocery_and_pharmacy_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         transit_stations_percent_change_from_baseline = rollmean(transit_stations_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         workplaces_percent_change_from_baseline = rollmean(workplaces_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         residential_percent_change_from_baseline = rollmean(residential_percent_change_from_baseline, 7, fill = 0, align = "right")
+         ) %>%
+  filter(date >= '2020-02-21') %>%
+  mutate(`Österreich` = (retail_and_recreation_percent_change_from_baseline + grocery_and_pharmacy_percent_change_from_baseline + transit_stations_percent_change_from_baseline + workplaces_percent_change_from_baseline)/4 ) %>%
+  dplyr::select(date, `Österreich`)
+
+gmr_de <- rbind(read_csv("2020_DE_Region_Mobility_Report.csv"), read_csv("2021_DE_Region_Mobility_Report.csv"))  %>%
+  filter(is.na(sub_region_1)) %>%
+  mutate(retail_and_recreation_percent_change_from_baseline = rollmean(retail_and_recreation_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         grocery_and_pharmacy_percent_change_from_baseline = rollmean(grocery_and_pharmacy_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         transit_stations_percent_change_from_baseline = rollmean(transit_stations_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         workplaces_percent_change_from_baseline = rollmean(workplaces_percent_change_from_baseline, 7, fill = 0, align = "right"),
+         residential_percent_change_from_baseline = rollmean(residential_percent_change_from_baseline, 7, fill = 0, align = "right")
+         ) %>%
+  filter(date >= '2020-02-21') %>%
+  mutate(Deutschland = (retail_and_recreation_percent_change_from_baseline + grocery_and_pharmacy_percent_change_from_baseline + transit_stations_percent_change_from_baseline + workplaces_percent_change_from_baseline)/4 ) %>%
+  dplyr::select(date, Deutschland)
+
+gmr <- merge(gmr_de, gmr_at, by = 'date')
+gmr <- merge(gmr, gmr_ch, by = 'date')
+
+update_chart(id = "101552dc3a2c51542953caad1e8a4bee", 
+             data = gmr)
+
+
+########################################
+# OENB-Index
+########################################
+
+pg <- read_html("https://www.oenb.at/Publikationen/corona/bip-indikator-der-oenb.html")
+
+# get all the Excel (xlsx) links on that page:
+
+html_nodes(pg, xpath=".//a[contains(@href, '.xlsx')]") %>% 
+  html_attr("href") %>% 
+  sprintf("https://www.oenb.at%s", .) -> excel_links
+
+url <- excel_links[1]
+GET(url, write_disk(tf <- tempfile(fileext = ".xlsx")))
+oenb <- read_excel(tf, sheet="Wochen-BIP-Indikator", skip = 13)
+
+oenb <- oenb[ -c(1,2) ]
+oenb <- oenb %>% drop_na(Tourismusexporte)
+names(oenb)[1] <- "Datum"
+oenb$Datum <- gsub(' K', '-', oenb$Datum)
+
+q <- oenb[,c(1:7)]
+update_chart(id = "84daeadb234674f39b55f90454fca893", 
              data = q)
 
 
 
+##############################################################
+# täglicher Lkw-Maut-Fahrleistungsindex
+##############################################################
+
+pg <- read_html("https://www.destatis.de/DE/Themen/Branchen-Unternehmen/Industrie-Verarbeitendes-Gewerbe/Tabellen/Lkw-Maut-Fahrleistungsindex-Daten.html")
+html_nodes(pg, xpath=".//a[contains(@href, '.xlsx')]") %>% 
+  html_attr("href") %>% 
+  sprintf("https://www.destatis.de%s", .) -> excel_links
+
+url <- excel_links
+GET(url, write_disk(tf <- tempfile(fileext = ".xlsx")))
+destatis <- read_excel(tf, sheet = 'Daten', skip = 5)
+
+destatis <- destatis %>% drop_na()
+
+destatis <- destatis[,c('Datum','Kalenderwoche','gleitender 7-Tage-Durchschnitt KSB')]
+names(destatis)[3] <- "KSB"
+
+destatis$Jahr <- strftime(destatis$Datum, format = "%Y")
+destatis$mw <- substring(destatis$Datum, 6, 10)
+
+start = 1
+
+destatis_2021 = subset(destatis, Jahr == 2021 & Kalenderwoche>=start)
+
+destatis_2020 = subset(destatis, Jahr == 2020 & Kalenderwoche>=start)
+
+destatis_2019 = subset(destatis, Jahr == 2019 & Kalenderwoche>=start)
+
+destatis_2019 <- destatis_2019[order(destatis_2019$Datum),]
+destatis_2020 <- destatis_2020[order(destatis_2020$Datum),]
+destatis_2021 <- destatis_2021[order(destatis_2021$Datum),]
+
+q <- destatis_2021[,c('Datum', 'KSB', 'mw')] %>%
+  merge(destatis_2020[,c('Datum', 'KSB', 'mw')], by = "mw" , all.x = TRUE, all.y = TRUE) %>%
+  dplyr::select(mw, KSB.x, KSB.y) %>%
+  dplyr::rename(`2021` = KSB.x, `2020` = KSB.y) %>%
+  merge(destatis_2019[,c('Datum', 'KSB', 'mw')], by = "mw" , all.x = TRUE, all.y = TRUE) %>%
+  mutate(Datum = paste0('2021-',mw)) %>%
+  dplyr::select(Datum, KSB, `2020`, `2021`) %>%
+  dplyr::rename(`2019` = KSB)
+
+update_chart(id = "cb6f52d578153c0940c03f120020de0e", 
+             data = q)
+
+
+###################################################################################
+# U.S. consumer spending 
+###################################################################################
+
+us <- read_csv("https://raw.githubusercontent.com/Opportunitylab/EconomicTracker/main/data/Affinity%20-%20National%20-%20Daily.csv")
+
+us$date <- as.Date(with(us, paste(year, month, day,sep="-")), "%Y-%m-%d")
+
+q <- subset(us, select = c("date", "spend_all"))
+q$spend_all <- as.numeric(q$spend_all)
+q$spend_all <- q$spend_all*100
+q <- subset(q, date >= '2020-01-07')
+
+update_chart(id = "68a474c4f6f4b2503669c110cedae580", 
+             data = q)
 
 
 
+########################################################################
+# Zurich airport departures
+########################################################################
 
+zh_airport_departures <- read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
+zh_airport_departures <- subset(zh_airport_departures, rnwy == 'all' & route == 'total' & time >= '2019-01-01' & time <= Sys.Date(), 
+                                select = c('time', 'value'))
+
+zh_airport_departures <- zh_airport_departures %>%
+  mutate(mean = rollmean(value, 7, fill = 0, align = "right"))
+
+zh_airport_departures$Jahr <- strftime(zh_airport_departures$time, format = "%Y")
+zh_airport_departures$Datum <- substring(zh_airport_departures$time, 6, 10)
+
+zh_airport_departures_2021 <- subset(zh_airport_departures, select = c('Datum', 'Jahr', 'mean'), Jahr == 2021 & time >= '2021-01-01') %>%
+  dplyr::rename(`2021` = mean)
+zh_airport_departures_2020 <- subset(zh_airport_departures, select = c('Datum', 'Jahr', 'mean'), Jahr == 2020 & time >= as.Date('2021-01-01') - 366) %>%
+  dplyr::rename(`2020` = mean, Jahr_2020 = Jahr)
+zh_airport_departures_2019 <- subset(zh_airport_departures, select = c('Datum', 'Jahr', 'mean'), Jahr == 2019 & time >= as.Date('2021-01-01') - 366 - 365) %>%
+  dplyr::rename(`2019` = mean, Jahr_2019 = Jahr) %>%
+  mutate(`2019` = na_if(`2019`, 0))
+
+
+
+zh_airport_departures <- merge(zh_airport_departures_2020, zh_airport_departures_2019, by = 'Datum', all.x = TRUE)
+zh_airport_departures <- merge(zh_airport_departures, zh_airport_departures_2021, by = 'Datum', all.x = TRUE)
+
+zh_airport_departures <- subset(zh_airport_departures, select = c('Datum', 'Jahr', '2019', '2020', '2021'))
+zh_airport_departures$Datum <- paste0('2021-', zh_airport_departures$Datum) 
+zh_airport_departures$Jahr <- NULL
+
+update_chart(id = "e009c0862e7418ee009c6b89abca6339", 
+             data = zh_airport_departures)
+
+
+###########################################################
+# Labor market
+###########################################################
+
+job_room <- read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.seco.jobroom.candidates.csv')
+
+job_room <- subset(job_room, availability == 'tot' & geo == 'tot')
+job_room$date <- substr(job_room$time, 6, 10)
+
+job_room_2021 <- subset(job_room, time >= '2021-01-04', select = c('date', 'value')) %>%
+  dplyr::rename(`2021` = value)
+job_room_2020 <- subset(job_room, time >= as.Date('2021-01-04') - 366 & time <= '2020-12-31', select = c('date', 'value')) %>%
+  dplyr::rename(`2020` = value)
+job_room_2019 <- subset(job_room, time >= as.Date('2021-01-04') - 366 - 365 & time <= '2019-12-31', select = c('date', 'value')) %>%
+  dplyr::rename(`2019` = value)
+
+job_room <- merge(job_room_2020, job_room_2019, by = 'date')
+job_room <- merge(job_room, job_room_2021, by = 'date', all.x = TRUE)
+job_room$date <- paste0('2021-', job_room$date) 
+
+job_room <- job_room[, c('date', '2019', '2020', '2021')]
+
+update_chart(id = "0efbe12a71b5a3de14e8d10edb77724d", 
+             data = job_room)
+
+burning_glass <- read_csv('https://raw.githubusercontent.com/OpportunityInsights/EconomicTracker/main/data/Burning%20Glass%20-%20National%20-%20Weekly.csv')
+
+burning_glass$date <- as.Date(as.character(paste0(burning_glass$year,"-",burning_glass$month,"-",burning_glass$day_endofweek)), format="%Y-%m-%d")
+burning_glass <- subset(burning_glass, select = c('date', 'bg_posts'))
+burning_glass$bg_posts <- burning_glass$bg_posts*100
+
+update_chart(id = "0efbe12a71b5a3de14e8d10edb7abf60", 
+             data = burning_glass)
 
 
