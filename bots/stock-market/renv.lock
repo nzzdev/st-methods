@@ -58,13 +58,6 @@
       "Repository": "CRAN",
       "Hash": "125dc7a0ed375eb68c0ce533b48d291f"
     },
-    "XLConnect": {
-      "Package": "XLConnect",
-      "Version": "1.0.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "578704b341712a948f0b34d447799893"
-    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.1",
@@ -497,13 +490,6 @@
       "Repository": "CRAN",
       "Hash": "97def703420c8ab10d8f0e6c72101e02"
     },
-    "RCurl": {
-      "Package": "RCurl",
-      "Version": "1.98-1.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "cf29e1b71f8736960e0e851123a83e6f"
-    },
     "readr": {
       "Package": "readr",
       "Version": "1.4.0",
@@ -712,13 +698,7 @@
       "Version": "2.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "2826c5d9efb0a88f657c7a679c7106db",
-    "zoo": {
-      "Package": "zoo",
-      "Version": "1.8-8",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "c2ea03282caa1f6972dc84fc5bf671cc"
+      "Hash": "2826c5d9efb0a88f657c7a679c7106db"
     }
   }
 }
