@@ -37,6 +37,9 @@ jobs:
           Rscript bitcoin_automated.R
         env:
           COINMARKETCAPR_API_KEY: ${{ secrets.COINMARKETCAPR_API_KEY }}
+      - name: Run R scripts
+        run: |
+          Rscript economic-real-time-data.R
       - name: Setup python
         uses: actions/setup-python@v2
         with:
