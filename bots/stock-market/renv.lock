@@ -222,6 +222,7 @@
     "desc": {
       "Package": "desc",
       "Version": "1.4.0",
+<<<<<<< HEAD
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "28763d08fadd0b733e3cee9dab4e12fe"
@@ -231,6 +232,17 @@
       "Version": "0.3.4",
       "Source": "Repository",
       "Repository": "CRAN",
+=======
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "28763d08fadd0b733e3cee9dab4e12fe"
+    },
+    "diffobj": {
+      "Package": "diffobj",
+      "Version": "0.3.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+>>>>>>> 8a75139ac1f1fbcf7a2323bb8a9eaf92cd37ffb0
       "Hash": "feb5b7455eba422a2c110bb89852e6a3"
     },
     "digest": {
@@ -611,6 +623,10 @@
       "Repository": "CRAN",
       "Hash": "97def703420c8ab10d8f0e6c72101e02"
     },
+<<<<<<< HEAD
+=======
+    },
+>>>>>>> 8a75139ac1f1fbcf7a2323bb8a9eaf92cd37ffb0
     "raster": {
       "Package": "raster",
       "Version": "3.1-5",
