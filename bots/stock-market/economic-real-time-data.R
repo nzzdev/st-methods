@@ -28,8 +28,6 @@ html_nodes(pg, xpath=".//a[contains(@href, '.xls')]") %>%
   html_attr("href") %>% 
   sprintf("https://www.seco.admin.ch%s", .) -> excel_links
 
-excel_links[1]
-
 url <- excel_links[1]
 GET(url, write_disk(tf <- tempfile(fileext = ".xls")))
 
@@ -184,8 +182,6 @@ pg <- read_html("https://news.sbb.ch/medien/artikel/101333/coronavirus-hintergru
 html_nodes(pg, xpath=".//a[contains(@href, '.xlsx')]") %>% 
   html_attr("href") %>% 
   sprintf("https://news.sbb.ch%s", .) -> excel_links
-
-excel_links[1]
 
 url <- excel_links[1]
 GET(url, write_disk(tf <- tempfile(fileext = ".xlsx")))
