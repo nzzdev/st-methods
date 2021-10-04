@@ -706,6 +706,13 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "2826c5d9efb0a88f657c7a679c7106db"
-    }
+    },
+    "zoo": {
+     "Package": "zoo",
+     "Version": "1.8-8",
+     "Source": "Repository",
+     "Repository": "CRAN",
+     "Hash": "c2ea03282caa1f6972dc84fc5bf671cc"
+     }
   }
 }
