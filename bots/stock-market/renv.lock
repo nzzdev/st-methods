@@ -65,13 +65,6 @@
       "Repository": "CRAN",
       "Hash": "125dc7a0ed375eb68c0ce533b48d291f"
     },
-    "XLConnect": {
-      "Package": "XLConnect",
-      "Version": "1.0.3",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "578704b341712a948f0b34d447799893"
-    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.1",
