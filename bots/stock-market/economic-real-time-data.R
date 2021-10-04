@@ -1,3 +1,6 @@
+rm(list = ls(all = TRUE))
+options(scipen = 999)
+
 library(clipr)
 library(tidyverse)
 library(readxl)
@@ -6,6 +9,11 @@ library(rvest)
 library(RCurl)
 library(zoo)
 library(curl)
+
+
+# import helper functions
+source("./helpers.R")
+
 
 
 ####################
