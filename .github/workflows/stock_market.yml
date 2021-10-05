@@ -2,9 +2,9 @@ name: Update Stock market Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run it at 12:10 MEZ every day (11:10 GMT)
+  # This will run it at 10:10 MEZ every day (9:10 GMT)
   schedule:
-    - cron: "10 11 * * *"
+    - cron: "10 9 * * *"
   workflow_dispatch:
 
 jobs:
