@@ -7,6 +7,8 @@ library(tidyverse)
 library(jsonlite)
 library(zoo)
 
+#setwd for fixes
+#setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # import helper functions
 source("./helpers.R")
 
@@ -462,13 +464,13 @@ ch_vacc_manuf <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$v
   rename('COVID-19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
 
 ch_inf_vacc <- read_csv(bag_data$sources$individual$csv$daily$casesVaccPersons)%>%
-  filter(vaccine == "all")
+  filter(vaccine == "all", vaccination_status == "fully_vaccinated")
 
 ch_hosp_vacc <- read_csv(bag_data$sources$individual$csv$daily$hospVaccPersons) %>%
-  filter(vaccine == "all")
+  filter(vaccine == "all", vaccination_status == "fully_vaccinated")
 
 ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons) %>%
-  filter(vaccine == "all")
+  filter(vaccine == "all", vaccination_status == "fully_vaccinated")
 
 # ch_inf_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
 #   filter(vaccine == "all")
@@ -483,9 +485,9 @@ ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons
 #Impfdurchbrüche
 
 id_total <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
-  filter(date == max(date)) %>%
+  filter(date == max(date))%>%
   cbind(c("Infektionen", "Spitaleintritte", "Todesfälle")) %>%
-  select(10, sumTotal) %>%
+  select(19, sumTotal) %>%
   rename("Typ" = 1, "Total" = 2)
 
 update_chart(id = "ab97925bcc5055b33011fb4d3320012a", 
