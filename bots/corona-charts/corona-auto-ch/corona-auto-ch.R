@@ -463,14 +463,17 @@ ch_vacc_manuf <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$v
   spread(vaccine, sumTotal) %>%
   rename('COVID-19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
 
-ch_inf_vacc <- read_csv(bag_data$sources$individual$csv$daily$casesVaccPersons)%>%
-  filter(vaccine == "all", vaccination_status == "fully_vaccinated")
+ch_inf_vacc <- read_csv(bag_data$sources$individual$csv$daily$casesVaccPersons) %>%
+  filter(vaccine == "all") %>%
+  mutate(type = "Infektionen")
 
 ch_hosp_vacc <- read_csv(bag_data$sources$individual$csv$daily$hospVaccPersons) %>%
-  filter(vaccine == "all", vaccination_status == "fully_vaccinated")
+  filter(vaccine == "all") %>%
+  mutate(type = "Spitaleintritte")
 
 ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons) %>%
-  filter(vaccine == "all", vaccination_status == "fully_vaccinated")
+  filter(vaccine == "all") %>%
+  mutate(type = "Todesfälle")
 
 # ch_inf_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
 #   filter(vaccine == "all")
@@ -480,50 +483,31 @@ ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons
 # 
 # ch_death_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
 #   filter(vaccine == "all")
-# 
 
-#Impfdurchbrüche
+#### Impfdurchbrüche ####
 
 id_total <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
-  filter(date == max(date))%>%
-  cbind(c("Infektionen", "Spitaleintritte", "Todesfälle")) %>%
-  select(19, sumTotal) %>%
-  rename("Typ" = 1, "Total" = 2)
+  filter(date == max(date), vaccination_status %in% c("fully_vaccinated","partially_vaccinated")) %>%
+  select(type, vaccination_status, sumTotal) %>%
+  spread(vaccination_status, sumTotal) %>%
+  rename("Typ" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 3)
 
 update_chart(id = "ab97925bcc5055b33011fb4d3320012a", 
              data = id_total, 
-             notes = paste0("Die Zahlen des BAG können unvollständig sein, da der Meldeprozess noch eingeführt wird. ",
-                            "Die Zahl der Infektionen bei Geimpften dürften stark unterschätzt sein, da sich Geimpfte ",
-                            "weniger testen lassen und so viele Fälle untentdeckt bleiben dürften.<br>Stand: ",
+             notes = paste0("Die Zahl der Infektionen bei Geimpften dürften stark unterschätzt sein, da sich Geimpfte ",
+                            "weniger testen lassen und so viele Fälle untentdeckt bleiben dürften. Zudem fehlen bei",
+                            "den meisten Infektionsfällen Angaben zum Impfstatus. <br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
-             
-id_inf_hist <- bag_cases %>%
-  filter(geoRegion == "CHFL") %>%
-  inner_join(ch_inf_vacc, by = c("datum"= "date")) %>%
-  select(datum, entries.x, entries.y) %>%
-  mutate(type = "Infektionen")
 
-id_hosp_hist <- bag_hosps %>%
-  filter(geoRegion == "CHFL") %>%
-  inner_join(ch_hosp_vacc, by = c("datum"= "date")) %>%
-  select(datum, entries.x, entries.y) %>%
-  mutate(type = "Spitaleintritte")
+id_hist <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+  filter(date >= "2021-07-01") %>%
+  group_by(type, vaccination_status) %>%
+  summarise(entries = sum(entries)) %>%
+  spread(vaccination_status, entries) %>%
+  select("Typ" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3)
 
-id_death_hist <- bag_deaths %>%
-  filter(geoRegion == "CHFL") %>%
-  inner_join(ch_death_vacc, by = c("datum"= "date")) %>%
-  select(datum, entries.x, entries.y) %>%
-  mutate(type = "Todesfälle")
-
-id_hist <- rbind(id_inf_hist, id_hosp_hist, id_death_hist) %>%
-  filter(datum >= "2021-07-01") %>%
-  group_by(type) %>%
-  summarise(entries.x = sum(entries.x),
-            entries.y = sum(entries.y)) %>%
-  mutate("Geimpft" = round(entries.y*100/entries.x,1),
-         "Nicht geimpft" = 100-Geimpft) %>%
-  select(1,5,4)
+id_hist[2:5] <- round(id_hist[2:5]/rowSums(id_hist[2:5])*100,1)
 
 update_chart(id = "c041757a38ba1d4e6851aaaee55c6207", 
              data = id_hist, 
@@ -531,13 +515,13 @@ update_chart(id = "c041757a38ba1d4e6851aaaee55c6207",
                             "die Zahlen also weniger auf eine tiefe Impfquote zurückzuführen sind.<br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
-id_hosp_line <- id_hosp_hist %>%
-  mutate_at(2:3, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
-  rename(Geimpfte = 3) %>%
-  mutate(Ungeimpfte = entries.x-Geimpfte) %>%
-  filter(datum >= "2021-07-01") %>%
-  select(-4,-2) %>%
-  head(-2)
+
+id_hosp_line <- ch_hosp_vacc %>%   
+  select(date, vaccination_status, entries) %>%
+  spread(vaccination_status, entries) %>%
+  mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
+  filter(date >= "2021-07-01") %>%
+  select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3)
 
 update_chart(id = "8d9bea408c789a55ff9d8f19e10a3397", 
              data = id_hosp_line)
