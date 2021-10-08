@@ -160,8 +160,7 @@ html_nodes(pg, xpath=".//a[contains(@href, '.xlsx')]") %>%
 
 url <- excel_links[1]
 GET(url, write_disk(tf <- tempfile(fileext = ".xlsx")))
-sbb <- read_excel(tf, sheet=1, skip = 2, col_names = FALSE) 
-sbb[1] <- NULL
+sbb <- read_excel(tf, sheet=1, skip = 1, col_names = FALSE) 
 
 names(sbb)[1] <- "type"
 names(sbb)[2:54]<- paste0("2020-W", 2:ncol(sbb)-1)
