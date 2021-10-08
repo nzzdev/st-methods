@@ -440,7 +440,6 @@ bag_cert <- bag_cert %>%
 update_chart(id = "15326b5086f1007b7c67825700c2d149", data = bag_cert)
 
 
-
 #### CH Vaccinations ####
 # update on TUE and FRI, check if new BAG vacc data are there, if not read in again later
 
@@ -448,7 +447,7 @@ update_chart(id = "15326b5086f1007b7c67825700c2d149", data = bag_cert)
 ch_vacc_delrec <- read_csv(bag_data$sources$individual$csv$vaccDosesDelivered) %>% 
   select(date,geoRegion, pop, type, sumTotal)
 
-ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered) %>% 
+ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered)%>% 
   select(date,geoRegion, pop, type, sumTotal)
 
 ch_vacc_doses <- rbind(ch_vacc_delrec, ch_vacc_adm)
@@ -464,15 +463,15 @@ ch_vacc_manuf <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$v
   rename('COVID-19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
 
 ch_inf_vacc <- read_csv(bag_data$sources$individual$csv$daily$casesVaccPersons) %>%
-  filter(vaccine == "all") %>%
+#  filter(vaccine == "all") %>%
   mutate(type = "Infektionen")
 
 ch_hosp_vacc <- read_csv(bag_data$sources$individual$csv$daily$hospVaccPersons) %>%
-  filter(vaccine == "all") %>%
+#  filter(vaccine == "all") %>%
   mutate(type = "Spitaleintritte")
 
 ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons) %>%
-  filter(vaccine == "all") %>%
+#  filter(vaccine == "all") %>%
   mutate(type = "Todesfälle")
 
 # ch_inf_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
@@ -485,8 +484,14 @@ ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons
 #   filter(vaccine == "all")
 
 #### Impfdurchbrüche ####
+# By Manuf. - one-off
+# id_total2 <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+#   group_by(type, vaccination_status, vaccine) %>%
+#   summarise(sum = sum(entries), pop = max(pop)) %>%
+#   mutate(per100k = 100000*sum/pop)
 
 id_total <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+  filter(vaccine == "all") %>%
   filter(date == max(date), vaccination_status %in% c("fully_vaccinated","partially_vaccinated")) %>%
   select(type, vaccination_status, sumTotal) %>%
   spread(vaccination_status, sumTotal) %>%
@@ -501,6 +506,7 @@ update_chart(id = "ab97925bcc5055b33011fb4d3320012a",
 
 
 id_hist <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+  filter(vaccine == "all") %>%
   filter(date >= "2021-07-01") %>%
   group_by(type, vaccination_status) %>%
   summarise(entries = sum(entries)) %>%
@@ -516,7 +522,8 @@ update_chart(id = "c041757a38ba1d4e6851aaaee55c6207",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
 
-id_hosp_line <- ch_hosp_vacc %>%   
+id_hosp_line <- ch_hosp_vacc %>%
+  filter(vaccine == "all") %>%
   select(date, vaccination_status, entries) %>%
   spread(vaccination_status, entries) %>%
   mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
@@ -665,8 +672,8 @@ ch_vacc_speed <- ch_vacc_doses %>%
 
 #Just vacc Speed
 #write to Q-cli
-update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e", 
-             data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
+# update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e", 
+#              data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
 
 #Projection
 dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
@@ -739,9 +746,9 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
          Zweitimpfungen = rollmean(n2, 7, NA, align = "right")) %>%
   select(date, Erstimpfungen, Zweitimpfungen)
 
-update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae", 
-             data = ch_vacc_persons_hist_new,
-             notes = paste0("Stand: ", ch_vacc_date))
+# update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae", 
+#              data = ch_vacc_persons_hist_new,
+#              notes = paste0("Stand: ", ch_vacc_date))
 
 # #which day?
 # herd_immunity_date_ch
