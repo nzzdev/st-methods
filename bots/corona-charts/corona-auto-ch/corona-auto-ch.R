@@ -672,8 +672,8 @@ ch_vacc_speed <- ch_vacc_doses %>%
 
 #Just vacc Speed
 #write to Q-cli
-# update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e", 
-#              data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
+update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e",
+             data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
 
 #Projection
 dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
@@ -746,9 +746,9 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
          Zweitimpfungen = rollmean(n2, 7, NA, align = "right")) %>%
   select(date, Erstimpfungen, Zweitimpfungen)
 
-# update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae", 
-#              data = ch_vacc_persons_hist_new,
-#              notes = paste0("Stand: ", ch_vacc_date))
+update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae",
+             data = ch_vacc_persons_hist_new,
+             notes = paste0("Stand: ", ch_vacc_date))
 
 # #which day?
 # herd_immunity_date_ch
