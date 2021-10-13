@@ -8,7 +8,6 @@ library(zoo)
 library(countrycode)
 library(car)
 
-setwd('/Users/florianseliger/Documents/GitHub/st-methods/bots/corona-charts/')
 
 # import helper functions
 source("./helpers.R")
