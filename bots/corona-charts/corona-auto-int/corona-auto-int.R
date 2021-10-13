@@ -11,7 +11,7 @@ library(countrycode)
 setwd("~/Documents/GitHub/st-methods/bots/corona-charts") #delete later
 
 # import helper functions
-source("./helpers.R")
+#source("./helpers.R")
 
 #read-in
 # get data from JHU
@@ -22,8 +22,6 @@ dead <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/mast
 wdi <- read_csv("wdi.csv") %>%
   add_row(country = "Taiwan", Land = "Taiwan", pop = 23570000)
 
-
-tail(wdi)
 wdi$Region <- wdi$region
 
 cases$Land[cases$Region == "Macau"] <- "Macau"
