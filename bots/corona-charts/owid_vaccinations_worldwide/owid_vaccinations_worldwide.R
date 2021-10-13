@@ -4,35 +4,69 @@
 rm(list = ls(all = TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen = 999)
 library(tidyverse)
+library(countrycode)
+
+# uncomment for editing
+# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 
 # import helper functions
 source("./helpers.R")
 
 # read-in
 owid_raw <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
-pop <- read_csv("./owid_vaccinations_worldwide/countries_pop.csv") %>%
-  add_row(name = "European Union", `2018` = 446777673, name_ger = "EU") %>%
-  add_row(name = "World", `2018` = 7591945270.5, name_ger = "Welt")
+owid_pop <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/scripts/input/un/population_2020.csv") %>% 
+  filter(!grepl("OWID", iso_code) | iso_code %in% c("OWID_WRL", "OWID_EUN", "OWID_KOS")) #exclude owid's own iso codes except World, EU and Kosovo (see below)
 
-# Adding missing nations
-pop$name_ger[pop$name == "Seychelles"] <- "Seychellen"
-pop$name[pop$name == "US"] <- "United States"
-pop$name[pop$name == "Korea, South"] <- "South Korea"
-pop$name[pop$name == "West Bank and Gaza"] <- "Palestine"
-pop$name_ger[pop$name == "Palau"] <- "Palau"
+#join by iso code
+owid <- owid_raw %>%
+  left_join(owid_pop %>% select(iso_code, population), by = "iso_code")
 
-owid_pop <- owid_raw %>%
-  left_join(pop, by = c("location" = "name"))
+#match english names with german ones
+owid$location_ger <- countrycode(owid$iso_code, 'iso3c', 'cldr.short.de_ch')
 
-owid_check <- owid_pop %>%
-  select(location, name_ger, iso_code) %>%
+#check which countries don't have a german name -- because they lack a proper iso code
+owid_check <- owid %>%
+  select(location, location_ger, iso_code) %>%
   unique() %>%
-  filter(is.na(name_ger))
+  filter(is.na(location_ger))
 
-owid_check # These are British overseas territories, British nations and conglomerates (world, EU). If "real"countries are here, add them above
+owid_check # These are British British nations and conglomerates (Asia, Low income). If "real"countries are here, add them above. Northern Cyprus is not recognised.
 
-solid_ctry <- owid_pop %>%
-  filter(!is.na(total_vaccinations), !is.na(name_ger)) %>%
+#in addition to adding the iso code above, add german name here
+owid$location_ger[owid$location == "World"] <- "Welt"
+owid$location_ger[owid$location == "European Union"] <- "EU"
+owid$location_ger[owid$location == "Kosovo"] <- "Kosovo"
+
+#adjust names to nzz nomenclature
+owid$location_ger[owid$location_ger == "Saudi-Arabien"] <- "Saudiarabien"
+owid$location_ger[owid$location_ger == "Bangladesch"] <- "Bangladesh"
+owid$location_ger[owid$location_ger == "Kirgisistan"] <- "Kirgistan"
+owid$location_ger[owid$location_ger == "Zimbabwe"] <- "Simbabwe"
+owid$location_ger[owid$location_ger == "Mosambik"] <- "Moçambique"
+owid$location_ger[owid$location_ger == "Zimbabwe"] <- "Simbabwe"
+owid$location_ger[owid$location_ger == "Bosnien und Herzegowina"] <- "Bosnien-Herzegowina"
+owid$location_ger[owid$location_ger == "GB"] <- "Grossbritannien"
+owid$location_ger[owid$location_ger == "Dschibuti"] <- "Djibouti"
+owid$location_ger[owid$location_ger == "Zentralafrikanische Republik"] <- "Zentralafrika"
+owid$location_ger[owid$location_ger == "Jamaika"] <- "Jamaica"
+owid$location_ger[owid$location_ger == "Kenia"] <- "Kenya"
+owid$location_ger[owid$location_ger == "Gabun"] <- "Gabon"
+owid$location_ger[owid$location_ger == "Ruanda"] <- "Rwanda"
+owid$location_ger[owid$location_ger == "Republik Moldau"] <- "Moldau"
+owid$location_ger[owid$location_ger == "St. Vincent und die Grenadinen"] <- "Saint Vincent"
+owid$location_ger[owid$location_ger == "Salomon-Inseln"] <- "Salomoninseln"
+owid$location_ger[owid$location_ger == "Suriname"] <- "Surinam"
+
+# ow <- owid$location_ger %>% unique()
+# 
+# nzz <- read_csv("owid_vaccinations_worldwide/NZZ-Länderliste.csv")
+# 
+# setdiff(ow, nzz$Name)
+# setdiff(nzz$Name, ow)
+# getwd()
+
+solid_ctry <- owid %>%
+  filter(!is.na(total_vaccinations), !is.na(location_ger)) %>%
   group_by(location) %>%
   filter(last(date) >= Sys.Date() - 14 & first(date) <= Sys.Date() - 30) %>%
   summarise(n = n()) %>%
@@ -41,16 +75,14 @@ solid_ctry <- owid_pop %>%
   as_vector() %>%
   unname()
 
-vacc_esti <- owid_pop %>%
+vacc_esti <- owid %>%
   filter(location %in% solid_ctry, date >= last(date) - 14) %>%
   group_by(location) %>%
-  summarise(
-    max_iqr = quantile(daily_vaccinations, 0.75, na.rm = TRUE),
+  summarise(max_iqr = quantile(daily_vaccinations, 0.75, na.rm = TRUE),
     min_iqr = quantile(daily_vaccinations, 0.25, na.rm = TRUE),
-    mean = mean(daily_vaccinations, na.rm = TRUE)
-  )
+    mean = mean(daily_vaccinations, na.rm = TRUE))
 
-vacc_esti_lag <- owid_pop %>%
+vacc_esti_lag <- owid %>%
   filter(location %in% solid_ctry, date >= last(date) - 28 & date < last(date) - 14) %>%
   group_by(location) %>%
   summarise(mean = mean(daily_vaccinations, na.rm = TRUE))
@@ -58,12 +90,12 @@ vacc_esti_lag <- owid_pop %>%
 vacc_proj_date <- tibble()
 
 for (i in 1:length(solid_ctry)) {
-  dates_proj <- seq(last(owid_pop$date[owid_pop$location == solid_ctry[i]]) + 1, as.Date("2099-12-31"), by = "days")
-  dates_proj_lag <- seq(nth(owid_pop$date[owid_pop$location == solid_ctry[i]], -13), as.Date("2099-12-31"), by = "days")
+  dates_proj <- seq(last(owid$date[owid$location == solid_ctry[i]]) + 1, as.Date("2099-12-31"), by = "days")
+  dates_proj_lag <- seq(nth(owid$date[owid$location == solid_ctry[i]], -13), as.Date("2099-12-31"), by = "days")
   ndays_proj <- seq(1, length(dates_proj), by = 1)
   ndays_proj_lag <- seq(1, length(dates_proj_lag), by = 1)
-  vacc_proj_mean <- ndays_proj * vacc_esti$mean[vacc_esti$location == solid_ctry[i]] + last(na.omit(owid_pop$total_vaccinations[owid_pop$location == solid_ctry[i]]))
-  vacc_proj_mean_lag <- ndays_proj_lag * vacc_esti_lag$mean[vacc_esti_lag$location == solid_ctry[i]] + nth(na.omit(owid_pop$total_vaccinations[owid_pop$location == solid_ctry[i]]), -14)
+  vacc_proj_mean <- ndays_proj * vacc_esti$mean[vacc_esti$location == solid_ctry[i]] + last(na.omit(owid$total_vaccinations[owid$location == solid_ctry[i]]))
+  vacc_proj_mean_lag <- ndays_proj_lag * vacc_esti_lag$mean[vacc_esti_lag$location == solid_ctry[i]] + nth(na.omit(owid$total_vaccinations[owid$location == solid_ctry[i]]), -14)
 
   if (length(vacc_proj_mean_lag) < length(vacc_proj_mean)) {
     vacc_proj_mean_lag <- rep(NA, length(vacc_proj_mean))
@@ -74,7 +106,7 @@ for (i in 1:length(solid_ctry)) {
   proj_raw <- tibble(dates_proj, vacc_proj_mean)
   proj_raw_lag <- tibble(dates_proj_lag, vacc_proj_mean_lag)
 
-  herd_immunity_dosis <- first(owid_pop$`2018`[owid_pop$location == solid_ctry[i]] * 1.6)
+  herd_immunity_dosis <- first(owid$`2018`[owid$location == solid_ctry[i]] * 1.6)
   herd_immunity_pct <- herd_immunity_dosis / 2
   herd_immunity_goal <- 80
 
@@ -87,12 +119,12 @@ for (i in 1:length(solid_ctry)) {
   vacc_proj_date <- rbind(vacc_proj_date, vacc_proj_temp)
 }
 
-vacc_sum <- owid_pop %>%
-  select(location, name_ger, iso_code, date, total_vaccinations, people_vaccinated, people_fully_vaccinated) %>%
+vacc_sum <- owid %>%
+  select(location, location_ger, iso_code, date, total_vaccinations, people_vaccinated, people_fully_vaccinated) %>%
   group_by(location) %>%
   summarise_all(last) %>%
   ungroup() %>%
-  select(name_ger, location, iso_code, total_vaccinations, people_vaccinated, people_fully_vaccinated)
+  select(location_ger, location, iso_code, total_vaccinations, people_vaccinated, people_fully_vaccinated)
 
 over65 <- read_csv("./owid_vaccinations_worldwide/API_SP.POP.65UP.TO.ZS_DS2_en_csv_v2_1929265.csv", skip = 3) %>%
   select(`Country Code`, `2019`) %>%
@@ -104,7 +136,7 @@ vacc_final <- vacc_sum %>%
   full_join(vacc_proj_date, by = "location") %>%
   filter(location %in% solid_ctry) %>%
   rename(location_en = location) %>%
-  rename(location = name_ger)
+  rename(location = location_ger)
 
 vacc_final$iso_code[vacc_final$location == "Welt"] <- "Welt"
 vacc_final$iso_code[vacc_final$location == "EU"] <- "EU"
