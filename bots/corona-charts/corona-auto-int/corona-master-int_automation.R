@@ -17,7 +17,7 @@ dead <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/mast
 cured <- read_csv("https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv")
 
 # get population figures 
-un <- read_csv("./corona-auto-ch/un_pop.csv") 
+un <- read_csv("./corona-auto-int/un_pop.csv") 
 
 cases$Land <- countrycode(cases$`Country/Region`, 'country.name', 'cldr.short.de_ch')
 dead$Land <- countrycode(dead$`Country/Region`, 'country.name', 'cldr.short.de_ch')
