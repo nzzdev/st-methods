@@ -25,7 +25,7 @@ jobs:
       - name: Cache R packages
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/renv
+          path: ~/.cache/R/renv
           key: ${{ runner.os }}-renv-${{ hashFiles('./bots/stock-market/renv.lock') }}
       - name: Restore R packages
         shell: Rscript {0}
