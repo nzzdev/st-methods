@@ -7,7 +7,7 @@ library(tidyverse)
 library(countrycode)
 
 # uncomment for editing
- setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 
 # import helper functions
 source("./helpers.R")
