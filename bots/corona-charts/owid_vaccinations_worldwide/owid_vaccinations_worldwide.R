@@ -7,7 +7,7 @@ library(tidyverse)
 library(countrycode)
 
 # uncomment for editing
-# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+ setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 
 # import helper functions
 source("./helpers.R")
@@ -106,7 +106,7 @@ for (i in 1:length(solid_ctry)) {
   proj_raw <- tibble(dates_proj, vacc_proj_mean)
   proj_raw_lag <- tibble(dates_proj_lag, vacc_proj_mean_lag)
 
-  herd_immunity_dosis <- first(owid$`2018`[owid$location == solid_ctry[i]] * 1.6)
+  herd_immunity_dosis <- first(owid$population[owid$location == solid_ctry[i]] * 1.6)
   herd_immunity_pct <- herd_immunity_dosis / 2
   herd_immunity_goal <- 80
 
@@ -146,3 +146,4 @@ vacc_final$people_fully_vaccinated[vacc_final$location == "EU"] <- NA
 
 notes_string <- paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
 update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = notes_string)
+
