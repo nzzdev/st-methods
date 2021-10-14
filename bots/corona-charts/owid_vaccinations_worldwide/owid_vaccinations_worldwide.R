@@ -144,6 +144,12 @@ vacc_final$iso_code[vacc_final$location == "EU"] <- "EU"
 vacc_final$people_fully_vaccinated[vacc_final$location == "Welt"] <- NA
 vacc_final$people_fully_vaccinated[vacc_final$location == "EU"] <- NA
 
+#set herd immunity date to 2099 for countries above 80pct
+
+vacc_final <- vacc_final %>%
+  mutate(herd_immunity_date = case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_date),
+         herd_immunity_previous_date =case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_date))
+
 notes_string <- paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
 update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = notes_string)
 
