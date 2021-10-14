@@ -309,10 +309,12 @@ full_vacc <- vaccination %>%
   arrange(desc(`Vollständig geimpft, in % der Bev.`)) %>%
   select(Land, `Vollständig geimpft, in % der Bev.`) %>%
   mutate(`Vollständig geimpft, in % der Bev.` = round(`Vollständig geimpft, in % der Bev.`, 1)) %>%
-  ungroup() %>% slice(1:20)
+  ungroup() 
+
+data <- full_vacc %>% slice(1:20)
 
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern. Eine Person muss in der Regel zwei Dosen geimpft bekommen, um als vollständig geimpft zu gelten. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
-update_chart(id = 'a15febf1b611cd45c56db4f85b1ea73b', data = full_vacc, notes = notes)
+update_chart(id = 'a15febf1b611cd45c56db4f85b1ea73b', data = data, notes = notes)
 
 
 booster <- vaccination %>%
