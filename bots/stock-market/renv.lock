@@ -57,7 +57,7 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "cf29e1b71f8736960e0e851123a83e6f"
-    ],
+    },
     "Rcpp": {
       "Package": "Rcpp",
       "Version": "1.0.5",
@@ -520,10 +520,10 @@
     },
     "renv": {
       "Package": "renv",
-      "Version": "0.13.2",
-      "Source": "Repository",
+      "Version": "0.14.0",
+      "OS_type": NA,
       "Repository": "CRAN",
-      "Hash": "079cb1f03ff972b30401ed05623cbe92"
+      "Source": "Repository"
     },
     "reprex": {
       "Package": "reprex",

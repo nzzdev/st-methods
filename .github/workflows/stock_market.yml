@@ -19,29 +19,20 @@ jobs:
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: "4.0.5"
-      - name: Setup renv
-        run: |
-          install.packages("renv")
-          renv::activate()
-        shell: Rscript {0}
-      - name: Get R params
-        id: r-params
-        run: |
-          cat("##[set-output name=r-version;]", R.Version()$version.string, sep = "")
-          cat("##[set-output name=renv-cache-path;]", renv::paths$cache(), sep = "")
-        shell: Rscript {0}
       - name: Install system dependencies
         run: |
           sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
       - name: Cache R packages
         uses: actions/cache@v2
         with:
-          path: ${{ steps.r-params.outputs.renv-cache-path }}
-          key: ${{ runner.os }}-${{ steps.r-params.outputs.r-version }}-renv-${{ hashFiles('./bots/stock-market/renv.lock') }}
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/stock-market/renv.lock') }}
       - name: Restore R packages
-        run: |
-          renv::restore()
         shell: Rscript {0}
+        run: |
+          install.packages("renv")
+          renv::activate()
+          renv::restore()
       - name: Run R scripts
         run: |
           Rscript bitcoin_automated.R
