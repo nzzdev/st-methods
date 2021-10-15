@@ -78,9 +78,7 @@ solid_ctry <- owid %>%
 vacc_esti <- owid %>%
   filter(location %in% solid_ctry, date >= last(date) - 14) %>%
   group_by(location) %>%
-  summarise(max_iqr = quantile(daily_vaccinations, 0.75, na.rm = TRUE),
-    min_iqr = quantile(daily_vaccinations, 0.25, na.rm = TRUE),
-    mean = mean(daily_vaccinations, na.rm = TRUE))
+  summarise(mean = mean(daily_vaccinations, na.rm = TRUE))
 
 vacc_esti_lag <- owid %>%
   filter(location %in% solid_ctry, date >= last(date) - 28 & date < last(date) - 14) %>%
@@ -100,8 +98,6 @@ for (i in 1:length(solid_ctry)) {
   if (length(vacc_proj_mean_lag) < length(vacc_proj_mean)) {
     vacc_proj_mean_lag <- rep(NA, length(vacc_proj_mean))
   }
-  # vacc_proj_max_iqr <- ndays_proj*vacc_esti$max_iqr[vacc_esti$location == "Switzerland"] + last(owid_pop$total_vaccinations[owid_pop$location == "Switzerland"])
-  # vacc_proj_min_iqr <- ndays_proj*vacc_esti$min_iqr[vacc_esti$location == "Switzerland"] + last(owid_pop$total_vaccinations[owid_pop$location == "Switzerland"])
 
   proj_raw <- tibble(dates_proj, vacc_proj_mean)
   proj_raw_lag <- tibble(dates_proj_lag, vacc_proj_mean_lag)
@@ -148,7 +144,7 @@ vacc_final$people_fully_vaccinated[vacc_final$location == "EU"] <- NA
 
 vacc_final <- vacc_final %>%
   mutate(herd_immunity_date = case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_date),
-         herd_immunity_previous_date =case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_date))
+         herd_immunity_previous_date =case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_previous_date))
 
 notes_string <- paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
 update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = notes_string)
