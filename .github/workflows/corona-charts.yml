@@ -30,7 +30,8 @@ jobs:
       - name: Restore R packages
         shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          install.packages("renv")
+          renv::activate()
           renv::restore()
       - name: Run R scripts
         run: |
