@@ -499,8 +499,8 @@ id_total <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
 
 update_chart(id = "ab97925bcc5055b33011fb4d3320012a", 
              data = id_total, 
-             notes = paste0("Die Zahl der Infektionen bei Geimpften dürften stark unterschätzt sein, da sich Geimpfte ",
-                            "weniger testen lassen und so viele Fälle untentdeckt bleiben dürften. Zudem fehlen bei",
+             notes = paste0("Die Zahl der Infektionen bei Geimpften dürfte stark unterschätzt sein, da sich Geimpfte ",
+                            "weniger oft testen lassen und so viele Fälle untentdeckt bleiben dürften. Zudem fehlen bei ",
                             "den meisten Infektionsfällen Angaben zum Impfstatus. <br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
@@ -517,8 +517,7 @@ id_hist[2:5] <- round(id_hist[2:5]/rowSums(id_hist[2:5])*100,1)
 
 update_chart(id = "c041757a38ba1d4e6851aaaee55c6207", 
              data = id_hist, 
-             notes = paste0("Der Zeitraum ab 1. Juli wurde so gewählt, weil dort bereits eine relativ hohe Impfquote erreicht ist, ",
-                            "die Zahlen also weniger auf eine tiefe Impfquote zurückzuführen sind.<br>Stand: ",
+             notes = paste0("Der Zeitraum ab 1. Juli wurde so gewählt, weil dort bereits eine relativ hohe Impfquote erreicht war. <br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
 
