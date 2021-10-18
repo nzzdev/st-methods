@@ -517,7 +517,7 @@ id_hist[2:5] <- round(id_hist[2:5]/rowSums(id_hist[2:5])*100,1)
 
 update_chart(id = "c041757a38ba1d4e6851aaaee55c6207", 
              data = id_hist, 
-             notes = paste0("Der Zeitraum ab 1. Juli wurde so gewählt, weil dort bereits eine relativ hohe Impfquote erreicht war. <br>Stand: ",
+             notes = paste0("Der Zeitraum ab 1. Juli wurde so gewählt, weil zu diesem Zeitpunkt bereits eine relativ hohe Impfquote erreicht war. <br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
 
