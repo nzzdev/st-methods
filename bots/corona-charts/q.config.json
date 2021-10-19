@@ -293,18 +293,6 @@
       "environments": [
         {
           "name": "production",
-          "id": "37fc5e48506c4cd050bac04346238a2d"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "15326b5086f1007b7c67825700c2d149"
         }
       ],
@@ -366,17 +354,6 @@
         {
           "name": "production",
           "id": "26356a1918b687a3e1a7ff0d5e0b9675"
-        }
-      ],
-      "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "73f90b0c316ac9014cefff5d2de1de62"
         }
       ],
       "item": {

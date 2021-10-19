@@ -292,9 +292,6 @@ bag_age_deaths  <- bag_deaths_age %>%
   mutate(`0–59` = `0 - 9` +  `10 - 19` + `20 - 29` +  `30 - 39` + `40 - 49` +  `50 - 59`, `60–79` = `60 - 69` +  `70 - 79`) %>%
   select(datum, `0–59`,`60–79`, `80+`) 
 
-# %>%
-#   slice(1:n()-1) #incomplete week results
-
 update_chart(id = "ec163329f1a1a5698ef5d1ee7587b3d6", data = bag_age_deaths)
 
 
@@ -392,44 +389,44 @@ update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e",
 
 ### Variants ###
 
-bag_var_delta <- bag_var %>%
-  mutate(date = as.Date(date)) %>%
-  filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date)) %>%
-  drop_na(prct) %>%
-  mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
-         prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
-         prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right")) %>%
-  select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
-  filter(date >= '2021-04-01') %>%
-  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
-
-bag_var_delta_notes <- paste0("* 95-Prozent-Konfidenzintervall. Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
-                              " Prognose = durchgehend weniger als 20 Sequenzierungen pro Tag.")
-
-update_chart(id = "dc697b19f4ecaf842746e444a46761b4", 
-             data = bag_var_delta, 
-             notes = bag_var_delta_notes)
-
-bag_var_all <- bag_var %>%
-  mutate(date = as.Date(date)) %>%
-  drop_na(prct) %>%
-  filter(variant_type != "all_sequenced") %>%
-  mutate(var = case_when(variant_type == "B.1.1.7"~ "Alpha",
-                         variant_type == "B.1.617.2"~ "Delta",
-                         variant_type == "other_lineages" ~ "Urtyp/andere Varianten",
-                         TRUE ~ "Weitere «relevante Virusvarianten»*")) %>%
-  group_by(date, var) %>%
-  summarise(prct = sum(prct)) %>%
-  group_by(var) %>%
-  mutate(prct_7 = round(rollmean(prct, 7, fill = NA, align = "right"),1)) %>%
-  select(date, var, prct_7) %>%
-  spread(var,prct_7) %>%
-  mutate(`Urtyp/andere Varianten` = round(100-(Alpha+Delta+`Weitere «relevante Virusvarianten»*`),1)) %>%
-  filter(date >= "2020-10-10") %>%
-  select(date, Alpha, Delta, `Weitere «relevante Virusvarianten»*`, `Urtyp/andere Varianten`)
-
-update_chart(id = "73f90b0c316ac9014cefff5d2de1de62", 
-             data = bag_var_all)
+# bag_var_delta <- bag_var %>%
+#   mutate(date = as.Date(date)) %>%
+#   filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date)) %>%
+#   drop_na(prct) %>%
+#   mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
+#          prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
+#          prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right")) %>%
+#   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
+#   filter(date >= '2021-04-01') %>%
+#   rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
+# 
+# bag_var_delta_notes <- paste0("* 95-Prozent-Konfidenzintervall. Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
+#                               " Prognose = durchgehend weniger als 20 Sequenzierungen pro Tag.")
+# 
+# update_chart(id = "dc697b19f4ecaf842746e444a46761b4", 
+#              data = bag_var_delta, 
+#              notes = bag_var_delta_notes)
+# 
+# bag_var_all <- bag_var %>%
+#   mutate(date = as.Date(date)) %>%
+#   drop_na(prct) %>%
+#   filter(variant_type != "all_sequenced") %>%
+#   mutate(var = case_when(variant_type == "B.1.1.7"~ "Alpha",
+#                          variant_type == "B.1.617.2"~ "Delta",
+#                          variant_type == "other_lineages" ~ "Urtyp/andere Varianten",
+#                          TRUE ~ "Weitere «relevante Virusvarianten»*")) %>%
+#   group_by(date, var) %>%
+#   summarise(prct = sum(prct)) %>%
+#   group_by(var) %>%
+#   mutate(prct_7 = round(rollmean(prct, 7, fill = NA, align = "right"),1)) %>%
+#   select(date, var, prct_7) %>%
+#   spread(var,prct_7) %>%
+#   mutate(`Urtyp/andere Varianten` = round(100-(Alpha+Delta+`Weitere «relevante Virusvarianten»*`),1)) %>%
+#   filter(date >= "2020-10-10") %>%
+#   select(date, Alpha, Delta, `Weitere «relevante Virusvarianten»*`, `Urtyp/andere Varianten`)
+# 
+# update_chart(id = "73f90b0c316ac9014cefff5d2de1de62", 
+#              data = bag_var_all)
 
 ### Certificates ###
 
@@ -663,68 +660,68 @@ update_chart(id = "ce1529d1facf24bb5bef83a3df033bfc",
 
 
 #### Vaccination Projection CH ####
-ch_vacc_speed <- ch_vacc_doses %>%
-  filter(geoRegion == "CHFL", type == "COVID19VaccDosesAdministered") %>%
-  mutate(new_vacc_doses = sumTotal-lag(sumTotal, 1, default = 0)) %>%
-  mutate(new_vacc_doses_7day = (sumTotal-lag(sumTotal,7, default = 0))/7) %>%
-  mutate(new_vacc_doses_7day = round(new_vacc_doses_7day))
-
-#Just vacc Speed
-#write to Q-cli
-update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e",
-             data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
-
-#Projection
-dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
-ndays_proj_ch <- seq(1,length(dates_proj_ch), by = 1)
-
-ch_vacc_esti <- ch_vacc_speed %>%
-  filter(date >= last(date)-13) %>%
-  summarise(  max_iqr = max(new_vacc_doses_7day), 
-              min_iqr = min(new_vacc_doses_7day), 
-              mean = mean(new_vacc_doses_7day, na.rm = TRUE))
-
-vacc_proj_mean_ch <- ndays_proj_ch*ch_vacc_esti$mean + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-vacc_proj_max_iqr_ch <- ndays_proj_ch*ch_vacc_esti$max_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-vacc_proj_min_iqr_ch <- ndays_proj_ch*ch_vacc_esti$min_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-
-ch_vacc_proj_raw <- tibble(dates_proj_ch, vacc_proj_mean_ch, vacc_proj_max_iqr_ch, vacc_proj_min_iqr_ch)
-
-herd_immunity_ch <-8644780*1.6
-herd_immunity_date_ch <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_mean_ch > herd_immunity_ch])
-herd_immunity_date_ch_max <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_min_iqr_ch > herd_immunity_ch])
-
-
-#calculate goal
-ch_vacc_goaldays <- length(ch_vacc_proj_raw$dates_proj_ch[ch_vacc_proj_raw$dates_proj_ch <= "2021-08-31"])
-ch_vacc_goalspeed <- (herd_immunity_ch-last(ch_vacc_speed$sumTotal))/ch_vacc_goaldays
-vacc_proj_goal_ch <- ndays_proj_ch*ch_vacc_goalspeed + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-
-ch_vacc_proj_raw_goal <- tibble(ch_vacc_proj_raw, vacc_proj_goal_ch)
-
-ch_vacc_hi <- ch_vacc_proj_raw_goal %>% filter(dates_proj_ch <= herd_immunity_date_ch_max)
-
-# clean off unneecessary data points
-ch_vacc_hi$vacc_proj_mean_ch[ch_vacc_hi$vacc_proj_mean_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_max_iqr_ch[ch_vacc_hi$vacc_proj_max_iqr_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_min_iqr_ch[ch_vacc_hi$vacc_proj_min_iqr_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_goal_ch[ch_vacc_hi$vacc_proj_goal_ch >= herd_immunity_ch] <- NA
-
-colnames(ch_vacc_hi) <- c("Datum",	"Momentante Geschwindigkeit", " ",	"Unsicherheitsbereich*", "Nötige Geschwindigkeit")
-
-ch_past <- cbind(ch_vacc_speed[,c(1,5)], NA, NA, NA)
-
-colnames(ch_past) <- colnames(ch_vacc_hi)
-
-ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
-  select(1,3,4,2,5)
-
-#write to Q-cli
-
-update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
-             data = ch_vacc_hi2,
-             notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
-                            ch_vacc_date))
+# ch_vacc_speed <- ch_vacc_doses %>%
+#   filter(geoRegion == "CHFL", type == "COVID19VaccDosesAdministered") %>%
+#   mutate(new_vacc_doses = sumTotal-lag(sumTotal, 1, default = 0)) %>%
+#   mutate(new_vacc_doses_7day = (sumTotal-lag(sumTotal,7, default = 0))/7) %>%
+#   mutate(new_vacc_doses_7day = round(new_vacc_doses_7day))
+# 
+# #Just vacc Speed
+# #write to Q-cli
+# update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e",
+#              data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
+# 
+# #Projection
+# dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
+# ndays_proj_ch <- seq(1,length(dates_proj_ch), by = 1)
+# 
+# ch_vacc_esti <- ch_vacc_speed %>%
+#   filter(date >= last(date)-13) %>%
+#   summarise(  max_iqr = max(new_vacc_doses_7day), 
+#               min_iqr = min(new_vacc_doses_7day), 
+#               mean = mean(new_vacc_doses_7day, na.rm = TRUE))
+# 
+# vacc_proj_mean_ch <- ndays_proj_ch*ch_vacc_esti$mean + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+# vacc_proj_max_iqr_ch <- ndays_proj_ch*ch_vacc_esti$max_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+# vacc_proj_min_iqr_ch <- ndays_proj_ch*ch_vacc_esti$min_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+# 
+# ch_vacc_proj_raw <- tibble(dates_proj_ch, vacc_proj_mean_ch, vacc_proj_max_iqr_ch, vacc_proj_min_iqr_ch)
+# 
+# herd_immunity_ch <-8644780*1.6
+# herd_immunity_date_ch <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_mean_ch > herd_immunity_ch])
+# herd_immunity_date_ch_max <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_min_iqr_ch > herd_immunity_ch])
+# 
+# 
+# #calculate goal
+# ch_vacc_goaldays <- length(ch_vacc_proj_raw$dates_proj_ch[ch_vacc_proj_raw$dates_proj_ch <= "2021-08-31"])
+# ch_vacc_goalspeed <- (herd_immunity_ch-last(ch_vacc_speed$sumTotal))/ch_vacc_goaldays
+# vacc_proj_goal_ch <- ndays_proj_ch*ch_vacc_goalspeed + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+# 
+# ch_vacc_proj_raw_goal <- tibble(ch_vacc_proj_raw, vacc_proj_goal_ch)
+# 
+# ch_vacc_hi <- ch_vacc_proj_raw_goal %>% filter(dates_proj_ch <= herd_immunity_date_ch_max)
+# 
+# # clean off unneecessary data points
+# ch_vacc_hi$vacc_proj_mean_ch[ch_vacc_hi$vacc_proj_mean_ch >= herd_immunity_ch] <- NA
+# ch_vacc_hi$vacc_proj_max_iqr_ch[ch_vacc_hi$vacc_proj_max_iqr_ch >= herd_immunity_ch] <- NA
+# ch_vacc_hi$vacc_proj_min_iqr_ch[ch_vacc_hi$vacc_proj_min_iqr_ch >= herd_immunity_ch] <- NA
+# ch_vacc_hi$vacc_proj_goal_ch[ch_vacc_hi$vacc_proj_goal_ch >= herd_immunity_ch] <- NA
+# 
+# colnames(ch_vacc_hi) <- c("Datum",	"Momentante Geschwindigkeit", " ",	"Unsicherheitsbereich*", "Nötige Geschwindigkeit")
+# 
+# ch_past <- cbind(ch_vacc_speed[,c(1,5)], NA, NA, NA)
+# 
+# colnames(ch_past) <- colnames(ch_vacc_hi)
+# 
+# ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
+#   select(1,3,4,2,5)
+# 
+# #write to Q-cli
+# 
+# update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
+#              data = ch_vacc_hi2,
+#              notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
+#                             ch_vacc_date))
 
 #Vacc pct by dose
 ch_vacc_persons_hist <- ch_vacc_persons %>%
