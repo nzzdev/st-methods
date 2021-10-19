@@ -15,6 +15,7 @@ source("./helpers.R")
 # read in additional data
 pop <- read_csv("./corona-auto-ch/pop_kant.csv")
 
+
 #### Update R eth estimate ####
 
 eth <- read_csv("https://raw.githubusercontent.com/covid-19-Re/dailyRe-Data/master/CHE-estimates.csv") %>%
@@ -447,12 +448,13 @@ update_chart(id = "15326b5086f1007b7c67825700c2d149", data = bag_cert)
 ch_vacc_delrec <- read_csv(bag_data$sources$individual$csv$vaccDosesDelivered) %>% 
   select(date,geoRegion, pop, type, sumTotal)
 
-ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered)%>% 
+ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered) %>% 
   select(date,geoRegion, pop, type, sumTotal)
 
 ch_vacc_doses <- rbind(ch_vacc_delrec, ch_vacc_adm)
 
 ch_vacc_persons <- read_csv(bag_data$sources$individual$csv$vaccPersonsV2) %>%
+  filter(age_group == "total_population") %>%
   select(geoRegion, pop, date, type, sumTotal) %>%
   drop_na()
 
@@ -539,8 +541,6 @@ update_chart(id = "e5aee99aec92ee1365613b671ef405f7", data = ch_vacc_manuf)
 
 ch_vacc_date <-  gsub("\\b0(\\d)\\b", "\\1", format(last(ch_vacc_adm$date), format = "%d. %m. %Y"))
 
-## Ich habe die folgende Karte aus dem Grafikstück genommen, da sie sich mit einer anderen Grafik doppelt.
-## Muss aber trotzdem aktualisiert werden für Newsroom (fsl)
 
 vaccchart_kant <- ch_vacc_doses %>%
   filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH", type == "COVID19VaccDosesAdministered") %>%
@@ -676,56 +676,56 @@ update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e",
              data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
 
 #Projection
-dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
-ndays_proj_ch <- seq(1,length(dates_proj_ch), by = 1)
+#dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
+#ndays_proj_ch <- seq(1,length(dates_proj_ch), by = 1)
 
-ch_vacc_esti <- ch_vacc_speed %>%
-  filter(date >= last(date)-13) %>%
-  summarise(  max_iqr = max(new_vacc_doses_7day), 
-              min_iqr = min(new_vacc_doses_7day), 
-              mean = mean(new_vacc_doses_7day, na.rm = TRUE))
+#ch_vacc_esti <- ch_vacc_speed %>%
+#  filter(date >= last(date)-13) %>%
+#  summarise(  max_iqr = max(new_vacc_doses_7day), 
+#              min_iqr = min(new_vacc_doses_7day), 
+#              mean = mean(new_vacc_doses_7day, na.rm = TRUE))
 
-vacc_proj_mean_ch <- ndays_proj_ch*ch_vacc_esti$mean + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-vacc_proj_max_iqr_ch <- ndays_proj_ch*ch_vacc_esti$max_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-vacc_proj_min_iqr_ch <- ndays_proj_ch*ch_vacc_esti$min_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+#vacc_proj_mean_ch <- ndays_proj_ch*ch_vacc_esti$mean + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+#vacc_proj_max_iqr_ch <- ndays_proj_ch*ch_vacc_esti$max_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+#vacc_proj_min_iqr_ch <- ndays_proj_ch*ch_vacc_esti$min_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
 
-ch_vacc_proj_raw <- tibble(dates_proj_ch, vacc_proj_mean_ch, vacc_proj_max_iqr_ch, vacc_proj_min_iqr_ch)
+#ch_vacc_proj_raw <- tibble(dates_proj_ch, vacc_proj_mean_ch, vacc_proj_max_iqr_ch, vacc_proj_min_iqr_ch)
 
-herd_immunity_ch <-8644780*1.6
-herd_immunity_date_ch <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_mean_ch > herd_immunity_ch])
-herd_immunity_date_ch_max <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_min_iqr_ch > herd_immunity_ch])
+#herd_immunity_ch <-8644780*1.6
+#herd_immunity_date_ch <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_mean_ch > herd_immunity_ch])
+#herd_immunity_date_ch_max <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_min_iqr_ch > herd_immunity_ch])
 
 
 #calculate goal
-ch_vacc_goaldays <- length(ch_vacc_proj_raw$dates_proj_ch[ch_vacc_proj_raw$dates_proj_ch <= "2021-08-31"])
-ch_vacc_goalspeed <- (herd_immunity_ch-last(ch_vacc_speed$sumTotal))/ch_vacc_goaldays
-vacc_proj_goal_ch <- ndays_proj_ch*ch_vacc_goalspeed + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+#ch_vacc_goaldays <- length(ch_vacc_proj_raw$dates_proj_ch[ch_vacc_proj_raw$dates_proj_ch <= "2021-08-31"])
+#ch_vacc_goalspeed <- (herd_immunity_ch-last(ch_vacc_speed$sumTotal))/ch_vacc_goaldays
+#vacc_proj_goal_ch <- ndays_proj_ch*ch_vacc_goalspeed + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
 
-ch_vacc_proj_raw_goal <- tibble(ch_vacc_proj_raw, vacc_proj_goal_ch)
+#ch_vacc_proj_raw_goal <- tibble(ch_vacc_proj_raw, vacc_proj_goal_ch)
 
-ch_vacc_hi <- ch_vacc_proj_raw_goal %>% filter(dates_proj_ch <= herd_immunity_date_ch_max)
+#ch_vacc_hi <- ch_vacc_proj_raw_goal %>% filter(dates_proj_ch <= herd_immunity_date_ch_max)
 
 # clean off unneecessary data points
-ch_vacc_hi$vacc_proj_mean_ch[ch_vacc_hi$vacc_proj_mean_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_max_iqr_ch[ch_vacc_hi$vacc_proj_max_iqr_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_min_iqr_ch[ch_vacc_hi$vacc_proj_min_iqr_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_goal_ch[ch_vacc_hi$vacc_proj_goal_ch >= herd_immunity_ch] <- NA
+#ch_vacc_hi$vacc_proj_mean_ch[ch_vacc_hi$vacc_proj_mean_ch >= herd_immunity_ch] <- NA
+#ch_vacc_hi$vacc_proj_max_iqr_ch[ch_vacc_hi$vacc_proj_max_iqr_ch >= herd_immunity_ch] <- NA
+#ch_vacc_hi$vacc_proj_min_iqr_ch[ch_vacc_hi$vacc_proj_min_iqr_ch >= herd_immunity_ch] <- NA
+#ch_vacc_hi$vacc_proj_goal_ch[ch_vacc_hi$vacc_proj_goal_ch >= herd_immunity_ch] <- NA
 
-colnames(ch_vacc_hi) <- c("Datum",	"Momentante Geschwindigkeit", " ",	"Unsicherheitsbereich*", "Nötige Geschwindigkeit")
+#colnames(ch_vacc_hi) <- c("Datum",	"Momentante Geschwindigkeit", " ",	"Unsicherheitsbereich*", "Nötige Geschwindigkeit")
 
-ch_past <- cbind(ch_vacc_speed[,c(1,5)], NA, NA, NA)
+#ch_past <- cbind(ch_vacc_speed[,c(1,5)], NA, NA, NA)
 
-colnames(ch_past) <- colnames(ch_vacc_hi)
+#colnames(ch_past) <- colnames(ch_vacc_hi)
 
-ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
-  select(1,3,4,2,5)
+#ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
+#  select(1,3,4,2,5)
 
 #write to Q-cli
 
-update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
-             data = ch_vacc_hi2,
-             notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
-                            ch_vacc_date))
+#update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
+#             data = ch_vacc_hi2,
+#             notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
+#                            ch_vacc_date))
 
 #Vacc pct by dose
 ch_vacc_persons_hist <- ch_vacc_persons %>%
