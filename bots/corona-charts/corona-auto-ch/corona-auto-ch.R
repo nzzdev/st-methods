@@ -660,17 +660,17 @@ update_chart(id = "ce1529d1facf24bb5bef83a3df033bfc",
 
 
 #### Vaccination Projection CH ####
-# ch_vacc_speed <- ch_vacc_doses %>%
-#   filter(geoRegion == "CHFL", type == "COVID19VaccDosesAdministered") %>%
-#   mutate(new_vacc_doses = sumTotal-lag(sumTotal, 1, default = 0)) %>%
-#   mutate(new_vacc_doses_7day = (sumTotal-lag(sumTotal,7, default = 0))/7) %>%
-#   mutate(new_vacc_doses_7day = round(new_vacc_doses_7day))
-# 
-# #Just vacc Speed
-# #write to Q-cli
-# update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e",
-#              data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
-# 
+ch_vacc_speed <- ch_vacc_doses %>%
+   filter(geoRegion == "CHFL", type == "COVID19VaccDosesAdministered") %>%
+   mutate(new_vacc_doses = sumTotal-lag(sumTotal, 1, default = 0)) %>%
+   mutate(new_vacc_doses_7day = (sumTotal-lag(sumTotal,7, default = 0))/7) %>%
+   mutate(new_vacc_doses_7day = round(new_vacc_doses_7day))
+ 
+#Just vacc Speed
+#write to Q-cli
+update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e",
+             data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
+
 # #Projection
 # dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
 # ndays_proj_ch <- seq(1,length(dates_proj_ch), by = 1)
