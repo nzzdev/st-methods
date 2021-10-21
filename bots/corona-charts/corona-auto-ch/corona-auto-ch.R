@@ -346,7 +346,8 @@ bag_hosp_cap_regions <- bag_hosp_cap_cantons %>%
             "Patienten mit Covid-19" = sum(`Patienten mit Covid-19`),
             "Andere Patienten" = sum(`Andere Patienten`),
             "Freie Betten" = sum(`Freie Betten`)) %>%
-  mutate_at(4:6, .funs = funs(round(.*100/`Kapazität`,1))) %>%
+  mutate_at((4:6), .funs = list(~ .*100/`Kapazität`)) %>%
+  mutate(across(4:6, round, 1)) %>%
   select(1, 4:6) %>%
   arrange(desc(`Patienten mit Covid-19`))
 
@@ -745,6 +746,33 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
 update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae",
              data = ch_vacc_persons_hist_new)
 
+
+
+### BAG VACC GOAL
+
+vacc_bag_goal <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersons) %>%
+  filter(geoRegion == 'CHFL', 
+         type %in% c("COVID19AtLeastOneDosePersons"), 
+         date ==last(date),
+         age_group_type == "age_group_vacc_strategy") %>%
+  select(altersklasse_covid19, per100PersonsTotal, type) %>%
+  spread(type,per100PersonsTotal)%>%
+  rename('Altersklasse' = altersklasse_covid19, 
+         Impfquote = COVID19AtLeastOneDosePersons) %>%
+  mutate(Impfquote = round(Impfquote, 1)) %>%
+  arrange(desc(`Altersklasse`)) %>%
+  mutate(Altersklasse = str_replace_all(Altersklasse, " - ", "–")) %>%
+  add_column(Zielwert = c(93, 80, NA))
+
+vacc_bag_goal_notes <- paste0("Der Bundesrat hat Zielwerte für 18- bis 65-Jährige und über 65-Jährige festgelegt,",
+                               " die Daten des BAG weisen leicht abweichende Altersgruppen aus (16 bis 64  und über 64 Jahre).",
+                              " Die Zahlen werden wöchentlich aktualisiert.",
+                               "<br>Stand: ", 
+                               ch_vacc_date)
+
+update_chart(id = 'b4f50110543451f0029c2fdefe53d578',
+             data = vacc_bag_goal,
+             notes = vacc_bag_goal_notes)
 
 
 # fin
