@@ -42,10 +42,10 @@ if __name__ == '__main__':
             7)['dosen_dritt_differenz_zum_vortag'].mean()
         mean = mean_first + mean_full + mean_third
         # round, use thousand seperator and convert to str
-        mean = f'{mean.round(-3).astype(int):,}'.replace(',', ' ')
-        mean_first = f'{mean_first.round(-3).astype(int):,}'.replace(',', ' ')
-        mean_full = f'{mean_full.round(-3).astype(int):,}'.replace(',', ' ')
-        mean_third = f'{mean_third.round(-3).astype(int):,}'.replace(',', ' ')
+        mean = f'{mean.round(-3).astype(int):,}'.replace(',', ' ')
+        mean_first = f'{mean_first.round(-3).astype(int):,}'.replace(',', ' ')
+        mean_full = f'{mean_full.round(-3).astype(int):,}'.replace(',', ' ')
+        mean_third = f'{mean_third.round(-3).astype(int):,}'.replace(',', ' ')
 
         # get date for chart notes and add one day
         timestamp_str = df['date'].iloc[-1]
