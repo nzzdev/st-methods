@@ -146,37 +146,6 @@ update_chart(id = "47b8b7f460b37c786692405da9c795fd",
              data = q)
 
 
-#######################
-### Auslastung SBB
-#######################
-
-pg <- read_html("https://news.sbb.ch/medien/artikel/101333/coronavirus-hintergrundinformationen-fuer-medienschaffende")
-
-# get all the Excel (xlsx) links on that page:
-
-html_nodes(pg, xpath=".//a[contains(@href, '.xlsx')]") %>% 
-  html_attr("href") %>% 
-  sprintf("https://news.sbb.ch%s", .) -> excel_links
-
-url <- excel_links[1]
-GET(url, write_disk(tf <- tempfile(fileext = ".xlsx")))
-sbb <- read_excel(tf, sheet=1, skip = 1, col_names = FALSE) 
-
-names(sbb)[1] <- "type"
-names(sbb)[2:54]<- paste0("2020-W", 2:ncol(sbb)-1)
-names(sbb)[55:ncol(sbb)]<- paste0("2021-W", 55:ncol(sbb)-53) 
-
-
-sbb <- sbb  %>%
-  filter(type == 'Regionalverkehr'| type == 'Fernverkehr') %>%
-  gather(key = "KW", value = "value", 2:ncol(sbb)) %>%
-  mutate(value = value*100) %>%
-  ## necessary to preserve ordering of KW
-  mutate(KW = factor(KW, levels=unique(KW))) %>% 
-  spread("type", "value")
-
-update_chart(id = "3819150d9ecde64169327d9dd0c610f7", 
-             data = sbb)
 
 
 ################################
