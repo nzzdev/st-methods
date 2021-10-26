@@ -59,8 +59,12 @@ if __name__ == '__main__':
         df.columns = cols
 
         # add year to values in date column
-        df.loc[:302, ''] = df.loc[:302, ''].apply(lambda x: x + '2020')
-        df.loc[303:, ''] = df.loc[303:, ''].apply(lambda x: x + '2021')
+        # df.loc[:302, ''] = df.loc[:302, ''].apply(lambda x: x + '2020')
+        # df.loc[303:, ''] = df.loc[303:, ''].apply(lambda x: x + '2021')
+        df.loc[:302, ''] = df.loc[:302, ''].apply(
+            lambda x: str(x).replace('.20', '.2020'))
+        df.loc[303:, ''] = df.loc[303:, ''].apply(
+            lambda x: str(x).replace('.21', '.2021'))
 
         # change thousands and decimal separator and remove rows with empty values
         df['7-Tage-Inzidenz'] = df['7-Tage-Inzidenz'].str.replace(
