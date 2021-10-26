@@ -2,9 +2,9 @@ name: Update Travel Guide
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at 4am and 4pm (CEST)
+  # This will run at 6am and 6pm (CEST)
   schedule:
-    - cron: "0 6,18 * * *"
+    - cron: "0 4,16 * * *"
   workflow_dispatch:
 
 jobs:
