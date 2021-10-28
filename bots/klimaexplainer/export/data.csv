@@ -59,7 +59,7 @@ EU,SWE,/countries/eu/,/static/countries/flags/4x3/eu.svg,,3,3,Insufficient,ORANG
 Switzerland,CHE,/countries/switzerland/,/static/countries/flags/4x3/ch.svg,,3,3,Insufficient,ORANGE
 Thailand,THA,/countries/thailand/,/static/countries/flags/4x3/th.svg,,1,1,Critically insufficient,DARK_GRAY
 The Gambia,GMB,/countries/gambia/,/static/countries/flags/4x3/gm.svg,,5,5,1.5°C Paris Agreement compatible,GREEN
-Turkey,TUR,/countries/turkey/,/static/countries/flags/4x3/tr.svg,,0,0,No rating,black
+Turkey,TUR,/countries/turkey/,/static/countries/flags/4x3/tr.svg,,1,1,Critically insufficient,DARK_GRAY
 UAE,ARE,/countries/uae/,/static/countries/flags/4x3/ae.svg,,2,2,Highly insufficient,RED
 Ukraine,UKR,/countries/ukraine/,/static/countries/flags/4x3/ua.svg,,2,2,Highly insufficient,RED
 United Kingdom,GBR,/countries/uk/,/static/countries/flags/4x3/gb.svg,,4,4,Almost Sufficient,YELLOW
