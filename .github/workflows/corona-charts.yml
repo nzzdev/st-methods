@@ -25,21 +25,23 @@ jobs:
       - name: Cache R packages
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
       - name: Restore R packages
-        shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          install.packages("renv")
+          renv::activate()
           renv::restore()
+        shell: Rscript {0}
       - name: Run R scripts
         run: |
           Rscript owid_vaccinations_worldwide/owid_vaccinations_worldwide.R
           Rscript corona-auto-ch/corona-auto-ch.R
+          Rscript corona-auto-int/corona-master-int_automation.R
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x"
+          python-version: "3.10.x"
       - name: Get pip cache dir
         id: pip-cache
         run: |

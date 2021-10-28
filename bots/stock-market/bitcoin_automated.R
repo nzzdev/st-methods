@@ -17,6 +17,7 @@ source("./helpers.R")
 date <- Sys.Date()
 teny_back <- ymd(date) - years(10)
 oney_back <- ymd(date) - years(1)
+onem_back <- ymd(date) - months(1)
 
 current_price <- get_current_price() %>%
   select(bpi.USD.rate_float) %>%
@@ -46,6 +47,16 @@ update_chart(
   data = historic_price_one
 )
 
+historic_price_onem <- get_historic_price('USD', onem_back, date-1) %>%
+  tibble::rownames_to_column("date") %>%
+  mutate(date = as.Date(date, "%Y-%m-%d")) %>%
+  rbind(current_price) %>%
+  mutate(Price = round(Price, 1))
+
+update_chart(
+  id = "80a5f74298f588521786f9061c21d472",
+  data = historic_price_onem
+  )
 
 
 ###########################

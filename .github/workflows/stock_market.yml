@@ -2,9 +2,9 @@ name: Update Stock market Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run it at 12:10 MEZ every day (11:10 GMT)
+  # This will run it at 10:10 MEZ every day (9:10 GMT)
   schedule:
-    - cron: "10 11 * * *"
+    - cron: "0 9-14 * * *"
   workflow_dispatch:
 
 jobs:
@@ -18,29 +18,31 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@v1
         with:
-          r-version: "4.0.3"
+          r-version: "4.0.5"
       - name: Install system dependencies
         run: |
           sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
       - name: Cache R packages
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/stock-market/renv.lock') }}
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/stock-market/renv.lock') }}
       - name: Restore R packages
-        shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          install.packages("renv")
+          renv::activate()
           renv::restore()
+        shell: Rscript {0}
       - name: Run R scripts
         run: |
           Rscript bitcoin_automated.R
+          Rscript economic-real-time-data.R
         env:
           COINMARKETCAPR_API_KEY: ${{ secrets.COINMARKETCAPR_API_KEY }}
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x"
+          python-version: "3.9.x"
       - name: Get pip cache dir
         id: pip-cache
         run: |
@@ -49,7 +51,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/corona-charts/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/stock-market/requirements.txt') }}
       - name: Install python packages
         run: |
           python -m pip install --upgrade pip
