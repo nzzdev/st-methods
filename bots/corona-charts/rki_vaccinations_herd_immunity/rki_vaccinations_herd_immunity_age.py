@@ -55,31 +55,31 @@ if __name__ == '__main__':
         dfall.loc[dfall.shape[0]] = [None, None, None]
 
         # rename columns
-        dfall = dfall.rename(columns={'Datum': '', 'Impfquote_gesamt_min1': 'erste Dose',
-                                      'Impfquote_gesamt_voll': 'vollständig geimpft'})
+        dfall = dfall.rename(columns={'Datum': '', 'Impfquote_gesamt_min1': 'Erste Dose',
+                                      'Impfquote_gesamt_voll': 'Vollständig geimpft'})
         df12 = df12.rename(columns={
-            'Datum': '', 'Impfquote_12bis17_min1': 'erste Dose', 'Impfquote_12bis17_voll': 'vollständig geimpft'})
+            'Datum': '', 'Impfquote_12bis17_min1': 'Erste Dose', 'Impfquote_12bis17_voll': 'Vollständig geimpft'})
         df18 = df18.rename(columns={
-            'Datum': '', 'Impfquote_18plus_min1': 'erste Dose', 'Impfquote_18plus_voll': 'vollständig geimpft'})
+            'Datum': '', 'Impfquote_18plus_min1': 'Erste Dose', 'Impfquote_18plus_voll': 'Vollständig geimpft'})
         df60 = df60.rename(columns={
-            'Datum': '', 'Impfquote_60plus_min1': 'erste Dose', 'Impfquote_60plus_voll': 'vollständig geimpft'})
+            'Datum': '', 'Impfquote_60plus_min1': 'Erste Dose', 'Impfquote_60plus_voll': 'Vollständig geimpft'})
 
         # combine datasets
         df = pd.concat([dfall, df60, df18, df12],
                        ignore_index=True)
 
         # do calculations for stacked bar chart
-        df['erste Dose'] = (
-            df['erste Dose'] - df['vollständig geimpft']).round(1)
-        df['vollständig geimpft'] = df['vollständig geimpft'].round(1)
+        df['Erste Dose'] = (
+            df['Erste Dose'] - df['Vollständig geimpft']).round(1)
+        df['Vollständig geimpft'] = df['Vollständig geimpft'].round(1)
 
         # create new column "Ziel" and calculate gap between status quo and herd immunity
-        df.loc[0, 'Ziel'] = (80 - (df.loc[0, 'vollständig geimpft'] +
-                                   df.loc[0, 'erste Dose'])).round(1)
+        df.loc[0, 'Ziel'] = (80 - (df.loc[0, 'Vollständig geimpft'] +
+                                   df.loc[0, 'Erste Dose'])).round(1)
 
         # rearrange columns
-        df = df[['', 'vollständig geimpft',
-                 'erste Dose', 'Ziel']].set_index('')
+        df = df[['', 'Vollständig geimpft',
+                 'Erste Dose', 'Ziel']].set_index('')
 
         # show percentage total (copy to chart title later)
         title_percent = df.iat[0, 0]+df.iat[0, 1]
