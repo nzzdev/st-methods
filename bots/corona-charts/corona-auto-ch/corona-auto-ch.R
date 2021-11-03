@@ -8,7 +8,7 @@ library(jsonlite)
 library(zoo)
 
 #setwd for fixes
-#setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # import helper functions
 source("./helpers.R")
 
@@ -453,6 +453,7 @@ ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered)%>
 ch_vacc_doses <- rbind(ch_vacc_delrec, ch_vacc_adm)
 
 ch_vacc_persons <- read_csv(bag_data$sources$individual$csv$vaccPersonsV2) %>%
+  filter(age_group == "total_population") %>%
   select(geoRegion, pop, date, type, sumTotal) %>%
   drop_na()
 
@@ -600,8 +601,10 @@ update_chart(id = "e039a1c64b33e327ecbbd17543e518d3", data = vaccchart_kant, not
 #              notes = paste0("Stand: ", ch_vacc_date))
 
 # second doses
+
 vacc_ch_persons_kant <- ch_vacc_persons %>%
-  filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH", date == max(date)) %>%
+  filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH") %>%
+  filter(date == max(date)) %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
   left_join(pop[,c(1:2)], by = c("geoRegion" = "ktabk")) %>%
   select(-pop, -sumTotal, -geoRegion, -date) %>%
