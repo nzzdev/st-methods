@@ -59,7 +59,7 @@ owid$location_ger[owid$location_ger == "Suriname"] <- "Surinam"
 
 # ow <- owid$location_ger %>% unique()
 # 
-# nzz <- read_csv("owid_vaccinations_worldwide/NZZ-Länderliste.csv")
+# nzz <- read.csv("~/NZZ/NZZ Visuals - Dokumente/Vorlagen/Infografik/QGIS/Rohdaten/AL/NZZ-Länderliste.csv")
 # 
 # setdiff(ow, nzz$Name)
 # setdiff(nzz$Name, ow)
