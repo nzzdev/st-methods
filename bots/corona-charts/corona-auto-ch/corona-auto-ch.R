@@ -527,7 +527,8 @@ id_hosp_line <- ch_hosp_vacc %>%
   spread(vaccination_status, entries) %>%
   mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
   filter(date >= "2021-07-01") %>%
-  select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3)
+  select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3) %>%
+  filter(date < max(date)-1)
 
 update_chart(id = "8d9bea408c789a55ff9d8f19e10a3397", 
              data = id_hosp_line)
@@ -768,6 +769,7 @@ vacc_bag_goal <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccP
 
 vacc_bag_goal_notes <- paste0("Der Bundesrat hat Zielwerte für 18- bis 65-Jährige und über 65-Jährige festgelegt,",
                                " die Daten des BAG weisen leicht abweichende Altersgruppen aus (16 bis 64  und über 64 Jahre).",
+                              " Für unter 18-Jähruge wurde kein Zielwert festgelegt.",
                               " Die Zahlen werden wöchentlich aktualisiert.",
                                "<br>Stand: ", 
                                ch_vacc_date)
