@@ -25,17 +25,15 @@ if __name__ == '__main__':
             xl = urlopen(url, timeout=10).read()
 
             # read data and convert to csv (requires openpyxl)
-            if not os.path.exists('data'):
-                os.makedirs('data')
             df = pd.read_excel(
                 xl, sheet_name=0, index_col=0, engine='openpyxl')
-            df.to_csv('./data/Altersverteilung.csv', encoding='utf-8')
+            df.to_csv('./Altersverteilung.csv', encoding='utf-8')
 
             # get current week number for chart notes
             timestamp_str = (d.isocalendar().week) - 1
 
         # read csv and transpose data
-        df = pd.read_csv('./data/Altersverteilung.csv', encoding='utf-8')
+        df = pd.read_csv('./Altersverteilung.csv', encoding='utf-8')
         df = df.set_index('Altersgruppe').T
 
         # calculate correct sum of cases with known age groups in "Gesamt"
