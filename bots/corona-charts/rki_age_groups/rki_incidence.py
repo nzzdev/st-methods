@@ -16,7 +16,7 @@ if __name__ == '__main__':
         # check weekday and get last week number for chart notes
         d = datetime.today()
         dcheck = d.isoweekday() == 5
-        timestamp_str = (d.isocalendar().week) - 2
+        timestamp = (d.isocalendar().week) - 2
 
         # only download data on Fridays
         if dcheck == 'True':
@@ -30,7 +30,7 @@ if __name__ == '__main__':
             df.to_csv('./Altersverteilung.csv', encoding='utf-8')
 
             # get current week number for chart notes
-            timestamp_str = (d.isocalendar().week) - 1
+            timestamp = (d.isocalendar().week) - 1
 
         # read csv and transpose data
         df = pd.read_csv('./Altersverteilung.csv', encoding='utf-8')
@@ -63,7 +63,7 @@ if __name__ == '__main__':
         df.index = df.index.str.replace('_', '-W')
 
         # show date in chart notes
-        notes_chart = 'Stand: Kalenderwoche ' + timestamp_str
+        notes_chart = 'Stand: Kalenderwoche ' + str(timestamp)
 
         # run function
         update_chart(id='34937bf850cf702a02c3648cdf8c02b9',
