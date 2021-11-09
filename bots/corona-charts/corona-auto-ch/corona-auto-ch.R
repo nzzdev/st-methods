@@ -528,7 +528,7 @@ id_hosp_line <- ch_hosp_vacc %>%
   mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
   filter(date >= "2021-07-01") %>%
   select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3) %>%
-  filter(date < max(date)-1)
+  head(-2)
 
 update_chart(id = "8d9bea408c789a55ff9d8f19e10a3397", 
              data = id_hosp_line)
