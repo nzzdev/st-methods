@@ -22,7 +22,7 @@ if __name__ == '__main__':
         with open(os.path.join('data', 'Aktuell_Deutschland_Impfquoten_COVID-19.csv'), 'wb') as f:
             f.write(download_data(url).read())
 
-        # read columns need for the chart
+        # read data
         csv = './data/Aktuell_Deutschland_Impfquoten_COVID-19.csv'
         dfall = pd.read_csv(csv, encoding='utf-8',
                             usecols=['Datum', 'Impfquote_gesamt_min1', 'Impfquote_gesamt_voll'])
