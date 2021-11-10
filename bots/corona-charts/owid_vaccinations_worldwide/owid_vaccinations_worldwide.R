@@ -124,11 +124,11 @@ for (i in 1:length(solid_ctry)) {
 }
 
 vacc_sum <- owid %>%
-  select(location, location_ger, iso_code, date, total_vaccinations, people_vaccinated, people_fully_vaccinated) %>%
+  select(location, location_ger, iso_code, date, total_vaccinations, people_vaccinated, people_fully_vaccinated, total_boosters) %>%
   group_by(location) %>%
   summarise_all(last) %>%
   ungroup() %>%
-  select(location_ger, location, iso_code, total_vaccinations, people_vaccinated, people_fully_vaccinated)
+  select(location_ger, location, iso_code, total_vaccinations, people_vaccinated, people_fully_vaccinated, total_boosters)
 
 over65 <- read_csv("./owid_vaccinations_worldwide/API_SP.POP.65UP.TO.ZS_DS2_en_csv_v2_1929265.csv", skip = 3) %>%
   select(`Country Code`, `2019`) %>%
