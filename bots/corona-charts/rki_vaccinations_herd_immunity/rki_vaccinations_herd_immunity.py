@@ -23,7 +23,7 @@ if __name__ == '__main__':
         with open(os.path.join('data', 'germany_vaccinations_timeseries_v2.tsv'), 'wb') as f:
             f.write(download_data(url).read())
 
-        # read columns need for the chart
+        # read data
         df = pd.read_csv('./data/germany_vaccinations_timeseries_v2.tsv', delimiter='\t',
                          encoding='utf-8', usecols=['date', 'impf_quote_erst', 'impf_quote_voll'])
 
