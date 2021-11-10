@@ -75,7 +75,7 @@ if __name__ == '__main__':
         # show date in chart notes
         notes_chartpatients = 'Rund die Hälfte der im Jahr 2020 mechanisch beatmeten Covid-19-Intensivpatienten ist gestorben. Bei nicht mechanisch beatmeten lag die Mortalitätsrate zwischen 10 und 38 Prozent.<br>Stand: ' + \
             timestamp_str
-        notes_chartbeds = '¹ Belegte und freie Betten ohne Notfallreserve (wird erst seit dem 3. 8. 2020 erfasst).<br>Stand: ' + \
+        notes_chartbeds = '¹ Belegte und freie Betten ohne Notfallreserve (wird seit dem 3. 8. 2020 separat erfasst).<br>Stand: ' + \
             timestamp_str
 
         # insert id manually and run function
