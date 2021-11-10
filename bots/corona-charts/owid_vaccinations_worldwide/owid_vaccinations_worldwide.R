@@ -5,6 +5,7 @@ rm(list = ls(all = TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen = 999)
 library(tidyverse)
 library(countrycode)
+library(zoo)
 
 # uncomment for editing
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
