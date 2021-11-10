@@ -19,7 +19,14 @@ owid_pop <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/maste
 
 #join by iso code
 owid <- owid_raw %>%
-  left_join(owid_pop %>% select(iso_code, population), by = "iso_code")
+  left_join(owid_pop %>% select(iso_code, population), by = "iso_code") %>%
+  mutate(total_boosters = replace_na(total_boosters, 0)) %>%
+  mutate(total_vaccinations = total_vaccinations-total_boosters) %>%
+  group_by(location) %>%
+  arrange(location, date) %>%
+  mutate(daily_boosters = total_boosters-lag(total_boosters,1, default = 0)) %>%
+  mutate(daily_vaccinations_nonbooster = daily_vaccinations_raw-daily_boosters) %>%
+  mutate(daily_vaccinations = rollmean(daily_vaccinations_nonbooster, 7, NA, align = "right"))
 
 #match english names with german ones
 owid$location_ger <- countrycode(owid$iso_code, 'iso3c', 'cldr.short.de_ch')
