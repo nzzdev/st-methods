@@ -34,7 +34,6 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python risklayer_icu/risklayer_icu.py
           python risklayer_incidence/risklayer_incidence.py
           python risklayer_new_deaths/risklayer_new_deaths.py
         env:
