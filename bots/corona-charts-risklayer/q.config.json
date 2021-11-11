@@ -23,18 +23,6 @@
         "notes": "",
         "data": []
       }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "ab97925bcc5055b33011fb4d3326e163"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
     }
   ]
 }
