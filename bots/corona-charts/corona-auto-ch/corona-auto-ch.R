@@ -8,7 +8,7 @@ library(jsonlite)
 library(zoo)
 
 #setwd for fixes
-# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # import helper functions
 source("./helpers.R")
 
@@ -490,7 +490,7 @@ ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons
 #   summarise(sum = sum(entries), pop = max(pop)) %>%
 #   mutate(per100k = 100000*sum/pop)
 
-id_total <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+id_total <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   filter(vaccine == "all") %>%
   filter(date == max(date), vaccination_status %in% c("fully_vaccinated","partially_vaccinated")) %>%
   select(type, vaccination_status, sumTotal) %>%
@@ -499,13 +499,12 @@ id_total <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
 
 update_chart(id = "ab97925bcc5055b33011fb4d3320012a", 
              data = id_total, 
-             notes = paste0("Die Zahl der Infektionen bei Geimpften dürfte stark unterschätzt sein, da sich Geimpfte ",
-                            "weniger oft testen lassen und so viele Fälle untentdeckt bleiben dürften. Zudem fehlen bei ",
-                            "den meisten Infektionsfällen Angaben zum Impfstatus. <br>Stand: ",
+             notes = paste0("Die Zahl der Infektionen bei Geimpften wird vom BAG nicht mehr publiziert,",
+                            " da die Daten nicht aussagekräftig sind. <br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
 
 
-id_hist <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+id_hist <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   filter(vaccine == "all") %>%
   filter(date >= "2021-07-01") %>%
   group_by(type, vaccination_status) %>%
