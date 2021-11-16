@@ -110,6 +110,7 @@ for (i in 1:length(solid_ctry)) {
   proj_raw <- tibble(dates_proj, vacc_proj_mean)
   proj_raw_lag <- tibble(dates_proj_lag, vacc_proj_mean_lag)
 
+  population <- first(owid$population[owid$location == solid_ctry[i]])
   herd_immunity_dosis <- first(owid$population[owid$location == solid_ctry[i]] * 1.6)
   herd_immunity_pct <- herd_immunity_dosis / 2
   herd_immunity_goal <- 80
@@ -119,7 +120,7 @@ for (i in 1:length(solid_ctry)) {
 
   location <- solid_ctry[i]
 
-  vacc_proj_temp <- tibble(location, herd_immunity_dosis, herd_immunity_pct, herd_immunity_date, herd_immunity_previous_date, herd_immunity_goal)
+  vacc_proj_temp <- tibble(location, population, herd_immunity_dosis, herd_immunity_pct, herd_immunity_date, herd_immunity_previous_date, herd_immunity_goal)
   vacc_proj_date <- rbind(vacc_proj_date, vacc_proj_temp)
 }
 
