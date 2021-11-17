@@ -36,6 +36,7 @@ jobs:
         run: |
           python risklayer_incidence/risklayer_incidence.py
           python risklayer_incidence/risklayer_map.py
+          python risklayer_incidence/risklayer_table.py
           python risklayer_new_deaths/risklayer_new_deaths.py
         env:
           GSPREAD_PRIVATE_KEY_ID: ${{ secrets.GSPREAD_PRIVATE_KEY_ID }}
