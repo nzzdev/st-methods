@@ -59,7 +59,7 @@ if __name__ == '__main__':
         df = df.rename(columns={'00-04': '0-4', '05-14': '5-14'})
 
         # show date in chart notes
-        notes_chart = '¹ inklusive Intensivstationen.<br>Stand: ' + \
+        notes_chart = '¹ Inklusive Intensivstationen.<br>Stand: ' + \
             timestamp_str
 
         # run function
