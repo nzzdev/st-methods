@@ -2,9 +2,9 @@ name: Update Corona Risklayer Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 15 and 45 past every hour from 7 through 16 CEST (5 - 14 GMT)
+  # This will run at minute 15 and 45 past every hour
   schedule:
-    - cron: "15,45 2-14 * * *"
+    - cron: "15,45 1-22 * * *"
   workflow_dispatch:
 
 jobs:
