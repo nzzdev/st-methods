@@ -16,6 +16,18 @@
       "environments": [
         {
           "name": "production",
+          "id": "538b731c16026f131aa0b314def63f9b"
+        }
+      ],
+      "item": {
+        "notes": "",
+        "data": []
+      }
+    },
+    {
+      "environments": [
+        {
+          "name": "production",
           "id": "beb6de8405dcbea50a354dc453822c18"
         }
       ],

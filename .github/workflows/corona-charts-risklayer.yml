@@ -2,9 +2,9 @@ name: Update Corona Risklayer Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 0 and 30 past every hour from 7 through 16 CEST (5 - 14 GMT)
+  # This will run at minute 0 and 45 past every hour from 7 through 16 CEST (5 - 14 GMT)
   schedule:
-    - cron: "0,45 5-14 * * *"
+    - cron: "0,45 2-14 * * *"
   workflow_dispatch:
 
 jobs:
@@ -35,6 +35,7 @@ jobs:
       - name: Run python scripts
         run: |
           python risklayer_incidence/risklayer_incidence.py
+          python risklayer_incidence/risklayer_map.py
           python risklayer_new_deaths/risklayer_new_deaths.py
         env:
           GSPREAD_PRIVATE_KEY_ID: ${{ secrets.GSPREAD_PRIVATE_KEY_ID }}
