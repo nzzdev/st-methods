@@ -501,7 +501,7 @@ update_chart(id = "ab97925bcc5055b33011fb4d3320012a",
              data = id_total, 
              notes = paste0("Die Zahl der gemeldeten Infektionen bei Geimpften wird vom BAG nicht mehr publiziert,",
                             " da die Daten nicht aussagekräftig sind.<br>Stand: ",
-                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
+                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_hosp_vacc$date), format = "%d. %m. %Y"))))
 
 
 id_hist <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
