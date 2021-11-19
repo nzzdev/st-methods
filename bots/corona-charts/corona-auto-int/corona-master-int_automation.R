@@ -313,8 +313,10 @@ full_vacc <- vaccination %>%
 
 data <- full_vacc %>% slice(1:20)
 
+title <- paste("In", head(full_vacc$Land, 1), "sind", round(head(full_vacc$`Vollständig geimpft, in % der Bev.`, 1)), "Prozent der Einwohner vollständig geimpft" )
+
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern. Eine Person muss in der Regel zwei Dosen geimpft bekommen, um als vollständig geimpft zu gelten. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
-update_chart(id = 'a15febf1b611cd45c56db4f85b1ea73b', data = data, notes = notes)
+update_chart(id = 'a15febf1b611cd45c56db4f85b1ea73b', data = data, notes = notes, title = title)
 
 
 booster <- vaccination %>%
@@ -418,8 +420,9 @@ all_cum_cases <- all_cum %>%
   slice(1:20) %>%
   select(Land, all_cases_pop)
 
+title <- paste(head(all_cum_cases$Land, 1), "insgesamt pro Kopf am stärksten betroffen")
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(all_ctry$date), format = "%d. %m. %Y")))
-update_chart(id = '7c647e0bd14b018f4f4f91aa86eb1872', data = all_cum_cases, notes = notes)
+update_chart(id = '7c647e0bd14b018f4f4f91aa86eb1872', data = all_cum_cases, notes = notes, title = title)
 
 
 #Continents
@@ -481,10 +484,10 @@ all_cum_deaths <- all_cum %>%
   slice(1:20) %>%
   select(Land, dead_pop)
 
-
+title <- paste(head(all_cum_deaths, 1), "hat insgesamt am meisten Tote pro Kopf zu beklagen")
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
-update_chart(id = 'c7004f4d1b11f50ecbbd2d4a1849f329', data = all_cum_deaths, notes = notes)
+update_chart(id = 'c7004f4d1b11f50ecbbd2d4a1849f329', data = all_cum_deaths, notes = notes, title = title)
 
 
 
@@ -686,7 +689,9 @@ test_table <- tests %>%
   filter(`Tests pro 1000 Einwohner` > 1) %>%
   ungroup() 
 
+title <- paste(head(test_table$Land, 1), "testet am meisten")
+
 notes <- paste0("Nur Länder mit mehr als 1 Million Einwohnern, die mehr als einen Test pro 1000 Einwohner pro Tag durchführen. Aufgrund unterschiedlicher Meldeverfahren können die Daten für einige Länder schon mehrere Tage alt sein. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
-update_chart(id = 'fdf83ddd0451dc0c0d09c18769f1abd5', data = test_table, notes = notes)
+update_chart(id = 'fdf83ddd0451dc0c0d09c18769f1abd5', data = test_table, notes = notes, title = title)
 
