@@ -5,6 +5,7 @@ rm(list = ls(all = TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen = 999)
 library(tidyverse)
 library(countrycode)
+library(zoo)
 
 # uncomment for editing
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
@@ -19,7 +20,14 @@ owid_pop <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/maste
 
 #join by iso code
 owid <- owid_raw %>%
-  left_join(owid_pop %>% select(iso_code, population), by = "iso_code")
+  left_join(owid_pop %>% select(iso_code, population), by = "iso_code") %>%
+  mutate(total_boosters = replace_na(total_boosters, 0)) %>%
+  mutate(total_vaccinations = total_vaccinations-total_boosters) %>%
+  group_by(location) %>%
+  arrange(location, date) %>%
+  mutate(daily_boosters = total_boosters-lag(total_boosters,1, default = 0)) %>%
+  mutate(daily_vaccinations_nonbooster = daily_vaccinations_raw-daily_boosters) %>%
+  mutate(daily_vaccinations = rollmean(daily_vaccinations_nonbooster, 7, NA, align = "right"))
 
 #match english names with german ones
 owid$location_ger <- countrycode(owid$iso_code, 'iso3c', 'cldr.short.de_ch')
@@ -59,7 +67,7 @@ owid$location_ger[owid$location_ger == "Suriname"] <- "Surinam"
 
 # ow <- owid$location_ger %>% unique()
 # 
-# nzz <- read_csv("owid_vaccinations_worldwide/NZZ-Länderliste.csv")
+# nzz <- read.csv("~/NZZ/NZZ Visuals - Dokumente/Vorlagen/Infografik/QGIS/Rohdaten/AL/NZZ-Länderliste.csv")
 # 
 # setdiff(ow, nzz$Name)
 # setdiff(nzz$Name, ow)
@@ -102,6 +110,7 @@ for (i in 1:length(solid_ctry)) {
   proj_raw <- tibble(dates_proj, vacc_proj_mean)
   proj_raw_lag <- tibble(dates_proj_lag, vacc_proj_mean_lag)
 
+  population <- first(owid$population[owid$location == solid_ctry[i]])
   herd_immunity_dosis <- first(owid$population[owid$location == solid_ctry[i]] * 1.6)
   herd_immunity_pct <- herd_immunity_dosis / 2
   herd_immunity_goal <- 80
@@ -111,16 +120,16 @@ for (i in 1:length(solid_ctry)) {
 
   location <- solid_ctry[i]
 
-  vacc_proj_temp <- tibble(location, herd_immunity_dosis, herd_immunity_pct, herd_immunity_date, herd_immunity_previous_date, herd_immunity_goal)
+  vacc_proj_temp <- tibble(location, population, herd_immunity_dosis, herd_immunity_pct, herd_immunity_date, herd_immunity_previous_date, herd_immunity_goal)
   vacc_proj_date <- rbind(vacc_proj_date, vacc_proj_temp)
 }
 
 vacc_sum <- owid %>%
-  select(location, location_ger, iso_code, date, total_vaccinations, people_vaccinated, people_fully_vaccinated) %>%
+  select(location, location_ger, iso_code, date, total_vaccinations, people_vaccinated, people_fully_vaccinated, total_boosters) %>%
   group_by(location) %>%
   summarise_all(last) %>%
   ungroup() %>%
-  select(location_ger, location, iso_code, total_vaccinations, people_vaccinated, people_fully_vaccinated)
+  select(location_ger, location, iso_code, total_vaccinations, people_vaccinated, people_fully_vaccinated, total_boosters)
 
 over65 <- read_csv("./owid_vaccinations_worldwide/API_SP.POP.65UP.TO.ZS_DS2_en_csv_v2_1929265.csv", skip = 3) %>%
   select(`Country Code`, `2019`) %>%

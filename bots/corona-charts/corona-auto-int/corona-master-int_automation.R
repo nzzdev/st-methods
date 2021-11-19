@@ -329,7 +329,7 @@ booster <- vaccination %>%
   mutate(`Booster-Impfungen, in % der Bev.` = round(`Booster-Impfungen, in % der Bev.`, 1)) %>%
   ungroup() %>% slice(1:20)
 
-notes <- paste0("Länder mit mehr als 1 Million Einwohnern. <br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
+notes <- paste0("Länder mit mehr als 1 Million Einwohnern. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
 update_chart(id = '8f41ac40bb78221f4e0ee924d6e85133', data = booster, notes = notes)
 
 

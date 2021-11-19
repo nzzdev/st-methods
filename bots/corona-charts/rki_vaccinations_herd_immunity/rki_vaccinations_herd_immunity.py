@@ -23,7 +23,7 @@ if __name__ == '__main__':
         with open(os.path.join('data', 'germany_vaccinations_timeseries_v2.tsv'), 'wb') as f:
             f.write(download_data(url).read())
 
-        # read columns need for the chart
+        # read data
         df = pd.read_csv('./data/germany_vaccinations_timeseries_v2.tsv', delimiter='\t',
                          encoding='utf-8', usecols=['date', 'impf_quote_erst', 'impf_quote_voll'])
 
@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
         # rename first column and set as index
         df2 = df2.rename(columns={
-            'date': '', 'impf_quote_voll': 'vollständig geimpft', 'impf_quote_erst': 'erste Dose'}).set_index('')
+            'date': '', 'impf_quote_voll': 'Vollständig geimpft', 'impf_quote_erst': 'Erste Dose'}).set_index('')
 
         # show percentage total (copy to chart title later)
         title_percent = df2.iat[0, 0]+df2.iat[0, 1]

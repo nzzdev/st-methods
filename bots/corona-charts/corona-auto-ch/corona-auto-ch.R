@@ -7,8 +7,8 @@ library(tidyverse)
 library(jsonlite)
 library(zoo)
 
-#setwd for fixes
-#setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+# setwd for fixes
+# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # import helper functions
 source("./helpers.R")
 
@@ -490,7 +490,7 @@ ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons
 #   summarise(sum = sum(entries), pop = max(pop)) %>%
 #   mutate(per100k = 100000*sum/pop)
 
-id_total <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+id_total <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   filter(vaccine == "all") %>%
   filter(date == max(date), vaccination_status %in% c("fully_vaccinated","partially_vaccinated")) %>%
   select(type, vaccination_status, sumTotal) %>%
@@ -499,13 +499,19 @@ id_total <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
 
 update_chart(id = "ab97925bcc5055b33011fb4d3320012a", 
              data = id_total, 
+<<<<<<< HEAD
              notes = paste0("Die Zahl der Infektionen bei Geimpften dürfte stark unterschätzt sein, da sich Geimpfte ",
                             "weniger oft testen lassen und so viele Fälle untentdeckt bleiben dürften. Zudem fehlen bei ",
                             "den meisten Infektionsfällen Angaben zum Impfstatus. <br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_hosp_vacc$date), format = "%d. %m. %Y"))))
+=======
+             notes = paste0("Die Zahl der gemeldeten Infektionen bei Geimpften wird vom BAG nicht mehr publiziert,",
+                            " da die Daten nicht aussagekräftig sind.<br>Stand: ",
+                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
+>>>>>>> 4fd815cd477ec1162b9215dca2e6e8d0727baa91
 
 
-id_hist <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+id_hist <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   filter(vaccine == "all") %>%
   filter(date >= "2021-07-01") %>%
   group_by(type, vaccination_status) %>%
@@ -518,7 +524,7 @@ id_hist[2:5] <- round(id_hist[2:5]/rowSums(id_hist[2:5])*100,1)
 update_chart(id = "c041757a38ba1d4e6851aaaee55c6207", 
              data = id_hist, 
              notes = paste0("Der Zeitraum ab 1. Juli wurde so gewählt, weil zu diesem Zeitpunkt bereits eine relativ hohe Impfquote erreicht war. <br>Stand: ",
-                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_inf_vacc$date), format = "%d. %m. %Y"))))
+                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_hosp_vacc$date), format = "%d. %m. %Y"))))
 
 
 id_hosp_line <- ch_hosp_vacc %>%
@@ -527,7 +533,8 @@ id_hosp_line <- ch_hosp_vacc %>%
   spread(vaccination_status, entries) %>%
   mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
   filter(date >= "2021-07-01") %>%
-  select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3)
+  select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3) %>%
+  head(-2)
 
 update_chart(id = "8d9bea408c789a55ff9d8f19e10a3397", 
              data = id_hosp_line)
@@ -597,8 +604,10 @@ update_chart(id = "e039a1c64b33e327ecbbd17543e518d3", data = vaccchart_kant, not
 #              notes = paste0("Stand: ", ch_vacc_date))
 
 # second doses
+
 vacc_ch_persons_kant <- ch_vacc_persons %>%
-  filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH", date == max(date)) %>%
+  filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH") %>%
+  filter(date == max(date)) %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
   left_join(pop[,c(1:2)], by = c("geoRegion" = "ktabk")) %>%
   select(-pop, -sumTotal, -geoRegion, -date) %>%
@@ -766,6 +775,7 @@ vacc_bag_goal <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccP
 
 vacc_bag_goal_notes <- paste0("Der Bundesrat hat Zielwerte für 18- bis 65-Jährige und über 65-Jährige festgelegt,",
                                " die Daten des BAG weisen leicht abweichende Altersgruppen aus (16 bis 64  und über 64 Jahre).",
+                              " Für unter 18-Jähruge wurde kein Zielwert festgelegt.",
                               " Die Zahlen werden wöchentlich aktualisiert.",
                                "<br>Stand: ", 
                                ch_vacc_date)
