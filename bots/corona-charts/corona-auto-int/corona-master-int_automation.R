@@ -484,7 +484,8 @@ all_cum_deaths <- all_cum %>%
   slice(1:20) %>%
   select(Land, dead_pop)
 
-title <- paste(head(all_cum_deaths, 1), "hat insgesamt am meisten Tote pro Kopf zu beklagen")
+title <- paste(head(all_cum_deaths$Land, 1), "hat insgesamt am meisten Tote pro Kopf zu beklagen")
+
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'c7004f4d1b11f50ecbbd2d4a1849f329', data = all_cum_deaths, notes = notes, title = title)
