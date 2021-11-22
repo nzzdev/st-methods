@@ -17,10 +17,10 @@ on:
 env:
   # The URL where the data should be downloaded.
   # Usually the 24h Shapefiles from https://firms.modaps.eosdis.nasa.gov/active_fire/#firms-shapefile
-  DATA_URL: https://firms2.modaps.eosdis.nasa.gov/data/active_fire/noaa-20-viirs-c2/shapes/zips/J1_VIIRS_C2_Europe_24h.zip
+  DATA_URL: https://firms2.modaps.eosdis.nasa.gov/data/active_fire/modis-c6.1/shapes/zips/MODIS_C6_1_Europe_24h.zip
 
   # The filename that should be extracted
-  FILENAME: J1_VIIRS_C2_Europe_24h
+  FILENAME: MODIS_C6_1_Europe_24h
 
   # The ID of the Q chart that should be updated
   QID: c041757a38ba1d4e6851aaaee5430fb7
