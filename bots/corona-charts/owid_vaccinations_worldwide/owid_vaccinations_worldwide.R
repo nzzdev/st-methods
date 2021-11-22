@@ -15,7 +15,7 @@ source("./helpers.R")
 
 # read-in
 owid_raw <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
-owid_pop <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/scripts/input/un/population_2020.csv") %>% 
+owid_pop <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/scripts/input/un/population_latest.csv") %>% 
   filter(!grepl("OWID", iso_code) | iso_code %in% c("OWID_WRL", "OWID_EUN", "OWID_KOS")) #exclude owid's own iso codes except World, EU and Kosovo (see below)
 
 #join by iso code
