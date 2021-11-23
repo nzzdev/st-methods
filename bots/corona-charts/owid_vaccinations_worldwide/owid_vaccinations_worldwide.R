@@ -155,6 +155,11 @@ vacc_final <- vacc_final %>%
   mutate(herd_immunity_date = case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_date),
          herd_immunity_previous_date =case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_previous_date))
 
-notes_string <- paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
-update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = notes_string)
+n_booster <- length(vacc_final$total_boosters[vacc_final$total_boosters > 0])
+
+notes_string <- paste("Zahlen zu den Booster-Impfungen liegen für", n_booster, "Länder vor. Dargestellt werden nur Länder und Regionen,",
+                      "für welche regelmässig publizierte und aktuelle Daten vorliegen.",  "<br>Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
+update_chart(id = "79af3c6593df15827ccb5268a7aff0be", 
+             data = vacc_final, 
+             notes = notes_string)
 
