@@ -772,7 +772,7 @@ vacc_bag_goal <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccP
 
 vacc_bag_goal_notes <- paste0("Der Bundesrat hat Zielwerte für 18- bis 65-Jährige und über 65-Jährige festgelegt,",
                                " die Daten des BAG weisen leicht abweichende Altersgruppen aus (16 bis 64  und über 64 Jahre).",
-                              " Für unter 18-Jähruge wurde kein Zielwert festgelegt.",
+                              " Für unter 18-Jährige wurde kein Zielwert festgelegt.",
                               " Die Zahlen werden wöchentlich aktualisiert.",
                                "<br>Stand: ", 
                                ch_vacc_date)
