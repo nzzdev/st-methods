@@ -15,7 +15,7 @@ source("./helpers.R")
 
 # read-in
 owid_raw <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/vaccinations/vaccinations.csv")
-owid_pop <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/scripts/input/un/population_2020.csv") %>% 
+owid_pop <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/scripts/input/un/population_latest.csv") %>% 
   filter(!grepl("OWID", iso_code) | iso_code %in% c("OWID_WRL", "OWID_EUN", "OWID_KOS")) #exclude owid's own iso codes except World, EU and Kosovo (see below)
 
 #join by iso code
@@ -155,6 +155,11 @@ vacc_final <- vacc_final %>%
   mutate(herd_immunity_date = case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_date),
          herd_immunity_previous_date =case_when(people_fully_vaccinated > herd_immunity_pct | total_vaccinations > herd_immunity_dosis ~ as.Date("2099-01-01"), TRUE ~ herd_immunity_previous_date))
 
-notes_string <- paste("Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
-update_chart(id = "79af3c6593df15827ccb5268a7aff0be", data = vacc_final, notes = notes_string)
+n_booster <- length(vacc_final$total_boosters[vacc_final$total_boosters > 0])
+
+notes_string <- paste("Zahlen zu den Booster-Impfungen liegen für", n_booster, "Länder vor. Dargestellt werden nur Länder und Regionen,",
+                      "für welche regelmässig publizierte und aktuelle Daten vorliegen.",  "<br>Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
+update_chart(id = "79af3c6593df15827ccb5268a7aff0be", 
+             data = vacc_final, 
+             notes = notes_string)
 

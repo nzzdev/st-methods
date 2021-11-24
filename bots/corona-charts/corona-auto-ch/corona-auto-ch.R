@@ -15,9 +15,7 @@ source("./helpers.R")
 # read in additional data
 pop <- read_csv("./corona-auto-ch/pop_kant.csv")
 
-
 #### Update R eth estimate ####
-
 eth <- read_csv("https://raw.githubusercontent.com/covid-19-Re/dailyRe-Data/master/CHE-estimates.csv") %>%
   filter(region == "CHE" & 
            data_type == "Confirmed cases" & 
@@ -477,8 +475,10 @@ ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons
 # ch_inf_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
 #   filter(vaccine == "all")
 # 
-# ch_hosp_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
-#   filter(vaccine == "all")
+
+ch_hosp_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$hospVaccPersons) %>% 
+  filter(vaccine == "all")
+
 # 
 # ch_death_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
 #   filter(vaccine == "all")
@@ -518,19 +518,36 @@ update_chart(id = "c041757a38ba1d4e6851aaaee55c6207",
              notes = paste0("Der Zeitraum ab 1. Juli wurde so gewählt, weil zu diesem Zeitpunkt bereits eine relativ hohe Impfquote erreicht war. <br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_hosp_vacc$date), format = "%d. %m. %Y"))))
 
+# id_hosp_line <- ch_hosp_vacc %>%
+#   filter(vaccine == "all") %>%
+#   select(date, vaccination_status, entries) %>%
+#   spread(vaccination_status, entries) %>%
+#   mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
+#   filter(date >= "2021-07-01") %>%
+#   select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3) %>%
+#   head(-2)
 
-id_hosp_line <- ch_hosp_vacc %>%
-  filter(vaccine == "all") %>%
-  select(date, vaccination_status, entries) %>%
-  spread(vaccination_status, entries) %>%
-  mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
-  filter(date >= "2021-07-01") %>%
-  select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3) %>%
-  head(-2)
+id_hosp_line_weekly_pc_60 <- ch_hosp_vacc_age %>%
+  filter(altersklasse_covid19 %in% c("60 - 69", "70 - 79", "80+"), 
+         vaccination_status != "unknown" & vaccination_status != "partially_vaccinated",
+         date >= "202126") %>%
+  select(date, altersklasse_covid19, vaccination_status, entries, pop) %>%
+  group_by(date, vaccination_status) %>%
+  summarise(entries = sum(entries), pop = sum(pop)) %>%
+  mutate(per100k = 100000*entries/pop) %>%
+  select(-entries, -pop) %>%
+  spread(vaccination_status, per100k) %>%
+  mutate(date = paste0(str_sub(date, 1,4), "-W", str_sub(date, 5,6)))
 
-update_chart(id = "8d9bea408c789a55ff9d8f19e10a3397", 
-             data = id_hosp_line)
+names(id_hosp_line_weekly_pc_60) <- c("date", "Vollständig geimpft", "Ungeimpft")
 
+if (weekdays(Sys.Date()) %in% c("Monday", "Montag", "Dienstag", "Tuesday")){
+  id_hosp_line_weekly_pc_60 <- id_hosp_line_weekly_pc_60 %>%
+    head(-1)
+}
+
+update_chart(id = "6069088c960d0f055227f901b974637f", 
+             data = id_hosp_line_weekly_pc_60)
 
 #Manufacturer of Vaccine
 update_chart(id = "e5aee99aec92ee1365613b671ef405f7", data = ch_vacc_manuf)
@@ -772,7 +789,7 @@ vacc_bag_goal <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccP
 
 vacc_bag_goal_notes <- paste0("Der Bundesrat hat Zielwerte für 18- bis 65-Jährige und über 65-Jährige festgelegt,",
                                " die Daten des BAG weisen leicht abweichende Altersgruppen aus (16 bis 64  und über 64 Jahre).",
-                              " Für unter 18-Jähruge wurde kein Zielwert festgelegt.",
+                              " Für unter 18-Jährige wurde kein Zielwert festgelegt.",
                               " Die Zahlen werden wöchentlich aktualisiert.",
                                "<br>Stand: ", 
                                ch_vacc_date)
