@@ -195,11 +195,18 @@ gmr_de <- rbind(read_csv("2020_DE_Region_Mobility_Report.csv"), read_csv("2021_D
   mutate(Deutschland = (retail_and_recreation_percent_change_from_baseline + grocery_and_pharmacy_percent_change_from_baseline + transit_stations_percent_change_from_baseline + workplaces_percent_change_from_baseline)/4 ) %>%
   dplyr::select(date, Deutschland)
 
-gmr <- merge(gmr_de, gmr_at, by = 'date')
-gmr <- merge(gmr, gmr_ch, by = 'date')
+gmr_ch_at <- merge(gmr_ch, gmr_at, by = 'date')
+gmr <- merge(gmr_ch_at, gmr_de, by = 'date')
 
 update_chart(id = "101552dc3a2c51542953caad1e8a4bee", 
              data = gmr)
+
+update_chart(id = "6069088c960d0f055227f901b977a49b", 
+             data = gmr_ch_at)
+
+
+
+
 
 
 ########################################
