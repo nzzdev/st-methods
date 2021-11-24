@@ -565,9 +565,6 @@ id_rel_age_q <- id_rel_age %>%
 
 names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Vollständig Geimpft")
 
-write_clip(id_rel_age_q)
-browseURL("https://q.st.nzz.ch/editor/chart/32933cfe729928ecb4906a82bdcc4f9f")
-
 update_chart(id = "32933cfe729928ecb4906a82bdcc4f9f", 
              data = id_rel_age_q)
 
