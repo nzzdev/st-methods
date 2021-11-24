@@ -563,7 +563,7 @@ id_rel_age_q <- id_rel_age %>%
   select(altersklasse_covid19, not_vaccinated, fully_vaccinated) %>%
   filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt")
 
-names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Vollständig Geimpft")
+names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Vollständig geimpft")
 
 update_chart(id = "32933cfe729928ecb4906a82bdcc4f9f", 
              data = id_rel_age_q)
