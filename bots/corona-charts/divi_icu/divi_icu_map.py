@@ -79,6 +79,7 @@ if __name__ == '__main__':
             ['faelle_covid_aktuell', 'betten_frei', 'betten_belegt'], axis=1)
         dftable['% Covid-Patienten'] = dftable['% Covid-Patienten'].astype(
             object).fillna('')
+        dftable['% Belegt'] = dftable['% Belegt'].astype(object).fillna('')
 
         # drop unused columns and NaN values for map
         df = df.drop(
