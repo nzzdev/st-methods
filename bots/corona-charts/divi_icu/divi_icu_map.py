@@ -88,7 +88,7 @@ if __name__ == '__main__':
 
         # create notes for map and table
         notes_chartmap = 'Kreise ohne Zahlen: Meldung standortübergreifend am Hauptsitz des Klinikverbunds oder keine Intensivstation.<br>Stand: ' + timestamp_str
-        notes_charttable = 'Kreise ohne Zahlen: Meldung standortübergreifend am Hauptsitz des Klinikverbunds oder keine Intensivstation.<br>In einzelnen Kreisen, etwa in Rastatt, gibt trotz Intensivstation keine Covid-19-Patienten, weil umliegende Spitäler diese aufnehmen.<br>Stand: ' + timestamp_str
+        notes_charttable = 'Kreise ohne Zahlen: Meldung standortübergreifend am Hauptsitz des Klinikverbunds oder keine Intensivstation.<br>In einzelnen Kreisen mit Intensivstation, etwa in Rastatt, gibt es keine Covid-19-Patienten, weil umliegende Spitäler diese aufnehmen.<br>Stand: ' + timestamp_str
 
         # run function
         update_chart(id='81caa0242fa168d128995977cd4026a8',
