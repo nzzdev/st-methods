@@ -65,8 +65,8 @@ if __name__ == '__main__':
         df['% Covid-Patienten'] = df['% Covid-Patienten'].round(
             0).astype(int)
 
-        # join with dfags
-        df = dfags.join(df)
+        # join with dfags (preserve dtype of the join keys)
+        df = dfags.join(df.astype('Int64'))
 
         # create new dataframe for table
         dftable = df.copy()
@@ -77,16 +77,15 @@ if __name__ == '__main__':
         # drop unused columns and NaN values for table
         dftable = dftable.drop(
             ['faelle_covid_aktuell', 'betten_frei', 'betten_belegt'], axis=1)
-        dftable['% Covid-Patienten'] = dftable['% Covid-Patienten'].fillna(
-            -1).astype(int).astype(str).replace('-1', ' ')
-        dftable['% Belegt'] = dftable['% Belegt'].fillna(
-            -1).astype(int).astype(str).replace('-1', ' ')
+        dftable['% Covid-Patienten'] = dftable['% Covid-Patienten'].astype(
+            object).fillna('')
+        dftable['% Belegt'] = dftable['% Belegt'].astype(object).fillna('')
 
         # drop unused columns and NaN values for map
         df = df.drop(
             ['Region', 'Land', 'faelle_covid_aktuell', 'betten_frei', 'betten_belegt', '% Belegt'], axis=1)
-        df['% Covid-Patienten'] = df['% Covid-Patienten'].fillna(-1).astype(
-            int).astype(str).replace('-1', ' ')
+        df['% Covid-Patienten'] = df['% Covid-Patienten'].astype(
+            object).fillna('')
 
         # create notes for map and table
         notes_chartmap = 'Kreise ohne Zahlen: Meldung standortübergreifend am Hauptsitz des Klinikverbunds oder keine Intensivstation.<br>Stand: ' + timestamp_str
