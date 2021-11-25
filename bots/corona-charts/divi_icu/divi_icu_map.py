@@ -80,13 +80,13 @@ if __name__ == '__main__':
         dftable['% Covid-Patienten'] = dftable['% Covid-Patienten'].fillna(
             -1).astype(int).astype(str).replace('-1', '')
         dftable['% Belegt'] = dftable['% Belegt'].fillna(
-            -1).astype(int).astype(str).replace('-1', '')
+            -1).astype(int).astype(str).replace('-1', 'null')
 
         # drop unused columns and NaN values for map
         df = df.drop(
             ['Region', 'Land', 'faelle_covid_aktuell', 'betten_frei', 'betten_belegt', '% Belegt'], axis=1)
         df['% Covid-Patienten'] = df['% Covid-Patienten'].fillna(-1).astype(
-            int).astype(str).replace('-1', '')
+            int).astype(str).replace('-1', 'null')
 
         # create notes for map and table
         notes_chartmap = 'Kreise ohne Zahlen: Meldung standortübergreifend am Hauptsitz des Klinikverbunds oder keine Intensivstation.<br>Stand: ' + timestamp_str
