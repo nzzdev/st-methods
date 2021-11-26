@@ -264,7 +264,14 @@ world <- vaccination %>%
   filter(Land == "World") %>%
   select(Datum, Impfdosen_total)
 
-update_chart(id = "83dcb25c0e922ac143111ad204e65d15", data = world)
+
+title <- case_when(last(world$Impfdosen_total) < 9000000000 &  last(world$Impfdosen_total) >= 8750000000 ~ "Fast 9 Milliarden Impfdosen wurden weltweit verabreicht",
+                   last(world$Impfdosen_total) > 8000000000 &  last(world$Impfdosen_total) < 8750000000 ~ "Mehr als 8 Milliarden Impfdosen wurden weltweit verabreicht",
+                   last(world$Impfdosen_total) < 8000000000 &  last(world$Impfdosen_total) >= 7750000000 ~ "Fast 8 Milliarden Impfdosen wurden weltweit verabreicht",
+                   last(world$Impfdosen_total) > 7000000000 &  last(world$Impfdosen_total) < 7750000000 ~ "Mehr als 7 Milliarden Impfdosen wurden weltweit verabreicht"    
+                   )
+
+update_chart(id = "83dcb25c0e922ac143111ad204e65d15", data = world, title = title)
 
 
 vaccination$Land <- countrycode(vaccination$Land, 'country.name', 'cldr.short.de_ch')
@@ -436,6 +443,17 @@ roll_cont <- rolling_average_all %>%
 
 update_chart(id = 'af5ce13bfad0180d368a3810c9e9eabf', data = roll_cont)
 update_chart(id = 'afb382321448e30ea606ea26259b4004', data = roll_cont)
+
+
+roll_cont <- rolling_average_all %>%
+  group_by(date, region_2) %>%
+  summarise(cases = sum(ravg_deaths)) %>%
+  spread(region_2, cases) %>%
+  select(date, Europa, Asien, Afrika, Nordamerika, Lateinamerika, Ozeanien) %>%
+  filter(date > "2020-01-28")
+
+update_chart(id = '549b5522072c32f00946aa2ea0db1247', data = roll_cont)
+
 
 
 ### Table with 50 countries, largest number of new cases per capita
