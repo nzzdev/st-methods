@@ -549,6 +549,26 @@ if (weekdays(Sys.Date()) %in% c("Monday", "Montag", "Dienstag", "Tuesday")){
 update_chart(id = "6069088c960d0f055227f901b974637f", 
              data = id_hosp_line_weekly_pc_60)
 
+
+id_rel_age <- ch_hosp_vacc_age %>% 
+  select(1:4,6) %>%
+  filter(date %in% c(202144, 202145, 202146)) %>%
+  group_by(altersklasse_covid19, vaccination_status) %>%
+  summarise(entries = sum(entries), pop = first(pop)) %>%
+  mutate(per100k = round(100000*entries/pop, 1))
+
+id_rel_age_q <- id_rel_age %>%
+  select(-entries, -pop) %>% 
+  spread(vaccination_status, per100k) %>%
+  select(altersklasse_covid19, not_vaccinated, fully_vaccinated) %>%
+  filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt")
+
+names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Vollständig Geimpft")
+
+update_chart(id = "32933cfe729928ecb4906a82bdcc4f9f", 
+             data = id_rel_age_q)
+
+
 #Manufacturer of Vaccine
 update_chart(id = "e5aee99aec92ee1365613b671ef405f7", data = ch_vacc_manuf)
 
