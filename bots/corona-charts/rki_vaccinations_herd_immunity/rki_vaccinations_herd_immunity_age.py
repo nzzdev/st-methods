@@ -83,12 +83,13 @@ if __name__ == '__main__':
                  'Erste Dose', 'Ziel']].set_index('')
 
         # show percentage total (copy to chart title later)
-        title_percent = df.iat[0, 0]+df.iat[0, 1]
-        title_percent_full = df.iat[0, 0]
-        title_chart = str(title_percent.round(1)).replace('.', ',') + \
-            ' Prozent sind geimpft, ' + \
-            str(title_percent_full.round(1)).replace('.', ',') + \
-            ' Prozent vollständig'
+        title_percent = df.iat[0, 0] + df.iat[0, 1] + df.iat[0, 2]
+        title_percent_full = df.iat[0, 0] + df.iat[0, 1]
+        title_percent_boost = df.iat[0, 0]
+        # title_chart = str(title_percent.round(1)).replace('.', ',') + ' Prozent sind geimpft, ' + str(title_percent_full.round(1)).replace('.', ',') + ' Prozent vollständig'
+        title_chart = str(title_percent_full.round(1)).replace('.', ',') + ' Prozent sind vollständig geimpft, ' + \
+            str(title_percent_boost.round(1)).replace('.', ',') + \
+            ' Prozent haben einen Booster erhalten'
 
         # replace NaN with empty string
         df.fillna('', inplace=True)
