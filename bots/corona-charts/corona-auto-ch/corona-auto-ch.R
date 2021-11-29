@@ -548,7 +548,6 @@ if (weekdays(Sys.Date()) %in% c("Monday", "Montag", "Dienstag", "Tuesday")){
 update_chart(id = "6069088c960d0f055227f901b974637f", 
              data = id_hosp_line_weekly_pc_60)
 
-
 id_rel_age <- ch_hosp_vacc_age %>% 
   select(1:4,6) %>%
   filter(date %in% c(202144, 202145, 202146)) %>%
