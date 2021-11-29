@@ -48,7 +48,7 @@ EU,POL,/countries/eu/,/static/countries/flags/4x3/eu.svg,,3,3,Insufficient,ORANG
 EU,PRT,/countries/eu/,/static/countries/flags/4x3/eu.svg,,3,3,Insufficient,ORANGE
 EU,ROU,/countries/eu/,/static/countries/flags/4x3/eu.svg,,3,3,Insufficient,ORANGE
 Russian Federation,RUS,/countries/russian-federation/,/static/countries/flags/4x3/ru.svg,,1,1,Critically insufficient,DARK_GRAY
-Saudi Arabia,SAU,/countries/saudi-arabia/,/static/countries/flags/4x3/sa.svg,,1,1,Critically insufficient,DARK_GRAY
+Saudi Arabia,SAU,/countries/saudi-arabia/,/static/countries/flags/4x3/sa.svg,,2,2,Highly insufficient,RED
 Singapore,SGP,/countries/singapore/,/static/countries/flags/4x3/sg.svg,,1,1,Critically insufficient,DARK_GRAY
 EU,SVK,/countries/eu/,/static/countries/flags/4x3/eu.svg,,3,3,Insufficient,ORANGE
 EU,SVN,/countries/eu/,/static/countries/flags/4x3/eu.svg,,3,3,Insufficient,ORANGE
@@ -58,10 +58,10 @@ EU,ESP,/countries/eu/,/static/countries/flags/4x3/eu.svg,,3,3,Insufficient,ORANG
 EU,SWE,/countries/eu/,/static/countries/flags/4x3/eu.svg,,3,3,Insufficient,ORANGE
 Switzerland,CHE,/countries/switzerland/,/static/countries/flags/4x3/ch.svg,,3,3,Insufficient,ORANGE
 Thailand,THA,/countries/thailand/,/static/countries/flags/4x3/th.svg,,1,1,Critically insufficient,DARK_GRAY
-The Gambia,GMB,/countries/gambia/,/static/countries/flags/4x3/gm.svg,,5,5,1.5°C Paris Agreement compatible,GREEN
+The Gambia,GMB,/countries/gambia/,/static/countries/flags/4x3/gm.svg,,4,4,Almost Sufficient,YELLOW
 Turkey,TUR,/countries/turkey/,/static/countries/flags/4x3/tr.svg,,1,1,Critically insufficient,DARK_GRAY
 UAE,ARE,/countries/uae/,/static/countries/flags/4x3/ae.svg,,2,2,Highly insufficient,RED
 Ukraine,UKR,/countries/ukraine/,/static/countries/flags/4x3/ua.svg,,2,2,Highly insufficient,RED
 United Kingdom,GBR,/countries/uk/,/static/countries/flags/4x3/gb.svg,,4,4,Almost Sufficient,YELLOW
 USA,USA,/countries/usa/,/static/countries/flags/4x3/us.svg,,3,3,Insufficient,ORANGE
-Viet Nam,VNM,/countries/vietnam/,/static/countries/flags/4x3/vn.svg,,2,2,Highly insufficient,RED
+Viet Nam,VNM,/countries/vietnam/,/static/countries/flags/4x3/vn.svg,,1,1,Critically insufficient,DARK_GRAY
