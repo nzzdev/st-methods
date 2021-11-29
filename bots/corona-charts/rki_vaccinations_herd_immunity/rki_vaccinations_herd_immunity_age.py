@@ -52,17 +52,17 @@ if __name__ == '__main__':
         df60.loc[0, 'Datum'] = '60+'
 
         # add emtpy row as a chart spacer
-        dfall.loc[dfall.shape[0]] = [None, None, None]
+        dfall.loc[dfall.shape[0]] = [None, None, None, None]
 
         # rename columns
         dfall = dfall.rename(columns={'Datum': '', 'Impfquote_gesamt_min1': 'Erste Dose',
-                                      'Impfquote_gesamt_voll': 'Vollständig geimpft'})
+                                      'Impfquote_gesamt_voll': 'Vollständig geimpft', 'Impfquote_gesamt_boost': 'Mit Booster'})
         df12 = df12.rename(columns={
-            'Datum': '', 'Impfquote_12bis17_min1': 'Erste Dose', 'Impfquote_12bis17_voll': 'Vollständig geimpft'})
+            'Datum': '', 'Impfquote_12bis17_min1': 'Erste Dose', 'Impfquote_12bis17_voll': 'Vollständig geimpft', 'Impfquote_12bis17_boost': 'Mit Booster'})
         df18 = df18.rename(columns={
-            'Datum': '', 'Impfquote_18plus_min1': 'Erste Dose', 'Impfquote_18plus_voll': 'Vollständig geimpft'})
+            'Datum': '', 'Impfquote_18plus_min1': 'Erste Dose', 'Impfquote_18plus_voll': 'Vollständig geimpft', 'Impfquote_18plus_boost': 'Mit Booster'})
         df60 = df60.rename(columns={
-            'Datum': '', 'Impfquote_60plus_min1': 'Erste Dose', 'Impfquote_60plus_voll': 'Vollständig geimpft'})
+            'Datum': '', 'Impfquote_60plus_min1': 'Erste Dose', 'Impfquote_60plus_voll': 'Vollständig geimpft', 'Impfquote_60plus_boost': 'Mit Booster'})
 
         # combine datasets
         df = pd.concat([dfall, df60, df18, df12],
