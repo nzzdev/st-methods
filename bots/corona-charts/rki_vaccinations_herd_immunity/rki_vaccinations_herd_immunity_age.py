@@ -88,8 +88,8 @@ if __name__ == '__main__':
         title_percent_boost = df.iat[0, 0]
         # title_chart = str(title_percent.round(1)).replace('.', ',') + ' Prozent sind geimpft, ' + str(title_percent_full.round(1)).replace('.', ',') + ' Prozent vollständig'
         title_chart = str(title_percent_full.round(1)).replace('.', ',') + ' Prozent sind vollständig geimpft, ' + \
-            str(title_percent_boost.round(1)).replace('.', ',') + \
-            ' Prozent haben einen Booster erhalten'
+            str(title_percent_boost.round(1)).replace(
+                '.', ',') + ' Prozent mit Booster-Schutz'
 
         # replace NaN with empty string
         df.fillna('', inplace=True)
