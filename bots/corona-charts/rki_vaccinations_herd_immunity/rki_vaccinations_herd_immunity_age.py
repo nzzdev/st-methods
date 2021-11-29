@@ -25,13 +25,13 @@ if __name__ == '__main__':
         # read data
         csv = './data/Aktuell_Deutschland_Impfquoten_COVID-19.csv'
         dfall = pd.read_csv(csv, encoding='utf-8',
-                            usecols=['Datum', 'Impfquote_gesamt_min1', 'Impfquote_gesamt_voll'])
+                            usecols=['Datum', 'Impfquote_gesamt_min1', 'Impfquote_gesamt_voll', 'Impfquote_gesamt_boost'])
         df12 = pd.read_csv(
-            csv, encoding='utf-8', usecols=['Datum', 'Impfquote_12bis17_min1', 'Impfquote_12bis17_voll'])
+            csv, encoding='utf-8', usecols=['Datum', 'Impfquote_12bis17_min1', 'Impfquote_12bis17_voll', 'Impfquote_12bis17_boost'])
         df18 = pd.read_csv(
-            csv, encoding='utf-8', usecols=['Datum', 'Impfquote_18plus_min1', 'Impfquote_18plus_voll'])
+            csv, encoding='utf-8', usecols=['Datum', 'Impfquote_18plus_min1', 'Impfquote_18plus_voll', 'Impfquote_18plus_boost'])
         df60 = pd.read_csv(
-            csv, encoding='utf-8', usecols=['Datum', 'Impfquote_60plus_min1', 'Impfquote_60plus_voll'])
+            csv, encoding='utf-8', usecols=['Datum', 'Impfquote_60plus_min1', 'Impfquote_60plus_voll', 'Impfquote_60plus_boost'])
 
         # extract first rows (=Germany)
         dfall = dfall.iloc[[0]].reset_index(drop=True)
@@ -69,16 +69,17 @@ if __name__ == '__main__':
                        ignore_index=True)
 
         # do calculations for stacked bar chart
-        df['Erste Dose'] = (
-            df['Erste Dose'] - df['Vollständig geimpft']).round(1)
-        df['Vollständig geimpft'] = df['Vollständig geimpft'].round(1)
+        df['Erste Dose'] = (df['Erste Dose'] -
+                            df['Vollständig geimpft']).round(1)
+        df['Vollständig geimpft'] = (
+            df['Vollständig geimpft'] - df['Mit Booster']).round(1)
 
         # create new column "Ziel" and calculate gap between status quo and herd immunity
         df.loc[0, 'Ziel'] = (80 - (df.loc[0, 'Vollständig geimpft'] +
-                                   df.loc[0, 'Erste Dose'])).round(1)
+                             df.loc[0, 'Erste Dose'] + df.loc[0, 'Mit Booster'])).round(1)
 
         # rearrange columns
-        df = df[['', 'Vollständig geimpft',
+        df = df[['', 'Mit Booster', 'Vollständig geimpft',
                  'Erste Dose', 'Ziel']].set_index('')
 
         # show percentage total (copy to chart title later)
