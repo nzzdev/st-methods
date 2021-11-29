@@ -61,6 +61,7 @@ jobs:
           python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity_age.py
           python rki_vaccinations_states/rki_vaccinations_states.py
           python divi_icu/divi_icu.py
+          python divi_icu/divi_icu_map.py
           python rki_age_groups/rki_hospitalizations.py
           python rki_age_groups/rki_incidence.py
           python rki_notbremse/rki_notbremse.py
