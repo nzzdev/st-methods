@@ -68,16 +68,17 @@ def get_options(rules: set) -> dict:
     customCategoriesOrder = list()
 
     position = 1
-    for rule in rules:
-        colorOverwrites.append({
-            'textColor': 'dark',
-            'color': colors[rule],
-            'position': position
-        })
-        position += 1
-        customCategoriesOrder.append({
-            'category': rule
-        })
+    for rule in ['Keine', '2G', '2G+', 'Kontakt-Verbote']:
+        if rule in rules:
+            colorOverwrites.append({
+                'textColor': 'dark',
+                'color': colors[rule],
+                'position': position
+            })
+            position += 1
+            customCategoriesOrder.append({
+                'category': rule
+            })
 
     options = {
         'colorColumn': {
@@ -133,7 +134,7 @@ if __name__ == '__main__':
         # get date for chart notes and add one day
         today = df.iloc[-1].name
         timestamp_dt = datetime.strptime(today, '%Y-%m-%d')
-        timestamp_str = timestamp_dt.strftime('%d.%m.%Y')
+        timestamp_str = timestamp_dt.strftime('%d. %m. %Y')
 
         # set Nowcast source (current day)
         for i in range(1, 4):

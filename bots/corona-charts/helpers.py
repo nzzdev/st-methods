@@ -27,7 +27,7 @@ def download_data(url):  # function for data download
         print('Other URL error:', e.reason)
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options=""):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=None, options=""):  # Q helper function
     # read qConfig file
     json_file = open('../q.config.json')
     qConfig = json.load(json_file)
@@ -42,7 +42,7 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
                     item.get('item').update({'subtitle': subtitle})
                 if notes != '':
                     item.get('item').update({'notes': notes})
-                if data.size > 0:
+                if data is not None:
                     # reset_index() and T (for transpose) are used to bring column names into the first row
                     transformed_data = data.applymap(str).reset_index(
                         drop=False).T.reset_index().T.apply(list, axis=1).to_list()
