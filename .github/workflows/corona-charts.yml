@@ -65,6 +65,7 @@ jobs:
           python rki_age_groups/rki_hospitalizations.py
           python rki_age_groups/rki_incidence.py
           python rki_notbremse/rki_notbremse.py
+          python rki_2g/rki_2g.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
