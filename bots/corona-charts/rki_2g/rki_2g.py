@@ -134,7 +134,7 @@ if __name__ == '__main__':
         # get date for chart notes and add one day
         today = df.iloc[-1].name
         timestamp_dt = datetime.strptime(today, '%Y-%m-%d')
-        timestamp_str = timestamp_dt.strftime('%d. %m. %Y')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # set Nowcast source (current day)
         for i in range(1, 4):
