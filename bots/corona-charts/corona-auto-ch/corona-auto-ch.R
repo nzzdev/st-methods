@@ -677,8 +677,9 @@ vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$va
   deframe() %>%
   format(format = "%d. %m. %Y")
 
-title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Vollständig geimpft`), "Prozent der Ältesten sind geimpft")
+title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Booster erhalten`), "Prozent der Ältesten sind geboostert")
 
+vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Vollständig geimpft`
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
              notes = paste0("Die Zahlen werden wöchentlich aktualisiert.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
