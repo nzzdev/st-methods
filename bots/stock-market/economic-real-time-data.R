@@ -370,3 +370,93 @@ update_chart(id = "0efbe12a71b5a3de14e8d10edb7abf60",
              data = burning_glass)
 
 
+
+####################################
+# Oxford policy tracker
+####################################
+
+oxford <- read_csv('https://raw.githubusercontent.com/OxCGRT/covid-policy-tracker/master/data/OxCGRT_latest.csv') %>%
+  mutate(Date = as.Date(as.character(Date), format="%Y%m%d"))
+
+oxford$Land <- countrycode(oxford$`CountryName`, 'country.name', 'cldr.short.de_ch')
+
+oxford$Land <- car::recode(oxford$Land, '"Vereinigte Arabische Emirate"="VAE"')
+oxford$Land <- car::recode(oxford$Land, '"Saudi-Arabien"="Saudiarabien"')
+oxford$Land <- car::recode(oxford$Land, '"Bosnien und Herzegowina" = "Bosnien-Herz."')
+oxford$Land <- car::recode(oxford$Land, '"Nordmazedonien" = "Nordmazed."')
+oxford$Land <- car::recode(oxford$Land, '"Republik Moldau" = "Moldau"')
+oxford$Land <- car::recode(oxford$Land, '"Trinidad und Tobago" = "Trinidad u. T."')
+oxford$Land <- car::recode(oxford$Land, '"Dominikanische Republik" = "Dominikan. Rep."')
+oxford$Land <- car::recode(oxford$Land, '"Bangladesch" = "Bangladesh"')
+oxford$Land <- car::recode(oxford$Land, '"Zimbabwe" = "Simbabwe"')
+oxford$Land <- car::recode(oxford$Land, '"Kirgisistan" = "Kirgistan"')
+
+
+# OECD countries + BRICS
+oecd_brics <- c('Belgien',
+                'Dänemark', 
+                'Deutschland', 
+                'Frankreich', 
+                'Griechenland', 
+                'Irland',
+                'Island', 
+                'Italien', 
+                'Kanada', 
+                'Luxemburg', 
+                'Niederlande', 
+                'Norwegen', 
+                'Österreich', 
+                'Portugal', 
+                'Schweden', 
+                'Schweiz', 
+                'Spanien', 
+                'Türkei', 
+                'USA', 
+                'GB', 
+                'Japan', 
+                'Finnland', 
+                'Australien', 
+                'Neuseeland', 
+                'Mexiko', 
+                'Tschechien', 
+                'Südkorea', 
+                'Ungarn', 
+                'Polen', 
+                'Slowakei', 
+                'Chile', 
+                'Slowenien', 
+                'Israel', 
+                'Estland', 
+                'Lettland', 
+                'Litauen', 
+                'Kolumbien', 
+                'Costa Rica', 
+                'China',
+                'Russland',
+                'Brasilien',
+                'Indien',
+                'Südafrika')
+
+oxford_countries <- oxford  %>%
+  filter(Land %in% oecd_brics) %>%
+  drop_na(StringencyIndexForDisplay) %>%
+  arrange(Land, Date) %>%
+  mutate(pct_of_max = (StringencyIndexForDisplay*100) / max(StringencyIndexForDisplay, na.rm = T)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 14, default = 0)) %>%
+  mutate(Tendenz = case_when 
+         (diff_pct_max > 5 ~ '\U2191', 
+           diff_pct_max < -5 ~ '\U2193',
+           TRUE ~ '\U2192',)) %>%
+  mutate(StringencyIndexForDisplay = round(StringencyIndexForDisplay, 1)) %>%
+  filter(Date == last(Date)) %>%
+  select(Land, StringencyIndexForDisplay, Tendenz) %>%
+  arrange(desc(StringencyIndexForDisplay)) %>%
+  dplyr::rename(`Stringency Index` = StringencyIndexForDisplay) 
+
+notes <- paste0("Lesebeispiel: In ", first(oxford_countries$Land), " betragen die Einschränkungen des öffentlichen Lebens ",  first(round(oxford_countries$`Stringency Index`)), "% des maximalen Niveaus von 100%. <br>Berücksichtigt werden alle OECD- und BRICS-Länder. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: ", format(last(oxford$Date), format = "%d. %m. %Y"))
+
+update_chart(id = "e3eab39da5788b8d4701823ac92fc244", 
+             data = oxford_countries, notes = notes)
+
+
+
