@@ -10,6 +10,7 @@ library(RCurl)
 library(zoo)
 library(curl)
 library(countrycode)
+library(car)
 
 
 # import helper functions
