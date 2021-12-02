@@ -154,6 +154,13 @@
       "Repository": "CRAN",
       "Hash": "6b436e95723d1f0e861224dd9b094dfb"
     },
+    "countrycode": {
+      "Package": "countrycode",
+      "Version": "1.3.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "0b2ceb4d9dc48332decc876ecd01ed00"
+    },
     "cpp11": {
       "Package": "cpp11",
       "Version": "0.2.3",
