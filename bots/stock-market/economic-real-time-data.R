@@ -9,6 +9,7 @@ library(rvest)
 library(RCurl)
 library(zoo)
 library(curl)
+library(countrycode)
 
 
 # import helper functions
