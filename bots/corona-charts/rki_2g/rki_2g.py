@@ -10,7 +10,7 @@ def corona_rule_given_rki(value: float) -> str:
     if value < 0:
         return("")
     elif value < 3:
-        return "Keine"
+        return "Teilw. 2G"
     elif value < 6:
         return "2G"
     elif value < 9:
@@ -58,7 +58,7 @@ def transform_2G_data(data: pd.DataFrame, estimates: pd.Series) -> pd.DataFrame:
 # create options dictionary
 def get_options(rules: set) -> dict:
     colors = {
-        'Keine': '#EDECE1',
+        'Teilw. 2G': '#EDECE1',
         '2G': '#C6D7B8',
         '2G+': '#8BC5A0',
         'Kontakt-Verbote': '#24B39C'
@@ -68,7 +68,7 @@ def get_options(rules: set) -> dict:
     customCategoriesOrder = list()
 
     position = 1
-    for rule in ['Keine', '2G', '2G+', 'Kontakt-Verbote']:
+    for rule in ['Teilw. 2G', '2G', '2G+', 'Kontakt-Verbote']:
         if rule in rules:
             colorOverwrites.append({
                 'textColor': 'dark',
