@@ -2,9 +2,9 @@ name: Update Corona Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 0 and 30 past every hour from 7 through 18 CEST (5 - 16 GMT)
+  # This will run at minute 0 and 30 past every hour from 7 through 19 CEST (5 - 17 GMT)
   schedule:
-    - cron: "0,30 5-16 * * *"
+    - cron: "0,30 5-17 * * *"
   workflow_dispatch:
 
 jobs:
@@ -61,9 +61,11 @@ jobs:
           python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity_age.py
           python rki_vaccinations_states/rki_vaccinations_states.py
           python divi_icu/divi_icu.py
+          python divi_icu/divi_icu_map.py
           python rki_age_groups/rki_hospitalizations.py
           python rki_age_groups/rki_incidence.py
           python rki_notbremse/rki_notbremse.py
+          python rki_2g/rki_2g.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:

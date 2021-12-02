@@ -27,7 +27,7 @@ def download_data(url):  # function for data download
         print('Other URL error:', e.reason)
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=None, options=""):  # Q helper function
     # read qConfig file
     json_file = open('../q.config.json')
     qConfig = json.load(json_file)
@@ -42,7 +42,7 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q
                     item.get('item').update({'subtitle': subtitle})
                 if notes != '':
                     item.get('item').update({'notes': notes})
-                if data.size > 0:
+                if data is not None:
                     # reset_index() and T (for transpose) are used to bring column names into the first row
                     transformed_data = data.applymap(str).reset_index(
                         drop=False).T.reset_index().T.apply(list, axis=1).to_list()
@@ -53,6 +53,9 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q
                         item.get('item').update({'data': transformed_data})
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
+                if options != '':
+                    item.get('item').update({'options': options})
+
     # write qConfig file
     with open('../q.config.json', 'w', encoding='utf-8') as json_file:
         json.dump(qConfig, json_file, ensure_ascii=False, indent=1)

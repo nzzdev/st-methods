@@ -47,8 +47,12 @@ if __name__ == '__main__':
         state = cells
 
         # deaths column
-        cells = get_sheet(wsh, 'J:J')
-        deaths = cells
+        # cells = get_sheet(wsh, 'J:J')
+        # deaths = cells
+
+        # trend column
+        cells = get_sheet(wsh, 'N:N')
+        trend = cells
 
         # new cases 7 day mvg avg
         cells = get_sheet(wsh, 'B:B')
@@ -56,7 +60,7 @@ if __name__ == '__main__':
 
         df1 = pd.DataFrame(data=name)
         df2 = pd.DataFrame(data=state)
-        df3 = pd.DataFrame(data=deaths)
+        df3 = pd.DataFrame(data=trend)
         df4 = pd.DataFrame(data=cases)
         df = pd.concat([df1, df2, df3, df4], axis=1)
 
@@ -67,7 +71,7 @@ if __name__ == '__main__':
         cols = list(df.columns)
         cols[0] = 'Region'
         cols[1] = 'Land'
-        cols[2] = 'Tote'
+        cols[2] = 'Trend'
         cols[3] = 'Inzidenz'
         df.columns = cols
 
