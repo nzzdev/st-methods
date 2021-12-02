@@ -791,6 +791,8 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
          Boosterimpfungen = rollmean(n3, 7, NA, align = "right"))%>%
   select(date, Erstimpfungen, Zweitimpfungen, Boosterimpfungen)
 
+ch_vacc_persons_hist_new$Boosterimpfungen[ch_vacc_persons_hist_new$Boosterimpfungen < 10] <- NA
+
 update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae",
              data = ch_vacc_persons_hist_new)
 
