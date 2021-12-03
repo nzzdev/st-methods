@@ -11,6 +11,8 @@ library(zoo)
 library(curl)
 library(countrycode)
 library(car)
+library(gdata)
+
 
 
 # import helper functions
@@ -209,6 +211,30 @@ update_chart(id = "6069088c960d0f055227f901b977a49b",
 
 
 
+####################
+# SECO indicator
+####################
+
+pg <- read_html("https://www.seco.admin.ch/seco/de/home/wirtschaftslage---wirtschaftspolitik/Wirtschaftslage/indikatoren/wwa.html")
+
+# get all the Excel (xls) links on that page:
+
+html_nodes(pg, xpath=".//a[contains(@href, '.xls')]") %>% 
+  html_attr("href") %>% 
+  sprintf("https://www.seco.admin.ch%s", .) -> excel_links
+
+url <- excel_links[1]
+GET(url, write_disk(tf <- tempfile(fileext = ".xls")))
+
+seco <- read.xls(tf, sheet = 3, skip = 2, header = T)
+seco$X.1 <- ifelse(seco$X.1 < 10, paste0('0', as.character(seco$X.1)), as.character(seco$X.1))
+seco$Datum <- paste0(as.character(seco$X), '-W', seco$X.1)
+
+schweiz <- seco %>% dplyr::select(Datum, WEA) %>% drop_na()
+
+update_chart(id = "c366afc02f262094669128cd054faf78", 
+             data = schweiz)
+
 
 
 ########################################
@@ -231,10 +257,29 @@ oenb <- oenb[ -c(1,2) ]
 oenb <- oenb %>% drop_na(Tourismusexporte)
 names(oenb)[1] <- "Datum"
 oenb$Datum <- gsub(' K', '-', oenb$Datum)
+oenb$Jahr <- as.integer(substr(oenb$Datum, start = 1 , stop = 4 ))
+oenb$Woche <- as.integer(sub(".*\\D(\\d+).*", "\\1", oenb$Datum)) 
+
+oenb$Woche <- ifelse(oenb$Woche < 10, paste0('0', as.character(oenb$Woche)), as.character(oenb$Woche))
+oenb$Datum <- paste0(as.character(oenb$Jahr), '-W', oenb$Woche)
+
+q <- oenb[,c(1:7)]
 
 q <- oenb[,c(1:7)]
 update_chart(id = "84daeadb234674f39b55f90454fca893", 
              data = q)
+
+
+oenb_bip <- subset(oenb, select = c('Datum', 'Reales BIP im Vorkrisenvergleich'))
+
+schweiz_oenb <- merge(schweiz, oenb_bip, by = 'Datum', all = TRUE) %>%
+  dplyr::rename('Schweiz' = 2, 'Österreich' = 3)
+
+update_chart(id = "6069088c960d0f055227f901b953c55a", 
+             data = schweiz_oenb)
+
+
+
 
 
 
@@ -455,10 +500,11 @@ oxford_countries <- oxford  %>%
   arrange(desc(StringencyIndexForDisplay)) %>%
   dplyr::rename(`Stringency Index` = StringencyIndexForDisplay) 
 
-notes <- paste0("Lesebeispiel: In ", first(oxford_countries$Land), " betragen die Einschränkungen des öffentlichen Lebens ",  first(round(oxford_countries$`Stringency Index`)), "% des maximalen Niveaus von 100%. <br>Berücksichtigt werden alle OECD- und BRICS-Länder. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: ", format(last(oxford$Date), format = "%d. %m. %Y"))
+notes <- paste0("Lesebeispiel: In ", first(oxford_countries$Land), " betragen die Einschränkungen des öffentlichen Lebens ",  first(round(oxford_countries$`Stringency Index`)), "% des maximalen Niveaus von 100%. <br>Berücksichtigt werden alle OECD- und BRICS-Länder. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(oxford$Date), format = "%d. %m. %Y")))
 
 update_chart(id = "e3eab39da5788b8d4701823ac92fc244", 
              data = oxford_countries, notes = notes)
+
 
 
 
