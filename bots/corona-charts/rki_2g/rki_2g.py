@@ -139,7 +139,7 @@ if __name__ == '__main__':
         # set Nowcast source (current day)
         for i in range(1, 4):
             day = df.iloc[-i].name
-            urlcast = 'https://raw.githubusercontent.com/KITmetricslab/hospitalization-nowcast-hub/main/data-processed/Epiforecasts-independent/{}-Epiforecasts-independent.csv'.format(
+            urlcast = 'https://raw.githubusercontent.com/KITmetricslab/hospitalization-nowcast-hub/main/data-processed/LMU_StaBLab-GAM_nowcast/{}-LMU_StaBLab-GAM_nowcast.csv'.format(
                 day)
             try:
                 # read columns needed for the chart
