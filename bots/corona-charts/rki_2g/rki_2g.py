@@ -198,8 +198,8 @@ if __name__ == '__main__':
         # add corona rules to each state and extract existing corona rules as set
         corona_rules_set = transform_2G_data(data=data, estimates=estimates)
 
-        # round RKI values and sort
-        data['RKI-Wert'] = round(data['RKI-Wert'], 1)
+        # sort RKI values
+        # data['RKI-Wert'] = round(data['RKI-Wert'], 1)
         data = data.sort_values(by=['RKI-Wert'], ascending=False)
         data = data[['Regel¹', 'RKI-Wert', 'Real²']]
 
