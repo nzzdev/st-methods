@@ -58,12 +58,10 @@ if __name__ == '__main__':
         # calculate percentage of occupied beds and Covid-19 patients
         df['% Belegt'] = (
             df['betten_belegt'] / (df['betten_frei'] + df['betten_belegt'])) * 100
-        df['% Belegt'] = df['% Belegt'].round(
-            0).astype(int)
+        df['% Belegt'] = df['% Belegt'].round(0)
         df['% Covid-Patienten'] = (df['faelle_covid_aktuell'] /
                                    df['betten_belegt']) * 100
-        df['% Covid-Patienten'] = df['% Covid-Patienten'].round(
-            0).astype(int)
+        df['% Covid-Patienten'] = df['% Covid-Patienten'].round(0)
 
         # join with dfags (preserve dtype of the join keys)
         df = dfags.join(df.astype('Int64'))
