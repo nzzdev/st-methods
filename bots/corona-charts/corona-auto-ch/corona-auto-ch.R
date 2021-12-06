@@ -550,7 +550,7 @@ update_chart(id = "6069088c960d0f055227f901b974637f",
 
 id_rel_age <- ch_hosp_vacc_age %>% 
   select(1:4,6) %>%
-  filter(date %in% c(202144, 202145, 202146)) %>%
+  filter(date %in% tail(unique(ch_hosp_vacc_age$date), 3)) %>%
   group_by(altersklasse_covid19, vaccination_status) %>%
   summarise(entries = sum(entries), pop = first(pop)) %>%
   mutate(per100k = round(100000*entries/pop, 1))
