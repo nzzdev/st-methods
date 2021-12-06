@@ -139,7 +139,7 @@ if __name__ == '__main__':
         # set Nowcast source (current day)
         for i in range(1, 4):
             day = df.iloc[-i].name
-            urlcast = 'https://raw.githubusercontent.com/KITmetricslab/hospitalization-nowcast-hub/main/data-processed/Epiforecasts-independent/{}-Epiforecasts-independent.csv'.format(
+            urlcast = 'https://raw.githubusercontent.com/KITmetricslab/hospitalization-nowcast-hub/main/data-processed/LMU_StaBLab-GAM_nowcast/{}-LMU_StaBLab-GAM_nowcast.csv'.format(
                 day)
             try:
                 # read columns needed for the chart
@@ -198,8 +198,8 @@ if __name__ == '__main__':
         # add corona rules to each state and extract existing corona rules as set
         corona_rules_set = transform_2G_data(data=data, estimates=estimates)
 
-        # round RKI values and sort
-        data['RKI-Wert'] = round(data['RKI-Wert'], 1)
+        # sort RKI values
+        # data['RKI-Wert'] = round(data['RKI-Wert'], 1)
         data = data.sort_values(by=['RKI-Wert'], ascending=False)
         data = data[['Regel¹', 'RKI-Wert', 'Real²']]
 
