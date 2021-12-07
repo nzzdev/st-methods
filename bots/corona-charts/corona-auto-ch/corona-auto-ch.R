@@ -387,44 +387,41 @@ update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e",
 
 ### Variants ###
 
-# bag_var_delta <- bag_var %>%
-#   mutate(date = as.Date(date)) %>%
-#   filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date)) %>%
-#   drop_na(prct) %>%
-#   mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
-#          prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
-#          prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right")) %>%
-#   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
-#   filter(date >= '2021-04-01') %>%
-#   rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
-# 
-# bag_var_delta_notes <- paste0("* 95-Prozent-Konfidenzintervall. Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
-#                               " Prognose = durchgehend weniger als 20 Sequenzierungen pro Tag.")
-# 
-# update_chart(id = "dc697b19f4ecaf842746e444a46761b4", 
-#              data = bag_var_delta, 
-#              notes = bag_var_delta_notes)
-# 
-# bag_var_all <- bag_var %>%
-#   mutate(date = as.Date(date)) %>%
-#   drop_na(prct) %>%
-#   filter(variant_type != "all_sequenced") %>%
-#   mutate(var = case_when(variant_type == "B.1.1.7"~ "Alpha",
-#                          variant_type == "B.1.617.2"~ "Delta",
-#                          variant_type == "other_lineages" ~ "Urtyp/andere Varianten",
-#                          TRUE ~ "Weitere «relevante Virusvarianten»*")) %>%
-#   group_by(date, var) %>%
-#   summarise(prct = sum(prct)) %>%
-#   group_by(var) %>%
-#   mutate(prct_7 = round(rollmean(prct, 7, fill = NA, align = "right"),1)) %>%
-#   select(date, var, prct_7) %>%
-#   spread(var,prct_7) %>%
-#   mutate(`Urtyp/andere Varianten` = round(100-(Alpha+Delta+`Weitere «relevante Virusvarianten»*`),1)) %>%
-#   filter(date >= "2020-10-10") %>%
-#   select(date, Alpha, Delta, `Weitere «relevante Virusvarianten»*`, `Urtyp/andere Varianten`)
-# 
-# update_chart(id = "73f90b0c316ac9014cefff5d2de1de62", 
-#              data = bag_var_all)
+bag_var_omikron <- bag_var %>%
+  mutate(date = as.Date(date)) %>%
+  filter(variant_type == 'B.1.1.529' & date >= '2021-11-01' & date <= last(date)) %>%
+  drop_na(prct) %>%
+  mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
+         prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
+         prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right")) %>%
+  select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
+  filter(date >= '2021-04-01') %>%
+  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
+
+update_chart(id = "396fd1e1ae7c6223217d80a9c5417e1f",
+             data = bag_var_omikron)
+
+bag_var_all <- bag_var %>%
+  mutate(date = as.Date(date)) %>%
+  drop_na(prct) %>%
+  filter(variant_type != "all_sequenced") %>%
+  mutate(var = case_when(variant_type == "B.1.1.7"~ "Alpha",
+                         variant_type == "B.1.617.2" ~ "Delta",
+                         variant_type == "B.1.1.529" ~ "Omikron",
+                         variant_type == "other_lineages" ~ "Urtyp/andere Varianten",
+                         TRUE ~ "Weitere «relevante Virusvarianten»*")) %>%
+  group_by(date, var) %>%
+  summarise(prct = sum(prct)) %>%
+  group_by(var) %>%
+  mutate(prct_7 = round(rollmean(prct, 7, fill = NA, align = "right"),1)) %>%
+  select(date, var, prct_7) %>%
+  spread(var,prct_7) %>%
+  mutate(`Urtyp/andere Varianten` = round(100-(Alpha+Delta+Omikron+`Weitere «relevante Virusvarianten»*`),1)) %>%
+  filter(date >= "2020-10-10") %>%
+  select(date, Alpha, Delta, Omikron, `Weitere «relevante Virusvarianten»*`, `Urtyp/andere Varianten`)
+
+update_chart(id = "396fd1e1ae7c6223217d80a9c5421999",
+             data = bag_var_all)
 
 ### Certificates ###
 
