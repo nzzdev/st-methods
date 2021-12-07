@@ -5,15 +5,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Fail on purpose
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Action failed on purpose!')
       - name: Report Status
         if: always()
         uses: ravsamhq/notify-slack-action@v1
         with:
           status: ${{ job.status }}
+          notify_when: "failure"
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
-      - name: Fail on purpose
-        uses: actions/github-script@v3
-        with:
-          script: |
-            core.setFailed('envA and envB are not equivalent!')
