@@ -1,12 +1,6 @@
 name: Log Failure Test
 
 on:
-  # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 0 and 30 past every hour from 7 through 19 CEST (5 - 17 GMT)
-  schedule:
-    - cron: "0,30 5-17 * * *"
-  workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
