@@ -1,4 +1,4 @@
-name: Log Failure Test
+name: Log Failure Example # Logs failures to the slack channel: #visuals-workflow-log
 
 on:
   workflow_dispatch:
@@ -17,6 +17,6 @@ jobs:
         uses: ravsamhq/notify-slack-action@v1
         with:
           status: ${{ job.status }}
-          notify_when: "failure"
+          notify_when: "failure" # Remove this line if you want to log all results
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
