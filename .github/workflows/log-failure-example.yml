@@ -12,7 +12,7 @@ jobs:
         with:
           script: |
             core.setFailed('Action failed on purpose!')
-      - name: Report Status
+      - name: Log failure to slack
         if: always()
         uses: ravsamhq/notify-slack-action@v1
         with:
