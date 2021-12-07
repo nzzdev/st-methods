@@ -500,7 +500,7 @@ oxford_countries <- oxford  %>%
   arrange(desc(StringencyIndexForDisplay)) %>%
   dplyr::rename(`Stringency Index` = StringencyIndexForDisplay) 
 
-notes <- paste0("Lesebeispiel: In ", first(oxford_countries$Land), " betragen die Einschränkungen des öffentlichen Lebens ",  first(round(oxford_countries$`Stringency Index`)), "% des maximalen Niveaus von 100%. <br>Berücksichtigt werden alle OECD- und BRICS-Länder. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(oxford$Date), format = "%d. %m. %Y")))
+notes <- paste0("Lesebeispiel: In ", first(oxford_countries$Land), " betragen die Einschränkungen des öffentlichen Lebens ",  first(round(oxford_countries$`Stringency Index`)), "% des maximalen Niveaus von 100%. <br>Berücksichtigt werden alle OECD- und BRICS-Länder. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien. <br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(oxford$Date), format = "%d. %m. %Y")))
 
 update_chart(id = "e3eab39da5788b8d4701823ac92fc244", 
              data = oxford_countries, notes = notes)
