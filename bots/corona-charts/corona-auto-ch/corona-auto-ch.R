@@ -547,7 +547,7 @@ update_chart(id = "6069088c960d0f055227f901b974637f",
 
 id_rel_age <- ch_hosp_vacc_age %>% 
   select(1:4,6) %>%
-  filter(date %in% c(202144, 202145, 202146)) %>%
+  filter(date %in% tail(unique(ch_hosp_vacc_age$date), 3)) %>%
   group_by(altersklasse_covid19, vaccination_status) %>%
   summarise(entries = sum(entries), pop = first(pop)) %>%
   mutate(per100k = round(100000*entries/pop, 1))
@@ -638,16 +638,16 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
   spread(type, per100) %>%
   select(-COVID19AtLeastOneDosePersons) %>%
   mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
-  rename("Vollständig geimpft" = COVID19FullyVaccPersons, 
-         "Teilweise geimpft" = COVID19PartiallyVaccPersons,
+  rename("Nur doppelt geimpft" = COVID19FullyVaccPersons, 
+         "Nur einmal geimpft" = COVID19PartiallyVaccPersons,
          "Booster erhalten" = COVID19FirstBoosterPersons) %>%
-  arrange(desc(`Vollständig geimpft`+`Teilweise geimpft`+`Booster erhalten`))
+  arrange(desc(`Nur doppelt geimpft`+`Nur einmal geimpft`+`Booster erhalten`))
 
 title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
 
 update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
              data = vacc_ch_persons_kant,
-             notes = paste0("Stand: ", ch_vacc_date), 
+             notes = paste0("In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. <br>Stand: ", ch_vacc_date), 
              title = title_vacc_kant)
 
 ### Schweiz geimpft nach Altersgruppen
@@ -659,11 +659,12 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
   spread(type,per100PersonsTotal) %>%
   rename('Altersklasse' = altersklasse_covid19, 
          "Vollständig geimpft" = COVID19FullyVaccPersons,
-         "Teilweise geimpft" = COVID19PartiallyVaccPersons,
+         "Nur einfach geimpft" = COVID19PartiallyVaccPersons,
          "Booster erhalten" = COVID19FirstBoosterPersons) %>%
-  mutate(`Vollständig geimpft` = round(`Vollständig geimpft`-`Booster erhalten`, 1),
-         `Teilweise geimpft` = round(`Teilweise geimpft`, 1),
+  mutate(`Nur doppelt geimpft` = round(`Vollständig geimpft`-`Booster erhalten`, 1),
+         `Nur einfach geimpft` = round(`Nur einfach geimpft`, 1),
          `Booster erhalten` = round(`Booster erhalten`, 1))  %>%
+  select(Altersklasse, `Booster erhalten`, `Nur doppelt geimpft`, `Nur einfach geimpft`) %>%
   arrange(desc(`Altersklasse`))
 
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
@@ -676,10 +677,9 @@ vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$va
 
 title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Booster erhalten`), "Prozent der Ältesten sind geboostert")
 
-vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Vollständig geimpft`
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
-             notes = paste0("Die Zahlen werden wöchentlich aktualisiert.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
+             notes = paste0("Die Zahlen werden wöchentlich aktualisiert. In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. <br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
              title = title)
 
 #### Vaccination, delivered, received ####

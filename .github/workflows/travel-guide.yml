@@ -35,3 +35,11 @@ jobs:
           Q_PRODUCTION_ID: 3a9abac92d258dff5f305f2fd069a439
           SHERPA_API_KEY: ${{ secrets.SHERPA_API_KEY }}
           SHERPA_API_URL: requirements-api.joinsherpa.com
+      - name: Log failure to slack
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
