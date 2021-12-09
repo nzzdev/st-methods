@@ -505,11 +505,13 @@
       "environments": [
         {
           "name": "production",
-          "id": "8f41ac40bb78221f4e0ee924d6e85133"
+          "id": "33696d9875c026f74a2335377666f2b8"
         }
       ],
       "item": {
-        "data": []
+        "data": {
+          "table": []
+        }
       }
     },
     {
