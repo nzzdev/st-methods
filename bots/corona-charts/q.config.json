@@ -494,12 +494,13 @@
       "environments": [
         {
           "name": "production",
-          "id": "a15febf1b611cd45c56db4f85b1ea73b"
+          "id": "ee2ce1d4bd795db54ef74a9ed8abb147"
         }
       ],
       "item": {
-        "data": []
-      }
+        "data": {
+          "table": []
+        }
     },
     {
       "environments": [
