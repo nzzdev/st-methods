@@ -9,17 +9,7 @@
    ],
    "item": {
     "data": [],
-    "notes": "",
-    "assetGroups": [
-     {
-      "assets": [
-       {
-        "path": "./export/dashboard.json"
-       }
-      ],
-      "name": "jsonFiles"
-     }
-    ]
+    "notes": ""
    }
   }
  ]
