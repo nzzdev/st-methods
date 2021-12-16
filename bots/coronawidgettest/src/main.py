@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from io import StringIO
 import os
-from helpers import *
+import sys
 from pathlib import Path
+
+sys.path.append(os.path.dirname((os.path.dirname(__file__))))
+from helpers import *
 
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))

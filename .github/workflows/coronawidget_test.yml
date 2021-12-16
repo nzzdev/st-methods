@@ -41,6 +41,8 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
+          Q_STAGING_SERVER: ${{ secrets.Q_STAGING_SERVER }}
+          Q_STAGING_ACCESSTOKEN: ${{ secrets.Q_STAGING_ACCESSTOKEN }}
       - name: Log failure to slack
         if: always()
         uses: ravsamhq/notify-slack-action@v1

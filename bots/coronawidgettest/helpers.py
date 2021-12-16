@@ -84,7 +84,6 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), asset
                             'assets': [{"path": f} for f in g['files']],
                             'name': g['name']
                         })
-                        print(g)
                     item['item']['assetGroups'] = groups
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
