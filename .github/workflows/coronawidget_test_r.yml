@@ -1,4 +1,4 @@
-name: Corona Widget Test (shu)
+name: Corona Widget Test R (shu)
 
 on: workflow_dispatch
 
@@ -10,26 +10,27 @@ jobs:
         working-directory: bots/coronawidgettest/
     steps:
       - uses: actions/checkout@v2
-      - name: Setup python
-        uses: actions/setup-python@v2
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
         with:
-          python-version: "3.x"
-      - name: Get pip cache dir
-        id: pip-cache
+          r-version: "4.0.5"
+      - name: Install system dependencies
         run: |
-          echo "::set-output name=dir::$(pip cache dir)"
-      - name: Cache python packages
+          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
+      - name: Cache R packages
         uses: actions/cache@v2
         with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/coronawidgettest/requirements.txt') }}
-      - name: Install python packages
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
+      - name: Restore R packages
         run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run python scripts
+          install.packages("renv")
+          renv::activate()
+          renv::restore()
+        shell: Rscript {0}
+      - name: Run R scripts
         run: |
-          python src/main.py
+          Rscript src/main.R
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:

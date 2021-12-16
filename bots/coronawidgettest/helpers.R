@@ -1,7 +1,7 @@
 library(jsonlite)
 
 # Q helper function
-update_chart <- function(id, title = "", subtitle = "", notes = "", data = list()) {
+update_chart <- function(id, title = "", subtitle = "", notes = "", data = list(), asset.groups = list()) {
   # read qConfig file
   qConfig <- fromJSON("./q.config.json", simplifyDataFrame = FALSE)
 
@@ -31,9 +31,27 @@ update_chart <- function(id, title = "", subtitle = "", notes = "", data = list(
           else
           {
             # as.matrix adds extra spaces when converting numbers to strings sapply(data, as.character)
-          # trims extra characters. See also https://stackoverflow.com/questions/15618527/why-does-as-matrix-add-extra-spaces-when-converting-numeric-to-character
+            # trims extra characters. See also https://stackoverflow.com/questions/15618527/why-does-as-matrix-add-extra-spaces-when-converting-numeric-to-character
             qConfig$items[[index]]$item$data <- I(rbind(names(data), as.matrix(sapply(data, as.character))))
           }
+        }
+        
+        if(length(asset.groups) > 0) {
+          gr <- list()
+          for(g in asset.groups)
+          {
+            gr <- append(gr, list(
+              name = g$name,
+              assets=list()
+            ))
+            for(file in g$files)
+            {
+              print(file)
+              gr$assets = append(gr$assets, list(list(path=file)))
+            }
+          }
+          qConfig$items[[index]]$item$assetGroups <- list(gr)
+          
         }
         print(paste0("Successfully updated item with id ", id))
       }
