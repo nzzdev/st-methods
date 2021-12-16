@@ -2,7 +2,7 @@
 
 #prep
 rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
-source("../helpers.R")
+source("./helpers.R")
 
 
 # Struktur:
