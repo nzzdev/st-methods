@@ -14,7 +14,7 @@ source("./helpers.R")
 assets <- list(
   list(
     name = "jsonFiles",
-    files = list("./data/dashboard.json")
+    files = list("./data/test.json")
   )
 )
 
