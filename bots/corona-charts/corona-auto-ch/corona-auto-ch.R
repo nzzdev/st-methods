@@ -297,8 +297,11 @@ bag_age_hosps  <- bag_hosp_age %>%
   mutate(datum = paste0(year, "-W", KW)) %>%
   select(datum, altersklasse_covid19, entries) %>%
   spread(altersklasse_covid19, entries) %>%
-  mutate(`0–59` = `0 - 9` +  `10 - 19` + `20 - 29` +  `30 - 39` + `40 - 49` +  `50 - 59`, `60–79` = `60 - 69` +  `70 - 79`) %>%
-  select(datum, `0–59`,`60–79`, `80+`) %>%
+  mutate(`0–19` = `0 - 9` +  `10 - 19`,
+         `20-39` = `20 - 29` +  `30 - 39`,
+         `40-59` =  `40 - 49` +  `50 - 59`, 
+         `60–79` = `60 - 69` +  `70 - 79`) %>%
+  select(datum, `0–19`, `20-39`, `40-59`, `60–79`, `80+`) %>%
   slice(1:n()-1) #incomplete week results
 
 update_chart(id = "b3423b05ea50c39f8da718719ec3d161", data = bag_age_hosps)
@@ -397,7 +400,7 @@ bag_var_omikron <- bag_var %>%
   filter(date >= '2021-11-01' & date <= last(date)) %>%
   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
   filter(date >= '2021-04-01') %>%
-  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
+  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Omikron-Variante" = "prct_7")
 
 update_chart(id = "396fd1e1ae7c6223217d80a9c5417e1f",
              data = bag_var_omikron)
@@ -648,7 +651,7 @@ title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meiste
 
 update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
              data = vacc_ch_persons_kant,
-             notes = paste0("In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. <br>Stand: ", ch_vacc_date), 
+             notes = paste0("In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. Auch Genesene, die eine Impfdosis erhalten haben, sind dort aufgeführt.<br>Stand: ", ch_vacc_date), 
              title = title_vacc_kant)
 
 ### Schweiz geimpft nach Altersgruppen
@@ -680,7 +683,7 @@ title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Bo
 
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
-             notes = paste0("Die Zahlen werden wöchentlich aktualisiert. In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. <br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
+             notes = paste0("In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. Auch Genesene, die eine Impfdosis erhalten haben, sind dort aufgeführt.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
              title = title)
 
 #### Vaccination, delivered, received ####

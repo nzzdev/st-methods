@@ -494,22 +494,26 @@
       "environments": [
         {
           "name": "production",
-          "id": "a15febf1b611cd45c56db4f85b1ea73b"
+          "id": "ee2ce1d4bd795db54ef74a9ed8abb147"
         }
       ],
       "item": {
-        "data": []
+        "data": {
+          "table": []
+        }
       }
     },
     {
       "environments": [
         {
           "name": "production",
-          "id": "8f41ac40bb78221f4e0ee924d6e85133"
+          "id": "33696d9875c026f74a2335377666f2b8"
         }
       ],
       "item": {
-        "data": []
+        "data": {
+          "table": []
+        }
       }
     },
     {

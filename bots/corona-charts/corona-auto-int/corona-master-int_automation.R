@@ -311,19 +311,17 @@ full_vacc <- vaccination %>%
   drop_na(`Vollständig geimpft, in % der Bev.`) %>%
   group_by(Land) %>%
   mutate(Datum = as.Date(Datum, "%d.%m.%Y")) %>%
-  filter(Land != 'World', pop > 1000000) %>%
+  filter(Land != 'World', pop > 1000000, `Vollständig geimpft, in % der Bev.` > 0) %>%
   slice_max(order_by = Datum, n = 1) %>%
   arrange(desc(`Vollständig geimpft, in % der Bev.`)) %>%
   select(Land, `Vollständig geimpft, in % der Bev.`) %>%
   mutate(`Vollständig geimpft, in % der Bev.` = round(`Vollständig geimpft, in % der Bev.`, 1)) %>%
   ungroup() 
 
-data <- full_vacc %>% slice(1:20)
-
 title <- paste("In", head(full_vacc$Land, 1), "sind", round(head(full_vacc$`Vollständig geimpft, in % der Bev.`, 1)), "Prozent der Einwohner vollständig geimpft" )
 
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern. Eine Person muss in der Regel zwei Dosen geimpft bekommen, um als vollständig geimpft zu gelten. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
-update_chart(id = 'a15febf1b611cd45c56db4f85b1ea73b', data = data, notes = notes, title = title)
+update_chart(id = 'ee2ce1d4bd795db54ef74a9ed8abb147', data = full_vacc, notes = notes, title = title)
 
 
 booster <- vaccination %>%
@@ -331,15 +329,17 @@ booster <- vaccination %>%
   drop_na(`Booster-Impfungen, in % der Bev.`) %>%
   group_by(Land) %>%
   mutate(Datum = as.Date(Datum, "%d.%m.%Y")) %>%
-  filter(Land != 'World', pop > 1000000) %>%
+  filter(Land != 'World', pop > 1000000, `Booster-Impfungen, in % der Bev.` > 0) %>%
   slice_max(order_by = Datum, n = 1) %>%
   arrange(desc(`Booster-Impfungen, in % der Bev.`)) %>%
   select(Land, `Booster-Impfungen, in % der Bev.`) %>%
   mutate(`Booster-Impfungen, in % der Bev.` = round(`Booster-Impfungen, in % der Bev.`, 1)) %>%
-  ungroup() %>% slice(1:20)
+  ungroup() 
+
+title <- paste(head(booster$Land, 1), "ist mit den Booster-Impfungen schon weit fortgeschritten" )
 
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
-update_chart(id = '8f41ac40bb78221f4e0ee924d6e85133', data = booster, notes = notes)
+update_chart(id = '33696d9875c026f74a2335377666f2b8', data = booster, notes = notes, title = title)
 
 
 booster_10 <- vaccination %>%
