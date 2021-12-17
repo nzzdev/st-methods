@@ -30,8 +30,8 @@ if __name__ == '__main__':
         # rearrange columns
         # df2 = df2[['date', 'impf_quote_voll', 'impf_quote_erst', 'Ziel']]
 
-        # only show last nine months
-        df = df.tail(270)
+        # only show last year
+        df = df.tail(365)
 
         # get 7-day average of vaccinations for chart title and notes
         mean_first = df.tail(
