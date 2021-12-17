@@ -671,7 +671,7 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
   select(date) %>% 
   filter(date == max(date)) %>% 
-  mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 1), "%Y-%W-%u")+6) %>%
+  mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 1), "%Y-%W-%u")+2) %>%
   unique() %>%
   deframe() %>%
   format(format = "%d. %m. %Y")
