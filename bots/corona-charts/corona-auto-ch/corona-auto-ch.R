@@ -331,7 +331,7 @@ z <- toJSON(rbind_pages(list(forJson, forJson_2, forJson_3)), pretty = T)
 assets <- list(
   list(
     name = "jsonFiles",
-    files = list("./data/dashboard.json")
+    files = list("./dashboard.json")
   )
 )
 
