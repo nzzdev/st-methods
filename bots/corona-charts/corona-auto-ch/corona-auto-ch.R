@@ -261,7 +261,7 @@ update_chart(id = "a2fc71a532ec45c64434712991efb41f", data = bag_kanton_choro, n
 roll_ch_bag_death_hosp <- bag_cases %>%
   full_join(bag_deaths, by = c("geoRegion", "datum")) %>%
   full_join(bag_hosps, by = c("geoRegion", "datum")) %>%
-  filter(datum >= "2020-02-28" & datum <=  last(datum)-2, geoRegion == 'CHFL')  %>%
+  filter(datum >= "2020-02-28" & datum <=  last(datum)-5, geoRegion == 'CHFL')  %>%
   mutate(entries.y = replace_na(entries.y, 0),
          hosp_roll = rollmean(entries,7,fill = 0, align = "right"),
          death_roll = rollmean(entries.y,7,fill = 0, align = "right")) %>%
