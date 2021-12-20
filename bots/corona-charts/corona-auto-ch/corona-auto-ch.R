@@ -472,7 +472,7 @@ bag_var_omikron <- bag_var %>%
   filter(date >= '2021-11-01' & date <= last(date)) %>%
   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
   filter(date >= '2021-04-01') %>%
-  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
+  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Omikron-Variante" = "prct_7")
 
 update_chart(id = "396fd1e1ae7c6223217d80a9c5417e1f",
              data = bag_var_omikron)
@@ -746,7 +746,7 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
   select(date) %>% 
   filter(date == max(date)) %>% 
-  mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 1), "%Y-%W-%u")+6) %>%
+  mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 1), "%Y-%W-%u")+2) %>%
   unique() %>%
   deframe() %>%
   format(format = "%d. %m. %Y")

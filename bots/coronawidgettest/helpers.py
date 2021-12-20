@@ -53,7 +53,7 @@ def download_sheet(sh, name):  # function for sheet download
         print('Other URL error:', e)
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", asset_groups=[]):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), asset_groups=[]):  # Q helper function
     # read qConfig file
     json_file = open('../q.config.json')
     qConfig = json.load(json_file)
@@ -87,10 +87,21 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
                     item['item']['assetGroups'] = groups
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
-                if options != '':
-                    item.get('item').update({'options': options})
-
     # write qConfig file
     with open('../q.config.json', 'w', encoding='utf-8') as json_file:
         json.dump(qConfig, json_file, ensure_ascii=False, indent=1)
     json_file.close()
+
+"""
+
+"assetGroups": [
+        {
+          "assets": [
+            {
+            "path": "./data/test.json"
+            }
+          ],
+          "name": "data"
+        }
+      ]
+"""
