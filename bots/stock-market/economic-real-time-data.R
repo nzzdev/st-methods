@@ -549,7 +549,7 @@ mobis_pendler <- mobis_pendler %>%
 q <- mobis_pendler %>% 
   select(Datum, Total)
 
-update_chart(id = '538b731c16026f131aa0b314ded6efa0', data = mobis_pendler)
+update_chart(id = '538b731c16026f131aa0b314ded6efa0', data = q)
 
 
 
