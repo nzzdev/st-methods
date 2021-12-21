@@ -526,7 +526,7 @@ hard_agg <- hard %>%
   summarize(traffic = sum(traffic))
 
 hard_agg$weekday <- weekdays(hard_agg$date)
-hard_agg <-  hard_agg %>% filter(weekday == 'Montag') %>% select(-3)
+hard_agg <-  hard_agg %>% filter(weekday == 'Monday') %>% select(-3)
 
 update_chart(id = '396fd1e1ae7c6223217d80a9c5b948bd', data = hard_agg)
 
