@@ -53,11 +53,13 @@ class Germany:
     def to_df(self):
         df = self.read().pipe(self.pipeline)
         # add row with current date for step-after chart
-        timestamp_str = df['Datum'].iloc[-1]
+        timestamp_df = df['Datum'].iloc[-1]
         timestamp = datetime.strptime(
-            timestamp_str, '%Y-%m-%d') + timedelta(weeks=1)
+            timestamp_df, '%Y-%m-%d') + timedelta(weeks=1)
         df.loc[-1] = [str(timestamp).split(" ")[0], '', '']
         df = df.set_index('Datum')
+        timestamp_str = datetime.strptime(
+            timestamp_df, '%Y-%m-%d').strftime('%-d. %-m. %Y')
         notes_chart = 'Je höher der Anteil der positiven Tests im Verhältnis zum Anteil der negativen Tests, desto höher die Positivrate.<br>Stand: ' + timestamp_str
         update_chart(id='fcd18326e9d6d215efe2e522678af018',
                      data=df, notes=notes_chart)
