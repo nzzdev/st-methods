@@ -82,8 +82,8 @@ if __name__ == '__main__':
         dcheck = d.isoweekday() == 5
 
         # only download data on Fridays
-        # if dcheck == 'False':
-        main()
+        if dcheck == 'False':
+            main()
 
     except:
         raise
