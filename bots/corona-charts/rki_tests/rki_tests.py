@@ -58,9 +58,7 @@ class Germany:
             timestamp_str, '%Y-%m-%d') + timedelta(weeks=1)
         df.loc[-1] = [str(timestamp).split(" ")[0], '', '']
         df = df.set_index('Datum')
-        timestamp = (d.isocalendar().week) - 1
-        notes_chart = 'Je höher der Anteil der positiven Tests im Verhältnis zum Anteil der negativen Tests, desto höher die Positivrate.<br>Stand: Kalenderwoche ' + \
-            str(timestamp)
+        notes_chart = 'Je höher der Anteil der positiven Tests im Verhältnis zum Anteil der negativen Tests, desto höher die Positivrate.<br>Stand: ' + timestamp_str
         update_chart(id='fcd18326e9d6d215efe2e522678af018',
                      data=df, notes=notes_chart)
 
@@ -78,13 +76,7 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
-        # check weekday
-        d = datetime.today()
-        dcheck = d.isoweekday() == 5
-
-        # only download data on Fridays
-        if dcheck == 'False':
-            main()
+        main()
 
     except:
         raise

@@ -13,24 +13,18 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
-        # check weekday and get last week number for chart notes
-        d = datetime.today()
-        dcheck = d.isoweekday() == 5
-        timestamp = (d.isocalendar().week) - 2
-
         # only download data on Fridays
-        if dcheck == 'True':
-            url = Request('https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Altersverteilung.xlsx?__blob=publicationFile',
-                          headers={'User-Agent': 'Mozilla/5.0'})
-            xl = urlopen(url, timeout=10).read()
+        url = Request('https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Altersverteilung.xlsx?__blob=publicationFile',
+                      headers={'User-Agent': 'Mozilla/5.0'})
+        xl = urlopen(url, timeout=10).read()
 
-            # read data and convert to csv (requires openpyxl)
-            df = pd.read_excel(
-                xl, sheet_name=0, index_col=0, engine='openpyxl')
-            df.to_csv('./Altersverteilung.csv', encoding='utf-8')
+        # read data and convert to csv (requires openpyxl)
+        df = pd.read_excel(
+            xl, sheet_name=0, index_col=0, engine='openpyxl')
+        df.to_csv('./Altersverteilung.csv', encoding='utf-8')
 
-            # get current week number for chart notes
-            timestamp = (d.isocalendar().week) - 1
+        # get current week number for chart notes
+        timestamp = (d.isocalendar().week) - 1
 
         # read csv and transpose data
         df = pd.read_csv('./Altersverteilung.csv', encoding='utf-8')
@@ -61,9 +55,12 @@ if __name__ == '__main__':
 
         # convert weeknumbers to Q date format
         df.index = df.index.str.replace('_', '-W')
+        timestamp = df.index[-1]
+        timestamp = datetime.strptime(timestamp + '-1', "%Y-W%W-%w")
+        timestamp_str = timestamp.strftime('%-d. %-m. %Y')
 
         # show date in chart notes
-        notes_chart = 'Stand: Kalenderwoche ' + str(timestamp)
+        notes_chart = 'Stand: ' + timestamp_str
 
         # run function
         update_chart(id='34937bf850cf702a02c3648cdf8c02b9',
