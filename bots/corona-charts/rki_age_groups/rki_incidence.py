@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 from urllib.request import Request, urlopen
 
 if __name__ == '__main__':
@@ -53,7 +53,8 @@ if __name__ == '__main__':
         # convert weeknumbers to Q date format
         df.index = df.index.str.replace('_', '-W')
         timestamp = df.index[-1]
-        timestamp = datetime.strptime(timestamp + '-1', "%Y-W%W-%w")
+        timestamp = datetime.strptime(
+            timestamp + '-1', "%Y-W%W-%w") + timedelta(days=6)
         timestamp_str = timestamp.strftime('%-d. %-m. %Y')
 
         # show date in chart notes
