@@ -16,7 +16,7 @@ def corona_rule_given_rki(value: float) -> str:
     elif value < 9:
         return "2G+"
     else:
-        return "Kontakt-Verbote"
+        return "Schliessungen"
 
 
 # add corona rule to every RKI value
@@ -61,14 +61,14 @@ def get_options(rules: set) -> dict:
         'Teilw. 2G': '#EDECE1',
         '2G': '#C6D7B8',
         '2G+': '#8BC5A0',
-        'Kontakt-Verbote': '#24B39C'
+        'Schliessungen': '#24B39C'
     }
 
     colorOverwrites = list()
     customCategoriesOrder = list()
 
     position = 1
-    for rule in ['Teilw. 2G', '2G', '2G+', 'Kontakt-Verbote']:
+    for rule in ['Teilw. 2G', '2G', '2G+', 'Schliessungen']:
         if rule in rules:
             colorOverwrites.append({
                 'textColor': 'dark',
