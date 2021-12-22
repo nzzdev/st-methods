@@ -23,9 +23,6 @@ if __name__ == '__main__':
             xl, sheet_name=0, index_col=0, engine='openpyxl')
         df.to_csv('./Altersverteilung.csv', encoding='utf-8')
 
-        # get current week number for chart notes
-        timestamp = (d.isocalendar().week) - 1
-
         # read csv and transpose data
         df = pd.read_csv('./Altersverteilung.csv', encoding='utf-8')
         df = df.set_index('Altersgruppe').T
