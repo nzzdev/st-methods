@@ -12,6 +12,8 @@ library(curl)
 library(countrycode)
 library(car)
 library(gdata)
+library(lubridate)
+
 
 
 
@@ -505,6 +507,49 @@ notes <- paste0("Lesebeispiel: In ", first(oxford_countries$Land), " betragen di
 update_chart(id = "e3eab39da5788b8d4701823ac92fc244", 
              data = oxford_countries, notes = notes)
 
+
+
+##################################
+# Passantenfrequenzen Hardbrücke
+##################################
+
+hard <- read_csv('https://data.stadt-zuerich.ch/dataset/vbz_frequenzen_hardbruecke/download/frequenzen_hardbruecke_2021.csv')
+
+hard$date <- as.Date(hard$Timestamp)
+
+hard <- hard %>%
+  drop_na('In', 'Out') 
+
+hard$traffic <- hard$In + hard$Out
+hard_agg <- hard %>%
+  group_by(date) %>%
+  summarize(traffic = sum(traffic))
+
+hard_agg$weekday <- weekdays(hard_agg$date)
+hard_agg <-  hard_agg %>% filter(weekday == 'Monday') %>% select(-3)
+
+update_chart(id = '396fd1e1ae7c6223217d80a9c5b948bd', data = hard_agg)
+
+
+##############################
+# Mobis
+##############################
+
+mobis_pendler <- read_csv('https://ivtmobis.ethz.ch/data/api/kof/pendler/latest')
+
+mobis_pendler <- mobis_pendler %>% 
+  select(Datum, Total, `Erwerbstätig`, `In_Ausbildung`) %>%
+  drop_na(Datum) %>%
+  filter(Datum >= '2020-01-30', Datum <= last(Datum) - 3) %>%                               
+  mutate(Total = rollmean(Total*100, 7, fill = NA, align = "right"),
+         `Erwerbstätig` = rollmean(`Erwerbstätig`*100, 7, fill = NA, align = "right"),
+         `In Ausbildung` = rollmean(In_Ausbildung*100, 7, fill = NA, align = "right")
+  )
+
+q <- mobis_pendler %>% 
+  select(Datum, Total)
+
+update_chart(id = '538b731c16026f131aa0b314ded6efa0', data = q)
 
 
 
