@@ -13,10 +13,9 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
-        # check weekday and get last week number for chart notes
+        # check weekday
         d = datetime.today()
         dcheck = d.isoweekday() == 5
-        timestamp = (d.isocalendar().week) - 2
 
         # only download data on Fridays
         if dcheck == 'True':
