@@ -803,6 +803,23 @@ update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae",
 
 ### BAG VACC GOAL
 # XXX !!! Auskommentiert, weil Fehler. shu
+# Achtung: in q.config Chart auch hinzufügen:
+
+# {
+#   "environments": [
+#     {
+#       "name": "production",
+#       "id": "b4f50110543451f0029c2fdefe53d578"
+#     }
+#   ],
+#   "item": {
+#     "notes": "",
+#     "data": []
+#   }
+# },
+
+
+
 # vacc_bag_goal <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersons) %>%
 #   filter(geoRegion == 'CHFL', 
 #          type %in% c("COVID19AtLeastOneDosePersons"), 
