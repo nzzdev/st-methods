@@ -264,14 +264,9 @@ world <- vaccination %>%
   filter(Land == "World") %>%
   select(Datum, Impfdosen_total)
 
+title_world <- paste0("Weltweit wurden ", round(last(world$Impfdosen_total)/1000000000,1), " Milliarden Impfdosen verabreicht")
 
-title <- case_when(last(world$Impfdosen_total) < 9000000000 &  last(world$Impfdosen_total) >= 8750000000 ~ "Fast 9 Milliarden Impfdosen wurden weltweit verabreicht",
-                   last(world$Impfdosen_total) > 8000000000 &  last(world$Impfdosen_total) < 8750000000 ~ "Mehr als 8 Milliarden Impfdosen wurden weltweit verabreicht",
-                   last(world$Impfdosen_total) < 8000000000 &  last(world$Impfdosen_total) >= 7750000000 ~ "Fast 8 Milliarden Impfdosen wurden weltweit verabreicht",
-                   last(world$Impfdosen_total) > 7000000000 &  last(world$Impfdosen_total) < 7750000000 ~ "Mehr als 7 Milliarden Impfdosen wurden weltweit verabreicht"    
-                   )
-
-update_chart(id = "83dcb25c0e922ac143111ad204e65d15", data = world, title = title)
+update_chart(id = "83dcb25c0e922ac143111ad204e65d15", data = world, title = title_world)
 
 
 vaccination$Land <- countrycode(vaccination$Land, 'country.name', 'cldr.short.de_ch')
