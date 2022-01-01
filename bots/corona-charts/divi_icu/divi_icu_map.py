@@ -59,9 +59,9 @@ if __name__ == '__main__':
         df['% Belegt'] = (
             df['betten_belegt'] / (df['betten_frei'] + df['betten_belegt'])) * 100
         df['% Belegt'] = df['% Belegt'].round(0)
-        df['% Covid-Patienten'] = (df['faelle_covid_aktuell'] /
+        df['% Corona-Fälle'] = (df['faelle_covid_aktuell'] /
                                    df['betten_belegt']) * 100
-        df['% Covid-Patienten'] = df['% Covid-Patienten'].round(0)
+        df['% Corona-Fälle'] = df['% Corona-Fälle'].round(0)
 
         # join with dfags (preserve dtype of the join keys)
         df = dfags.join(df.astype('Int64'))
@@ -69,20 +69,20 @@ if __name__ == '__main__':
         # create new dataframe for table
         dftable = df.copy()
         dftable = dftable.sort_values(
-            by=['% Covid-Patienten'], ascending=False)
+            by=['% Corona-Fälle'], ascending=False)
         dftable = dftable.set_index('Region')
 
         # drop unused columns and NaN values for table
         dftable = dftable.drop(
             ['faelle_covid_aktuell', 'betten_frei', 'betten_belegt'], axis=1)
-        dftable['% Covid-Patienten'] = dftable['% Covid-Patienten'].astype(
+        dftable['% Corona-Fälle'] = dftable['% Corona-Fälle'].astype(
             object).fillna('')
         dftable['% Belegt'] = dftable['% Belegt'].astype(object).fillna('')
 
         # drop unused columns and NaN values for map
         df = df.drop(
             ['Region', 'Land', 'faelle_covid_aktuell', 'betten_frei', 'betten_belegt', '% Belegt'], axis=1)
-        df['% Covid-Patienten'] = df['% Covid-Patienten'].astype(
+        df['% Corona-Fälle'] = df['% Corona-Fälle'].astype(
             object).fillna('')
 
         # create notes for map and table
