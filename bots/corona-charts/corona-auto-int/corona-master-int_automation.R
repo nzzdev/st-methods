@@ -264,14 +264,9 @@ world <- vaccination %>%
   filter(Land == "World") %>%
   select(Datum, Impfdosen_total)
 
+title_world <- paste0("Weltweit wurden ", round(last(world$Impfdosen_total)/1000000000,1), " Milliarden Impfdosen verabreicht")
 
-title <- case_when(last(world$Impfdosen_total) < 9000000000 &  last(world$Impfdosen_total) >= 8750000000 ~ "Fast 9 Milliarden Impfdosen wurden weltweit verabreicht",
-                   last(world$Impfdosen_total) > 8000000000 &  last(world$Impfdosen_total) < 8750000000 ~ "Mehr als 8 Milliarden Impfdosen wurden weltweit verabreicht",
-                   last(world$Impfdosen_total) < 8000000000 &  last(world$Impfdosen_total) >= 7750000000 ~ "Fast 8 Milliarden Impfdosen wurden weltweit verabreicht",
-                   last(world$Impfdosen_total) > 7000000000 &  last(world$Impfdosen_total) < 7750000000 ~ "Mehr als 7 Milliarden Impfdosen wurden weltweit verabreicht"    
-                   )
-
-update_chart(id = "83dcb25c0e922ac143111ad204e65d15", data = world, title = title)
+update_chart(id = "83dcb25c0e922ac143111ad204e65d15", data = world, title = title_world)
 
 
 vaccination$Land <- countrycode(vaccination$Land, 'country.name', 'cldr.short.de_ch')
@@ -713,4 +708,20 @@ title <- paste(head(test_table$Land, 1), "testet am meisten")
 notes <- paste0("Nur Länder mit mehr als 1 Million Einwohnern, die mehr als einen Test pro 1000 Einwohner pro Tag durchführen. Aufgrund unterschiedlicher Meldeverfahren können die Daten für einige Länder schon mehrere Tage alt sein. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'fdf83ddd0451dc0c0d09c18769f1abd5', data = test_table, notes = notes, title = title)
+
+# OMIKRON TRACKER
+
+owid_var <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/variants/covid-variants.csv") %>%
+  filter(variant == "Omicron") %>%
+  group_by(location) %>%
+  filter(date == max(date), num_sequences > 50) %>%
+  mutate(date = paste0(str_sub(date,9,10),". ", str_sub(date,6,7), ".")) %>%
+  select(Land = location, Stand = date, `Seq.` = num_sequences, `Anteil (%)` = perc_sequences) %>%
+  arrange(desc(`Anteil (%)`))
+
+owid_var$Land <- countrycode(owid_var$Land, 'country.name', 'cldr.short.de_ch')
+
+update_chart(id = '61b317ffe7090356618cfdc957aaa838', data = owid_var)
+
+
 
