@@ -181,7 +181,7 @@ if __name__ == '__main__':
 
         # calculate relative values for table and line chart
         estimates = round(dfcast/dfpop*100000, 1).iloc[1:]
-        dfcastde['NZZ-Schätzung'] = round(dfcastde['value']/83138368*100000, 1)
+        dfcastde['LMU-Schätzung'] = round(dfcastde['value']/83138368*100000, 1)
 
         # create new dataframe for line chart
         datachart = dfcastde.join(dfde)
@@ -190,7 +190,7 @@ if __name__ == '__main__':
         datachart.index = datachart.index.rename('')
 
         # remove last two from Nowcast estimate
-        datachart.loc[datachart.index[-2:], 'NZZ-Schätzung'] = ''
+        datachart.loc[datachart.index[-2:], 'LMU-Schätzung'] = ''
 
         # use only current day
         data = pd.DataFrame({'RKI-Wert': df.iloc[-1]})
