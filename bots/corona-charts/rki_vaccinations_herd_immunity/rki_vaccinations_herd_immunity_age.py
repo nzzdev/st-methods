@@ -56,13 +56,13 @@ if __name__ == '__main__':
 
         # rename columns
         dfall = dfall.rename(columns={'Datum': '', 'Impfquote_gesamt_min1': 'Erste Dose',
-                                      'Impfquote_gesamt_voll': 'Vollständig geimpft', 'Impfquote_gesamt_boost': 'Mit Booster'})
+                                      'Impfquote_gesamt_voll': 'Doppelt geimpft', 'Impfquote_gesamt_boost': 'Mit Booster'})
         df12 = df12.rename(columns={
-            'Datum': '', 'Impfquote_12bis17_min1': 'Erste Dose', 'Impfquote_12bis17_voll': 'Vollständig geimpft', 'Impfquote_12bis17_boost': 'Mit Booster'})
+            'Datum': '', 'Impfquote_12bis17_min1': 'Erste Dose', 'Impfquote_12bis17_voll': 'Doppelt geimpft', 'Impfquote_12bis17_boost': 'Mit Booster'})
         df18 = df18.rename(columns={
-            'Datum': '', 'Impfquote_18plus_min1': 'Erste Dose', 'Impfquote_18plus_voll': 'Vollständig geimpft', 'Impfquote_18plus_boost': 'Mit Booster'})
+            'Datum': '', 'Impfquote_18plus_min1': 'Erste Dose', 'Impfquote_18plus_voll': 'Doppelt geimpft', 'Impfquote_18plus_boost': 'Mit Booster'})
         df60 = df60.rename(columns={
-            'Datum': '', 'Impfquote_60plus_min1': 'Erste Dose', 'Impfquote_60plus_voll': 'Vollständig geimpft', 'Impfquote_60plus_boost': 'Mit Booster'})
+            'Datum': '', 'Impfquote_60plus_min1': 'Erste Dose', 'Impfquote_60plus_voll': 'Doppelt geimpft', 'Impfquote_60plus_boost': 'Mit Booster'})
 
         # combine datasets
         df = pd.concat([dfall, df60, df18, df12],
@@ -70,24 +70,24 @@ if __name__ == '__main__':
 
         # do calculations for stacked bar chart
         df['Erste Dose'] = (df['Erste Dose'] -
-                            df['Vollständig geimpft']).round(1)
-        df['Vollständig geimpft'] = (
-            df['Vollständig geimpft'] - df['Mit Booster']).round(1)
+                            df['Doppelt geimpft']).round(1)
+        df['Doppelt geimpft'] = (
+            df['Doppelt geimpft'] - df['Mit Booster']).round(1)
 
         # create new column "Ziel" and calculate gap between status quo and herd immunity
-        df.loc[0, 'Ziel'] = (80 - (df.loc[0, 'Vollständig geimpft'] +
+        df.loc[0, 'Ziel'] = (80 - (df.loc[0, 'Doppelt geimpft'] +
                              df.loc[0, 'Erste Dose'] + df.loc[0, 'Mit Booster'])).round(1)
 
         # rearrange columns
-        df = df[['', 'Mit Booster', 'Vollständig geimpft',
+        df = df[['', 'Mit Booster', 'Doppelt geimpft',
                  'Erste Dose', 'Ziel']].set_index('')
 
         # show percentage total (copy to chart title later)
         title_percent = df.iat[0, 0] + df.iat[0, 1] + df.iat[0, 2]
         title_percent_full = df.iat[0, 0] + df.iat[0, 1]
         title_percent_boost = df.iat[0, 0]
-        # title_chart = str(title_percent.round(1)).replace('.', ',') + ' Prozent sind geimpft, ' + str(title_percent_full.round(1)).replace('.', ',') + ' Prozent vollständig'
-        title_chart = str(title_percent_full.round(1)).replace('.', ',') + ' Prozent sind vollständig geimpft, ' + \
+        # title_chart = str(title_percent.round(1)).replace('.', ',') + ' Prozent sind geimpft, ' + str(title_percent_full.round(1)).replace('.', ',') + ' Prozent doppelt'
+        title_chart = str(title_percent_full.round(1)).replace('.', ',') + ' Prozent sind doppelt geimpft, ' + \
             str(title_percent_boost.round(1)).replace(
                 '.', ',') + ' Prozent mit Booster-Schutz'
 
