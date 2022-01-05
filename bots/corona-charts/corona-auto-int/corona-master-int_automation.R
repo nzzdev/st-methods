@@ -362,7 +362,7 @@ booster_d <- vaccination %>%
   mutate(`Vollständig geimpft, in % der Bev.` = round(`Vollständig geimpft, in % der Bev.`, 1)) 
 
 booster_d <- rbind(booster_d, booster_10) %>%
-  dplyr::rename('Booster-Impfungen' = 2, 'vollständig geimpft' = 3) 
+  dplyr::rename('Booster-Impfungen' = 2, 'doppelt geimpft' = 3) 
 
 notes <- paste0("Die Tabelle zeigt die 20 Länder ab einer Million Einwohner mit den meisten Booster-Impfungen sowie Deutschland. <br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
 update_chart(id = 'e8f976e14bac8280d4b908f99e49f8d6', data = booster_d, notes = notes)
