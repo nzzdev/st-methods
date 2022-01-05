@@ -41,9 +41,9 @@ if __name__ == '__main__':
         dfcovid = df.pivot_table(index=['Datum'], columns=[
             'Bundesland'], values='Aktuelle_COVID_Faelle_ITS')
         sum = dfcovid.columns[: dfcovid.shape[0]-1]
-        dfcovid['mit Covid-19-Fällen'] = dfcovid[sum].sum(axis=1)
+        dfcovid['mit Corona-Fällen'] = dfcovid[sum].sum(axis=1)
         dfcovid = dfcovid.filter(
-            ['mit Covid-19-Fällen']).reset_index().rename_axis(None, axis=1)
+            ['mit Corona-Fällen']).reset_index().rename_axis(None, axis=1)
 
         dfother = df.pivot_table(index=['Datum'], columns=[
             'Bundesland'], values='Andere Patienten')
@@ -62,8 +62,8 @@ if __name__ == '__main__':
         # create new dataframes for charts with Covid-19 patients and bed occupancy
         dfbeds = dfcovid.set_index('Datum').join(dfother.set_index('Datum')).join(
             dffree.set_index('Datum')).rename_axis(None)
-        dfpatients = dfbeds[['mit Covid-19-Fällen']].copy().rename(
-            columns={'mit Covid-19-Fällen': 'Covid-19-Patienten'})
+        dfpatients = dfbeds[['mit Corona-Fällen']].copy().rename(
+            columns={'mit Corona-Fällen': 'Corona-Patienten'})
 
         # delete old dataframes
         del [[df, dfcovid, dfother, dffree]]

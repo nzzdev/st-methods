@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
         # rename first column and set as index
         df2 = df2.rename(columns={'date': '', 'indikation_pflegeheim_erst': 'erste Dose',
-                         'indikation_pflegeheim_voll': 'vollständig geimpft'}).set_index('')
+                         'indikation_pflegeheim_voll': 'doppelt geimpft'}).set_index('')
 
         # show date in chart notes
         notes_chart = 'Laut dem Statistischen Bundesamt (StBA) lebten in Deutschland im Jahr 2019 rund 820 000 Menschen in Pflege- und Altersheimen. In die Statistik zu «geimpften Pflegeheimbewohnern» des RKI fliessen allerdings inzwischen auch Zahlen von geimpften Menschen ein, die gemäss der Definition des StBA keine Pflegeheimbewohner sind.<br>Stand: ' + \

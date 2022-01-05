@@ -181,7 +181,7 @@ if __name__ == '__main__':
 
         # calculate relative values for table and line chart
         estimates = round(dfcast/dfpop*100000, 1).iloc[1:]
-        dfcastde['NZZ-Schätzung'] = round(dfcastde['value']/83138368*100000, 1)
+        dfcastde['LMU-Schätzung'] = round(dfcastde['value']/83138368*100000, 1)
 
         # create new dataframe for line chart
         datachart = dfcastde.join(dfde)
@@ -190,7 +190,7 @@ if __name__ == '__main__':
         datachart.index = datachart.index.rename('')
 
         # remove last two from Nowcast estimate
-        datachart.loc[datachart.index[-2:], 'NZZ-Schätzung'] = ''
+        datachart.loc[datachart.index[-2:], 'LMU-Schätzung'] = ''
 
         # use only current day
         data = pd.DataFrame({'RKI-Wert': df.iloc[-1]})
@@ -204,7 +204,7 @@ if __name__ == '__main__':
         data = data[['Regel¹', 'RKI-Wert', 'Real²']]
 
         # run function
-        update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='¹ Bis 19. 3. sind strengere Regeln erlaubt.<br>² NZZ-Schätzung inklusive Nachmeldungen.<br><br>Stand: ' +
+        update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='¹ Bis 19. 3. sind strengere Regeln erlaubt.<br>² Schätzung der LMU München inklusive Nachmeldungen.<br><br>Stand: ' +
                      timestamp_str, data=data, options=get_options(corona_rules_set))
         update_chart(id='590776db9b66058b024b8dff27bfb8f6',
                      data=datachart, notes='Stand: ' + timestamp_str)

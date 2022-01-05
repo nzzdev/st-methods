@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
         # rename first column and set as index
         df2 = df2.rename(columns={
-            'date': '', 'impf_quote_voll': 'Vollständig geimpft', 'impf_quote_erst': 'Erste Dose'}).set_index('')
+            'date': '', 'impf_quote_voll': 'Doppelt geimpft', 'impf_quote_erst': 'Erste Dose'}).set_index('')
 
         # show percentage total (copy to chart title later)
         title_percent = df2.iat[0, 0]+df2.iat[0, 1]
@@ -63,7 +63,7 @@ if __name__ == '__main__':
         title_chart = str(title_percent.round(1)).replace('.', ',') + \
             ' Prozent sind geimpft, ' + \
             str(title_percent_full.round(1)).replace('.', ',') + \
-            ' Prozent vollständig'
+            ' Prozent doppelt'
 
         # show date in chart notes
         notes_chart = 'Impfquote von 80% in Grau. Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten. <br>Stand: ' + \
