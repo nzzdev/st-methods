@@ -483,9 +483,6 @@ europe <- subset(rolling_average_continents, select = c('Land', 'date', 'ravg_ca
 update_chart(id = '3ff86ba4f375303f8173c2e3f348f6dc', data = europe)
 
 
-
-
-
 #### Deaths ####
 
 # All deaths
