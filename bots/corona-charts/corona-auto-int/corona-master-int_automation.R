@@ -255,7 +255,7 @@ vaccination <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/ma
          Impfdosen_daily = daily_vaccinations,
          Impfdosen_total_100 = total_vaccinations_per_hundred,
          "Mind. eine Impfdose, in % der Bev." = people_vaccinated_per_hundred,
-         "Vollständig geimpft, in % der Bev." = people_fully_vaccinated_per_hundred,  
+         "Doppelt geimpft, in % der Bev." = people_fully_vaccinated_per_hundred,  
          "Booster-Impfungen, in % der Bev." = total_boosters_per_hundred,
          "Täglich verabreichte Impfdosen, pro 1000 Einw." = daily_vaccinations_per_million
          )
@@ -303,19 +303,19 @@ vacc <- vaccination %>%
 # fully vaccinated people in percent
 full_vacc <- vaccination %>%
   drop_na(Land) %>%
-  drop_na(`Vollständig geimpft, in % der Bev.`) %>%
+  drop_na(`Doppelt geimpft, in % der Bev.`) %>%
   group_by(Land) %>%
   mutate(Datum = as.Date(Datum, "%d.%m.%Y")) %>%
-  filter(Land != 'World', pop > 1000000, `Vollständig geimpft, in % der Bev.` > 0) %>%
+  filter(Land != 'World', pop > 1000000, `Doppelt geimpft, in % der Bev.` > 0) %>%
   slice_max(order_by = Datum, n = 1) %>%
-  arrange(desc(`Vollständig geimpft, in % der Bev.`)) %>%
-  select(Land, `Vollständig geimpft, in % der Bev.`) %>%
-  mutate(`Vollständig geimpft, in % der Bev.` = round(`Vollständig geimpft, in % der Bev.`, 1)) %>%
+  arrange(desc(`Doppelt geimpft, in % der Bev.`)) %>%
+  select(Land, `Doppelt geimpft, in % der Bev.`) %>%
+  mutate(`Doppelt geimpft, in % der Bev.` = round(`Doppelt geimpft, in % der Bev.`, 1)) %>%
   ungroup() 
 
-title <- paste("In", head(full_vacc$Land, 1), "sind", round(head(full_vacc$`Vollständig geimpft, in % der Bev.`, 1)), "Prozent der Einwohner vollständig geimpft" )
+title <- paste("In", head(full_vacc$Land, 1), "sind", round(head(full_vacc$`Doppelt geimpft, in % der Bev.`, 1)), "Prozent der Einwohner doppelt geimpft" )
 
-notes <- paste0("Länder mit mehr als 1 Million Einwohnern. Eine Person muss in der Regel zwei Dosen geimpft bekommen, um als vollständig geimpft zu gelten. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
+notes <- paste0("Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
 update_chart(id = 'ee2ce1d4bd795db54ef74a9ed8abb147', data = full_vacc, notes = notes, title = title)
 
 
@@ -345,9 +345,9 @@ booster_10 <- vaccination %>%
   filter(Land != 'World', Land != 'Deutschland', pop > 1000000) %>%
   slice_max(order_by = Datum, n = 1) %>%
   arrange(desc(`Booster-Impfungen, in % der Bev.`)) %>%
-  select(Land, `Booster-Impfungen, in % der Bev.`, `Vollständig geimpft, in % der Bev.`) %>%
+  select(Land, `Booster-Impfungen, in % der Bev.`, `Doppelt geimpft, in % der Bev.`) %>%
   mutate(`Booster-Impfungen, in % der Bev.` = round(`Booster-Impfungen, in % der Bev.`, 1)) %>%
-  mutate(`Vollständig geimpft, in % der Bev.` = round(`Vollständig geimpft, in % der Bev.`, 1)) %>%
+  mutate(`Doppelt geimpft, in % der Bev.` = round(`Doppelt geimpft, in % der Bev.`, 1)) %>%
   ungroup() %>% slice(1:20)
 
 booster_d <- vaccination %>%
@@ -357,12 +357,12 @@ booster_d <- vaccination %>%
   mutate(Datum = as.Date(Datum, "%d.%m.%Y")) %>%
   filter(Land == 'Deutschland') %>%
   slice_max(order_by = Datum, n = 1) %>%
-  select(Land, `Booster-Impfungen, in % der Bev.`, `Vollständig geimpft, in % der Bev.`) %>%
+  select(Land, `Booster-Impfungen, in % der Bev.`, `Doppelt geimpft, in % der Bev.`) %>%
   mutate(`Booster-Impfungen, in % der Bev.` = round(`Booster-Impfungen, in % der Bev.`, 1)) %>%
-  mutate(`Vollständig geimpft, in % der Bev.` = round(`Vollständig geimpft, in % der Bev.`, 1)) 
+  mutate(`Doppelt geimpft, in % der Bev.` = round(`Doppelt geimpft, in % der Bev.`, 1)) 
 
 booster_d <- rbind(booster_d, booster_10) %>%
-  dplyr::rename('Booster-Impfungen' = 2, 'vollständig geimpft' = 3) 
+  dplyr::rename('Booster-Impfungen' = 2, 'Doppelt geimpft' = 3) 
 
 notes <- paste0("Die Tabelle zeigt die 20 Länder ab einer Million Einwohner mit den meisten Booster-Impfungen sowie Deutschland. <br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
 update_chart(id = 'e8f976e14bac8280d4b908f99e49f8d6', data = booster_d, notes = notes)
@@ -567,13 +567,13 @@ vacc_table <- full_join(vacc, full_vacc, by = "Land") %>%
   full_join(vaccination_speed, by = "Land") %>%
   arrange(desc(`Täglich verabreichte Impfdosen, pro 1000 Einw.`)) %>%
   drop_na() %>%
-  filter(`Vollständig geimpft, in % der Bev.` > 1)
+  filter(`Doppelt geimpft, in % der Bev.` > 1)
 
 vacc_table$Land <- recode(vacc_table$Land, '"Griechenland"="GR"')
 vacc_table$Land <- recode(vacc_table$Land, '"Niederlande"="NL"')
 vacc_table$Land <- recode(vacc_table$Land, '"Grossbritannien"="GB"')
 
-notes <- paste0("Nur Länder mit mehr als 1 Million Einwohnern, in denen bereits mehr als 1 Prozent der Bevölkerung vollständig geimpft ist. Für die täglich verabreichten Impfdosen weisen wir den 7-Tage-Schnitt aus. Aufgrund unterschiedlicher Meldeverfahren können für einige Länder die Daten schon mehrere Tage alt sein. GB = Grossbritannien,  GR = Griechenland, NL = Niederlande, VAE = Vereinigte Arabische Emirate. <br>Stand: "
+notes <- paste0("Nur Länder mit mehr als 1 Million Einwohnern, in denen bereits mehr als 1 Prozent der Bevölkerung doppelt geimpft ist. Für die täglich verabreichten Impfdosen weisen wir den 7-Tage-Schnitt aus. Aufgrund unterschiedlicher Meldeverfahren können für einige Länder die Daten schon mehrere Tage alt sein. GB = Grossbritannien,  GR = Griechenland, NL = Niederlande, VAE = Vereinigte Arabische Emirate. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = '6e4d9b2212af59f507ce3da0b9537963', data = vacc_table, notes = notes)
 
