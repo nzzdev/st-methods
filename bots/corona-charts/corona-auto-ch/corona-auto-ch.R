@@ -648,7 +648,7 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
   rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
          "Einmal geimpft" = COVID19PartiallyVaccPersons,
          "Booster erhalten" = COVID19FirstBoosterPersons) %>%
-  arrange(desc(`Doppelt geimpft`+`Einmal geimpft`+`Booster erhalten`))
+  arrange(desc(`Doppelt geimpft*`+`Einmal geimpft`+`Booster erhalten`))
 
 title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
 
