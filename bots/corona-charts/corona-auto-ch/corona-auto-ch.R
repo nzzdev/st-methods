@@ -645,16 +645,16 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
   spread(type, per100) %>%
   select(-COVID19AtLeastOneDosePersons) %>%
   mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
-  rename("Nur doppelt geimpft" = COVID19FullyVaccPersons, 
-         "Nur einmal geimpft" = COVID19PartiallyVaccPersons,
+  rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
+         "Einmal geimpft" = COVID19PartiallyVaccPersons,
          "Booster erhalten" = COVID19FirstBoosterPersons) %>%
-  arrange(desc(`Nur doppelt geimpft`+`Nur einmal geimpft`+`Booster erhalten`))
+  arrange(desc(`Doppelt geimpft`+`Einmal geimpft`+`Booster erhalten`))
 
 title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
 
 update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
              data = vacc_ch_persons_kant,
-             notes = paste0("In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. Auch Genesene, die eine Impfdosis erhalten haben, sind dort aufgeführt.<br>Stand: ", ch_vacc_date), 
+             notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", ch_vacc_date), 
              title = title_vacc_kant)
 
 ### Schweiz geimpft nach Altersgruppen
@@ -686,7 +686,7 @@ title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Bo
 
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
-             notes = paste0("In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. Auch Genesene, die eine Impfdosis erhalten haben, sind dort aufgeführt.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
+             notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
              title = title)
 
 #### Vaccination, delivered, received ####
