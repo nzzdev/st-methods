@@ -792,9 +792,9 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
          n2 = COVID19FullyVaccPersons-lag(COVID19FullyVaccPersons,1),
          n3 = COVID19FirstBoosterPersons-lag(COVID19FirstBoosterPersons,1))%>%
   mutate(Erstimpfungen = rollmean(n1, 7, NA, align = "right"),
-         Zweitimpfungen = rollmean(n2, 7, NA, align = "right"),
+         `Zweitimpfungen*` = rollmean(n2, 7, NA, align = "right"),
          Boosterimpfungen = rollmean(n3, 7, NA, align = "right"))%>%
-  select(date, Erstimpfungen, Zweitimpfungen, Boosterimpfungen)
+  select(date, Erstimpfungen, `Zweitimpfungen*`, Boosterimpfungen)
 
 ch_vacc_persons_hist_new$Boosterimpfungen[ch_vacc_persons_hist_new$Boosterimpfungen < 20] <- NA
 
