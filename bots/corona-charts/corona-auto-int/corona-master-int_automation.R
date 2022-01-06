@@ -386,7 +386,7 @@ combo_table <- rolling_average_all %>%
   select(Land, `Fälle`, Tote) %>%
   slice(1:50)
 
-notes <- paste0("Gezeigt werden die 50 Länder (mit mehr als einer Million Einwohnern), welche in den letzten 14 Tagen die meisten Fälle pro Kopf verzeichnet haben.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
+notes <- paste0("Gezeigt werden die 50 Länder (mit mehr als einer Million Einwohnern), welche in den letzten 14 Tagen die meisten Fälle auf 100 000 Einwohner verzeichnet haben.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'd04de590ccac9ec5c74ec405ece8ffb1', data = combo_table, notes = notes)
 
 
@@ -420,7 +420,7 @@ all_cum_cases <- all_cum %>%
   slice(1:20) %>%
   select(Land, all_cases_pop)
 
-title <- paste(head(all_cum_cases$Land, 1), "insgesamt pro Kopf am stärksten betroffen")
+title <- paste(head(all_cum_cases$Land, 1), "insgesamt am stärksten betroffen")
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(all_ctry$date), format = "%d. %m. %Y")))
 update_chart(id = '7c647e0bd14b018f4f4f91aa86eb1872', data = all_cum_cases, notes = notes, title = title)
 
@@ -492,7 +492,7 @@ all_cum_deaths <- all_cum %>%
   slice(1:20) %>%
   select(Land, dead_pop)
 
-title <- paste(head(all_cum_deaths$Land, 1), "hat insgesamt am meisten Tote pro Kopf zu beklagen")
+title <- paste(head(all_cum_deaths$Land, 1), "hat gemessen an der Bevölkerungszahl am meisten Tote zu beklagen")
 
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
