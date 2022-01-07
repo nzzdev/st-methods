@@ -181,6 +181,11 @@ bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
 update_chart(id = "3209a77a596162b06346995b10896863", 
              data = bag_total)
 
+#now infected only
+bag_inf <- bag_total %>% select(datum, `gegenwärtig Infizierte`)
+
+update_chart(id = "9c87f52098e02f80740ec4a3743615b2", 
+             data = bag_inf)
 
 #Rolling average of cases
 bag_cases_ravg <- bag_cases %>%
