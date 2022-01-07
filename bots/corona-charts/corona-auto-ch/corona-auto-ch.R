@@ -215,7 +215,7 @@ bag_tests_pct <- bag_testPcrAntigen %>%
   select(nachweismethode, datum, pct) %>%
   spread(nachweismethode, pct) %>%
   drop_na()  %>%
-  rename("Antigen-Schnelltest" = Antigen_Schnelltest, "PCR-Test" = PCR) %>%
+  rename("Antigen-Schnelltests" = Antigen_Schnelltest, "PCR-Tests" = PCR) %>%
   add_column("WHO-Zielwert" = 5)
 
 #q-cli update
