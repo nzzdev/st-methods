@@ -197,10 +197,10 @@ bag_testPcrAntigen_abs <- bag_testPcrAntigen %>%
   filter(datum > "2020-11-01", geoRegion == 'CHFL') %>%
   select(datum, entries, nachweismethode) %>%
   spread(nachweismethode, entries) %>%
-  mutate("Antigen-Schnelltest" = round(rollmean(Antigen_Schnelltest, 7, fill = 0, align = "right"), 1), 
-         "PCR-Test" = round(rollmean(PCR, 7, na.pad = TRUE, align = "right"), 1)) %>%
-  select(datum, `Antigen-Schnelltest`, `PCR-Test`) %>%
-  filter(`Antigen-Schnelltest` + `PCR-Test` > 0) %>%
+  mutate("Antigen-Schnelltests" = round(rollmean(Antigen_Schnelltest, 7, fill = 0, align = "right"), 1), 
+         "PCR-Tests" = round(rollmean(PCR, 7, na.pad = TRUE, align = "right"), 1)) %>%
+  select(datum, `Antigen-Schnelltests`, `PCR-Tests`) %>%
+  filter(`Antigen-Schnelltests` + `PCR-Tests` > 0) %>%
   drop_na() 
 
 #q-cli update
