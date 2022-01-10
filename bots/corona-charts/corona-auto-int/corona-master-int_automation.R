@@ -383,10 +383,9 @@ combo_table <- rolling_average_all %>%
   ungroup() %>%
   filter(date == last(date), pop > 1000000) %>%
   arrange(desc(`Fälle`)) %>%
-  select(Land, `Fälle`, Tote) %>%
-  slice(1:50)
+  select(Land, `Fälle`, Tote) 
 
-notes <- paste0("Gezeigt werden die 50 Länder (mit mehr als einer Million Einwohnern), welche in den letzten 14 Tagen die meisten Fälle auf 100 000 Einwohner verzeichnet haben.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
+notes <- paste0("Gezeigt werden Länder mit mehr als einer Million Einwohnern.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'd04de590ccac9ec5c74ec405ece8ffb1', data = combo_table, notes = notes)
 
 
@@ -449,7 +448,7 @@ update_chart(id = '549b5522072c32f00946aa2ea0db1247', data = roll_cont)
 
 
 
-### Table with 50 countries, largest number of new cases per capita
+### Table with countries, number of new cases per capita
 
 cases_countries <- rolling_average_all %>%
   filter(pop > 1000000) %>%
@@ -465,10 +464,9 @@ cases_countries <- rolling_average_all %>%
   filter(date == last(date)) %>%
   select(Land, ravg_cases_pop, Tendenz) %>%
   arrange(desc(ravg_cases_pop)) %>%
-  dplyr::rename(`Neue Fälle` = ravg_cases_pop) %>%
-  head(50)
+  dplyr::rename(`Neue Fälle` = ravg_cases_pop)
 
-notes <- paste0("Berücksichtigt werden 50 Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
+notes <- paste0("Berücksichtigt werden Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'aa6f47afcb5960d3151eefaa3ef6bba7', data = cases_countries, notes = notes)
 
@@ -500,7 +498,7 @@ update_chart(id = 'c7004f4d1b11f50ecbbd2d4a1849f329', data = all_cum_deaths, not
 
 
 
-# Table with 50 countries, largest number of new deaths per capita
+# Table with countries, number of new deaths per capita
 deaths_countries <- rolling_average_all %>%
   filter(pop > 1000000) %>%
   drop_na(ravg_deaths_pop) %>%
@@ -515,11 +513,10 @@ deaths_countries <- rolling_average_all %>%
   filter(date == last(date)) %>%
   select(Land, ravg_deaths_pop, Tendenz) %>%
   arrange(desc(ravg_deaths_pop)) %>%
-  dplyr::rename(`Neue Todesfälle` = ravg_deaths_pop) %>%
-  head(50)
+  dplyr::rename(`Neue Todesfälle` = ravg_deaths_pop) 
 
 
-notes <- paste0("Berücksichtigt werden 50 Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
+notes <- paste0("Berücksichtigt werden Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = '12c077ec9e34e0a0817527a6a302143b', data = deaths_countries, notes = notes)
 
@@ -711,6 +708,7 @@ owid_var <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/maste
   group_by(location) %>%
   filter(date == max(date), num_sequences > 50) %>%
   mutate(date = paste0(str_sub(date,9,10),". ", str_sub(date,6,7), ".")) %>%
+  mutate(perc_sequences = round(perc_sequences)) %>%
   select(Land = location, Stand = date, `Seq.` = num_sequences, `Anteil (%)` = perc_sequences) %>%
   arrange(desc(`Anteil (%)`))
 
