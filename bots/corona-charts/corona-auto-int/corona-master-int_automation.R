@@ -381,7 +381,7 @@ combo_table <- rolling_average_all %>%
          deaths_new_100k = round(100000*deaths_new14/pop,1)) %>%
   dplyr::rename("Fälle" = cases_new_100k, "Tote" = deaths_new_100k) %>%
   ungroup() %>%
-  filter(date == last(date), pop > 1000000) %>%
+  filter(date == last(date), pop > 1000000, `Fälle` > 0) %>%
   arrange(desc(`Fälle`)) %>%
   select(Land, `Fälle`, Tote) 
 
@@ -461,7 +461,7 @@ cases_countries <- rolling_average_all %>%
            diff_pct_max < -5 ~ '\U2193',
            TRUE ~ '\U2192',)) %>%
   mutate(ravg_cases_pop = round(ravg_cases_pop, 1)) %>%
-  filter(date == last(date)) %>%
+  filter(date == last(date), ravg_cases_pop > 0) %>%
   select(Land, ravg_cases_pop, Tendenz) %>%
   arrange(desc(ravg_cases_pop)) %>%
   dplyr::rename(`Neue Fälle` = ravg_cases_pop)
@@ -510,7 +510,7 @@ deaths_countries <- rolling_average_all %>%
            diff_pct_max < -5 ~ '\U2193',
            TRUE ~ '\U2192',)) %>%
   mutate(ravg_deaths_pop = round(ravg_deaths_pop, 1)) %>%
-  filter(date == last(date)) %>%
+  filter(date == last(date), ravg_deaths_pop > 0) %>%
   select(Land, ravg_deaths_pop, Tendenz) %>%
   arrange(desc(ravg_deaths_pop)) %>%
   dplyr::rename(`Neue Todesfälle` = ravg_deaths_pop) 
