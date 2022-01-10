@@ -181,6 +181,11 @@ bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
 update_chart(id = "3209a77a596162b06346995b10896863", 
              data = bag_total)
 
+#now infected only
+bag_inf <- bag_total %>% select(datum, `gegenwärtig Infizierte`)
+
+update_chart(id = "9c87f52098e02f80740ec4a3743615b2", 
+             data = bag_inf)
 
 #Rolling average of cases
 bag_cases_ravg <- bag_cases %>%
@@ -197,10 +202,10 @@ bag_testPcrAntigen_abs <- bag_testPcrAntigen %>%
   filter(datum > "2020-11-01", geoRegion == 'CHFL') %>%
   select(datum, entries, nachweismethode) %>%
   spread(nachweismethode, entries) %>%
-  mutate("Antigen-Schnelltest" = round(rollmean(Antigen_Schnelltest, 7, fill = 0, align = "right"), 1), 
-         "PCR-Test" = round(rollmean(PCR, 7, na.pad = TRUE, align = "right"), 1)) %>%
-  select(datum, `Antigen-Schnelltest`, `PCR-Test`) %>%
-  filter(`Antigen-Schnelltest` + `PCR-Test` > 0) %>%
+  mutate("Antigen-Schnelltests" = round(rollmean(Antigen_Schnelltest, 7, fill = 0, align = "right"), 1), 
+         "PCR-Tests" = round(rollmean(PCR, 7, na.pad = TRUE, align = "right"), 1)) %>%
+  select(datum, `Antigen-Schnelltests`, `PCR-Tests`) %>%
+  filter(`Antigen-Schnelltests` + `PCR-Tests` > 0) %>%
   drop_na() 
 
 #q-cli update
@@ -215,7 +220,7 @@ bag_tests_pct <- bag_testPcrAntigen %>%
   select(nachweismethode, datum, pct) %>%
   spread(nachweismethode, pct) %>%
   drop_na()  %>%
-  rename("Antigen-Schnelltest" = Antigen_Schnelltest, "PCR-Test" = PCR) %>%
+  rename("Antigen-Schnelltests" = Antigen_Schnelltest, "PCR-Tests" = PCR) %>%
   add_column("WHO-Zielwert" = 5)
 
 #q-cli update
@@ -498,7 +503,7 @@ id_total <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   filter(date == max(date), vaccination_status %in% c("fully_vaccinated","partially_vaccinated")) %>%
   select(type, vaccination_status, sumTotal) %>%
   spread(vaccination_status, sumTotal) %>%
-  rename("Typ" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 3)
+  rename("Typ" = 1, "Mindestens zweimal geimpft" = 2, "Teilweise geimpft" = 3)
 
 update_chart(id = "ab97925bcc5055b33011fb4d3320012a", 
              data = id_total, 
@@ -512,7 +517,7 @@ id_hist <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   group_by(type, vaccination_status) %>%
   summarise(entries = sum(entries)) %>%
   spread(vaccination_status, entries) %>%
-  select("Typ" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3)
+  select("Typ" = 1, "Mindestens zweimal geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3)
 
 id_hist[2:5] <- round(id_hist[2:5]/rowSums(id_hist[2:5])*100,1)
 
@@ -527,7 +532,7 @@ update_chart(id = "c041757a38ba1d4e6851aaaee55c6207",
 #   spread(vaccination_status, entries) %>%
 #   mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
 #   filter(date >= "2021-07-01") %>%
-#   select("Datum" = 1, "Vollständig geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3) %>%
+#   select("Datum" = 1, "Mindestens zweimal geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3) %>%
 #   head(-2)
 
 id_hosp_line_weekly_pc_60 <- ch_hosp_vacc_age %>%
@@ -542,7 +547,7 @@ id_hosp_line_weekly_pc_60 <- ch_hosp_vacc_age %>%
   spread(vaccination_status, per100k) %>%
   mutate(date = paste0(str_sub(date, 1,4), "-W", str_sub(date, 5,6)))
 
-names(id_hosp_line_weekly_pc_60) <- c("date", "Vollständig geimpft", "Ungeimpft")
+names(id_hosp_line_weekly_pc_60) <- c("date", "Mindestens zweimal geimpft", "Ungeimpft")
 
 if (weekdays(Sys.Date()) %in% c("Monday", "Montag", "Dienstag", "Tuesday")){
   id_hosp_line_weekly_pc_60 <- id_hosp_line_weekly_pc_60 %>%
@@ -565,7 +570,7 @@ id_rel_age_q <- id_rel_age %>%
   select(altersklasse_covid19, not_vaccinated, fully_vaccinated) %>%
   filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt")
 
-names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Vollständig geimpft")
+names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Mindestens zweimal geimpft")
 
 update_chart(id = "32933cfe729928ecb4906a82bdcc4f9f", 
              data = id_rel_age_q)
@@ -645,16 +650,16 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
   spread(type, per100) %>%
   select(-COVID19AtLeastOneDosePersons) %>%
   mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
-  rename("Nur doppelt geimpft" = COVID19FullyVaccPersons, 
-         "Nur einmal geimpft" = COVID19PartiallyVaccPersons,
+  rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
+         "Einmal geimpft" = COVID19PartiallyVaccPersons,
          "Booster erhalten" = COVID19FirstBoosterPersons) %>%
-  arrange(desc(`Nur doppelt geimpft`+`Nur einmal geimpft`+`Booster erhalten`))
+  arrange(desc(`Doppelt geimpft*`+`Einmal geimpft`+`Booster erhalten`))
 
 title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
 
 update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
              data = vacc_ch_persons_kant,
-             notes = paste0("In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. Auch Genesene, die eine Impfdosis erhalten haben, sind dort aufgeführt.<br>Stand: ", ch_vacc_date), 
+             notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", ch_vacc_date), 
              title = title_vacc_kant)
 
 ### Schweiz geimpft nach Altersgruppen
@@ -665,13 +670,13 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
   select(altersklasse_covid19, per100PersonsTotal,type) %>%
   spread(type,per100PersonsTotal) %>%
   rename('Altersklasse' = altersklasse_covid19, 
-         "Vollständig geimpft" = COVID19FullyVaccPersons,
-         "Nur einfach geimpft" = COVID19PartiallyVaccPersons,
+         "Doppelt geimpft" = COVID19FullyVaccPersons,
+         "Einfach geimpft" = COVID19PartiallyVaccPersons,
          "Booster erhalten" = COVID19FirstBoosterPersons) %>%
-  mutate(`Nur doppelt geimpft` = round(`Vollständig geimpft`-`Booster erhalten`, 1),
-         `Nur einfach geimpft` = round(`Nur einfach geimpft`, 1),
+  mutate(`Doppelt geimpft` = round(`Doppelt geimpft`-`Booster erhalten`, 1),
+         `Einfach geimpft` = round(`Einfach geimpft`, 1),
          `Booster erhalten` = round(`Booster erhalten`, 1))  %>%
-  select(Altersklasse, `Booster erhalten`, `Nur doppelt geimpft`, `Nur einfach geimpft`) %>%
+  select(Altersklasse, `Booster erhalten`, `Doppelt geimpft`, `Einfach geimpft`) %>%
   arrange(desc(`Altersklasse`))
 
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
@@ -686,7 +691,7 @@ title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Bo
 
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
-             notes = paste0("In der Schweiz wurden nur wenige Impfungen mit dem Impfstoff von Johnson & Johnson durchgeführt. Diese Impfungen erfordern eine statt zwei Impfdosen und sind daher in der Kategorie «Nur doppelt geimpft» enthalten. Auch Genesene, die eine Impfdosis erhalten haben, sind dort aufgeführt.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
+             notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
              title = title)
 
 #### Vaccination, delivered, received ####
@@ -792,9 +797,9 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
          n2 = COVID19FullyVaccPersons-lag(COVID19FullyVaccPersons,1),
          n3 = COVID19FirstBoosterPersons-lag(COVID19FirstBoosterPersons,1))%>%
   mutate(Erstimpfungen = rollmean(n1, 7, NA, align = "right"),
-         Zweitimpfungen = rollmean(n2, 7, NA, align = "right"),
+         `Zweitimpfungen*` = rollmean(n2, 7, NA, align = "right"),
          Boosterimpfungen = rollmean(n3, 7, NA, align = "right"))%>%
-  select(date, Erstimpfungen, Zweitimpfungen, Boosterimpfungen)
+  select(date, Erstimpfungen, `Zweitimpfungen*`, Boosterimpfungen)
 
 ch_vacc_persons_hist_new$Boosterimpfungen[ch_vacc_persons_hist_new$Boosterimpfungen < 20] <- NA
 
