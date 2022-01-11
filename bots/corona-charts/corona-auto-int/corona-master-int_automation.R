@@ -701,17 +701,3 @@ notes <- paste0("Nur Länder mit mehr als 1 Million Einwohnern, die mehr als ein
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'fdf83ddd0451dc0c0d09c18769f1abd5', data = test_table, notes = notes, title = title)
 
-# OMIKRON TRACKER
-
-#owid_var <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/variants/covid-variants.csv") %>%
- # filter(variant == "Omicron") %>%
-  #group_by(location) %>%
-  #filter(date == max(date), num_sequences > 50) %>%
-  #mutate(date = paste0(str_sub(date,9,10),". ", str_sub(date,6,7), ".")) %>%
-  #mutate(perc_sequences = round(perc_sequences)) %>%
-  #select(Land = location, Stand = date, `Seq.` = num_sequences, `Anteil (%)` = perc_sequences) %>%
-  #arrange(desc(`Anteil (%)`))
-
-#owid_var$Land <- countrycode(owid_var$Land, 'country.name', 'cldr.short.de_ch')
-
-#update_chart(id = '61b317ffe7090356618cfdc957aaa838', data = owid_var)
