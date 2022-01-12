@@ -381,12 +381,11 @@ combo_table <- rolling_average_all %>%
          deaths_new_100k = round(100000*deaths_new14/pop,1)) %>%
   dplyr::rename("Fälle" = cases_new_100k, "Tote" = deaths_new_100k) %>%
   ungroup() %>%
-  filter(date == last(date), pop > 1000000) %>%
+  filter(date == last(date), pop > 1000000, `Fälle` > 0) %>%
   arrange(desc(`Fälle`)) %>%
-  select(Land, `Fälle`, Tote) %>%
-  slice(1:50)
+  select(Land, `Fälle`, Tote) 
 
-notes <- paste0("Gezeigt werden die 50 Länder (mit mehr als einer Million Einwohnern), welche in den letzten 14 Tagen die meisten Fälle auf 100 000 Einwohner verzeichnet haben.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
+notes <- paste0("Gezeigt werden Länder mit mehr als einer Million Einwohnern.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'd04de590ccac9ec5c74ec405ece8ffb1', data = combo_table, notes = notes)
 
 
@@ -449,7 +448,7 @@ update_chart(id = '549b5522072c32f00946aa2ea0db1247', data = roll_cont)
 
 
 
-### Table with 50 countries, largest number of new cases per capita
+### Table with countries, number of new cases per capita
 
 cases_countries <- rolling_average_all %>%
   filter(pop > 1000000) %>%
@@ -462,13 +461,12 @@ cases_countries <- rolling_average_all %>%
            diff_pct_max < -5 ~ '\U2193',
            TRUE ~ '\U2192',)) %>%
   mutate(ravg_cases_pop = round(ravg_cases_pop, 1)) %>%
-  filter(date == last(date)) %>%
+  filter(date == last(date), ravg_cases_pop > 0) %>%
   select(Land, ravg_cases_pop, Tendenz) %>%
   arrange(desc(ravg_cases_pop)) %>%
-  dplyr::rename(`Neue Fälle` = ravg_cases_pop) %>%
-  head(50)
+  dplyr::rename(`Neue Fälle` = ravg_cases_pop)
 
-notes <- paste0("Berücksichtigt werden 50 Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
+notes <- paste0("Berücksichtigt werden Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'aa6f47afcb5960d3151eefaa3ef6bba7', data = cases_countries, notes = notes)
 
@@ -500,7 +498,7 @@ update_chart(id = 'c7004f4d1b11f50ecbbd2d4a1849f329', data = all_cum_deaths, not
 
 
 
-# Table with 50 countries, largest number of new deaths per capita
+# Table with countries, number of new deaths per capita
 deaths_countries <- rolling_average_all %>%
   filter(pop > 1000000) %>%
   drop_na(ravg_deaths_pop) %>%
@@ -512,14 +510,13 @@ deaths_countries <- rolling_average_all %>%
            diff_pct_max < -5 ~ '\U2193',
            TRUE ~ '\U2192',)) %>%
   mutate(ravg_deaths_pop = round(ravg_deaths_pop, 1)) %>%
-  filter(date == last(date)) %>%
+  filter(date == last(date), ravg_deaths_pop > 0) %>%
   select(Land, ravg_deaths_pop, Tendenz) %>%
   arrange(desc(ravg_deaths_pop)) %>%
-  dplyr::rename(`Neue Todesfälle` = ravg_deaths_pop) %>%
-  head(50)
+  dplyr::rename(`Neue Todesfälle` = ravg_deaths_pop) 
 
 
-notes <- paste0("Berücksichtigt werden 50 Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
+notes <- paste0("Berücksichtigt werden Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = '12c077ec9e34e0a0817527a6a302143b', data = deaths_countries, notes = notes)
 
@@ -704,16 +701,3 @@ notes <- paste0("Nur Länder mit mehr als 1 Million Einwohnern, die mehr als ein
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'fdf83ddd0451dc0c0d09c18769f1abd5', data = test_table, notes = notes, title = title)
 
-# OMIKRON TRACKER
-
-owid_var <- read_csv("https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/variants/covid-variants.csv") %>%
-  filter(variant == "Omicron") %>%
-  group_by(location) %>%
-  filter(date == max(date), num_sequences > 50) %>%
-  mutate(date = paste0(str_sub(date,9,10),". ", str_sub(date,6,7), ".")) %>%
-  select(Land = location, Stand = date, `Seq.` = num_sequences, `Anteil (%)` = perc_sequences) %>%
-  arrange(desc(`Anteil (%)`))
-
-owid_var$Land <- countrycode(owid_var$Land, 'country.name', 'cldr.short.de_ch')
-
-update_chart(id = '61b317ffe7090356618cfdc957aaa838', data = owid_var)
