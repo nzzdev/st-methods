@@ -581,7 +581,6 @@ update_chart(id = "e5aee99aec92ee1365613b671ef405f7", data = ch_vacc_manuf)
 
 ch_vacc_date <-  gsub("\\b0(\\d)\\b", "\\1", format(last(ch_vacc_adm$date), format = "%d. %m. %Y"))
 
-
 vaccchart_kant <- ch_vacc_doses %>%
   filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH", type == "COVID19VaccDosesAdministered") %>%
   group_by(geoRegion) %>%
@@ -591,7 +590,6 @@ vaccchart_kant <- ch_vacc_doses %>%
   arrange(geoRegion)
 
 vaccchart_kant_notes <- paste0("Die Zahlen beziehen sich auf die verabreichten Impfdosen, nicht auf geimpfte Personen.",
-                               " Eine Person muss im Normalfall zwei Dosen verimpft bekommen.",
                                "<br>Stand: ", 
                                ch_vacc_date)
 
