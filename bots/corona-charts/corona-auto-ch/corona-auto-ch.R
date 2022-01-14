@@ -514,17 +514,17 @@ update_chart(id = "ab97925bcc5055b33011fb4d3320012a",
 
 id_hist <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   filter(vaccine == "all") %>%
-  filter(date >= "2021-07-01") %>%
+  filter(date >= "2021-11-01") %>%
   group_by(type, vaccination_status) %>%
   summarise(entries = sum(entries)) %>%
   spread(vaccination_status, entries) %>%
-  select("Typ" = 1, "Mindestens zweimal geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3)
+  select("Typ" = 1, "Booster erhalten" = 3, "Nur doppelt geimpft" = 4, "Einmal geimpft" = 6, "Nicht geimpft" = 5, "Unbekannt" = 6)
 
-id_hist[2:5] <- round(id_hist[2:5]/rowSums(id_hist[2:5])*100,1)
+id_hist[2:6] <- round(id_hist[2:6]/rowSums(id_hist[2:6])*100,1)
 
 update_chart(id = "c041757a38ba1d4e6851aaaee55c6207", 
              data = id_hist, 
-             notes = paste0("Der Zeitraum ab 1. Juli wurde so gewählt, weil zu diesem Zeitpunkt bereits eine relativ hohe Impfquote erreicht war. <br>Stand: ",
+             notes = paste0("Der Zeitraum ab 1. November 2021 wurde so gewählt, weil zu diesem Zeitpunkt die Booster-Impfungen starteten. <br>Stand: ",
                             gsub("\\b0(\\d)\\b", "\\1", format(max(ch_hosp_vacc$date), format = "%d. %m. %Y"))))
 
 # id_hosp_line <- ch_hosp_vacc %>%
@@ -539,16 +539,18 @@ update_chart(id = "c041757a38ba1d4e6851aaaee55c6207",
 id_hosp_line_weekly_pc_60 <- ch_hosp_vacc_age %>%
   filter(altersklasse_covid19 %in% c("60 - 69", "70 - 79", "80+"), 
          vaccination_status != "unknown" & vaccination_status != "partially_vaccinated",
-         date >= "202126") %>%
+         date >= "202146") %>%
   select(date, altersklasse_covid19, vaccination_status, entries, pop) %>%
   group_by(date, vaccination_status) %>%
   summarise(entries = sum(entries), pop = sum(pop)) %>%
   mutate(per100k = 100000*entries/pop) %>%
   select(-entries, -pop) %>%
   spread(vaccination_status, per100k) %>%
-  mutate(date = paste0(str_sub(date, 1,4), "-W", str_sub(date, 5,6)))
+  mutate(date = paste0(str_sub(date, 1,4), "-W", str_sub(date, 5,6))) %>%
+  select(1, 3, 4, 5)
 
-names(id_hosp_line_weekly_pc_60) <- c("date", "Mindestens zweimal geimpft", "Ungeimpft")
+names(id_hosp_line_weekly_pc_60) <- c("date", "Booster erhalten", "Doppelt geimpft", "Ungeimpft") 
+  
 
 if (weekdays(Sys.Date()) %in% c("Monday", "Montag", "Dienstag", "Tuesday")){
   id_hosp_line_weekly_pc_60 <- id_hosp_line_weekly_pc_60 %>%
