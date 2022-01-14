@@ -518,9 +518,9 @@ id_hist <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   group_by(type, vaccination_status) %>%
   summarise(entries = sum(entries)) %>%
   spread(vaccination_status, entries) %>%
-  select("Typ" = 1, "Booster erhalten" = 3, "Nur doppelt geimpft" = 4, "Einmal geimpft" = 6, "Nicht geimpft" = 5, "Unbekannt" = 6)
+  select("Typ" = 1, "Mindestens doppelt geimpft" = 2, "Einmal geimpft" = 6, "Nicht geimpft" = 5, "Unbekannt" = 6)
 
-id_hist[2:6] <- round(id_hist[2:6]/rowSums(id_hist[2:6])*100,1)
+id_hist[2:5] <- round(id_hist[2:5]/rowSums(id_hist[2:5])*100,1)
 
 update_chart(id = "c041757a38ba1d4e6851aaaee55c6207", 
              data = id_hist, 
