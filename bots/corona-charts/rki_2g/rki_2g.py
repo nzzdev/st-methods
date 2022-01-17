@@ -10,13 +10,13 @@ def corona_rule_given_rki(value: float) -> str:
     if value < 0:
         return("")
     elif value < 3:
-        return "Teilw. 2G"
+        return "0"
     elif value < 6:
-        return "2G"
+        return "1"
     elif value < 9:
-        return "2G+"
+        return "2"
     else:
-        return "Teil-Lockdown"
+        return "3"
 
 
 # add corona rule to every RKI value
@@ -27,7 +27,7 @@ def transform_2G_data(data: pd.DataFrame, estimates: pd.Series) -> pd.DataFrame:
         rule = corona_rule_given_rki(value=rki_value)
         corona_rules.append(rule)
         corona_rules_set.add(rule)
-    data['Regel¹'] = corona_rules
+    data['Warn-Stufe'] = corona_rules
 
     country_codes = {
         'Baden-Württemberg': 'DE-BW',
@@ -50,7 +50,7 @@ def transform_2G_data(data: pd.DataFrame, estimates: pd.Series) -> pd.DataFrame:
 
     # add Nowcast estimate to dataframe
     for index, row in data.iterrows():
-        data.loc[index, 'Real²'] = estimates.loc[country_codes[index]]
+        data.loc[index, 'Real¹'] = estimates.loc[country_codes[index]]
 
     return corona_rules_set
 
@@ -58,17 +58,17 @@ def transform_2G_data(data: pd.DataFrame, estimates: pd.Series) -> pd.DataFrame:
 # create options dictionary
 def get_options(rules: set) -> dict:
     colors = {
-        'Teilw. 2G': '#EDECE1',
-        '2G': '#C6D7B8',
-        '2G+': '#8BC5A0',
-        'Teil-Lockdown': '#24B39C'
+        '0': '#EDECE1',
+        '1': '#C6D7B8',
+        '2': '#8BC5A0',
+        '3': '#24B39C'
     }
 
     colorOverwrites = list()
     customCategoriesOrder = list()
 
     position = 1
-    for rule in ['Teilw. 2G', '2G', '2G+', 'Teil-Lockdown']:
+    for rule in ['0', '1', '2', '3']:
         if rule in rules:
             colorOverwrites.append({
                 'textColor': 'dark',
@@ -201,10 +201,10 @@ if __name__ == '__main__':
         # sort RKI values
         # data['RKI-Wert'] = round(data['RKI-Wert'], 1)
         data = data.sort_values(by=['RKI-Wert'], ascending=False)
-        data = data[['Regel¹', 'RKI-Wert', 'Real²']]
+        data = data[['Warn-Stufe', 'RKI-Wert', 'Real¹']]
 
         # run function
-        update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='¹ Bis 19. 3. sind strengere Regeln erlaubt.<br>² Schätzung der LMU München inklusive Nachmeldungen.<br><br>Stand: ' +
+        update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='¹ Schätzung der LMU München inklusive Nachmeldungen.<br><br>Stand: ' +
                      timestamp_str, data=data, options=get_options(corona_rules_set))
         update_chart(id='590776db9b66058b024b8dff27bfb8f6',
                      data=datachart, notes='Stand: ' + timestamp_str)
