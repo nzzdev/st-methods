@@ -254,11 +254,11 @@ forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
  
 forJson_3$chartData <- list(roll_ch_bag_death)
 
-print(getwd())
 if (!(file.exists("./data/"))){
-  print("does not exists")
+  print("Create Folder ./data")
   dir.create("./data/")
 }
+
 z <- toJSON(rbind_pages(list(forJson_1, forJson_2, forJson_3)), pretty = T)
 write(z, "./data/dashboard_ch.json")
 
