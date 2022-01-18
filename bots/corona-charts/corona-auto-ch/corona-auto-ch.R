@@ -263,17 +263,17 @@ z <- toJSON(rbind_pages(list(forJson_1, forJson_2, forJson_3)), pretty = T)
 write(z, "./data/dashboard_ch.json")
 
 
-#assets <- list(
- #  list(
-  #   name = "jsonFiles",
-   #  files = list("./data/dashboard_ch.json")
-   #)
- #)
+assets <- list(
+  list(
+    name = "jsonFiles",
+    files = list("./data/dashboard_ch.json")
+  )
+)
  
  
-# #q-cli update
-#update_chart(id = "499935fb791197fd126bda721f15884a",
- #             asset.groups = assets)
+#q-cli update
+update_chart(id = "499935fb791197fd126bda721f15884a",
+             asset.groups = assets)
 
 
 
