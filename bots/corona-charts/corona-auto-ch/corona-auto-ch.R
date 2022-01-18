@@ -165,109 +165,109 @@ update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e",
 
 ### Dashboard ###
 
-bag_cases_dash <- read_csv(bag_data$sources$individual$csv$daily$cases)%>% 
-  select("geoRegion", "datum", "entries", "sumTotal", "pop") %>%
-  filter(datum != max(datum)) #exclude today, because new cases will not be there
-
-bag_deaths_dash <- read_csv(bag_data$sources$individual$csv$daily$death) %>%
-  select("geoRegion", "datum", "entries", "sumTotal") %>%
-  filter(datum != max(datum)) #exclude today
-
-bag_hosps_dash <- read_csv(bag_data$sources$individual$csv$daily$hosp) %>%
-  select("geoRegion", "datum", "entries", "sumTotal") %>%
-  filter(datum != max(datum)) #exclude today
-
-bag_cases_ravg <- bag_cases_dash %>%
-  filter(geoRegion == 'CHFL', datum >= "2020-02-28" & datum <= last(datum)-2) %>%
-  mutate(value = round(rollmean(entries, 7, fill = 0, align = "right"),0)) %>%
-  select("datum", "value") %>%
-  rename(date = datum)
-
-roll_ch_bag_death_hosp_dash <- bag_deaths_dash %>%
-  full_join(bag_hosps_dash, by = c("geoRegion", "datum")) %>%
-  filter(datum >= "2020-02-28" & datum <=  last(datum)-5, geoRegion == 'CHFL')  %>%
-  mutate(hosp_roll = rollmean(entries.y,7,fill = 0, align = "right"),
-         death_roll = rollmean(entries.x,7,fill = 0, align = "right")) %>%
-  select("datum", "hosp_roll", "death_roll") %>%
-  rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
-
-
-roll_ch_bag_hosp <- roll_ch_bag_death_hosp_dash %>%
-  select(datum, Hospitalierungen) %>%
-  filter(datum >= '2020-10-01') %>%
-  rename(date = datum, value = Hospitalierungen)
-
-roll_ch_bag_death <- roll_ch_bag_death_hosp_dash %>%
-  select(datum, `Todesfälle`) %>%
-  filter(datum >= '2020-10-01') %>%
-  rename(date = datum, value = `Todesfälle`)
-
-
-roll_ch_bag_cases_trend <- bag_cases_ravg %>%
-  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
-  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
-                           diff_pct_max < -3 ~ 'fallend',
-                           TRUE ~ 'gleichbleibend',)) 
-
-roll_ch_bag_hosp_trend <- roll_ch_bag_hosp %>%
-  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
-  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend', 
-                           diff_pct_max < -3 ~ 'fallend',
-                           TRUE ~ 'gleichbleibend',)) 
-
-roll_ch_bag_death_trend <- roll_ch_bag_death %>%
-  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
-  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
-                           diff_pct_max < -3 ~ 'fallend',
-                           TRUE ~ 'gleichbleibend',)) 
-
-forJson_1 <- data.frame(indicatorTitle = "Neue Spitaleintritte",
-                        date = Sys.Date(),
-                        indicatorSubtitle = "7-Tage-Schnitt",
-                        value = tmp_hosp$entries_diff_last,
-                        color = "#24b39c",
-                        trend = last(roll_ch_bag_hosp_trend$trend),
-                        chartType = "area")
-
-forJson_1$chartData <- list(roll_ch_bag_hosp)
-
-
-forJson_2 <- data.frame(indicatorTitle = "Neuinfektionen",
-                        date = Sys.Date(),
-                        value = tmp_cases$entries_diff_last,
-                        color = "#e66e4a",
-                        trend = last(roll_ch_bag_cases_trend$trend),
-                        chartType = "area")
-
-forJson_2$chartData <- list(bag_cases_ravg %>% filter(date >= '2020-10-01'))
-
-forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
-                        date = Sys.Date(),
-                        value = tmp_death$entries_diff_last,
-                        color = "#05032d",
-                        trend = last(roll_ch_bag_death_trend$trend),
-                        chartType = "area")
-
-forJson_3$chartData <- list(roll_ch_bag_death)
-
-z <- toJSON(rbind_pages(list(forJson_1, forJson_2, forJson_3)), pretty = T)
-write(z, "./data/dashboard_ch.json")
-
-
-assets <- list(
-  list(
-    name = "jsonFiles",
-    files = list("./data/dashboard_ch.json")
-  )
-)
-
-
-#q-cli update
-update_chart(id = "499935fb791197fd126bda721f15884a",
-             asset.groups = assets)
+# bag_cases_dash <- read_csv(bag_data$sources$individual$csv$daily$cases)%>% 
+#   select("geoRegion", "datum", "entries", "sumTotal", "pop") %>%
+#   filter(datum != max(datum)) #exclude today, because new cases will not be there
+# 
+# bag_deaths_dash <- read_csv(bag_data$sources$individual$csv$daily$death) %>%
+#   select("geoRegion", "datum", "entries", "sumTotal") %>%
+#   filter(datum != max(datum)) #exclude today
+# 
+# bag_hosps_dash <- read_csv(bag_data$sources$individual$csv$daily$hosp) %>%
+#   select("geoRegion", "datum", "entries", "sumTotal") %>%
+#   filter(datum != max(datum)) #exclude today
+# 
+# bag_cases_ravg <- bag_cases_dash %>%
+#   filter(geoRegion == 'CHFL', datum >= "2020-02-28" & datum <= last(datum)-2) %>%
+#   mutate(value = round(rollmean(entries, 7, fill = 0, align = "right"),0)) %>%
+#   select("datum", "value") %>%
+#   rename(date = datum)
+# 
+# roll_ch_bag_death_hosp_dash <- bag_deaths_dash %>%
+#   full_join(bag_hosps_dash, by = c("geoRegion", "datum")) %>%
+#   filter(datum >= "2020-02-28" & datum <=  last(datum)-5, geoRegion == 'CHFL')  %>%
+#   mutate(hosp_roll = rollmean(entries.y,7,fill = 0, align = "right"),
+#          death_roll = rollmean(entries.x,7,fill = 0, align = "right")) %>%
+#   select("datum", "hosp_roll", "death_roll") %>%
+#   rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
+# 
+# 
+# roll_ch_bag_hosp <- roll_ch_bag_death_hosp_dash %>%
+#   select(datum, Hospitalierungen) %>%
+#   filter(datum >= '2020-10-01') %>%
+#   rename(date = datum, value = Hospitalierungen)
+# 
+# roll_ch_bag_death <- roll_ch_bag_death_hosp_dash %>%
+#   select(datum, `Todesfälle`) %>%
+#   filter(datum >= '2020-10-01') %>%
+#   rename(date = datum, value = `Todesfälle`)
+# 
+# 
+# roll_ch_bag_cases_trend <- bag_cases_ravg %>%
+#   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+#   mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+#   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
+#                            diff_pct_max < -3 ~ 'fallend',
+#                            TRUE ~ 'gleichbleibend',)) 
+# 
+# roll_ch_bag_hosp_trend <- roll_ch_bag_hosp %>%
+#   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+#   mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+#   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend', 
+#                            diff_pct_max < -3 ~ 'fallend',
+#                            TRUE ~ 'gleichbleibend',)) 
+# 
+# roll_ch_bag_death_trend <- roll_ch_bag_death %>%
+#   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+#   mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+#   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
+#                            diff_pct_max < -3 ~ 'fallend',
+#                            TRUE ~ 'gleichbleibend',)) 
+# 
+# forJson_1 <- data.frame(indicatorTitle = "Neue Spitaleintritte",
+#                         date = Sys.Date(),
+#                         indicatorSubtitle = "7-Tage-Schnitt",
+#                         value = tmp_hosp$entries_diff_last,
+#                         color = "#24b39c",
+#                         trend = last(roll_ch_bag_hosp_trend$trend),
+#                         chartType = "area")
+# 
+# forJson_1$chartData <- list(roll_ch_bag_hosp)
+# 
+# 
+# forJson_2 <- data.frame(indicatorTitle = "Neuinfektionen",
+#                         date = Sys.Date(),
+#                         value = tmp_cases$entries_diff_last,
+#                         color = "#e66e4a",
+#                         trend = last(roll_ch_bag_cases_trend$trend),
+#                         chartType = "area")
+# 
+# forJson_2$chartData <- list(bag_cases_ravg %>% filter(date >= '2020-10-01'))
+# 
+# forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
+#                         date = Sys.Date(),
+#                         value = tmp_death$entries_diff_last,
+#                         color = "#05032d",
+#                         trend = last(roll_ch_bag_death_trend$trend),
+#                         chartType = "area")
+# 
+# forJson_3$chartData <- list(roll_ch_bag_death)
+# 
+# z <- toJSON(rbind_pages(list(forJson_1, forJson_2, forJson_3)), pretty = T)
+# write(z, "./data/dashboard_ch.json")
+# 
+# 
+# assets <- list(
+#   list(
+#     name = "jsonFiles",
+#     files = list("./data/dashboard_ch.json")
+#   )
+# )
+# 
+# 
+# #q-cli update
+# update_chart(id = "499935fb791197fd126bda721f15884a",
+#              asset.groups = assets)
 
 
 
