@@ -9,6 +9,7 @@ library(zoo)
 
 # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+# setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
 # import helper functions
 source("./helpers.R")
 
@@ -162,12 +163,126 @@ update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e",
              data = df_overview,
              subtitle = subtitle)
 
+
+### Dashboard ###
+
+bag_cases_dash <- read_csv(bag_data$sources$individual$csv$daily$cases)%>%
+  select("geoRegion", "datum", "entries", "sumTotal", "pop") %>%
+  filter(datum != max(datum)) #exclude today, because new cases will not be there
+ 
+bag_deaths_dash <- read_csv(bag_data$sources$individual$csv$daily$death) %>%
+  select("geoRegion", "datum", "entries", "sumTotal") %>%
+  filter(datum != max(datum)) #exclude today
+ 
+bag_hosps_dash <- read_csv(bag_data$sources$individual$csv$daily$hosp) %>%
+  select("geoRegion", "datum", "entries", "sumTotal") %>%
+  filter(datum != max(datum)) #exclude today
+ 
+bag_cases_ravg <- bag_cases_dash %>%
+  filter(geoRegion == 'CHFL', datum >= "2020-02-28" & datum <= last(datum)-2) %>%
+  mutate(value = round(rollmean(entries, 7, fill = 0, align = "right"),0)) %>%
+  select("datum", "value") %>%
+  rename(date = datum)
+ 
+roll_ch_bag_death_hosp_dash <- bag_deaths_dash %>%
+  full_join(bag_hosps_dash, by = c("geoRegion", "datum")) %>%
+  filter(datum >= "2020-02-28" & datum <=  last(datum)-5, geoRegion == 'CHFL')  %>%
+  mutate(hosp_roll = rollmean(entries.y,7,fill = 0, align = "right"),
+     death_roll = rollmean(entries.x,7,fill = 0, align = "right")) %>%
+  select("datum", "hosp_roll", "death_roll") %>%
+  rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
+ 
+ 
+roll_ch_bag_hosp <- roll_ch_bag_death_hosp_dash %>%
+  select(datum, Hospitalierungen) %>%
+  filter(datum >= '2020-10-01') %>%
+  rename(date = datum, value = Hospitalierungen)
+ 
+roll_ch_bag_death <- roll_ch_bag_death_hosp_dash %>%
+  select(datum, `Todesfälle`) %>%
+  filter(datum >= '2020-10-01') %>%
+  rename(date = datum, value = `Todesfälle`)
+ 
+ 
+roll_ch_bag_cases_trend <- bag_cases_ravg %>%
+  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
+                     diff_pct_max < -3 ~ 'fallend',
+                     TRUE ~ 'gleichbleibend',))
+ 
+roll_ch_bag_hosp_trend <- roll_ch_bag_hosp %>%
+  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
+                      diff_pct_max < -3 ~ 'fallend',
+                      TRUE ~ 'gleichbleibend',))
+ 
+roll_ch_bag_death_trend <- roll_ch_bag_death %>%
+  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
+                      diff_pct_max < -3 ~ 'fallend',
+                      TRUE ~ 'gleichbleibend',))
+ 
+forJson_1 <- data.frame(indicatorTitle = "Neue Spitaleintritte",
+                   date = Sys.Date(),
+                   indicatorSubtitle = "7-Tage-Schnitt",
+                   value = tmp_hosp$entries_diff_last,
+                   color = "#24b39c",
+                   trend = last(roll_ch_bag_hosp_trend$trend),
+                   chartType = "area")
+ 
+forJson_1$chartData <- list(roll_ch_bag_hosp)
+ 
+ 
+forJson_2 <- data.frame(indicatorTitle = "Neuinfektionen",
+                  date = Sys.Date(),
+                  value = tmp_cases$entries_diff_last,
+                  color = "#e66e4a",
+                  trend = last(roll_ch_bag_cases_trend$trend),
+                  chartType = "area")
+ 
+forJson_2$chartData <- list(bag_cases_ravg %>% filter(date >= '2020-10-01'))
+ 
+forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
+                  date = Sys.Date(),
+                  value = tmp_death$entries_diff_last,
+                  color = "#05032d",
+                  trend = last(roll_ch_bag_death_trend$trend),
+                  chartType = "area")
+ 
+forJson_3$chartData <- list(roll_ch_bag_death)
+
+if (!(file.exists("./data/"))){
+  print("Create Folder ./data")
+  dir.create("./data/")
+}
+
+z <- toJSON(rbind_pages(list(forJson_1, forJson_2, forJson_3)), pretty = T)
+write(z, "./data/dashboard_ch.json")
+
+
+assets <- list(
+  list(
+    name = "jsonFiles",
+    files = list("./data/dashboard_ch.json")
+  )
+)
+ 
+ 
+#q-cli update
+update_chart(id = "499935fb791197fd126bda721f15884a",
+             asset.groups = assets)
+
+
+
 # Total cases in CH since 2020-02-24 and recovery calculation
 bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
   filter(geoRegion == 'CHFL') %>%
   mutate(Infizierte = sumTotal.x - sumTotal.y) %>%
   rename("Tote" = `sumTotal.y`) %>%
-  select(datum, Infizierte, Tote) %>%
+  select("datum", "Infizierte", "Tote") %>%
   mutate(`Genesene (Schätzung)` = (lag(Infizierte,10, default = 0)) ) %>%
     #`Genesene (Schätzung)` = ((lag(Infizierte,10, default = 0)) * 0.75) + 
      #      ((lag(Infizierte,20, default = 0)) * 0.10) + 
@@ -192,7 +307,7 @@ update_chart(id = "9c87f52098e02f80740ec4a3743615b2",
 bag_cases_ravg <- bag_cases %>%
   filter(geoRegion == 'CHFL', datum <= last(datum)-2) %>%
   mutate(ravg_cases = round(rollmean(entries, 7, fill = 0, align = "right"),0)) %>%
-  select(datum, ravg_cases) 
+  select("datum", "ravg_cases") 
 
 #q-cli update
 update_chart(id = "93b53396ee7f90b1271f620a0472c112", data = bag_cases_ravg)
@@ -201,7 +316,7 @@ update_chart(id = "93b53396ee7f90b1271f620a0472c112", data = bag_cases_ravg)
 
 bag_testPcrAntigen_abs <- bag_testPcrAntigen %>% 
   filter(datum > "2020-11-01", geoRegion == 'CHFL') %>%
-  select(datum, entries, nachweismethode) %>%
+  select("datum", "entries", "nachweismethode") %>%
   spread(nachweismethode, entries) %>%
   mutate("Antigen-Schnelltests" = round(rollmean(Antigen_Schnelltest, 7, fill = 0, align = "right"), 1), 
          "PCR-Tests" = round(rollmean(PCR, 7, na.pad = TRUE, align = "right"), 1)) %>%
@@ -218,7 +333,7 @@ bag_tests_pct <- bag_testPcrAntigen %>%
   filter(datum > "2020-11-01", geoRegion == 'CHFL') %>%
   group_by(nachweismethode) %>%
   mutate(pct = round(rollmean(pos_anteil, 7, na.pad = TRUE, align = "right"), 1)) %>%
-  select(nachweismethode, datum, pct) %>%
+  select("nachweismethode", "datum", "pct") %>%
   spread(nachweismethode, pct) %>%
   drop_na()  %>%
   rename("Antigen-Schnelltests" = Antigen_Schnelltest, "PCR-Tests" = PCR) %>%
@@ -231,7 +346,7 @@ update_chart(id = "e18ed50b4fad7ada8063e3a908eb77ac", data = bag_tests_pct)
 bag_age  <- bag_cases_age %>%
   filter(!is.na(datum), altersklasse_covid19 != "Unbekannt", geoRegion == "CHFL") %>%
   mutate(datum = paste0(substr(datum, 1, 4), "-W", substr(datum, 5, 6))) %>%
-  select(datum, altersklasse_covid19, entries) %>%
+  select("datum", "altersklasse_covid19", "entries") %>%
   spread(altersklasse_covid19, entries) %>%
   mutate(`0-19` = `0 - 9` +  `10 - 19`,
          `20-39` = `20 - 29` +  `30 - 39`,
@@ -254,7 +369,7 @@ bag_kanton_choro <- bag_cases %>%
   summarise(sum = sum(entries), .groups = "drop") %>%
   mutate(per100k = round(100000*sum/pop, 0)) %>%
   arrange(geoRegion) %>%
-  select(geoRegion, per100k)
+  select("geoRegion", "per100k")
 
 bag_kanton_choro_notes <- paste0("Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(bag_cases$datum), format = "%d. %m. %Y")))
 
@@ -271,7 +386,7 @@ roll_ch_bag_death_hosp <- bag_cases %>%
   mutate(entries.y = replace_na(entries.y, 0),
          hosp_roll = rollmean(entries,7,fill = 0, align = "right"),
          death_roll = rollmean(entries.y,7,fill = 0, align = "right")) %>%
-  select(datum, hosp_roll, death_roll) %>%
+  select("datum", "hosp_roll", "death_roll") %>%
   rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
 
 update_chart(id = "2e86418698ad77f1247bedf99b771e99", data = roll_ch_bag_death_hosp)

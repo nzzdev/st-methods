@@ -1,6 +1,5 @@
 import pandas as pd
 import json
-import gspread
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 from time import sleep
@@ -28,36 +27,10 @@ def download_data(url):  # function for data download
         print('Other URL error:', e.reason)
 
 
-def download_sheet(sh, name):  # function for sheet download
-    try:
-        wsh = sh.worksheet(name)
-        return wsh
-    except gspread.exceptions.APIError as e:
-        if e.response.status_code == 429:
-            sleep(5)
-            try:
-                wsh = sh.worksheet(name)
-                return wsh
-            except gspread.exceptions.APIError as e:
-                print('Script failed twice (blacklisted?):', e)
-        elif e.response.status_code > 499:
-            sleep(20)
-            try:
-                wsh = sh.worksheet(name)
-                return wsh
-            except gspread.exceptions.APIError as e:
-                print('Script failed twice (check source):', e)
-        else:
-            print('Other HTTP error:', e)
-    except gspread.exceptions.APIError as e:
-        print('Other URL error:', e)
-
-
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", asset_groups=[]):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", asset_groups=[], files=[]):  # Q helper function
     # read qConfig file
     json_file = open('../q.config.json')
     qConfig = json.load(json_file)
-
     # update chart properties
     for item in qConfig.get('items'):
         for environment in item.get('environments'):
@@ -85,6 +58,8 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
                             'name': g['name']
                         })
                     item['item']['assetGroups'] = groups
+                if len(files) > 0:
+                    item['item']['files'] = files
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
                 if options != '':
