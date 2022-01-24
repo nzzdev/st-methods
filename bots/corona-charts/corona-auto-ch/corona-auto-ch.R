@@ -571,7 +571,7 @@ id_rel_age_q <- id_rel_age %>%
   select(-entries, -pop) %>% 
   spread(vaccination_status, per100k) %>%
   select(altersklasse_covid19, not_vaccinated, fully_vaccinated) %>%
-  filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt")
+  filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt" & altersklasse_covid19 != "0 - 9")
 
 names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Mindestens zweimal geimpft")
 
