@@ -53,7 +53,7 @@ update_chart <- function(id, title = "", subtitle = "", notes = "", data = list(
           qConfig$items[[index]]$item$assetGroups <- list(gr)
         }
 
-        if(length(files) > 0) {
+        if(length(files) > 0) {
           qConfig$items[[index]]$item$files <- files
         }
 
