@@ -213,13 +213,15 @@ if __name__ == '__main__':
         dicts.append(meta_cases)
         dicts.append(meta_deaths)
 
-        with open('./dashboard_de.json', 'w') as fp:
+        # save data
+        if not os.path.exists('data'):
+            os.makedirs('data')
+        with open('./data/dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, ensure_ascii=True, indent=4)
-        dicts = [{"path": "./dashboard_de.json"}]
+        file = [{"path": "./data/dashboard_de.json"}]
 
         # run function
-        update_chart(id='499935fb791197fd126bda721f15884a', files=dicts)
-        fp.close()
+        update_chart(id='499935fb791197fd126bda721f15884a', files=file)
 
     except:
         raise
