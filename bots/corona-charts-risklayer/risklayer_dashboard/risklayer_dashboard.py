@@ -213,9 +213,9 @@ if __name__ == '__main__':
         dicts.append(meta_cases)
         dicts.append(meta_deaths)
 
-        with open('dashboard_de.json', 'w') as fp:
+        with open('./dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, ensure_ascii=True, indent=4)
-        dicts = [{"path": "dashboard_de.json"}]
+        dicts = [{"path": "./dashboard_de.json"}]
 
         # run function
         update_chart(id='499935fb791197fd126bda721f15884a', files=dicts)
