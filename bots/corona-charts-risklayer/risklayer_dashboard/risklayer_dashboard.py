@@ -220,6 +220,7 @@ if __name__ == '__main__':
         with open('./data/dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, ensure_ascii=True, indent=4)
         file = [{"path": "./data/dashboard_de.json"}]
+        print(os.path.abspath('./data/dashboard_de.json'))
 
         # run function
         update_chart(id='499935fb791197fd126bda721f15884a', files=file)
