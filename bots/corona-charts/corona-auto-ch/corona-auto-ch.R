@@ -9,7 +9,7 @@ library(zoo)
 
 # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
- setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
+# setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
 # import helper functions
 source("./helpers.R")
 
