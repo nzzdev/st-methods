@@ -62,8 +62,11 @@ if __name__ == '__main__':
         trend_deaths = get_sheet(wsh, 'U:U')
         df4 = pd.DataFrame(data=trend_deaths)
         # AC:AC new ICU patients
-        new_patients = get_sheet(wsh, 'AC:AC')
-        df5 = pd.DataFrame(data=new_patients)
+        # new_patients = get_sheet(wsh, 'AC:AC')
+        # df5 = pd.DataFrame(data=new_patients)
+        # Z:Z ICU patients
+        diff_patients = get_sheet(wsh, 'Z:Z')
+        df5 = pd.DataFrame(data=diff_patients)
         # E:E new cases
         new_cases = get_sheet(wsh, 'E:E')
         df6 = pd.DataFrame(data=new_cases)
@@ -89,7 +92,7 @@ if __name__ == '__main__':
         cols[1] = 'Trend ICU'
         cols[2] = 'Trend Fälle'
         cols[3] = 'Trend Tote'
-        cols[4] = 'Neu ICU'
+        cols[4] = 'Diff ICU'
         cols[5] = 'Neu Fälle'
         cols[6] = 'Neu Tote'
         df_meta.columns = cols
@@ -107,7 +110,7 @@ if __name__ == '__main__':
             ',', '.', regex=False).str.replace('%', '', regex=False)
         df_meta['Trend Tote'] = df_meta['Trend Tote'].str.replace(
             ',', '.', regex=False).str.replace('%', '', regex=False)
-        df_meta['Neu ICU'] = df_meta['Neu ICU'].str.replace(
+        df_meta['Diff ICU'] = df_meta['Diff ICU'].str.replace(
             '.', '', regex=False)
         df_meta['Neu Fälle'] = df_meta['Neu Fälle'].str.replace(
             '.', '', regex=False)
@@ -119,7 +122,7 @@ if __name__ == '__main__':
         # df_meta.dropna(subset=['Trend ICU'], inplace=True)
         df_meta.dropna(subset=['Trend Fälle'], inplace=True)
         df_meta.dropna(subset=['Trend Tote'], inplace=True)
-        # df_meta.dropna(subset=['Neu ICU'], inplace=True)
+        # df_meta.dropna(subset=['Diff ICU'], inplace=True)
         df_meta.dropna(subset=['Neu Fälle'], inplace=True)
         df_meta.dropna(subset=['Neu Tote'], inplace=True)
 
@@ -132,7 +135,7 @@ if __name__ == '__main__':
         df_meta['Trend ICU'] = df_meta['Trend ICU'].astype(float)  # nan
         df_meta['Trend Fälle'] = df_meta['Trend Fälle'].astype(float)
         df_meta['Trend Tote'] = df_meta['Trend Tote'].astype(float)
-        df_meta['Neu ICU'] = df_meta['Neu ICU'].astype(float)  # nan
+        df_meta['Diff ICU'] = df_meta['Diff ICU'].astype(int)
         df_meta['Neu Fälle'] = df_meta['Neu Fälle'].astype(int)
         df_meta['Neu Tote'] = df_meta['Neu Tote'].astype(int)
 
@@ -167,12 +170,16 @@ if __name__ == '__main__':
             return df_meta
         df_meta = df_meta.apply(replace_vals, axis=1)
 
+        # calculate decrease/increase in ICU patients
+        df_meta.loc[df_meta.index[-1], 'Diff ICU'] = df_meta.loc[df_meta.index[-1],
+                                                                 'Diff ICU'] - df_meta.loc[df_meta.index[-2], 'Diff ICU']
+
         # get last values of df_meta as objects
         df_meta = df_meta.iloc[-1]
         trend_icu = df_meta['Trend ICU']
         trend_cases = df_meta['Trend Fälle']
         trend_deaths = df_meta['Trend Tote']
-        diff_icu = df_meta['Neu ICU']
+        diff_icu = df_meta['Diff ICU']
         diff_cases = df_meta['Neu Fälle']
         diff_deaths = df_meta['Neu Tote']
 
@@ -198,7 +205,7 @@ if __name__ == '__main__':
         trend_icu = 'fallend'
         trend_cases = 'steigend'
         trend_deaths = 'fallend'
-        meta_icu = {'indicatorTitle': 'Intensivpatienten', 'date': timestamp_str,
+        meta_icu = {'indicatorTitle': 'Intensivpatienten', 'date': timestamp_str, 'indicatorSubtitle': 'Belegte Betten',
                     'value': int(diff_icu), 'color': '#24b39c', 'trend': trend_icu, 'chartType': 'area'}
         meta_cases = {'indicatorTitle': 'Neuinfektionen', 'date': timestamp_str, 'indicatorSubtitle': '7-Tage-Schnitt',
                       'value': int(diff_cases), 'color': '#e66e4a', 'trend': trend_cases, 'chartType': 'area'}
@@ -218,7 +225,8 @@ if __name__ == '__main__':
         if not os.path.exists('data'):
             os.makedirs('data')
         with open('./data/dashboard_de.json', 'w') as fp:
-            json.dump(dicts, fp, ensure_ascii=True, indent=4)
+            json.dump(dicts, fp, indent=4)
+        fp.close()
         file = [{
             "loadSyncBeforeInit": True,
             "file": {
