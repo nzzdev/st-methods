@@ -1,7 +1,7 @@
 library(jsonlite)
 
 # Q helper function
-update_chart <- function(id, title = "", subtitle = "", notes = "", data = list(), asset.groups = list()) {
+update_chart <- function(id, title = "", subtitle = "", notes = "", data = list(), asset.groups = list(), files = list()) {
   # read qConfig file
   qConfig <- fromJSON("./q.config.json", simplifyDataFrame = FALSE)
 
@@ -51,8 +51,12 @@ update_chart <- function(id, title = "", subtitle = "", notes = "", data = list(
             }
           }
           qConfig$items[[index]]$item$assetGroups <- list(gr)
-          
         }
+
+        if(length(files) > 0) {
+          qConfig$items[[index]]$item$files <- files
+        }
+
         print(paste0("Successfully updated item with id ", id))
       }
     }
