@@ -215,14 +215,14 @@ if __name__ == '__main__':
         dicts.append(meta_deaths)
 
         # save data
-        if not os.path.exists('risklayer_dashboard'):
-            os.makedirs('risklayer_dashboard')
-        with open('./risklayer_dashboard/dashboard_de.json', 'w') as fp:
+        if not os.path.exists('data'):
+            os.makedirs('data')
+        with open('./data/dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, ensure_ascii=True, indent=4)
         file = [{
             "loadSyncBeforeInit": "true",
             "file": {
-                "path": "./risklayer_dashboard/dashboard_de.json"
+                "path": "./risklayer_dashboard/data/dashboard_de.json"
             }
         }]
 
