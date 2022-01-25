@@ -220,7 +220,7 @@ if __name__ == '__main__':
         with open('./data/dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, ensure_ascii=True, indent=4)
         file = [{
-            "loadSyncBeforeInit": "true",
+            "loadSyncBeforeInit": True,
             "file": {
                 "path": "./risklayer_dashboard/data/dashboard_de.json"
             }
