@@ -135,7 +135,7 @@ if __name__ == '__main__':
         df_meta['Trend ICU'] = df_meta['Trend ICU'].astype(float)  # nan
         df_meta['Trend Fälle'] = df_meta['Trend Fälle'].astype(float)
         df_meta['Trend Tote'] = df_meta['Trend Tote'].astype(float)
-        df_meta['Diff ICU'] = df_meta['Diff ICU'].astype(int)
+        df_meta['Diff ICU'] = df_meta['Diff ICU'].astype(float)  # nan
         df_meta['Neu Fälle'] = df_meta['Neu Fälle'].astype(int)
         df_meta['Neu Tote'] = df_meta['Neu Tote'].astype(int)
 
