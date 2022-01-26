@@ -4,135 +4,6 @@
       "environments": [
         {
           "name": "production",
-          "id": "dd4b1de66b3907bb65164669b0d3353f"
-        }
-      ],
-      "item": {
-        "title": "",
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "31ebc60a92f9c59ce4023dc0e8dfec69"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "34937bf850cf702a02c3648cdf8c02b9"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "ab97925bcc5055b33011fb4d3326e163"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "ca6ad78976cf6de104f01ab6f59ce114"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "e8f976e14bac8280d4b908f99eeb409a"
-        }
-      ],
-      "item": {
-        "title": "",
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "530c9a2b291a3ac848e9dc471a762204"
-        }
-      ],
-      "item": {
-        "subtitle": "",
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "4c6603c3b465e2d11eb5b22d736dadcc"
-        }
-      ],
-      "item": {
-        "subtitle": "",
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "245e5a30acb9ffa8e53b336e6bda032b"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": {
-          "table": []
-        }
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "050befd50ccb2f5f9080d4bba4df423d"
-        }
-      ],
-      "item": {
-        "subtitle": "",
-        "notes": "",
-        "data": {
-          "table": []
-        }
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "79af3c6593df15827ccb5268a7aff0be"
         }
       ],
@@ -727,44 +598,7 @@
       "environments": [
         {
           "name": "production",
-          "id": "81caa0242fa168d128995977cd4026a8"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "81caa0242fa168d128995977cd45268b"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": {
-          "table": []
-        }
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "32933cfe729928ecb4906a82bdcc4f9f"
-        }
-      ],
-      "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "fcd18326e9d6d215efe2e522678af018"
         }
       ],
       "item": {
@@ -790,17 +624,6 @@
       "environments": [
         {
           "name": "production",
-          "id": "590776db9b66058b024b8dff27bfb8f6"
-        }
-      ],
-      "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "fdf83ddd0451dc0c0d09c18769f1abd5"
         }
       ],
@@ -808,17 +631,6 @@
         "data": {
           "table": []
         }
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "499935fb791197fd126bda721f15884a"
-        }
-      ],
-      "item": {
-        "data":  []
       }
     }
   ]
