@@ -676,7 +676,7 @@ id_rel_age <- ch_hosp_vacc_age %>%
   select(1:4,6) %>%
   filter(date %in% tail(unique(ch_hosp_vacc_age$date), 3)) %>%
   group_by(altersklasse_covid19, vaccination_status) %>%
-  summarise(entries = sum(entries), pop = first(pop)) %>%
+  summarise(entries = sum(entries), pop = last(pop)) %>%
   mutate(per100k = round(100000*entries/pop, 1))
 
 id_rel_age_q <- id_rel_age %>%
