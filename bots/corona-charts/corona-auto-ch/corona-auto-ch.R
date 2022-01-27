@@ -254,26 +254,23 @@ forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
  
 forJson_3$chartData <- list(roll_ch_bag_death)
 
-if (!(file.exists("./data/"))){
-  print("Create Folder ./data")
+if (!(file.exists("./data/"))) {
   dir.create("./data/")
 }
 
 z <- toJSON(rbind_pages(list(forJson_1, forJson_2, forJson_3)), pretty = T)
 write(z, "./data/dashboard_ch.json")
 
-
-assets <- list(
+files <- list(
   list(
-    name = "jsonFiles",
-    files = list("./data/dashboard_ch.json")
+    file = list(
+      path = "./data/dashboard_ch.json"
+    )
   )
 )
  
- 
 #q-cli update
-update_chart(id = "499935fb791197fd126bda721f15884a",
-             asset.groups = assets)
+update_chart(id = "499935fb791197fd126bda721f15884a", files = files)
 
 
 
