@@ -65,4 +65,4 @@ jobs:
           status: ${{ job.status }}
           notify_when: "failure"
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_DE_SLACK }}
