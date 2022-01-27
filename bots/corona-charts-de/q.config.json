@@ -176,17 +176,6 @@
       "item": {
         "data": []
       }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "499935fb791197fd126bda721f15884a"
-        }
-      ],
-      "item": {
-        "data": []
-      }
     }
   ]
 }
