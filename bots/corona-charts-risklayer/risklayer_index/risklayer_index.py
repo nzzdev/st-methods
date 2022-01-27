@@ -105,7 +105,7 @@ if __name__ == '__main__':
 
         # convert numeric strings to int/float
         df['Intensiv'] = df['Intensiv'].astype(int)
-        df['Beatmet'] = df['Beatmet'].astype(int)
+        df['Beatmet'] = df['Beatmet'].astype(float)  # nan
         df_cases['Fälle'] = df_cases['Fälle'].astype(float).round().astype(int)
         df_cases['Tote'] = df_cases['Tote'].astype(float).round().astype(int)
 
