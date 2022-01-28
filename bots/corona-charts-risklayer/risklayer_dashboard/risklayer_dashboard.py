@@ -44,10 +44,10 @@ if __name__ == '__main__':
         # Z:Z ICU patients
         icu = get_sheet(wsh, 'Z:Z')
         df2 = pd.DataFrame(data=icu)
-        # F:F new cases 7 day mvg avg
+        # F:F new cases 7-day mvg avg
         cases = get_sheet(wsh, 'F:F')
         df3 = pd.DataFrame(data=cases)
-        # S:S new deaths 7 day mvg avg
+        # S:S new deaths 7-day mvg avg
         deaths = get_sheet(wsh, 'T:T')
         df4 = pd.DataFrame(data=deaths)
         df = pd.concat([df1, df2, df3, df4], axis=1)
@@ -55,10 +55,10 @@ if __name__ == '__main__':
         # AA:AA ICU patients trend
         trend_icu = get_sheet(wsh, 'AA:AA')
         df2 = pd.DataFrame(data=trend_icu)
-        # G:G new cases trend
-        trend_cases = get_sheet(wsh, 'G:G')
+        # H:H new cases 7-day mvg avg trend
+        trend_cases = get_sheet(wsh, 'H:H')
         df3 = pd.DataFrame(data=trend_cases)
-        # U:U new deaths trend
+        # U:U new deaths 7-day mvg avg trend
         trend_deaths = get_sheet(wsh, 'U:U')
         df4 = pd.DataFrame(data=trend_deaths)
         # AC:AC new ICU patients
