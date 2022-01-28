@@ -26,6 +26,8 @@ if __name__ == '__main__':
         csv = './data/Aktuell_Deutschland_Impfquoten_COVID-19.csv'
         dfall = pd.read_csv(csv, encoding='utf-8',
                             usecols=['Datum', 'Impfquote_gesamt_min1', 'Impfquote_gesamt_voll', 'Impfquote_gesamt_boost'])
+        df5 = pd.read_csv(
+            csv, encoding='utf-8', usecols=['Datum', 'Impfquote_05bis11_min1', 'Impfquote_05bis11_voll'])
         df12 = pd.read_csv(
             csv, encoding='utf-8', usecols=['Datum', 'Impfquote_12bis17_min1', 'Impfquote_12bis17_voll', 'Impfquote_12bis17_boost'])
         df18 = pd.read_csv(
@@ -35,6 +37,7 @@ if __name__ == '__main__':
 
         # extract first rows (=Germany)
         dfall = dfall.iloc[[0]].reset_index(drop=True)
+        df5 = df5.iloc[[0]].reset_index(drop=True)
         df12 = df12.iloc[[0]].reset_index(drop=True)
         df18 = df18.iloc[[0]].reset_index(drop=True)
         df60 = df60.iloc[[0]].reset_index(drop=True)
@@ -47,6 +50,7 @@ if __name__ == '__main__':
 
         # rename headers
         dfall.loc[0, 'Datum'] = 'Alle'
+        df5.loc[0, 'Datum'] = '5-11'
         df12.loc[0, 'Datum'] = '12-17'
         df18.loc[0, 'Datum'] = '18+'
         df60.loc[0, 'Datum'] = '60+'
@@ -57,6 +61,8 @@ if __name__ == '__main__':
         # rename columns
         dfall = dfall.rename(columns={'Datum': '', 'Impfquote_gesamt_min1': 'Erste Dose',
                                       'Impfquote_gesamt_voll': 'Doppelt geimpft', 'Impfquote_gesamt_boost': 'Mit Booster'})
+        df5 = df5.rename(columns={
+            'Datum': '', 'Impfquote_05bis11_min1': 'Erste Dose', 'Impfquote_05bis11_voll': 'Doppelt geimpft'})
         df12 = df12.rename(columns={
             'Datum': '', 'Impfquote_12bis17_min1': 'Erste Dose', 'Impfquote_12bis17_voll': 'Doppelt geimpft', 'Impfquote_12bis17_boost': 'Mit Booster'})
         df18 = df18.rename(columns={
@@ -64,9 +70,10 @@ if __name__ == '__main__':
         df60 = df60.rename(columns={
             'Datum': '', 'Impfquote_60plus_min1': 'Erste Dose', 'Impfquote_60plus_voll': 'Doppelt geimpft', 'Impfquote_60plus_boost': 'Mit Booster'})
 
-        # combine datasets
-        df = pd.concat([dfall, df60, df18, df12],
+        # combine datasets, replace nan in column with no boosters
+        df = pd.concat([dfall, df60, df18, df12, df5],
                        ignore_index=True)
+        df.loc[5, 'Mit Booster'] = 0
 
         # do calculations for stacked bar chart
         df['Erste Dose'] = (df['Erste Dose'] -
