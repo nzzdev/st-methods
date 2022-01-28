@@ -67,11 +67,11 @@ if __name__ == '__main__':
         # Z:Z ICU patients
         diff_patients = get_sheet(wsh, 'Z:Z')
         df5 = pd.DataFrame(data=diff_patients)
-        # E:E new cases
-        new_cases = get_sheet(wsh, 'E:E')
+        # F:F new deaths 7-day mvg avg
+        new_cases = get_sheet(wsh, 'F:F')
         df6 = pd.DataFrame(data=new_cases)
-        # S:S new deaths
-        new_deaths = get_sheet(wsh, 'S:S')
+        # T:T new deaths 7-day mvg avg
+        new_deaths = get_sheet(wsh, 'T:T')
         df7 = pd.DataFrame(data=new_deaths)
         df_meta = pd.concat([df1, df2, df3, df4, df5, df6, df7], axis=1)
 
@@ -113,9 +113,9 @@ if __name__ == '__main__':
         df_meta['Diff ICU'] = df_meta['Diff ICU'].str.replace(
             '.', '', regex=False)
         df_meta['Neu Fälle'] = df_meta['Neu Fälle'].str.replace(
-            '.', '', regex=False)
+            '.', '', regex=False).str.replace(',', '.', regex=False)
         df_meta['Neu Tote'] = df_meta['Neu Tote'].str.replace(
-            '.', '', regex=False)
+            '.', '', regex=False).str.replace(',', '.', regex=False)
         df.dropna(subset=['Neuinfektionen'], inplace=True)
         df.dropna(subset=['Neue Todesfälle'], inplace=True)
         # df.dropna(subset=['Intensivpatienten'], inplace=True)
@@ -136,8 +136,10 @@ if __name__ == '__main__':
         df_meta['Trend Fälle'] = df_meta['Trend Fälle'].astype(float)
         df_meta['Trend Tote'] = df_meta['Trend Tote'].astype(float)
         df_meta['Diff ICU'] = df_meta['Diff ICU'].astype(float)  # nan
-        df_meta['Neu Fälle'] = df_meta['Neu Fälle'].astype(int)
-        df_meta['Neu Tote'] = df_meta['Neu Tote'].astype(int)
+        df_meta['Neu Fälle'] = df_meta['Neu Fälle'].astype(
+            float).round().astype(int)
+        df_meta['Neu Tote'] = df_meta['Neu Tote'].astype(
+            float).round().astype(int)
 
         # check if last row in ICU column is not nan, then shift cases and deaths
         if pd.notna(df['Intensivpatienten'].iloc[-1]) == True:
