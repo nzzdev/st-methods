@@ -104,7 +104,7 @@ if __name__ == '__main__':
             method='slinear', fill_value='extrapolate', limit_direction='backward')
 
         # convert numeric strings to int/float
-        df['Intensiv'] = df['Intensiv'].astype(int)
+        df['Intensiv'] = df['Intensiv'].astype(float)  # nan
         df['Beatmet'] = df['Beatmet'].astype(float)  # nan
         df_cases['Fälle'] = df_cases['Fälle'].astype(float).round().astype(int)
         df_cases['Tote'] = df_cases['Tote'].astype(float).round().astype(int)
@@ -131,7 +131,7 @@ if __name__ == '__main__':
             df.index, format='%d.%m.%Y').strftime('%d.%m.%Y')
 
         # merge dataframes
-        df = df.iloc[:-1]
+        # df = df.iloc[:-1]
         # dataframe with no NaN values (same date)
         df_no_nan = df.join(df_cases)
         # dataframe with NaN values (different dates)
