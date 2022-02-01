@@ -102,7 +102,7 @@ if __name__ == '__main__':
         df.fillna('', inplace=True)
 
         # show date in chart notes
-        notes_chart = 'Ziel: Impfquote von 80%. Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten. <br>Stand: ' + \
+        notes_chart = 'Ziel: Impfquote von 80%.<br>Stand: ' + \
             timestamp_str
 
         # run function
