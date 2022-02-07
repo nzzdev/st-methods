@@ -204,9 +204,6 @@ if __name__ == '__main__':
             columns={'Neue Todesfälle': 'value'}).to_dict(orient='records')
 
         # additional data for JSON file
-        trend_icu = 'fallend'
-        trend_cases = 'steigend'
-        trend_deaths = 'fallend'
         meta_icu = {'indicatorTitle': 'Intensivpatienten', 'date': timestamp_str, 'indicatorSubtitle': 'Belegte Betten',
                     'value': int(diff_icu), 'color': '#24b39c', 'trend': trend_icu, 'chartType': 'area'}
         meta_cases = {'indicatorTitle': 'Neuinfektionen', 'date': timestamp_str, 'indicatorSubtitle': '7-Tage-Schnitt',
