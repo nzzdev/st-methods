@@ -50,7 +50,7 @@ def transform_2G_data(data: pd.DataFrame, estimates: pd.Series) -> pd.DataFrame:
 
     # add Nowcast estimate to dataframe
     for index, row in data.iterrows():
-        data.loc[index, 'Real¹'] = estimates.loc[country_codes[index]]
+        data.loc[index, 'Korrigiert¹'] = estimates.loc[country_codes[index]]
 
     return corona_rules_set
 
@@ -201,7 +201,7 @@ if __name__ == '__main__':
         # sort RKI values
         # data['RKI-Wert'] = round(data['RKI-Wert'], 1)
         data = data.sort_values(by=['RKI-Wert'], ascending=False)
-        data = data[['Warn-Stufe', 'RKI-Wert', 'Real¹']]
+        data = data[['Warn-Stufe', 'RKI-Wert', 'Korrigiert¹']]
 
         # run function
         update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='3 bis 6: Warnstufe 1, 6 bis 9: Warnstufe 2, ab 9: Warnstufe 3.<br>¹ Schätzung der LMU München inklusive Nachmeldungen.<br><br>Stand: ' +
