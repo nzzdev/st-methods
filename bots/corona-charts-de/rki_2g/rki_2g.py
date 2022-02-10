@@ -32,13 +32,13 @@ def transform_2G_data(data: pd.DataFrame, estimates: pd.Series) -> pd.DataFrame:
     country_codes = {
         'Baden-Württemberg': 'DE-BW',
         'Bayern': 'DE-BY',
-        'Berlin': 'DE-BE',
+        'Berlin¹': 'DE-BE',
         'Brandenburg': 'DE-BB',
-        'Bremen': 'DE-HB',
+        'Bremen¹': 'DE-HB',
         'Hamburg': 'DE-HH',
         'Hessen': 'DE-HE',
-        'Mecklenburg-Vorpommern': 'DE-MV',
-        'Niedersachsen': 'DE-NI',
+        'Mecklenburg-Vorpommern¹': 'DE-MV',
+        'Niedersachsen¹': 'DE-NI',
         'Nordrhein-Westfalen': 'DE-NW',
         'Rheinland-Pfalz': 'DE-RP',
         'Saarland': 'DE-SL',
@@ -124,6 +124,10 @@ if __name__ == '__main__':
         # drop unused columns
         df = df.drop(columns='Altersgruppe')
         dfde = dfde.drop(columns='Altersgruppe')
+
+        # add superscript for footnotes
+        df['Bundesland'].replace({'Berlin': 'Berlin¹', 'Bremen': 'Bremen¹',
+                                  'Mecklenburg-Vorpommern': 'Mecklenburg-Vorpommern¹', 'Niedersachsen': 'Niedersachsen¹'}, inplace=True)
 
         # create a spreadsheet-style pivot table for rules table and line chart
         df = df.pivot_table(index=['Datum'], columns=[
