@@ -208,7 +208,7 @@ if __name__ == '__main__':
         data = data[['Warn-Stufe', 'RKI-Wert', 'Korrigiert']]
 
         # run function
-        update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='3 bis 6: Warnstufe 1, 6 bis 9: Warnstufe 2, ab 9: Warnstufe 3.<br>Korrigierter Wert: Schätzung der LMU München inklusive Nachmeldungen.<br><br>Stand: ' +
+        update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='¹ Diese Länder orientieren sich an ihrer eigenen Hospitalisierungsrate.<br>3 bis 6: Warnstufe 1, 6 bis 9: Warnstufe 2, ab 9: Warnstufe 3.<br>Korrigierter Wert: Schätzung der LMU München inklusive Nachmeldungen.<br><br>Stand: ' +
                      timestamp_str, data=data, options=get_options(corona_rules_set))
         update_chart(id='590776db9b66058b024b8dff27bfb8f6',
                      data=datachart, notes='Stand: ' + timestamp_str)
