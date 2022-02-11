@@ -125,6 +125,58 @@ bag_var <- read.csv(bag_data$sources$individual$csv$daily$virusVariantsWgs)%>%
   filter(geoRegion == 'CHFL') %>%
   select("variant_type", "date", "prct", "prct_lower_ci", "prct_upper_ci", "prct_mean7d", "entries")
 
+bag_hosp_reason <- read_csv(bag_data$sources$individual$csv$weekly$byAge$hospReason)
+
+# #### Hosp Reason ####
+# 
+# hosp_reason <- bag_hosp_reason %>%
+#   filter(geoRegion == 'CHFL', altersklasse_covid19 == "all") %>%
+#   select(date, primary_hosp_reason, entries) %>%
+#   spread(primary_hosp_reason, entries) %>%
+#   mutate(date = paste0(str_sub(date, 1, 4), "-W",str_sub(date, 5, 6)))
+# 
+# names(hosp_reason) <- c("date", "Covid-19", "Andere", "Unbekannt")
+# 
+# write_clip(hosp_reason)
+# 
+# hosp_reason[2:4] <- round(hosp_reason[2:4]/rowSums(hosp_reason[2:4])*100,1)
+# 
+# hosp_reason_age <- bag_hosp_reason %>%
+#   filter(geoRegion == 'CHFL' & 
+#            altersklasse_covid19 != "all" & 
+#            altersklasse_covid19 != "Unbekannt" &
+#            date > 202140) %>%
+#   select(date,altersklasse_covid19, primary_hosp_reason, entries) %>%
+#   group_by(altersklasse_covid19, primary_hosp_reason) %>%
+#   summarise(entries = sum(entries)) %>%
+#   spread(primary_hosp_reason, entries) %>% 
+#   select(altersklasse_covid19, covid, unknown, other)
+# 
+# hosp_reason_age[2:4] <- round(hosp_reason_age[2:4]/rowSums(hosp_reason_age[2:4])*100,1)
+# names(hosp_reason_age) <- c("Alter", "Covid-19", "Unbekannt", "Andere")
+# 
+# write_clip(hosp_reason_age)
+# 
+# 
+# hosp_reason_kant <- bag_hosp_reason %>%
+#   filter(geoRegion != 'CHFL' &
+#            geoRegion != 'CH' &
+#            geoRegion != 'FL' &
+#            altersklasse_covid19 == "all" & 
+#            date > 202140) %>%
+#   select(date, geoRegion, primary_hosp_reason, entries) %>%
+#   group_by(geoRegion, primary_hosp_reason) %>%
+#   summarise(entries = sum(entries)) %>%
+#   spread(primary_hosp_reason, entries) %>%
+#   select(geoRegion, covid, unknown, other)
+# 
+# 
+# hosp_reason_kant[2:4] <- round(hosp_reason_kant[2:4]/rowSums(hosp_reason_kant[2:4])*100,1)
+# names(hosp_reason_kant) <- c("Kanton", "Covid-19", "Unbekannt", "Andere")
+# 
+# hosp_reason_kant <- hosp_reason_kant %>% arrange(desc(`Covid-19`))
+# 
+# write_clip(hosp_reason_kant)
 
 #### Update Overview (Zahlenübersicht oben)
 
