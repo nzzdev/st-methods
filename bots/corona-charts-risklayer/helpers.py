@@ -56,11 +56,10 @@ def get_sheet(wsh, name):  # function for sheet data download
         print('Other URL error:', e)
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", asset_groups=[], files=[]):  # Q helper function
     # read qConfig file
     json_file = open('../q.config.json')
     qConfig = json.load(json_file)
-
     # update chart properties
     for item in qConfig.get('items'):
         for environment in item.get('environments'):
@@ -80,8 +79,21 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q
                             {'table': transformed_data})
                     else:
                         item.get('item').update({'data': transformed_data})
+                if len(asset_groups) > 0:
+                    groups = []
+                    for g in asset_groups:
+                        groups.append({
+                            'assets': [{"path": f} for f in g['files']],
+                            'name': g['name']
+                        })
+                    item['item']['assetGroups'] = groups
+                if len(files) > 0:
+                    item['item']['files'] = files
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
+                if options != '':
+                    item.get('item').update({'options': options})
+
     # write qConfig file
     with open('../q.config.json', 'w', encoding='utf-8') as json_file:
         json.dump(qConfig, json_file, ensure_ascii=False, indent=1)

@@ -67,7 +67,7 @@ if __name__ == '__main__':
 
        # show date in chart notes
         notes_chart = '¹ Sieben-Tage-Schnitt (Erstimpfung: ' + mean_first + ', Zweitimpfung: ' + mean_full + ', Auffrischung: ' + mean_third + \
-            '). Der Impfstoff von J&J, von dem nur eine Dose nötig ist, ist sowohl in den Erst- als auch in den Zweitimpfungen enthalten.<br>Stand: ' + timestamp_str
+            ').<br>Stand: ' + timestamp_str
 
         # show 7-day average in chart title
         title_chart = 'Deutschland verimpft derzeit im Schnitt ' + mean + ' Dosen¹ pro Tag'

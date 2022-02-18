@@ -1,10 +1,10 @@
-name: Update Corona Risklayer Charts
+name: Update Corona Charts DE
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 15 and 45 past every hour from 1 through 22 CET
+  # This will run every 16 minutes from 7 through 21 CEST (5 - 19 GMT)
   schedule:
-    - cron: "15,45 1-22 * * *"
+    - cron: "*/16 5-19 * * *"
   workflow_dispatch:
 
 jobs:
@@ -12,9 +12,12 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: bots/corona-charts-risklayer/
+        working-directory: bots/corona-charts-de/
     steps:
       - uses: actions/checkout@v2
+      - name: Install system dependencies
+        run: |
+          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
       - name: Setup python
         uses: actions/setup-python@v2
         with:
@@ -27,22 +30,23 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/corona-charts-risklayer/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/corona-charts-de/requirements.txt') }}
       - name: Install python packages
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python risklayer_incidence/risklayer_incidence.py
-          python risklayer_incidence/risklayer_map.py
-          python risklayer_incidence/risklayer_table.py
-          python risklayer_new_deaths/risklayer_new_deaths.py
-          python risklayer_index/risklayer_index.py
-          python risklayer_dashboard/risklayer_dashboard.py
-        env:
-          GSPREAD_PRIVATE_KEY_ID: ${{ secrets.GSPREAD_PRIVATE_KEY_ID }}
-          GSPREAD_PRIVATE_KEY: ${{ secrets.GSPREAD_PRIVATE_KEY }}
+          python rki_vaccinations_daily/rki_vaccinations_daily.py
+          python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity_age.py
+          python rki_vaccinations_states/rki_vaccinations_states.py
+          python divi_icu/divi_icu.py
+          python divi_icu/divi_icu_map.py
+          python rki_age_groups/rki_hospitalizations.py
+          python rki_age_groups/rki_incidence.py
+          python rki_notbremse/rki_notbremse.py
+          python rki_2g/rki_2g.py
+          python rki_tests/rki_tests.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
