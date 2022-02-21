@@ -1,7 +1,7 @@
 ##### Script for Coronacases INTERNATIONAL ####
 
 #prep
-rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
+rm(list=ls(all=TRUE)) 
 options(scipen=999)
 library(tidyverse)
 library(zoo)
@@ -313,7 +313,7 @@ full_vacc <- vaccination %>%
   mutate(`Doppelt geimpft, in % der Bev.` = round(`Doppelt geimpft, in % der Bev.`, 1)) %>%
   ungroup()
 
-notes <- paste0("Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
+notes <- paste0("Länder mit mehr als 1 Million Einwohnern. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
 update_chart(id = 'ee2ce1d4bd795db54ef74a9ed8abb147', data = full_vacc, notes = notes)
 
 
