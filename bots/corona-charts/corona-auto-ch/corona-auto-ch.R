@@ -841,7 +841,7 @@ vacc_persons_ch <- ch_vacc_persons %>%
   arrange(desc(per100))
 
 
-title_vacc_ch <- paste0(gsub('\\.', ',', toString(vacc_persons_ch$`Doppelt geimpft*`)), ' Prozent der Schweizer Bevölkerung ist doppelt geimpft')
+title_vacc_ch <- paste0(gsub('\\.', ',', toString(vacc_persons_ch$per100[vacc_persons_ch$type == "Doppelt geimpft*"])), ' Prozent der Schweizer Bevölkerung ist doppelt geimpft')
 
 update_chart(id = "8022cf0d0f108d3a2f65d2d360266789",
              data = vacc_persons_ch,
