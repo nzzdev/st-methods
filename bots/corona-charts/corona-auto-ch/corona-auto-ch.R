@@ -833,15 +833,13 @@ vacc_persons_ch <- ch_vacc_persons %>%
   filter(geoRegion == "CHFL") %>%
   filter(date == max(date)) %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
-  select(-pop, -sumTotal, -date) %>%
-  spread(type, per100) %>%
-  select(-COVID19AtLeastOneDosePersons, -COVID19NotVaccPersons) %>%
-  rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
-         "Einmal geimpft" = COVID19PartiallyVaccPersons,
-         "Booster erhalten" = COVID19FirstBoosterPersons) %>%
-  select(geoRegion, `Doppelt geimpft*`, `Booster erhalten`, `Einmal geimpft`)
+  select(-pop, -sumTotal, -date, -geoRegion) %>%
+  mutate(type = dplyr::recode(type, COVID19FullyVaccPersons = "Doppelt geimpft*", 
+                              COVID19PartiallyVaccPersons = "Einmal geimpft",
+                              COVID19FirstBoosterPersons = "Booster erhalten")) %>%
+  filter(type != "COVID19AtLeastOneDosePersons" & type != "COVID19NotVaccPersons") %>%
+  arrange(desc(per100))
 
-vacc_persons_ch$geoRegion <- NA
 
 title_vacc_ch <- paste0(gsub('\\.', ',', toString(vacc_persons_ch$`Doppelt geimpft*`)), ' Prozent der Schweizer Bevölkerung ist doppelt geimpft')
 
@@ -849,6 +847,7 @@ update_chart(id = "8022cf0d0f108d3a2f65d2d360266789",
              data = vacc_persons_ch,
              notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", ch_vacc_date), 
              title = title_vacc_ch)
+
 
 
 ### Schweiz geimpft nach Altersgruppen
