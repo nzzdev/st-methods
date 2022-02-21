@@ -400,8 +400,6 @@ update_chart(id = '6c2576748a77f670cb88f2bb792bcdf3', data = us)
 
 
 
-
-
 #### Cases ####
 
 # All cases
@@ -495,6 +493,28 @@ title <- paste(head(all_cum_deaths$Land, 1), "hat gemessen an der Bevölkerungsz
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'c7004f4d1b11f50ecbbd2d4a1849f329', data = all_cum_deaths, notes = notes, title = title)
+
+
+
+all_cum_world <- rolling_average_all %>%
+  filter(date == last(all_ctry$date)) %>%
+  group_by(date) %>%
+  summarise(all_cases = sum(all_cases),
+            dead = sum(dead)) %>%
+  mutate(`Offizielle Todesfälle` = round(dead, 0)) %>%
+  select(`Offizielle Todesfälle`)
+
+all_cum_world$empty <- NA
+
+economist <- read_csv('https://raw.githubusercontent.com/TheEconomist/covid-19-the-economist-global-excess-deaths-model/main/output-data/output-for-interactive/world_line_chart_cumulative.csv')
+
+economist <- economist %>% filter(date == last(date)) %>%
+  mutate(`Schätzung des «Economist»` = round(estimate, 0)) %>%
+  select(`Schätzung des «Economist»`)
+
+q <- cbind(all_cum_world, economist) %>% select(empty, `Offizielle Todesfälle`, `Schätzung des «Economist»`) 
+notes <- paste0("Die Schätzung der Todesfälle beinhaltet einen Unsicherheitsbereich, der nicht angezeigt wird.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(all_ctry$date), format = "%d. %m. %Y")))
+update_chart('3634bbb802cb1a3fb644a38fbe0c9579', data = q, notes = notes)
 
 
 
