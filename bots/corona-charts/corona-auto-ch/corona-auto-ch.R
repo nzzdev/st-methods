@@ -125,6 +125,58 @@ bag_var <- read.csv(bag_data$sources$individual$csv$daily$virusVariantsWgs)%>%
   filter(geoRegion == 'CHFL') %>%
   select("variant_type", "date", "prct", "prct_lower_ci", "prct_upper_ci", "prct_mean7d", "entries")
 
+bag_hosp_reason <- read_csv(bag_data$sources$individual$csv$weekly$byAge$hospReason)
+
+# #### Hosp Reason ####
+# 
+# hosp_reason <- bag_hosp_reason %>%
+#   filter(geoRegion == 'CHFL', altersklasse_covid19 == "all") %>%
+#   select(date, primary_hosp_reason, entries) %>%
+#   spread(primary_hosp_reason, entries) %>%
+#   mutate(date = paste0(str_sub(date, 1, 4), "-W",str_sub(date, 5, 6)))
+# 
+# names(hosp_reason) <- c("date", "Covid-19", "Andere", "Unbekannt")
+# 
+# write_clip(hosp_reason)
+# 
+# hosp_reason[2:4] <- round(hosp_reason[2:4]/rowSums(hosp_reason[2:4])*100,1)
+# 
+# hosp_reason_age <- bag_hosp_reason %>%
+#   filter(geoRegion == 'CHFL' & 
+#            altersklasse_covid19 != "all" & 
+#            altersklasse_covid19 != "Unbekannt" &
+#            date > 202140) %>%
+#   select(date,altersklasse_covid19, primary_hosp_reason, entries) %>%
+#   group_by(altersklasse_covid19, primary_hosp_reason) %>%
+#   summarise(entries = sum(entries)) %>%
+#   spread(primary_hosp_reason, entries) %>% 
+#   select(altersklasse_covid19, covid, unknown, other)
+# 
+# hosp_reason_age[2:4] <- round(hosp_reason_age[2:4]/rowSums(hosp_reason_age[2:4])*100,1)
+# names(hosp_reason_age) <- c("Alter", "Covid-19", "Unbekannt", "Andere")
+# 
+# write_clip(hosp_reason_age)
+# 
+# 
+# hosp_reason_kant <- bag_hosp_reason %>%
+#   filter(geoRegion != 'CHFL' &
+#            geoRegion != 'CH' &
+#            geoRegion != 'FL' &
+#            altersklasse_covid19 == "all" & 
+#            date > 202140) %>%
+#   select(date, geoRegion, primary_hosp_reason, entries) %>%
+#   group_by(geoRegion, primary_hosp_reason) %>%
+#   summarise(entries = sum(entries)) %>%
+#   spread(primary_hosp_reason, entries) %>%
+#   select(geoRegion, covid, unknown, other)
+# 
+# 
+# hosp_reason_kant[2:4] <- round(hosp_reason_kant[2:4]/rowSums(hosp_reason_kant[2:4])*100,1)
+# names(hosp_reason_kant) <- c("Kanton", "Covid-19", "Unbekannt", "Andere")
+# 
+# hosp_reason_kant <- hosp_reason_kant %>% arrange(desc(`Covid-19`))
+# 
+# write_clip(hosp_reason_kant)
 
 #### Update Overview (Zahlenübersicht oben)
 
@@ -254,26 +306,23 @@ forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
  
 forJson_3$chartData <- list(roll_ch_bag_death)
 
-if (!(file.exists("./data/"))){
-  print("Create Folder ./data")
+if (!(file.exists("./data/"))) {
   dir.create("./data/")
 }
 
 z <- toJSON(rbind_pages(list(forJson_1, forJson_2, forJson_3)), pretty = T)
 write(z, "./data/dashboard_ch.json")
 
-
-assets <- list(
+files <- list(
   list(
-    name = "jsonFiles",
-    files = list("./data/dashboard_ch.json")
+    file = list(
+      path = "./data/dashboard_ch.json"
+    )
   )
 )
  
- 
 #q-cli update
-update_chart(id = "499935fb791197fd126bda721f15884a",
-             asset.groups = assets)
+update_chart(id = "499935fb791197fd126bda721f15884a", files = files)
 
 
 
@@ -679,14 +728,14 @@ id_rel_age <- ch_hosp_vacc_age %>%
   select(1:4,6) %>%
   filter(date %in% tail(unique(ch_hosp_vacc_age$date), 3)) %>%
   group_by(altersklasse_covid19, vaccination_status) %>%
-  summarise(entries = sum(entries), pop = first(pop)) %>%
+  summarise(entries = sum(entries), pop = last(pop)) %>%
   mutate(per100k = round(100000*entries/pop, 1))
 
 id_rel_age_q <- id_rel_age %>%
   select(-entries, -pop) %>% 
   spread(vaccination_status, per100k) %>%
   select(altersklasse_covid19, not_vaccinated, fully_vaccinated) %>%
-  filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt")
+  filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt" & altersklasse_covid19 != "0 - 9")
 
 names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Mindestens zweimal geimpft")
 

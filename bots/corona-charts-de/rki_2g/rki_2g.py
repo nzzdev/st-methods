@@ -32,13 +32,13 @@ def transform_2G_data(data: pd.DataFrame, estimates: pd.Series) -> pd.DataFrame:
     country_codes = {
         'Baden-Württemberg': 'DE-BW',
         'Bayern': 'DE-BY',
-        'Berlin': 'DE-BE',
+        'Berlin¹': 'DE-BE',
         'Brandenburg': 'DE-BB',
-        'Bremen': 'DE-HB',
+        'Bremen¹': 'DE-HB',
         'Hamburg': 'DE-HH',
         'Hessen': 'DE-HE',
-        'Mecklenburg-Vorpommern': 'DE-MV',
-        'Niedersachsen': 'DE-NI',
+        'Mecklenburg-Vorpommern¹': 'DE-MV',
+        'Niedersachsen¹': 'DE-NI',
         'Nordrhein-Westfalen': 'DE-NW',
         'Rheinland-Pfalz': 'DE-RP',
         'Saarland': 'DE-SL',
@@ -50,7 +50,7 @@ def transform_2G_data(data: pd.DataFrame, estimates: pd.Series) -> pd.DataFrame:
 
     # add Nowcast estimate to dataframe
     for index, row in data.iterrows():
-        data.loc[index, 'Real¹'] = estimates.loc[country_codes[index]]
+        data.loc[index, 'Korrigiert'] = estimates.loc[country_codes[index]]
 
     return corona_rules_set
 
@@ -124,6 +124,10 @@ if __name__ == '__main__':
         # drop unused columns
         df = df.drop(columns='Altersgruppe')
         dfde = dfde.drop(columns='Altersgruppe')
+
+        # add superscript for footnotes
+        df['Bundesland'].replace({'Berlin': 'Berlin¹', 'Bremen': 'Bremen¹',
+                                  'Mecklenburg-Vorpommern': 'Mecklenburg-Vorpommern¹', 'Niedersachsen': 'Niedersachsen¹'}, inplace=True)
 
         # create a spreadsheet-style pivot table for rules table and line chart
         df = df.pivot_table(index=['Datum'], columns=[
@@ -201,10 +205,10 @@ if __name__ == '__main__':
         # sort RKI values
         # data['RKI-Wert'] = round(data['RKI-Wert'], 1)
         data = data.sort_values(by=['RKI-Wert'], ascending=False)
-        data = data[['Warn-Stufe', 'RKI-Wert', 'Real¹']]
+        data = data[['Warn-Stufe', 'RKI-Wert', 'Korrigiert']]
 
         # run function
-        update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='3 bis 6: Warnstufe 1, 6 bis 9: Warnstufe 2, ab 9: Warnstufe 3.<br>¹ Schätzung der LMU München inklusive Nachmeldungen.<br><br>Stand: ' +
+        update_chart(id='9dd87b7667e84ce621ab705db264e761', notes='¹ Diese Länder orientieren sich an ihrer eigenen Hospitalisierungsrate.<br>3 bis 6: Warnstufe 1, 6 bis 9: Warnstufe 2, ab 9: Warnstufe 3.<br>Korrigierter Wert: Schätzung der LMU München inklusive Nachmeldungen.<br><br>Stand: ' +
                      timestamp_str, data=data, options=get_options(corona_rules_set))
         update_chart(id='590776db9b66058b024b8dff27bfb8f6',
                      data=datachart, notes='Stand: ' + timestamp_str)

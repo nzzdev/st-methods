@@ -264,7 +264,7 @@ world <- vaccination %>%
   filter(Land == "World") %>%
   select(Datum, Impfdosen_total)
 
-title_world <- paste0("Weltweit wurden ", round(last(world$Impfdosen_total)/1000000000,1), " Milliarden Impfdosen verabreicht")
+title_world <- paste0("Weltweit wurden über ", str_sub(last(world$Impfdosen_total)/1000000000,1,2), " Milliarden Impfdosen verabreicht")
 
 update_chart(id = "83dcb25c0e922ac143111ad204e65d15", data = world, title = title_world)
 

@@ -1,0 +1,5 @@
+# Ignore temporary data folders
+data/
+
+# Ignore temporary Python files
+__pycache__
