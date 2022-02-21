@@ -340,7 +340,8 @@ bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
   mutate(`gegenwärtig Infizierte` = Infizierte -`Genesene (Schätzung)`) %>%
   select("datum", "Tote", "gegenwärtig Infizierte", "Genesene (Schätzung)")
 
-#bag_total_title <- paste0("Über ",str_sub(sum(tail(bag_total[,2:4], 1),3),1,3), " 000 bestätigte Infektionen in der Schweiz")
+
+bag_total_title <- paste0(gsub('\\.', ',' ,toString(round(sum(tail(bag_total[,2:4], 1))/1000000, 1))), " Millionen bestätigte Infektionen und ", toString(tail(bag_total$Tote, 1)), " Todesfälle in der Schweiz")
 
 #q-cli update
 update_chart(id = "3209a77a596162b06346995b10896863", 
