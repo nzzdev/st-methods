@@ -205,7 +205,7 @@ rolling_average_all <- all_ctry %>%
   left_join(un, by = c("Land"= "Land")) %>%
   select(date, continent, region_2, Land, entity, ravg_cases, ravg_deaths, all_cases, dead, pop) %>%
   mutate(ravg_cases_pop = ravg_cases/(pop/100000)) %>%
-  mutate(ravg_deaths_pop = ravg_deaths/(pop/1000000))
+  mutate(ravg_deaths_pop = ravg_deaths/(pop/100000))
 
 #change country names if necessary for matching and displaying
 rolling_average_all$Land <- recode(rolling_average_all$Land, '"Vereinigte Arabische Emirate"="VAE"')
