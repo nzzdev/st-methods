@@ -7,6 +7,12 @@ library(tidyverse)
 library(jsonlite)
 library(zoo)
 library(rvest)
+library(renv)
+
+# renv::init()
+# renv::snapshot()
+# renv::restore()
+# renv::dependencies()
 
 # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
