@@ -6,6 +6,7 @@ options(scipen=999)
 library(tidyverse)
 library(jsonlite)
 library(zoo)
+library(rvest)
 
 # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
@@ -15,6 +16,41 @@ source("./helpers.R")
 
 # read in additional data
 pop <- read_csv("./corona-auto-ch/pop_kant.csv")
+
+#### Excess deaths (BfS) ####
+
+url_xm <- read_html("https://www.bfs.admin.ch//bfs/de/home/statistiken/gesundheit/gesundheitszustand/sterblichkeit-todesursachen/_jcr_content/par/ws_composed_list_1765412048.dynamiclist.html") %>%
+  as.character() %>%
+  str_extract_all("/bfs.(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+") %>%
+  unlist() %>%
+  as_vector()
+
+link_xm <- paste0("https://www.bfs.admin.ch/bfsstatic/dam/assets/",str_sub(url_xm[1], -13,-6), "/master")
+
+bfs <- read_csv2(link_xm) %>%
+  filter((Jahr == "2020"| Jahr == "2021" | Jahr == "2022"), AnzTF_HR != ".") %>%
+  select(Alter, endend, untGrenze, obeGrenze, AnzTF_HR, Diff) %>%
+  mutate(AnzTF_HR = as.numeric(AnzTF_HR), Diff = as.numeric(Diff), endend = as.Date(endend, "%d.%m.%Y")) %>%
+  rename(Datum = endend) %>%
+  replace(is.na(.), 0) 
+
+bfs_old <- read.csv2(text=paste0(head(readLines('https://www.bfs.admin.ch/bfsstatic/dam/assets/12607336/master'), -11), collapse="\n")) %>%
+  select(Alter, Endend, untGrenze, obeGrenze, Anzahl_Todesfalle, Exzess) %>%
+  replace(is.na(.), 0) %>%
+  dplyr::rename(Datum = Endend, AnzTF_HR = Anzahl_Todesfalle, Diff = Exzess) %>%
+  mutate(Datum = as.Date(Datum, "%d.%m.%Y")) 
+
+bfs_all <- rbind(bfs_old, bfs) %>%  filter(Datum >= '2015-01-01') %>%
+  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "erwartete Bandbreite" = "obeGrenze")
+
+## Neuster Stand für die Q Grafik
+
+xm_notes <- paste0("Die Datenreihe endet am ", gsub("\\b0(\\d)\\b", "\\1", format(max(bfs_all$Datum), format = "%d. %m. %Y.")))
+
+#q-cli update
+update_chart(id = "f7b3b35758e309767ad0d3096a2fe0ff", 
+             data = bfs_all, 
+             notes = xm_notes)
 
 #### Update R eth estimate ####
 eth <- read_csv("https://raw.githubusercontent.com/covid-19-Re/dailyRe-Data/master/CHE-estimates.csv") %>%
