@@ -9,11 +9,6 @@ library(zoo)
 library(rvest)
 library(renv)
 
-# renv::init()
-# renv::snapshot()
-# renv::restore()
-# renv::dependencies()
-
 # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
@@ -46,8 +41,10 @@ bfs_old <- read.csv2(text=paste0(head(readLines('https://www.bfs.admin.ch/bfssta
   dplyr::rename(Datum = Endend, AnzTF_HR = Anzahl_Todesfalle, Diff = Exzess) %>%
   mutate(Datum = as.Date(Datum, "%d.%m.%Y")) 
 
-bfs_all <- rbind(bfs_old, bfs) %>%  filter(Datum >= '2015-01-01') %>%
-  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "erwartete Bandbreite" = "obeGrenze")
+bfs_all <- rbind(bfs_old, bfs) %>%  
+  filter(Datum >= '2015-01-01', Alter == "65+") %>%
+  select(-Alter, -Diff) %>%
+  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "erwartete Bandbreite" = "obeGrenze") %>%
 
 ## Neuster Stand für die Q Grafik
 
