@@ -13,6 +13,7 @@ library(renv)
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
 # import helper functions
+
 source("./helpers.R")
 
 # read in additional data
@@ -44,7 +45,7 @@ bfs_old <- read.csv2(text=paste0(head(readLines('https://www.bfs.admin.ch/bfssta
 bfs_all <- rbind(bfs_old, bfs) %>%  
   filter(Datum >= '2015-01-01', Alter == "65+") %>%
   select(-Alter, -Diff) %>%
-  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "erwartete Bandbreite" = "obeGrenze") %>%
+  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "erwartete Bandbreite" = "obeGrenze")
 
 ## Neuster Stand für die Q Grafik
 
