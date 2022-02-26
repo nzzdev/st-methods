@@ -4,9 +4,10 @@
 # %%
 import pandas as pd
 import json
+import datetime
 
 # %%
-url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR28WE_2xWMoUvFIItA_rQDu0-nBnmIByy3T3H1bcZCeni1FWAxVLUFxml6sBhYCTWxsVoLNSaOTrY8/pub?gid=0&single=true&output=csv'
+url = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR28WE_2xWMoUvFIItA_rQDu0-nBnmIByy3T3H1bcZCeni1FWAxVLUFxml6sBhYCTWxsVoLNSaOTrY8/pub?gid=0&single=true&output=csv&cache=%s' % datetime.datetime.now().timestamp()
 
 def create_geojson(export_path):
 
