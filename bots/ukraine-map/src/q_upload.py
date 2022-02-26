@@ -21,7 +21,7 @@ geojson_export.create_geojson(export_path)
 if args.p.lower() == 'staging':
     chartid = 'ecf1db20c4ca6dcf6e7909906709f3f7'
 elif args.p.lower() == 'production':
-    chartid = 'xxx'
+    chartid = 'c43940da317fdc578cf589dd9357512c'
 else:
     raise Exception('Unknown platform: %s' % args.p)
 
