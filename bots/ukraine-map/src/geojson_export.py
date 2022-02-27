@@ -22,30 +22,34 @@ def create_geojson(export_path):
     df = df.fillna('')
 
     for i, row in df[df['_visible'] == 1].iterrows():
-        coords = row['latlon'].replace(' ', '').split(',')
+        try:
+            coords = row['latlon'].replace(' ', '').split(',')
 
-        if len(coords) < 2:
-            raise ValueError('Koordinaten falsch: %s' % list(row))
+            if len(coords) < 2:
+                raise ValueError('Koordinaten falsch: %s' % list(row))
 
-        data['features'].append({
-            "type": "Feature",
-            "properties": {
-                "date": row['date'],
-                "place": row['place'],
-                "title": row['title'],
-                "text": row['text'],
-                "url": row['url'],
-                "imgurl": row['imgurl'],
-                "type": row['type'],
-                "source": row['source'],
-                "sourceurl": row['sourceurl'],
-                "grey": int(row['grey']),
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [float(coords[1]), float(coords[0])]
-            }
-        })
+            data['features'].append({
+                "type": "Feature",
+                "properties": {
+                    "date": row['date'],
+                    "place": row['place'],
+                    "title": row['title'],
+                    "text": row['text'],
+                    "url": row['url'],
+                    "imgurl": row['imgurl'],
+                    "type": row['type'],
+                    "source": row['source'],
+                    "sourceurl": row['sourceurl'],
+                    "grey": int(row['grey']),
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [float(coords[1]), float(coords[0])]
+                }
+            })
+        except:
+            print("ERROR")
+            print(row)
 
     with open(export_path, 'w', encoding='UTF-8') as f:
         json.dump(data, f, ensure_ascii=False)
