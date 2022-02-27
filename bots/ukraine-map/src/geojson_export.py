@@ -31,13 +31,16 @@ def create_geojson(export_path):
             data['features'].append({
                 "type": "Feature",
                 "properties": {
+                    "type": row['type'],
+                    "state": int(row['state']),
                     "date": row['date'],
                     "place": row['place'],
                     "title": row['title'],
                     "text": row['text'],
                     "url": row['url'],
                     "imgurl": row['imgurl'],
-                    "type": row['type'],
+                    "imgsource": row['imgsource'],
+                    "imgsourceurl": row['imgsourceurl'],
                     "source": row['source'],
                     "sourceurl": row['sourceurl'],
                     "grey": int(row['grey']),
