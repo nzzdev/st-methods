@@ -14,12 +14,21 @@ def create_geojson(export_path):
     df = pd.read_csv(url)
 
     data = {
-    "type": "FeatureCollection",
-    "features": []
+        "type": "FeatureCollection",
+        "features": []
     }
 
-    df['grey'] = df['grey'].fillna(0)
     df = df.fillna('')
+    try:
+        df['date_added'] = pd.to_datetime(df['date_added'])
+    except:
+        print("🤬 Das Feld 'date_added' konnte nicht in ein Datumsfeld konvertiert werden. Bitte prüfen, ob richtiges Datum")
+        print("")
+        pass
+
+    # Calc State
+    hours_added = datetime.timedelta(hours = 24)
+    df['state'] = df['date_added'].apply(lambda x: 3 if datetime.datetime.now() - hours_added >= x  else 1)
 
     for i, row in df[df['_visible'] == 1].iterrows():
         try:
@@ -33,7 +42,7 @@ def create_geojson(export_path):
                 "properties": {
                     "type": row['type'],
                     "state": int(row['state']),
-                    "date": row['date'],
+                    "date": row['date_text'],
                     "place": row['place'],
                     "title": row['title'],
                     "text": row['text'],
@@ -43,7 +52,6 @@ def create_geojson(export_path):
                     "imgsourceurl": row['imgsourceurl'],
                     "source": row['source'],
                     "sourceurl": row['sourceurl'],
-                    "grey": int(row['grey']),
                 },
                 "geometry": {
                     "type": "Point",
@@ -54,6 +62,7 @@ def create_geojson(export_path):
             print("🥵 Ups, da ging was schief. In Zeile %s im Sheet:" % (i + 1))
             print(list(row))
             print("ℹ️ Fehlermeldung: %s" % e)
+            pass
             break
 
 
