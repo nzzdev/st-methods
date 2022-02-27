@@ -18,7 +18,6 @@ def create_geojson(export_path):
     "features": []
     }
 
-    df['grey'] = df['grey'].str.replace(' ', '0')
     df['grey'] = df['grey'].fillna(0)
     df = df.fillna('')
 
