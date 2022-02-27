@@ -47,9 +47,12 @@ def create_geojson(export_path):
                     "coordinates": [float(coords[1]), float(coords[0])]
                 }
             })
-        except:
-            print("ERROR")
-            print(row)
+        except Exception as e:
+            print("🥵 Ups, da ging was schief. In Zeile %s im Sheet:" % (i + 1))
+            print(list(row))
+            print("ℹ️ Fehlermeldung: %s" % e)
+            break
+
 
     with open(export_path, 'w', encoding='UTF-8') as f:
         json.dump(data, f, ensure_ascii=False)
