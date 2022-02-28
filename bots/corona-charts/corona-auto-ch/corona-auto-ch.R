@@ -10,7 +10,11 @@ library(rvest)
 library(renv)
 
 # setwd for fixes
+<<<<<<< HEAD
 #setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+=======
+# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+>>>>>>> 0fc2c2303aaefab217a9aa0610c5b65b71f82591
 # setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
 # import helper functions
 
