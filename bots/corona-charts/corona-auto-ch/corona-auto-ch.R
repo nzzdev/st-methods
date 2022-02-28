@@ -10,7 +10,11 @@ library(rvest)
 library(renv)
 
 # setwd for fixes
+<<<<<<< HEAD
+#setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+=======
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+>>>>>>> 0fc2c2303aaefab217a9aa0610c5b65b71f82591
 # setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
 # import helper functions
 
@@ -385,7 +389,7 @@ bag_total_title <- paste0(gsub('\\.', ',' ,toString(round(sum(tail(bag_total[,2:
 
 #q-cli update
 update_chart(id = "3209a77a596162b06346995b10896863", 
-             data = bag_total)
+             data = bag_total, title = bag_total_title)
 
 #now infected only
 bag_inf <- bag_total %>% select(datum, `gegenwärtig Infizierte`)
