@@ -20,7 +20,7 @@ def create_geojson(export_path):
 
     df = df.fillna('')
     try:
-        df['date_added'] = pd.to_datetime(df['date_added'])
+        df['date_added'] = pd.to_datetime(df['date_added'], format='%d.%m.%Y %H:%M:00')
     except:
         print("🤬 Das Feld 'date_added' konnte nicht in ein Datumsfeld konvertiert werden. Bitte prüfen, ob richtiges Datum")
         print("")
