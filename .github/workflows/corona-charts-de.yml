@@ -47,6 +47,7 @@ jobs:
           python rki_notbremse/rki_notbremse.py
           python rki_2g/rki_2g.py
           python rki_tests/rki_tests.py
+          python rki_dw_test/rki_dw_test.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
