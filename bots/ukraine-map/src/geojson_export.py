@@ -26,9 +26,14 @@ def create_geojson(export_path):
         print("")
         pass
 
-    # Calc State
-    hours_added = datetime.timedelta(hours = 24)
-    df['state'] = df['date_added'].apply(lambda x: 3 if datetime.datetime.now() - hours_added >= x  else 1)
+    # Calc State by date
+    #hours_added = datetime.timedelta(hours = 24)
+    #df['state'] = df['date_added'].apply(lambda x: 3 if datetime.datetime.now() - hours_added >= x  else 1)
+
+    df['today'] = df['today'].fillna(0)
+    df['state'] = df['today'].apply(lambda x: 1 if x == 1 else 3)
+
+    df = df.sort_values('state', ascending=False)
 
     for i, row in df[df['_visible'] == 1].iterrows():
         try:

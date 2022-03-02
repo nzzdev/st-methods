@@ -8,7 +8,6 @@ library(zoo)
 library(countrycode)
 library(car)
 
-
 # import helper functions
 source("./helpers.R")
 
@@ -185,6 +184,9 @@ new_nep_deaths[1] <- 0
 corr_nep_deaths <- (new_nep_deaths/2065)*619
 cum_nep_deaths_nepeck <- cumsum(new_nep_deaths+corr_nep_deaths)
 all_ctry$dead[all_ctry$country == "Nepal" & all_ctry$date < "2021-02-24"] <- cum_nep_deaths_nepeck
+
+#france deaths adjust
+all_ctry$dead[all_ctry$Land == "Frankreich" & all_ctry$date =="2022-02-21"] <- 137596
 
 #us-corr-recovered (they are not included anymore)
 all_ctry$sick[all_ctry$country == "US"] <- all_ctry$all_cases[all_ctry$country == "US"]
