@@ -13,6 +13,8 @@ def create_geojson(export_path):
 
     df = pd.read_csv(url)
 
+    df = df[df['_visible'] == 1]
+
     data = {
         "type": "FeatureCollection",
         "features": []
@@ -35,7 +37,7 @@ def create_geojson(export_path):
 
     df = df.sort_values('state', ascending=False)
 
-    for i, row in df[df['_visible'] == 1].iterrows():
+    for i, row in df.iterrows():
         try:
             coords = row['latlon'].replace(' ', '').split(',')
 
