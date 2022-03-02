@@ -417,7 +417,7 @@ all_cum_cases <- all_cum %>%
   slice(1:20) %>%
   select(Land, all_cases_pop)
 
-title <- paste(head(all_cum_cases$Land, 1), "insgesamt am stärksten betroffen")
+title <- paste(head(all_cum_cases$Land, 1), "hat gemessen an der Bevölkerungszahl insgesamt am meisten Fälle gemeldet")
 notes <- paste0("Länder mit mehr als 1 Million Einwohnern.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(all_ctry$date), format = "%d. %m. %Y")))
 update_chart(id = '7c647e0bd14b018f4f4f91aa86eb1872', data = all_cum_cases, notes = notes, title = title)
 
@@ -630,7 +630,7 @@ hersteller <- manufacturer %>%
   ungroup() %>%
   spread(Hersteller, Anzahl_Impfdosen) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
-  mutate(Summe = Moderna + `Oxford/AstraZeneca` + `Pfizer/BioNTech` + `Johnson&Johnson` + Sinovac + `Sinopharm/Beijing` + `CanSino` + `Sputnik V`) %>%
+  mutate(Summe = Moderna + `Oxford/AstraZeneca` + `Pfizer/BioNTech` + `Johnson&Johnson` + Sinovac + `Sinopharm/Beijing` + `CanSino` + `Sputnik V` + `Novavax`) %>%
   mutate(Moderna = Moderna/Summe*100,
          `Oxford/AstraZeneca` = `Oxford/AstraZeneca`/Summe*100,
          `Pfizer/BioNTech` = `Pfizer/BioNTech`/Summe*100,
@@ -638,7 +638,8 @@ hersteller <- manufacturer %>%
          `Sinopharm/Beijing` = `Sinopharm/Beijing`/Summe*100,
          `Johnson&Johnson` = `Johnson&Johnson`/Summe*100,
          `CanSino` = `CanSino`/Summe*100,
-         `Sputnik V` = `Sputnik V`/Summe*100) %>%
+         `Sputnik V` = `Sputnik V`/Summe*100,
+         `Novavax` = `Novavax`/Summe*100) %>%
   dplyr::rename(
     "AstraZeneca" = "Oxford/AstraZeneca",
     "Biontech/Pfizer" = "Pfizer/BioNTech",
