@@ -3,7 +3,7 @@ import pandas as pd
 import gc
 from datetime import datetime, timedelta
 import sys
-
+pd.options.mode.chained_assignment = None
 
 if __name__ == '__main__':
     try:
