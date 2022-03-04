@@ -13,18 +13,19 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
+        # call Node.js script and save output as csv
         # subprocess.call('npm i dataunwrapper', shell=True)
-        dataunwrapper = subprocess.Popen('node dataunwrapper.js z9o4e',
-                                         shell=True, stdout=subprocess.PIPE)
-        output = dataunwrapper.stdout.read()
+        dw_cases = subprocess.Popen('node dataunwrapper.js z9o4e',
+                                    shell=True, stdout=subprocess.PIPE)
+        output = dw_cases.stdout.read()
 
         if not os.path.exists('data'):
             os.makedirs('data')
-        with open(os.path.join('data', 'nodeoutput.csv'), 'wb') as f:
+        with open(os.path.join('data', 'node_inzidenz.csv'), 'wb') as f:
             f.write(output)
 
         # read csv and convert to datetime, add one day
-        df = pd.read_csv('./data/nodeoutput.csv',
+        df = pd.read_csv('./data/node_inzidenz.csv',
                          encoding='utf-8', index_col=0)
         df.index = pd.to_datetime(df.index)
         df.index = df.index.date + pd.Timedelta(days=1)
