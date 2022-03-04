@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import sys
 import subprocess
-from datetime import datetime
+from datetime import datetime, timedelta
 
 if __name__ == '__main__':
     try:
@@ -32,7 +32,8 @@ if __name__ == '__main__':
 
         # get current date
         timestamp_str = df.iloc[-1, 0]
-        timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
+        timestamp_dt = datetime.strptime(
+            timestamp_str, '%Y-%m-%d') + timedelta(days=1)
         timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
         notes_chart = 'Stand: ' + timestamp_str
 
