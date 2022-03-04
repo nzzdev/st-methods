@@ -1,6 +1,7 @@
 import os
 import pandas as pd
 import sys
+from datetime import datetime
 from urllib.request import Request, urlopen
 
 if __name__ == '__main__':
@@ -30,14 +31,16 @@ if __name__ == '__main__':
         df = df.iloc[:, 3].rolling(
             window=7).mean().round().dropna().astype(int).reset_index()
 
-        # get current date and remove DatetimeIndex for Q
-        timestamp_str = df.iloc[-1, 0].strftime('%-d. %-m. %Y')
+        # get current date
+        timestamp_str = df.iloc[-1, 0]
+        timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        notes_chart = 'Stand: ' + timestamp_str
+
+        # prepare dataframe for Q
         df = df.set_index(df.columns[0])
         df = df.rename(columns={df.columns[0]: '7-Tage-Schnitt'})
         df.index.rename('Datum', inplace=True)
-        df.index = df.index.strftime('%Y-%m-%d')
-
-        notes_chart = 'Stand: ' + timestamp_str
 
         # run function
         update_chart(id='2a1327d75c83a9c4ea49f935dd597e1a',

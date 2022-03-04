@@ -34,13 +34,14 @@ if __name__ == '__main__':
         timestamp_str = df.iloc[-1, 0]
         timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
         timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        notes_chart = 'Stand: ' + timestamp_str
 
-        # prepare for Q
+        # prepare dataframe for Q
         df = df.set_index(df.columns[0])
-        df = df.rename(columns={df.columns[0]: '7-Tage-Schnitt'})
+        df = df.rename(
+            columns={df.columns[0]: '7-Tage-Schnitt'}).round().astype(int)
         df.index.rename('Datum', inplace=True)
 
-        notes_chart = 'Stand: ' + timestamp_str
         # run function
         update_chart(id='2a1327d75c83a9c4ea49f935dd687c24',
                      data=df, notes=notes_chart)
