@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import sys
 import subprocess
+from datetime import datetime
 
 if __name__ == '__main__':
     try:
@@ -29,15 +30,17 @@ if __name__ == '__main__':
         # drop unused columns
         df = df.iloc[:, 2].reset_index()
 
-        # get current date and remove DatetimeIndex for Q
-        df.iloc[:, 0] = pd.to_datetime(df.iloc[:, 0])
-        timestamp_str = df.iloc[-1, 0].strftime('%-d. %-m. %Y')
-        df.iloc[:, 0] = df.iloc[:, 0].dt.strftime('%Y-%m-%d')
+        # get current date
+        timestamp_str = df.iloc[-1, 0]
+        timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
+        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+
+        # prepare for Q
         df = df.set_index(df.columns[0])
         df = df.rename(columns={df.columns[0]: '7-Tage-Schnitt'})
         df.index.rename('Datum', inplace=True)
 
-        notes_chart = '<br>Stand: ' + timestamp_str
+        notes_chart = 'Stand: ' + timestamp_str
 
         # run function
         update_chart(id='2a1327d75c83a9c4ea49f935dd687c24',
