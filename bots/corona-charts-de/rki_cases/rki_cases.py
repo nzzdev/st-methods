@@ -30,11 +30,11 @@ if __name__ == '__main__':
 
         # drop unused columns
         df = df.iloc[:, 2].reset_index()
-        df.index = pd.to_datetime(df.index)
 
         # get current date and remove DatetimeIndex for Q
         timestamp_str = df.iloc[-1, 0].strftime('%-d. %-m. %Y')
-        df.index = df.index.strftime('%Y-%m-%d')
+        df.iloc[:, 0] = pd.to_datetime(df.iloc[:, 0])
+        df.iloc[:, 0] = df.iloc[:, 0].dt.strftime('%Y-%m-%d')
         df = df.set_index(df.columns[0])
         df = df.rename(columns={df.columns[0]: '7-Tage-Schnitt'})
         df.index.rename('Datum', inplace=True)
