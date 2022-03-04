@@ -42,6 +42,8 @@ if __name__ == '__main__':
 
         notes_chart = 'Stand: ' + timestamp_str
 
+        print(df)
+
         # run function
         update_chart(id='2a1327d75c83a9c4ea49f935dd687c24',
                      data=df, notes=notes_chart)
