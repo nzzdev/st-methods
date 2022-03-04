@@ -25,15 +25,13 @@ if __name__ == '__main__':
         # read csv and convert to datetime, add one day
         df = pd.read_csv('./data/nodeoutput.csv',
                          encoding='utf-8', index_col=0)
-        df.index = pd.to_datetime(df.index)
-        df.index = df.index.date + pd.Timedelta(days=1)
 
         # drop unused columns
         df = df.iloc[:, 2].reset_index()
 
         # get current date and remove DatetimeIndex for Q
-        timestamp_str = df.iloc[-1, 0].strftime('%-d. %-m. %Y')
         df.iloc[:, 0] = pd.to_datetime(df.iloc[:, 0])
+        timestamp_str = df.iloc[-1, 0].strftime('%-d. %-m. %Y')
         df.iloc[:, 0] = df.iloc[:, 0].dt.strftime('%Y-%m-%d')
         df = df.set_index(df.columns[0])
         df = df.rename(columns={df.columns[0]: '7-Tage-Schnitt'})
