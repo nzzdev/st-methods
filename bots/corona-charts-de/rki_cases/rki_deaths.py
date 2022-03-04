@@ -21,10 +21,12 @@ if __name__ == '__main__':
         # read data and convert to csv (requires openpyxl)
         df = pd.read_excel(
             xl, sheet_name=0, index_col=0, skiprows=2, engine='openpyxl').dropna(how='all', axis=1)
-        df.to_csv('./fallzahlen.csv', encoding='utf-8')
+        if not os.path.exists('data'):
+            os.makedirs('data')
+        df.to_csv('./data/tote.csv', encoding='utf-8')
 
         # read csv and convert to datetime
-        df = pd.read_csv('./fallzahlen.csv', encoding='utf-8', index_col=0)
+        df = pd.read_csv('./data/tote.csv', encoding='utf-8', index_col=0)
 
         # 7-day moving average of new deaths, drop other columns
         df = df.iloc[:, 3].rolling(
