@@ -51,12 +51,12 @@ if __name__ == '__main__':
             columns={df_divi.columns[0]: 'Intensiv', df_divi.columns[1]: 'Beatmet'})
         df_divi.index.rename('Datum', inplace=True)
         df_divi.index = pd.to_datetime(df_divi.index)
-        # add missing dates and extrapolate missing values
+        # add missing dates and fill in missing values
         df_divi = df_divi.asfreq('d')
         df_divi['Intensiv'] = df_divi['Intensiv'].interpolate(
-            method='slinear', fill_value='extrapolate', limit_direction='backward')
+            method='linear', limit_direction='backward', limit_area='inside')
         df_divi['Beatmet'] = df_divi['Beatmet'].interpolate(
-            method='slinear', fill_value='extrapolate', limit_direction='backward')
+            method='linear', limit_direction='backward', limit_area='inside')
 
         # 7-day mvg average deaths
         df_deaths = df_deaths.iloc[:, 3].rolling(
