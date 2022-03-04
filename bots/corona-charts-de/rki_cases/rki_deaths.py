@@ -25,7 +25,6 @@ if __name__ == '__main__':
 
         # read csv and convert to datetime
         df = pd.read_csv('./fallzahlen.csv', encoding='utf-8', index_col=0)
-        df.index = pd.to_datetime(df.index)
 
         # 7-day moving average of new deaths, drop other columns
         df = df.iloc[:, 3].rolling(
