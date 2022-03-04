@@ -40,7 +40,7 @@ if __name__ == '__main__':
         notes_chart = '<br>Stand: ' + timestamp_str
 
         # run function
-        update_chart(id='2a1327d75c83a9c4ea49f935dd599130',
+        update_chart(id='2a1327d75c83a9c4ea49f935dd687c24',
                      data=df, notes=notes_chart)
 
     except:
