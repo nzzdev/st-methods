@@ -26,6 +26,10 @@ if __name__ == '__main__':
         # read csv and convert to datetime, add one day
         df = pd.read_csv('./data/nodeoutput.csv',
                          encoding='utf-8', index_col=0)
+        df.index = pd.to_datetime(df.index)
+        df.index = df.index.date + pd.Timedelta(days=1)
+        df.index = pd.to_datetime(df.index)
+        df.index = df.index.strftime('%Y-%m-%d')
 
         # drop unused columns
         df = df.iloc[:, 2].reset_index()
