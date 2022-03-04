@@ -30,11 +30,12 @@ if __name__ == '__main__':
         df = df.iloc[:, 3].rolling(
             window=7).mean().round().dropna().astype(int).reset_index()
 
-        # get current date and prepare for Q
+        # get current date and remove DatetimeIndex for Q
         timestamp_str = df.iloc[-1, 0].strftime('%-d. %-m. %Y')
         df = df.set_index(df.columns[0])
         df = df.rename(columns={df.columns[0]: '7-Tage-Schnitt'})
         df.index.rename('Datum', inplace=True)
+        df.index = df.index.strftime('%Y-%m-%d')
 
         notes_chart = 'Stand: ' + timestamp_str
 
