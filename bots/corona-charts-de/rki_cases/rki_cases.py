@@ -14,7 +14,7 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # subprocess.call('npm i dataunwrapper', shell=True)
-        dataunwrapper = subprocess.Popen('node dataunwrapper.js WHW9o',
+        dataunwrapper = subprocess.Popen('node dataunwrapper.js z9o4e',
                                          shell=True, stdout=subprocess.PIPE)
         output = dataunwrapper.stdout.read()
 
@@ -41,9 +41,6 @@ if __name__ == '__main__':
         df.index.rename('Datum', inplace=True)
 
         notes_chart = 'Stand: ' + timestamp_str
-
-        print(df)
-
         # run function
         update_chart(id='2a1327d75c83a9c4ea49f935dd687c24',
                      data=df, notes=notes_chart)
