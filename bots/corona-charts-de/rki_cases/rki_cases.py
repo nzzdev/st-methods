@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import sys
 import subprocess
-from datetime import datetime
 
 if __name__ == '__main__':
     try:
@@ -14,38 +13,44 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # call Node.js script and save output as csv
-        # subprocess.call('npm i dataunwrapper', shell=True)
-        dw_cases = subprocess.Popen('node dataunwrapper.js z9o4e',
-                                    shell=True, stdout=subprocess.PIPE)
-        output = dw_cases.stdout.read()
+        #subprocess.call('npm i dataunwrapper', shell=True)
+        dataunwrapper = subprocess.Popen('node dataunwrapper.js gXuhg',
+                                         shell=True, stdout=subprocess.PIPE)
+        output = dataunwrapper.stdout.read()
 
         if not os.path.exists('data'):
             os.makedirs('data')
-        with open(os.path.join('data', 'node_inzidenz.csv'), 'wb') as f:
+        with open(os.path.join('data', 'node_faelle.csv'), 'wb') as f:
             f.write(output)
 
         # read csv and convert to datetime, add one day
-        df = pd.read_csv('./data/node_inzidenz.csv',
+        df = pd.read_csv('./data/node_faelle.csv',
                          encoding='utf-8', index_col=0)
         df.index = pd.to_datetime(df.index)
         df.index = df.index.date + pd.Timedelta(days=1)
         df.index = pd.to_datetime(df.index)
+        timestamp_str = df.tail(1).index.item().strftime('%-d. %-m. %Y')
         df.index = df.index.strftime('%Y-%m-%d')
 
-        # drop unused columns
-        df = df.iloc[:, 2].reset_index()
+        # save incidence with Destatis pop 2020/12/31 as csv
+        dfi = df.iloc[:, 0].reset_index()
+        dfi = dfi.set_index(dfi.columns[0])
+        dfi = dfi.rename(
+            columns={dfi.columns[0]: 'Inzidenz'}).astype(int)
+        dfi.index.rename('Datum', inplace=True)
+        dfi['Inzidenz'] = round(dfi['Inzidenz'].rolling(
+            min_periods=1, window=7).sum() * 100000 / 83155031, 0).astype(int)
+        dfi = dfi.iloc[7:]
+        dfi.to_csv('./data/inzidenz.csv', encoding='utf-8', index=True)
 
-        # get current date
-        timestamp_str = df.iloc[-1, 0]
-        timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
-        notes_chart = 'Stand: ' + timestamp_str
-
-        # prepare dataframe for Q
+        # save mvg average of new cases as csv
+        df = df.iloc[:, 1].reset_index()
         df = df.set_index(df.columns[0])
         df = df.rename(
-            columns={df.columns[0]: '7-Tage-Schnitt'}).round().astype(int)
+            columns={df.columns[0]: 'Fälle'}).astype(int)
         df.index.rename('Datum', inplace=True)
+        notes_chart = 'Stand: ' + timestamp_str
+        df.to_csv('./data/faelle7d.csv', encoding='utf-8', index=True)
 
         # run function
         update_chart(id='2a1327d75c83a9c4ea49f935dd687c24',

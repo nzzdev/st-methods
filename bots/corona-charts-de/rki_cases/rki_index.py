@@ -15,34 +15,23 @@ if __name__ == '__main__':
 
         # call Node.js script and save output as csv
         # subprocess.call('npm i dataunwrapper', shell=True)
-        dw_cases = subprocess.Popen(
-            'node dataunwrapper.js czrCa', shell=True, stdout=subprocess.PIPE)
-        output = dw_cases.stdout.read()
-        if not os.path.exists('data'):
-            os.makedirs('data')
-        with open(os.path.join('data', 'node_faelle.csv'), 'wb') as f:
-            f.write(output)
         dw_divi = subprocess.Popen(
             'node dataunwrapper.js HCAPG', shell=True, stdout=subprocess.PIPE)
         output = dw_divi.stdout.read()
+        if not os.path.exists('data'):
+            os.makedirs('data')
         with open(os.path.join('data', 'node_divi.csv'), 'wb') as f:
             f.write(output)
 
         # read csv
-        df_cases = pd.read_csv('./data/node_faelle.csv',
+        df_cases = pd.read_csv('./data/faelle7d.csv',
                                encoding='utf-8', index_col=0)
         df_divi = pd.read_csv('./data/node_divi.csv',
                               encoding='utf-8', index_col=0)
         df_deaths = pd.read_csv(
-            './data/tote.csv', encoding='utf-8', index_col=0)
+            './data/tote7d.csv', encoding='utf-8', index_col=0)
 
         # 7-day mvg average new cases
-        df_cases = df_cases.iloc[:, 2].reset_index()
-        df_cases = df_cases.set_index(df_cases.columns[0])
-        df_cases = df_cases.rename(columns={df_cases.columns[0]: 'Fälle'})
-        df_cases.index.rename('Datum', inplace=True)
-        df_cases.index = pd.to_datetime(df_cases.index)
-        df_cases.index = df_cases.index.date + pd.Timedelta(days=1)
         df_cases.index = pd.to_datetime(df_cases.index)
 
         # ICU patients and ventilated
@@ -59,12 +48,6 @@ if __name__ == '__main__':
             method='linear', limit_direction='backward', limit_area='inside')
 
         # 7-day mvg average deaths
-        df_deaths = df_deaths.iloc[:, 3].rolling(
-            window=7).mean().dropna().reset_index()
-        df_deaths = df_deaths.set_index(df_deaths.columns[0])
-        df_deaths = df_deaths.rename(
-            columns={df_deaths.columns[0]: 'Tote'})
-        df_deaths.index.rename('Datum', inplace=True)
         df_deaths.index = pd.to_datetime(df_deaths.index)
 
         # create index with max value of winter 2020/21

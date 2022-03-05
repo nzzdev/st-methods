@@ -1,8 +1,7 @@
 import os
 import pandas as pd
 import sys
-from datetime import datetime
-from urllib.request import Request, urlopen
+import subprocess
 
 if __name__ == '__main__':
     try:
@@ -13,35 +12,36 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
-        # download excel file
-        url = Request('https://www.rki.de/DE/Content/InfAZ/N/Neuartiges_Coronavirus/Daten/Fallzahlen_Gesamtuebersicht.xlsx?__blob=publicationFile',
-                      headers={'User-Agent': 'Mozilla/5.0'})
-        xl = urlopen(url, timeout=10).read()
+        # call Node.js script and save output as csv
+        #subprocess.call('npm i dataunwrapper', shell=True)
+        dataunwrapper = subprocess.Popen('node dataunwrapper.js V721h',
+                                         shell=True, stdout=subprocess.PIPE)
+        output = dataunwrapper.stdout.read()
 
-        # read data and convert to csv (requires openpyxl)
-        df = pd.read_excel(
-            xl, sheet_name=0, index_col=0, skiprows=2, engine='openpyxl').dropna(how='all', axis=1)
         if not os.path.exists('data'):
             os.makedirs('data')
-        df.to_csv('./data/tote.csv', encoding='utf-8')
+        with open(os.path.join('data', 'node_tote.csv'), 'wb') as f:
+            f.write(output)
 
-        # read csv and convert to datetime
-        df = pd.read_csv('./data/tote.csv', encoding='utf-8', index_col=0)
+        # read csv and convert to datetime, add one day
+        df = pd.read_csv('./data/node_tote.csv',
+                         encoding='utf-8', index_col=0)
+        df.index = pd.to_datetime(df.index)
+        df.index = df.index.date + pd.Timedelta(days=1)
+        df.index = pd.to_datetime(df.index)
+        timestamp_str = df.tail(1).index.item().strftime('%-d. %-m. %Y')
+        df.index = df.index.strftime('%Y-%m-%d')
 
-        # 7-day moving average of new deaths, drop other columns
-        df = df.iloc[:, 3].rolling(
-            window=7).mean().round().dropna().astype(int).reset_index()
+        # drop unused columns
+        df = df.iloc[:, 1].reset_index()
 
-        # get current date
-        timestamp_str = df.iloc[-1, 0]
-        timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
-        notes_chart = 'Stand: ' + timestamp_str
-
-        # prepare dataframe for Q
+        # prepare for Q
         df = df.set_index(df.columns[0])
-        df = df.rename(columns={df.columns[0]: '7-Tage-Schnitt'})
+        df = df.rename(
+            columns={df.columns[0]: 'Tote'}).astype(int)
         df.index.rename('Datum', inplace=True)
+        notes_chart = 'Stand: ' + timestamp_str
+        df.to_csv('./data/tote7d.csv', encoding='utf-8', index=True)
 
         # run function
         update_chart(id='2a1327d75c83a9c4ea49f935dd597e1a',
@@ -49,3 +49,5 @@ if __name__ == '__main__':
 
     except:
         raise
+    finally:
+        f.close()
