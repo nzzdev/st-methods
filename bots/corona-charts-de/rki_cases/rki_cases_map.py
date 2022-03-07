@@ -59,10 +59,10 @@ if __name__ == '__main__':
         dftable['Trend'] = (
             ((df.iloc[:, -4] - df.iloc[:, -11]) / df.iloc[:, -11]) * 100)
         dftable['Trend_arrow'] = ''
-        dftable['Trend_arrow'][(dftable['Trend'] <= -10)] = '➘ '
-        dftable['Trend_arrow'][(dftable['Trend'] >= 10)] = '➚ '
-        dftable['Trend_arrow'][(dftable['Trend'] < 10)
-                               & (dftable['Trend'] > -10)] = '➙ '
+        dftable['Trend_arrow'][(dftable['Trend'] <= -5)] = '➘ '
+        dftable['Trend_arrow'][(dftable['Trend'] >= 5)] = '➚ '
+        dftable['Trend_arrow'][(dftable['Trend'] < 5)
+                               & (dftable['Trend'] > -5)] = '➙ '
         # add arrows to trend and ignore regions with NaN values
         dftable['Trend_tmp'] = dftable['Trend'].round(0)
         dftable['Trend_tmp'] = dftable['Trend_tmp'].apply(
