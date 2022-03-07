@@ -46,6 +46,8 @@ if __name__ == '__main__':
             method='linear', limit_direction='backward', limit_area='inside')
         df_divi['Beatmet'] = df_divi['Beatmet'].interpolate(
             method='linear', limit_direction='backward', limit_area='inside')
+        df_divi.astype(int).to_csv('./data/intensiv.csv',
+                                   encoding='utf-8', index=True)
 
         # 7-day mvg average deaths
         df_deaths.index = pd.to_datetime(df_deaths.index)
