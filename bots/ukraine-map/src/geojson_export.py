@@ -13,6 +13,8 @@ def create_geojson(export_path):
 
     df = pd.read_csv(url)
 
+    df = df[df['_visible'] == 1]
+
     data = {
         "type": "FeatureCollection",
         "features": []
@@ -35,7 +37,7 @@ def create_geojson(export_path):
 
     df = df.sort_values('state', ascending=False)
 
-    for i, row in df[df['_visible'] == 1].iterrows():
+    for i, row in df.iterrows():
         try:
             coords = row['latlon'].replace(' ', '').split(',')
 
@@ -48,10 +50,10 @@ def create_geojson(export_path):
                     "type": row['type'],
                     "state": int(row['state']),
                     "date": row['date_text'],
-                    "place": row['place'],
-                    "title": row['title'],
-                    "text": row['text'],
-                    "url": row['url'],
+                    "place": row['place'].strip(),
+                    "title": row['title'].strip(),
+                    "text": row['text'].strip(),
+                    "url": row['url'].strip(),
                     "imgurl": row['imgurl'],
                     "imgsource": row['imgsource'],
                     "imgsourceurl": row['imgsourceurl'],
