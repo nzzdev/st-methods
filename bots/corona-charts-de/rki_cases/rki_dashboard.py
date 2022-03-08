@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
         # create new dataframe for trends and find last non NaN value
         df_meta = pd.concat([df_divi, df_cases, df_deaths], axis=1)
-        df_meta = df_meta.dropna().tail(1)
+        df_meta = df_meta.tail(1)
         df_meta['Trend ICU'] = ((df_divi['Intensiv'].loc[~df_divi['Intensiv'].isnull(
         )].iloc[-1] - df_divi['Intensiv'].loc[~df_divi['Intensiv'].isnull()].iloc[-8]) / df_divi['Intensiv'].loc[~df_divi['Intensiv'].isnull()].iloc[-8]) * 100
         df_meta['Trend Fälle'] = ((df_cases['Fälle'].loc[~df_cases['Fälle'].isnull(
@@ -67,13 +67,15 @@ if __name__ == '__main__':
         diff_cases = df_meta['Fälle']
         diff_deaths = df_meta['Tote']
 
-        # drop columns and merge dataframes
-        df_divi = df_divi[(df_divi.index.get_level_values(0) >= '2020-10-01')]
-        df_cases = df_cases[(
-            df_cases.index.get_level_values(0) >= '2020-10-01')]
-        df_deaths = df_deaths[(
-            df_deaths.index.get_level_values(0) >= '2020-10-01')]
+        # merge dataframes
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
+
+        # check if last row in ICU column is NaN, then shift cases and deaths
+        if pd.isna(df['Intensiv'].iloc[-1]) == True:
+            df['Intensiv'] = df['Intensiv'].shift(1)
+
+        # drop columns
+        df = df[(df.index.get_level_values(0) >= '2020-10-01')]
 
         # get current date for chart notes and reset index
         df = df.reset_index().rename({'Datum': 'date'}, axis='columns')
