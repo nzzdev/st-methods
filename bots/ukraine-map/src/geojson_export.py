@@ -57,6 +57,7 @@ def create_geojson(export_path):
                     "imgurl": row['imgurl'],
                     "imgsource": row['imgsource'],
                     "imgsourceurl": row['imgsourceurl'],
+                    "videoid": row['videoid'],
                     "source": row['source'],
                     "sourceurl": row['sourceurl'],
                 },
