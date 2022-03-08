@@ -2,9 +2,9 @@ name: Update Corona Charts DE
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run every 16 minutes from 7 through 21 CEST (5 - 19 GMT)
+  # This will run every 15 minutes from 7 through 21 CEST (5 - 19 GMT)
   schedule:
-    - cron: "*/16 5-19 * * *"
+    - cron: "*/15 0-22 * * *"
   workflow_dispatch:
 
 jobs:
@@ -51,6 +51,7 @@ jobs:
           python rki_cases/rki_deaths.py
           python rki_cases/rki_cases.py
           python rki_cases/rki_index.py
+          python rki_cases/rki_dashboard.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:

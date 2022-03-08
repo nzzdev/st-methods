@@ -40,17 +40,6 @@
       "environments": [
         {
           "name": "production",
-          "id": "499935fb791197fd126bda721f15884a"
-        }
-      ],
-      "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "549b5522072c32f00946aa2ea073bfbd"
         }
       ],
