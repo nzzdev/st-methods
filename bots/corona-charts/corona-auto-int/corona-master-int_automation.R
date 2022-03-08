@@ -632,7 +632,7 @@ hersteller <- manufacturer %>%
   ungroup() %>%
   spread(Hersteller, Anzahl_Impfdosen) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
-  mutate(Summe = Moderna + `Oxford/AstraZeneca` + `Pfizer/BioNTech` + `Johnson&Johnson` + Sinovac + `Sinopharm/Beijing` + `CanSino` + `Sputnik V` + `Novavax`) %>%
+  mutate(Summe = Moderna + `Oxford/AstraZeneca` + `Pfizer/BioNTech` + `Johnson&Johnson` + Sinovac + `Sinopharm/Beijing` + `CanSino` + `Sputnik V` + `Novavax` + `Covaxin`) %>%
   mutate(Moderna = Moderna/Summe*100,
          `Oxford/AstraZeneca` = `Oxford/AstraZeneca`/Summe*100,
          `Pfizer/BioNTech` = `Pfizer/BioNTech`/Summe*100,
@@ -641,7 +641,8 @@ hersteller <- manufacturer %>%
          `Johnson&Johnson` = `Johnson&Johnson`/Summe*100,
          `CanSino` = `CanSino`/Summe*100,
          `Sputnik V` = `Sputnik V`/Summe*100,
-         `Novavax` = `Novavax`/Summe*100) %>%
+         `Novavax` = `Novavax`/Summe*100,
+         `Covaxin` = `Covaxin`/Summe*100) %>%
   dplyr::rename(
     "AstraZeneca" = "Oxford/AstraZeneca",
     "Biontech/Pfizer" = "Pfizer/BioNTech",
