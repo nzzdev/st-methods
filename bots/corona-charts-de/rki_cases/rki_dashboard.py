@@ -42,7 +42,7 @@ if __name__ == '__main__':
         df_meta['Diff ICU'] = df_divi['Intensiv'].loc[~df_divi['Intensiv'].isnull(
         )].iloc[-1] - df_divi['Intensiv'].loc[~df_divi['Intensiv'].isnull()].iloc[-2]
         df_meta = df_meta[['Trend ICU', 'Trend Fälle',
-                           'Trend Tote', 'Diff ICU', 'Fälle', 'Tote']]
+                           'Trend Tote', 'Diff ICU', 'Fälle', 'Tote']].dropna()
 
         # replace percentages with strings
         cols = ('Trend ICU', 'Trend Fälle', 'Trend Tote')
