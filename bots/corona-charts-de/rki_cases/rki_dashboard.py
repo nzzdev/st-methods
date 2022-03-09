@@ -83,13 +83,13 @@ if __name__ == '__main__':
             df['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         timestamp_str = df['date'].tail(1).item()
 
-        # create dictionaries for JSON file (drop ICU with iloc)
-        dict_icu = df.drop(['Fälle', 'Tote'], axis=1).rename(
-            columns={'Intensiv': 'value'}).to_dict(orient='records')
-        dict_cases = df.drop(df.iloc[:, 1:3], axis=1).rename(
-            columns={'Fälle': 'value'}).to_dict(orient='records')
-        dict_deaths = df.drop(['Intensiv', 'Fälle'], axis=1).rename(
-            columns={'Tote': 'value'}).to_dict(orient='records')
+        # create dictionaries for JSON file
+        dict_cases = df.drop(df.columns[[2, 3]], axis=1).rename(
+            columns={df.columns[1]: 'value'}).to_dict(orient='records')
+        dict_icu = df.drop(df.columns[[1, 3]], axis=1).rename(
+            columns={df.columns[2]: 'value'}).to_dict(orient='records')
+        dict_deaths = df.drop(df.columns[[1, 2]], axis=1).rename(
+            columns={df.columns[3]: 'value'}).to_dict(orient='records')
 
         # additional data for JSON file
         meta_icu = {'indicatorTitle': 'Intensivpatienten', 'date': timestamp_str, 'indicatorSubtitle': 'Belegte Betten',
