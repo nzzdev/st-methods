@@ -32,7 +32,7 @@ jobs:
           pip install -r ./requirements-action.txt
       - name: Run python scripts
         run: |
-          python ./src/q_upload.py -p production
+          python ./src/q_annotation.py -p production
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
