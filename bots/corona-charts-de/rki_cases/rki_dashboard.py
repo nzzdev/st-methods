@@ -20,10 +20,9 @@ if __name__ == '__main__':
                                 encoding='utf-8', index_col=0)
 
         # ICU patients
-        # df_divi['Intensiv'] = df_divi['Intensiv'] + df_divi['Beatmet']
+        # df_divi['Covid-19-Patienten'] = df_divi['Covid-19-Patienten'] + df_divi['Beatmet']
         # df_divi = df_divi.drop(df_divi.columns[1], axis=1)
         df_divi.index.names = ['Datum']
-        df_divi = df_divi.rename({'Covid-19-Patienten': 'Intensiv'}, axis=1)
         df_divi.index = pd.to_datetime(df_divi.index)
 
         # 7-day mvg average new cases
@@ -36,19 +35,19 @@ if __name__ == '__main__':
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
 
         # check if last row in ICU column is nan, then shift ICU patients
-        if pd.isna(df['Intensiv'].iloc[-1]) == True:
-            df['Intensiv'] = df['Intensiv'].shift(1)
+        if pd.isna(df['Covid-19-Patienten'].iloc[-1]) == True:
+            df['Covid-19-Patienten'] = df['Covid-19-Patienten'].shift(1)
 
         # create new dataframe for trends and find last non NaN value
         df_meta = df.copy().tail(1)
-        df_meta['Trend ICU'] = round(((df['Intensiv'].loc[~df['Intensiv'].isnull(
-        )].iloc[-1] - df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-8]) / df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-8]) * 100, 0)
+        df_meta['Trend ICU'] = round(((df['Covid-19-Patienten'].loc[~df['Covid-19-Patienten'].isnull(
+        )].iloc[-1] - df['Covid-19-Patienten'].loc[~df['Covid-19-Patienten'].isnull()].iloc[-8]) / df['Covid-19-Patienten'].loc[~df['Covid-19-Patienten'].isnull()].iloc[-8]) * 100, 0)
         df_meta['Trend Fälle'] = round(((df['Fälle'].loc[~df['Fälle'].isnull(
         )].iloc[-1] - df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) / df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) * 100, 0)
         df_meta['Trend Tote'] = round(((df['Tote'].loc[~df['Tote'].isnull(
         )].iloc[-1] - df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) / df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) * 100, 0)
-        df_meta['Diff ICU'] = df['Intensiv'].loc[~df['Intensiv'].isnull(
-        )].iloc[-1] - df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-2]
+        df_meta['Diff ICU'] = df['Covid-19-Patienten'].loc[~df['Covid-19-Patienten'].isnull(
+        )].iloc[-1] - df['Covid-19-Patienten'].loc[~df['Covid-19-Patienten'].isnull()].iloc[-2]
         df_meta = df_meta[['Trend ICU', 'Trend Fälle',
                            'Trend Tote', 'Diff ICU', 'Fälle', 'Tote']]
 
@@ -87,10 +86,10 @@ if __name__ == '__main__':
 
         # create dictionaries for JSON file
         dict_icu = df.drop(['Fälle', 'Tote'], axis=1).rename(
-            columns={'Intensiv': 'value'}).to_dict(orient='records')
-        dict_cases = df.drop(['Intensiv', 'Tote'], axis=1).rename(
+            columns={'Covid-19-Patienten': 'value'}).to_dict(orient='records')
+        dict_cases = df.drop(['Covid-19-Patienten', 'Tote'], axis=1).rename(
             columns={'Fälle': 'value'}).to_dict(orient='records')
-        dict_deaths = df.drop(['Intensiv', 'Fälle'], axis=1).rename(
+        dict_deaths = df.drop(['Covid-19-Patienten', 'Fälle'], axis=1).rename(
             columns={'Tote': 'value'}).to_dict(orient='records')
 
         # additional data for JSON file
