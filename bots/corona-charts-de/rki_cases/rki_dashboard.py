@@ -22,10 +22,12 @@ if __name__ == '__main__':
         # ICU patients
         # df_divi['Intensiv'] = df_divi['Intensiv'] + df_divi['Beatmet']
         # df_divi = df_divi.drop(df_divi.columns[1], axis=1)
+        print(df_divi)
         df_divi.rename(
             columns={'Covid-19-Patienten': 'Intensiv'}, inplace=True)
         df_divi.index.names = ['Datum']
         df_divi.index = pd.to_datetime(df_divi.index)
+        print(df_divi)
 
         # 7-day mvg average new cases
         df_cases.index = pd.to_datetime(df_cases.index)
@@ -35,6 +37,7 @@ if __name__ == '__main__':
 
         # merge dataframes
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
+        print(df)
 
         # check if last row in ICU column is nan, then shift ICU patients
         if pd.isna(df['Intensiv'].iloc[-1]) == True:
