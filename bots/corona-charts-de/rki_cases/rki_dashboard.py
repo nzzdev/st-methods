@@ -33,11 +33,11 @@ if __name__ == '__main__':
         # merge dataframes
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
 
-        # check if last row in ICU column is nan, then shift ICU patients
+        # check if last row in ICU column (#1) is nan, then shift ICU patients
         if pd.isna(df.iloc[-1:, 1].item()) == True:
             df.iloc[:, 1] = df.iloc[:, 1].shift(1)
 
-        # create new dataframe for trends and find last non NaN value
+        # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df.copy().tail(1)
         df_meta['Trend ICU'] = round(((df.iloc[:, 1].loc[~df.iloc[:, 1].isnull(
         )].iloc[-1] - df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()].iloc[-8]) / df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()].iloc[-8]) * 100, 0)
@@ -83,10 +83,10 @@ if __name__ == '__main__':
             df['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         timestamp_str = df['date'].tail(1).item()
 
-        # create dictionaries for JSON file
+        # create dictionaries for JSON file (drop ICU with iloc)
         dict_icu = df.drop(['Fälle', 'Tote'], axis=1).rename(
             columns={'Intensiv': 'value'}).to_dict(orient='records')
-        dict_cases = df.drop(['Intensiv', 'Tote'], axis=1).rename(
+        dict_cases = df.drop(df.iloc[:, 1:3], axis=1).rename(
             columns={'Fälle': 'value'}).to_dict(orient='records')
         dict_deaths = df.drop(['Intensiv', 'Fälle'], axis=1).rename(
             columns={'Tote': 'value'}).to_dict(orient='records')
