@@ -78,7 +78,7 @@ if __name__ == '__main__':
         notes_chartbeds = '¹ Belegte und freie Betten ohne Notfallreserve (wird seit dem 3. 8. 2020 separat erfasst).<br>Stand: ' + \
             timestamp_str
 
-        dfpatients.to_csv('../rki_cases/data/intensiv12h.csv',
+        dfpatients.to_csv('./data/intensiv12h.csv',
                           encoding='utf-8', index=True)
 
         # insert id manually and run function

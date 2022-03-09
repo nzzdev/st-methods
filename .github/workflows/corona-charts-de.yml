@@ -40,13 +40,13 @@ jobs:
           python rki_vaccinations_daily/rki_vaccinations_daily.py
           python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity_age.py
           python rki_vaccinations_states/rki_vaccinations_states.py
-          python divi_icu/divi_icu.py
-          python divi_icu/divi_icu_map.py
           python rki_age_groups/rki_hospitalizations.py
           python rki_age_groups/rki_incidence.py
           python rki_notbremse/rki_notbremse.py
           python rki_2g/rki_2g.py
           python rki_tests/rki_tests.py
+          python rki_cases/divi_icu.py
+          python rki_cases/divi_icu_map.py
           python rki_cases/rki_cases_map.py
           python rki_cases/rki_deaths.py
           python rki_cases/rki_cases.py
