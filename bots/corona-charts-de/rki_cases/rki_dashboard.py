@@ -33,8 +33,8 @@ if __name__ == '__main__':
         # merge dataframes
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
 
-        # check if last row in ICU column is not nan, then shift cases and deaths
-        if pd.notna(df['Intensiv'].iloc[-1]) == True:
+        # check if last row in ICU column is nan, then shift cases and deaths
+        if pd.isna(df['Intensiv'].iloc[-1]) == True:
             df['Fälle'] = df['Fälle'].shift(1)
             df['Tote'] = df['Tote'].shift(1)
 
