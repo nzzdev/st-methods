@@ -78,6 +78,9 @@ if __name__ == '__main__':
         notes_chartbeds = '¹ Belegte und freie Betten ohne Notfallreserve (wird seit dem 3. 8. 2020 separat erfasst).<br>Stand: ' + \
             timestamp_str
 
+        dfpatients.to_csv('./data/intensiv12h.csv',
+                          encoding='utf-8', index=True)
+
         # insert id manually and run function
         update_chart(id='ab97925bcc5055b33011fb4d3326e163',
                      data=dfpatients, notes=notes_chartpatients)

@@ -12,7 +12,7 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # read csv
-        df_divi = pd.read_csv('./data/intensiv.csv',
+        df_divi = pd.read_csv('./data/intensiv12h.csv',
                               encoding='utf-8', index_col=0)
         df_cases = pd.read_csv('./data/faelle7d.csv',
                                encoding='utf-8', index_col=0)
@@ -20,8 +20,11 @@ if __name__ == '__main__':
                                 encoding='utf-8', index_col=0)
 
         # ICU patients
-        df_divi['Intensiv'] = df_divi['Intensiv'] + df_divi['Beatmet']
-        df_divi = df_divi.drop(df_divi.columns[1], axis=1)
+        # df_divi['Intensiv'] = df_divi['Intensiv'] + df_divi['Beatmet']
+        # df_divi = df_divi.drop(df_divi.columns[1], axis=1)
+        df_divi.rename(
+            columns={'Covid-19-Patienten': 'Intensiv'}, inplace=True)
+        df_divi.index.names = ['Datum']
         df_divi.index = pd.to_datetime(df_divi.index)
 
         # 7-day mvg average new cases
@@ -33,10 +36,9 @@ if __name__ == '__main__':
         # merge dataframes
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
 
-        # check if last row in ICU column is nan, then shift cases and deaths
+        # check if last row in ICU column is nan, then shift ICU patients
         if pd.isna(df['Intensiv'].iloc[-1]) == True:
-            df['Fälle'] = df['Fälle'].shift(1)
-            df['Tote'] = df['Tote'].shift(1)
+            df['Intensiv'] = df['Intensiv'].shift(1)
 
         # create new dataframe for trends and find last non NaN value
         df_meta = df.copy().tail(1)
