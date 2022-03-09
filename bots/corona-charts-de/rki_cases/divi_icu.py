@@ -78,14 +78,17 @@ if __name__ == '__main__':
         notes_chartbeds = '¹ Belegte und freie Betten ohne Notfallreserve (wird seit dem 3. 8. 2020 separat erfasst).<br>Stand: ' + \
             timestamp_str
 
-        dfpatients.to_csv('./data/intensiv12h.csv',
-                          encoding='utf-8', index=True)
-
         # insert id manually and run function
         update_chart(id='ab97925bcc5055b33011fb4d3326e163',
                      data=dfpatients, notes=notes_chartpatients)
         update_chart(id='ca6ad78976cf6de104f01ab6f59ce114',
                      data=dfbeds, notes=notes_chartbeds)
+
+        dfpatients.index.names = ['Datum']
+        dfpatients = dfpatients.rename(
+            {'Covid-19-Patienten': 'Intensiv'}, axis=1)
+        dfpatients.to_csv('./data/intensiv12h.csv',
+                          encoding='utf-8', index=True)
 
     except:
         raise
