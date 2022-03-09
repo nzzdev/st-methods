@@ -34,19 +34,19 @@ if __name__ == '__main__':
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
 
         # check if last row in ICU column is nan, then shift ICU patients
-        if pd.isna(df['Intensiv'].iloc[-1]) == True:
-            df['Intensiv'] = df['Intensiv'].shift(1)
+        if pd.isna(df.iloc[-1:, 1].item()) == True:
+            df.iloc[:, 1] = df.iloc[:, 1].shift(1)
 
         # create new dataframe for trends and find last non NaN value
         df_meta = df.copy().tail(1)
-        df_meta['Trend ICU'] = round(((df['Intensiv'].loc[~df['Intensiv'].isnull(
-        )].iloc[-1] - df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-8]) / df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-8]) * 100, 0)
+        df_meta['Trend ICU'] = round(((df.iloc[:, 1].loc[~df.iloc[:, 1].isnull(
+        )].iloc[-1] - df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()].iloc[-8]) / df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()].iloc[-8]) * 100, 0)
         df_meta['Trend Fälle'] = round(((df['Fälle'].loc[~df['Fälle'].isnull(
         )].iloc[-1] - df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) / df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) * 100, 0)
         df_meta['Trend Tote'] = round(((df['Tote'].loc[~df['Tote'].isnull(
         )].iloc[-1] - df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) / df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) * 100, 0)
-        df_meta['Diff ICU'] = df['Intensiv'].loc[~df['Intensiv'].isnull(
-        )].iloc[-1] - df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-2]
+        df_meta['Diff ICU'] = df.iloc[:, 1].loc[~df.iloc[:, 1].isnull(
+        )].iloc[-1] - df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()].iloc[-2]
         df_meta = df_meta[['Trend ICU', 'Trend Fälle',
                            'Trend Tote', 'Diff ICU', 'Fälle', 'Tote']]
 
