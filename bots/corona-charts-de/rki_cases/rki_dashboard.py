@@ -37,16 +37,15 @@ if __name__ == '__main__':
         if pd.notna(df['Intensiv'].iloc[-1]) == True:
             df['Fälle'] = df['Fälle'].shift(1)
             df['Tote'] = df['Tote'].shift(1)
-        df.dropna(inplace=True)
 
         # create new dataframe for trends and find last non NaN value
         df_meta = df.copy().tail(1)
-        df_meta['Trend ICU'] = ((df['Intensiv'].loc[~df['Intensiv'].isnull(
-        )].iloc[-1] - df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-8]) / df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-8]) * 100
-        df_meta['Trend Fälle'] = ((df['Fälle'].loc[~df['Fälle'].isnull(
-        )].iloc[-1] - df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) / df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) * 100
-        df_meta['Trend Tote'] = ((df['Tote'].loc[~df['Tote'].isnull(
-        )].iloc[-1] - df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) / df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) * 100
+        df_meta['Trend ICU'] = round(((df['Intensiv'].loc[~df['Intensiv'].isnull(
+        )].iloc[-1] - df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-8]) / df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-8]) * 100, 0)
+        df_meta['Trend Fälle'] = round(((df['Fälle'].loc[~df['Fälle'].isnull(
+        )].iloc[-1] - df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) / df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) * 100, 0)
+        df_meta['Trend Tote'] = round(((df['Tote'].loc[~df['Tote'].isnull(
+        )].iloc[-1] - df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) / df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) * 100, 0)
         df_meta['Diff ICU'] = df['Intensiv'].loc[~df['Intensiv'].isnull(
         )].iloc[-1] - df['Intensiv'].loc[~df['Intensiv'].isnull()].iloc[-2]
         df_meta = df_meta[['Trend ICU', 'Trend Fälle',
@@ -77,6 +76,7 @@ if __name__ == '__main__':
 
         # drop unused columns
         df = df[(df.index.get_level_values(0) >= '2020-10-01')].astype(int)
+        df.dropna(inplace=True)
 
         # get current date for chart notes and reset index
         df = df.reset_index().rename({'Datum': 'date'}, axis='columns')
