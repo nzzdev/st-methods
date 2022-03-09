@@ -1,4 +1,4 @@
-name: Ukraine Annotations STAGING
+name: Ukraine Areas STAGING
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
@@ -25,14 +25,14 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/ukraine-map/requirements-action-annotation.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/ukraine-map/requirements-action-areas.txt') }}
       - name: Install python packages
         run: |
           python -m pip install --upgrade pip
-          pip install -r ./requirements-action-annotation.txt
+          pip install -r ./requirements-action-areas.txt
       - name: Run python scripts
         run: |
-          python ./src/q_annotation.py -p staging
+          python ./src/q_areas.py -p staging
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
