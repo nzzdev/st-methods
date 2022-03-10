@@ -40,6 +40,7 @@ jobs:
           python rki_vaccinations_daily/rki_vaccinations_daily.py
           python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity_age.py
           python rki_vaccinations_states/rki_vaccinations_states.py
+          python rki_vaccinations_states/rki_vaccinations_type.py
           python rki_age_groups/rki_hospitalizations.py
           python rki_age_groups/rki_incidence.py
           python rki_notbremse/rki_notbremse.py
