@@ -30,6 +30,12 @@ if __name__ == '__main__':
         timestamp_str = df['Impfdatum'].tail(1).item() + pd.Timedelta(days=1)
         timestamp_str = timestamp_str.strftime('%-d. %-m. %Y')
 
+        # add empty row with next week number for Q step-after chart
+        df = df.append(df.loc[df.index[-1]], ignore_index=True)
+        df.loc[df.index[-1], 'Impfdatum'] = df.loc[df.index[-2],
+                                                   'Impfdatum'] + pd.Timedelta(days=7)
+        df.loc[df.index[-1], 'Anzahl'] = 0
+
         # calculate sum and convert to week number
         df['Impfdatum'] = df['Impfdatum'].apply(lambda x: str(
             x.isocalendar()[0]) + '-W' + str(x.isocalendar()[1]).zfill(2))
