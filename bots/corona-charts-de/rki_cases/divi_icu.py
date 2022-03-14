@@ -84,6 +84,12 @@ if __name__ == '__main__':
         update_chart(id='ca6ad78976cf6de104f01ab6f59ce114',
                      data=dfbeds, notes=notes_chartbeds)
 
+        dfpatients.index.names = ['Datum']
+        dfpatients = dfpatients.rename(
+            {'Covid-19-Patienten': 'Intensiv'}, axis=1)
+        dfpatients.to_csv('./data/intensiv12h.csv',
+                          encoding='utf-8', index=True)
+
     except:
         raise
     finally:
