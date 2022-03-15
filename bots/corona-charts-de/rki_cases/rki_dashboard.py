@@ -45,8 +45,9 @@ if __name__ == '__main__':
         )].iloc[-1] - df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) / df['Fälle'].loc[~df['Fälle'].isnull()].iloc[-8]) * 100, 0)
         df_meta['Trend Tote'] = round(((df['Tote'].loc[~df['Tote'].isnull(
         )].iloc[-1] - df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) / df['Tote'].loc[~df['Tote'].isnull()].iloc[-8]) * 100, 0)
-        df_meta['Diff ICU'] = df.iloc[:, 1].loc[~df.iloc[:, 1].isnull(
-        )].iloc[-1] - df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()].iloc[-2]
+        # df_meta['Diff ICU'] = df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()].iloc[-1] - df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()].iloc[-2]
+        df_meta['Diff ICU'] = df.iloc[:, 1].loc[~df.iloc[:, 1].isnull()
+                                                ].iloc[-1]
         df_meta = df_meta[['Trend ICU', 'Trend Fälle',
                            'Trend Tote', 'Diff ICU', 'Fälle', 'Tote']]
 
