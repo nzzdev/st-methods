@@ -112,16 +112,16 @@ update_chart(id = "f649302cbf7dd462f339d0cc35d9695a",
 
 #### Update UZH survey ####
 
-uzh_raw <- read_csv("https://covid-norms.ch/wp-content/uploads/data/complete.csv") %>%
-  mutate(Woche = paste0(dYear, "-W", KW)) %>%
-  filter(Wert == "prop") %>%
-  select(Woche, f300_1_Geimpft, f300_1_Zustimmung, f300_1_Neutral, f300_1_Ablehnung) %>%
-  mutate_at(2:5, .funs = funs(.*100)) %>%
-  rename(Geimpfte = f300_1_Geimpft, Impfwillige = f300_1_Zustimmung, Unentschlossene = f300_1_Neutral, Ablehnende = f300_1_Ablehnung)
+#uzh_raw <- read_csv("https://covid-norms.ch/wp-content/uploads/data/complete.csv") %>%
+ # mutate(Woche = paste0(dYear, "-W", KW)) %>%
+  #filter(Wert == "prop") %>%
+  #select(Woche, f300_1_Geimpft, f300_1_Zustimmung, f300_1_Neutral, f300_1_Ablehnung) %>%
+  #rename(Geimpfte = f300_1_Geimpft, Impfwillige = f300_1_Zustimmung, Unentschlossene = f300_1_Neutral, Ablehnende = f300_1_Ablehnung)
+  #mutate_at(2:5, .funs = funs(.*100)) %>%
 
 # write
-update_chart(id = "26356a1918b687a3e1a7ff0d5e0b9675", 
-             data = uzh_raw)
+#update_chart(id = "26356a1918b687a3e1a7ff0d5e0b9675", 
+ #            data = uzh_raw)
 
 #### Update BAG data ####
 # Load Data Schema
