@@ -872,6 +872,7 @@ update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
 
 vacc_persons_ch <- ch_vacc_persons %>%
   filter(geoRegion == "CHFL") %>%
+  group_by(type) %>%
   filter(date == max(date)) %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
   select(-pop, -sumTotal, -date, -geoRegion) %>%
