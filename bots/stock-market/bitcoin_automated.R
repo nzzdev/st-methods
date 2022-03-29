@@ -17,7 +17,11 @@ source("./helpers.R")
 date <- Sys.Date()
 teny_back <- ymd(date) - years(10)
 oney_back <- ymd(date) - years(1)
+if(date != '2022-03-29') {
 onem_back <- ymd(date) - months(1)
+} else {
+  onem_back <- '2022-02-28'
+}
 
 current_price <- get_current_price() %>%
   select(bpi.USD.rate_float) %>%
