@@ -293,17 +293,6 @@
       "environments": [
         {
           "name": "production",
-          "id": "26356a1918b687a3e1a7ff0d5e0b9675"
-        }
-      ],
-      "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "e5aee99aec92ee1365613b671ef405f7"
         }
       ],

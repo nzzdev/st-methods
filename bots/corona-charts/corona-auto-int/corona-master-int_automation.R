@@ -89,6 +89,14 @@ corr_chile_deaths <- ((new_chile_deaths/7290)*1057)
 cum_chile_deaths_check <- cumsum(new_chile_deaths+corr_chile_deaths)
 all_ctry$dead[all_ctry$country == "Chile" & all_ctry$date < "2020-07-17"] <- cum_chile_deaths_check
 
+#chile_2 deaths adjust
+cum_chile_deaths_2 <- all_ctry$dead[all_ctry$country == "Chile" & all_ctry$date < "2022-03-21"]
+new_chile_deaths_2 <- cum_chile_deaths_2 - lag(cum_chile_deaths_2,1)
+new_chile_deaths_2[1] <- 0
+corr_chile_deaths_2 <- ((new_chile_deaths_2/44518)*11447)
+cum_chile_deaths_check_2 <- cumsum(new_chile_deaths_2+corr_chile_deaths_2)
+all_ctry$dead[all_ctry$country == "Chile" & all_ctry$date < "2022-03-21"] <- cum_chile_deaths_check_2
+
 #peru deaths adjust
 cum_peru_deaths <- all_ctry$dead[all_ctry$country == "Peru" & all_ctry$date < "2020-07-23"]
 new_peru_deaths <- cum_peru_deaths - lag(cum_peru_deaths,1)
