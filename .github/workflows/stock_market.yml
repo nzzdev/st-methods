@@ -57,7 +57,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python economic_inidcators_March_2020.py
+          python economic_indicators_March_2020.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
