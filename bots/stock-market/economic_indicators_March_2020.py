@@ -119,7 +119,7 @@ benzin = benzin[['Reiseziel', '95']]
 benzin.rename(columns = {'95': 'Benzinpreis'}, inplace = True)
 benzin.sort_values(by = 'Benzinpreis', ascending = False, inplace = True)
 
-update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin)
+#update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin)
 
 
 
@@ -268,7 +268,7 @@ smi.to_csv('./stock-market/SMI.csv', index = False)
 kurs = euro['EURCHF=X'].tail(1).values
 benzin_de = benzin.copy()
 benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
-update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = benzin_de)
+#update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = benzin_de)
 
 
 # Unternehmen, die Russland verlassen
