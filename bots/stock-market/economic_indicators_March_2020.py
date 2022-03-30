@@ -76,7 +76,7 @@ zh_2019.rename(columns = {'value': '2019'}, inplace = True)
 zh_2022.rename(columns = {'value': '2022'}, inplace = True)
 zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
 
-update_chart(id='6aa31459fbbb1211b5ec05508a5413ca')
+update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh)
 
 
 # Energie
@@ -119,7 +119,7 @@ benzin = benzin[['Reiseziel', '95']]
 benzin.rename(columns = {'95': 'Benzinpreis'}, inplace = True)
 benzin.sort_values(by = 'Benzinpreis', ascending = False, inplace = True)
 
-update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1')
+update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin)
 
 
 
@@ -165,8 +165,8 @@ fuel_prices_de = fuel_prices_old_de.append(fuel_prices_de)
 
 fuel_prices_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
-update_chart(id = '1dda540238574eac80e865faa0d4aaba')
-update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6')
+update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices)
+update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de)
 
 fuel_prices.to_csv('./stock-market/Benzinpreise.csv', index = False)
 fuel_prices_de.to_csv('./stock-market/Benzinpreise_de.csv', index = False)
@@ -210,8 +210,8 @@ oil_price_de = oil_price_old_de.append(oil_price_de)
 
 oil_price_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
-update_chart(id = 'b1717dcaee838699497b647ebbc25935')
-update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6')
+update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price)
+update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de)
 
 oil_price.to_csv('./stock-market/oil_price.csv', index = False)
 oil_price_de.to_csv('./stock-market/oil_price_de.csv', index = False)
@@ -223,20 +223,20 @@ tickers = ["EURCHF=X", "KE=F", "TTF=F", "^GDAXI", "EURUSD=X"] #Subtitute for the
 df = yf.download(tickers,  start = "2019-01-01" , end = date.today())
 
 euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].reset_index().dropna()
-update_chart(id = '1dda540238574eac80e865faa0dcab83')
+update_chart(id = '1dda540238574eac80e865faa0dcab83', data = euro)
 
 dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].reset_index().dropna()
-update_chart(id = '5ac628c4bb388d36fb2f5cbc744a628c')
+update_chart(id = '5ac628c4bb388d36fb2f5cbc744a628c', data = dollar)
 
 dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].reset_index().dropna()
-update_chart(id = 'a78c9d9de3230aea314700dc582d873d')
+update_chart(id = 'a78c9d9de3230aea314700dc582d873d', data = dax)
 
 wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].reset_index().dropna()
 wheat['2019'] = df['Close']['KE=F'][(df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 wheat.rename(columns={wheat.columns[1]: '2022'}, inplace = True)
 wheat = wheat[['Date', '2019', '2022']]
 
-update_chart(id = 'b1717dcaee838699497b647ebbceda21')
+update_chart(id = 'b1717dcaee838699497b647ebbceda21', data = wheat)
 
 
 gas = df['Close']['TTF=F'][df.index >= '2022-01-01'].reset_index().dropna()
@@ -244,7 +244,7 @@ gas['2019'] = df['Close']['TTF=F'][(df.index >= '2019-01-01') & (df.index <= '20
 gas.rename(columns={gas.columns[1]: '2022'}, inplace = True)
 gas = gas[['Date', '2019', '2022']]
 
-update_chart(id = '1dda540238574eac80e865faa0ddbafc')
+update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas)
 
 
 smi_old = pd.read_csv('./stock-market/SMI.csv')
@@ -262,13 +262,13 @@ smi= pd.DataFrame(data, index=[0])
 smi = smi_old.append(smi)
 smi.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
-update_chart(id = '1dda540238574eac80e865faa0dc2348')
+update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi)
 smi.to_csv('./stock-market/SMI.csv', index = False)
 
 kurs = euro['EURCHF=X'].tail(1).values
 benzin_de = benzin.copy()
 benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
-update_chart(id = 'a78c9d9de3230aea314700dc5855b330')
+update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = benzin_de)
 
 
 # Unternehmen, die Russland verlassen
@@ -289,7 +289,7 @@ data = {'type': ['Suspendierung des Russlandgeschäfts',
 
 df = pd.DataFrame(data = data)
 df = df.sort_values(by = 'number', ascending = False)
-update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e')
+update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e', data = df)
 
 
 # BIP Indikator
@@ -308,4 +308,4 @@ bip.loc[bip['W'] < 10 , 'KW'] = bip['year'].astype(str) + '-W0' + bip['W'].astyp
 bip.loc[bip['W'] >= 10 , 'KW'] = bip['year'].astype(str) + '-W' + bip['W'].astype(int).astype(str)
 bip =  bip[['KW', 'Index']]
 
-update_chart(id = 'c366afc02f262094669128cd054faf78')
+update_chart(id = 'c366afc02f262094669128cd054faf78', data = bip)
