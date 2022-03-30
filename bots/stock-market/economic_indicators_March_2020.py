@@ -84,37 +84,37 @@ update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh)
 url = 'https://www.tcs.ch/de/camping-reisen/reiseinformationen/wissenswertes/fahrkosten-gebuehren/benzinpreise.php'
 
 # Opens a website and read its binary contents (HTTP Response Body)
-def url_get_contents(url):
+#def url_get_contents(url):
 
 	#making request to the website
-        req = urllib.request.Request(url=url)
-        f = urllib.request.urlopen(req)
+        #req = urllib.request.Request(url=url)
+        #f = urllib.request.urlopen(req)
 
 	#reading contents of the website
-        return f.read()
+        #return f.read()
 
 # defining the html contents of a URL.
-xhtml = url_get_contents(url).decode('utf-8')
+#xhtml = url_get_contents(url).decode('utf-8')
 
 # Defining the HTMLTableParser object
-p = HTMLTableParser()
+#p = HTMLTableParser()
 
 # feeding the html contents in the HTMLTableParser object
-p.feed(xhtml)
+#p.feed(xhtml)
 
-benzin = pd.DataFrame(p.tables[2]).dropna()
-benzin.columns = benzin.iloc[0]
-benzin = benzin[1:]
-benzin = benzin[benzin.Reiseziel != 'Russland']
+#benzin = pd.DataFrame(p.tables[2]).dropna()
+#benzin.columns = benzin.iloc[0]
+#benzin = benzin[1:]
+#benzin = benzin[benzin.Reiseziel != 'Russland']
 
-benzin['95'] = pd.to_numeric(benzin['95']).round(2)
-benzin['98'] = pd.to_numeric(benzin['98']).round(2)
-benzin.loc[benzin['95'].isna(), '95'] = benzin['98']
-benzin = benzin[['Reiseziel', '95']]
-benzin.rename(columns = {'95': 'Benzinpreis'}, inplace = True)
-benzin.sort_values(by = 'Benzinpreis', ascending = False, inplace = True)
+#benzin['95'] = pd.to_numeric(benzin['95']).round(2)
+#benzin['98'] = pd.to_numeric(benzin['98']).round(2)
+#benzin.loc[benzin['95'].isna(), '95'] = benzin['98']
+#benzin = benzin[['Reiseziel', '95']]
+#benzin.rename(columns = {'95': 'Benzinpreis'}, inplace = True)
+#benzin.sort_values(by = 'Benzinpreis', ascending = False, inplace = True)
 
-update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin)
+#update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin)
 
 
 
@@ -261,8 +261,8 @@ update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi)
 smi.to_csv('./SMI.csv', index = False)
 
 kurs = euro['EURCHF=X'].tail(1).values
-benzin_de = benzin.copy()
-benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
+#benzin_de = benzin.copy()
+#benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
 #update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = benzin_de)
 
 
