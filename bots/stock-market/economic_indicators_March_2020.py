@@ -290,12 +290,14 @@ update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e', data = df)
 # BIP Indikator
 
 url = "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa_publish.xls.download.xls/wwa_publish.xls"
+r = requests.get(url)
+open('temp.xls', 'wb').write(r.content)
 
-file = msoffcrypto.OfficeFile (open ('/Users/florianseliger/Downloads/wwa_publish-2.xls', 'rb')) # read the original file
+file = msoffcrypto.OfficeFile (open ('temp.xls', 'rb')) # read the original file
 file.load_key (password = 'VelvetSweatshop') # Fill in the password, if it can be opened directly, the default password is 'VelvetSweatshop'
-file.decrypt (open ('/Users/florianseliger/Downloads/decrypted.xls', 'wb'))
+file.decrypt (open ('./decrypted.xls', 'wb'))
 
-bip = pd.read_excel('/Users/florianseliger/Downloads/decrypted.xls', sheet_name = 'rel_preCovid')
+bip = pd.read_excel('./decrypted.xls', sheet_name = 'rel_preCovid')
 bip = bip[3:]
 bip.rename(columns = {bip.columns[0]: 'year', bip.columns[1]: 'W', bip.columns[2]: 'Index'}, inplace = True)
 
