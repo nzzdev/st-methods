@@ -3,7 +3,7 @@ import pandas as pd
 
 def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", asset_groups=[], files=[]):  # Q helper function
     # read qConfig file
-    json_file = open('../q.config.json')
+    json_file = open('./q.config.json')
     qConfig = json.load(json_file)
     # update chart properties
     for item in qConfig.get('items'):
