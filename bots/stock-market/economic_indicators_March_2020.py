@@ -139,8 +139,8 @@ element = results.find_all("li", class_="sc-eBhrFy iKCSre")[0]
 text = element.find("b").text.strip()
 price_e10 = pd.to_numeric(re.findall(r'\d+\,\d+', text)[0].replace(',','.'))
 
-fuel_prices_old = pd.read_csv('./stock-market/Benzinpreise.csv')
-fuel_prices_old_de = pd.read_csv('./stock-market/Benzinpreise_de.csv')
+fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
+fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')
 
 
 data = {'date': date.today().strftime('%Y-%m-%d'), 
@@ -168,8 +168,8 @@ fuel_prices_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices)
 update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de)
 
-fuel_prices.to_csv('./stock-market/Benzinpreise.csv', index = False)
-fuel_prices_de.to_csv('./stock-market/Benzinpreise_de.csv', index = False)
+fuel_prices.to_csv('./Benzinpreise.csv', index = False)
+fuel_prices_de.to_csv('./Benzinpreise_de.csv', index = False)
 
 
 url = 'https://www.heizoel24.ch/heizoelpreise'
@@ -187,8 +187,8 @@ price_de = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
 price = pd.to_numeric(re.findall(r'\d+\,\d+', price)[0].replace(',','.'))
 price_de = pd.to_numeric(re.findall(r'\d+\,\d+', price_de)[0].replace(',','.'))
 
-oil_price_old = pd.read_csv('./stock-market/oil_price.csv')
-oil_price_old_de = pd.read_csv('./stock-market/oil_price_de.csv')
+oil_price_old = pd.read_csv('./oil_price.csv')
+oil_price_old_de = pd.read_csv('./oil_price_de.csv')
 
 data = {'Datum': date.today().strftime('%Y-%m-%d'), 
         '2019': 89.62,
@@ -213,8 +213,8 @@ oil_price_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price)
 update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de)
 
-oil_price.to_csv('./stock-market/oil_price.csv', index = False)
-oil_price_de.to_csv('./stock-market/oil_price_de.csv', index = False)
+oil_price.to_csv('./oil_price.csv', index = False)
+oil_price_de.to_csv('./oil_price_de.csv', index = False)
 
 
 # Stock market data
@@ -247,7 +247,7 @@ gas = gas[['Date', '2019', '2022']]
 update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas)
 
 
-smi_old = pd.read_csv('./stock-market/SMI.csv')
+smi_old = pd.read_csv('./SMI.csv')
 
 url = 'https://www.marketwatch.com/investing/index/smi?countrycode=ch'
 page = requests.get(url)
@@ -263,7 +263,7 @@ smi = smi_old.append(smi)
 smi.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
 update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi)
-smi.to_csv('./stock-market/SMI.csv', index = False)
+smi.to_csv('./SMI.csv', index = False)
 
 kurs = euro['EURCHF=X'].tail(1).values
 benzin_de = benzin.copy()
