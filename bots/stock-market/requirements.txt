@@ -19,3 +19,4 @@ msoffcrypto-tool==5.0.0
 requests_html==0.10.0
 html-table-parser-python3==0.2.0
 openpyxl==3.0.9
+xlrd==1.0.0
