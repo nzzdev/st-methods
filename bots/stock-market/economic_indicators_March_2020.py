@@ -33,28 +33,28 @@ update_chart(id='5ac628c4bb388d36fb2f5cbc743f5f8b', data = congestion_de[(conges
 
 # LKW
 
-#lkw = pd.read_excel('https://www.destatis.de/DE/Themen/Branchen-Unternehmen/Industrie-Verarbeitendes-Gewerbe/Tabellen/Lkw-Maut-Fahrleistungsindex-Daten.xlsx?__blob=publicationFile', sheet_name = 'Daten')
-#lkw = lkw[4:]
-#new_header = lkw.iloc[0]
-#lkw = lkw[1:]
-#lkw.columns = new_header
-#lkw = lkw[['Datum', 'gleitender 7-Tage-Durchschnitt KSB']]
-#lkw['Datum'] = pd.to_datetime(lkw['Datum'])
+lkw = pd.read_excel('https://www.destatis.de/DE/Themen/Branchen-Unternehmen/Industrie-Verarbeitendes-Gewerbe/Tabellen/Lkw-Maut-Fahrleistungsindex-Daten.xlsx?__blob=publicationFile', sheet_name = 'Daten')
+lkw = lkw[4:]
+new_header = lkw.iloc[0]
+lkw = lkw[1:]
+lkw.columns = new_header
+lkw = lkw[['Datum', 'gleitender 7-Tage-Durchschnitt KSB']]
+lkw['Datum'] = pd.to_datetime(lkw['Datum'])
 
-#lkw_2022 = lkw.loc[lkw['Datum'] >= '2022-01-01'].copy()
-#lkw_2019 = lkw.loc[(lkw['Datum'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
- #               (lkw['Datum'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
-  #              ].copy()
+lkw_2022 = lkw.loc[lkw['Datum'] >= '2022-01-01'].copy()
+lkw_2019 = lkw.loc[(lkw['Datum'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
+                (lkw['Datum'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
+                ].copy()
 
-#lkw_2019['Datum'] = lkw_2019['Datum'].dt.date + timedelta(366) + timedelta(2*365)
-#lkw_2022['Datum'] = lkw_2022['Datum'].dt.date
+lkw_2019['Datum'] = lkw_2019['Datum'].dt.date + timedelta(366) + timedelta(2*365)
+lkw_2022['Datum'] = lkw_2022['Datum'].dt.date
 
-#lkw_2019.rename(columns = {'gleitender 7-Tage-Durchschnitt KSB': '2019'}, inplace = True)
-#lkw_2022.rename(columns = {'gleitender 7-Tage-Durchschnitt KSB': '2022'}, inplace = True)
+lkw_2019.rename(columns = {'gleitender 7-Tage-Durchschnitt KSB': '2019'}, inplace = True)
+lkw_2022.rename(columns = {'gleitender 7-Tage-Durchschnitt KSB': '2022'}, inplace = True)
 
-#lkw = lkw_2019.merge(lkw_2022, on = 'Datum', how = 'outer')
+lkw = lkw_2019.merge(lkw_2022, on = 'Datum', how = 'outer')
 
-#update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data = lkw)
+update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data = lkw)
 
 
 # Flugdaten
