@@ -15,3 +15,4 @@ toml==0.10.2
 virtualenv==20.4.3
 virtualenv-clone==0.5.4
 yfinance==0.1.63
+msoffcrypto-tool==5.0.0
