@@ -76,6 +76,7 @@ zh_2019.rename(columns = {'value': '2019'}, inplace = True)
 zh_2022.rename(columns = {'value': '2022'}, inplace = True)
 zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
 zh.set_index('time', inplace = True)
+zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
 
 update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh[['2019', '2022']])
 
@@ -163,6 +164,8 @@ fuel_prices_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
 fuel_prices.set_index('date', inplace =True)
 fuel_prices_de.set_index('Date', inplace =True)
+fuel_prices.index = pd.to_datetime(fuel_prices.index).strftime('%Y-%m-%d')
+fuel_prices_de.index = pd.to_datetime(fuel_prices_de.index).strftime('%Y-%m-%d')
 
 update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices[['2019', '2022']])
 update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de[['2019', '2022']])
@@ -211,6 +214,9 @@ oil_price_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
 oil_price.set_index('Datum', inplace = True)
 oil_price_de.set_index('Date', inplace = True)
+oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
+oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
+
 
 update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price[['2019', '2022']])
 update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de[['2019', '2022']])
@@ -226,14 +232,18 @@ df = yf.download(tickers,  start = "2019-01-01" , end = date.today())
 
 euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].reset_index().dropna()
 euro.set_index('Date', inplace = True)
+euro.index = pd.to_datetime(euro.index).strftime('%Y-%m-%d')
+
 update_chart(id = '1dda540238574eac80e865faa0dcab83', data = euro[['EURCHF=X']])
 
 dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].reset_index().dropna()
 dollar.set_index('Date', inplace = True)
+dollar.index = pd.to_datetime(dollar.index).strftime('%Y-%m-%d')
 update_chart(id = '5ac628c4bb388d36fb2f5cbc744a628c', data = dollar[['EURUSD=X']])
 
 dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].reset_index().dropna()
 dax.set_index('Date', inplace = True)
+dax.index = pd.to_datetime(dax.index).strftime('%Y-%m-%d')
 update_chart(id = 'a78c9d9de3230aea314700dc582d873d', data = dax[['^GDAXI']])
 
 wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].reset_index().dropna()
@@ -241,6 +251,7 @@ wheat['2019'] = df['Close']['KE=F'][(df.index >= '2019-01-01') & (df.index <= '2
 wheat.rename(columns={wheat.columns[1]: '2022'}, inplace = True)
 wheat = wheat[['Date', '2019', '2022']]
 wheat.set_index('Date', inplace = True)
+wheat.index = pd.to_datetime(wheat.index).strftime('%Y-%m-%d')
 update_chart(id = 'b1717dcaee838699497b647ebbceda21', data = wheat[['2019', '2022']])
 
 
@@ -249,6 +260,7 @@ gas['2019'] = df['Close']['TTF=F'][(df.index >= '2019-01-01') & (df.index <= '20
 gas.rename(columns={gas.columns[1]: '2022'}, inplace = True)
 gas = gas[['Date', '2019', '2022']]
 gas.set_index('Date', inplace = True)
+gas.index = pd.to_datetime(gas.index).strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas[['2019', '2022']])
 
 
@@ -267,6 +279,7 @@ smi= pd.DataFrame(data, index=[0])
 smi = smi_old.append(smi)
 smi.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 smi.set_index('Date', inplace = True)
+smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
 
 update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi[['Close']])
 smi.to_csv('./SMI.csv')
@@ -316,5 +329,6 @@ bip.loc[bip['W'] < 10 , 'KW'] = bip['year'].astype(str) + '-W0' + bip['W'].astyp
 bip.loc[bip['W'] >= 10 , 'KW'] = bip['year'].astype(str) + '-W' + bip['W'].astype(int).astype(str)
 bip =  bip[['KW', 'Index']]
 bip.set_index('KW', inplace = True)
+bip.index = pd.to_datetime(euro.bip).strftime('%Y-%m-%d')
 
 update_chart(id = 'c366afc02f262094669128cd054faf78', data = bip[['Index']])
