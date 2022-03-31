@@ -329,6 +329,5 @@ bip.loc[bip['W'] < 10 , 'KW'] = bip['year'].astype(str) + '-W0' + bip['W'].astyp
 bip.loc[bip['W'] >= 10 , 'KW'] = bip['year'].astype(str) + '-W' + bip['W'].astype(int).astype(str)
 bip =  bip[['KW', 'Index']]
 bip.set_index('KW', inplace = True)
-bip.index = pd.to_datetime(euro.bip).strftime('%Y-%m-%d')
 
 update_chart(id = 'c366afc02f262094669128cd054faf78', data = bip[['Index']])
