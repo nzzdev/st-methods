@@ -226,7 +226,6 @@ oil_price_de.to_csv('./oil_price_de.csv')
 
 
 # Stock market data
-
 tickers = ["EURCHF=X", "KE=F", "TTF=F", "^GDAXI", "EURUSD=X"] #Subtitute for the tickers you want
 df = yf.download(tickers,  start = "2019-01-01" , end = date.today())
 
