@@ -60,42 +60,6 @@
     "data": []
    }
   },
-  {
-    "environments": [
-     {
-      "name": "production",
-      "id": "c77298787298e4fcae70369e03275be6"
-     }
-    ],
-    "item": {
-     "notes": "",
-     "data": []
-    }
-   },
-   {
-    "environments": [
-     {
-      "name": "production",
-      "id": "5ac628c4bb388d36fb2f5cbc743f5f8b"
-     }
-    ],
-    "item": {
-     "notes": "",
-     "data": []
-    }
-   },
-   {
-    "environments": [
-     {
-      "name": "production",
-      "id": "5ac628c4bb388d36fb2f5cbc7441bfc7"
-     }
-    ],
-    "item": {
-     "notes": "",
-     "data": []
-    }
-   },
    {
     "environments": [
      {
@@ -251,32 +215,6 @@
      "notes": "",
      "data": []
     }
-   },
-   {
-    "environments": [
-      {
-        "name": "production",
-        "id": "4359e80ee2738a55d5f04f1409ffebf1"
-      }
-    ],
-    "item": {
-      "data": {
-        "table": []
-      }
-    }
-  },
-  {
-    "environments": [
-      {
-        "name": "production",
-        "id": "a78c9d9de3230aea314700dc5855b330"
-      }
-    ],
-    "item": {
-      "data": {
-        "table": []
-      }
-    }
-  }
+   }
  ]
 }
