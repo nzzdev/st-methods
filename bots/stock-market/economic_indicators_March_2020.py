@@ -75,8 +75,9 @@ zh_2022['time'] = zh_2022['time'].dt.date
 zh_2019.rename(columns = {'value': '2019'}, inplace = True)
 zh_2022.rename(columns = {'value': '2022'}, inplace = True)
 zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
+zh.set_index('time', inplace = True)
 
-update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh)
+update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh[['2019', '2022']])
 
 
 # Energie
@@ -160,11 +161,14 @@ fuel_prices_de = fuel_prices_old_de.append(fuel_prices_de)
 
 fuel_prices_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
-update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices)
-update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de)
+fuel_prices.set_index('date', inplace =True)
+fuel_prices_de.set_index('Date', inplace =True)
 
-fuel_prices.to_csv('./Benzinpreise.csv', index = False)
-fuel_prices_de.to_csv('./Benzinpreise_de.csv', index = False)
+update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices[['2019', '2022']])
+update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de[['2019', '2022']])
+
+fuel_prices.to_csv('./Benzinpreise.csv')
+fuel_prices_de.to_csv('./Benzinpreise_de.csv')
 
 
 url = 'https://www.heizoel24.ch/heizoelpreise'
@@ -205,11 +209,14 @@ oil_price_de = oil_price_old_de.append(oil_price_de)
 
 oil_price_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
-update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price)
-update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de)
+oil_price.set_index('Datum', inplace = True)
+oil_price_de.set_index('Date', inplace = True)
 
-oil_price.to_csv('./oil_price.csv', index = False)
-oil_price_de.to_csv('./oil_price_de.csv', index = False)
+update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price[['2019', '2022']])
+update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de[['2019', '2022']])
+
+oil_price.to_csv('./oil_price.csv')
+oil_price_de.to_csv('./oil_price_de.csv')
 
 
 # Stock market data
@@ -218,28 +225,31 @@ tickers = ["EURCHF=X", "KE=F", "TTF=F", "^GDAXI", "EURUSD=X"] #Subtitute for the
 df = yf.download(tickers,  start = "2019-01-01" , end = date.today())
 
 euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].reset_index().dropna()
-update_chart(id = '1dda540238574eac80e865faa0dcab83', data = euro)
+euro.set_index('Date', inplace = True)
+update_chart(id = '1dda540238574eac80e865faa0dcab83', data = euro[['EURCHF=X']])
 
 dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].reset_index().dropna()
-update_chart(id = '5ac628c4bb388d36fb2f5cbc744a628c', data = dollar)
+dollar.set_index('Date', inplace = True)
+update_chart(id = '5ac628c4bb388d36fb2f5cbc744a628c', data = dollar[['EURUSD=X']])
 
 dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].reset_index().dropna()
-update_chart(id = 'a78c9d9de3230aea314700dc582d873d', data = dax)
+dax.set_index('Date', inplace = True)
+update_chart(id = 'a78c9d9de3230aea314700dc582d873d', data = dax[['^GDAXI']])
 
 wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].reset_index().dropna()
 wheat['2019'] = df['Close']['KE=F'][(df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 wheat.rename(columns={wheat.columns[1]: '2022'}, inplace = True)
 wheat = wheat[['Date', '2019', '2022']]
-
-update_chart(id = 'b1717dcaee838699497b647ebbceda21', data = wheat)
+wheat.set_index('Date', inplace = True)
+update_chart(id = 'b1717dcaee838699497b647ebbceda21', data = wheat[['2019', '2022']])
 
 
 gas = df['Close']['TTF=F'][df.index >= '2022-01-01'].reset_index().dropna()
 gas['2019'] = df['Close']['TTF=F'][(df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 gas.rename(columns={gas.columns[1]: '2022'}, inplace = True)
 gas = gas[['Date', '2019', '2022']]
-
-update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas)
+gas.set_index('Date', inplace = True)
+update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas[['2019', '2022']])
 
 
 smi_old = pd.read_csv('./SMI.csv')
@@ -256,9 +266,10 @@ data = {'Date': (date.today() - timedelta(1)).strftime('%Y-%m-%d'),
 smi= pd.DataFrame(data, index=[0])
 smi = smi_old.append(smi)
 smi.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
+smi.set_index('Date', inplace = True)
 
-update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi)
-smi.to_csv('./SMI.csv', index = False)
+update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi[['Close']])
+smi.to_csv('./SMI.csv')
 
 kurs = euro['EURCHF=X'].tail(1).values
 #benzin_de = benzin.copy()
@@ -304,5 +315,6 @@ bip.rename(columns = {bip.columns[0]: 'year', bip.columns[1]: 'W', bip.columns[2
 bip.loc[bip['W'] < 10 , 'KW'] = bip['year'].astype(str) + '-W0' + bip['W'].astype(int).astype(str)
 bip.loc[bip['W'] >= 10 , 'KW'] = bip['year'].astype(str) + '-W' + bip['W'].astype(int).astype(str)
 bip =  bip[['KW', 'Index']]
+bip.set_index('KW', inplace = True)
 
-update_chart(id = 'c366afc02f262094669128cd054faf78', data = bip)
+update_chart(id = 'c366afc02f262094669128cd054faf78', data = bip[['Index']])
