@@ -10,8 +10,9 @@ import msoffcrypto
 import requests
 import urllib.request
 import os
+import sys
 
-
+sys.path.append(os.path.dirname((os.path.dirname(__file__))))
 from helpers import *
 
 # Set Working Directory
@@ -232,7 +233,6 @@ df = yf.download(tickers,  start = "2019-01-01" , end = date.today())
 euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].reset_index().dropna()
 euro.set_index('Date', inplace = True)
 euro.index = pd.to_datetime(euro.index).strftime('%Y-%m-%d')
-
 update_chart(id = '1dda540238574eac80e865faa0dcab83', data = euro[['EURCHF=X']])
 
 dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].reset_index().dropna()
