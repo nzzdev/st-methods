@@ -60,31 +60,31 @@ os.chdir(os.path.dirname(__file__))
 
 # Flugdaten
 
-zh = pd.read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
+#zh = pd.read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
 
-zh['time'] = pd.to_datetime(zh['time'])
-zh = zh.loc[(zh['rnwy'] == 'all') & (zh['route'] == 'total') & (zh['time'] >= '2019-01-01') & (zh['time'].dt.date <= date.today()) ]
-zh = zh[['time', 'value']]
-zh = zh.set_index('time')
-zh = zh.rolling(7).mean().reset_index()
-zh_2022 = zh.loc[zh['time'] >= '2022-01-01'].copy()
-zh_2019 = zh.loc[(zh['time'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
-                (zh['time'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
-                ].copy()
-zh_2019['time'] = zh_2019['time'].dt.date + timedelta(366) + timedelta(2*365)
-zh_2022['time'] = zh_2022['time'].dt.date
-zh_2019.rename(columns = {'value': '2019'}, inplace = True)
-zh_2022.rename(columns = {'value': '2022'}, inplace = True)
-zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
-zh.set_index('time', inplace = True)
-zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
+#zh['time'] = pd.to_datetime(zh['time'])
+#zh = zh.loc[(zh['rnwy'] == 'all') & (zh['route'] == 'total') & (zh['time'] >= '2019-01-01') & (zh['time'].dt.date <= date.today()) ]
+#zh = zh[['time', 'value']]
+#zh = zh.set_index('time')
+#zh = zh.rolling(7).mean().reset_index()
+#zh_2022 = zh.loc[zh['time'] >= '2022-01-01'].copy()
+#zh_2019 = zh.loc[(zh['time'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
+ #               (zh['time'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
+  #              ].copy()
+#zh_2019['time'] = zh_2019['time'].dt.date + timedelta(366) + timedelta(2*365)
+#zh_2022['time'] = zh_2022['time'].dt.date
+#zh_2019.rename(columns = {'value': '2019'}, inplace = True)
+#zh_2022.rename(columns = {'value': '2022'}, inplace = True)
+#zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
+#zh.set_index('time', inplace = True)
+#zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
 
-update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh[['2019', '2022']])
+#update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh[['2019', '2022']])
 
 
 # Energie
 
-url = 'https://www.tcs.ch/de/camping-reisen/reiseinformationen/wissenswertes/fahrkosten-gebuehren/benzinpreise.php'
+#url = 'https://www.tcs.ch/de/camping-reisen/reiseinformationen/wissenswertes/fahrkosten-gebuehren/benzinpreise.php'
 
 # Opens a website and read its binary contents (HTTP Response Body)
 #def url_get_contents(url):
@@ -121,109 +121,109 @@ url = 'https://www.tcs.ch/de/camping-reisen/reiseinformationen/wissenswertes/fah
 
 
 
-session = requests_html.HTMLSession()
-r = session.get(url)
-price_95 = r.html.xpath('//*[@id="blockContentcontentInner"]/div[1]/div/div/div[3]/div/div[1]/table/tbody/tr[1]/td[2]/div/text()')
-price_95 = pd.to_numeric(price_95[0])
+#session = requests_html.HTMLSession()
+#r = session.get(url)
+#price_95 = r.html.xpath('//*[@id="blockContentcontentInner"]/div[1]/div/div/div[3]/div/div[1]/table/tbody/tr[1]/td[2]/div/text()')
+#price_95 = pd.to_numeric(price_95[0])
 
-adac = 'https://www.adac.de/news/aktueller-spritpreis/'
-page = requests.get(adac)
+#adac = 'https://www.adac.de/news/aktueller-spritpreis/'
+#page = requests.get(adac)
 
-soup = BeautifulSoup(page.content, "html.parser")
+#soup = BeautifulSoup(page.content, "html.parser")
 
-results = soup.find(class_ = "sc-bQFuvY dJfhdt")
+#results = soup.find(class_ = "sc-bQFuvY dJfhdt")
 
-element = results.find_all("li", class_="sc-eBhrFy iKCSre")[0]
-text = element.find("b").text.strip()
-price_e10 = pd.to_numeric(re.findall(r'\d+\,\d+', text)[0].replace(',','.'))
+#element = results.find_all("li", class_="sc-eBhrFy iKCSre")[0]
+#text = element.find("b").text.strip()
+#price_e10 = pd.to_numeric(re.findall(r'\d+\,\d+', text)[0].replace(',','.'))
 
-fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
-fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')
-
-
-data = {'date': date.today().strftime('%Y-%m-%d'), 
-        '2019': 1.6,
-        '2022': price_95
-        }
-
-fuel_prices = pd.DataFrame(data, index=[0])
-
-fuel_prices = fuel_prices_old.append(fuel_prices)
-
-fuel_prices.drop_duplicates(subset = 'date', keep = 'last', inplace = True)
-
-data = {'Date': date.today().strftime('%Y-%m-%d'), 
-        '2019': 1.4005,
-        '2022': price_e10
-        }
-
-fuel_prices_de = pd.DataFrame(data, index=[0])
-
-fuel_prices_de = fuel_prices_old_de.append(fuel_prices_de)
-
-fuel_prices_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
-
-fuel_prices.set_index('date', inplace =True)
-fuel_prices_de.set_index('Date', inplace =True)
-fuel_prices.index = pd.to_datetime(fuel_prices.index).strftime('%Y-%m-%d')
-fuel_prices_de.index = pd.to_datetime(fuel_prices_de.index).strftime('%Y-%m-%d')
-
-update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices[['2019', '2022']])
-update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de[['2019', '2022']])
-
-fuel_prices.to_csv('./Benzinpreise.csv')
-fuel_prices_de.to_csv('./Benzinpreise_de.csv')
+#fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
+#fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')
 
 
-url = 'https://www.heizoel24.ch/heizoelpreise'
-session = requests_html.HTMLSession()
-r = session.get(url)
+#data = {'date': date.today().strftime('%Y-%m-%d'), 
+ #       '2019': 1.6,
+  #      '2022': price_95
+   #     }
 
-price = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
+#fuel_prices = pd.DataFrame(data, index=[0])
 
-url_de = 'https://www.heizoel24.de/heizoelpreise'
-session = requests_html.HTMLSession()
-r = session.get(url_de)
+#fuel_prices = fuel_prices_old.append(fuel_prices)
 
-price_de = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
+#fuel_prices.drop_duplicates(subset = 'date', keep = 'last', inplace = True)
 
-price = pd.to_numeric(re.findall(r'\d+\,\d+', price)[0].replace(',','.'))
-price_de = pd.to_numeric(re.findall(r'\d+\,\d+', price_de)[0].replace(',','.'))
+#data = {'Date': date.today().strftime('%Y-%m-%d'), 
+ #       '2019': 1.4005,
+  #      '2022': price_e10
+   #     }
 
-oil_price_old = pd.read_csv('./oil_price.csv')
-oil_price_old_de = pd.read_csv('./oil_price_de.csv')
+#fuel_prices_de = pd.DataFrame(data, index=[0])
 
-data = {'Datum': date.today().strftime('%Y-%m-%d'), 
-        '2019': 89.62,
-        '2022': price}
+#fuel_prices_de = fuel_prices_old_de.append(fuel_prices_de)
 
-oil_price = pd.DataFrame(data, index=[0])
+#fuel_prices_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
-oil_price = oil_price_old.append(oil_price)
+#fuel_prices.set_index('date', inplace =True)
+#fuel_prices_de.set_index('Date', inplace =True)
+#fuel_prices.index = pd.to_datetime(fuel_prices.index).strftime('%Y-%m-%d')
+#fuel_prices_de.index = pd.to_datetime(fuel_prices_de.index).strftime('%Y-%m-%d')
 
-oil_price.drop_duplicates(subset = 'Datum', keep = 'last', inplace = True)
+#update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices[['2019', '2022']])
+#update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de[['2019', '2022']])
 
-data = {'Date': date.today().strftime('%Y-%m-%d'), 
-        '2019': 65.77,
-        '2022': price_de}
-
-oil_price_de = pd.DataFrame(data, index=[0])
-
-oil_price_de = oil_price_old_de.append(oil_price_de)
-
-oil_price_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
-
-oil_price.set_index('Datum', inplace = True)
-oil_price_de.set_index('Date', inplace = True)
-oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
-oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
+#fuel_prices.to_csv('./Benzinpreise.csv')
+#fuel_prices_de.to_csv('./Benzinpreise_de.csv')
 
 
-update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price[['2019', '2022']])
-update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de[['2019', '2022']])
+#url = 'https://www.heizoel24.ch/heizoelpreise'
+#session = requests_html.HTMLSession()
+#r = session.get(url)
 
-oil_price.to_csv('./oil_price.csv')
-oil_price_de.to_csv('./oil_price_de.csv')
+#price = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
+
+#url_de = 'https://www.heizoel24.de/heizoelpreise'
+#session = requests_html.HTMLSession()
+#r = session.get(url_de)
+
+#price_de = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
+
+#price = pd.to_numeric(re.findall(r'\d+\,\d+', price)[0].replace(',','.'))
+#price_de = pd.to_numeric(re.findall(r'\d+\,\d+', price_de)[0].replace(',','.'))
+
+#oil_price_old = pd.read_csv('./oil_price.csv')
+#oil_price_old_de = pd.read_csv('./oil_price_de.csv')
+
+#data = {'Datum': date.today().strftime('%Y-%m-%d'), 
+ #       '2019': 89.62,
+  #      '2022': price}
+
+#oil_price = pd.DataFrame(data, index=[0])
+
+#oil_price = oil_price_old.append(oil_price)
+
+#oil_price.drop_duplicates(subset = 'Datum', keep = 'last', inplace = True)
+
+#data = {'Date': date.today().strftime('%Y-%m-%d'), 
+ #       '2019': 65.77,
+  #      '2022': price_de}
+
+#oil_price_de = pd.DataFrame(data, index=[0])
+
+#oil_price_de = oil_price_old_de.append(oil_price_de)
+
+#oil_price_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
+
+#oil_price.set_index('Datum', inplace = True)
+#oil_price_de.set_index('Date', inplace = True)
+#oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
+#oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
+
+
+#update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price[['2019', '2022']])
+#update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de[['2019', '2022']])
+
+#oil_price.to_csv('./oil_price.csv')
+#oil_price_de.to_csv('./oil_price_de.csv')
 
 
 # Stock market data
@@ -263,27 +263,27 @@ gas.index = pd.to_datetime(gas.index).strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas[['2019', '2022']])
 
 
-smi_old = pd.read_csv('./SMI.csv')
+#smi_old = pd.read_csv('./SMI.csv')
 
-url = 'https://www.marketwatch.com/investing/index/smi?countrycode=ch'
-page = requests.get(url)
+#url = 'https://www.marketwatch.com/investing/index/smi?countrycode=ch'
+#page = requests.get(url)
 
-soup = BeautifulSoup(page.content, "html.parser")
-results = soup.find(class_ = "table__cell u-semi").text.strip()
-close = pd.to_numeric(results.replace(',',''))
+#soup = BeautifulSoup(page.content, "html.parser")
+#results = soup.find(class_ = "table__cell u-semi").text.strip()
+#close = pd.to_numeric(results.replace(',',''))
 
-data = {'Date': (date.today() - timedelta(1)).strftime('%Y-%m-%d'), 
-        'Close': close}
-smi= pd.DataFrame(data, index=[0])
-smi = smi_old.append(smi)
-smi.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
-smi.set_index('Date', inplace = True)
-smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
+#data = {'Date': (date.today() - timedelta(1)).strftime('%Y-%m-%d'), 
+ #       'Close': close}
+#smi= pd.DataFrame(data, index=[0])
+#smi = smi_old.append(smi)
+#smi.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
+#smi.set_index('Date', inplace = True)
+#smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
 
-update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi[['Close']])
-smi.to_csv('./SMI.csv')
+#update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi[['Close']])
+#smi.to_csv('./SMI.csv')
 
-kurs = euro['EURCHF=X'].tail(1).values
+#kurs = euro['EURCHF=X'].tail(1).values
 #benzin_de = benzin.copy()
 #benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
 #update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = benzin_de)
@@ -291,42 +291,42 @@ kurs = euro['EURCHF=X'].tail(1).values
 
 # Unternehmen, die Russland verlassen
 
-url = 'https://som.yale.edu/story/2022/over-450-companies-have-withdrawn-russia-some-remain'
-page = requests.get(url)
-soup = BeautifulSoup(page.content, "html.parser")
-a = soup.find_all('div', class_ = 'text-long')
+#url = 'https://som.yale.edu/story/2022/over-450-companies-have-withdrawn-russia-some-remain'
+#page = requests.get(url)
+#soup = BeautifulSoup(page.content, "html.parser")
+#a = soup.find_all('div', class_ = 'text-long')
 
-data = {'type': ['Suspendierung des Russlandgeschäfts',
-        'Endgültiger Rückzug aus Russland',
-        'Zurückhalten von Russlandinvestitionen',
-       'Reduzierung des Russlandgeschäfts'],
-       'number': [pd.to_numeric(re.findall(r'\d+', a[7].text))[0], 
-                  pd.to_numeric(re.findall(r'\d+', a[8].text))[0],
-                  pd.to_numeric(re.findall(r'\d+', a[5].text))[0],
-                  pd.to_numeric(re.findall(r'\d+', a[6].text))[0]]} 
+#data = {'type': ['Suspendierung des Russlandgeschäfts',
+ #       'Endgültiger Rückzug aus Russland',
+  #      'Zurückhalten von Russlandinvestitionen',
+   #    'Reduzierung des Russlandgeschäfts'],
+    #   'number': [pd.to_numeric(re.findall(r'\d+', a[7].text))[0], 
+     #             pd.to_numeric(re.findall(r'\d+', a[8].text))[0],
+       #           pd.to_numeric(re.findall(r'\d+', a[5].text))[0],
+      #            pd.to_numeric(re.findall(r'\d+', a[6].text))[0]]} 
 
-df = pd.DataFrame(data = data)
-df = df.sort_values(by = 'number', ascending = False)
-update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e', data = df)
+#df = pd.DataFrame(data = data)
+#df = df.sort_values(by = 'number', ascending = False)
+#update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e', data = df)
 
 
 # BIP Indikator
 
-url = "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa_publish.xls.download.xls/wwa_publish.xls"
-r = requests.get(url)
-open('temp.xls', 'wb').write(r.content)
+#url = "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa_publish.xls.download.xls/wwa_publish.xls"
+#r = requests.get(url)
+#open('temp.xls', 'wb').write(r.content)
 
-file = msoffcrypto.OfficeFile (open ('temp.xls', 'rb')) # read the original file
-file.load_key (password = 'VelvetSweatshop') # Fill in the password, if it can be opened directly, the default password is 'VelvetSweatshop'
-file.decrypt (open ('./decrypted.xls', 'wb'))
+#file = msoffcrypto.OfficeFile (open ('temp.xls', 'rb')) # read the original file
+#file.load_key (password = 'VelvetSweatshop') # Fill in the password, if it can be opened directly, the default password is 'VelvetSweatshop'
+#file.decrypt (open ('./decrypted.xls', 'wb'))
 
-bip = pd.read_excel('./decrypted.xls', sheet_name = 'rel_preCovid')
-bip = bip[3:]
-bip.rename(columns = {bip.columns[0]: 'year', bip.columns[1]: 'W', bip.columns[2]: 'Index'}, inplace = True)
+#bip = pd.read_excel('./decrypted.xls', sheet_name = 'rel_preCovid')
+#bip = bip[3:]
+#bip.rename(columns = {bip.columns[0]: 'year', bip.columns[1]: 'W', bip.columns[2]: 'Index'}, inplace = True)
 
-bip.loc[bip['W'] < 10 , 'KW'] = bip['year'].astype(str) + '-W0' + bip['W'].astype(int).astype(str)
-bip.loc[bip['W'] >= 10 , 'KW'] = bip['year'].astype(str) + '-W' + bip['W'].astype(int).astype(str)
-bip =  bip[['KW', 'Index']]
-bip.set_index('KW', inplace = True)
+#bip.loc[bip['W'] < 10 , 'KW'] = bip['year'].astype(str) + '-W0' + bip['W'].astype(int).astype(str)
+#bip.loc[bip['W'] >= 10 , 'KW'] = bip['year'].astype(str) + '-W' + bip['W'].astype(int).astype(str)
+#bip =  bip[['KW', 'Index']]
+#bip.set_index('KW', inplace = True)
 
-update_chart(id = 'c366afc02f262094669128cd054faf78', data = bip[['Index']])
+#update_chart(id = 'c366afc02f262094669128cd054faf78', data = bip[['Index']])
