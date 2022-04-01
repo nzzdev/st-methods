@@ -230,36 +230,33 @@ os.chdir(os.path.dirname(__file__))
 tickers = ["EURCHF=X", "KE=F", "TTF=F", "^GDAXI", "EURUSD=X"] #Subtitute for the tickers you want
 df = yf.download(tickers,  start = "2019-01-01" , end = date.today())
 
-euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].reset_index().dropna()
-euro.set_index('Date', inplace = True)
-euro.index = pd.to_datetime(euro.index).strftime('%Y-%m-%d')
+euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].to_frame().dropna()
+euro = euro[['EURCHF=X']]
+euro.index = euro.index.strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0dcab83', data = euro[['EURCHF=X']])
 
-dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].reset_index().dropna()
-dollar.set_index('Date', inplace = True)
-dollar.index = pd.to_datetime(dollar.index).strftime('%Y-%m-%d')
+dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].to_frame().dropna()
+dollar = dollar[['EURUSD=X']]
+dollar.index = dollar.index.strftime('%Y-%m-%d')
 update_chart(id = '5ac628c4bb388d36fb2f5cbc744a628c', data = dollar[['EURUSD=X']])
 
-dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].reset_index().dropna()
-dax.set_index('Date', inplace = True)
-dax.index = pd.to_datetime(dax.index).strftime('%Y-%m-%d')
+dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].to_frame().dropna()
+dax = dax[['^GDAXI']]
+dax.index = dax.index.strftime('%Y-%m-%d')
 update_chart(id = 'a78c9d9de3230aea314700dc582d873d', data = dax[['^GDAXI']])
 
-wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].reset_index().dropna()
+wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].to_frame().dropna()
 wheat['2019'] = df['Close']['KE=F'][(df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
-wheat.rename(columns={wheat.columns[1]: '2022'}, inplace = True)
-wheat = wheat[['Date', '2019', '2022']]
-wheat.set_index('Date', inplace = True)
-wheat.index = pd.to_datetime(wheat.index).strftime('%Y-%m-%d')
+wheat.rename(columns={wheat.columns[0]: '2022'}, inplace = True)
+wheat = wheat[['2019', '2022']]
+wheat.index = wheat.index.strftime('%Y-%m-%d')
 update_chart(id = 'b1717dcaee838699497b647ebbceda21', data = wheat[['2019', '2022']])
 
-
-gas = df['Close']['TTF=F'][df.index >= '2022-01-01'].reset_index().dropna()
+gas = df['Close']['TTF=F'][df.index >= '2022-01-01'].to_frame().dropna()
 gas['2019'] = df['Close']['TTF=F'][(df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
-gas.rename(columns={gas.columns[1]: '2022'}, inplace = True)
-gas = gas[['Date', '2019', '2022']]
-gas.set_index('Date', inplace = True)
-gas.index = pd.to_datetime(gas.index).strftime('%Y-%m-%d')
+gas.rename(columns={gas.columns[0]: '2022'}, inplace = True)
+gas = gas[['2019', '2022']]
+gas.index = gas.index.strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas[['2019', '2022']])
 
 
