@@ -34,52 +34,54 @@ update_chart(id='5ac628c4bb388d36fb2f5cbc743f5f8b', data = data)
 
 # LKW
 
-#lkw = pd.read_excel('https://www.destatis.de/DE/Themen/Branchen-Unternehmen/Industrie-Verarbeitendes-Gewerbe/Tabellen/Lkw-Maut-Fahrleistungsindex-Daten.xlsx?__blob=publicationFile', sheet_name = 'Daten')
-#lkw = lkw[4:]
-#new_header = lkw.iloc[0]
-#lkw = lkw[1:]
-#lkw.columns = new_header
-#lkw = lkw[['Datum', 'gleitender 7-Tage-Durchschnitt KSB']]
-#lkw['Datum'] = pd.to_datetime(lkw['Datum'])
+lkw = pd.read_excel('https://www.destatis.de/DE/Themen/Branchen-Unternehmen/Industrie-Verarbeitendes-Gewerbe/Tabellen/Lkw-Maut-Fahrleistungsindex-Daten.xlsx?__blob=publicationFile', sheet_name = 'Daten')
+lkw = lkw[4:]
+new_header = lkw.iloc[0]
+lkw = lkw[1:]
+lkw.columns = new_header
+lkw = lkw[['Datum', 'gleitender 7-Tage-Durchschnitt KSB']]
+lkw['Datum'] = pd.to_datetime(lkw['Datum'])
 
-#lkw_2022 = lkw.loc[lkw['Datum'] >= '2022-01-01'].copy()
-#lkw_2019 = lkw.loc[(lkw['Datum'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
- #               (lkw['Datum'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
-  #              ].copy()
+lkw_2022 = lkw.loc[lkw['Datum'] >= '2022-01-01'].copy()
+lkw_2019 = lkw.loc[(lkw['Datum'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
+                (lkw['Datum'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
+                ].copy()
 
-#lkw_2019['Datum'] = lkw_2019['Datum'].dt.date + timedelta(366) + timedelta(2*365)
-#lkw_2022['Datum'] = lkw_2022['Datum'].dt.date
+lkw_2019['Datum'] = lkw_2019['Datum'].dt.date + timedelta(366) + timedelta(2*365)
+lkw_2022['Datum'] = lkw_2022['Datum'].dt.date
 
-#lkw_2019.rename(columns = {'gleitender 7-Tage-Durchschnitt KSB': '2019'}, inplace = True)
-#lkw_2022.rename(columns = {'gleitender 7-Tage-Durchschnitt KSB': '2022'}, inplace = True)
+lkw_2019.rename(columns = {'gleitender 7-Tage-Durchschnitt KSB': '2019'}, inplace = True)
+lkw_2022.rename(columns = {'gleitender 7-Tage-Durchschnitt KSB': '2022'}, inplace = True)
 
-#lkw = lkw_2019.merge(lkw_2022, on = 'Datum', how = 'outer')
+lkw = lkw_2019.merge(lkw_2022, on = 'Datum', how = 'outer')
+lkw.set_index('Datum', inplace =True)
+lkw.index = pd.to_datetime(lkw.index).strftime('%Y-%m-%d')
 
-#update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data = lkw)
+update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data = lkw[['2019', '2022']])
 
 
 # Flugdaten
 
-#zh = pd.read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
+zh = pd.read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
 
-#zh['time'] = pd.to_datetime(zh['time'])
-#zh = zh.loc[(zh['rnwy'] == 'all') & (zh['route'] == 'total') & (zh['time'] >= '2019-01-01') & (zh['time'].dt.date <= date.today()) ]
-#zh = zh[['time', 'value']]
-#zh = zh.set_index('time')
-#zh = zh.rolling(7).mean().reset_index()
-#zh_2022 = zh.loc[zh['time'] >= '2022-01-01'].copy()
-#zh_2019 = zh.loc[(zh['time'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
- #               (zh['time'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
-  #              ].copy()
-#zh_2019['time'] = zh_2019['time'].dt.date + timedelta(366) + timedelta(2*365)
-#zh_2022['time'] = zh_2022['time'].dt.date
-#zh_2019.rename(columns = {'value': '2019'}, inplace = True)
-#zh_2022.rename(columns = {'value': '2022'}, inplace = True)
-#zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
-#zh.set_index('time', inplace = True)
-#zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
+zh['time'] = pd.to_datetime(zh['time'])
+zh = zh.loc[(zh['rnwy'] == 'all') & (zh['route'] == 'total') & (zh['time'] >= '2019-01-01') & (zh['time'].dt.date <= date.today()) ]
+zh = zh[['time', 'value']]
+zh = zh.set_index('time')
+zh = zh.rolling(7).mean().reset_index()
+zh_2022 = zh.loc[zh['time'] >= '2022-01-01'].copy()
+zh_2019 = zh.loc[(zh['time'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
+                (zh['time'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
+                ].copy()
+zh_2019['time'] = zh_2019['time'].dt.date + timedelta(366) + timedelta(2*365)
+zh_2022['time'] = zh_2022['time'].dt.date
+zh_2019.rename(columns = {'value': '2019'}, inplace = True)
+zh_2022.rename(columns = {'value': '2022'}, inplace = True)
+zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
+zh.set_index('time', inplace = True)
+zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
 
-#update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh[['2019', '2022']])
+update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh[['2019', '2022']])
 
 
 # Energie
