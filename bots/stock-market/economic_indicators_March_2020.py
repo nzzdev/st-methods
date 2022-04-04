@@ -62,24 +62,24 @@ update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data = lkw[['2019', '2022']]
 
 # Flugdaten
 
-zh = pd.read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
+#zh = pd.read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
 
-zh['time'] = pd.to_datetime(zh['time'])
-zh = zh.loc[(zh['rnwy'] == 'all') & (zh['route'] == 'total') & (zh['time'] >= '2019-01-01') & (zh['time'].dt.date <= date.today()) ]
-zh = zh[['time', 'value']]
-zh = zh.set_index('time')
-zh = zh.rolling(7).mean().reset_index()
-zh_2022 = zh.loc[zh['time'] >= '2022-01-01'].copy()
-zh_2019 = zh.loc[(zh['time'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
-                (zh['time'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
-                ].copy()
-zh_2019['time'] = zh_2019['time'].dt.date + timedelta(366) + timedelta(2*365)
-zh_2022['time'] = zh_2022['time'].dt.date
-zh_2019.rename(columns = {'value': '2019'}, inplace = True)
-zh_2022.rename(columns = {'value': '2022'}, inplace = True)
-zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
-zh.set_index('time', inplace = True)
-zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
+#zh['time'] = pd.to_datetime(zh['time'])
+#zh = zh.loc[(zh['rnwy'] == 'all') & (zh['route'] == 'total') & (zh['time'] >= '2019-01-01') & (zh['time'].dt.date <= date.today()) ]
+#zh = zh[['time', 'value']]
+#zh = zh.set_index('time')
+#zh = zh.rolling(7).mean().reset_index()
+#zh_2022 = zh.loc[zh['time'] >= '2022-01-01'].copy()
+#zh_2019 = zh.loc[(zh['time'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
+  #              (zh['time'].dt.date <= date(2022, 12, 31) - timedelta(366) - timedelta(2*365))
+ #               ].copy()
+#zh_2019['time'] = zh_2019['time'].dt.date + timedelta(366) + timedelta(2*365)
+#zh_2022['time'] = zh_2022['time'].dt.date
+#zh_2019.rename(columns = {'value': '2019'}, inplace = True)
+#zh_2022.rename(columns = {'value': '2022'}, inplace = True)
+#zh = zh_2019.merge(zh_2022, on = 'time', how = 'outer')
+#zh.set_index('time', inplace = True)
+#zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
 
 #update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh[['2019', '2022']])
 
