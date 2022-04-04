@@ -62,7 +62,7 @@ update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data = lkw[['2019', '2022']]
 
 # Flugdaten
 
-#zh = pd.read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
+zh = pd.read_csv('https://raw.githubusercontent.com/KOF-ch/economic-monitoring/master/data/ch.zrh_airport.departures.csv')
 
 zh['time'] = pd.to_datetime(zh['time'])
 zh = zh.loc[(zh['rnwy'] == 'all') & (zh['route'] == 'total') & (zh['time'] >= '2019-01-01') & (zh['time'].dt.date <= date.today()) ]
