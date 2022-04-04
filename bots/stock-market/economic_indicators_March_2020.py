@@ -41,6 +41,7 @@ lkw = lkw[1:]
 lkw.columns = new_header
 lkw = lkw[['Datum', 'gleitender 7-Tage-Durchschnitt KSB']]
 lkw['Datum'] = pd.to_datetime(lkw['Datum'])
+lkw = lkw.rename_axis(None, axis=1)
 
 lkw_2022 = lkw.loc[lkw['Datum'] >= '2022-01-01'].copy()
 lkw_2019 = lkw.loc[(lkw['Datum'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
