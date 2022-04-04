@@ -2,9 +2,9 @@ name: Update Stock market Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run it at at minute 0 past every hour from 9 through 12 (GMT) on every day-of-week from Monday through Friday.
+  # This will run it at 7:45 and 23:45.
   schedule:
-    - cron: "45 7,23 * * *"
+    - cron: "45 5,21 * * *"
   workflow_dispatch:
 
 jobs:
