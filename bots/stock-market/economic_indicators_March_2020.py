@@ -121,62 +121,61 @@ benzin.rename(columns = {'95': 'Benzinpreis'}, inplace = True)
 benzin.sort_values(by = 'Benzinpreis', ascending = False, inplace = True)
 benzin.set_index('Reiseziel', inplace = True)
 
-update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin[['Benzinpreis']])
+#update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin[['Benzinpreis']])
 
 
 
-#session = requests_html.HTMLSession()
-#r = session.get(url)
-#price_95 = r.html.xpath('//*[@id="blockContentcontentInner"]/div[1]/div/div/div[3]/div/div[1]/table/tbody/tr[1]/td[2]/div/text()')
-#price_95 = pd.to_numeric(price_95[0])
+session = requests_html.HTMLSession()
+r = session.get(url)
+price_95 = r.html.xpath('//*[@id="blockContentcontentInner"]/div[1]/div/div/div[3]/div/div[1]/table/tbody/tr[1]/td[2]/div/text()')
+price_95 = pd.to_numeric(price_95[0])
 
-#adac = 'https://www.adac.de/news/aktueller-spritpreis/'
-#page = requests.get(adac)
+adac = 'https://www.adac.de/news/aktueller-spritpreis/'
+page = requests.get(adac)
 
-#soup = BeautifulSoup(page.content, "html.parser")
+soup = BeautifulSoup(page.content, "html.parser")
 
-#results = soup.find(class_ = "sc-bQFuvY dJfhdt")
+results = soup.find(class_ = "sc-bQFuvY dJfhdt")
 
-#element = results.find_all("li", class_="sc-eBhrFy iKCSre")[0]
-#text = element.find("b").text.strip()
-#price_e10 = pd.to_numeric(re.findall(r'\d+\,\d+', text)[0].replace(',','.'))
+element = results.find_all("li", class_="sc-eBhrFy iKCSre")[0]
+text = element.find("b").text.strip()
+price_e10 = pd.to_numeric(re.findall(r'\d+\,\d+', text)[0].replace(',','.'))
 
-#fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
-#fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')
+fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
+fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')
 
+data = {'date': date.today().strftime('%Y-%m-%d'), 
+        '2019': 1.6,
+        '2022': price_95
+        }
 
-#data = {'date': date.today().strftime('%Y-%m-%d'), 
- #       '2019': 1.6,
-  #      '2022': price_95
-   #     }
+fuel_prices = pd.DataFrame(data, index=[0])
 
-#fuel_prices = pd.DataFrame(data, index=[0])
+fuel_prices = fuel_prices_old.append(fuel_prices)
 
-#fuel_prices = fuel_prices_old.append(fuel_prices)
+fuel_prices.drop_duplicates(subset = 'date', keep = 'last', inplace = True)
 
-#fuel_prices.drop_duplicates(subset = 'date', keep = 'last', inplace = True)
+data = {'Date': date.today().strftime('%Y-%m-%d'), 
+        '2019': 1.4005,
+        '2022': price_e10
+        }
 
-#data = {'Date': date.today().strftime('%Y-%m-%d'), 
- #       '2019': 1.4005,
-  #      '2022': price_e10
-   #     }
+fuel_prices_de = pd.DataFrame(data, index=[0])
 
-#fuel_prices_de = pd.DataFrame(data, index=[0])
+fuel_prices_de = fuel_prices_old_de.append(fuel_prices_de)
 
-#fuel_prices_de = fuel_prices_old_de.append(fuel_prices_de)
+fuel_prices_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
-#fuel_prices_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
+fuel_prices.set_index('date', inplace =True)
+fuel_prices_de.set_index('Date', inplace =True)
+fuel_prices.index = pd.to_datetime(fuel_prices.index).strftime('%Y-%m-%d')
+fuel_prices_de.index = pd.to_datetime(fuel_prices_de.index).strftime('%Y-%m-%d')
 
-#fuel_prices.set_index('date', inplace =True)
-#fuel_prices_de.set_index('Date', inplace =True)
-#fuel_prices.index = pd.to_datetime(fuel_prices.index).strftime('%Y-%m-%d')
-#fuel_prices_de.index = pd.to_datetime(fuel_prices_de.index).strftime('%Y-%m-%d')
+update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices[['2019', '2022']])
+update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de[['2019', '2022']])
 
-#update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices[['2019', '2022']])
-#update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de[['2019', '2022']])
-
-#fuel_prices.to_csv('./Benzinpreise.csv')
-#fuel_prices_de.to_csv('./Benzinpreise_de.csv')
+fuel_prices.to_csv('./Benzinpreise.csv')
+fuel_prices_de.to_csv('./Benzinpreise_de.csv')
 
 
 #url = 'https://www.heizoel24.ch/heizoelpreise'
