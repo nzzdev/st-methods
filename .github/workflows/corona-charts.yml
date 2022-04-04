@@ -2,9 +2,9 @@ name: Update Corona Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run every hour from 7 through 18 CEST (5 - 17 GMT)
+  # This will run at 7:30 and 11:30
   schedule:
-    - cron: "0 5-16 * * *"
+    - cron: "30 5,11 * * *"
   workflow_dispatch:
 
 jobs:
