@@ -292,23 +292,25 @@ smi.to_csv('./SMI.csv')
 
 # Unternehmen, die Russland verlassen
 
-#url = 'https://som.yale.edu/story/2022/over-450-companies-have-withdrawn-russia-some-remain'
-#page = requests.get(url)
-#soup = BeautifulSoup(page.content, "html.parser")
-#a = soup.find_all('div', class_ = 'text-long')
+url = 'https://som.yale.edu/story/2022/over-450-companies-have-withdrawn-russia-some-remain'
+page = requests.get(url)
+soup = BeautifulSoup(page.content, "html.parser")
+a = soup.find_all('div', class_ = 'text-long')
 
-#data = {'type': ['Suspendierung des Russlandgeschäfts',
- #       'Endgültiger Rückzug aus Russland',
-  #      'Zurückhalten von Russlandinvestitionen',
-   #    'Reduzierung des Russlandgeschäfts'],
-    #   'number': [pd.to_numeric(re.findall(r'\d+', a[7].text))[0], 
-     #             pd.to_numeric(re.findall(r'\d+', a[8].text))[0],
-       #           pd.to_numeric(re.findall(r'\d+', a[5].text))[0],
-      #            pd.to_numeric(re.findall(r'\d+', a[6].text))[0]]} 
+data = {'type': ['Suspendierung des Russlandgeschäfts',
+        'Endgültiger Rückzug aus Russland',
+        'Zurückhalten von Russlandinvestitionen',
+       'Reduzierung des Russlandgeschäfts'],
+       'number': [pd.to_numeric(re.findall(r'\d+', a[7].text))[0], 
+                  pd.to_numeric(re.findall(r'\d+', a[8].text))[0],
+                  pd.to_numeric(re.findall(r'\d+', a[5].text))[0],
+                  pd.to_numeric(re.findall(r'\d+', a[6].text))[0]]} 
 
-#df = pd.DataFrame(data = data)
-#df = df.sort_values(by = 'number', ascending = False)
-#update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e', data = df)
+df = pd.DataFrame(data = data)
+df = df.sort_values(by = 'number', ascending = False)
+df.set_index('type', inplace = True)
+
+update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e', data = df)
 
 
 # BIP Indikator
