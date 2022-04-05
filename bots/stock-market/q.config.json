@@ -2370,6 +2370,18 @@
     "notes": "",
     "data": []
    }
+  },
+  {
+   "environments": [
+    {
+     "name": "production",
+     "id": "c366afc02f262094669128cd054faf78"
+    }
+   ],
+   "item": {
+    "notes": "",
+    "data": []
+   }
   }
  ]
 }
