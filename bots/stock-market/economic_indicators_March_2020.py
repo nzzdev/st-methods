@@ -175,55 +175,54 @@ fuel_prices.to_csv('./Benzinpreise.csv')
 fuel_prices_de.to_csv('./Benzinpreise_de.csv')
 
 
-#url = 'https://www.heizoel24.ch/heizoelpreise'
-#session = requests_html.HTMLSession()
-#r = session.get(url)
+url = 'https://www.heizoel24.ch/heizoelpreise'
+session = requests_html.HTMLSession()
+r = session.get(url)
 
-#price = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
+price = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
 
-#url_de = 'https://www.heizoel24.de/heizoelpreise'
-#session = requests_html.HTMLSession()
-#r = session.get(url_de)
+url_de = 'https://www.heizoel24.de/heizoelpreise'
+session = requests_html.HTMLSession()
+r = session.get(url_de)
 
-#price_de = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
+price_de = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
 
-#price = pd.to_numeric(re.findall(r'\d+\,\d+', price)[0].replace(',','.'))
-#price_de = pd.to_numeric(re.findall(r'\d+\,\d+', price_de)[0].replace(',','.'))
+price = pd.to_numeric(re.findall(r'\d+\,\d+', price)[0].replace(',','.'))
+price_de = pd.to_numeric(re.findall(r'\d+\,\d+', price_de)[0].replace(',','.'))
 
-#oil_price_old = pd.read_csv('./oil_price.csv')
-#oil_price_old_de = pd.read_csv('./oil_price_de.csv')
+oil_price_old = pd.read_csv('./oil_price.csv')
+oil_price_old_de = pd.read_csv('./oil_price_de.csv')
 
-#data = {'Datum': date.today().strftime('%Y-%m-%d'), 
- #       '2019': 89.62,
-  #      '2022': price}
+data = {'Datum': date.today().strftime('%Y-%m-%d'), 
+        '2019': 89.62,
+        '2022': price}
 
-#oil_price = pd.DataFrame(data, index=[0])
+oil_price = pd.DataFrame(data, index=[0])
 
-#oil_price = oil_price_old.append(oil_price)
+oil_price = oil_price_old.append(oil_price)
 
-#oil_price.drop_duplicates(subset = 'Datum', keep = 'last', inplace = True)
+oil_price.drop_duplicates(subset = 'Datum', keep = 'last', inplace = True)
 
-#data = {'Date': date.today().strftime('%Y-%m-%d'), 
- #       '2019': 65.77,
-  #      '2022': price_de}
+data = {'Date': date.today().strftime('%Y-%m-%d'), 
+        '2019': 65.77,
+        '2022': price_de}
 
-#oil_price_de = pd.DataFrame(data, index=[0])
+oil_price_de = pd.DataFrame(data, index=[0])
 
-#oil_price_de = oil_price_old_de.append(oil_price_de)
+oil_price_de = oil_price_old_de.append(oil_price_de)
 
-#oil_price_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
+oil_price_de.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
 
-#oil_price.set_index('Datum', inplace = True)
-#oil_price_de.set_index('Date', inplace = True)
-#oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
-#oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
+oil_price.set_index('Datum', inplace = True)
+oil_price_de.set_index('Date', inplace = True)
+oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
+oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
 
+update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price[['2019', '2022']])
+update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de[['2019', '2022']])
 
-#update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price[['2019', '2022']])
-#update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de[['2019', '2022']])
-
-#oil_price.to_csv('./oil_price.csv')
-#oil_price_de.to_csv('./oil_price_de.csv')
+oil_price.to_csv('./oil_price.csv')
+oil_price_de.to_csv('./oil_price_de.csv')
 
 
 # Stock market data
