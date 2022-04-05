@@ -319,7 +319,7 @@ roll_ch_bag_death_trend <- roll_ch_bag_death %>%
                       TRUE ~ 'gleichbleibend',))
  
 forJson_1 <- data.frame(indicatorTitle = "Neue Spitaleintritte",
-                   date = Sys.Date(),
+                   date = tmp_cases$datum,
                    indicatorSubtitle = "7-Tage-Schnitt",
                    value = tmp_hosp$entries_diff_last,
                    color = "#24b39c",
@@ -330,7 +330,7 @@ forJson_1$chartData <- list(roll_ch_bag_hosp)
  
  
 forJson_2 <- data.frame(indicatorTitle = "Neuinfektionen",
-                  date = Sys.Date(),
+                  date = tmp_cases$datum,
                   value = tmp_cases$entries_diff_last,
                   color = "#e66e4a",
                   trend = last(roll_ch_bag_cases_trend$trend),
@@ -339,7 +339,7 @@ forJson_2 <- data.frame(indicatorTitle = "Neuinfektionen",
 forJson_2$chartData <- list(bag_cases_ravg %>% filter(date >= '2020-10-01'))
  
 forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
-                  date = Sys.Date(),
+                  date = tmp_cases$datum,
                   value = tmp_death$entries_diff_last,
                   color = "#05032d",
                   trend = last(roll_ch_bag_death_trend$trend),
