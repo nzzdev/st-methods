@@ -259,25 +259,30 @@ gas.index = gas.index.strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas[['2019', '2022']])
 
 
-#smi_old = pd.read_csv('./SMI.csv')
+smi_old = pd.read_csv('./SMI.csv')
 
-#url = 'https://www.marketwatch.com/investing/index/smi?countrycode=ch'
-#page = requests.get(url)
+url = 'https://www.marketwatch.com/investing/index/smi?countrycode=ch'
+page = requests.get(url)
 
-#soup = BeautifulSoup(page.content, "html.parser")
-#results = soup.find(class_ = "table__cell u-semi").text.strip()
-#close = pd.to_numeric(results.replace(',',''))
+soup = BeautifulSoup(page.content, "html.parser")
+results = soup.find(class_ = "table__cell u-semi").text.strip()
+close = pd.to_numeric(results.replace(',',''))
 
-#data = {'Date': (date.today() - timedelta(1)).strftime('%Y-%m-%d'), 
- #       'Close': close}
-#smi= pd.DataFrame(data, index=[0])
-#smi = smi_old.append(smi)
-#smi.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
-#smi.set_index('Date', inplace = True)
-#smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
+if date.today().weekday() == 0:
+    date_ = (date.today() - timedelta(3)).strftime('%Y-%m-%d')
+else:
+    date_ = (date.today() - timedelta(1)).strftime('%Y-%m-%d')
 
-#update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi[['Close']])
-#smi.to_csv('./SMI.csv')
+data = {'Date': date_, 
+        'Close': close}
+smi= pd.DataFrame(data, index=[0])
+smi = smi_old.append(smi)
+smi.drop_duplicates(subset = 'Date', keep = 'last', inplace = True)
+smi.set_index('Date', inplace = True)
+smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
+
+update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi[['Close']])
+smi.to_csv('./SMI.csv')
 
 #kurs = euro['EURCHF=X'].tail(1).values
 #benzin_de = benzin.copy()
