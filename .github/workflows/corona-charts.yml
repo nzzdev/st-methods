@@ -2,9 +2,9 @@ name: Update Corona Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at 7:30 and 11:30
+  # This will run at 7:30 and 16:30
   schedule:
-    - cron: "30 5,11 * * *"
+    - cron: "30 5,14 * * *"
   workflow_dispatch:
 
 jobs:
