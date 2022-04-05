@@ -310,7 +310,7 @@ df = pd.DataFrame(data = data)
 df = df.sort_values(by = 'number', ascending = False)
 df.set_index('type', inplace = True)
 
-update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e', data = df)
+update_chart(id = '6aa31459fbbb1211b5ec05508a665b9e', data = df[['number']])
 
 
 # BIP Indikator
