@@ -25,6 +25,8 @@ if __name__ == '__main__':
 
         # read csv and transpose data
         df = pd.read_csv('./Altersverteilung.csv', encoding='utf-8')
+        # drop new column with percentages
+        df = df.iloc[:, :-1]
         df = df.set_index('Altersgruppe').T
 
         # calculate correct sum of cases with known age groups in "Gesamt"
