@@ -302,11 +302,11 @@ data = {'type': ['Suspendierung des Russlandgeschäfts',
         'Zurückhalten von Russlandinvestitionen',
        'Reduzierung des Russlandgeschäfts',
                 'Festhalten am Russlandgeschäft'],
-       'number': [pd.to_numeric(re.findall(r'\d+', a[7].text))[0], 
-                  pd.to_numeric(re.findall(r'\d+', a[8].text))[0],
+       'number': [pd.to_numeric(re.findall(r'\d+', a[6].text))[0], 
+                  pd.to_numeric(re.findall(r'\d+', a[7].text))[0],
+                  pd.to_numeric(re.findall(r'\d+', a[4].text))[0],
                   pd.to_numeric(re.findall(r'\d+', a[5].text))[0],
-                  pd.to_numeric(re.findall(r'\d+', a[6].text))[0],
-                  pd.to_numeric(re.findall(r'\d+', a[4].text))[0]
+                  pd.to_numeric(re.findall(r'\d+', a[3].text))[0]
                  ]} 
 
 
