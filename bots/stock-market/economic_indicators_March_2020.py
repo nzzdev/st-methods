@@ -297,17 +297,19 @@ page = requests.get(url)
 soup = BeautifulSoup(page.content, "html.parser")
 a = soup.find_all('div', class_ = 'text-long')
 
-data = {'type': ['Suspendierung des Russlandgeschäfts',
+data = {'type': ['Suspendierung des Russland-Geschäfts',
         'Endgültiger Rückzug aus Russland',
-        'Zurückhalten von Russlandinvestitionen',
-       'Reduzierung des Russlandgeschäfts',
-                'Festhalten am Russlandgeschäft'],
+        'Zurückhalten von Russland-Investitionen',
+       'Reduzierung des Russland-Geschäfts',
+                'Festhalten am Russland-Geschäft'],
        'number': [pd.to_numeric(re.findall(r'\d+', a[6].text))[0], 
                   pd.to_numeric(re.findall(r'\d+', a[7].text))[0],
                   pd.to_numeric(re.findall(r'\d+', a[4].text))[0],
                   pd.to_numeric(re.findall(r'\d+', a[5].text))[0],
                   pd.to_numeric(re.findall(r'\d+', a[3].text))[0]
                  ]} 
+
+
 
 
 df = pd.DataFrame(data = data)
