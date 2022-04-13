@@ -131,6 +131,7 @@ origin['all'] = origin.iloc[:,1:].sum(axis = 1)
 origin = origin[['start', 'all']].sort_values(by = 'start')
 
 origin.set_index('start', inplace = True)
+origin.index = pd.to_datetime(origin.index).strftime('%Y-%m-%d')
 
 update_chart(id='85c353bb11cc62672a227f886950b782', data = origin[['all']])
 
