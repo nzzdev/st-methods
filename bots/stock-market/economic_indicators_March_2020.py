@@ -84,6 +84,56 @@ zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
 
 update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data = zh[['2019', '2022']])
 
+url = 'https://www.adv.aero/corona-pandemie/woechentliche-verkehrszahlen/'
+page = requests.get(url)
+
+soup = BeautifulSoup(page.content, "html.parser")
+results = soup.find('table', class_ = "alignleft")
+
+data = []
+rows = results.find_all('tr')
+for row in rows:
+    cols = row.find_all('td')
+    cols = [ele.text.strip() for ele in cols]
+    data.append([ele for ele in cols if ele])
+
+passagiere = pd.DataFrame(data[1:], columns = ['KW in 2022', '2019_datum', '2021_datum', '2022_datum', '2019', '2021', '2022', '%22/21', '%22/19'])
+passagiere = passagiere[['KW in 2022', '2019', '2022']].copy()
+
+passagiere['2019'] = pd.to_numeric(passagiere['2019'].str.replace('.', '', regex = False))
+passagiere['2022'] = pd.to_numeric(passagiere['2022'].str.replace('.', '', regex = False))
+passagiere['KW in 2022'] = pd.to_numeric(passagiere['KW in 2022'])
+passagiere.loc[passagiere['KW in 2022'] >= 10 , 'KW'] = '2022-W' + passagiere['KW in 2022'].astype(str)
+
+passagiere = passagiere[['KW', '2019', '2022']].copy()
+passagiere.set_index('KW', inplace = True)
+
+update_chart(id='7a53d2e458b7ba35c25526a2c21d3956', data = passagiere[['2019', '2022']])
+
+
+# Sanktionen
+
+timeline = pd.read_csv('https://raw.githubusercontent.com/correctiv/ru-sanctions-dashboard/main/src/data/sanctions_timeline_2014-2022.csv')
+timeline.set_index('time', inplace = True)
+timeline.index = pd.to_datetime(timeline.index).strftime('%Y-%m-%d')
+
+update_chart(id='2a1327d75c83a9c4ea49f935dd3705ef', data = timeline[['sanction_id']])
+
+origin = pd.read_csv('https://raw.githubusercontent.com/correctiv/ru-sanctions-dashboard/main/src/data/recent_origin_aggregation_table.csv')
+origin = origin.iloc[1: , :]
+cols = origin.iloc[:, 1:].columns.tolist()
+origin['start'] = pd.to_datetime(origin.start)
+
+origin[cols] = origin[cols].apply(pd.to_numeric, errors='coerce')
+
+origin['all'] = origin.iloc[:,1:].sum(axis = 1)
+origin = origin[['start', 'all']].sort_values(by = 'start')
+
+origin.set_index('start', inplace = True)
+
+update_chart(id='85c353bb11cc62672a227f886950b782', data = origin[['start']])
+
+
 
 # Energie
 
