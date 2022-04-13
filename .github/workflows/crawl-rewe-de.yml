@@ -37,7 +37,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          crawl-rewe.py
+          python crawl-rewe.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Upload csv with REWE prices
