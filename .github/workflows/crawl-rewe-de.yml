@@ -2,7 +2,6 @@ name: Update Food Prices DE
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run every 25 minutes from 0 through 22 CEST
   schedule:
     - cron: "0 10-11 * * *"
   workflow_dispatch:
