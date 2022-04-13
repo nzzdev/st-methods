@@ -76,7 +76,8 @@ with open(f"./data/{today}-rewe.csv", 'w') as file:
                 ('brand', b),
                 ('page', n),
                 ('serviceTypes', 'DELIVERY,PARCEL'),
-                ('sorting', 'TOPSELLER_DESC'),
+                ('sorting', 'NAME_ASC'),
+                # ('sorting', 'TOPSELLER_DESC'),
                 ('source', ''),
             )
             sleep(1)
