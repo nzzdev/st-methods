@@ -132,7 +132,7 @@ origin = origin[['start', 'all']].sort_values(by = 'start')
 
 origin.set_index('start', inplace = True)
 
-update_chart(id='85c353bb11cc62672a227f886950b782', data = origin[['start']])
+update_chart(id='85c353bb11cc62672a227f886950b782', data = origin[['all']])
 
 
 
