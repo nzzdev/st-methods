@@ -40,7 +40,7 @@ jobs:
           python crawl-rewe.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Upload csv with REWE prices
+          commit_message: Upload csv with food prices
       - name: Log failure to slack
         if: always()
         uses: ravsamhq/notify-slack-action@v1
