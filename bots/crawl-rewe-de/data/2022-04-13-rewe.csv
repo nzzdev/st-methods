@@ -514,8 +514,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-13;1220979;REWE Beste Wahl;REWE Beste Wahl Schokoladen-Glückskäfer 100g;159;100g
 2022-04-13;112068;REWE Beste Wahl;REWE Beste Wahl Schlagsahne 500g;249;500g (1 kg = 4,98 €)
 2022-04-13;2061726;REWE Beste Wahl;REWE Beste Wahl Laugenstangen 700g;149;718g (1 kg = 2,08 €)
-2022-04-13;2594391;REWE Beste Wahl;REWE Beste Wahl Kartoffeln mehligkochend 2,5kg;249;2,50kg (1 kg = 1 €)
 2022-04-13;1041191;REWE Beste Wahl;REWE Rispentomaten Aromatico 250g;349;250g (100 g = 1,40 €)
+2022-04-13;2594391;REWE Beste Wahl;REWE Beste Wahl Kartoffeln mehligkochend 2,5kg;249;2,50kg (1 kg = 1 €)
 2022-04-13;994552;REWE Beste Wahl;REWE Beste Wahl Kalifornische Mandeln gemahlen 100g;149;100g
 2022-04-13;754918;REWE Beste Wahl;REWE Beste Wahl Zartbitter-Kuvertüre 200g;99;200g (100 g = 0,50 €)
 2022-04-13;8209143;REWE Beste Wahl;REWE Beste Wahl Eier Freilandhaltung 6 Stück;189;6 Stück
@@ -925,8 +925,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-13;8011973;REWE Beste Wahl;REWE Beste Wahl Kurkuma gemahlen 37g;189;37g (100 g = 5,11 €)
 2022-04-13;8475285;REWE Beste Wahl;REWE Beste Wahl High Protein Eis Double Chocolate 500ml;299;500ml (1 l = 5,98 €)
 2022-04-13;8354256;REWE Beste Wahl;REWE Beste Wahl Erdbeeren gezuckert 245g;279;245g (100 g = 1,14 €)
-2022-04-13;2184091;REWE Beste Wahl;REWE Beste Wahl Heidelbeer-Konfitüre 340g;149;340g (1 kg = 4,38 €)
 2022-04-13;8323001;REWE Beste Wahl;REWE beste Wahl Schokoflockenkuchen 525g;189;510g (1 kg = 3,71 €)
+2022-04-13;2184091;REWE Beste Wahl;REWE Beste Wahl Heidelbeer-Konfitüre 340g;149;340g (1 kg = 4,38 €)
 2022-04-13;8275402;REWE Beste Wahl;REWE Beste Wahl Biskuit Obsttortenboden 250g;129;250g (100 g = 0,52 €)
 2022-04-13;3011756;REWE Beste Wahl;REWE Beste Wahl Knusper Müsli weiße Schokolade Himbeere 500g;209;500g (1 kg = 4,18 €)
 2022-04-13;8414795;REWE Beste Wahl;REWE Beste Wahl Thymian gerebelt 16g;169;16g (100 g = 10,56 €)
@@ -986,8 +986,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-13;8412884;REWE Beste Wahl;REWE Beste Wahl Cayennepfeffer gemahlen 39g;189;39g (100 g = 4,85 €)
 2022-04-13;2281045;REWE Beste Wahl;REWE Beste Wahl Chocolate Brownies 360g;189;350g (1 kg = 5,40 €)
 2022-04-13;8333001;REWE Beste Wahl;REWE Beste Wahl Chiliflocken feurig scharf 26g;199;26g (100 g = 7,65 €)
-2022-04-13;1475705;REWE Beste Wahl;REWE Beste Wahl Aglio Olio & Peperoncino 100g;149;100g
 2022-04-13;117199;REWE Beste Wahl;REWE Beste Wahl Peperoni feurig-scharf 165g;119;165g (100 g = 0,72 €)
+2022-04-13;1475705;REWE Beste Wahl;REWE Beste Wahl Aglio Olio & Peperoncino 100g;149;100g
 2022-04-13;8413767;REWE Beste Wahl;REWE Beste Wahl Koriander gemahlen 32g;189;32g (100 g = 5,91 €)
 2022-04-13;8593925;REWE Beste Wahl;REWE Beste Wahl Milder Multi 0,33l;59;0,33l (1 l = 1,79 €)
 2022-04-13;8659391;REWE Beste Wahl;REWE Beste Wahl Hafer Joghurt Natur vegan 400g;129;400g (1 kg = 3,23 €)
@@ -1059,8 +1059,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-13;8424019;REWE Beste Wahl;Rewe Beste Wahl Basilikum gerebelt 18g;239;18g (100 g = 13,28 €)
 2022-04-13;2535656;REWE Beste Wahl;REWE Beste Wahl Butter Chicken Sauce 350g;159;350g (1 kg = 4,54 €)
 2022-04-13;1302332;REWE Beste Wahl;REWE Beste Wahl Kräuter-Oliven ohne Stein 150g;199;150g (100 g = 1,33 €)
-2022-04-13;8353795;REWE Beste Wahl;REWE Beste Wahl Snacktomaten mit Meersalz 150g;199;150g (100 g = 1,33 €)
 2022-04-13;8049593;REWE Beste Wahl;REWE Beste Wahl Snacktomaten mit Kräutern 150g;199;150g (100 g = 1,33 €)
+2022-04-13;8353795;REWE Beste Wahl;REWE Beste Wahl Snacktomaten mit Meersalz 150g;199;150g (100 g = 1,33 €)
 2022-04-13;7210157;REWE Beste Wahl;REWE Beste Wahl Schwerlast Müllsack 240l 5 Stück;499;5 Stück
 2022-04-13;8427595;REWE Beste Wahl;REWE Beste Wahl Herzchen Mix 60g;119;60g (100 g = 1,98 €)
 2022-04-13;116788;REWE Beste Wahl;REWE Beste Wahl Wachsbrechbohnen 185g;99;185g (100 g = 0,54 €)
@@ -1172,8 +1172,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-13;871215;REWE Bio;REWE Bio Blattspinat 600g;199;600g (1 kg = 3,32 €)
 2022-04-13;940075;REWE Bio;REWE Bio Agavendicksaft 250ml;179;250ml (100 ml = 0,72 €)
 2022-04-13;276692;REWE Bio;REWE Bio Basmatireis 500g;199;500g (1 kg = 3,98 €)
-2022-04-13;6697038;REWE Bio;REWE Bio Schalotten 200g im Netz;179;200g (100 g = 0,90 €)
 2022-04-13;2439530;REWE Bio;REWE Bio Gartenkresse 1 Stück;49;1 Stück
+2022-04-13;6697038;REWE Bio;REWE Bio Schalotten 200g im Netz;179;200g (100 g = 0,90 €)
 2022-04-13;1136740;REWE Bio;REWE Bio Buttergemüse 300g;139;300g (1 kg = 4,63 €)
 2022-04-13;8090294;REWE Bio;REWE Bio + vegan Mandel Drink Natur 1l;179;1l
 2022-04-13;7294456;REWE Bio;REWE Bio Blattspinat 100g;179;100g
