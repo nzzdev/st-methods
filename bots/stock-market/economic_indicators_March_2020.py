@@ -103,6 +103,7 @@ passagiere = passagiere[['KW in 2022', '2019', '2022']].copy()
 passagiere['2019'] = pd.to_numeric(passagiere['2019'].str.replace('.', '', regex = False))
 passagiere['2022'] = pd.to_numeric(passagiere['2022'].str.replace('.', '', regex = False))
 passagiere['KW in 2022'] = pd.to_numeric(passagiere['KW in 2022'])
+passagiere.loc[passagiere['KW in 2022'] < 10 , 'KW'] = '2022-W0' + passagiere['KW in 2022'].astype(str)
 passagiere.loc[passagiere['KW in 2022'] >= 10 , 'KW'] = '2022-W' + passagiere['KW in 2022'].astype(str)
 
 passagiere = passagiere[['KW', '2019', '2022']].copy()
@@ -114,7 +115,7 @@ update_chart(id='7a53d2e458b7ba35c25526a2c21d3956', data = passagiere[['2019', '
 # Sanktionen
 
 timeline = pd.read_csv('https://raw.githubusercontent.com/correctiv/ru-sanctions-dashboard/main/src/data/sanctions_timeline_2014-2022.csv')
-timeline.set_index('time', inplace = True)
+timeline.set_index('start', inplace = True)
 timeline.index = pd.to_datetime(timeline.index).strftime('%Y-%m-%d')
 
 update_chart(id='2a1327d75c83a9c4ea49f935dd3705ef', data = timeline[['sanction_id']])
