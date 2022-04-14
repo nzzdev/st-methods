@@ -1,7 +1,8 @@
 import requests
 import json
 import os
-from datetime import date
+import pandas as pd
+from datetime import date, timedelta
 from time import sleep
 
 os.chdir(os.path.dirname(__file__))
@@ -60,6 +61,7 @@ headers = {
 }
 
 today = date.today()
+yesterday = date.today() - timedelta(days=1)
 header = (f"Datum;ID;Marke;Name;Preis;Gewicht"+'\n')
 brands = ['ja!', 'REWE Beste Wahl', 'REWE', 'REWE Bio']
 
@@ -116,3 +118,26 @@ with open(f"./data/{today}-rewe.csv", 'w') as file:
                     ';' +
                     str(product['_embedded']['articles'][0]['_embedded']['listing']['pricing']['grammage']) +
                     '\n')
+
+# create csv with price rises
+oldcsv = pd.read_csv(f'./data/{yesterday}-rewe.csv',
+                     sep=';', usecols=['ID', 'Preis'], index_col='ID')
+newcsv = pd.read_csv(f'./data/{today}-rewe.csv',
+                     sep=';', usecols=['ID', 'Preis'], index_col='ID')
+
+oldcsv.rename(columns={'Preis': yesterday}, inplace=True)
+newcsv.rename(columns={'Preis': today}, inplace=True)
+
+df = pd.merge(oldcsv, newcsv, left_index=True, right_index=True)
+df[today] = df[today] - df[yesterday]
+df = df[[today]]
+# remove cheaper items
+# df = df.clip(lower=0)
+df = df[df[today] != 0]
+
+# essential products
+values = [7227868, 2594381, 5883121, 7937888, 2865690, 5350522, 7897999, 1033906, 687999, 7845005,
+          8280234, 5499259, 2597847, 2421597, 8434947, 6322298, 8152779, 8125186, 873322, 7009798, 3064105, 1028378, 3007929, 3009590, 1045111, 1902921, 207470,  8075412, 2134122, 5249473, 64840, 9393595, 5900174, 1215356, 6445667, 914670, 7073947, 2594349, 5636442, 8468236]
+df['Wichtig?'] = df.index.isin(values)
+
+df.to_csv(f"./data/{today}-rewe-diff.csv", sep=';')
