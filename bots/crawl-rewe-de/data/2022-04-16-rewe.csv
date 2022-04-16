@@ -195,6 +195,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-16;8075412;ja!;ja! Geschirrtabs All-in-1 840g;355;840g (1 kg = 4,23 €)
 2022-04-16;592755;ja!;ja! Gnocchi di Patate 500g;79;500g (1 kg = 1,58 €)
 2022-04-16;3151583;ja!;ja! Gold entkoffeiniert 100g;299;100g
+2022-04-16;6243711;ja!;ja! Gold löslicher Kaffee 100g;249;100g
 2022-04-16;2597847;ja!;ja! Gouda Holland jung am Stück 450g;269;450g (1 kg = 5,98 €)
 2022-04-16;6337279;ja!;ja! Gouda jung 48% Fett 400g;259;400g (1 kg = 6,48 €)
 2022-04-16;1205219;ja!;ja! Gulaschsuppe 400ml;129;400ml (1 l = 3,23 €)
@@ -1343,6 +1344,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-16;871212;REWE Bio;REWE Bio Rahmspinat 450g;149;450g (1 kg = 3,31 €)
 2022-04-16;8538170;REWE Bio;REWE Bio Raspberry Dressing 150ml;199;150ml (100 ml = 1,33 €)
 2022-04-16;8303178;REWE Bio;REWE Bio Reinweinstein-Backpulver 4x20 g;99;4x20g (100 g = 1,24 €)
+2022-04-16;7903295;REWE Bio;REWE Bio Reiswaffeln Joghurt 100g;99;100g
 2022-04-16;8630170;REWE Bio;REWE Bio Reiswaffeln Vollmilch 100g;99;100g
 2022-04-16;8589618;REWE Bio;REWE Bio Reiswaffeln Zartbitter 100g;99;100g
 2022-04-16;7046681;REWE Bio;REWE Bio Reiswaffeln mit Hirse und Mais 100g;69;100g
