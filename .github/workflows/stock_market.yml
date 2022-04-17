@@ -58,6 +58,9 @@ jobs:
       - name: Run python scripts
         run: |
           python economic_indicators_March_2020.py
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Upload csv with food prices
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
