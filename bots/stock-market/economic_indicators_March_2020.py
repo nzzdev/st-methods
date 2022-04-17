@@ -223,8 +223,8 @@ fuel_prices_de.index = pd.to_datetime(fuel_prices_de.index).strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices[['2019', '2022']])
 update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de[['2019', '2022']])
 
-fuel_prices.to_csv('./Benzinpreise.csv')
-fuel_prices_de.to_csv('./Benzinpreise_de.csv')
+fuel_prices.to_csv(f'./Benzinpreise.csv')
+fuel_prices_de.to_csv(f'./Benzinpreise_de.csv')
 
 
 url = 'https://www.heizoel24.ch/heizoelpreise'
@@ -273,8 +273,8 @@ oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
 update_chart(id = 'b1717dcaee838699497b647ebbc25935', data = oil_price[['2019', '2022']])
 update_chart(id = '5ac628c4bb388d36fb2f5cbc746a7cb6', data = oil_price_de[['2019', '2022']])
 
-oil_price.to_csv('./oil_price.csv')
-oil_price_de.to_csv('./oil_price_de.csv')
+oil_price.to_csv(f'./oil_price.csv')
+oil_price_de.to_csv(f'./oil_price_de.csv')
 
 
 # Stock market data
@@ -334,7 +334,7 @@ smi.set_index('Date', inplace = True)
 smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
 
 update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi[['Close']])
-smi.to_csv('./SMI.csv')
+smi.to_csv(f'./SMI.csv')
 
 #kurs = euro['EURCHF=X'].tail(1).values
 #benzin_de = benzin.copy()
