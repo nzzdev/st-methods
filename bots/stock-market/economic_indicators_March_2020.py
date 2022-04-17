@@ -223,7 +223,7 @@ fuel_prices_de.index = pd.to_datetime(fuel_prices_de.index).strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0d4aaba', data = fuel_prices[['2019', '2022']])
 update_chart(id = '5ac628c4bb388d36fb2f5cbc745073c6', data = fuel_prices_de[['2019', '2022']])
 
-fuel_prices.to_csv(f'./Benzinpreise.csv')
+fuel_prices.to_csv(f'~/GitHub/st-methods/bots/stock-market/Benzinpreise_de.csv./Benzinpreise.csv')
 fuel_prices_de.to_csv(f'./Benzinpreise_de.csv')
 
 
