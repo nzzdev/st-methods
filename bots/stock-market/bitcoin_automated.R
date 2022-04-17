@@ -65,11 +65,19 @@ update_chart(
 
 ###########################
 
-coinmarketcapr::setup(Sys.getenv("COINMARKETCAPR_API_KEY"))
+#coinmarketcapr::setup(Sys.getenv("COINMARKETCAPR_API_KEY"))
 
-market_cap <- get_crypto_listings() %>%
-  slice(1:10) %>%
-  select(name, USD_market_cap)
+#market_cap <- get_crypto_listings() %>%
+ # slice(1:10) %>%
+  #select(name, USD_market_cap)
+
+market_cap <- as.data.frame(read_html('https://coinmarketcap.com/')  %>%
+                              html_table(fill = TRUE)) %>%
+  separate(col = "Name" , into = c("Name", NA), sep = "(?<=[a-zA-Z])\\s*(?=[0-9])")  %>%
+  separate(col = "Market.Cap" , into = c('x', "Market.Cap"), sep = "(?<=[a-zA-Z])") %>%
+  select(Name, Market.Cap) %>%
+  drop_na() %>%
+  mutate(Market.Cap = str_replace_all(Market.Cap, "[^[:alnum:]]", ""))
 
 update_chart(
   id = "9640becc888e8a5d878819445105edce",
