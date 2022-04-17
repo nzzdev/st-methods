@@ -33,11 +33,6 @@ jobs:
           renv::activate()
           renv::restore()
         shell: Rscript {0}
-      - name: Run R scripts
-        run: |
-          Rscript bitcoin_automated.R
-        env:
-          COINMARKETCAPR_API_KEY: ${{ secrets.COINMARKETCAPR_API_KEY }}
       - name: Setup python
         uses: actions/setup-python@v2
         with:
