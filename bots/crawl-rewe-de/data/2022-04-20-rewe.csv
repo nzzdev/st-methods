@@ -190,7 +190,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-20;990026;ja!;ja! Geflügel-Salami mit Schweinefleisch 200g;179;200g (100 g = 0,90 €)
 2022-04-20;2070458;ja!;ja! Geflügel-Wiener 300g;224;300g (1 kg = 7,47 €)
 2022-04-20;677207;ja!;ja! Gefrierbeutel 6l, 45 Stück;149;45 Stück
-2022-04-20;8599735;ja!;ja! Gelee Bananen 250g;119;250g (100 g = 0,48 €)
 2022-04-20;8613805;ja!;ja! Geleefrüchte 250g;119;250g (100 g = 0,48 €)
 2022-04-20;7901857;ja!;ja! Gemüse Fond 400ml;99;400ml (1 l = 2,48 €)
 2022-04-20;7146084;ja!;ja! Genießer-Menü Multipack Fleisch 15x100g;269;15x100g (1 kg = 1,79 €)
@@ -681,12 +680,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-20;119678;REWE Beste Wahl;REWE Beste Wahl Gurkensticks 360g;139;360g (1 kg = 3,86 €)
 2022-04-20;8351000;REWE Beste Wahl;REWE Beste Wahl Gyros Gewürzsalz 48g;199;48g (100 g = 4,15 €)
 2022-04-20;2821417;REWE Beste Wahl;REWE Beste Wahl H-Sahne zum Kochen 15% 200g;55;200g (100 g = 0,28 €)
-2022-04-20;8613284;REWE Beste Wahl;REWE Beste Wahl Hack vegan 275g;259;275g (1 kg = 9,42 €)
 2022-04-20;8659391;REWE Beste Wahl;REWE Beste Wahl Hafer Joghurt Natur vegan 400g;129;400g (1 kg = 3,23 €)
-2022-04-20;8709460;REWE Beste Wahl;REWE Beste Wahl Hase Helle mit Nuss vegan 110g;169;110g (100 g = 1,54 €)
 2022-04-20;7859559;REWE Beste Wahl;REWE Beste Wahl Hase Helle vegan 110g;169;110g (100 g = 1,54 €)
-2022-04-20;8655106;REWE Beste Wahl;REWE Beste Wahl Hase Kokos Mandel Weiß 125g;169;125g (100 g = 1,35 €)
-2022-04-20;8658718;REWE Beste Wahl;REWE Beste Wahl Hase Salz Karamell 125g;169;125g (100 g = 1,35 €)
 2022-04-20;445189;REWE Beste Wahl;REWE Beste Wahl Haselnussgebäck mit Cremefüllung 250g;109;250g (100 g = 0,44 €)
 2022-04-20;994524;REWE Beste Wahl;REWE Beste Wahl Haselnusskerne gemahlen 100g;179;100g
 2022-04-20;8330642;REWE Beste Wahl;REWE Beste Wahl Haselnusskerne geröstet & gehackt 100g;169;100g
@@ -939,7 +934,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-20;126938;REWE Beste Wahl;REWE Beste Wahl Schokokeks Vollmilch 125g;69;125g (100 g = 0,55 €)
 2022-04-20;470737;REWE Beste Wahl;REWE Beste Wahl Schokokeks Zartbitter 125g;69;125g (100 g = 0,55 €)
 2022-04-20;3261314;REWE Beste Wahl;REWE Beste Wahl Schokolade Edel Bitter 72% 100g;89;100g
-2022-04-20;1220979;REWE Beste Wahl;REWE Beste Wahl Schokoladen-Glückskäfer 100g;159;100g
 2022-04-20;920085;REWE Beste Wahl;REWE Beste Wahl Schwarze Bohnen in Chilisauce 400g;119;400g (1 kg = 2,98 €)
 2022-04-20;135299;REWE Beste Wahl;REWE Beste Wahl Schwarzer Johannisbeer-Nektar 1l;99;1l
 2022-04-20;2184092;REWE Beste Wahl;REWE Beste Wahl Schwarzkirsch-Konfitüre 340g;129;340g (1 kg = 3,79 €)
