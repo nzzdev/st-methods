@@ -234,6 +234,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-22;2202616;ja!;ja! Hähnchenschnitten Cordon Bleu 500g;399;500g (1 kg = 7,98 €)
 2022-04-22;8573928;ja!;ja! Hähnchenschnitzel 2 Stück 300g;299;300g (1 kg = 9,97 €)
 2022-04-22;570612;ja!;ja! Hühnernudeltopf 800g;139;800g (1 kg = 1,74 €)
+2022-04-22;2239595;ja!;ja! Jaffa Cake Orange 300g;99;300g (1 kg = 3,30 €)
 2022-04-22;6387918;ja!;ja! Jagdwurst 200g;129;200g (100 g = 0,65 €)
 2022-04-22;8350407;ja!;ja! Jasmin Reis 1kg;199;1000g
 2022-04-22;8601073;ja!;ja! Joghurt Dressing 250ml;69;250ml (100 ml = 0,28 €)
@@ -339,7 +340,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-04-22;2317787;ja!;ja! Nussfruchtmischung 200g;149;200g (100 g = 0,75 €)
 2022-04-22;3151703;ja!;ja! Nusskernmischung naturell ungesalzen & ungeröstet 200g;279;200g (100 g = 1,40 €)
 2022-04-22;2949713;ja!;ja! Ofenkäse würzig 180g;189;180g (100 g = 1,05 €)
-2022-04-22;2239595;ja!;ja! Orange Cake 300g;99;300g (1 kg = 3,30 €)
 2022-04-22;1042253;ja!;ja! Orangeat 100g;49;100g
 2022-04-22;518913;ja!;ja! Orangen-Limonade 6x1,5l;270;6x1,50l (1 l = 0,30 €)
 2022-04-22;7226202;ja!;ja! Orangenlimonade 0% Zucker 6x1,5l;270;6x1,50l (1 l = 0,30 €)
