@@ -193,6 +193,21 @@ corr_nep_deaths <- (new_nep_deaths/2065)*619
 cum_nep_deaths_nepeck <- cumsum(new_nep_deaths+corr_nep_deaths)
 all_ctry$dead[all_ctry$country == "Nepal" & all_ctry$date < "2021-02-24"] <- cum_nep_deaths_nepeck
 
+#austria deaths adjust
+cum_austria_deaths <- all_ctry$dead[all_ctry$country == "Austria" & all_ctry$date < "2022-04-21"]
+new_austria_deaths <- cum_austria_deaths - lag(cum_austria_deaths,1)
+new_austria_deaths[1] <- 0
+corr_austria_deaths <- ((new_austria_deaths/16470)*587)
+cum_austria_deaths_check <- cumsum(new_austria_deaths+corr_austria_deaths)
+all_ctry$dead[all_ctry$country == "Austria" & all_ctry$date < "2022-04-21"] <- cum_austria_deaths_check
+
+cum_austria2_deaths <- all_ctry$dead[all_ctry$country == "Austria" & all_ctry$date < "2022-04-22"]
+new_austria2_deaths <- cum_austria2_deaths - lag(cum_austria2_deaths,1)
+new_austria2_deaths[1] <- 0
+corr_austria2_deaths <- ((new_austria2_deaths/17057)*959)
+cum_austria2_deaths_check <- cumsum(new_austria2_deaths+corr_austria2_deaths)
+all_ctry$dead[all_ctry$country == "Austria" & all_ctry$date < "2022-04-22"] <- cum_austria2_deaths_check
+
 #france deaths adjust
 all_ctry$dead[all_ctry$Land == "Frankreich" & all_ctry$date =="2022-02-21"] <- 137596
 
