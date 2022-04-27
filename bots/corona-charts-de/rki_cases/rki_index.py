@@ -14,9 +14,9 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # call Node.js script and save output as csv
-        # subprocess.call('npm i dataunwrapper', shell=True)
+        # subprocess.call(['npm' 'i' 'dataunwrapper'])
         dw_divi = subprocess.Popen(
-            'node dataunwrapper.js HCAPG', shell=True, stdout=subprocess.PIPE)
+            ['node', 'dataunwrapper.js', 'HCAPG'], stdout=subprocess.PIPE)
         output = dw_divi.stdout.read()
         if not os.path.exists('data'):
             os.makedirs('data')
