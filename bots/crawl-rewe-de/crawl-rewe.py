@@ -1,9 +1,9 @@
 import requests
 import json
 import os
-import pandas as pd
 from datetime import date, timedelta
 from time import sleep
+import pandas as pd
 
 os.chdir(os.path.dirname(__file__))
 
@@ -62,6 +62,8 @@ headers = {
 
 today = date.today()
 yesterday = date.today() - timedelta(days=1)
+todaynice = today.strftime('%-d.%-m.')
+
 header = (f"Datum;ID;Marke;Name;Preis;Gewicht"+'\n')
 brands = ['ja!', 'REWE Beste Wahl', 'REWE', 'REWE Bio']
 
@@ -119,25 +121,72 @@ with open(f"./data/{today}-rewe.csv", 'w') as file:
                     str(product['_embedded']['articles'][0]['_embedded']['listing']['pricing']['grammage']) +
                     '\n')
 
-# create csv with price rises
+# create dataframes with price changes
 oldcsv = pd.read_csv(f'./data/{yesterday}-rewe.csv',
-                     sep=';', usecols=['ID', 'Preis'], index_col='ID')
+                     sep=';', usecols=['ID', 'Preis', 'Marke', 'Name'], index_col='ID')
 newcsv = pd.read_csv(f'./data/{today}-rewe.csv',
                      sep=';', usecols=['ID', 'Preis'], index_col='ID')
-
 oldcsv.rename(columns={'Preis': yesterday}, inplace=True)
 newcsv.rename(columns={'Preis': today}, inplace=True)
-
 df = pd.merge(oldcsv, newcsv, left_index=True, right_index=True)
 df[today] = df[today] - df[yesterday]
-df = df[[today]]
-# remove cheaper items
-# df = df.clip(lower=0)
+
+# only keep products with price changes
 df = df[df[today] != 0]
 
-# essential products
-values = [7227868, 2594381, 5883121, 7937888, 2865690, 5350522, 7897999, 1033906, 687999, 7845005,
-          8280234, 5499259, 2597847, 2421597, 8434947, 6322298, 8152779, 8125186, 873322, 7009798, 3064105, 1028378, 3007929, 3009590, 1045111, 1902921, 207470,  8075412, 2134122, 5249473, 64840, 9393595, 5900174, 1215356, 6445667, 914670, 7073947, 2594349, 5636442, 8468236]
-df['Wichtig?'] = df.index.isin(values)
+# create new dataframe with ja! products only
+df_ja = df.copy()
+df_ja = df_ja[df_ja['Marke'] == 'ja!']
 
-df.to_csv(f"./data/{today}-rewe-diff.csv", sep=';')
+if not df.empty:
+    # keep column with price changes only
+    df = df[[today]]
+
+    # remove cheaper items
+    # df = df.clip(lower=0)
+
+    # essential products
+    values = [7227868, 2594381, 5883121, 7937888, 2865690, 5350522, 7897999, 1033906, 687999, 7845005,
+              8280234, 5499259, 2597847, 2421597, 8434947, 6322298, 8152779, 8125186, 873322, 7009798, 3064105, 1028378, 3007929, 3009590, 1045111, 1902921, 207470,  8075412, 2134122, 5249473, 64840, 9393595, 5900174, 1215356, 6445667, 914670, 7073947, 2594349, 5636442, 8468236]
+    df['Wichtig?'] = df.index.isin(values)
+    df.to_csv(f'./data/{today}-rewe-diff.csv', sep=';')
+
+if not df_ja.empty:
+    # create dataframe with ja! products and calculate price change
+    df_ja['Name'] = df_ja['Name'].astype(
+        str).str.replace(r'[Jj]a!\s', r'', regex=True)
+    df_ja['Name'] = df_ja['Name'].astype(
+        str).str.replace(r'\s\d.*', r'', regex=True)
+    df_ja['Name'] = df_ja['Name'].astype(
+        str).str.replace(r'\smit\s.*', r'', regex=True)
+    df_ja['Name'] = df_ja['Name'].astype(
+        str).str.replace('  Arabica-Robusta-Mischung', '', regex=False)
+    df_ja['Marke'] = ((((df_ja[yesterday] + df_ja[today]) -
+                        df_ja[yesterday])/df_ja[yesterday])*100).round(0).astype(int)
+    df_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
+    df_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
+    df_ja['Prozent'] = df_ja['Prozent'].apply(
+        lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
+    df_ja['Prozent'] = df_ja['Prozent'].str.replace('-', '', regex=False)
+    df_ja.drop([yesterday], axis=1, inplace=True)
+    df_ja.rename(columns={today: 'Veränderung'}, inplace=True)
+    # convert cents to euro and add currency
+    df_ja['Veränderung'] = df_ja['Veränderung'] / 100.0
+    df_ja['Veränderung'] = df_ja['Veränderung'].apply(
+        lambda x: f'+{x}€' if x >= 0 else f'{x}€')
+    df_ja['Veränderung'] = df_ja['Veränderung'].str.replace(
+        '.', ',', regex=False)
+    # df_ja['Tweet'] = df_ja[['Prozent', 'Name', 'Veränderung']].agg(' '.join, axis=1)
+    df_ja['Tweet'] = df_ja['Prozent'] + ' ' + df_ja['Name'] + \
+        ': ' + df_ja['Veränderung'] + '\n'
+    df_ja = df_ja[['Tweet']]
+    # add Tweet intro
+    count = df_ja.shape[0]
+    if count > 1:
+        intro = [f'Am {todaynice} änderte Rewe {count} ja! Preise:']
+    else:
+        intro = [f'Am {todaynice} änderte Rewe 1 ja! Preis:']
+    df_ja = pd.DataFrame([intro], index=[
+                         '0000000'], columns=['Tweet']).append(df_ja)
+    # df_ja.to_csv(f'./data/{today}-ja-diff.csv', sep=';', index=False)
+    df_ja.to_json(f'./data/{today}-ja-diff.json', orient='values')
