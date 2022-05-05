@@ -183,9 +183,9 @@ if not df_ja.empty:
     # add Tweet intro
     count = df_ja.shape[0]
     if count > 1:
-        intro = [f'Am {todaynice} änderte Rewe {count} ja! Preise:']
+        intro = [f'Am {todaynice} änderte Rewe {count} ja! Preise:\n\n']
     else:
-        intro = [f'Am {todaynice} änderte Rewe 1 ja! Preis:']
+        intro = [f'Am {todaynice} änderte Rewe 1 ja! Preis:\n\n']
     df_ja = pd.DataFrame([intro], index=[
                          '0000000'], columns=['Tweet']).append(df_ja)
     # df_ja.to_csv(f'./data/{today}-ja-diff.csv', sep=';', index=False)
