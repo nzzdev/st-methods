@@ -161,6 +161,8 @@ if not df_ja.empty:
         str).str.replace(r'\smit\s.*', r'', regex=True)
     df_ja['Name'] = df_ja['Name'].astype(
         str).str.replace('  Arabica-Robusta-Mischung', '', regex=False)
+    df_ja['Name'] = df_ja['Name'].astype(
+        str).str.replace('  ca.', '', regex=False)
     df_ja['Marke'] = ((((df_ja[yesterday] + df_ja[today]) -
                         df_ja[yesterday])/df_ja[yesterday])*100).round(0).astype(int)
     df_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
