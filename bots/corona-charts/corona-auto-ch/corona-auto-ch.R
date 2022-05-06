@@ -495,7 +495,7 @@ roll_ch_bag_hosp_2 <- roll_ch_bag_death_hosp %>%
 hosp_corr <- read_csv("./corona-auto-ch/hosp-corr.csv")
 hosp_corr_fill <- as_tibble(rep(1, nrow(roll_ch_bag_hosp_2)-nrow(hosp_corr)))
 
-hosp_corr_2 <- rbind(hosp_corr_fill, hosp_corr)
+hosp_corr_2 <- bind_rows(hosp_corr_fill, hosp_corr)
 
 hop_with_corr <- cbind(roll_ch_bag_hosp_2, hosp_corr_2) %>% 
   mutate(corr = Hospitalisierungen*((((value-1)/3)*2)+1)*1.3) %>%
