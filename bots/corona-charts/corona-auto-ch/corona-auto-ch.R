@@ -492,7 +492,7 @@ update_chart(id = "ae2fa42664db4ab375dba744d07afac4", data = roll_ch_bag_death)
 roll_ch_bag_hosp_2 <- roll_ch_bag_death_hosp %>%
   select("datum", "Hospitalisierungen")
 
-hosp_corr <- read_csv("./hosp-corr.csv")
+hosp_corr <- read_csv("./corona-auto-ch/hosp-corr.csv")
 hosp_corr_fill <- as_tibble(rep(1, nrow(roll_ch_bag_hosp_2)-nrow(hosp_corr)))
 
 hosp_corr_2 <- rbind(hosp_corr_fill, hosp_corr)
