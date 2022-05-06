@@ -418,7 +418,6 @@ bag_testPcrAntigen_abs <- bag_testPcrAntigen %>%
 #q-cli update
 update_chart(id = "fe58121b9eb9cbc28fb71b8810a7b573", data = bag_testPcrAntigen_abs)
 
-
 # Positivity rate (PCR and Antigen)
 bag_tests_pct <- bag_testPcrAntigen %>%
   filter(datum > "2020-11-01", geoRegion == 'CHFL') %>%
@@ -478,13 +477,33 @@ roll_ch_bag_death_hosp <- bag_cases %>%
          hosp_roll = rollmean(entries,7,fill = 0, align = "right"),
          death_roll = rollmean(entries.y,7,fill = 0, align = "right")) %>%
   select("datum", "hosp_roll", "death_roll") %>%
-  rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
+  rename(Hospitalisierungen = hosp_roll, Todesfälle = death_roll)
 
 update_chart(id = "2e86418698ad77f1247bedf99b771e99", data = roll_ch_bag_death_hosp)
 
 
+# Todesfälle only 
+roll_ch_bag_death <- roll_ch_bag_death_hosp %>%
+  select("datum", "Todesfälle")
 
+update_chart(id = "ae2fa42664db4ab375dba744d07afac4", data = roll_ch_bag_death)
 
+# Hosps only (with correction)
+roll_ch_bag_hosp_2 <- roll_ch_bag_death_hosp %>%
+  select("datum", "Hospitalisierungen")
+
+hosp_corr <- read_csv("./hosp-corr.csv")
+hosp_corr_fill <- as_tibble(rep(1, nrow(roll_ch_bag_hosp_2)-nrow(hosp_corr)))
+
+hosp_corr_2 <- rbind(hosp_corr_fill, hosp_corr)
+
+hop_with_corr <- cbind(roll_ch_bag_hosp_2, hosp_corr_2) %>% 
+  mutate(corr = Hospitalisierungen*((((value-1)/3)*2)+1)*1.3) %>%
+  select(datum, Hospitalisierungen, corr) %>%
+  rename("Hospitalisierungen laut BAG" = Hospitalisierungen, "Schätzung inkl. Nachmeldungen und Meldelücke*" = corr) %>% 
+  as_tibble()
+  
+update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = roll_ch_bag_death)
 
 # Todesfälle und Hospitalisierungen absolut nach Altersklasse 
 
