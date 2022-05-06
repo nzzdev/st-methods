@@ -20,6 +20,27 @@ source("./helpers.R")
 # read in additional data
 pop <- read_csv("./corona-auto-ch/pop_kant.csv")
 
+#### Wastewater Analysis Werdhölzli ####
+
+ww_zh_0 <- read_delim("https://sensors-eawag.ch/sars/__data__/processed_normed_data_zurich_v1.csv", delim = ";") %>% 
+  select(...1, `median_7d_new_cases [1/(d*100000 capita)]`, `median_7d_sars_cov2_rna [gc/(d*100000 capita)]`) %>%
+  rename(date = 1, cases = 2, old = 3) %>%
+  mutate(old = old/100000000000)
+
+ww_zh <- read_delim("https://sensors-eawag.ch/sars/__data__/processed_normed_data_zurich_v2.csv", delim = ";") %>% 
+  select(...1, `median_7d_sars_cov2_rna [gc/(d*100000 capita)]`) %>%
+  rename(date = 1, new = 2) %>%
+  mutate(new = new/250000000000)
+
+ww_zh_comb <- ww_zh_0 %>%
+  full_join(ww_zh, by = "date") %>%
+  rename("Gemessene Gensequenzen (in 100 Milliarden)" = old, 
+         "Gemessene Gensequenzen (neue Messmethode*)" = new,
+         "Neuinfektionen" = cases)
+
+update_chart(id = "ae2fa42664db4ab375dba744d0706269", 
+             data = ww_zh_comb)
+
 #### Excess deaths (BfS) ####
 
 url_xm <- read_html("https://www.bfs.admin.ch//bfs/de/home/statistiken/gesundheit/gesundheitszustand/sterblichkeit-todesursachen/_jcr_content/par/ws_composed_list_1765412048.dynamiclist.html") %>%
@@ -503,7 +524,7 @@ hop_with_corr <- cbind(roll_ch_bag_hosp_2, hosp_corr_2) %>%
   rename("Hospitalisierungen laut BAG" = Hospitalisierungen, "Schätzung inkl. Nachmeldungen und Meldelücke*" = corr) %>% 
   as_tibble()
   
-update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = roll_ch_bag_death)
+update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = hop_with_corr)
 
 # Todesfälle und Hospitalisierungen absolut nach Altersklasse 
 
