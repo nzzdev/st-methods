@@ -92,7 +92,7 @@ if __name__ == '__main__':
                     # retry if error
                     logging.basicConfig(level=logging.INFO)
                     s = requests.Session()
-                    retries = Retry(total=8, backoff_factor=1,
+                    retries = Retry(total=10, backoff_factor=1,
                                     status_forcelist=[502, 503, 504])
                     s.mount('https://', HTTPAdapter(max_retries=retries))
                     response = s.get('https://shop.rewe.de/api/products',
