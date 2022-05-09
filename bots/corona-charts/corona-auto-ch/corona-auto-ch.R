@@ -518,13 +518,13 @@ hosp_corr_fill <- as_tibble(rep(1, nrow(roll_ch_bag_hosp_2)-nrow(hosp_corr)))
 
 hosp_corr_2 <- bind_rows(hosp_corr_fill, hosp_corr)
 
-hop_with_corr <- cbind(roll_ch_bag_hosp_2, hosp_corr_2) %>% 
+hosp_with_corr <- cbind(roll_ch_bag_hosp_2, hosp_corr_2) %>% 
   mutate(corr = Hospitalisierungen*((((value-1)/3)*2)+1)*1.3) %>%
   select(datum, Hospitalisierungen, corr) %>%
   rename("Hospitalisierungen laut BAG" = Hospitalisierungen, "Schätzung inkl. Nachmeldungen und Meldelücke*" = corr) %>% 
   as_tibble()
-  
-update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = hop_with_corr)
+
+update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = hosp_with_corr)
 
 # Todesfälle und Hospitalisierungen absolut nach Altersklasse 
 
