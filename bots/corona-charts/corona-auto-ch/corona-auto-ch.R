@@ -522,7 +522,8 @@ hosp_with_corr <- cbind(roll_ch_bag_hosp_2, hosp_corr_2) %>%
   mutate(corr = Hospitalisierungen*((((value-1)/3)*2)+1)*1.3) %>%
   select(datum, Hospitalisierungen, corr) %>%
   rename("Hospitalisierungen laut BAG" = Hospitalisierungen, "Schätzung inkl. Nachmeldungen und Meldelücke*" = corr) %>% 
-  as_tibble()
+  as_tibble() %>%
+  tail(-6)
 
 update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = hosp_with_corr)
 
