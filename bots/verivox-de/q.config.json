@@ -1,0 +1,16 @@
+{
+    "items": [
+        {
+            "environments": [
+                {
+                    "name": "staging",
+                    "id": "71b560c075f23d2f41e0089664958e30"
+                }
+            ],
+            "item": {
+                "data": "",
+                "files": ""
+            }
+        }
+    ]
+}
