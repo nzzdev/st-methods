@@ -15,7 +15,7 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # set source data
-        url = 'https://impfdashboard.de/static/data/germany_vaccinations_timeseries_v2.tsv'
+        url = 'https://impfdashboard.de/static/data/germany_vaccinations_timeseries_v3.tsv'
 
         # save data
         if not os.path.exists('data'):
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
         # read relevant columns
         df = pd.read_csv('./data/germany_vaccinations_timeseries_v2.tsv', delimiter='\t', encoding='utf-8',
-                         usecols=['date', 'dosen_erst_differenz_zum_vortag', 'dosen_zweit_differenz_zum_vortag', 'dosen_dritt_differenz_zum_vortag'])
+                         usecols=['date', 'impfungen_min1', 'impfungen_gi', 'impfungen_boost1', 'impfungen_boost2'])
 
         # rearrange columns
         # df2 = df2[['date', 'impf_quote_voll', 'impf_quote_erst', 'Ziel']]
@@ -35,17 +35,23 @@ if __name__ == '__main__':
 
         # get 7-day average of vaccinations for chart title and notes
         mean_first = df.tail(
-            7)['dosen_erst_differenz_zum_vortag'].mean()
+            7)['impfungen_min1'].mean()
         mean_full = df.tail(
-            7)['dosen_zweit_differenz_zum_vortag'].mean()
+            7)['impfungen_gi'].mean()
         mean_third = df.tail(
-            7)['dosen_dritt_differenz_zum_vortag'].mean()
-        mean = mean_first + mean_full + mean_third
+            7)['impfungen_boost1'].mean()
+        mean_fourth = df.tail(
+            7)['impfungen_boost2'].mean()
+        mean = mean_first + mean_full + mean_third + mean_fourth
+        mean_booster = mean_third + mean_fourth
         # round, use thousand seperator and convert to str
         mean = f'{mean.round(-3).astype(int):,}'.replace(',', ' ')
+        mean_booster = f'{mean_booster.round(-3).astype(int):,}'.replace(
+            ',', ' ')
         mean_first = f'{mean_first.round(-3).astype(int):,}'.replace(',', '')
         mean_full = f'{mean_full.round(-3).astype(int):,}'.replace(',', '')
         mean_third = f'{mean_third.round(-3).astype(int):,}'.replace(',', '')
+        mean_fourth = f'{mean_fourth.round(-3).astype(int):,}'.replace(',', '')
 
         # get date for chart notes and add one day
         timestamp_str = df['date'].iloc[-1]
@@ -54,11 +60,11 @@ if __name__ == '__main__':
         timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
         # rename first column and set as index
-        df = df.rename(columns={'date': '', 'dosen_erst_differenz_zum_vortag': 'Erstimpfung',
-                       'dosen_zweit_differenz_zum_vortag': 'Zweitimpfung', 'dosen_dritt_differenz_zum_vortag': 'Auffrischung'}).set_index('')
+        df = df.rename(columns={'date': '', 'impfungen_min1': '1. Dose',
+                       'impfungen_gi': '2. Dose', 'impfungen_boost1': '3. Dose', 'impfungen_boost2': '4. Dose'}).set_index('')
 
         # add row with no values and current date as index for step-after chart
-        df.loc[df.shape[0]] = ['', '', '']
+        df.loc[df.shape[0]] = ['', '', '', '']
         df.rename({df.index[-1]: timestamp_dt}, inplace=True)
 
         # change date format
@@ -66,7 +72,7 @@ if __name__ == '__main__':
             df.index, format='%Y-%m-%d').strftime('%d.%m.%Y')
 
        # show date in chart notes
-        notes_chart = '¹ Sieben-Tage-Schnitt (Erstimpfung: ' + mean_first + ', Zweitimpfung: ' + mean_full + ', Auffrischung: ' + mean_third + \
+        notes_chart = '¹ Sieben-Tage-Schnitt (1. Dose: ' + mean_first + ', 2. Dose: ' + mean_full + ', Booster: ' + mean_booster + \
             ').<br>Stand: ' + timestamp_str
 
         # show 7-day average in chart title

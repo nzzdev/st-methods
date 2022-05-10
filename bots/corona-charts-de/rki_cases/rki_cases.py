@@ -13,9 +13,9 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # call Node.js script and save output as csv
-        #subprocess.call('npm i dataunwrapper', shell=True)
-        dataunwrapper = subprocess.Popen('node dataunwrapper.js gXuhg',
-                                         shell=True, stdout=subprocess.PIPE)
+        # subprocess.call(['npm' 'i' 'dataunwrapper'])
+        dataunwrapper = subprocess.Popen(
+            ['node', 'dataunwrapper.js', 'gXuhg'], stdout=subprocess.PIPE)
         output = dataunwrapper.stdout.read()
 
         if not os.path.exists('data'):

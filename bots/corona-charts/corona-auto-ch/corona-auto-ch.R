@@ -20,6 +20,27 @@ source("./helpers.R")
 # read in additional data
 pop <- read_csv("./corona-auto-ch/pop_kant.csv")
 
+#### Wastewater Analysis Werdhölzli ####
+
+ww_zh_0 <- read_delim("https://sensors-eawag.ch/sars/__data__/processed_normed_data_zurich_v1.csv", delim = ";") %>% 
+  select(...1, `median_7d_new_cases [1/(d*100000 capita)]`, `median_7d_sars_cov2_rna [gc/(d*100000 capita)]`) %>%
+  rename(date = 1, cases = 2, old = 3) %>%
+  mutate(old = old/100000000000)
+
+ww_zh <- read_delim("https://sensors-eawag.ch/sars/__data__/processed_normed_data_zurich_v2.csv", delim = ";") %>% 
+  select(...1, `median_7d_sars_cov2_rna [gc/(d*100000 capita)]`) %>%
+  rename(date = 1, new = 2) %>%
+  mutate(new = new/250000000000)
+
+ww_zh_comb <- ww_zh_0 %>%
+  full_join(ww_zh, by = "date") %>%
+  rename("Gemessene Gensequenzen (in 100 Milliarden)" = old, 
+         "Gemessene Gensequenzen (neue Messmethode*)" = new,
+         "Neuinfektionen" = cases)
+
+update_chart(id = "ae2fa42664db4ab375dba744d0706269", 
+             data = ww_zh_comb)
+
 #### Excess deaths (BfS) ####
 
 url_xm <- read_html("https://www.bfs.admin.ch//bfs/de/home/statistiken/gesundheit/gesundheitszustand/sterblichkeit-todesursachen/_jcr_content/par/ws_composed_list_1765412048.dynamiclist.html") %>%
@@ -418,7 +439,6 @@ bag_testPcrAntigen_abs <- bag_testPcrAntigen %>%
 #q-cli update
 update_chart(id = "fe58121b9eb9cbc28fb71b8810a7b573", data = bag_testPcrAntigen_abs)
 
-
 # Positivity rate (PCR and Antigen)
 bag_tests_pct <- bag_testPcrAntigen %>%
   filter(datum > "2020-11-01", geoRegion == 'CHFL') %>%
@@ -478,13 +498,34 @@ roll_ch_bag_death_hosp <- bag_cases %>%
          hosp_roll = rollmean(entries,7,fill = 0, align = "right"),
          death_roll = rollmean(entries.y,7,fill = 0, align = "right")) %>%
   select("datum", "hosp_roll", "death_roll") %>%
-  rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
+  rename(Hospitalisierungen = hosp_roll, Todesfälle = death_roll)
 
 update_chart(id = "2e86418698ad77f1247bedf99b771e99", data = roll_ch_bag_death_hosp)
 
 
+# Todesfälle only 
+roll_ch_bag_death <- roll_ch_bag_death_hosp %>%
+  select("datum", "Todesfälle")
 
+update_chart(id = "ae2fa42664db4ab375dba744d07afac4", data = roll_ch_bag_death)
 
+# Hosps only (with correction)
+roll_ch_bag_hosp_2 <- roll_ch_bag_death_hosp %>%
+  select("datum", "Hospitalisierungen")
+
+hosp_corr <- read_csv("./corona-auto-ch/hosp-corr.csv")
+hosp_corr_fill <- as_tibble(rep(1, nrow(roll_ch_bag_hosp_2)-nrow(hosp_corr)))
+
+hosp_corr_2 <- bind_rows(hosp_corr_fill, hosp_corr)
+
+hosp_with_corr <- cbind(roll_ch_bag_hosp_2, hosp_corr_2) %>% 
+  mutate(corr = Hospitalisierungen*((((value-1)/3)*2)+1)*1.3) %>%
+  select(datum, Hospitalisierungen, corr) %>%
+  rename("Hospitalisierungen laut BAG" = Hospitalisierungen, "Schätzung inkl. Nachmeldungen und Meldelücke*" = corr) %>% 
+  as_tibble() %>%
+  tail(-6)
+
+update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = hosp_with_corr)
 
 # Todesfälle und Hospitalisierungen absolut nach Altersklasse 
 

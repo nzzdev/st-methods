@@ -26,7 +26,7 @@ if __name__ == '__main__':
         # read data
         csv = './data/Aktuell_Deutschland_Impfquoten_COVID-19.csv'
         df = pd.read_csv(csv, encoding='utf-8',
-                         usecols=['Datum', 'Bundesland', 'Impfquote_gesamt_voll', 'Impfquote_gesamt_boost'])
+                         usecols=['Datum', 'Bundesland', 'Impfquote_gesamt_gi', 'Impfquote_gesamt_boost1', 'Impfquote_gesamt_boost2'])
 
         # get date for chart notes and drop date column
         timestamp_str = df.loc[0, 'Datum']
@@ -40,19 +40,18 @@ if __name__ == '__main__':
         df = df.drop(df.index[[-1, 0]])
 
         # sorty by fully vaccinated
-        df = df.sort_values(by='Impfquote_gesamt_voll', ascending=False)
+        df = df.sort_values(by='Impfquote_gesamt_gi', ascending=False)
 
         # add Germany at the top
         df = pd.concat([pd.DataFrame(dfde), df], ignore_index=True)
 
         # rename column headers
-        df = df.rename(columns={'Bundesland': 'Land', 'Impfquote_gesamt_voll': '2. Dose',
-                       'Impfquote_gesamt_boost': '3. Dose'}).set_index('Land')
+        df = df.rename(columns={'Bundesland': 'Land', 'Impfquote_gesamt_gi': '2. Dose',
+                       'Impfquote_gesamt_boost1': '3. Dose', 'Impfquote_gesamt_boost2': '4. Dose'}).set_index('Land')
 
         # show date in chart notes
         notes_chart = 'Stand: ' + timestamp_str
 
-        # run function
         update_chart(id='245e5a30acb9ffa8e53b336e6bda032b',
                      data=df, notes=notes_chart)
 
