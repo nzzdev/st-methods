@@ -312,7 +312,7 @@ update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas[['2019', '2022'
 
 oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna()
 oil['2019'] = df['Close']['BZ=F'][(df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
-oil.rename(columns={oil.columns[1]: '2022'}, inplace = True)
+oil.rename(columns={oil.columns[0]: '2022'}, inplace = True)
 oil = oil[['2019', '2022']]
 oil.index = oil.index.strftime('%Y-%m-%d')
 update_chart(id = 'c6aec0c9dea84bcdef43b980cd4a7e3f', data = oil[['2019', '2020']])
