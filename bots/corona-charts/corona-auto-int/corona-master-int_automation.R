@@ -745,9 +745,9 @@ test_table <- tests %>%
   filter(`Tests pro 1000 Einwohner` > 1) %>%
   ungroup()
 
-title <- paste(head(test_table$Land, 1), "testet am meisten")
+#title <- paste(head(test_table$Land, 1), "testet am meisten")
 
 notes <- paste0("Nur Länder mit mehr als 1 Million Einwohnern, die mehr als einen Test pro 1000 Einwohner pro Tag durchführen. Aufgrund unterschiedlicher Meldeverfahren können die Daten für einige Länder schon mehrere Tage alt sein. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
-update_chart(id = 'fdf83ddd0451dc0c0d09c18769f1abd5', data = test_table, notes = notes, title = title)
+update_chart(id = 'fdf83ddd0451dc0c0d09c18769f1abd5', data = test_table, notes = notes)
 
