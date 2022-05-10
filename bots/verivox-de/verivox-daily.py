@@ -55,7 +55,7 @@ if __name__ == '__main__':
         api_endpoint = base_uri + token_path
         tasks_url = base_uri + uri_path
         username = os.environ['VERIVOX_USERNAME']
-        password = os.environ['VERIVOX_PASSWORD'] = 'bNMdA354nLqG9xAt'
+        password = os.environ['VERIVOX_PASSWORD']
 
         payload = {'username': username,
                    'password': password, 'grant_type': 'password'}
