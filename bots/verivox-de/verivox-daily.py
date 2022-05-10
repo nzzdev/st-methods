@@ -13,7 +13,7 @@ import subprocess
 import zipfile
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", asset_groups=[], files=[]):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data="", files="", options=""):  # Q helper function
     # read qConfig file
     json_file = open('./q.config.json')
     qConfig = json.load(json_file)
@@ -29,14 +29,6 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
                     item.get('item').update({'notes': notes})
                 if len(data) > 0:
                     item['item']['data'] = data
-                if len(asset_groups) > 0:
-                    groups = []
-                    for g in asset_groups:
-                        groups.append({
-                            'assets': [{"path": f} for f in g['files']],
-                            'name': g['name']
-                        })
-                    item['item']['assetGroups'] = groups
                 if len(files) > 0:
                     item['item']['files'] = files
                 print('Successfully updated item with id', id,
@@ -205,8 +197,16 @@ if __name__ == '__main__':
                 os.remove(os.path.join(dir, item))
 
         # prepare some data for q.config.json
-        data = [["lastUpdatedAt"], [time_str], [
-            "MeanAC"], [meanac], ["MeanGas"], [meangas]]
+        data = [[
+            "lastUpdatedAt",
+            "MeanAC",
+            "MeanGas"
+        ],
+            [
+            str(time_str),
+            int(meanac),
+            int(meangas)
+        ]]
         file = [{
             "loadSyncBeforeInit": False,
             "file": {
