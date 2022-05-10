@@ -315,7 +315,7 @@ oil['2019'] = df['Close']['BZ=F'][(df.index >= '2019-01-01') & (df.index <= '201
 oil.rename(columns={oil.columns[0]: '2022'}, inplace = True)
 oil = oil[['2019', '2022']]
 oil.index = oil.index.strftime('%Y-%m-%d')
-update_chart(id = 'c6aec0c9dea84bcdef43b980cd4a7e3f', data = oil[['2019', '2020']])
+update_chart(id = 'c6aec0c9dea84bcdef43b980cd4a7e3f', data = oil[['2019', '2022']])
 
 bitcoin = df['Close']["BTC-USD"].reset_index().dropna().round(1)
 bitcoin = bitcoin[['BTC-USD']]
