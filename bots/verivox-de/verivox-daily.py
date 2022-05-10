@@ -204,8 +204,8 @@ if __name__ == '__main__':
         ],
             [
             str(time_str),
-            int(meanac),
-            int(meangas)
+            str(meanac),
+            str(meangas)
         ]]
         file = [{
             "loadSyncBeforeInit": False,
