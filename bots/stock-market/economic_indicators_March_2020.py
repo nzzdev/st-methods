@@ -278,7 +278,7 @@ oil_price_de.to_csv(f'./oil_price_de.csv')
 
 
 # Stock market data
-tickers = ["EURCHF=X", "KE=F", "TTF=F", "^GDAXI", "EURUSD=X"] #Subtitute for the tickers you want
+tickers = ["EURCHF=X", "KE=F", "TTF=F", "^GDAXI", "EURUSD=X", "BTC-USD", "BZ=F"] #Subtitute for the tickers you want
 df = yf.download(tickers,  start = "2019-01-01" , end = date.today())
 
 euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].to_frame().dropna()
@@ -310,6 +310,17 @@ gas = gas[['2019', '2022']]
 gas.index = gas.index.strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas[['2019', '2022']])
 
+oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna()
+oil['2019'] = df['Close']['BZ=F'][(df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
+oil.rename(columns={oil.columns[0]: '2022'}, inplace = True)
+oil = oil[['2019', '2022']]
+oil.index = oil.index.strftime('%Y-%m-%d')
+update_chart(id = 'c6aec0c9dea84bcdef43b980cd4a7e3f', data = oil[['2019', '2022']])
+
+bitcoin = df['Close']["BTC-USD"].to_frame().dropna().round(1)
+bitcoin = bitcoin[['BTC-USD']]
+bitcoin.index = bitcoin.index.strftime('%Y-%m-%d')
+update_chart(id = '3ae57b07ddc738d6984ae6d72c027d3d', data = bitcoin[['BTC-USD']])
 
 smi_old = pd.read_csv('./SMI.csv')
 
