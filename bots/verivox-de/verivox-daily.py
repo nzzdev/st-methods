@@ -135,6 +135,8 @@ if __name__ == '__main__':
             'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (Brutto) in EUR pro Jahr', 'Exportdatum'], dtype={'Postleitzahl': 'string'})
         dfgas = pd.read_csv('./data/Gas_Zeit_online_20000.csv', encoding='ISO-8859-1', sep=';', decimal=',', index_col=None, usecols=[
             'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (Brutto) in EUR pro Jahr', 'Exportdatum'], dtype={'Postleitzahl': 'string'})
+        df21 = pd.read_csv('./data/gas-strom-0921.tsv',
+                           sep='\t', index_col=None, dtype={'id': 'string'})
         # GeoJSON with postal codes
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5.json')
 
@@ -176,9 +178,10 @@ if __name__ == '__main__':
             .rename(columns={0: 'gas'})
         )
 
-        # merge both dataframes, then join geometry with verivox data and save
+        # merge dataframes, then join geometry with verivox data and save
         #df = dfac.join(dfgas.set_index('id'), on='id')
         df = dfac.merge(dfgas, on='id', how='outer')
+        df = df.merge(df21, on='id', how='outer')
         df.strom = df.strom.round(0).astype(float)
         df.gas = df.gas.round(0).astype(float)
         df = gdf.set_index('id').join(df.set_index('id'))
