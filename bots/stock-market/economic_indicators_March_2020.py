@@ -187,7 +187,7 @@ page = requests.get(adac)
 
 soup = BeautifulSoup(page.content, "html.parser")
 
-text = soup.find_all('b')[6].text.strip()
+text = soup.find_all('b')[5].text.strip()
 price_e10 = pd.to_numeric(re.findall(r'\d+\,\d+', text)[0].replace(',','.'))
 
 fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
@@ -321,6 +321,12 @@ bitcoin = df['Close']["BTC-USD"].to_frame().dropna().round(1)
 bitcoin = bitcoin[['BTC-USD']]
 bitcoin.index = bitcoin.index.strftime('%Y-%m-%d')
 update_chart(id = '3ae57b07ddc738d6984ae6d72c027d3d', data = bitcoin[['BTC-USD']])
+
+month1 = date.today() -  pd.to_timedelta(30, unit='d')
+bitcoin1m = bitcoin.loc[(bitcoin.index >= pd.to_datetime(month1))]
+bitcoin1m.index = bitcoin1m.index.strftime('%Y-%m-%d')
+update_chart(id = '80a5f74298f588521786f9061c21d472', data = bitcoin1m[['BTC-USD']])
+
 
 smi_old = pd.read_csv('./SMI.csv')
 
