@@ -323,7 +323,7 @@ bitcoin.index = bitcoin.index.strftime('%Y-%m-%d')
 update_chart(id = '3ae57b07ddc738d6984ae6d72c027d3d', data = bitcoin[['BTC-USD']])
 
 month1 = date.today() -  pd.to_timedelta(30, unit='d')
-bitcoin1m = bitcoin.loc[(bitcoin.index >= pd.to_datetime(month1))]
+bitcoin1m = bitcoin.loc[(pd.to_datetime(bitcoin.index) >= pd.to_datetime(month1))]
 bitcoin1m.index = bitcoin1m.index.strftime('%Y-%m-%d')
 update_chart(id = '80a5f74298f588521786f9061c21d472', data = bitcoin1m[['BTC-USD']])
 
