@@ -157,7 +157,8 @@ vacc_final <- vacc_final %>%
 
 n_booster <- length(vacc_final$total_boosters[vacc_final$total_boosters > 0])
 
-notes_string <- paste("* In der Regel inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Zahlen zu den Booster-Impfungen liegen für", n_booster, "Länder vor. Dargestellt werden nur Länder und Regionen,",
+notes_string <- paste("* In der Regel inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.",
+                      "<br>Aktuelle Zahlen zu den Booster-Impfungen liegen für", n_booster, "Länder vor. Dargestellt werden nur Länder und Regionen,",
                       "für welche regelmässig publizierte und aktuelle Daten vorliegen.",  "<br>Stand:", format(Sys.Date(), "%d. %m. %Y"), sep = " ")
 update_chart(id = "79af3c6593df15827ccb5268a7aff0be", 
              data = vacc_final, 
