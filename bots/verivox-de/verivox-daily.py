@@ -182,10 +182,11 @@ if __name__ == '__main__':
         df.strom = df.strom.round(0).astype(float)
         df.gas = df.gas.round(0).astype(float)
         df = gdf.set_index('id').join(df.set_index('id'))
+        #df = df.to_crs(4326)
         df.to_file('./data/nzz-gas-strom.geojson', driver='GeoJSON')
 
         # run mapshaper and pass arguments as list to avoid shell=True
-        simplified = subprocess.Popen(['mapshaper', './data/nzz-gas-strom.geojson', '-o',
+        simplified = subprocess.Popen(['mapshaper', './data/nzz-gas-strom.geojson', '-proj', 'crs="EPSG:4326"', '-o',
                                       'format=topojson', './data/de-postcode-geographic-1-5.json'], stdout=subprocess.PIPE)
         output = simplified.stdout.read()
 
