@@ -65,7 +65,8 @@ if __name__ == '__main__':
                                & (dftable['Trend'] > -5)] = '➙ '
         # add arrows to trend and ignore regions with NaN values
         dftable['Trend_tmp'] = dftable['Trend'].round(0)
-        #dftable['Trend_tmp'] = dftable['Trend_tmp'].apply(lambda x: '+'+str(x) if x >= 0 else x)
+        dftable['Trend_tmp'] = dftable['Trend_tmp'].apply(
+            lambda x: '+'+str(x) if x > 0 else x)
         dftable['Trend'][dftable['Trend'].notnull()] = dftable['Trend_arrow'] + \
             dftable['Trend_tmp'].astype(str) + '%'
         # remove decimals
