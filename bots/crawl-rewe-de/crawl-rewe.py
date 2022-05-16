@@ -66,6 +66,13 @@ if __name__ == '__main__':
         yesterday = date.today() - timedelta(days=1)
         todaynice = today.strftime('%-d.%-m.')
 
+        # retry if error
+        logging.basicConfig(level=logging.INFO)
+        s = requests.Session()
+        retries = Retry(total=10, backoff_factor=1,
+                        status_forcelist=[502, 503, 504])
+        s.mount('https://', HTTPAdapter(max_retries=retries))
+
         header = (f"Datum;ID;Marke;Name;Preis;Gewicht"+'\n')
         brands = ['ja!', 'REWE Beste Wahl', 'REWE', 'REWE Bio']
 
@@ -89,12 +96,6 @@ if __name__ == '__main__':
                     )
                     sleep(1)
 
-                    # retry if error
-                    logging.basicConfig(level=logging.INFO)
-                    s = requests.Session()
-                    retries = Retry(total=10, backoff_factor=1,
-                                    status_forcelist=[502, 503, 504])
-                    s.mount('https://', HTTPAdapter(max_retries=retries))
                     response = s.get('https://shop.rewe.de/api/products',
                                      headers=headers, params=params, cookies=cookies)
 
