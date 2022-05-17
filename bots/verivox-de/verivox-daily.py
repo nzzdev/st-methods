@@ -218,9 +218,11 @@ if __name__ == '__main__':
             }
         }]
 
+        notes_chart = 'Die Daten zeigen den jeweils günstigsten verfügbaren Tarif für eine Familie mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + time_str
+
         # run function
         update_chart(id='71b560c075f23d2f41e0089664958e30',
-                     files=file, data=data)
+                     files=file, notes=notes_chart)
 
     except:
         raise
