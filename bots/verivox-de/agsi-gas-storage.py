@@ -122,6 +122,7 @@ if __name__ == '__main__':
         # merge dataframes and convert datetime to string
         df = dfold.merge(dfnew, on='Datum', how='left')
         df.rename(columns={'Min': ''}, inplace=True)
+        df['2022'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
         df.index = df.index.strftime('%Y-%m-%d')
 
