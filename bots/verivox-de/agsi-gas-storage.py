@@ -9,7 +9,7 @@ import pandas as pd
 import math
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", asset_groups=[], files=[]):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options=""):  # Q helper function
     # read qConfig file
     json_file = open('./q.config.json')
     qConfig = json.load(json_file)
@@ -32,16 +32,6 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
                             {'table': transformed_data})
                     else:
                         item.get('item').update({'data': transformed_data})
-                if len(asset_groups) > 0:
-                    groups = []
-                    for g in asset_groups:
-                        groups.append({
-                            'assets': [{"path": f} for f in g['files']],
-                            'name': g['name']
-                        })
-                    item['item']['assetGroups'] = groups
-                if len(files) > 0:
-                    item['item']['files'] = files
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
                 if options != '':
