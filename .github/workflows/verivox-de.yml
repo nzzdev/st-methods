@@ -46,6 +46,7 @@ jobs:
       - name: Run python scripts
         run: |
           python verivox-daily.py
+          python agsi-gas-storage.py
         env:
           VERIVOX_USERNAME: ${{ secrets.VERIVOX_USERNAME }}
           VERIVOX_PASSWORD: ${{ secrets.VERIVOX_PASSWORD }}

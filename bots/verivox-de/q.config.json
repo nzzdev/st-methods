@@ -12,6 +12,19 @@
                 "data": "",
                 "files": ""
             }
+        },
+        {
+            "environments": [
+                {
+                    "name": "production",
+                    "id": "6753e823039fa08055b1ef287c091c1b"
+                }
+            ],
+            "item": {
+                "title": "",
+                "notes": "",
+                "data": []
+            }
         }
     ]
 }
