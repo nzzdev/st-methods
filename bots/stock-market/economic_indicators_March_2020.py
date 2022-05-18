@@ -11,6 +11,8 @@ import requests
 import urllib.request
 import os
 import sys
+from fake_useragent import UserAgent
+import re
 
 sys.path.append(os.path.dirname((os.path.dirname(__file__))))
 from helpers import *
@@ -419,3 +421,53 @@ bip =  bip[['KW', 'Index']]
 bip.set_index('KW', inplace = True)
 
 update_chart(id = 'c366afc02f262094669128cd054faf78', data = bip[['Index']])
+
+
+# Bitcoin energy
+
+url = 'https://api.everviz.com/gsheet?googleSpreadsheetKey=1bLjXWHG4IXO8_CyMKRl1tSN8hTn3AFOlxfBISyQ6zM0&worksheet=A1:ZZ'
+ua_str = UserAgent().chrome
+
+r = requests.get(url, headers={"User-Agent": ua_str})
+data = r.json()
+
+df = pd.json_normalize(data,  record_path = ['values'])
+df.columns = df.iloc[0] 
+
+df = df[1:]
+df = df.transpose()
+df.columns = df.iloc[0] 
+
+df = df[1:]
+df.iloc[:, 0] = pd.to_numeric(df.iloc[:, 0])
+df.iloc[:, 1] = pd.to_numeric(df.iloc[:, 1])
+
+df.index = pd.to_datetime(df.index).strftime('%Y-%m-&d')
+
+update_chart(id = 'b6873820afc5a1492240edc1b101cdd9', data = df[['Estimated TWh per Year', 'Minimum TWh per Year']])
+
+
+# 10 largest crypto currencies
+
+url = 'https://coinmarketcap.com/'
+
+page = requests.get(url)
+
+soup = BeautifulSoup(page.content, "html.parser")
+results = soup.find('table', class_ = "h7vnx2-2 czTsgW cmc-table")
+
+market_cap = []
+for i in range(0,10):
+    market_cap.append(re.sub("[^0-9]", "", results.find_all('span', class_ = 'sc-1ow4cwt-1 ieFnWP')[i].text.strip()))
+
+crypto = []
+for i in range(0,10):
+    crypto.append(results.find_all('p', class_ = 'sc-1eb5slv-0 iworPT')[i].text.strip())
+
+df = pd.DataFrame(data = {'crypto': crypto, 'market_cap': market_cap})
+
+df.set_index('crypto', inplace = True)
+
+notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
+
+update_chart(id = '9640becc888e8a5d878819445105edce', data = df[['market_cap']], notes = notes)
