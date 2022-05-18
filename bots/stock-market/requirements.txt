@@ -21,4 +21,4 @@ html-table-parser-python3==0.2.0
 openpyxl==3.0.9
 xlrd==1.2.0
 fake_useragent==0.1.11
-re==3.10.3
+regex==2022.4.24
