@@ -128,7 +128,7 @@ if __name__ == '__main__':
         notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2022.<br>Stand: ' + timecodestr
 
         # run function
-        update_chart(id='6753e823039fa08055b1ef287c091c1b',
+        update_chart(id='4acf1a0fd4dd89aef4abaeefd0362a3e',
                      data=df, notes=notes_chart)
 
     except:
