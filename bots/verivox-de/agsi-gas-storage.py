@@ -79,8 +79,6 @@ if __name__ == '__main__':
 
         # create header and get data from 2022
         header = (f"Datum,2022"+'\n')
-        if not os.path.exists('data'):
-            os.makedirs('data')
         with open(f'./data/{todaystr}-gasspeicher.csv', 'w') as file:
             file.write(header)
             for n in range(1, pages):
@@ -109,8 +107,7 @@ if __name__ == '__main__':
         # retrieve data from 2011-2022
         dfnew = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None)
-        dfold = pd.read_csv(
-            f'./data/gas-storage-2011-2021.csv', index_col=None)
+        dfold = pd.read_csv('./data/gas-storage-2011-2021.csv', index_col=None)
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
