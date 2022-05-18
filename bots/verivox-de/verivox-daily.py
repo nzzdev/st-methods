@@ -145,6 +145,7 @@ if __name__ == '__main__':
         time_dt = datetime.strptime(time_str, '%d.%m.%y')
         time_str = time_dt.strftime(
             '%Y-%m-%dT%H:%M:%SZ')  # %Y-%m-%dT%H:%M:%S.%fZ
+        time_str_notes = time_dt.strftime('%-d. %-m. %Y')
 
         # rename column headers
         dfac.rename(columns={'Postleitzahl': 'id', 'Anzahl Haushalte': 'hh',
@@ -218,9 +219,12 @@ if __name__ == '__main__':
             }
         }]
 
+        notes_chart = 'Die Daten zeigen den jeweils günstigsten verfügbaren Tarif für eine Familie mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
+            str(time_str_notes)
+
         # run function
         update_chart(id='71b560c075f23d2f41e0089664958e30',
-                     files=file, data=data)
+                     files=file, data=data, notes=notes_chart)
 
     except:
         raise
