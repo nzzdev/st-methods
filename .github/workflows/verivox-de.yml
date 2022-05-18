@@ -52,8 +52,8 @@ jobs:
       - name: Run Q cli
         run: Q update-item
         env:
-          Q_STAGING_SERVER: ${{ secrets.Q_STAGING_SERVER }}
-          Q_STAGING_ACCESSTOKEN: ${{ secrets.Q_STAGING_ACCESSTOKEN }}
+          Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
+          Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
       - name: Log failure to slack
         if: always()
         uses: ravsamhq/notify-slack-action@v1
