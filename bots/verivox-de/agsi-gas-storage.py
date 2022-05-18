@@ -51,7 +51,6 @@ if __name__ == '__main__':
 
         headers = {
             'sec-fetch-mode': 'cors',
-            'accept-encoding': 'gzip, deflate, br',
             'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36',
             'referer': 'https://agsi.gie.eu/historical/DE',
