@@ -445,9 +445,9 @@ df = df[1:]
 df.iloc[:, 0] = pd.to_numeric(df.iloc[:, 0])
 df.iloc[:, 1] = pd.to_numeric(df.iloc[:, 1])
 
-df.index = pd.to_datetime(df.index).strftime('%Y-%m-&d')
+df.index = pd.to_datetime(df.index).strftime('%Y-%m-%d')
 
-update_chart(id = 'b6873820afc5a1492240edc1b101cdd9', data = df[['Estimated TWh per Year', 'Minimum TWh per Year']])
+update_chart(id = 'b6873820afc5a1492240edc1b101cdd9', data = df[['Estimated TWh per Year']])
 
 
 # 10 largest crypto currencies
