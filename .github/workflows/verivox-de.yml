@@ -45,8 +45,8 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python verivox-daily.py
           python agsi-gas-storage.py
+          python verivox-daily.py
         env:
           VERIVOX_USERNAME: ${{ secrets.VERIVOX_USERNAME }}
           VERIVOX_PASSWORD: ${{ secrets.VERIVOX_PASSWORD }}

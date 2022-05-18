@@ -108,7 +108,7 @@ if __name__ == '__main__':
         dfnew = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dfold = pd.read_csv(
-            './data/gas-storage-2011-2021.csv', sep='\t', index_col=None)
+            './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
