@@ -223,7 +223,7 @@ if __name__ == '__main__':
             str(time_str_notes)
 
         # run function
-        update_chart(id='71b560c075f23d2f41e0089664958e30',
+        update_chart(id='4acf1a0fd4dd89aef4abaeefd02be69f',
                      files=file, data=data, notes=notes_chart)
 
     except:
