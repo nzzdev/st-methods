@@ -3,8 +3,8 @@
         {
             "environments": [
                 {
-                    "name": "staging",
-                    "id": "71b560c075f23d2f41e0089664958e30"
+                    "name": "production",
+                    "id": "4acf1a0fd4dd89aef4abaeefd02be69f"
                 }
             ],
             "item": {

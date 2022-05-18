@@ -319,8 +319,11 @@ update_chart(id = '1dda540238574eac80e865faa0ddbafc', data = gas[['2019', '2022'
 gas2 = df['Close']['TTF=F'][df.index >= '2021-03-01'].to_frame().dropna()
 gas2.rename(columns={'TTF=F': 'Kosten'}, inplace=True)
 gas2 = gas2[['Kosten']]
+timecode = gas2.index[-1]
+timecode_str = timecode.strftime('%-d. %-m. %Y')
 gas2.index = gas2.index.strftime('%Y-%m-%d')
-update_chart(id='4decc4d9f742ceb683fd78fa5937acfd', data = gas2[['Kosten']])
+notes_chart = 'Stand: ' + timecode_str
+update_chart(id='4decc4d9f742ceb683fd78fa5937acfd', notes = notes_chart, data = gas2[['Kosten']])
 
 oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna()
 oil['2019'] = df['Close']['BZ=F'][(df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
