@@ -4,11 +4,11 @@ from datetime import date, datetime, timedelta
 from bs4 import BeautifulSoup
 import requests
 import json
+import os
 
 
 
 sys.path.append(os.path.dirname((os.path.dirname(__file__))))
-from helpers import *
 
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
