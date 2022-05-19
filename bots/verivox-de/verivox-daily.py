@@ -203,7 +203,6 @@ if __name__ == '__main__':
             # update chart with averages
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
                          data=dfavg, notes=notes_chart)
-            print(dfavg)
         else:
             time_dt_notes = dfavg['date'].iloc[-1]
             time_str_notes = dfavg['date'].iloc[-1].strftime('%-d. %-m. %Y')
