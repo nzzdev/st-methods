@@ -437,15 +437,22 @@ data = r.json()
 df = pd.json_normalize(data,  record_path = ['values'])
 df.columns = df.iloc[0] 
 
-df = df[1:]
-df = df.transpose()
+df = df[1:].reset_index(drop = True)
+df = df.transpose().copy()
 df.columns = df.iloc[0] 
 
 df = df[1:]
 df.iloc[:, 0] = pd.to_numeric(df.iloc[:, 0])
 df.iloc[:, 1] = pd.to_numeric(df.iloc[:, 1])
-
+df.reset_index(level=0, inplace = True)
+df.rename(columns = {0: 'Date'}, inplace = True)
+#drop index name
+df.columns.name = None
+# set new index
+df.set_index('Date', inplace = True)
 df.index = pd.to_datetime(df.index).strftime('%Y-%m-%d')
+
+
 
 update_chart(id = 'b6873820afc5a1492240edc1b101cdd9', data = df[['Estimated TWh per Year']])
 
