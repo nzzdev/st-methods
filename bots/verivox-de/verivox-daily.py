@@ -27,12 +27,7 @@ def update_chart(id, title="", subtitle="", notes="", data="", files="", options
                     item.get('item').update({'subtitle': subtitle})
                 if notes != '':
                     item.get('item').update({'notes': notes})
-                if isinstance(data, pd.DataFrame):
-                    # reset_index() and T (for transpose) are used to bring column names into the first row
-                    transformed_data = data.applymap(str).reset_index(
-                        drop=False).T.reset_index().T.apply(list, axis=1).to_list()
-                    item.get('item').update({'data': transformed_data})
-                elif len(data) > 0 and not isinstance(data, pd.DataFrame):
+                if len(data) > 0:
                     item['item']['data'] = data
                 if len(files) > 0:
                     item['item']['files'] = files
@@ -40,6 +35,11 @@ def update_chart(id, title="", subtitle="", notes="", data="", files="", options
                       'on', environment.get('name'), 'environment')
                 if options != '':
                     item.get('item').update({'options': options})
+
+    # write qConfig file
+    with open('./q.config.json', 'w', encoding='utf-8') as json_file:
+        json.dump(qConfig, json_file, ensure_ascii=False, indent=1)
+    json_file.close()
 
     # write qConfig file
     with open('./q.config.json', 'w', encoding='utf-8') as json_file:
@@ -142,6 +142,8 @@ if __name__ == '__main__':
             'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (Brutto) in EUR pro Jahr', 'Exportdatum'], dtype={'Postleitzahl': 'string'})
         df21 = pd.read_csv('./data/gas-strom-0921.tsv',
                            sep='\t', index_col=None, dtype={'id': 'string'})
+        dfavg = pd.read_csv(
+            './data/gas-strom-bundesschnitt.tsv', sep='\t', index_col=None)
 
         # GeoJSON with postal codes
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5.json')
@@ -188,9 +190,6 @@ if __name__ == '__main__':
         # merge gas and electricity and append current average for Germany
         #df = dfac.join(dfgas.set_index('id'), on='id')
         df = dfac.merge(dfgas, on='id', how='outer')
-
-        dfavg = pd.read_csv(
-            './data/gas-strom-bundesschnitt.tsv', sep='\t', index_col=None)
         dfavg['date'] = pd.to_datetime(dfavg['date'])
         if time_dt > dfavg['date'].iloc[-1]:  # check if there's new data
             dfavg2 = pd.DataFrame()
@@ -204,12 +203,17 @@ if __name__ == '__main__':
             notes_chart = '¹ Gewichteter Bundesdurchschnitt.<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
+            dfavg = dfavg.applymap(str).reset_index(
+                drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             # update chart with averages
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
                          data=dfavg, notes=notes_chart)
+            print(dfavg)
         else:
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
+            dfavg = dfavg.applymap(str).reset_index(
+                drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7', data=dfavg)
 
         # merge dataframes, then join geometry with verivox data and save
