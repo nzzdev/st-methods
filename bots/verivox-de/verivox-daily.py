@@ -1,6 +1,5 @@
 import os
 import io
-import sys
 from regex import R
 from datetime import datetime, timedelta
 import requests
@@ -53,8 +52,6 @@ if __name__ == '__main__':
 
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
-        if not os.path.exists('data'):
-            os.makedirs('data')
 
         # MOVEit Transfer API
         base_uri = 'https://app.verivox.de/'
@@ -145,8 +142,7 @@ if __name__ == '__main__':
             'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (Brutto) in EUR pro Jahr', 'Exportdatum'], dtype={'Postleitzahl': 'string'})
         df21 = pd.read_csv('./data/gas-strom-0921.tsv',
                            sep='\t', index_col=None, dtype={'id': 'string'})
-        dfavg = pd.read_csv(
-            './data/gas-strom-bundesschnitt.tsv', sep='\t', index_col=None)
+
         # GeoJSON with postal codes
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5.json')
 
@@ -192,6 +188,9 @@ if __name__ == '__main__':
         # merge gas and electricity and append current average for Germany
         #df = dfac.join(dfgas.set_index('id'), on='id')
         df = dfac.merge(dfgas, on='id', how='outer')
+
+        dfavg = pd.read_csv(
+            './data/gas-strom-bundesschnitt.tsv', sep='\t', index_col=None)
         dfavg['date'] = pd.to_datetime(dfavg['date'])
         if time_dt > dfavg['date'].iloc[-1]:  # check if there's new data
             dfavg2 = pd.DataFrame()
@@ -206,19 +205,12 @@ if __name__ == '__main__':
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             # update chart with averages
-            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
+            update_chart(id='cc9eff02ba0867d71af4fbc25326f18a',
                          data=dfavg, notes=notes_chart)
-            print(sys.path)
-            print(dfavg)
-            print(dfavg.info)
-
         else:
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7', data=dfavg)
-            print(sys.path)
-            print(dfavg)
-            print(dfavg.info)
+            update_chart(id='cc9eff02ba0867d71af4fbc25326f18a', data=dfavg)
 
         # merge dataframes, then join geometry with verivox data and save
         df = df.merge(df21, on='id', how='outer')
