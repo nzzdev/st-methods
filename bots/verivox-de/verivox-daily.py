@@ -27,7 +27,12 @@ def update_chart(id, title="", subtitle="", notes="", data="", files="", options
                     item.get('item').update({'subtitle': subtitle})
                 if notes != '':
                     item.get('item').update({'notes': notes})
-                if len(data) > 0:
+                if len(data) > 0 and isinstance(data, pd.DataFrame):
+                    # reset_index() and T (for transpose) are used to bring column names into the first row
+                    transformed_data = data.applymap(str).reset_index(
+                        drop=False).T.reset_index().T.apply(list, axis=1).to_list()
+                    item.get('item').update({'data': transformed_data})
+                elif len(data) > 0 and not isinstance(data, pd.DataFrame):
                     item['item']['data'] = data
                 if len(files) > 0:
                     item['item']['files'] = files
@@ -137,6 +142,8 @@ if __name__ == '__main__':
             'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (Brutto) in EUR pro Jahr', 'Exportdatum'], dtype={'Postleitzahl': 'string'})
         df21 = pd.read_csv('./data/gas-strom-0921.tsv',
                            sep='\t', index_col=None, dtype={'id': 'string'})
+        dfavg = pd.read_csv(
+            './data/gas-strom-bundesschnitt.tsv', sep='\t', index_col=None)
         # GeoJSON with postal codes
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5.json')
 
@@ -179,9 +186,26 @@ if __name__ == '__main__':
             .rename(columns={0: 'gas'})
         )
 
-        # merge dataframes, then join geometry with verivox data and save
+        # merge gas and electricity and append current average for Germany
         #df = dfac.join(dfgas.set_index('id'), on='id')
         df = dfac.merge(dfgas, on='id', how='outer')
+        dfavg['date'] = pd.to_datetime(dfavg['date'])
+        if time_dt > dfavg['date'].iloc[-1]:  # check if there's new data
+            dfavg2 = pd.DataFrame()
+            dfavg2['date'] = [time_dt]
+            dfavg2['Gas'] = [meangas]
+            dfavg2['Strom'] = [meanac]
+            #dfavg = dfavg.append(dfavg2.tail(1))
+            dfavg = pd.concat([dfavg, dfavg2], ignore_index=True)
+            dfavg.set_index('date', inplace=True)
+            dfavg.index = dfavg.index.strftime('%Y-%m-%d')
+            notes_chart = '¹ Gewichteter Bundesdurchschnitt.<br>Stand: ' + \
+                str(time_str_notes)
+            # update chart with averages
+            update_chart(id='4acf1a0fd4dd89aef4abaeefd01bfe82',
+                         data=dfavg, notes=notes_chart)
+
+        # merge dataframes, then join geometry with verivox data and save
         df = df.merge(df21, on='id', how='outer')
         df.strom = df.strom.round(0).astype(float)
         df.gas = df.gas.round(0).astype(float)
