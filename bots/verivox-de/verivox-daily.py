@@ -27,7 +27,7 @@ def update_chart(id, title="", subtitle="", notes="", data="", files="", options
                     item.get('item').update({'subtitle': subtitle})
                 if notes != '':
                     item.get('item').update({'notes': notes})
-                if len(data) > 0 and isinstance(data, pd.DataFrame):
+                if isinstance(data, pd.DataFrame):
                     # reset_index() and T (for transpose) are used to bring column names into the first row
                     transformed_data = data.applymap(str).reset_index(
                         drop=False).T.reset_index().T.apply(list, axis=1).to_list()
@@ -205,12 +205,12 @@ if __name__ == '__main__':
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             # update chart with averages
-            update_chart(id='cc9eff02ba0867d71af4fbc25326f18a',
+            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
                          data=dfavg, notes=notes_chart)
         else:
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            update_chart(id='cc9eff02ba0867d71af4fbc25326f18a', data=dfavg)
+            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7', data=dfavg)
 
         # merge dataframes, then join geometry with verivox data and save
         df = df.merge(df21, on='id', how='outer')
