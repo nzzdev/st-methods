@@ -203,12 +203,12 @@ if __name__ == '__main__':
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             # update chart with averages
-            update_chart(id='4acf1a0fd4dd89aef4abaeefd01bfe82',
+            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
                          data=dfavg, notes=notes_chart)
         else:
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            update_chart(id='4acf1a0fd4dd89aef4abaeefd01bfe82', data=dfavg)
+            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7', data=dfavg)
 
         # merge dataframes, then join geometry with verivox data and save
         df = df.merge(df21, on='id', how='outer')
