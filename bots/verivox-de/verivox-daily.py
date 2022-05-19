@@ -41,11 +41,6 @@ def update_chart(id, title="", subtitle="", notes="", data="", files="", options
         json.dump(qConfig, json_file, ensure_ascii=False, indent=1)
     json_file.close()
 
-    # write qConfig file
-    with open('./q.config.json', 'w', encoding='utf-8') as json_file:
-        json.dump(qConfig, json_file, ensure_ascii=False, indent=1)
-    json_file.close()
-
 
 if __name__ == '__main__':
     try:
@@ -210,11 +205,17 @@ if __name__ == '__main__':
                          data=dfavg, notes=notes_chart)
             print(dfavg)
         else:
+            time_dt_notes = dfavg['date'].iloc[-1]
+            time_str_notes = dfavg['date'].iloc[-1].strftime('%-d. %-m. %Y')
+            print(time_str_notes)
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
+            notes_chart = '¹ Gewichteter Bundesdurchschnitt.<br>Stand: ' + \
+                str(time_str_notes)
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
-            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7', data=dfavg)
+            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
+                         data=dfavg, notes=notes_chart)
 
         # merge dataframes, then join geometry with verivox data and save
         df = df.merge(df21, on='id', how='outer')
