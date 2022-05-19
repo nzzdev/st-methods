@@ -1,5 +1,6 @@
 import os
 import io
+import sys
 from regex import R
 from datetime import datetime, timedelta
 import requests
@@ -52,6 +53,8 @@ if __name__ == '__main__':
 
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
+        if not os.path.exists('data'):
+            os.makedirs('data')
 
         # MOVEit Transfer API
         base_uri = 'https://app.verivox.de/'
@@ -205,10 +208,17 @@ if __name__ == '__main__':
             # update chart with averages
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
                          data=dfavg, notes=notes_chart)
+            print(sys.path)
+            print(dfavg)
+            print(dfavg.info)
+
         else:
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7', data=dfavg)
+            print(sys.path)
+            print(dfavg)
+            print(dfavg.info)
 
         # merge dataframes, then join geometry with verivox data and save
         df = df.merge(df21, on='id', how='outer')
