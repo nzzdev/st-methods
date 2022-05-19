@@ -13,6 +13,8 @@ import os
 import sys
 from fake_useragent import UserAgent
 import re
+import gettext
+import pycountry
 
 sys.path.append(os.path.dirname((os.path.dirname(__file__))))
 from helpers import *
@@ -175,7 +177,7 @@ benzin.rename(columns = {'95': 'Benzinpreis'}, inplace = True)
 benzin.sort_values(by = 'Benzinpreis', ascending = False, inplace = True)
 benzin.set_index('Reiseziel', inplace = True)
 
-update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin)
+#update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin[['Reiseziel', 'Benzinpreis']])
 
 
 
@@ -367,10 +369,26 @@ smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
 update_chart(id = '1dda540238574eac80e865faa0dc2348', data = smi[['Close']])
 smi.to_csv(f'./SMI.csv')
 
-#kurs = euro['EURCHF=X'].tail(1).values
-#benzin_de = benzin.copy()
-#benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
-#update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = benzin_de)
+# Benzinpreistabelle D
+
+kurs = euro['EURCHF=X'].tail(1).values
+benzin_de = benzin.copy()
+benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
+eu = pd.read_excel('https://ec.europa.eu/energy/observatory/reports/latest_prices_raw_data.xlsx')
+eu = eu.loc[eu['Product Name'] == 'Euro-super 95'].copy()
+eu['Benzinpreis'] = round(pd.to_numeric(eu['Weekly price with taxes'].str.replace(',', '')) / 1000, 2)
+german = gettext.translation('iso3166', pycountry.LOCALES_DIR,
+                              languages=['de'])
+german.install()
+
+eu['Reiseziel'] = eu['Country EU Code'].apply(lambda x: _(pycountry.countries.get(alpha_2 = x).name))
+
+eu = benzin_de[benzin_de['Reiseziel'] == 'Schweiz'].append(eu[['Reiseziel', 'Benzinpreis']])
+eu = eu.sort_values(by = 'Benzinpreis', ascending = False)
+
+eu.set_index('Reiseziel', inplace = True)
+
+update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu[['Benzinpreis']])
 
 
 # Unternehmen, die Russland verlassen
