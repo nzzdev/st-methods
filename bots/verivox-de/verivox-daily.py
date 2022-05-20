@@ -254,7 +254,7 @@ if __name__ == '__main__':
             }
         }]
 
-        notes_chart = 'Die Daten zeigen den jeweils günstigsten verfügbaren Tarif für eine vierköpfige Familie im Einfamilienhaus mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
+        notes_chart = 'Die Daten zeigen den jeweils günstigsten verfügbaren Tarif für eine vierköpfige Familie in einem Einfamilienhaus mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
             str(time_str_notes)
 
         # run function
