@@ -195,7 +195,7 @@ if __name__ == '__main__':
             dfavg = pd.concat([dfavg, dfavg2], ignore_index=True)
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Gewichteter Bundesdurchschnitt.<br>Stand: ' + \
+            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             dfavg = dfavg.applymap(str).reset_index(
@@ -209,7 +209,7 @@ if __name__ == '__main__':
             print(time_str_notes)
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Gewichteter Bundesdurchschnitt.<br>Stand: ' + \
+            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
                 str(time_str_notes)
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
