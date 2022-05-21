@@ -48,6 +48,7 @@ if __name__ == '__main__':
 
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
+        from helpers import *
 
         headers = {
             'sec-fetch-mode': 'cors',
