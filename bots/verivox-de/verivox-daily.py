@@ -186,6 +186,7 @@ if __name__ == '__main__':
         #df = dfac.join(dfgas.set_index('id'), on='id')
         df = dfac.merge(dfgas, on='id', how='outer')
         dfavg['date'] = pd.to_datetime(dfavg['date'])
+
         if time_dt > dfavg['date'].iloc[-1]:  # check if there's new data
             dfavg2 = pd.DataFrame()
             dfavg2['date'] = [time_dt]
@@ -194,6 +195,14 @@ if __name__ == '__main__':
             #dfavg = dfavg.append(dfavg2.tail(1))
             dfavg = pd.concat([dfavg, dfavg2], ignore_index=True)
             dfavg.set_index('date', inplace=True)
+
+            # check if there are Sundays missing
+            datediff = dfavg.index[-1] - dfavg.index[-2]
+            if datediff > timedelta(days=1):
+                dfavg = dfavg.asfreq('D')  # add rows for missing days
+                dfavg.interpolate(inplace=True)  # fill NaN with values
+                dfavg = dfavg.round(0).astype(int)
+
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
                 str(time_str_notes)
