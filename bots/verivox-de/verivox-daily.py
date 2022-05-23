@@ -109,6 +109,7 @@ if __name__ == '__main__':
         for i in range(spacetime):
             for item in files:
                 if strom_item == None and item['name'] == strom_names[i]:
+                    time_dt = datetime.today() - timedelta(days=i)  # get date from zip file
                     strom_item = item
                 elif gas_item == None and item['name'] == gas_names[i]:
                     gas_item = item
@@ -144,10 +145,10 @@ if __name__ == '__main__':
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5.json')
 
         # current date
-        time_str = (dfac.iat[0, 3])
-        time_dt = datetime.strptime(time_str, '%d.%m.%y')
+        # time_str = (dfac.iat[0, 3]) # export date from csv file
+        # time_dt = datetime.strptime(time_str, '%d.%m.%y')
         time_str = time_dt.strftime(
-            '%Y-%m-%dT%H:%M:%SZ')  # %Y-%m-%dT%H:%M:%S.%fZ
+            '%Y-%m-%d %H:%M:%SZ')  # %Y-%m-%dT%H:%M:%S.%fZ
         time_str_notes = time_dt.strftime('%-d. %-m. %Y')
 
         # rename column headers
