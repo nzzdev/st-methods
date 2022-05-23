@@ -187,8 +187,9 @@ if __name__ == '__main__':
         #df = dfac.join(dfgas.set_index('id'), on='id')
         df = dfac.merge(dfgas, on='id', how='outer')
         dfavg['date'] = pd.to_datetime(dfavg['date'])
+        datediff = time_dt - dfavg['date'].iloc[-1]
 
-        if time_dt > dfavg['date'].iloc[-1]:  # check if there's new data
+        if datediff > timedelta(days=1):  # check if there's new data
             dfavg2 = pd.DataFrame()
             dfavg2['date'] = [time_dt]
             dfavg2['Gas'] = [meangas]
