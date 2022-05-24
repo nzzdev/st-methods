@@ -15,7 +15,7 @@ jobs:
       run:
         working-directory: bots/monkeypox-charts/
     steps:
-#      - uses: actions/checkout@v2
+      - uses: actions/checkout@v2
 #      - name: Setup R
 #        uses: r-lib/actions/setup-r@v1
 #        with:
