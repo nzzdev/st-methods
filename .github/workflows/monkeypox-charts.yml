@@ -1,4 +1,4 @@
-name: Update Monkexpox Charts
+name: Update Monkeypox Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
