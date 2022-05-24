@@ -31,6 +31,7 @@ df.iloc[:,1:] = df.iloc[:,1:].astype(int)
 
 # replace Country names with our worldmap ids
 df['Country'] = df['Country'].str.replace('England', 'United Kingdom')
+df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
 
 
 # Catch country name if not in pycountry
@@ -64,7 +65,6 @@ df_worldmap =df.copy()
 
 # Rename countries to match world map ids
 df_worldmap['Country'] = df_worldmap['Country'].str.replace('United States','United States of America')
-df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
 
 # merge df with ids
 df_worldmap = df_worldmap.rename(columns ={'Country':'ID', 'Total':'Wert'})
