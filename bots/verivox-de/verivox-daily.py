@@ -41,11 +41,6 @@ def update_chart(id, title="", subtitle="", notes="", data="", files="", options
         json.dump(qConfig, json_file, ensure_ascii=False, indent=1)
     json_file.close()
 
-    # write qConfig file
-    with open('./q.config.json', 'w', encoding='utf-8') as json_file:
-        json.dump(qConfig, json_file, ensure_ascii=False, indent=1)
-    json_file.close()
-
 
 if __name__ == '__main__':
     try:
@@ -200,7 +195,7 @@ if __name__ == '__main__':
             dfavg = pd.concat([dfavg, dfavg2], ignore_index=True)
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Gewichteter Bundesdurchschnitt.<br>Stand: ' + \
+            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             dfavg = dfavg.applymap(str).reset_index(
@@ -208,13 +203,17 @@ if __name__ == '__main__':
             # update chart with averages
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
                          data=dfavg, notes=notes_chart)
-            print(dfavg)
         else:
+            time_dt_notes = dfavg['date'].iloc[-1]
+            time_str_notes = dfavg['date'].iloc[-1].strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
+            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
+                str(time_str_notes)
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
-            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7', data=dfavg)
+            update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
+                         data=dfavg, notes=notes_chart)
 
         # merge dataframes, then join geometry with verivox data and save
         df = df.merge(df21, on='id', how='outer')
@@ -254,7 +253,7 @@ if __name__ == '__main__':
             }
         }]
 
-        notes_chart = 'Die Daten zeigen den jeweils günstigsten verfügbaren Tarif für eine vierköpfige Familie im Einfamilienhaus mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
+        notes_chart = 'Die Daten zeigen den jeweils günstigsten verfügbaren Tarif für eine vierköpfige Familie in einem Einfamilienhaus mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
             str(time_str_notes)
 
         # run function
