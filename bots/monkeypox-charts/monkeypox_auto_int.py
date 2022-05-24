@@ -78,8 +78,10 @@ df_worldmap=df_worldmap.sort_values('ID', key=lambda col: col.str.lower())
 id_worldmap_test = '043bfe3491dac666e4bb4fe97a4101bf' # for testing
 id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc' # linked in article
 
-#update_chart(id=id_worldmap_test, data=df_worldmap)
-df_worldmap.to_csv('test_df_worldmap.csv', index=False) # to check if skript runs locally
+df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
+
+update_chart(id=id_worldmap_test, data=df_worldmap)
+#df_worldmap.to_csv('test_df_worldmap.csv', index=False) # to check if skript runs locally
 
 # export for q table
 df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht','Total']]
