@@ -3,7 +3,7 @@ name: Update Monkeypox Charts
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 6,15 * * *"
 
   workflow_dispatch:
   
