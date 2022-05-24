@@ -50,10 +50,10 @@ jobs:
       - name: Install python packages
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r ./bots/monkeypox-charts/requirements.txt
       - name: Run python scripts
         run: | # 
-          monkeypox_auto_int.py
+          python monkeypox_auto_int.py
       - uses: stefanzweifel/git-auto-commit-action@v4 # <---- ?
         with:
           commit_message: update monkeypox charts #
