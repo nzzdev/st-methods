@@ -200,7 +200,7 @@ if __name__ == '__main__':
 
             # check if there are Sundays missing
             datediff = dfavg.index[-1] - dfavg.index[-2]
-            if datediff > timedelta(days=1):
+            if datediff > timedelta(hours=47): # more than 24h due to upload timecode
                 dfavg = dfavg.asfreq('D')  # add rows for missing days
                 dfavg.interpolate(inplace=True)  # fill NaN with values
                 dfavg = dfavg.round(0).astype(int)
