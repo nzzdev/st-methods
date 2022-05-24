@@ -1,26 +1,28 @@
 {
-   "items": [
-      {
-       "environments": [
-        {
-         "name": "production",
-         "id": "043bfe3491dac666e4bb4fe97a4101bf"
-        }
-       ],
-       "item": {
-         "data": []
-       }
-      },
-      {
-         "environments": [
-          {
-           "name": "production",
-           "id": "4913f749b598fb2ecc9721cb17187e05"
-          }
-         ],
-         "item": {
-           "data": []
-         }
-        }
-   ]
+ "items": [
+  {
+   "environments": [
+    {
+     "name": "production",
+     "id": "4acf1a0fd4dd89aef4abaeefd0b6f4dc"
+    }
+   ],
+   "item": {
+    "data": []
+   }
+  },
+  {
+   "environments": [
+    {
+     "name": "production",
+     "id": "4acf1a0fd4dd89aef4abaeefd0da5ac6"
+    }
+   ],
+   "item": {
+     "data": {
+       "table": []
+     }
+   }
   }
+ ]
+}

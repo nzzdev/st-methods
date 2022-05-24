@@ -31,6 +31,7 @@ df.iloc[:,1:] = df.iloc[:,1:].astype(int)
 
 # replace Country names with our worldmap ids
 df['Country'] = df['Country'].str.replace('England', 'United Kingdom')
+df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
 
 
 # Catch country name if not in pycountry
@@ -74,19 +75,17 @@ if df_worldmap['Wert'].sum() != df['Total'].sum():
     raise ValueError('Some country names do not correspond with our world map ids. Please rename manually.')
 
 df_worldmap=df_worldmap.sort_values('ID', key=lambda col: col.str.lower())
+df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
 
 id_worldmap_test = '043bfe3491dac666e4bb4fe97a4101bf' # for testing
 id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc' # linked in article
 
-df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
-
-update_chart(id=id_worldmap_test, data=df_worldmap)
-#df_worldmap.to_csv('test_df_worldmap.csv', index=False) # to check if skript runs locally
+update_chart(id=id_worldmap, data=df_worldmap)
 
 # export for q table
-df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht','Total']]
+df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht','Total']].rename(columns = {'Land':'', 'Flagge':''})
 
 id_q_table_test = '4913f749b598fb2ecc9721cb17187e05' # for testing
-id_q_table = '4acf1a0fd4dd89aef4abaeefd0b6f4dc' # linked in article
+id_q_table = '4acf1a0fd4dd89aef4abaeefd0da5ac6' # linked in article
 
-update_chart(id=id_q_table_test, data=df_q_table)
+update_chart(id=id_q_table, data=df_q_table)
