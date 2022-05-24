@@ -110,6 +110,8 @@ if __name__ == '__main__':
             for item in files:
                 if strom_item == None and item['name'] == strom_names[i]:
                     time_dt = datetime.today() - timedelta(days=i)  # get date from zip file
+                    time_dt = pd.Timestamp(time_dt).replace(
+                        hour=0, minute=0, second=0, microsecond=0)  # keep day only
                     strom_item = item
                 elif gas_item == None and item['name'] == gas_names[i]:
                     gas_item = item
@@ -189,7 +191,7 @@ if __name__ == '__main__':
         dfavg['date'] = pd.to_datetime(dfavg['date'])
         datediff = time_dt - dfavg['date'].iloc[-1]
 
-        if datediff > timedelta(days=1):  # check if there's new data
+        if datediff >= timedelta(days=1):  # check if there's new data
             dfavg2 = pd.DataFrame()
             dfavg2['date'] = [time_dt]
             dfavg2['Gas'] = [meangas]
@@ -200,7 +202,7 @@ if __name__ == '__main__':
 
             # check if there are Sundays missing
             datediff = dfavg.index[-1] - dfavg.index[-2]
-            if datediff > timedelta(hours=47): # more than 24h due to upload timecode
+            if datediff > timedelta(days=1):
                 dfavg = dfavg.asfreq('D')  # add rows for missing days
                 dfavg.interpolate(inplace=True)  # fill NaN with values
                 dfavg = dfavg.round(0).astype(int)
