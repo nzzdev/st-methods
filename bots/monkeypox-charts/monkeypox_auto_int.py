@@ -86,6 +86,6 @@ update_chart(id=id_worldmap, data=df_worldmap)
 df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht','Total']].rename(columns = {'Land':'', 'Flagge':''})
 
 id_q_table_test = '4913f749b598fb2ecc9721cb17187e05' # for testing
-id_q_table = '4acf1a0fd4dd89aef4abaeefd0b6f4dc' # linked in article
+id_q_table = '4acf1a0fd4dd89aef4abaeefd0da5ac6' # linked in article
 
 update_chart(id=id_q_table, data=df_q_table)
