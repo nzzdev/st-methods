@@ -53,9 +53,9 @@ jobs:
       - name: Run python scripts
         run: | # 
           python monkeypox_auto_int.py
-      - uses: stefanzweifel/git-auto-commit-action@v4 # <---- ?
-        with:
-          commit_message: update monkeypox charts #
+      # - uses: stefanzweifel/git-auto-commit-action@v4 # <---- ?
+      #   with:
+      #     commit_message: update monkeypox charts #
       - name: Setup Node.js 
         uses: actions/setup-node@v2
         with:
