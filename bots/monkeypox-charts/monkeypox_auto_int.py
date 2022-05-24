@@ -64,6 +64,7 @@ df_worldmap =df.copy()
 
 # Rename countries to match world map ids
 df_worldmap['Country'] = df_worldmap['Country'].str.replace('United States','United States of America')
+df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
 
 # merge df with ids
 df_worldmap = df_worldmap.rename(columns ={'Country':'ID', 'Total':'Wert'})
