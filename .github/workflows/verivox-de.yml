@@ -47,6 +47,7 @@ jobs:
         run: |
           python agsi-gas-storage.py
           python entsog-imports.py
+          python ttf-gas-stock.py
           python verivox-daily.py
         env:
           VERIVOX_USERNAME: ${{ secrets.VERIVOX_USERNAME }}
