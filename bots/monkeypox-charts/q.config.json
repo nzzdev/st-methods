@@ -7,7 +7,9 @@
          "id": "043bfe3491dac666e4bb4fe97a4101bf"
         }
        ],
-       "item": {}
+       "item": {
+         "data": []
+       }
       },
       {
          "environments": [
@@ -16,7 +18,9 @@
            "id": "4913f749b598fb2ecc9721cb17187e05"
           }
          ],
-         "item": {}
+         "item": {
+           "data": []
+         }
         }
    ]
   }
