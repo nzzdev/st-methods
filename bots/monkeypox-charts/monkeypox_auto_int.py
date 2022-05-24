@@ -82,10 +82,9 @@ id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc' # linked in article
 df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
 
 update_chart(id=id_worldmap_test, data=df_worldmap)
-#df_worldmap.to_csv('test_df_worldmap.csv', index=False) # to check if skript runs locally
 
 # export for q table
-df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht','Total']]
+df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht','Total']].rename(columns = {'Land':'', 'Flagge':''})
 
 id_q_table_test = '4913f749b598fb2ecc9721cb17187e05' # for testing
 id_q_table = '4acf1a0fd4dd89aef4abaeefd0b6f4dc' # linked in article
