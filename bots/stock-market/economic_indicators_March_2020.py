@@ -179,8 +179,6 @@ benzin.set_index('Reiseziel', inplace = True)
 
 #update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin[['Reiseziel', 'Benzinpreis']])
 
-
-
 session = requests_html.HTMLSession()
 r = session.get(url)
 price_95 = r.html.xpath('//*[@id="blockContentcontentInner"]/div[1]/div/div/div[3]/div/div[1]/table/tbody/tr[1]/td[2]/div/text()')
