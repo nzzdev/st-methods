@@ -190,10 +190,10 @@ page = requests.get(adac)
 soup = BeautifulSoup(page.content, "html.parser")
 
 try:
-        text = soup.find_all('b')[6].text.strip()
+        text = soup.find_all('b')[16].text.strip()
         price_e10 = pd.to_numeric(re.findall(r'\d+\,\d+', text)[0].replace(',','.'))
 except IndexError:
-        text = soup.find_all('b')[5].text.strip()
+        text = soup.find_all('b')[15].text.strip()
         price_e10 = pd.to_numeric(re.findall(r'\d+\,\d+', text)[0].replace(',','.'))
 
 fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
