@@ -3,9 +3,10 @@ name: Update Monkexpox Charts
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   # This will eventually run at 7:30 and 16:30.
-  schedule:
-    - cron: #"30 7,16 * * *"
   workflow_dispatch:
+  #schedule:
+  #  - cron: #"30 7,16 * * *"
+ 
 
 jobs:
   build:
