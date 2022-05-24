@@ -1,10 +1,11 @@
 import json
 import pandas as pd
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", asset_groups=[], files=[]):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), asset_groups=[], files=[]):  # Q helper function
     # read qConfig file
     json_file = open('./q.config.json')
     qConfig = json.load(json_file)
+
     # update chart properties
     for item in qConfig.get('items'):
         for environment in item.get('environments'):
@@ -32,12 +33,12 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
                             'name': g['name']
                         })
                     item['item']['assetGroups'] = groups
+
                 if len(files) > 0:
                     item['item']['files'] = files
+
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
-                if options != '':
-                    item.get('item').update({'options': options})
 
     # write qConfig file
     with open('./q.config.json', 'w', encoding='utf-8') as json_file:
