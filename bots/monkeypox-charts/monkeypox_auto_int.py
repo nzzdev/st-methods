@@ -33,6 +33,8 @@ df.iloc[:,1:] = df.iloc[:,1:].astype(int)
 df['Country'] = df['Country'].str.replace('England', 'United Kingdom')
 df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
 
+# Drop country like "Scotland"
+df = df[df.Country.isin(['Scotland']) == False]
 
 # Catch country name if not in pycountry
 for name in df['Country'].to_list():
