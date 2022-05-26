@@ -23,18 +23,23 @@ df= df.rename(columns={'confirmed':'Bestätigt', 'suspected':'Verdacht'})
 
 # add totals column
 df['Total']=df.iloc[:,1:].sum(axis=True)
-df=df.sort_values('Total', ascending=False)
+
 
 # format integers
 df = df.fillna(0)
 df.iloc[:,1:] = df.iloc[:,1:].astype(int)
 
+# sum up country-parts of united kingdom
+uk_idx = df[df['Country'].isin(['England', 'Scotland', 'Wales', 'Northern Ireland'])].index
+uk_row = df.iloc[uk_idx].sum()
+uk_row.loc['Country'] = 'United Kingdom'
+df =df.append(uk_row, ignore_index=True)
+df.drop(uk_idx, inplace=True)
+
 # replace Country names with our worldmap ids
-df['Country'] = df['Country'].str.replace('England', 'United Kingdom')
 df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
 
-# Drop country like "Scotland"
-df = df[df.Country.isin(['Scotland']) == False]
+df=df.sort_values('Total', ascending=False)
 
 # Catch country name if not in pycountry
 for name in df['Country'].to_list():
