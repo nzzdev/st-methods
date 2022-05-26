@@ -42,7 +42,7 @@ if __name__ == '__main__':
 
         # API request
         df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=(
-            int(time.time()) * 1000) - (24*3600)*365000)  # 365000 = 1 year
+            int(time.time()) * 1000) - (24*3600)*373000)  # 365000 = 1 year
 
         # fix wrong decimal
         df.to_csv('./data/smard_fixed.csv', sep=';',
