@@ -82,6 +82,9 @@ if __name__ == '__main__':
         perc_gas = (df_perc['Gas'].iloc[-1]*100).round(0).astype(int)
         title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
 
+        # convert DatetimeIndex to string
+        df.index = df.index.strftime('%Y-%m-%d')
+
         # run Q function
         update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
                      data=df, notes=notes_chart, title=title_chart)
