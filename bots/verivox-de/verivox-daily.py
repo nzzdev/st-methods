@@ -218,7 +218,7 @@ if __name__ == '__main__':
                          data=dfavg, notes=notes_chart)
         else:
             time_dt_notes = dfavg['date'].iloc[-1]
-            time_str_notes = dfavg['date'].iloc[-1].strftime('%-d. %-m. %Y')
+            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
