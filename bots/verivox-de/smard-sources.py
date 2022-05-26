@@ -82,6 +82,9 @@ if __name__ == '__main__':
         perc_gas = (df_perc['Gas'].iloc[-1]*100).round(0).astype(int)
         title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
 
+        # convert to terawatt
+        df = df.div(1000000)
+
         # convert DatetimeIndex to string
         df.index = df.index.strftime('%Y-%m-%d')
 
