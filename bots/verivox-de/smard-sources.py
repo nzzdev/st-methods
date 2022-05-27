@@ -44,53 +44,59 @@ if __name__ == '__main__':
         df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=(
             int(time.time()) * 1000) - (24*3600)*373000)  # 365000 = 1 year
 
-        # fix wrong decimal
-        df.to_csv('./data/smard_fixed.csv', sep=';',
-                  encoding='utf-8', index=False)
-        df = pd.read_csv('./data/smard_fixed.csv', sep=';', thousands='.',
-                         decimal=',', index_col=None, usecols=['Datum', 'Erdgas[MWh]', 'Kernenergie[MWh]', 'Braunkohle[MWh]', 'Steinkohle[MWh]', 'Pumpspeicher[MWh]', 'Sonstige Konventionelle[MWh]', 'Biomasse[MWh]', 'Wasserkraft[MWh]', 'Wind Offshore[MWh]', 'Wind Onshore[MWh]', 'Photovoltaik[MWh]', 'Sonstige Erneuerbare[MWh]'], dtype={'Datum': 'string'})
+        # check if data is corrupted
+        if 'Uhrzeit' not in df.columns:
+            df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=(
+                int(time.time()) * 1000) - (24*3600)*373000)  # 365000 = 1 year
+        else:
+            # fix wrong decimal
+            df.to_csv('./data/smard_fixed.csv', sep=';',
+                      encoding='utf-8', index=False)
+            df = pd.read_csv('./data/smard_fixed.csv', sep=';', thousands='.',
+                             decimal=',', index_col=None, dtype={'Datum': 'string', 'Uhrzeit': 'string'})
 
-        # convert dates to DatetimeIndex
-        #df.drop('Uhrzeit', axis=1, inplace=True)
-        df['Datum'] = pd.to_datetime(df['Datum'], format="%d.%m.%Y")
-        df = df.groupby(['Datum']).sum()
+            # drop time and convert dates to DatetimeIndex
+            df.drop('Uhrzeit', axis=1, inplace=True)
+            df['Datum'] = pd.to_datetime(df['Datum'], format="%d.%m.%Y")
+            df = df.groupby(['Datum']).sum()
 
-        # create new columns and drop the old ones
-        df['Gas'] = df['Erdgas[MWh]']
-        df['Kernkraft'] = df['Kernenergie[MWh]']
-        df['Kohle'] = df['Braunkohle[MWh]'] + df['Steinkohle[MWh]']
-        df['Sonstige'] = df['Pumpspeicher[MWh]'] + \
-            df['Sonstige Konventionelle[MWh]']
-        df['Erneuerbare'] = df['Biomasse[MWh]'] + df['Wasserkraft[MWh]'] + df['Wind Offshore[MWh]'] + \
-            df['Wind Offshore[MWh]'] + df['Wind Onshore[MWh]'] + \
-            df['Photovoltaik[MWh]'] + df['Sonstige Erneuerbare[MWh]']
-        df.drop(list(df)[0:12], axis=1, inplace=True)
+            # create new columns and drop the old ones
+            df['Gas'] = df['Erdgas[MWh]']
+            df['Kernkraft'] = df['Kernenergie[MWh]']
+            df['Kohle'] = df['Braunkohle[MWh]'] + df['Steinkohle[MWh]']
+            df['Sonstige'] = df['Pumpspeicher[MWh]'] + \
+                df['Sonstige Konventionelle[MWh]']
+            df['Erneuerbare'] = df['Biomasse[MWh]'] + df['Wasserkraft[MWh]'] + df['Wind Offshore[MWh]'] + \
+                df['Wind Offshore[MWh]'] + df['Wind Onshore[MWh]'] + \
+                df['Photovoltaik[MWh]'] + df['Sonstige Erneuerbare[MWh]']
+            df.drop(list(df)[0:12], axis=1, inplace=True)
 
-        # convert to week and drop first and last row with partial values
-        df.reset_index(inplace=True)
-        df = df.resample('W', on='Datum').sum()
-        df.drop(df.tail(1).index, inplace=True)  # no drop for step-after chart
-        df.drop(df.head(1).index, inplace=True)
+            # convert to week and drop first and last row with partial values
+            df.reset_index(inplace=True)
+            df = df.resample('W', on='Datum').sum()
+            # no drop for step-after chart
+            df.drop(df.tail(1).index, inplace=True)
+            df.drop(df.head(1).index, inplace=True)
 
-        # get current date for chart notes
-        time_dt_notes = df.index[-1] + timedelta(days=1)
-        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-        notes_chart = f'Stand: {time_str_notes}'
+            # get current date for chart notes
+            time_dt_notes = df.index[-1] + timedelta(days=1)
+            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+            notes_chart = f'Stand: {time_str_notes}'
 
-        # calculate percentage for chart title
-        df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
-        perc_gas = (df_perc['Gas'].iloc[-1]*100).round(0).astype(int)
-        title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
+            # calculate percentage for chart title
+            df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
+            perc_gas = (df_perc['Gas'].iloc[-1]*100).round(0).astype(int)
+            title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
 
-        # convert to terawatt
-        df = df.div(1000000)
+            # convert to terawatt
+            df = df.div(1000000)
 
-        # convert DatetimeIndex to string
-        df.index = df.index.strftime('%Y-%m-%d')
+            # convert DatetimeIndex to string
+            df.index = df.index.strftime('%Y-%m-%d')
 
-        # run Q function
-        update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
-                     data=df, notes=notes_chart, title=title_chart)
+            # run Q function
+            update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
+                         data=df, notes=notes_chart, title=title_chart)
 
     except:
         raise
