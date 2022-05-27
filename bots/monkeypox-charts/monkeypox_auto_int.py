@@ -60,7 +60,7 @@ df = df[['Country', 'Land', 'Flagge','Bestätigt', 'Verdacht', 'Total']]
 now = datetime.now()
 time_now = now.strftime("%Y%m%d-%Hh%M")
 
-df.to_csv('data/'+ time_now+'.csv', index=False)
+#df.to_csv('data/'+ time_now+'.csv', index=False)
 
 # export for q world map
 ids = pd.read_csv('country_ids.csv')
