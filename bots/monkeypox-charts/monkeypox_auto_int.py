@@ -47,14 +47,28 @@ for name in df['Country'].to_list():
     if pycountry.countries.get(name=name)== None:
         raise ValueError('Country name is not recognised by pycountry:', name)
 
-# Add German country names and flags
-def get_german_name(name):
-    country = pycountry.countries.get(name=name)
-    return _(country.name)
+# get country object, using common name if there is one
+def get_common_name(name):
+    if pycountry.countries.get(common_name =name) == None: 
+        country = pycountry.countries.get(name=name)
+    else:
+        country = pycountry.countries.get(common_name =name)
+    return country
 
+# return german name
+def get_german_name(name):
+    country = get_common_name(name)
+    if pycountry.countries.get(common_name =name) == None:
+        country = country.name
+    else:
+        country = country.common_name        
+    return _(country)
+
+# return flag
 def get_flag(name):
-    country = pycountry.countries.get(name=name)
+    country = get_common_name(name)
     return country.flag
+
 
 df['Land'] = df['Country'].apply(get_german_name)
 df['Flagge'] =  df['Country'].apply(get_flag)
