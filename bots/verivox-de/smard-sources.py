@@ -48,7 +48,7 @@ if __name__ == '__main__':
         df.to_csv('./data/smard_fixed.csv', sep=';',
                   encoding='utf-8', index=False)
         df = pd.read_csv('./data/smard_fixed.csv', sep=';', thousands='.',
-                         decimal=',', index_col=None, usecols=['Datum', 'Erdgas[MWh]', 'Kernenergie[MWh]', 'Braunkohle[MWh]', 'Steinkohle[MWh]', 'Pumpspeicher[MWh]', 'Sonstige Konventionelle[MWh]', 'Biomasse[MWh]', 'Wasserkraft[MWh]', 'Wind Offshore[MWh]', 'Wind Onshore[MWh]', 'Photovoltaik[MWh]', 'Sonstige Erneuerbare[MWh]'], dtype={'Datum': 'string', 'Uhrzeit': 'string'})
+                         decimal=',', index_col=None, usecols=['Datum', 'Erdgas[MWh]', 'Kernenergie[MWh]', 'Braunkohle[MWh]', 'Steinkohle[MWh]', 'Pumpspeicher[MWh]', 'Sonstige Konventionelle[MWh]', 'Biomasse[MWh]', 'Wasserkraft[MWh]', 'Wind Offshore[MWh]', 'Wind Onshore[MWh]', 'Photovoltaik[MWh]', 'Sonstige Erneuerbare[MWh]'], dtype={'Datum': 'string'})
 
         # convert dates to DatetimeIndex
         #df.drop('Uhrzeit', axis=1, inplace=True)
