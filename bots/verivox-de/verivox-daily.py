@@ -218,7 +218,7 @@ if __name__ == '__main__':
                          data=dfavg, notes=notes_chart)
         else:
             time_dt_notes = dfavg['date'].iloc[-1]
-            time_str_notes = dfavg['date'].iloc[-1].strftime('%-d. %-m. %Y')
+            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
@@ -266,7 +266,7 @@ if __name__ == '__main__':
             }
         }]
 
-        notes_chart = 'Die Daten zeigen den jeweils günstigsten verfügbaren Tarif für eine vierköpfige Familie in einem Einfamilienhaus mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
+        notes_chart = 'Die Zahlen beruhen auf dem jeweils günstigsten verfügbaren Tarif für eine vierköpfige Familie in einem Einfamilienhaus mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
             str(time_str_notes)
 
         # run function
