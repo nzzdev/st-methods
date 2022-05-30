@@ -20,6 +20,7 @@ df_roh = pd.read_csv(url)
 # Pivot wider
 df = df_roh.groupby(['Country','Status'])['ID'].count().unstack().reset_index()
 df= df.rename(columns={'confirmed':'Bestätigt', 'suspected':'Verdacht'})
+df.drop('discarded', inplace=True, axis=True)
 
 # add totals column
 df['Total']=df.iloc[:,1:].sum(axis=True)
@@ -38,7 +39,8 @@ df.drop(uk_idx, inplace=True)
 
 # replace Country names with our worldmap ids
 df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
-df['Country'] = df['Country'].str.replace('Bolivia', 'Bolivia, Plurinational State of')
+#df['Country'] = df['Country'].str.replace('Bolivia', 'Bolivia, Plurinational State of')
+df['Country'] = df['Country'].str.replace('Iran', 'Iran, Islamic Republic of')
 
 df=df.sort_values('Total', ascending=False)
 
@@ -72,6 +74,9 @@ def get_flag(name):
 
 df['Land'] = df['Country'].apply(get_german_name)
 df['Flagge'] =  df['Country'].apply(get_flag)
+
+# reverse Iran 
+df['Country'] = df['Country'].str.replace('Iran, Islamic Republic of', 'Iran')
 
 df = df[['Country', 'Land', 'Flagge','Bestätigt', 'Verdacht', 'Total']]
 
