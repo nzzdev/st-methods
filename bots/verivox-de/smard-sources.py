@@ -86,7 +86,10 @@ if __name__ == '__main__':
             # calculate percentage for chart title
             df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
             perc_gas = (df_perc['Gas'].iloc[-1]*100).round(0).astype(int)
-            title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
+            if perc_gas > 1:
+                title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
+            else:
+                title_chart = f'{perc_gas} Prozent des Stroms stammt derzeit aus Erdgas'
 
             # convert to terawatt
             df = df.div(1000000)

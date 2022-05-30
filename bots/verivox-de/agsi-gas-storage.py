@@ -129,7 +129,7 @@ if __name__ == '__main__':
 
         notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2022.<br>Stand: ' + timecodestr
         title_perc = dfnew['2022'].iloc[-1].round(0).astype(int)
-        title = f'Gasspeicher nur zu {title_perc} Prozent gefüllt'
+        title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
         # run function
         update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
