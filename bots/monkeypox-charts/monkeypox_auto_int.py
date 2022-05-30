@@ -51,7 +51,7 @@ df = df.sort_values('Total', ascending=False)
 
 # Catch country name if not in pycountry
 for name in df['Country'].to_list():
-    if pycountry.countries.get(name=name) == None:
+    if pycountry.countries.get(name=name)== None and pycountry.countries.get(common_name =name) == None:
         raise ValueError('Country name is not recognised by pycountry:', name)
 
 # get country object, using common name if there is one
