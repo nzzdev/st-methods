@@ -78,6 +78,8 @@ def get_flag(name):
 
 df['Land'] = df['Country'].apply(get_german_name)
 df['Flagge'] = df['Country'].apply(get_flag)
+df_worldmap['Country'] = df_worldmap['Country'].str.replace(
+    'Iran, Islamic Republic of', 'Iran')
 
 df = df[['Country', 'Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']]
 
@@ -92,8 +94,6 @@ ids = pd.read_csv('country_ids.csv')
 df_worldmap = df.copy()
 
 # Rename countries to match world map ids
-df_worldmap['Country'] = df_worldmap['Country'].str.replace(
-    'Iran, Islamic Republic of', 'Iran')
 df_worldmap['Country'] = df_worldmap['Country'].str.replace(
     'United States', 'United States of America')
 #df_worldmap['Country'] = df_worldmap['Country'].str.replace(
