@@ -22,6 +22,7 @@ df_roh = pd.read_csv(url)
 df = df_roh.groupby(['Country', 'Status'])[
     'ID'].count().unstack().reset_index()
 df = df.rename(columns={'confirmed': 'Bestätigt', 'suspected': 'Verdacht'})
+df.drop('discarded', inplace=True, axis=True)
 
 # add totals column
 df['Total'] = df.iloc[:, 1:].sum(axis=True)
@@ -41,7 +42,7 @@ df.drop(uk_idx, inplace=True)
 # replace Country names with our worldmap ids
 df['Country'] = df['Country'].str.replace('Iran', 'Iran, Islamic Republic of')
 df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
-df['Country'] = df['Country'].str.replace('Bolivia', 'Bolivia, Plurinational State of')
+#df['Country'] = df['Country'].str.replace('Bolivia', 'Bolivia, Plurinational State of')
 
 # Drop some countries. Martina, fix this :)
 df = df[df.Country != 'French Guiana']
@@ -95,8 +96,8 @@ df_worldmap['Country'] = df_worldmap['Country'].str.replace(
     'Iran, Islamic Republic of', 'Iran')
 df_worldmap['Country'] = df_worldmap['Country'].str.replace(
     'United States', 'United States of America')
-df_worldmap['Country'] = df_worldmap['Country'].str.replace(
-    'Bolivia, Plurinational State of', 'Bolivia')
+#df_worldmap['Country'] = df_worldmap['Country'].str.replace(
+#    'Bolivia, Plurinational State of', 'Bolivia')
 
 # merge df with ids
 df_worldmap = df_worldmap.rename(columns={'Country': 'ID', 'Total': 'Wert'})
