@@ -78,7 +78,7 @@ def get_flag(name):
 
 df['Land'] = df['Country'].apply(get_german_name)
 df['Flagge'] = df['Country'].apply(get_flag)
-df['Country'] = df['Country'].str.replace(
+df['Land'] = df['Land'].str.replace(
     'Iran, Islamische Republik', 'Iran')
 
 df = df[['Country', 'Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']]
