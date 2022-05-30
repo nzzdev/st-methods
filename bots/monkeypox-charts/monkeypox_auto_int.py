@@ -97,8 +97,8 @@ df_worldmap = df.copy()
 # Rename countries to match world map ids
 df_worldmap['Country'] = df_worldmap['Country'].str.replace(
     'United States', 'United States of America')
-#df_worldmap['Country'] = df_worldmap['Country'].str.replace(
-#    'Bolivia, Plurinational State of', 'Bolivia')
+df_worldmap['Country'] = df_worldmap['Country'].str.replace(
+    'Iran, Islamic Republic of', 'Iran')
 
 # merge df with ids
 df_worldmap = df_worldmap.rename(columns={'Country': 'ID', 'Total': 'Wert'})
@@ -106,8 +106,7 @@ df_worldmap = ids.merge(df_worldmap[['ID', 'Wert']], how='left').sort_values(
     'Wert', ascending=False)
 
 # check if all countries were merged
-## except if it's Malta (TODO: Check if Malta really is not in World Map)
-if df_worldmap['Wert'].sum() != df[df['Country']!='Malta']['Total'].sum():
+if df_worldmap['Wert'].sum() != df['Total'].sum():
     raise ValueError(
         'Some country names do not correspond with our world map ids. Please rename manually.')
 
@@ -117,7 +116,7 @@ df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
 id_worldmap_test = '043bfe3491dac666e4bb4fe97a4101bf'  # for testing
 id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc'  # linked in article
 
-update_chart(id=id_worldmap, data=df_worldmap)
+#update_chart(id=id_worldmap, data=df_worldmap)
 
 # export for q table
 df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']].rename(
@@ -126,4 +125,4 @@ df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']].rename(
 id_q_table_test = '4913f749b598fb2ecc9721cb17187e05'  # for testing
 id_q_table = '4acf1a0fd4dd89aef4abaeefd0da5ac6'  # linked in article
 
-update_chart(id=id_q_table, data=df_q_table)
+#update_chart(id=id_q_table, data=df_q_table)
