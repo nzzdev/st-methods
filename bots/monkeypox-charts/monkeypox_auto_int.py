@@ -26,6 +26,7 @@ df.drop('discarded', inplace=True, axis=True)
 
 # add totals column
 df['Total'] = df.iloc[:, 1:].sum(axis=True)
+df = df[df['Total']!=0].reset_index(drop = True)
 
 # format integers
 df = df.fillna(0)
@@ -105,7 +106,8 @@ df_worldmap = ids.merge(df_worldmap[['ID', 'Wert']], how='left').sort_values(
     'Wert', ascending=False)
 
 # check if all countries were merged
-if df_worldmap['Wert'].sum() != df['Total'].sum():
+## except if it's Malta (TODO: Check if Malta really is not in World Map)
+if df_worldmap['Wert'].sum() != df[df['Country']!='Malta']['Total'].sum():
     raise ValueError(
         'Some country names do not correspond with our world map ids. Please rename manually.')
 
