@@ -41,8 +41,10 @@ df.drop(uk_idx, inplace=True)
 # replace Country names with our worldmap ids
 df['Country'] = df['Country'].str.replace('Iran', 'Iran, Islamic Republic of')
 df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
-df['Country'] = df['Country'].str.replace(
-    'Bolivia', 'Bolivia, Plurinational State of')
+df['Country'] = df['Country'].str.replace('Bolivia', 'Bolivia, Plurinational State of')
+
+# Drop some countries. Martina, fix this :)
+df = df[df.Country != 'French Guiana']
 
 df = df.sort_values('Total', ascending=False)
 
