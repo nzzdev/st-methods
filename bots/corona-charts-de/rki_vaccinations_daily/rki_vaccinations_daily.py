@@ -72,7 +72,7 @@ if __name__ == '__main__':
             df.index, format='%Y-%m-%d').strftime('%d.%m.%Y')
 
        # show date in chart notes
-        notes_chart = '¹ Sieben-Tage-Schnitt (1. Dose: ' + mean_first + ', 2. Dose: ' + mean_full + ', Booster: ' + mean_booster + \
+        notes_chart = '¹ Sieben-Tage-Schnitt, gerundet (1. Dose: ' + mean_first + ', 2. Dose: ' + mean_full + ', Booster: ' + mean_booster + \
             ').<br>Stand: ' + timestamp_str
 
         # show 7-day average in chart title
