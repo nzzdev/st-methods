@@ -314,7 +314,7 @@ oil_price_de.to_csv(f'./oil_price_de.csv')
 
 
 # Stock market data
-tickers = ["EURCHF=X", "KE=F", "TTF=F", "^GDAXI", "EURUSD=X",
+tickers = ["EURCHF=X", "KE=F", "^GDAXI", "EURUSD=X",
            "BTC-USD", "BZ=F"]  # Subtitute for the tickers you want
 df = yf.download(tickers,  start="2019-01-01", end=date.today())
 
@@ -342,6 +342,7 @@ wheat.index = wheat.index.strftime('%Y-%m-%d')
 update_chart(id='b1717dcaee838699497b647ebbceda21',
              data=wheat[['2019', '2022']])
 
+"""
 gas = df['Close']['TTF=F'][df.index >= '2022-01-01'].to_frame().dropna()
 gas['2019'] = df['Close']['TTF=F'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
@@ -349,6 +350,30 @@ gas.rename(columns={gas.columns[0]: '2022'}, inplace=True)
 gas = gas[['2019', '2022']]
 gas.index = gas.index.strftime('%Y-%m-%d')
 update_chart(id='1dda540238574eac80e865faa0ddbafc', data=gas[['2019', '2022']])
+"""
+
+# get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
+url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5396828&historicalSpan=3'
+resp = requests.get(url)
+json_file = resp.text
+full_data = json.loads(json_file)
+
+# create dataframe and format date column
+df_gas = pd.DataFrame(full_data['bars'], columns=['Datum', 'Kosten'])
+df_gas['Datum'] = pd.to_datetime(df_gas['Datum'])
+df_gas.set_index('Datum', inplace=True)
+df_gas = df_gas['Kosten'][df_gas.index >= '2021-03-01'].to_frame().dropna()
+
+# create date for chart notes
+timecode = df_gas.index[-1]
+timecode_str = timecode.strftime('%-d. %-m. %Y')
+notes_chart = 'Stand: ' + timecode_str
+
+# convert DatetimeIndex
+df_gas.index = df_gas.index.strftime('%Y-%m-%d')
+
+# run Q function
+update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas)
 
 oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna()
 oil['2019'] = df['Close']['BZ=F'][(

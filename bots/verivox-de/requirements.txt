@@ -26,4 +26,3 @@ toml==0.10.2
 urllib3==1.26.7
 virtualenv==20.4.3
 virtualenv-clone==0.5.4
-yfinance==0.1.70
