@@ -32,23 +32,23 @@ df = df[df['Total']!=0].reset_index(drop = True)
 df = df.fillna(0)
 df.iloc[:, 1:] = df.iloc[:, 1:].astype(int)
 
-# sum up country-parts of united kingdom
-uk_idx = df[df['Country'].isin(
-    ['England', 'Scotland', 'Wales', 'Northern Ireland'])].index
-uk_row = df.iloc[uk_idx].sum()
-uk_row.loc['Country'] = 'United Kingdom'
-df = df.append(uk_row, ignore_index=True)
-df.drop(uk_idx, inplace=True)
+# sum up UK and France
+def sum_up_countries(df, subcountries, new_name):
+    country_idx = df[df['Country'].isin(subcountries)].index
+    country_row = df.iloc[country_idx].sum()
+    country_row.loc['Country'] = new_name
+    df =df.append(country_row, ignore_index=True)
+    df.drop(country_idx, inplace=True)
+    return df.reset_index(drop=True)
+    
+df = sum_up_countries(df, ['England', 'Scotland', 'Wales', 'Northern Ireland'], 'United Kingdom' )
+df = sum_up_countries(df, ['France', 'French Guiana'], 'France' )
+
+df = df.sort_values('Total', ascending=False)
 
 # replace Country names with our worldmap ids
 df['Country'] = df['Country'].str.replace('Iran', 'Iran, Islamic Republic of')
 df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
-#df['Country'] = df['Country'].str.replace('Bolivia', 'Bolivia, Plurinational State of')
-
-# Drop some countries. Martina, fix this :)
-df = df[df.Country != 'French Guiana']
-
-df = df.sort_values('Total', ascending=False)
 
 # Catch country name if not in pycountry
 for name in df['Country'].to_list():
@@ -70,7 +70,7 @@ def get_german_name(name):
         country = country.name
     else:
         country = country.common_name
-    return _(country)
+    return (country)
 
 # return flag
 def get_flag(name):
@@ -79,15 +79,13 @@ def get_flag(name):
 
 df['Land'] = df['Country'].apply(get_german_name)
 df['Flagge'] = df['Country'].apply(get_flag)
-df['Land'] = df['Land'].str.replace(
-    'Iran, Islamische Republik', 'Iran')
+df['Land'] = df['Land'].str.replace('Iran, Islamische Republik', 'Iran')
 
 df = df[['Country', 'Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']]
 
 # save csv
-now = datetime.now()
-time_now = now.strftime("%Y%m%d-%Hh%M")
-
+#now = datetime.now()
+#time_now = now.strftime("%Y%m%d-%Hh%M")
 #df.to_csv('data/'+ time_now+'.csv', index=False)
 
 # export for q world map
@@ -105,6 +103,11 @@ df_worldmap = df_worldmap.rename(columns={'Country': 'ID', 'Total': 'Wert'})
 df_worldmap = ids.merge(df_worldmap[['ID', 'Wert']], how='left').sort_values(
     'Wert', ascending=False)
 
+# to check locally if all countries were recognised by q_worldmap
+#print('Total Worldmap:', str(df_worldmap['Wert'].sum()))
+#print('Total DF:', str(df['Total'].sum()))
+#df_worldmap.to_csv('test_worldmap.csv', index=False)
+
 # check if all countries were merged
 if df_worldmap['Wert'].sum() != df['Total'].sum():
     raise ValueError(
@@ -113,7 +116,6 @@ if df_worldmap['Wert'].sum() != df['Total'].sum():
 df_worldmap = df_worldmap.sort_values('ID', key=lambda col: col.str.lower())
 df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
 
-id_worldmap_test = '043bfe3491dac666e4bb4fe97a4101bf'  # for testing
 id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc'  # linked in article
 
 update_chart(id=id_worldmap, data=df_worldmap)
@@ -122,7 +124,6 @@ update_chart(id=id_worldmap, data=df_worldmap)
 df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']].rename(
     columns={'Land': '', 'Flagge': ''})
 
-id_q_table_test = '4913f749b598fb2ecc9721cb17187e05'  # for testing
 id_q_table = '4acf1a0fd4dd89aef4abaeefd0da5ac6'  # linked in article
 
 update_chart(id=id_q_table, data=df_q_table)
