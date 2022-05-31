@@ -1,5 +1,6 @@
 import requests
 from requests.adapters import HTTPAdapter, Retry
+from fake_useragent import UserAgent
 import logging
 import json
 import time
@@ -12,6 +13,7 @@ s = requests.Session()
 retries = Retry(total=10, backoff_factor=1,
                 status_forcelist=[502, 503, 504])
 s.mount('https://', HTTPAdapter(max_retries=retries))
+
 
 # get unix timestamp in milliseconds
 timestamp = int(time.time()) * 1000
@@ -27,6 +29,8 @@ def requestSmardData(  # request smard data with default values
 ):
 
     # http request content
+    ua = UserAgent()
+    headers = {'User-Agent': str(ua.chrome)}
     url = "https://www.smard.de/nip-download-manager/nip/download/market-data"
     body = json.dumps({
         "request_form": [
@@ -41,7 +45,7 @@ def requestSmardData(  # request smard data with default values
             }]})
 
     # http response
-    data = s.post(url, body)
+    data = s.post(url, body, headers=headers)
 
     # create pandas dataframe out of response string (csv)
     df = pd.read_csv(StringIO(data.text), sep=';')

@@ -5,6 +5,7 @@ cachetools==4.2.4
 certifi==2020.12.5
 charset-normalizer==2.0.9
 distlib==0.3.1
+fake-useragent==0.1.11
 filelock==3.0.12
 geopandas==0.10.2
 idna==3.3
