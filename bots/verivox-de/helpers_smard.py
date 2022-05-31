@@ -1,11 +1,11 @@
 import requests
 from requests.adapters import HTTPAdapter, Retry
-from fake_useragent import UserAgent
 import logging
 import json
 import time
 import pandas as pd
 from io import StringIO
+from user_agent import generate_user_agent
 
 # retry if error
 logging.basicConfig(level=logging.INFO)
@@ -29,8 +29,7 @@ def requestSmardData(  # request smard data with default values
 ):
 
     # http request content
-    ua = UserAgent()
-    headers = {'User-Agent': str(ua.chrome)}
+    headers = generate_user_agent()
     url = "https://www.smard.de/nip-download-manager/nip/download/market-data"
     body = json.dumps({
         "request_form": [
@@ -45,7 +44,7 @@ def requestSmardData(  # request smard data with default values
             }]})
 
     # http response
-    data = s.post(url, body, headers=headers)
+    data = s.post(url, body, headers={'user-agent': headers})
 
     # create pandas dataframe out of response string (csv)
     df = pd.read_csv(StringIO(data.text), sep=';')
