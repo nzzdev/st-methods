@@ -118,7 +118,7 @@ df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
 
 id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc'  # linked in article
 
-#update_chart(id=id_worldmap, data=df_worldmap)
+update_chart(id=id_worldmap, data=df_worldmap)
 
 # export for q table
 df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']].rename(
@@ -126,4 +126,4 @@ df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']].rename(
 
 id_q_table = '4acf1a0fd4dd89aef4abaeefd0da5ac6'  # linked in article
 
-#update_chart(id=id_q_table, data=df_q_table)
+update_chart(id=id_q_table, data=df_q_table)
