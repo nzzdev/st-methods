@@ -5,6 +5,7 @@ import json
 import pandas as pd
 import os
 from datetime import date
+from user_agent import generate_user_agent
 
 if __name__ == '__main__':
     try:
@@ -32,8 +33,9 @@ if __name__ == '__main__':
         s.mount('https://', HTTPAdapter(max_retries=retries))
 
         # get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
+        headers = generate_user_agent()
         url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5396828&historicalSpan=3'
-        resp = s.get(url)
+        resp = s.get(url, headers={'user-agent': headers})
         json_file = resp.text
         full_data = json.loads(json_file)
 
