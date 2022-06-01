@@ -108,17 +108,23 @@ df_worldmap = ids.merge(df_worldmap[['ID', 'Wert']], how='left').sort_values(
 #print('Total DF:', str(df['Total'].sum()))
 #df_worldmap.to_csv('test_worldmap.csv', index=False)
 
+# set date for charts
+date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y")
+
 # check if all countries were merged
 if df_worldmap['Wert'].sum() != df['Total'].sum():
     raise ValueError(
         'Some country names do not correspond with our world map ids. Please rename manually.')
 
+# export for worldmap
 df_worldmap = df_worldmap.sort_values('ID', key=lambda col: col.str.lower())
 df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
 
 id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc'  # linked in article
 
-update_chart(id=id_worldmap, data=df_worldmap)
+update_chart(id=id_worldmap, 
+            data=df_worldmap,
+            notes = date_notes)
 
 # export for q table
 df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']].rename(
@@ -126,4 +132,6 @@ df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']].rename(
 
 id_q_table = '4acf1a0fd4dd89aef4abaeefd0da5ac6'  # linked in article
 
-update_chart(id=id_q_table, data=df_q_table)
+update_chart(id=id_q_table, 
+            data=df_q_table,
+            notes = date_notes)
