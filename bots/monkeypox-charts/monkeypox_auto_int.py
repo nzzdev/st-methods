@@ -70,7 +70,7 @@ def get_german_name(name):
         country = country.name
     else:
         country = country.common_name
-    return (country)
+    return _(country)
 
 # return flag
 def get_flag(name):
