@@ -20,6 +20,9 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), asset
                     # reset_index() and T (for transpose) are used to bring column names into the first row
                     transformed_data = data.applymap(str).reset_index(
                         drop=True).T.reset_index().T.apply(list, axis=1).to_list()
+                    # specific for speicherseen, transform int col names to str 
+                    if any(type(elem) == int for elem in transformed_data[0]):
+                        transformed_data[0] = [str(elem) for elem in transformed_data[0]]
                     if 'table' in item.get('item').get('data'):
                         item.get('item').get('data').update(
                             {'table': transformed_data})
