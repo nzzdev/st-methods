@@ -1,11 +1,9 @@
-
-import requests
+import pandas as pd
 from datetime import datetime
 import os
-import pandas as pd
-pd.options.mode.chained_assignment = None
 
 from helpers import *
+pd.options.mode.chained_assignment = None
 
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
@@ -15,9 +13,7 @@ q_date = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y")
 
 # read data
 url  = 'https://www.uvek-gis.admin.ch/BFE/ogd/17/ogd17_fuellungsgrad_speicherseen.csv'
-r = requests.get(url)
-open('temp.csv', 'wb').write(r.content)
-df = pd.read_csv('temp.csv')
+df = pd.read_csv(url)
 
 columns = [col[:-19] for col in df.columns.to_list()[1:]]
 columns.insert(0, 'Datum')
