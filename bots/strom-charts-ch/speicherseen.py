@@ -25,7 +25,7 @@ df.columns = columns
 df['Datum'] = pd.to_datetime(df['Datum'])
 
 # calculate prct
-df['TotalCH_prct']     = round(df['TotalCH']/df['TotalCH_max']*100, 1)
+df['TotalCH_prct'] = round(df['TotalCH']/df['TotalCH_max']*100, 1)
 
 # waterfall chart
 df_wf = df[['Datum', 'TotalCH_prct']]
@@ -39,8 +39,8 @@ df_wf_wide = df_wf.pivot(index=['Jahr_Woche'], columns='Jahr', values='TotalCH_p
 waterfall_q_data = df_wf_wide.iloc[:,-3:]
 waterfall_q_id = '69bd37806691fc0c2e6786eb38efea63'
 
-#update_chart(id=waterfall_q_id, 
-#            data=df_wf_wide.iloc[:,-3:],
-#            notes = q_date)
+update_chart(id=waterfall_q_id, 
+            data=df_wf_wide.iloc[:,-3:],
+            notes = q_date)
 
 waterfall_q_data.to_csv('test_data.csv')
