@@ -2,6 +2,7 @@ import time
 import pandas as pd
 import os
 from datetime import datetime, timedelta
+from time import sleep
 
 if __name__ == '__main__':
     try:
@@ -46,6 +47,7 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         if 'Uhrzeit' not in df.columns:
+            sleep(1)
             df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=(
                 int(time.time()) * 1000) - (24*3600)*373000)  # 365000 = 1 year
         else:
