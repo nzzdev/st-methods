@@ -32,11 +32,11 @@ df_wf['Jahr_Woche'] = '2000'+df_wf['Woche'].astype(str)
 
 df_wf_wide = df_wf.pivot(index=['Jahr_Woche'], columns='Jahr', values='TotalCH_prct')
 
-waterfall_q_data = df_wf_wide.iloc[:,-3:].reset_index()
+waterfall_q_data = df_wf_wide.iloc[:,-4:].reset_index()
 waterfall_q_id = '69bd37806691fc0c2e6786eb38efea63'
 
 update_chart(id=waterfall_q_id, 
-            data=df_wf_wide.iloc[:,-3:],
+            data=waterfall_q_data,
             notes = q_date)
 
 waterfall_q_data.to_csv('test_data.csv')
