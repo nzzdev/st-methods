@@ -1,6 +1,3 @@
-import requests
-from requests.adapters import HTTPAdapter, Retry
-import logging
 import json
 import pandas as pd
 import os
@@ -25,17 +22,10 @@ if __name__ == '__main__':
         df = df[['Kosten']]
         """
 
-        # retry if error
-        logging.basicConfig(level=logging.INFO)
-        s = requests.Session()
-        retries = Retry(total=10, backoff_factor=1,
-                        status_forcelist=[502, 503, 504])
-        s.mount('https://', HTTPAdapter(max_retries=retries))
-
         # get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
-        headers = generate_user_agent()
+        fheaders = {'user-agent': generate_user_agent()}
         url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5396828&historicalSpan=3'
-        resp = s.get(url, headers={'user-agent': headers})
+        resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
 

@@ -1,12 +1,9 @@
-import requests
-from requests.adapters import HTTPAdapter, Retry
-import logging
 import json
 import os
 from datetime import datetime, timedelta
 import pandas as pd
 from bs4 import BeautifulSoup
-
+from user_agent import generate_user_agent
 
 if __name__ == '__main__':
     try:
@@ -15,16 +12,11 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
         from helpers import *
 
-        # retry if error
-        logging.basicConfig(level=logging.INFO)
-        s = requests.Session()
-        retries = Retry(total=10, backoff_factor=1,
-                        status_forcelist=[502, 503, 504])
-        s.mount('https://', HTTPAdapter(max_retries=retries))
-
+        # read data for gas imports
         # https://www.bruegel.org/publications/datasets/european-natural-gas-imports/
+        fheaders = {'user-agent': generate_user_agent()}
         url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'
-        resp = s.get(url)
+        resp = download_data(url, headers=fheaders)
         html = resp.text
 
         soup = BeautifulSoup(html, features='html.parser')
@@ -105,11 +97,36 @@ if __name__ == '__main__':
         df_lng.fillna('', inplace=True)
         df_russia.fillna('', inplace=True)
 
-        # run function
+        # read data for gas flows in Germany
+        url = 'https://www.bundesnetzagentur.de/DE/Fachthemen/ElektrizitaetundGas/Versorgungssicherheit/aktuelle_gasversorgung/_svg/download.csv?nn=1059464&svgid=1067064&view=renderCSV'
+
+        # save data
+        with open(os.path.join('data', 'download.csv'), 'wb') as f:
+            f.write(download_data(url, headers=fheaders).content)
+
+        # read data
+        df_de = pd.read_csv('./data/download.csv',
+                            delimiter=';', encoding='utf-8')
+        df_de.iloc[:, 0] = pd.to_datetime(df_de.iloc[:, 0], dayfirst=True)
+        df_de.set_index(df_de.iloc[:, 0], inplace=True)
+        df_de['Gas aus Russland'] = df_de.iloc[:, -3:].sum(axis=1)
+        df_de = df_de.filter(['Gas aus Russland'])
+
+        # create date for chart notes
+        timecode = df_de.index[-1]
+        timecode_str = timecode.strftime('%-d. %-m. %Y')
+        notes_chart_de = 'Stand: ' + timecode_str
+
+        # convert DatetimeIndex
+        df_de.index = df_de.index.strftime('%Y-%m-%d')
+
+        # run Q function
         update_chart(id='1203f969609d721f3e48be4f2689fc53',
                      data=df_russia, notes=notes_chart)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
+        update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
+                     data=df_de, notes=notes_chart_de)
 
     except:
         raise

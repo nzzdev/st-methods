@@ -1,5 +1,17 @@
 import pandas as pd
 import json
+import requests
+from requests.adapters import HTTPAdapter, Retry
+import logging
+
+
+def download_data(url, headers=""):
+    logging.basicConfig(level=logging.INFO)
+    s = requests.Session()
+    retries = Retry(total=10, backoff_factor=1,
+                    status_forcelist=[502, 503, 504])
+    s.mount('https://', HTTPAdapter(max_retries=retries))
+    return s.get(url, headers=headers)
 
 
 def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options=""):  # Q helper function
