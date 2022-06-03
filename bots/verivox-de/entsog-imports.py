@@ -125,7 +125,7 @@ if __name__ == '__main__':
                      data=df_russia, notes=notes_chart)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
-        update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
+        update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
                      data=df_de, notes=notes_chart_de)
 
     except:
