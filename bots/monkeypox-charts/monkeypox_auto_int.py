@@ -41,7 +41,8 @@ def sum_up_countries(df, subcountries, new_name):
     df.drop(country_idx, inplace=True)
     return df.reset_index(drop=True)
     
-df = sum_up_countries(df, ['England', 'Scotland', 'Wales', 'Northern Ireland'], 'United Kingdom' )
+df = sum_up_countries(df, ['England', 'Scotland', 'Wales', 'Northern Ireland',
+'United Kingdom'], 'United Kingdom' )
 df = sum_up_countries(df, ['France', 'French Guiana'], 'France' )
 
 df = df.sort_values('Total', ascending=False)
