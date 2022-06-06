@@ -50,6 +50,9 @@ df = df.sort_values('Total', ascending=False)
 df['Country'] = df['Country'].str.replace('Iran', 'Iran, Islamic Republic of')
 df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
 
+# remove unofficial countries
+df = df[df['Country']!='Kosovo']
+
 # Catch country name if not in pycountry
 for name in df['Country'].to_list():
     if pycountry.countries.get(name=name)== None and pycountry.countries.get(common_name =name) == None:
@@ -109,10 +112,13 @@ df_worldmap = ids.merge(df_worldmap[['ID', 'Wert']], how='left').sort_values(
 # to check locally if all countries were recognised by q_worldmap
 #print('Total Worldmap:', str(df_worldmap['Wert'].sum()))
 #print('Total DF:', str(df['Total'].sum()))
-#df_worldmap.to_csv('test_worldmap.csv', index=False)
+df_worldmap.to_csv('test_worldmap.csv', index=False)
+
+# Countries that are not in q worldmap ids
+ignore_lst = ['Cayman Islands']
 
 # check if all countries were merged
-if df_worldmap['Wert'].sum() != df['Total'].sum():
+if df_worldmap['Wert'].sum() != df[~df['Country'].isin(ignore_lst)]['Total'].sum():
     raise ValueError(
         'Some country names do not correspond with our world map ids. Please rename manually.')
 
