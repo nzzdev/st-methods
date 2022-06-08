@@ -100,7 +100,7 @@ if __name__ == '__main__':
 
         # create dates for Russian gas flows in Germany
         today = date.today()
-        yesterday = date.today() - timedelta(days=1)
+        yesterday = today - timedelta(days=1)
         todaystr = today.strftime('%Y-%m-%d')
         yesterdaystr = yesterday.strftime('%Y-%m-%d')
         startstr = '2022-02-01'
