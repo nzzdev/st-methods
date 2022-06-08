@@ -116,7 +116,7 @@ df_worldmap = ids.merge(df_worldmap[['ID', 'Wert']], how='left').sort_values(
 df_worldmap.to_csv('test_worldmap.csv', index=False)
 
 # Countries that are not in q worldmap ids
-ignore_lst = ['Cayman Islands']
+ignore_lst = ['Cayman Islands','Bahamas']
 
 # check if all countries were merged
 if df_worldmap['Wert'].sum() != df[~df['Country'].isin(ignore_lst)]['Total'].sum():
