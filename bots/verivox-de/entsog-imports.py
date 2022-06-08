@@ -128,7 +128,7 @@ if __name__ == '__main__':
         # create date for chart notes
         timecode = df_de.index[-1]
         timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart_de = 'Mengen leicht überschätzt wegen Doppelzählungen an der deutsch-tschechischen Grenze.<br>Stand: ' + timecode_str
+        notes_chart_de = 'Mengen leicht überschätzt wegen Doppelzählungen an der tschechischen Grenze.<br>Stand: ' + timecode_str
 
         # convert DatetimeIndex to string
         df_de.index = df_de.index.strftime('%Y-%m-%d')
