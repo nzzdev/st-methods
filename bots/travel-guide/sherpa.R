@@ -8,6 +8,9 @@ library(clipr)
 library(jsonlite)
 library(countrycode)
 
+# import helper functions
+source("./helpers.R")
+
 # # uncomment for editing
 # setwd("~/NZZ/NZZ Visuals - Dokumente/Projekte/_2022/2214_Sherpa_Travel_Guide")
 
