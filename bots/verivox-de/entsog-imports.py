@@ -149,7 +149,7 @@ if __name__ == '__main__':
         df_de['value'] = df_de['value'] - df_exit['value']
 
         # convert kWh to million m3 according to calorific value of Russian gas
-        df_de['value'] = (df_de['value'] / 10300000).round(2).astype(int)
+        df_de['value'] = (df_de['value'] / 10300000).round(1)
 
         # create date for chart notes
         timecode = df_de.index[-1]
