@@ -26,7 +26,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
+          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/travel-guide/renv.lock') }}
       - name: Restore R packages
         shell: Rscript {0}
         run: |
