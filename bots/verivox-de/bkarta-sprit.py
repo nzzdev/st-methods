@@ -52,8 +52,6 @@ if __name__ == '__main__':
         title_chart_d = f'Diesel kostet derzeit im Schnitt {price_d} Euro je Liter'
         title_chart_s = f'Benzin kostet derzeit im Schnitt {price_s} Euro je Liter'
 
-        print(title_chart_s)
-
         # run Q function
         update_chart(id='458d885de84d6eb558874e221f294a93',
                      data=df_diesel, title=title_chart_d, notes=notes_chart)
