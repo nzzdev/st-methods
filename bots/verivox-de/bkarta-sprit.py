@@ -49,8 +49,8 @@ if __name__ == '__main__':
             2).astype(str).replace('.', ',')
         price_s = df_super['Bundesschnitt'].iloc[-1].round(
             2).astype(str).replace('.', ',')
-        title_chart_d = f'Diesel kostet derzeit im Schnitt {price_d} Euro je Liter'
-        title_chart_s = f'Benzin kostet derzeit im Schnitt {price_s} Euro je Liter'
+        title_chart_d = f'Diesel kostet heute im Schnitt {price_d} Euro je Liter'
+        title_chart_s = f'Benzin kostet heute im Schnitt {price_s} Euro je Liter'
 
         # run Q function
         update_chart(id='458d885de84d6eb558874e221f294a93',
