@@ -33,8 +33,9 @@ jobs:
           if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
           renv::restore()
       - name: Run R scripts
-        run: |
-          Rscript sherpa.R
+        env:
+          SHERPA_API_KEY: ${{ secrets.EMAIL_SENDER }}
+        run: Rscript sherpa.R
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
