@@ -7,11 +7,9 @@ library(tidyverse)
 library(clipr)
 library(jsonlite)
 library(countrycode)
-library(renv)
 
-
-
-setwd("~/NZZ/NZZ Visuals - Dokumente/Projekte/_2022/2214_Sherpa_Travel_Guide")
+# # uncomment for editing
+# setwd("~/NZZ/NZZ Visuals - Dokumente/Projekte/_2022/2214_Sherpa_Travel_Guide")
 
 # ## Africa
 # 
