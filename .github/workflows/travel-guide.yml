@@ -15,6 +15,26 @@ jobs:
         working-directory: bots/travel-guide/
     steps:
       - uses: actions/checkout@v2
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: "4.0.5"
+      - name: Install system dependencies
+        run: |
+          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.local/share/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
+      - name: Restore R packages
+        shell: Rscript {0}
+        run: |
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
+      - name: Run R scripts
+        run: |
+          Rscript sherpa.R
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
