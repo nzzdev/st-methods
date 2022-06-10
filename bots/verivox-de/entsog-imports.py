@@ -148,8 +148,8 @@ if __name__ == '__main__':
         df_exit = pd.concat([df_exit1, df_exit2], join='outer', axis=0)
         df_de['value'] = df_de['value'] - df_exit['value']
 
-        # convert kWh to GWh
-        df_de['value'] = (df_de['value'] / 1000000).round(0).astype(int)
+        # convert kWh to million m3 according to calorific value of Russian gas
+        df_de['value'] = (df_de['value'] / 10300000).round(2).astype(int)
 
         # create date for chart notes
         timecode = df_de.index[-1]
