@@ -25,8 +25,8 @@ jobs:
       - name: Cache R packages
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/travel-guide/renv.lock') }}
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
       - name: Restore R packages
         run: |
           install.packages("renv")
