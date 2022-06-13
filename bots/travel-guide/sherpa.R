@@ -10,19 +10,15 @@ library(countrycode)
 # import helper functions
 source("./helpers.R")
 
-# #get environment variables
-# sherpa_api_key <- Sys.getenv("SHERPA_API_KEY")
-
-# # uncomment for editing
-# setwd("~/NZZ/NZZ Visuals - Dokumente/Projekte/_2022/2214_Sherpa_Travel_Guide")
+# get environment variables
+sherpa_api_key <- Sys.getenv("SHERPA_API_KEY")
 
 ## Vaccinated People
-
-# download.file(url = paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=FULLY_VACCINATED&key=",sherpa_api_key),
-#               destfile = "map-international-vaccinated-auto.json")
+download.file(url = paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=FULLY_VACCINATED&key=",sherpa_api_key),
+               destfile = "map-international-vaccinated-auto.json")
 
 #data prep
-sherpa_json <- fromJSON("map-international-vaccinated.json", simplifyVector = TRUE)
+sherpa_json <- fromJSON("map-international-vaccinated-auto.json", simplifyVector = TRUE)
 
 #get clean dataset from json
 sherpa_data <- sherpa_json$data %>%
