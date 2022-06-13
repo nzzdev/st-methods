@@ -14,11 +14,9 @@ source("./helpers.R")
 sherpa_api_key <- Sys.getenv("SHERPA_API_KEY")
 
 ## Vaccinated People
-download.file(url = paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=FULLY_VACCINATED&key=",sherpa_api_key),
-               destfile = "map-international-vaccinated-auto.json")
 
 #data prep
-sherpa_json <- fromJSON("map-international-vaccinated-auto.json", simplifyVector = TRUE)
+sherpa_json <- fromJSON(paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=FULLY_VACCINATED&key=",sherpa_api_key), simplifyVector = TRUE)
 
 #get clean dataset from json
 sherpa_data <- sherpa_json$data %>%
@@ -104,10 +102,6 @@ sherpa_q_nv <- sherpa_data_nv %>%
 sherpa_q_nv %>% filter(is.na(policy))
 
 # auto
-sherpa_note <- paste0('Einige international umstrittene Gebiete sind grau eingezeichnet. Mehr Details zu den Einreiseregimes',
-                      ' <a href="https://apply.joinsherpa.com/map">hier</a>.<br>Stand:', 
-                      gsub("\\b0(\\d)\\b", "\\1", format(Sys.Date(), format = "%d. %m. %Y")))
-
 update_chart(id = "85c353bb11cc62672a227f8869521189", 
              data = sherpa_q_nv, 
              notes = sherpa_note)
