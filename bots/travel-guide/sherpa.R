@@ -105,6 +105,6 @@ sherpa_note <- paste0('Einige international umstrittene Gebiete sind grau eingez
                       gsub("\\b0(\\d)\\b", "\\1", format(Sys.Date(), format = "%d. %m. %Y")))
 
 update_chart(id = "85c353bb11cc62672a227f8869521189", 
-             data = sherpa_q, 
+             data = sherpa_q_nv, 
              notes = sherpa_note)
 
