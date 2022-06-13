@@ -28,10 +28,11 @@ jobs:
           path: ~/.local/share/renv
           key: ${{ runner.os }}-renv-${{ hashFiles('./bots/travel-guide/renv.lock') }}
       - name: Restore R packages
-        shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          install.packages("renv")
+          renv::activate()
           renv::restore()
+        shell: Rscript {0}
       - name: Run R scripts
         env:
           SHERPA_API_KEY: ${{ secrets.EMAIL_SENDER }}
