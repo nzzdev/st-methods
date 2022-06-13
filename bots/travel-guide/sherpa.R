@@ -16,25 +16,6 @@ source("./helpers.R")
 # # uncomment for editing
 # setwd("~/NZZ/NZZ Visuals - Dokumente/Projekte/_2022/2214_Sherpa_Travel_Guide")
 
-# ## Africa
-# 
-# afr <- read_csv("wid.csv") %>% rename(A = 1)
-# 
-# afr$iso <- countrycode(afr$A, 'country.name', 'iso3c')
-# 
-# afr_clean <- afr %>% filter(!is.na(iso))
-# 
-# urf <- read_csv("urf.csv")
-# 
-# urf$iso <- countrycode(urf$land, 'country.name', 'iso3c')
-# 
-# comp_afr <- afr %>% 
-#   full_join(urf, by = "iso") %>%
-#   mutate(E = E*100) %>%
-#   mutate(diff = E-wert_urf)
-# 
-# x <- table(comp_afr$iso) %>% as.data.frame()
-
 ## Vaccinated People
 
 # download.file(url = paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=FULLY_VACCINATED&key=",sherpa_api_key),
@@ -73,12 +54,6 @@ sherpa_q <- sherpa_data %>%
   right_join(q_wmap, by = c("iso3" = "ID")) %>%
   select(3,2) %>%
   arrange(iso3)
-
-# # manual
-# write_clip(sherpa_q)
-# head(sherpa_q)
-# 
-# browseURL("https://q.st.nzz.ch/editor/choropleth/e8023456bcfa4f8ea12f9a6114965a33")
 
 # auto
 sherpa_note <- paste0('Einige international umstrittene Gebiete sind grau eingezeichnet. Mehr Details zu den Einreiseregimes',
@@ -124,12 +99,6 @@ sherpa_q_nv <- sherpa_data_nv %>%
   right_join(q_wmap, by = c("iso3" = "ID")) %>%
   select(3,2) %>%
   arrange(iso3)
-
-# # manual
-# write_clip(sherpa_q_nv)
-# head(sherpa_q_nv)
-# 
-# browseURL("https://q.st.nzz.ch/editor/choropleth/85c353bb11cc62672a227f8869521189")
 
 #checking
 sherpa_q_nv %>% filter(is.na(policy))
