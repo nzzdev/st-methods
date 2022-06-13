@@ -1,15 +1,15 @@
 {
     "items": [
       {
-      "environments": [
-        {
-          "name": "production",
-          "id": "e8023456bcfa4f8ea12f9a6114965a33"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
+        "environments": [
+          {
+            "name": "production",
+            "id": "e8023456bcfa4f8ea12f9a6114965a33"
+          }
+        ],
+        "item": {
+          "notes": "",
+          "data": []
       }
     },
     {
