@@ -35,7 +35,7 @@ jobs:
         shell: Rscript {0}
       - name: Run R scripts
         env:
-          SHERPA_API_KEY: ${{ secrets.EMAIL_SENDER }}
+          SHERPA_API_KEY: ${{ secrets.SHERPA_API_KEY }}
         run: Rscript sherpa.R
       - name: Setup Node.js
         uses: actions/setup-node@v2
