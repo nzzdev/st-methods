@@ -14,9 +14,11 @@ source("./helpers.R")
 sherpa_api_key <- Sys.getenv("SHERPA_API_KEY")
 
 ## Vaccinated People
+download.file(url = paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=FULLY_VACCINATED&key=",sherpa_api_key),
+               destfile = "map-international-vaccinated-auto.json")
 
 #data prep
-sherpa_json <- fromJSON(paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=FULLY_VACCINATED&key=",sherpa_api_key), simplifyVector = TRUE)
+sherpa_json <- fromJSON("map-international-vaccinated-auto.json", simplifyVector = TRUE)
 
 #get clean dataset from json
 sherpa_data <- sherpa_json$data %>%
