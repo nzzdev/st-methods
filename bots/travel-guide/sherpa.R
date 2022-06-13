@@ -66,9 +66,13 @@ sherpa_q %>% filter(is.na(policy))
 
 ## Non-vaccinated People
 
-#data prep
-sherpa_json_nv <- fromJSON("map-international-not_vaccinated.json", simplifyVector = TRUE)
+download.file(url = paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=NOT_VACCINATED&key=",sherpa_api_key),
+              destfile = "map-international-notvaccinated-auto.json")
 
+#data prep
+sherpa_json_nv <- fromJSON("map-international-notvaccinated-auto.json", simplifyVector = TRUE)
+
+#data prep
 sherpa_data_nv <- sherpa_json_nv$data %>%
   bind_rows() %>%
   select(name, entry, quarantine, testing) %>%
