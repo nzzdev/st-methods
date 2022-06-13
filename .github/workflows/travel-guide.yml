@@ -25,16 +25,17 @@ jobs:
       - name: Cache R packages
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/travel-guide/renv.lock') }}
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/travel-guide/renv.lock') }}
       - name: Restore R packages
-        shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          install.packages("renv")
+          renv::activate()
           renv::restore()
+        shell: Rscript {0}
       - name: Run R scripts
         env:
-          SHERPA_API_KEY: ${{ secrets.EMAIL_SENDER }}
+          SHERPA_API_KEY: ${{ secrets.SHERPA_API_KEY }}
         run: Rscript sherpa.R
       - name: Setup Node.js
         uses: actions/setup-node@v2
