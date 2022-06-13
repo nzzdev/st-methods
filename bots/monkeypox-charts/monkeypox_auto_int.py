@@ -104,6 +104,8 @@ df_worldmap['Country'] = df_worldmap['Country'].str.replace(
     'United States', 'United States of America')
 df_worldmap['Country'] = df_worldmap['Country'].str.replace(
     'Iran, Islamic Republic of', 'Iran')
+df_worldmap['Country'] = df_worldmap['Country'].str.replace(
+    'Bahamas','The Bahamas')
 
 # merge df with ids
 df_worldmap = df_worldmap.rename(columns={'Country': 'ID', 'Total': 'Wert'})
@@ -116,7 +118,7 @@ df_worldmap = ids.merge(df_worldmap[['ID', 'Wert']], how='left').sort_values(
 df_worldmap.to_csv('test_worldmap.csv', index=False)
 
 # Countries that are not in q worldmap ids
-ignore_lst = ['Cayman Islands','Bahamas', 'Gibraltar']
+ignore_lst = ['Cayman Islands', 'Gibraltar']
 
 # check if all countries were merged
 if df_worldmap['Wert'].sum() != df[~df['Country'].isin(ignore_lst)]['Total'].sum():
