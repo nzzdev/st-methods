@@ -9,10 +9,24 @@ async function fetchCountriesInformation(language, originCountries) {
 
   for (const originCountry of originCountries) {
     let countryInformation = await fetchCountryInformation(language, originCountry);
+    if (retVal.length === 0) checkCountryInformationAttributes(countryInformation);
     retVal.push(countryInformation);
   }
 
   return retVal;
+}
+
+function checkCountryInformationAttributes(countryInformation) {
+  if (!countryInformation.hasOwnProperty("data")) throw new Error("Missing property 'data'.");
+  if (!countryInformation.hasOwnProperty("included")) throw new Error("Missing property 'included'.");
+
+  if (countryInformation.data && countryInformation.data.length < 1) return;
+
+  if (!countryInformation.data[0].hasOwnProperty("type")) throw new Error("Missing property 'data.type'.");
+  if (!countryInformation.data[0].hasOwnProperty("attributes")) throw new Error("Missing property 'data.attributes'.");
+  if (!countryInformation.data[0].attributes.hasOwnProperty("type")) throw new Error("Missing property 'data.attributes.type'.");
+  if (!countryInformation.data[0].attributes.hasOwnProperty("isoAlpha3")) throw new Error("Missing property 'data.attributes.isoAlpha3'.");
+  if (!countryInformation.data[0].attributes.hasOwnProperty("lastUpdatedAt")) throw new Error("Missing property 'data.attributes.lastUpdatedAt'.");
 }
 
 async function fetchCountryInformation(language, originCountry) {
@@ -45,11 +59,36 @@ async function fetchTripsInformation(language, originCountries, destinationCount
     for (const destinationCountry of destinationCountries) {
       if (originCountry === destinationCountry) continue;
       let tripInformation = await fetchTripInformation(language, originCountry, destinationCountry, travelDate);
+      if (retVal.length === 0) checkTripInformationAttributes(tripInformation);
       retVal.push(tripInformation);
     }
   }
   
   return retVal;
+}
+
+function checkTripInformationAttributes(tripInformation) {
+  if (!tripInformation.hasOwnProperty("data")) throw new Error("Missing property 'data'.");
+  if (!tripInformation.hasOwnProperty("included")) throw new Error("Missing property 'included'.");
+
+  if (tripInformation.data && tripInformation.data.length < 1) return;
+
+  if (!tripInformation.data.hasOwnProperty("type")) throw new Error("Missing property 'data.type'.");
+  if (!tripInformation.data.hasOwnProperty("attributes")) throw new Error("Missing property 'data.attributes'.");
+  if (!tripInformation.data.attributes.hasOwnProperty("category")) throw new Error("Missing property 'data.attributes.category'.");
+  if (!tripInformation.data.attributes.hasOwnProperty("segments")) throw new Error("Missing property 'data.attributes.segments'.");
+
+  if (tripInformation.data.attributes.segments && tripInformation.data.attributes.segments.length < 1) return;
+
+  if (!tripInformation.data.attributes.segments[0].hasOwnProperty("segmentType")) throw new Error("Missing property 'data.attributes.segments.segmentType'.");
+  if (!tripInformation.data.attributes.segments[0].hasOwnProperty("origin")) throw new Error("Missing property 'data.attributes.segments.origin'.");
+  if (!tripInformation.data.attributes.segments[0].origin.hasOwnProperty("countryCode")) throw new Error("Missing property 'data.attributes.segments.origin.countryCode'.");
+  if (!tripInformation.data.attributes.segments[0].hasOwnProperty("destination")) throw new Error("Missing property 'data.attributes.segments.destination'.");
+  if (!tripInformation.data.attributes.segments[0].destination.hasOwnProperty("countryCode")) throw new Error("Missing property 'data.attributes.segments.destination.countryCode'.");
+  if (!tripInformation.data.attributes.segments[0].hasOwnProperty("entryRestrictions")) throw new Error("Missing property 'data.attributes.segments.entryRestrictions'.");
+  if (!tripInformation.data.attributes.segments[0].hasOwnProperty("travelRestrictions")) throw new Error("Missing property 'data.attributes.segments.travelRestrictions'.");
+  if (!tripInformation.data.attributes.segments[0].hasOwnProperty("documents")) throw new Error("Missing property 'data.attributes.segments.documents'.");
+  if (!tripInformation.data.attributes.segments[0].hasOwnProperty("exitRestrictions")) throw new Error("Missing property 'data.attributes.segments.exitRestrictions'.");
 }
 
 async function fetchTripInformation(language, originCountry, destinationCountry, travelDate) {

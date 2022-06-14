@@ -1,0 +1,402 @@
+﻿ID,Region,Land
+1001,Flensburg,SH
+1002,Kiel,SH
+1003,Lübeck,SH
+1004,Neumünster,SH
+1051,Dithmarschen,SH
+1053,Herzogtum Lauenburg,SH
+1054,Nordfriesland,SH
+1055,Ostholstein,SH
+1056,Pinneberg,SH
+1057,Plön,SH
+1058,Rendsburg-Eckernförde,SH
+1059,Schleswig-Flensburg,SH
+1060,Segeberg,SH
+1061,Steinburg,SH
+1062,Stormarn,SH
+2000,Hamburg,HH
+3101,Braunschweig,NI
+3102,Salzgitter,NI
+3103,Wolfsburg,NI
+3151,Gifhorn,NI
+3153,Goslar,NI
+3154,Helmstedt,NI
+3155,Northeim,NI
+3157,Peine,NI
+3158,Wolfenbüttel,NI
+3159,Göttingen,NI
+3241,Region Hannover,NI
+3251,Diepholz,NI
+3252,Hameln-Pyrmont,NI
+3254,Hildesheim,NI
+3255,Holzminden,NI
+3256,Nienburg (Weser),NI
+3257,Schaumburg,NI
+3351,Celle,NI
+3352,Cuxhaven,NI
+3353,Harburg,NI
+3354,Lüchow-Dannenberg,NI
+3355,Lüneburg,NI
+3356,Osterholz,NI
+3357,Rotenburg (Wümme),NI
+3358,Heidekreis,NI
+3359,Stade,NI
+3360,Uelzen,NI
+3361,Verden,NI
+3401,Delmenhorst,NI
+3402,Emden,NI
+3403,Oldenburg (Oldb),NI
+3404,Osnabrück,NI
+3405,Wilhelmshaven,NI
+3451,Ammerland,NI
+3452,Aurich,NI
+3453,Cloppenburg,NI
+3454,Emsland,NI
+3455,Friesland,NI
+3456,Grafschaft Bentheim,NI
+3457,Leer,NI
+3458,Oldenburg,NI
+3459,Osnabrück (Land),NI
+3460,Vechta,NI
+3461,Wesermarsch,NI
+3462,Wittmund,NI
+4011,Bremen Stadt,HB
+4012,Bremerhaven,HB
+5111,Düsseldorf,NW
+5112,Duisburg,NW
+5113,Essen,NW
+5114,Krefeld,NW
+5116,Mönchengladbach,NW
+5117,Mülheim an der Ruhr,NW
+5119,Oberhausen,NW
+5120,Remscheid,NW
+5122,Solingen,NW
+5124,Wuppertal,NW
+5154,Kleve,NW
+5158,Mettmann,NW
+5162,Rhein-Kreis Neuss,NW
+5166,Viersen,NW
+5170,Wesel,NW
+5314,Bonn,NW
+5315,Köln,NW
+5316,Leverkusen,NW
+5334,Städteregion Aachen,NW
+5358,Düren,NW
+5362,Rhein-Erft-Kreis,NW
+5366,Euskirchen,NW
+5370,Heinsberg,NW
+5374,Oberbergischer Kreis,NW
+5378,Rheinisch-Bergischer Kreis,NW
+5382,Rhein-Sieg-Kreis,NW
+5512,Bottrop,NW
+5513,Gelsenkirchen,NW
+5515,Münster,NW
+5554,Borken,NW
+5558,Coesfeld,NW
+5562,Recklinghausen,NW
+5566,Steinfurt,NW
+5570,Warendorf,NW
+5711,Bielefeld,NW
+5754,Gütersloh,NW
+5758,Herford,NW
+5762,Höxter,NW
+5766,Lippe,NW
+5770,Minden-Lübbecke,NW
+5774,Paderborn,NW
+5911,Bochum,NW
+5913,Dortmund,NW
+5914,Hagen,NW
+5915,Hamm,NW
+5916,Herne,NW
+5954,Ennepe-Ruhr-Kreis,NW
+5958,Hochsauerlandkreis,NW
+5962,Märkischer Kreis,NW
+5966,Olpe,NW
+5970,Siegen-Wittgenstein,NW
+5974,Soest,NW
+5978,Unna,NW
+6411,Darmstadt,HE
+6412,Frankfurt am Main,HE
+6413,Offenbach am Main,HE
+6414,Wiesbaden,HE
+6431,Bergstraße,HE
+6432,Darmstadt-Dieburg,HE
+6433,Groß-Gerau,HE
+6434,Hochtaunuskreis,HE
+6435,Main-Kinzig-Kreis,HE
+6436,Main-Taunus-Kreis,HE
+6437,Odenwaldkreis,HE
+6438,Offenbach,HE
+6439,Rheingau-Taunus-Kreis,HE
+6440,Wetteraukreis,HE
+6531,Gießen,HE
+6532,Lahn-Dill-Kreis,HE
+6533,Limburg-Weilburg,HE
+6534,Marburg-Biedenkopf,HE
+6535,Vogelsbergkreis,HE
+6611,Kassel,HE
+6631,Fulda,HE
+6632,Hersfeld-Rotenburg,HE
+6633,Kassel (Land),HE
+6634,Schwalm-Eder-Kreis,HE
+6635,Waldeck-Frankenberg,HE
+6636,Werra-Meißner-Kreis,HE
+7111,Koblenz,RP
+7131,Ahrweiler,RP
+7132,Altenkirchen (Westerwald),RP
+7133,Bad Kreuznach,RP
+7134,Birkenfeld,RP
+7135,Cochem-Zell,RP
+7137,Mayen-Koblenz,RP
+7138,Neuwied,RP
+7140,Rhein-Hunsrück-Kreis,RP
+7141,Rhein-Lahn-Kreis,RP
+7143,Westerwaldkreis,RP
+7211,Trier,RP
+7231,Bernkastel-Wittlich,RP
+7232,Eifelkreis Bitburg-Prüm,RP
+7233,Vulkaneifel,RP
+7235,Trier-Saarburg,RP
+7311,Frankenthal (Pfalz),RP
+7312,Kaiserslautern,RP
+7313,Landau in der Pfalz,RP
+7314,Ludwigshafen am Rhein,RP
+7315,Mainz,RP
+7316,Neustadt an der Weinstraße,RP
+7317,Pirmasens,RP
+7318,Speyer,RP
+7319,Worms,RP
+7320,Zweibrücken,RP
+7331,Alzey-Worms,RP
+7332,Bad Dürkheim,RP
+7333,Donnersbergkreis,RP
+7334,Germersheim,RP
+7335,Kaiserslautern (Land),RP
+7336,Kusel,RP
+7337,Südliche Weinstraße,RP
+7338,Rhein-Pfalz-Kreis,RP
+7339,Mainz-Bingen,RP
+7340,Südwestpfalz,RP
+8111,Stuttgart,BW
+8115,Böblingen,BW
+8116,Esslingen,BW
+8117,Göppingen,BW
+8118,Ludwigsburg,BW
+8119,Rems-Murr-Kreis,BW
+8121,Heilbronn,BW
+8125,Heilbronn (Land),BW
+8126,Hohenlohekreis,BW
+8127,Schwäbisch Hall,BW
+8128,Main-Tauber-Kreis,BW
+8135,Heidenheim,BW
+8136,Ostalbkreis,BW
+8211,Baden-Baden,BW
+8212,Karlsruhe,BW
+8215,Karlsruhe (Land),BW
+8216,Rastatt,BW
+8221,Heidelberg,BW
+8222,Mannheim,BW
+8225,Neckar-Odenwald-Kreis,BW
+8226,Rhein-Neckar-Kreis,BW
+8231,Pforzheim,BW
+8235,Calw,BW
+8236,Enzkreis,BW
+8237,Freudenstadt,BW
+8311,Freiburg im Breisgau,BW
+8315,Breisgau-Hochschwarzwald,BW
+8316,Emmendingen,BW
+8317,Ortenaukreis,BW
+8325,Rottweil,BW
+8326,Schwarzwald-Baar-Kreis,BW
+8327,Tuttlingen,BW
+8335,Konstanz,BW
+8336,Lörrach,BW
+8337,Waldshut,BW
+8415,Reutlingen,BW
+8416,Tübingen,BW
+8417,Zollernalbkreis,BW
+8421,Ulm,BW
+8425,Alb-Donau-Kreis,BW
+8426,Biberach,BW
+8435,Bodenseekreis,BW
+8436,Ravensburg,BW
+8437,Sigmaringen,BW
+9161,Ingolstadt,BY
+9162,München,BY
+9163,Rosenheim,BY
+9171,Altötting,BY
+9172,Berchtesgadener Land,BY
+9173,Bad Tölz-Wolfratshausen,BY
+9174,Dachau,BY
+9175,Ebersberg,BY
+9176,Eichstätt,BY
+9177,Erding,BY
+9178,Freising,BY
+9179,Fürstenfeldbruck,BY
+9180,Garmisch-Partenkirchen,BY
+9181,Landsberg am Lech,BY
+9182,Miesbach,BY
+9183,Mühldorf a. Inn,BY
+9184,München (Land),BY
+9185,Neuburg-Schrobenhausen,BY
+9186,Pfaffenhofen a.d. Ilm,BY
+9187,Rosenheim (Land),BY
+9188,Starnberg,BY
+9189,Traunstein,BY
+9190,Weilheim-Schongau,BY
+9261,Landshut,BY
+9262,Passau,BY
+9263,Straubing,BY
+9271,Deggendorf,BY
+9272,Freyung-Grafenau,BY
+9273,Kelheim,BY
+9274,Landshut (Land),BY
+9275,Passau (Land),BY
+9276,Regen,BY
+9277,Rottal-Inn,BY
+9278,Straubing-Bogen,BY
+9279,Dingolfing-Landau,BY
+9361,Amberg,BY
+9362,Regensburg,BY
+9363,Weiden i.d. OPf.,BY
+9371,Amberg-Sulzbach,BY
+9372,Cham,BY
+9373,Neumarkt i.d. OPf.,BY
+9374,Neustadt a.d. Waldnaab,BY
+9375,Regensburg (Land),BY
+9376,Schwandorf,BY
+9377,Tirschenreuth,BY
+9461,Bamberg,BY
+9462,Bayreuth,BY
+9463,Coburg,BY
+9464,Hof,BY
+9471,Bamberg (Land),BY
+9472,Bayreuth (Land),BY
+9473,Coburg (Land),BY
+9474,Forchheim,BY
+9475,Hof (Land),BY
+9476,Kronach,BY
+9477,Kulmbach,BY
+9478,Lichtenfels,BY
+9479,Wunsiedel i. Fichtelgebirge,BY
+9561,Ansbach,BY
+9562,Erlangen,BY
+9563,Fürth,BY
+9564,Nürnberg,BY
+9565,Schwabach,BY
+9571,Ansbach (Land),BY
+9572,Erlangen-Höchstadt,BY
+9573,Fürth (Land),BY
+9574,Nürnberger Land,BY
+9575,Neustadt a.d. Aisch-Bad Windsheim,BY
+9576,Roth,BY
+9577,Weißenburg-Gunzenhausen,BY
+9661,Aschaffenburg,BY
+9662,Schweinfurt,BY
+9663,Würzburg,BY
+9671,Aschaffenburg (Land),BY
+9672,Bad Kissingen,BY
+9673,Rhön-Grabfeld,BY
+9674,Haßberge,BY
+9675,Kitzingen,BY
+9676,Miltenberg,BY
+9677,Main-Spessart,BY
+9678,Schweinfurt (Land),BY
+9679,Würzburg (Land),BY
+9761,Augsburg,BY
+9762,Kaufbeuren,BY
+9763,Kempten (Allgäu),BY
+9764,Memmingen,BY
+9771,Aichach-Friedberg,BY
+9772,Augsburg (Land),BY
+9773,Dillingen a.d. Donau,BY
+9774,Günzburg,BY
+9775,Neu-Ulm,BY
+9776,Lindau (Bodensee),BY
+9777,Ostallgäu,BY
+9778,Unterallgäu,BY
+9779,Donau-Ries,BY
+9780,Oberallgäu,BY
+10041,Regionalverband Saarbrücken,SL
+10042,Merzig-Wadern,SL
+10043,Neunkirchen,SL
+10044,Saarlouis,SL
+10045,Saarpfalz-Kreis,SL
+10046,St. Wendel,SL
+11000,Berlin,BE
+12051,Brandenburg an der Havel,BB
+12052,Cottbus,BB
+12053,Frankfurt (Oder),BB
+12054,Potsdam,BB
+12060,Barnim,BB
+12061,Dahme-Spreewald,BB
+12062,Elbe-Elster,BB
+12063,Havelland,BB
+12064,Märkisch-Oderland,BB
+12065,Oberhavel,BB
+12066,Oberspreewald-Lausitz,BB
+12067,Oder-Spree,BB
+12068,Ostprignitz-Ruppin,BB
+12069,Potsdam-Mittelmark,BB
+12070,Prignitz,BB
+12071,Spree-Neiße,BB
+12072,Teltow-Fläming,BB
+12073,Uckermark,BB
+13003,Rostock,MV
+13004,Schwerin,MV
+13071,Mecklenburgische Seenplatte,MV
+13072,Rostock (Land),MV
+13073,Vorpommern-Rügen,MV
+13074,Nordwestmecklenburg,MV
+13075,Vorpommern-Greifswald,MV
+13076,Ludwigslust-Parchim,MV
+14511,Chemnitz,SN
+14521,Erzgebirgskreis,SN
+14522,Mittelsachsen,SN
+14523,Vogtlandkreis,SN
+14524,Zwickau,SN
+14612,Dresden,SN
+14625,Bautzen,SN
+14626,Görlitz,SN
+14627,Meißen,SN
+14628,Sächsische Schweiz-Osterzgebirge,SN
+14713,Leipzig,SN
+14729,Leipzig (Land),SN
+14730,Nordsachsen,SN
+15001,Dessau-Roßlau,ST
+15002,Halle (Saale),ST
+15003,Magdeburg,ST
+15081,Altmarkkreis Salzwedel,ST
+15082,Anhalt-Bitterfeld,ST
+15083,Börde,ST
+15084,Burgenlandkreis,ST
+15085,Harz,ST
+15086,Jerichower Land,ST
+15087,Mansfeld-Südharz,ST
+15088,Saalekreis,ST
+15089,Salzlandkreis,ST
+15090,Stendal,ST
+15091,Wittenberg,ST
+16051,Erfurt,TH
+16052,Gera,TH
+16053,Jena,TH
+16054,Suhl,TH
+16055,Weimar,TH
+16056,Eisenach,TH
+16061,Eichsfeld,TH
+16062,Nordhausen,TH
+16063,Wartburgkreis,TH
+16064,Unstrut-Hainich-Kreis,TH
+16065,Kyffhäuserkreis,TH
+16066,Schmalkalden-Meiningen,TH
+16067,Gotha,TH
+16068,Sömmerda,TH
+16069,Hildburghausen,TH
+16070,Ilm-Kreis,TH
+16071,Weimarer Land,TH
+16072,Sonneberg,TH
+16073,Saalfeld-Rudolstadt,TH
+16074,Saale-Holzland-Kreis,TH
+16075,Saale-Orla-Kreis,TH
+16076,Greiz,TH
+16077,Altenburger Land,TH

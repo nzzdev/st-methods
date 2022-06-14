@@ -8,7 +8,7 @@ on:
   # Schedule makes this bot run in regular intervals, without any interventions
   # This will run it on 07:05 every day (05:05 GMT)
   schedule:
-    - cron: '5 5 * * *'
+    - cron: "5 5 * * *"
 
   # This will enable a button within GitHub that allows the workflow to be executed manually
   workflow_dispatch:
@@ -44,7 +44,7 @@ env:
   # Any notes that should be added to the chart
   NOTES: >-
     Jede der markierten Flächen weist mit einer bestimmten Wahrscheinlichkeit
-    ein oder mehrere aktive Feuer oder sonstige thermische Anomalien (z. B.
+    eines oder mehrere aktive Feuer oder sonstige thermische Anomalien (z. B.
     Vulkane) auf.
 
 defaults:
@@ -59,3 +59,11 @@ jobs:
       - uses: actions/checkout@v2
       - run: yarn install
       - run: yarn start
+      - name: Log failure to slack
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}

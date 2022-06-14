@@ -114,6 +114,9 @@ df['5'] = 400
 # Rename
 df = df.rename(columns = {'BAFU_2176_AbflussRadarSchacht': 'Messwert; Gefahrenstufe:'})
 
+# Resample (1 Entry per hour)
+df = df.resample('1H', on='Time').first()
+
 # Set Index
 df = df.set_index('Zeitstempel')
 
