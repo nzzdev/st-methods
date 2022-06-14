@@ -1,6 +1,6 @@
 #### Sherpa Travel Map ####
 
-#prep2
+#prep
 rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen=999)
 library(tidyverse)
