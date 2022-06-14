@@ -2,9 +2,9 @@ name: Update Corona Risklayer Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 0 and 30 past every hour from 7 through 16 CEST (5 - 14 GMT)
+  # This will run at minute 15 and 45 past every hour from 1 through 22 CET
   schedule:
-    - cron: "0,45 5-14 * * *"
+    - cron: "15,45 1-22 * * *"
   workflow_dispatch:
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v2
         with:
-          python-version: "3.x"
+          python-version: "3.10.x"
       - name: Get pip cache dir
         id: pip-cache
         run: |
@@ -34,9 +34,11 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python risklayer_icu/risklayer_icu.py
           python risklayer_incidence/risklayer_incidence.py
+          python risklayer_incidence/risklayer_map.py
+          python risklayer_incidence/risklayer_table.py
           python risklayer_new_deaths/risklayer_new_deaths.py
+          python risklayer_index/risklayer_index.py
         env:
           GSPREAD_PRIVATE_KEY_ID: ${{ secrets.GSPREAD_PRIVATE_KEY_ID }}
           GSPREAD_PRIVATE_KEY: ${{ secrets.GSPREAD_PRIVATE_KEY }}
@@ -51,3 +53,11 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
+      - name: Log failure to slack
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_DE_SLACK }}

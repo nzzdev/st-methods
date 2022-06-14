@@ -2,9 +2,9 @@ name: Update Corona Charts
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run at minute 0 and 30 past every hour from 7 through 16 CEST (5 - 14 GMT)
+  # This will run at 7:30 and 16:30
   schedule:
-    - cron: "0,30 5-14 * * *"
+    - cron: "30 5,14 * * *"
   workflow_dispatch:
 
 jobs:
@@ -25,40 +25,19 @@ jobs:
       - name: Cache R packages
         uses: actions/cache@v2
         with:
-          path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
       - name: Restore R packages
-        shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          install.packages("renv")
+          renv::activate()
           renv::restore()
+        shell: Rscript {0}
       - name: Run R scripts
         run: |
           Rscript owid_vaccinations_worldwide/owid_vaccinations_worldwide.R
           Rscript corona-auto-ch/corona-auto-ch.R
-      - name: Setup python
-        uses: actions/setup-python@v2
-        with:
-          python-version: "3.x"
-      - name: Get pip cache dir
-        id: pip-cache
-        run: |
-          echo "::set-output name=dir::$(pip cache dir)"
-      - name: Cache python packages
-        uses: actions/cache@v2
-        with:
-          path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/corona-charts/requirements.txt') }}
-      - name: Install python packages
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Run python scripts
-        run: |
-          python rki_vaccinations_daily/rki_vaccinations_daily.py
-          python rki_vaccinations_herd_immunity/rki_vaccinations_herd_immunity.py
-          python rki_vaccinations_states/rki_vaccinations_states.py
-          python rki_notbremse/rki_notbremse.py
+          Rscript corona-auto-int/corona-master-int_automation.R
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
@@ -70,3 +49,11 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
+      - name: Log failure to slack
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}

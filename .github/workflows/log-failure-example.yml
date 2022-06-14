@@ -1,0 +1,22 @@
+name: Log Failure Example # Logs failures to the slack channel: #visuals-workflow-log
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fail on purpose
+        uses: actions/github-script@v3
+        with:
+          script: |
+            core.setFailed('Action failed on purpose!')
+      - name: Log failure to slack
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure" # Remove this line if you want to log all results
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}

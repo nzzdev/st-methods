@@ -6,15 +6,79 @@ options(scipen=999)
 library(tidyverse)
 library(jsonlite)
 library(zoo)
+library(rvest)
+library(renv)
+
+# setwd for fixes
+# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+# setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
 
 # import helper functions
+
 source("./helpers.R")
 
 # read in additional data
 pop <- read_csv("./corona-auto-ch/pop_kant.csv")
 
-#### Update R eth estimate ####
+#### Wastewater Analysis Werdhölzli ####
 
+ww_zh_0 <- read_delim("https://sensors-eawag.ch/sars/__data__/processed_normed_data_zurich_v1.csv", delim = ";") %>% 
+  select(...1, `median_7d_new_cases [1/(d*100000 capita)]`, `median_7d_sars_cov2_rna [gc/(d*100000 capita)]`) %>%
+  rename(date = 1, cases = 2, old = 3) %>%
+  mutate(old = old/100000000000)
+
+ww_zh <- read_delim("https://sensors-eawag.ch/sars/__data__/processed_normed_data_zurich_v2.csv", delim = ";") %>% 
+  select(...1, `median_7d_sars_cov2_rna [gc/(d*100000 capita)]`) %>%
+  rename(date = 1, new = 2) %>%
+  mutate(new = new/250000000000)
+
+ww_zh_comb <- ww_zh_0 %>%
+  full_join(ww_zh, by = "date") %>%
+  rename("Gemessene Gensequenzen (in 100 Milliarden)" = old, 
+         "Gemessene Gensequenzen (neue Messmethode*)" = new,
+         "Neuinfektionen" = cases)
+
+update_chart(id = "ae2fa42664db4ab375dba744d0706269", 
+             data = ww_zh_comb)
+
+#### Excess deaths (BfS) ####
+
+url_xm <- read_html("https://www.bfs.admin.ch//bfs/de/home/statistiken/gesundheit/gesundheitszustand/sterblichkeit-todesursachen/_jcr_content/par/ws_composed_list_1765412048.dynamiclist.html") %>%
+  as.character() %>%
+  str_extract_all("/bfs.(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\\(\\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+") %>%
+  unlist() %>%
+  as_vector()
+
+link_xm <- paste0("https://www.bfs.admin.ch/bfsstatic/dam/assets/",str_sub(url_xm[1], -13,-6), "/master")
+
+bfs <- read_csv2(link_xm) %>%
+  filter((Jahr == "2020"| Jahr == "2021" | Jahr == "2022"), AnzTF_HR != ".") %>%
+  select(Alter, endend, untGrenze, obeGrenze, AnzTF_HR, Diff) %>%
+  mutate(AnzTF_HR = as.numeric(AnzTF_HR), Diff = as.numeric(Diff), endend = as.Date(endend, "%d.%m.%Y")) %>%
+  rename(Datum = endend) %>%
+  replace(is.na(.), 0) 
+
+bfs_old <- read.csv2(text=paste0(head(readLines('https://www.bfs.admin.ch/bfsstatic/dam/assets/12607336/master'), -11), collapse="\n")) %>%
+  select(Alter, Endend, untGrenze, obeGrenze, Anzahl_Todesfalle, Exzess) %>%
+  replace(is.na(.), 0) %>%
+  dplyr::rename(Datum = Endend, AnzTF_HR = Anzahl_Todesfalle, Diff = Exzess) %>%
+  mutate(Datum = as.Date(Datum, "%d.%m.%Y")) 
+
+bfs_all <- rbind(bfs_old, bfs) %>%  
+  filter(Datum >= '2015-01-01', Alter == "65+") %>%
+  select(-Alter, -Diff) %>%
+  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "erwartete Bandbreite" = "obeGrenze")
+
+## Neuster Stand für die Q Grafik
+
+xm_notes <- paste0("Die Datenreihe endet am ", gsub("\\b0(\\d)\\b", "\\1", format(max(bfs_all$Datum), format = "%d. %m. %Y.")))
+
+#q-cli update
+update_chart(id = "f7b3b35758e309767ad0d3096a2fe0ff", 
+             data = bfs_all, 
+             notes = xm_notes)
+
+#### Update R eth estimate ####
 eth <- read_csv("https://raw.githubusercontent.com/covid-19-Re/dailyRe-Data/master/CHE-estimates.csv") %>%
   filter(region == "CHE" & 
            data_type == "Confirmed cases" & 
@@ -57,7 +121,7 @@ eth_cantons_title <- paste0("Der Kanton ", eth_cantons[1,1], " verzeichnet den h
 eth_cantons_notes <- paste0("Die Daten liegen in einem 95%-Konfidenzintervall. Wir zeigen nur die R-Werte für die zehn grössten Kantone.",
                             " In kleinen Kantonen ist der Unsicherheitsbereich teilweise sehr gross, so dass keine verlässlichen Aussagen möglich sind.",
                             " Die neusten Schätzungen der Kantone liegen in der Regel einige Tage hinter der nationalen Schätzung.<br> Stand: ",
-                            format(nth(eth$Datum, -2)-4, format = "%d. %m. %Y"))
+                            gsub("\\b0(\\d)\\b", "\\1", format(nth(eth$Datum, -2)-4, format = "%d. %m. %Y")))
 
 colnames(eth_cantons) <- c("Kanton", "", "Unsicherheitsbereich", "Median")
 
@@ -67,11 +131,25 @@ update_chart(id = "f649302cbf7dd462f339d0cc35d9695a",
              notes = eth_cantons_notes,
              title = eth_cantons_title)
 
-#### Update BAG data ####
+#### Update UZH survey ####
 
-# data gathering
+#uzh_raw <- read_csv("https://covid-norms.ch/wp-content/uploads/data/complete.csv") %>%
+ # mutate(Woche = paste0(dYear, "-W", KW)) %>%
+  #filter(Wert == "prop") %>%
+  #select(Woche, f300_1_Geimpft, f300_1_Zustimmung, f300_1_Neutral, f300_1_Ablehnung) %>%
+  #rename(Geimpfte = f300_1_Geimpft, Impfwillige = f300_1_Zustimmung, Unentschlossene = f300_1_Neutral, Ablehnende = f300_1_Ablehnung)
+  #mutate_at(2:5, .funs = funs(.*100)) %>%
+
+# write
+#update_chart(id = "26356a1918b687a3e1a7ff0d5e0b9675", 
+ #            data = uzh_raw)
+
+#### Update BAG data ####
+# Load Data Schema
 
 bag_data <- fromJSON('https://www.covid19.admin.ch/api/data/context')
+
+# data gathering
 
 bag_cases <- read_csv(bag_data$sources$individual$csv$daily$cases)%>% 
   select("geoRegion", "datum", "entries", "sumTotal", "pop") %>%
@@ -109,33 +187,239 @@ bag_var <- read.csv(bag_data$sources$individual$csv$daily$virusVariantsWgs)%>%
   filter(geoRegion == 'CHFL') %>%
   select("variant_type", "date", "prct", "prct_lower_ci", "prct_upper_ci", "prct_mean7d", "entries")
 
+bag_hosp_reason <- read_csv(bag_data$sources$individual$csv$weekly$byAge$hospReason)
+
+# #### Hosp Reason ####
+# 
+# hosp_reason <- bag_hosp_reason %>%
+#   filter(geoRegion == 'CHFL', altersklasse_covid19 == "all") %>%
+#   select(date, primary_hosp_reason, entries) %>%
+#   spread(primary_hosp_reason, entries) %>%
+#   mutate(date = paste0(str_sub(date, 1, 4), "-W",str_sub(date, 5, 6)))
+# 
+# names(hosp_reason) <- c("date", "Covid-19", "Andere", "Unbekannt")
+# 
+# write_clip(hosp_reason)
+# 
+# hosp_reason[2:4] <- round(hosp_reason[2:4]/rowSums(hosp_reason[2:4])*100,1)
+# 
+# hosp_reason_age <- bag_hosp_reason %>%
+#   filter(geoRegion == 'CHFL' & 
+#            altersklasse_covid19 != "all" & 
+#            altersklasse_covid19 != "Unbekannt" &
+#            date > 202140) %>%
+#   select(date,altersklasse_covid19, primary_hosp_reason, entries) %>%
+#   group_by(altersklasse_covid19, primary_hosp_reason) %>%
+#   summarise(entries = sum(entries)) %>%
+#   spread(primary_hosp_reason, entries) %>% 
+#   select(altersklasse_covid19, covid, unknown, other)
+# 
+# hosp_reason_age[2:4] <- round(hosp_reason_age[2:4]/rowSums(hosp_reason_age[2:4])*100,1)
+# names(hosp_reason_age) <- c("Alter", "Covid-19", "Unbekannt", "Andere")
+# 
+# write_clip(hosp_reason_age)
+# 
+# 
+# hosp_reason_kant <- bag_hosp_reason %>%
+#   filter(geoRegion != 'CHFL' &
+#            geoRegion != 'CH' &
+#            geoRegion != 'FL' &
+#            altersklasse_covid19 == "all" & 
+#            date > 202140) %>%
+#   select(date, geoRegion, primary_hosp_reason, entries) %>%
+#   group_by(geoRegion, primary_hosp_reason) %>%
+#   summarise(entries = sum(entries)) %>%
+#   spread(primary_hosp_reason, entries) %>%
+#   select(geoRegion, covid, unknown, other)
+# 
+# 
+# hosp_reason_kant[2:4] <- round(hosp_reason_kant[2:4]/rowSums(hosp_reason_kant[2:4])*100,1)
+# names(hosp_reason_kant) <- c("Kanton", "Covid-19", "Unbekannt", "Andere")
+# 
+# hosp_reason_kant <- hosp_reason_kant %>% arrange(desc(`Covid-19`))
+# 
+# write_clip(hosp_reason_kant)
+
+#### Update Overview (Zahlenübersicht oben)
+
+tmp_cases <- read_csv(bag_data$sources$individual$csv$daily$cases) %>%
+  filter(datum == max(datum), geoRegion == 'CHFL')
+
+new_infections <- paste0("+ ", tmp_cases$entries_diff_last)
+
+tmp_hosp <- read_csv(bag_data$sources$individual$csv$daily$hosp) %>%
+  filter(datum == max(datum), geoRegion == 'CHFL')
+
+new_hosp <- paste0('+ ', tmp_hosp$entries_diff_last)
+
+tmp_death <- read_csv(bag_data$sources$individual$csv$daily$death) %>%
+  filter(datum == max(datum), geoRegion == 'CHFL')
+
+new_death <- paste0('+ ', tmp_death$entries_diff_last)
+
+# ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered)
+# 
+# doses_yesterday = filter(ch_vacc_adm, date == max(date - 1), geoRegion == 'CHFL')$sumTotal
+# doses_today = filter(ch_vacc_adm, date == max(date), geoRegion == 'CHFL')$sumTotal
+# newDoses = paste0('+ ', doses_today - doses_yesterday)
+
+df_overview <- data.frame(
+  Indikator = c("Neuinfektionen", "Hospitalisierungen", "Todesfälle"),
+  Wert = c(new_infections, new_hosp, new_death)
+)
+
+subtitle <- paste0("Neue Meldungen des Bundesamtes für Gesundheit vom ", 
+                   gsub("\\b0(\\d)\\b", "\\1", format(max(tmp_death$datum), format = "%d. %m. %Y")),
+                   " für die Schweiz und Liechtenstein")
+
+# write
+update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e", 
+             data = df_overview,
+             subtitle = subtitle)
+
+
+### Dashboard ###
+
+bag_cases_dash <- read_csv(bag_data$sources$individual$csv$daily$cases)%>%
+  select("geoRegion", "datum", "entries", "sumTotal", "pop") %>%
+  filter(datum != max(datum)) #exclude today, because new cases will not be there
+ 
+bag_deaths_dash <- read_csv(bag_data$sources$individual$csv$daily$death) %>%
+  select("geoRegion", "datum", "entries", "sumTotal") %>%
+  filter(datum != max(datum)) #exclude today
+ 
+bag_hosps_dash <- read_csv(bag_data$sources$individual$csv$daily$hosp) %>%
+  select("geoRegion", "datum", "entries", "sumTotal") %>%
+  filter(datum != max(datum)) #exclude today
+ 
+bag_cases_ravg <- bag_cases_dash %>%
+  filter(geoRegion == 'CHFL', datum >= "2020-02-28" & datum <= last(datum)-2) %>%
+  mutate(value = round(rollmean(entries, 7, fill = 0, align = "right"),0)) %>%
+  select("datum", "value") %>%
+  rename(date = datum)
+ 
+roll_ch_bag_death_hosp_dash <- bag_deaths_dash %>%
+  full_join(bag_hosps_dash, by = c("geoRegion", "datum")) %>%
+  filter(datum >= "2020-02-28" & datum <=  last(datum)-5, geoRegion == 'CHFL')  %>%
+  mutate(hosp_roll = rollmean(entries.y,7,fill = 0, align = "right"),
+     death_roll = rollmean(entries.x,7,fill = 0, align = "right")) %>%
+  select("datum", "hosp_roll", "death_roll") %>%
+  rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
+ 
+ 
+roll_ch_bag_hosp <- roll_ch_bag_death_hosp_dash %>%
+  select(datum, Hospitalierungen) %>%
+  filter(datum >= '2020-10-01') %>%
+  rename(date = datum, value = Hospitalierungen)
+ 
+roll_ch_bag_death <- roll_ch_bag_death_hosp_dash %>%
+  select(datum, `Todesfälle`) %>%
+  filter(datum >= '2020-10-01') %>%
+  rename(date = datum, value = `Todesfälle`)
+ 
+ 
+roll_ch_bag_cases_trend <- bag_cases_ravg %>%
+  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
+                     diff_pct_max < -3 ~ 'fallend',
+                     TRUE ~ 'gleichbleibend',))
+ 
+roll_ch_bag_hosp_trend <- roll_ch_bag_hosp %>%
+  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
+                      diff_pct_max < -3 ~ 'fallend',
+                      TRUE ~ 'gleichbleibend',))
+ 
+roll_ch_bag_death_trend <- roll_ch_bag_death %>%
+  mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
+                      diff_pct_max < -3 ~ 'fallend',
+                      TRUE ~ 'gleichbleibend',))
+ 
+forJson_1 <- data.frame(indicatorTitle = "Neue Spitaleintritte",
+                   date = tmp_cases$datum,
+                   indicatorSubtitle = "7-Tage-Schnitt",
+                   value = tmp_hosp$entries_diff_last,
+                   color = "#24b39c",
+                   trend = last(roll_ch_bag_hosp_trend$trend),
+                   chartType = "area")
+ 
+forJson_1$chartData <- list(roll_ch_bag_hosp)
+ 
+ 
+forJson_2 <- data.frame(indicatorTitle = "Neuinfektionen",
+                  date = tmp_cases$datum,
+                  value = tmp_cases$entries_diff_last,
+                  color = "#e66e4a",
+                  trend = last(roll_ch_bag_cases_trend$trend),
+                  chartType = "area")
+ 
+forJson_2$chartData <- list(bag_cases_ravg %>% filter(date >= '2020-10-01'))
+ 
+forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
+                  date = tmp_cases$datum,
+                  value = tmp_death$entries_diff_last,
+                  color = "#05032d",
+                  trend = last(roll_ch_bag_death_trend$trend),
+                  chartType = "area")
+ 
+forJson_3$chartData <- list(roll_ch_bag_death)
+
+if (!(file.exists("./data/"))) {
+  dir.create("./data/")
+}
+
+z <- toJSON(rbind_pages(list(forJson_1, forJson_2, forJson_3)), pretty = T)
+write(z, "./data/dashboard_ch.json")
+
+files <- list(
+  list(
+    file = list(
+      path = "./data/dashboard_ch.json"
+    )
+  )
+)
+ 
+#q-cli update
+update_chart(id = "499935fb791197fd126bda721f15884a", files = files)
+
+
 
 # Total cases in CH since 2020-02-24 and recovery calculation
 bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
   filter(geoRegion == 'CHFL') %>%
-  mutate(Infizierte = sumTotal.x -sumTotal.y) %>%
+  mutate(Infizierte = sumTotal.x - sumTotal.y) %>%
   rename("Tote" = `sumTotal.y`) %>%
-  select(datum, Infizierte, Tote) %>%
-  mutate(`Genesene (Schätzung)` = ((lag(Infizierte,14, default = 0)) * 0.75) + 
-           ((lag(Infizierte ,21, default = 0)) * 0.10) + 
-           ((lag(Infizierte,28, default = 0)) * 0.10) +
-           ((lag(Infizierte,42, default = 0)) * 0.05)) %>%
-  mutate(`gegenwärtig Infizierte` = Infizierte-`Genesene (Schätzung)`) %>%
+  select("datum", "Infizierte", "Tote") %>%
+  mutate(`Genesene (Schätzung)` = (lag(Infizierte,10, default = 0)) ) %>%
+    #`Genesene (Schätzung)` = ((lag(Infizierte,10, default = 0)) * 0.75) + 
+     #      ((lag(Infizierte,20, default = 0)) * 0.10) + 
+      #     ((lag(Infizierte,30, default = 0)) * 0.10) +
+       #    ((lag(Infizierte,40, default = 0)) * 0.05)) %>%
+  mutate(`gegenwärtig Infizierte` = Infizierte -`Genesene (Schätzung)`) %>%
   select("datum", "Tote", "gegenwärtig Infizierte", "Genesene (Schätzung)")
 
-bag_total_title <- paste0("Über ",str_sub(sum(tail(bag_total[,2:4], 1),3),1,3), " 000 bestätigte Infektionen in der Schweiz")
+
+bag_total_title <- paste0(gsub('\\.', ',' ,toString(round(sum(tail(bag_total[,2:4], 1))/1000000, 1))), " Millionen bestätigte Infektionen und ", toString(tail(bag_total$Tote, 1)), " Todesfälle in der Schweiz")
 
 #q-cli update
 update_chart(id = "3209a77a596162b06346995b10896863", 
-             data = bag_total, 
-             title = bag_total_title)
+             data = bag_total, title = bag_total_title)
 
+#now infected only
+bag_inf <- bag_total %>% select(datum, `gegenwärtig Infizierte`)
+
+update_chart(id = "9c87f52098e02f80740ec4a3743615b2", 
+             data = bag_inf)
 
 #Rolling average of cases
 bag_cases_ravg <- bag_cases %>%
   filter(geoRegion == 'CHFL', datum <= last(datum)-2) %>%
   mutate(ravg_cases = round(rollmean(entries, 7, fill = 0, align = "right"),0)) %>%
-  select(datum, ravg_cases) 
+  select("datum", "ravg_cases") 
 
 #q-cli update
 update_chart(id = "93b53396ee7f90b1271f620a0472c112", data = bag_cases_ravg)
@@ -144,27 +428,26 @@ update_chart(id = "93b53396ee7f90b1271f620a0472c112", data = bag_cases_ravg)
 
 bag_testPcrAntigen_abs <- bag_testPcrAntigen %>% 
   filter(datum > "2020-11-01", geoRegion == 'CHFL') %>%
-  select(datum, entries, nachweismethode) %>%
+  select("datum", "entries", "nachweismethode") %>%
   spread(nachweismethode, entries) %>%
-  mutate("Antigen-Schnelltest" = round(rollmean(Antigen_Schnelltest, 7, fill = 0, align = "right"), 1), 
-         "PCR-Test" = round(rollmean(PCR, 7, na.pad = TRUE, align = "right"), 1)) %>%
-  select(datum, `Antigen-Schnelltest`, `PCR-Test`) %>%
-  filter(`Antigen-Schnelltest` + `PCR-Test` > 0) %>%
+  mutate("Antigen-Schnelltests" = round(rollmean(Antigen_Schnelltest, 7, fill = 0, align = "right"), 1), 
+         "PCR-Tests" = round(rollmean(PCR, 7, na.pad = TRUE, align = "right"), 1)) %>%
+  select(datum, `Antigen-Schnelltests`, `PCR-Tests`) %>%
+  filter(`Antigen-Schnelltests` + `PCR-Tests` > 0) %>%
   drop_na() 
 
 #q-cli update
 update_chart(id = "fe58121b9eb9cbc28fb71b8810a7b573", data = bag_testPcrAntigen_abs)
-
 
 # Positivity rate (PCR and Antigen)
 bag_tests_pct <- bag_testPcrAntigen %>%
   filter(datum > "2020-11-01", geoRegion == 'CHFL') %>%
   group_by(nachweismethode) %>%
   mutate(pct = round(rollmean(pos_anteil, 7, na.pad = TRUE, align = "right"), 1)) %>%
-  select(nachweismethode, datum, pct) %>%
+  select("nachweismethode", "datum", "pct") %>%
   spread(nachweismethode, pct) %>%
   drop_na()  %>%
-  rename("Antigen-Schnelltest" = Antigen_Schnelltest, "PCR-Test" = PCR) %>%
+  rename("Antigen-Schnelltests" = Antigen_Schnelltest, "PCR-Tests" = PCR) %>%
   add_column("WHO-Zielwert" = 5)
 
 #q-cli update
@@ -174,7 +457,7 @@ update_chart(id = "e18ed50b4fad7ada8063e3a908eb77ac", data = bag_tests_pct)
 bag_age  <- bag_cases_age %>%
   filter(!is.na(datum), altersklasse_covid19 != "Unbekannt", geoRegion == "CHFL") %>%
   mutate(datum = paste0(substr(datum, 1, 4), "-W", substr(datum, 5, 6))) %>%
-  select(datum, altersklasse_covid19, entries) %>%
+  select("datum", "altersklasse_covid19", "entries") %>%
   spread(altersklasse_covid19, entries) %>%
   mutate(`0-19` = `0 - 9` +  `10 - 19`,
          `20-39` = `20 - 29` +  `30 - 39`,
@@ -197,9 +480,9 @@ bag_kanton_choro <- bag_cases %>%
   summarise(sum = sum(entries), .groups = "drop") %>%
   mutate(per100k = round(100000*sum/pop, 0)) %>%
   arrange(geoRegion) %>%
-  select(geoRegion, per100k)
+  select("geoRegion", "per100k")
 
-bag_kanton_choro_notes <- paste0("Stand: ", format(max(bag_cases$datum), , format = "%d. %m. %Y"))
+bag_kanton_choro_notes <- paste0("Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(bag_cases$datum), format = "%d. %m. %Y")))
 
 update_chart(id = "a2fc71a532ec45c64434712991efb41f", data = bag_kanton_choro, notes = bag_kanton_choro_notes)
 
@@ -210,15 +493,39 @@ update_chart(id = "a2fc71a532ec45c64434712991efb41f", data = bag_kanton_choro, n
 roll_ch_bag_death_hosp <- bag_cases %>%
   full_join(bag_deaths, by = c("geoRegion", "datum")) %>%
   full_join(bag_hosps, by = c("geoRegion", "datum")) %>%
-  filter(datum >= "2020-02-28" & datum <=  last(datum)-2, geoRegion == 'CHFL')  %>%
+  filter(datum >= "2020-02-28" & datum <=  last(datum)-5, geoRegion == 'CHFL')  %>%
   mutate(entries.y = replace_na(entries.y, 0),
          hosp_roll = rollmean(entries,7,fill = 0, align = "right"),
          death_roll = rollmean(entries.y,7,fill = 0, align = "right")) %>%
-  select(datum, hosp_roll, death_roll) %>%
-  rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
+  select("datum", "hosp_roll", "death_roll") %>%
+  rename(Hospitalisierungen = hosp_roll, Todesfälle = death_roll)
 
 update_chart(id = "2e86418698ad77f1247bedf99b771e99", data = roll_ch_bag_death_hosp)
 
+
+# Todesfälle only 
+roll_ch_bag_death <- roll_ch_bag_death_hosp %>%
+  select("datum", "Todesfälle")
+
+update_chart(id = "ae2fa42664db4ab375dba744d07afac4", data = roll_ch_bag_death)
+
+# Hosps only (with correction)
+roll_ch_bag_hosp_2 <- roll_ch_bag_death_hosp %>%
+  select("datum", "Hospitalisierungen")
+
+hosp_corr <- read_csv("./corona-auto-ch/hosp-corr.csv")
+hosp_corr_fill <- as_tibble(rep(1, nrow(roll_ch_bag_hosp_2)-nrow(hosp_corr)))
+
+hosp_corr_2 <- bind_rows(hosp_corr_fill, hosp_corr)
+
+hosp_with_corr <- cbind(roll_ch_bag_hosp_2, hosp_corr_2) %>% 
+  mutate(corr = Hospitalisierungen*((((value-1)/3)*2)+1)*1.3) %>%
+  select(datum, Hospitalisierungen, corr) %>%
+  rename("Hospitalisierungen laut BAG" = Hospitalisierungen, "Schätzung inkl. Nachmeldungen und Meldelücke*" = corr) %>% 
+  as_tibble() %>%
+  tail(-6)
+
+update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = hosp_with_corr)
 
 # Todesfälle und Hospitalisierungen absolut nach Altersklasse 
 
@@ -236,8 +543,7 @@ bag_age_deaths  <- bag_deaths_age %>%
   select(datum, altersklasse_covid19, entries) %>%
   spread(altersklasse_covid19, entries) %>%
   mutate(`0–59` = `0 - 9` +  `10 - 19` + `20 - 29` +  `30 - 39` + `40 - 49` +  `50 - 59`, `60–79` = `60 - 69` +  `70 - 79`) %>%
-  select(datum, `0–59`,`60–79`, `80+`) %>%
-  slice(1:n()-1) #incomplete week results
+  select(datum, `0–59`,`60–79`, `80+`) 
 
 update_chart(id = "ec163329f1a1a5698ef5d1ee7587b3d6", data = bag_age_deaths)
 
@@ -247,8 +553,11 @@ bag_age_hosps  <- bag_hosp_age %>%
   mutate(datum = paste0(year, "-W", KW)) %>%
   select(datum, altersklasse_covid19, entries) %>%
   spread(altersklasse_covid19, entries) %>%
-  mutate(`0–59` = `0 - 9` +  `10 - 19` + `20 - 29` +  `30 - 39` + `40 - 49` +  `50 - 59`, `60–79` = `60 - 69` +  `70 - 79`) %>%
-  select(datum, `0–59`,`60–79`, `80+`) %>%
+  mutate(`0–19` = `0 - 9` +  `10 - 19`,
+         `20-39` = `20 - 29` +  `30 - 39`,
+         `40-59` =  `40 - 49` +  `50 - 59`, 
+         `60–79` = `60 - 69` +  `70 - 79`) %>%
+  select(datum, `0–19`, `20-39`, `40-59`, `60–79`, `80+`) %>%
   slice(1:n()-1) #incomplete week results
 
 update_chart(id = "b3423b05ea50c39f8da718719ec3d161", data = bag_age_hosps)
@@ -278,64 +587,35 @@ bag_hosp_cap_cantons <- bag_hosp_cap %>%
   filter(datum == max(datum), geoRegion != 'CHFL' & geoRegion != 'CH' & geoRegion != 'FL') %>%
   select('geoRegion', 'Auslastung', 'Kapazität', 'Patienten mit Covid-19', 'Andere Patienten', 'Freie Betten')
 
-bag_hosp_cap_cantons$region <- ""
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'GE' | 
-                       bag_hosp_cap_cantons$geoRegion == 'VS' |
-                       bag_hosp_cap_cantons$geoRegion == 'VD'
-                     , "region"] <- "Genferseeregion"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'BE' | 
-                       bag_hosp_cap_cantons$geoRegion == 'SO' |
-                       bag_hosp_cap_cantons$geoRegion == 'FR' |
-                       bag_hosp_cap_cantons$geoRegion == 'NE' |
-                       bag_hosp_cap_cantons$geoRegion == 'JU'
-                     , "region"] <- "Espace Mittelland"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'BS' | 
-                       bag_hosp_cap_cantons$geoRegion == 'BL' |
-                       bag_hosp_cap_cantons$geoRegion == 'AG' 
-                     , "region"] <- "Nordwestschweiz"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'ZH'  
-                     , "region"] <- "Zürich"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'SG' | 
-                       bag_hosp_cap_cantons$geoRegion == 'TG' |
-                       bag_hosp_cap_cantons$geoRegion == 'AI' | 
-                       bag_hosp_cap_cantons$geoRegion == 'AR' | 
-                       bag_hosp_cap_cantons$geoRegion == 'GL' |
-                       bag_hosp_cap_cantons$geoRegion == 'GR' |
-                       bag_hosp_cap_cantons$geoRegion == 'SH'
-                     , "region"] <- "Ostschweiz"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'TI'  
-                     , "region"] <- "Tessin"
-bag_hosp_cap_cantons[bag_hosp_cap_cantons$geoRegion == 'LU' | 
-                       bag_hosp_cap_cantons$geoRegion == 'UR' |
-                       bag_hosp_cap_cantons$geoRegion == 'SZ' |
-                       bag_hosp_cap_cantons$geoRegion == 'OW' |
-                       bag_hosp_cap_cantons$geoRegion == 'NW' |
-                       bag_hosp_cap_cantons$geoRegion == 'ZG' 
-                     , "region"] <- "Zentralschweiz"
-
-
 bag_hosp_cap_regions <- bag_hosp_cap_cantons %>%
+  mutate(region = case_when(geoRegion %in% c("GE", "VS", "VD") ~ "Genferseeregion",
+                            geoRegion %in% c("BE", "SO", "FR", "NE", "JU") ~ "Espace Mittelland",
+                            geoRegion %in% c("BS", "BL", "AG") ~ "Nordwestschweiz",
+                            geoRegion == "ZH" ~ "Zürich",
+                            geoRegion %in% c("SG", "TG", "AI", "AR", "GL", "SH", "GR") ~ "Ostschweiz",
+                            geoRegion %in% c("UR", "SZ", "OW", "NW", "LU", "ZG") ~ "Zentralschweiz",
+                            geoRegion == "TI" ~ "Tessin")) %>%
   group_by(region) %>% 
   drop_na()  %>%
   summarise(Auslastung = sum(Auslastung),
             "Kapazität" = sum(`Kapazität`),
             "Patienten mit Covid-19" = sum(`Patienten mit Covid-19`),
             "Andere Patienten" = sum(`Andere Patienten`),
-            "Freie Betten" = sum(`Freie Betten`)) %>% 
-  mutate("Patienten mit Covid-19" = `Patienten mit Covid-19`*100/`Kapazität`,
-    "Andere Patienten" = `Andere Patienten`*100/`Kapazität`,
-    "Freie Betten" = `Freie Betten`*100/`Kapazität`) %>%
+            "Freie Betten" = sum(`Freie Betten`)) %>%
+  mutate_at((4:6), .funs = list(~ .*100/`Kapazität`)) %>%
+  mutate(across(4:6, round, 1)) %>%
   select(1, 4:6) %>%
   arrange(desc(`Patienten mit Covid-19`))
 
 # percentages for notes
+
 bag_hosp_cap_regions_notes <- paste0("Schweizweit sind derzeit etwa ", 
                                       last(subset(bag_hosp_cap, geoRegion == 'CH', select = c('datum', 'Auslastung in %'))$'Auslastung in %' ), 
                                       " Prozent der Intensivbetten belegt. Die Covid-19-Patienten machen derzeit rund ", 
                                       round(100*last(subset(bag_hosp_cap, geoRegion == 'CH', select = c('datum', 'Patienten mit Covid-19'))$'Patienten mit Covid-19') / 
                                               last(subset(bag_hosp_cap, geoRegion == 'CH', select = c('datum', 'Auslastung'))$'Auslastung')),
                                       " Prozent der Patienten aus.<br>Stand: ",
-                                     format(max(bag_hosp_cap$datum), format = "%d. %m. %Y"))
+                                     gsub("\\b0(\\d)\\b", "\\1", format(max(bag_hosp_cap$datum), format = "%d. %m. %Y")))
 
 
 update_chart(id = "e7ab74f261f39c7b670954aaed6de280", data = bag_hosp_cap_regions, notes = bag_hosp_cap_regions_notes)
@@ -355,9 +635,9 @@ bag_cases_bez_dates <- read_csv(bag_data$sources$individual$csv$extraGeoUnits$ca
   select(period_start_date, period_end_date)
 
 bag_cases_bez_notes <- paste0("Zeitraum: ", 
-                              format(bag_cases_bez_dates$period_start_date, format = "%d. %m."),
+                              gsub("\\b0(\\d)\\b", "\\1", format(bag_cases_bez_dates$period_start_date, format = "%d. %m.")),
                               " bis ",
-                              format(bag_cases_bez_dates$period_end_date, format = "%d. %m. %Y"),
+                              gsub("\\b0(\\d)\\b", "\\1", format(bag_cases_bez_dates$period_end_date, format = "%d. %m. %Y")),
                               ". Die Zahlen werden alle 2 Wochen aktualisiert.")
 
 update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e", 
@@ -366,21 +646,42 @@ update_chart(id = "1dc855a085bcadbf7a93ebf5b584336e",
 
 ### Variants ###
 
-bag_var_delta <- bag_var %>%
+bag_var_omikron <- bag_var %>%
   mutate(date = as.Date(date)) %>%
-  filter(variant_type == 'B.1.617.2' & date >= '2021-01-01' & date <= last(date)) %>%
+  filter(variant_type == 'B.1.1.529') %>%
   drop_na(prct) %>%
   mutate(prct_7 = rollmean(prct, 7, fill = NA, align = "right"),
          prct_lower_7 = rollmean(prct_lower_ci, 7, fill = NA, align = "right"),
          prct_upper_7 = rollmean(prct_upper_ci, 7, fill = NA, align = "right")) %>%
+  filter(date >= '2021-11-01' & date <= last(date)) %>%
   select(date, prct_lower_7, prct_upper_7, prct_7 ) %>%
   filter(date >= '2021-04-01') %>%
-  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Delta-Variante" = "prct_7")
+  rename(" " = "prct_lower_7", "Unsicherheit*" = "prct_upper_7", "Anteil der Omikron-Variante" = "prct_7")
 
-bag_var_delta_notes <- paste0("* 95-Prozent-Konfidenzintervall. Der Anteil der Variante wird auf Basis von Probesequenzierungen geschätzt.",
-                              " Prognose = durchgehend weniger als 20 Sequenzierungen pro Tag.")
+update_chart(id = "396fd1e1ae7c6223217d80a9c5417e1f",
+             data = bag_var_omikron)
 
-update_chart(id = "dc697b19f4ecaf842746e444a46761b4", data = bag_var_delta, notes = bag_var_delta_notes)
+bag_var_all <- bag_var %>%
+  mutate(date = as.Date(date)) %>%
+  drop_na(prct) %>%
+  filter(variant_type != "all_sequenced") %>%
+  mutate(var = case_when(variant_type == "B.1.1.7"~ "Alpha",
+                         variant_type == "B.1.617.2" ~ "Delta",
+                         variant_type == "B.1.1.529" ~ "Omikron",
+                         variant_type == "other_lineages" ~ "Urtyp/andere Varianten",
+                         TRUE ~ "Weitere «relevante Virusvarianten»*")) %>%
+  group_by(date, var) %>%
+  summarise(prct = sum(prct)) %>%
+  group_by(var) %>%
+  mutate(prct_7 = round(rollmean(prct, 7, fill = NA, align = "right"),1)) %>%
+  select(date, var, prct_7) %>%
+  spread(var,prct_7) %>%
+  mutate(`Urtyp/andere Varianten` = round(100-(Alpha+Delta+Omikron+`Weitere «relevante Virusvarianten»*`),1)) %>%
+  filter(date >= "2020-10-10") %>%
+  select(date, Alpha, Delta, Omikron, `Weitere «relevante Virusvarianten»*`, `Urtyp/andere Varianten`)
+
+update_chart(id = "396fd1e1ae7c6223217d80a9c5421999",
+             data = bag_var_all)
 
 ### Certificates ###
 
@@ -390,7 +691,6 @@ bag_cert <- bag_cert %>%
   rename('Genesen' = 'recovered', 'Getestet' = 'tested', 'Geimpft' = 'vaccinated')
 
 update_chart(id = "15326b5086f1007b7c67825700c2d149", data = bag_cert)
-
 
 
 #### CH Vaccinations ####
@@ -406,6 +706,7 @@ ch_vacc_adm <- read_csv(bag_data$sources$individual$csv$vaccDosesAdministered) %
 ch_vacc_doses <- rbind(ch_vacc_delrec, ch_vacc_adm)
 
 ch_vacc_persons <- read_csv(bag_data$sources$individual$csv$vaccPersonsV2) %>%
+  filter(age_group == "total_population") %>%
   select(geoRegion, pop, date, type, sumTotal) %>%
   drop_na()
 
@@ -413,16 +714,122 @@ ch_vacc_manuf <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byVaccine$v
   filter(geoRegion == "CHFL") %>%
   select(date, vaccine, sumTotal) %>%
   spread(vaccine, sumTotal) %>%
-  rename('COVID-`19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
+  rename('COVID-19 Vaccine Moderna® (Moderna)' = 'moderna', 'Comirnaty® (Pfizer / BioNTech)' = 'pfizer_biontech')
+
+ch_inf_vacc <- read_csv(bag_data$sources$individual$csv$daily$casesVaccPersons) %>%
+#  filter(vaccine == "all") %>%
+  mutate(type = "Infektionen")
+
+ch_hosp_vacc <- read_csv(bag_data$sources$individual$csv$daily$hospVaccPersons) %>%
+#  filter(vaccine == "all") %>%
+  mutate(type = "Spitaleintritte")
+
+ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons) %>%
+#  filter(vaccine == "all") %>%
+  mutate(type = "Todesfälle")
+
+# ch_inf_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
+#   filter(vaccine == "all")
+# 
+
+ch_hosp_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$hospVaccPersons) %>% 
+  filter(vaccine == "all")
+
+# 
+# ch_death_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
+#   filter(vaccine == "all")
+
+#### Impfdurchbrüche ####
+# By Manuf. - one-off
+# id_total2 <- rbind(ch_inf_vacc, ch_hosp_vacc, ch_death_vacc) %>%
+#   group_by(type, vaccination_status, vaccine) %>%
+#   summarise(sum = sum(entries), pop = max(pop)) %>%
+#   mutate(per100k = 100000*sum/pop)
+
+id_total <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
+  filter(vaccine == "all") %>%
+  filter(date == max(date), vaccination_status %in% c("fully_vaccinated","partially_vaccinated")) %>%
+  select(type, vaccination_status, sumTotal) %>%
+  spread(vaccination_status, sumTotal) %>%
+  rename("Typ" = 1, "Mindestens zweimal geimpft" = 2, "Teilweise geimpft" = 3)
+
+update_chart(id = "ab97925bcc5055b33011fb4d3320012a", 
+             data = id_total, 
+             notes = paste0("Die Zahl der gemeldeten Infektionen bei Geimpften wird vom BAG nicht mehr publiziert,",
+                            " da die Daten nicht aussagekräftig sind.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(ch_hosp_vacc$date), format = "%d. %m. %Y"))))
+
+
+id_hist <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
+  filter(vaccine == "all") %>%
+  filter(date >= "2021-11-01") %>%
+  group_by(type, vaccination_status) %>%
+  summarise(entries = sum(entries)) %>%
+  spread(vaccination_status, entries) %>%
+  select("Typ" = 1, "Mindestens doppelt geimpft" = 2, "Einmal geimpft" = 6, "Nicht geimpft" = 5, "Unbekannt" = 6)
+
+id_hist[2:5] <- round(id_hist[2:5]/rowSums(id_hist[2:5])*100,1)
+
+update_chart(id = "c041757a38ba1d4e6851aaaee55c6207", 
+             data = id_hist, 
+             notes = paste0("Der Zeitraum ab 1. November 2021 wurde so gewählt, weil zu diesem Zeitpunkt die Booster-Impfungen starteten. <br>Stand: ",
+                            gsub("\\b0(\\d)\\b", "\\1", format(max(ch_hosp_vacc$date), format = "%d. %m. %Y"))))
+
+# id_hosp_line <- ch_hosp_vacc %>%
+#   filter(vaccine == "all") %>%
+#   select(date, vaccination_status, entries) %>%
+#   spread(vaccination_status, entries) %>%
+#   mutate_at(2:5, .funs = funs(rollmean(.,7,NA, align = "right"))) %>%
+#   filter(date >= "2021-07-01") %>%
+#   select("Datum" = 1, "Mindestens zweimal geimpft" = 2, "Teilweise geimpft" = 4, "Unbekannt" = 5, "Ungeimpft" = 3) %>%
+#   head(-2)
+
+id_hosp_line_weekly_pc_60 <- ch_hosp_vacc_age %>%
+  filter(altersklasse_covid19 %in% c("60 - 69", "70 - 79", "80+"), 
+         vaccination_status != "unknown" & vaccination_status != "partially_vaccinated",
+         date >= "202146") %>%
+  select(date, altersklasse_covid19, vaccination_status, entries, pop) %>%
+  group_by(date, vaccination_status) %>%
+  summarise(entries = sum(entries), pop = sum(pop)) %>%
+  mutate(per100k = 100000*entries/pop) %>%
+  select(-entries, -pop) %>%
+  spread(vaccination_status, per100k) %>%
+  mutate(date = paste0(str_sub(date, 1,4), "-W", str_sub(date, 5,6))) %>%
+  select(1, 3, 4, 5)
+
+names(id_hosp_line_weekly_pc_60) <- c("date", "Booster erhalten", "Doppelt geimpft", "Ungeimpft") 
+  
+
+if (weekdays(Sys.Date()) %in% c("Monday", "Montag", "Dienstag", "Tuesday")){
+  id_hosp_line_weekly_pc_60 <- id_hosp_line_weekly_pc_60 %>%
+    head(-1)
+}
+
+update_chart(id = "6069088c960d0f055227f901b974637f", 
+             data = id_hosp_line_weekly_pc_60)
+
+id_rel_age <- ch_hosp_vacc_age %>% 
+  select(1:4,6) %>%
+  filter(date %in% tail(unique(ch_hosp_vacc_age$date), 3)) %>%
+  group_by(altersklasse_covid19, vaccination_status) %>%
+  summarise(entries = sum(entries), pop = last(pop)) %>%
+  mutate(per100k = round(100000*entries/pop, 1))
+
+id_rel_age_q <- id_rel_age %>%
+  select(-entries, -pop) %>% 
+  spread(vaccination_status, per100k) %>%
+  select(altersklasse_covid19, not_vaccinated, fully_vaccinated) %>%
+  filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt" & altersklasse_covid19 != "0 - 9")
+
+names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Mindestens zweimal geimpft")
+
+update_chart(id = "32933cfe729928ecb4906a82bdcc4f9f", 
+             data = id_rel_age_q)
+
 
 #Manufacturer of Vaccine
 update_chart(id = "e5aee99aec92ee1365613b671ef405f7", data = ch_vacc_manuf)
 
-ch_vacc_date <- format(last(ch_vacc_adm$date), format = "%d. %m. %Y") #which is the last date available?
-
-
-## Ich habe die folgende Karte aus dem Grafikstück genommen, da sie sich mit einer anderen Grafik doppelt.
-## Muss aber trotzdem aktualisiert werden für Newsroom (fsl)
+ch_vacc_date <-  gsub("\\b0(\\d)\\b", "\\1", format(last(ch_vacc_adm$date), format = "%d. %m. %Y"))
 
 vaccchart_kant <- ch_vacc_doses %>%
   filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH", type == "COVID19VaccDosesAdministered") %>%
@@ -432,11 +839,8 @@ vaccchart_kant <- ch_vacc_doses %>%
   select(geoRegion, per100) %>%
   arrange(geoRegion)
 
-vaccchart_kant$per100[vaccchart_kant$geoRegion == "OW"] <- NA
-
 vaccchart_kant_notes <- paste0("Die Zahlen beziehen sich auf die verabreichten Impfdosen, nicht auf geimpfte Personen.",
-                               " Eine Person muss im Normalfall zwei Dosen verimpft bekommen.",
-                               " Für den Kanton Obwalden werden keine Daten angezeigt, da diese nicht vollständig sind<br>Stand: ", 
+                               "<br>Stand: ", 
                                ch_vacc_date)
 
 update_chart(id = "e039a1c64b33e327ecbbd17543e518d3", data = vaccchart_kant, notes = vaccchart_kant_notes)
@@ -484,38 +888,82 @@ update_chart(id = "e039a1c64b33e327ecbbd17543e518d3", data = vaccchart_kant, not
 #              notes = paste0("Stand: ", ch_vacc_date))
 
 # second doses
+
 vacc_ch_persons_kant <- ch_vacc_persons %>%
-  filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH" & geoRegion != "OW", date == max(date)) %>%
+  filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH") %>%
+  filter(date == max(date)) %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
   left_join(pop[,c(1:2)], by = c("geoRegion" = "ktabk")) %>%
-  select(-pop, -sumTotal, -geoRegion) %>%
+  select(-pop, -sumTotal, -geoRegion, -date) %>%
   spread(type, per100) %>%
   select(-COVID19AtLeastOneDosePersons) %>%
-  rename("Vollständig geimpft" = COVID19FullyVaccPersons, 
-         "Teilweise geimpft" = COVID19PartiallyVaccPersons) %>%
-  arrange(desc(`Vollständig geimpft`))
+  mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
+  rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
+         "Einmal geimpft" = COVID19PartiallyVaccPersons,
+         "Booster erhalten" = COVID19FirstBoosterPersons) %>%
+  arrange(desc(`Doppelt geimpft*`+`Einmal geimpft`+`Booster erhalten`))
+
+title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
 
 update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
              data = vacc_ch_persons_kant,
-             notes = paste0("Für den Kanton Obwalden werden keine Daten angezeigt, da diese nicht vollständig sind. Stand: ", ch_vacc_date))
+             notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", ch_vacc_date), 
+             title = title_vacc_kant)
+
+
+vacc_persons_ch <- ch_vacc_persons %>%
+  filter(geoRegion == "CHFL") %>%
+  group_by(type) %>%
+  filter(date == max(date)) %>%
+  mutate(per100 =round(100*sumTotal/pop,1)) %>%
+  select(-pop, -sumTotal, -date, -geoRegion) %>%
+  mutate(type = dplyr::recode(type, COVID19FullyVaccPersons = "Doppelt geimpft*", 
+                              COVID19PartiallyVaccPersons = "Einmal geimpft",
+                              COVID19FirstBoosterPersons = "Booster erhalten")) %>%
+  filter(type != "COVID19AtLeastOneDosePersons" & type != "COVID19NotVaccPersons") %>%
+  arrange(desc(per100))
+
+
+title_vacc_ch <- paste0(gsub('\\.', ',', toString(vacc_persons_ch$per100[vacc_persons_ch$type == "Doppelt geimpft*"])), ' Prozent der Schweizer Bevölkerung ist doppelt geimpft')
+
+update_chart(id = "8022cf0d0f108d3a2f65d2d360266789",
+             data = vacc_persons_ch,
+             notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", ch_vacc_date), 
+             title = title_vacc_ch)
+
+
 
 ### Schweiz geimpft nach Altersgruppen
 
 vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersons) %>%
-  filter(geoRegion == 'CHFL', type %in% c("COVID19FullyVaccPersons", "COVID19PartiallyVaccPersons")) %>%
-  filter(date ==last(date))%>%
+  filter(geoRegion == 'CHFL', type %in% c("COVID19FullyVaccPersons", "COVID19PartiallyVaccPersons", "COVID19FirstBoosterPersons")) %>%
+  filter(date ==last(date), age_group_type == "age_group_AKL10") %>%
   select(altersklasse_covid19, per100PersonsTotal,type) %>%
   spread(type,per100PersonsTotal) %>%
   rename('Altersklasse' = altersklasse_covid19, 
-         "Vollständig geimpft" = COVID19FullyVaccPersons,
-         "Teilweise geimpft" = COVID19PartiallyVaccPersons) %>%
-  mutate(`Vollständig geimpft` = round(`Vollständig geimpft`, 1),
-         `Teilweise geimpft` = round(`Teilweise geimpft`, 1)) %>%
+         "Doppelt geimpft" = COVID19FullyVaccPersons,
+         "Einfach geimpft" = COVID19PartiallyVaccPersons,
+         "Booster erhalten" = COVID19FirstBoosterPersons) %>%
+  mutate(`Doppelt geimpft` = round(`Doppelt geimpft`-`Booster erhalten`, 1),
+         `Einfach geimpft` = round(`Einfach geimpft`, 1),
+         `Booster erhalten` = round(`Booster erhalten`, 1))  %>%
+  select(Altersklasse, `Booster erhalten`, `Doppelt geimpft`, `Einfach geimpft`) %>%
   arrange(desc(`Altersklasse`))
+
+vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
+  select(date) %>% 
+  filter(date == max(date)) %>% 
+  mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 1), "%Y-%W-%u")+2) %>%
+  unique() %>%
+  deframe() %>%
+  format(format = "%d. %m. %Y")
+
+title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Booster erhalten`), "Prozent der Ältesten sind geboostert")
 
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
-             notes = paste0("Stand: ", ch_vacc_date))
+             notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", vacc_ch_age_date)),
+             title = title)
 
 #### Vaccination, delivered, received ####
 
@@ -541,87 +989,92 @@ update_chart(id = "ce1529d1facf24bb5bef83a3df033bfc",
 
 #### Vaccination Projection CH ####
 ch_vacc_speed <- ch_vacc_doses %>%
-  filter(geoRegion == "CHFL", type == "COVID19VaccDosesAdministered") %>%
-  mutate(new_vacc_doses = sumTotal-lag(sumTotal, 1, default = 0)) %>%
-  mutate(new_vacc_doses_7day = (sumTotal-lag(sumTotal,7, default = 0))/7) %>%
-  mutate(new_vacc_doses_7day = round(new_vacc_doses_7day))
-
+   filter(geoRegion == "CHFL", type == "COVID19VaccDosesAdministered") %>%
+   mutate(new_vacc_doses = sumTotal-lag(sumTotal, 1, default = 0)) %>%
+   mutate(new_vacc_doses_7day = (sumTotal-lag(sumTotal,7, default = 0))/7) %>%
+   mutate(new_vacc_doses_7day = round(new_vacc_doses_7day))
+ 
 #Just vacc Speed
 #write to Q-cli
-update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e", 
+update_chart(id = "b5f3df8202d94e6cba27c93a5230cd0e",
              data = ch_vacc_speed %>% select(date, new_vacc_doses_7day))
 
-#Projection
-dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
-ndays_proj_ch <- seq(1,length(dates_proj_ch), by = 1)
-
-ch_vacc_esti <- ch_vacc_speed %>%
-  filter(date >= last(date)-13) %>%
-  summarise(  max_iqr = max(new_vacc_doses_7day), 
-              min_iqr = min(new_vacc_doses_7day), 
-              mean = mean(new_vacc_doses_7day, na.rm = TRUE))
-
-vacc_proj_mean_ch <- ndays_proj_ch*ch_vacc_esti$mean + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-vacc_proj_max_iqr_ch <- ndays_proj_ch*ch_vacc_esti$max_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-vacc_proj_min_iqr_ch <- ndays_proj_ch*ch_vacc_esti$min_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-
-ch_vacc_proj_raw <- tibble(dates_proj_ch, vacc_proj_mean_ch, vacc_proj_max_iqr_ch, vacc_proj_min_iqr_ch)
-
-herd_immunity_ch <-8644780*1.6
-herd_immunity_date_ch <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_mean_ch > herd_immunity_ch])
-herd_immunity_date_ch_max <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_min_iqr_ch > herd_immunity_ch])
-
-
-#calculate goal
-ch_vacc_goaldays <- length(ch_vacc_proj_raw$dates_proj_ch[ch_vacc_proj_raw$dates_proj_ch <= "2021-08-31"])
-ch_vacc_goalspeed <- (herd_immunity_ch-last(ch_vacc_speed$sumTotal))/ch_vacc_goaldays
-vacc_proj_goal_ch <- ndays_proj_ch*ch_vacc_goalspeed + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
-
-ch_vacc_proj_raw_goal <- tibble(ch_vacc_proj_raw, vacc_proj_goal_ch)
-
-ch_vacc_hi <- ch_vacc_proj_raw_goal %>% filter(dates_proj_ch <= herd_immunity_date_ch_max)
-
-# clean off unneecessary data points
-ch_vacc_hi$vacc_proj_mean_ch[ch_vacc_hi$vacc_proj_mean_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_max_iqr_ch[ch_vacc_hi$vacc_proj_max_iqr_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_min_iqr_ch[ch_vacc_hi$vacc_proj_min_iqr_ch >= herd_immunity_ch] <- NA
-ch_vacc_hi$vacc_proj_goal_ch[ch_vacc_hi$vacc_proj_goal_ch >= herd_immunity_ch] <- NA
-
-colnames(ch_vacc_hi) <- c("Datum",	"Momentante Geschwindigkeit", " ",	"Unsicherheitsbereich*", "Nötige Geschwindigkeit")
-
-ch_past <- cbind(ch_vacc_speed[,c(1,5)], NA, NA, NA)
-
-colnames(ch_past) <- colnames(ch_vacc_hi)
-
-ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
-  select(1,3,4,2,5)
-
-
-# #which day?
-# herd_immunity_date_ch
+# #Projection
+# dates_proj_ch <- seq(last(ch_vacc_speed$date)+1, as.Date("2099-12-31"), by="days")
+# ndays_proj_ch <- seq(1,length(dates_proj_ch), by = 1)
 # 
-# #which speed (now)?
-# ch_vacc_esti$mean
+# ch_vacc_esti <- ch_vacc_speed %>%
+#   filter(date >= last(date)-13) %>%
+#   summarise(  max_iqr = max(new_vacc_doses_7day), 
+#               min_iqr = min(new_vacc_doses_7day), 
+#               mean = mean(new_vacc_doses_7day, na.rm = TRUE))
 # 
-# #which speed (GOAL)?
-# ch_vacc_goalspeed
+# vacc_proj_mean_ch <- ndays_proj_ch*ch_vacc_esti$mean + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+# vacc_proj_max_iqr_ch <- ndays_proj_ch*ch_vacc_esti$max_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+# vacc_proj_min_iqr_ch <- ndays_proj_ch*ch_vacc_esti$min_iqr + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
 # 
-# #how many times faster need the vaccinations to happen?
-# ch_vacc_goalspeed/ch_vacc_esti$mean
+# ch_vacc_proj_raw <- tibble(dates_proj_ch, vacc_proj_mean_ch, vacc_proj_max_iqr_ch, vacc_proj_min_iqr_ch)
+# 
+# herd_immunity_ch <-8644780*1.6
+# herd_immunity_date_ch <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_mean_ch > herd_immunity_ch])
+# herd_immunity_date_ch_max <- first(ch_vacc_proj_raw$dates_proj_ch[vacc_proj_min_iqr_ch > herd_immunity_ch])
+# 
+# 
+# #calculate goal
+# ch_vacc_goaldays <- length(ch_vacc_proj_raw$dates_proj_ch[ch_vacc_proj_raw$dates_proj_ch <= "2021-08-31"])
+# ch_vacc_goalspeed <- (herd_immunity_ch-last(ch_vacc_speed$sumTotal))/ch_vacc_goaldays
+# vacc_proj_goal_ch <- ndays_proj_ch*ch_vacc_goalspeed + sum(ch_vacc_speed$new_vacc_doses, na.rm = T)
+# 
+# ch_vacc_proj_raw_goal <- tibble(ch_vacc_proj_raw, vacc_proj_goal_ch)
+# 
+# ch_vacc_hi <- ch_vacc_proj_raw_goal %>% filter(dates_proj_ch <= herd_immunity_date_ch_max)
+# 
+# # clean off unneecessary data points
+# ch_vacc_hi$vacc_proj_mean_ch[ch_vacc_hi$vacc_proj_mean_ch >= herd_immunity_ch] <- NA
+# ch_vacc_hi$vacc_proj_max_iqr_ch[ch_vacc_hi$vacc_proj_max_iqr_ch >= herd_immunity_ch] <- NA
+# ch_vacc_hi$vacc_proj_min_iqr_ch[ch_vacc_hi$vacc_proj_min_iqr_ch >= herd_immunity_ch] <- NA
+# ch_vacc_hi$vacc_proj_goal_ch[ch_vacc_hi$vacc_proj_goal_ch >= herd_immunity_ch] <- NA
+# 
+# colnames(ch_vacc_hi) <- c("Datum",	"Momentante Geschwindigkeit", " ",	"Unsicherheitsbereich*", "Nötige Geschwindigkeit")
+# 
+# ch_past <- cbind(ch_vacc_speed[,c(1,5)], NA, NA, NA)
+# 
+# colnames(ch_past) <- colnames(ch_vacc_hi)
+# 
+# ch_vacc_hi2 <- rbind(ch_past, ch_vacc_hi) %>%
+#   select(1,3,4,2,5)
+# 
+# #write to Q-cli
+# 
+# update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
+#              data = ch_vacc_hi2,
+#              notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
+#                             ch_vacc_date))
 
-#write to Q-cli
+#Vacc pct by dose
+ch_vacc_persons_hist <- ch_vacc_persons %>%
+  filter(geoRegion == "CHFL") %>%
+  mutate(per100 = 100*sumTotal/pop) %>%
+  select(-sumTotal, -geoRegion, -pop) %>%
+  spread(type, per100) %>%
+  select(-COVID19AtLeastOneDosePersons) %>%
+  rename(Vollständig = COVID19FullyVaccPersons, Teilweise = COVID19PartiallyVaccPersons)
 
-update_chart(id = "37fc5e48506c4cd050bac04346238a2d", 
-             data = ch_vacc_hi2,
-             notes = paste0("* Maximaler und minimaler 7-Tage-Schnitt der letzten zwei Wochen.<br>Stand: ",
-                            ch_vacc_date))
+ch_vacc_persons_hist_new <- ch_vacc_persons %>%
+  filter(geoRegion == "CHFL") %>%
+  select(-geoRegion, -pop) %>%
+  spread(type, sumTotal) %>%
+  mutate(n1 = COVID19AtLeastOneDosePersons-lag(COVID19AtLeastOneDosePersons), 
+         n2 = COVID19FullyVaccPersons-lag(COVID19FullyVaccPersons,1),
+         n3 = COVID19FirstBoosterPersons-lag(COVID19FirstBoosterPersons,1))%>%
+  mutate(Erstimpfungen = rollmean(n1, 7, NA, align = "right"),
+         `Zweitimpfungen*` = rollmean(n2, 7, NA, align = "right"),
+         Boosterimpfungen = rollmean(n3, 7, NA, align = "right"))%>%
+  select(date, Erstimpfungen, `Zweitimpfungen*`, Boosterimpfungen)
 
-#write to renv when adding new packages
+ch_vacc_persons_hist_new$Boosterimpfungen[ch_vacc_persons_hist_new$Boosterimpfungen < 20] <- NA
 
-# getwd()
-# library(renv)
-# init()
-# snapshot()
-# restore()
+update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae",
+             data = ch_vacc_persons_hist_new)
 
 # fin
