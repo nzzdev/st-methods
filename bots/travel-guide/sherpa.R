@@ -53,7 +53,7 @@ sherpa_q <- sherpa_data %>%
 
 # auto
 sherpa_note <- paste0('Einige international umstrittene Gebiete sind grau eingezeichnet. Mehr Details zu den Einreiseregimes',
-                               ' <a href="https://apply.joinsherpa.com/map">hier</a>.<br>Stand:', 
+                               ' <a href="https://apply.joinsherpa.com/map">hier</a>.<br>Stand: ', 
                                gsub("\\b0(\\d)\\b", "\\1", format(Sys.Date(), format = "%d. %m. %Y")))
 
 update_chart(id = "e8023456bcfa4f8ea12f9a6114965a33", 
@@ -107,4 +107,3 @@ sherpa_q_nv %>% filter(is.na(policy))
 update_chart(id = "85c353bb11cc62672a227f8869521189", 
              data = sherpa_q_nv, 
              notes = sherpa_note)
-
