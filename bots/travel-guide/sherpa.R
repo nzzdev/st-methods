@@ -4,17 +4,23 @@
 rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 options(scipen=999)
 library(tidyverse)
-library(clipr)
 library(jsonlite)
 library(countrycode)
 
-setwd("~/NZZ/NZZ Visuals - Dokumente/Projekte/_2022/2214_Sherpa_Travel_Guide")
+# import helper functions
+source("./helpers.R")
+
+# get environment variables
+sherpa_api_key <- Sys.getenv("SHERPA_API_KEY")
 
 ## Vaccinated People
+download.file(url = paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=FULLY_VACCINATED&key=",sherpa_api_key),
+               destfile = "map-international-vaccinated-auto.json")
 
 #data prep
-sherpa_json <- fromJSON("mapEndpoint-fullyVaccinated.json", simplifyVector = TRUE)
+sherpa_json <- fromJSON("map-international-vaccinated-auto.json", simplifyVector = TRUE)
 
+#get clean dataset from json
 sherpa_data <- sherpa_json$data %>%
   bind_rows() %>%
   select(name, entry, quarantine, testing) %>%
@@ -29,7 +35,7 @@ sherpa_data <- sherpa_json$data %>%
   filter(name != "Northern Cyprus") %>%
   select(1, 5)
 
-sherpa_data$iso3 <- countrycode(sherpa_data$name, 'country.name', 'iso3c')
+sherpa_data$iso3 <- countrycode(sherpa_data$name, 'country.name', 'iso3c') #assign ISO codes for matching
 
 # Q country list
 q_wmap <- read_csv("q-wmap.csv")
@@ -45,19 +51,28 @@ sherpa_q <- sherpa_data %>%
   select(3,2) %>%
   arrange(iso3)
 
-write_clip(sherpa_q)
-head(sherpa_q)
+# auto
+sherpa_note <- paste0('Einige international umstrittene Gebiete sind grau eingezeichnet. Mehr Details zu den Einreiseregimes',
+                               ' <a href="https://apply.joinsherpa.com/map">hier</a>.<br>Stand: ', 
+                               gsub("\\b0(\\d)\\b", "\\1", format(Sys.Date(), format = "%d. %m. %Y")))
 
-browseURL("https://q.st.nzz.ch/editor/choropleth/e8023456bcfa4f8ea12f9a6114965a33")
+update_chart(id = "e8023456bcfa4f8ea12f9a6114965a33", 
+             data = sherpa_q, 
+             notes = sherpa_note)
 
-#checking
+
+#checking which countries do not have a value
 sherpa_q %>% filter(is.na(policy))
 
 ## Non-vaccinated People
 
-#data prep
-sherpa_json_nv <- fromJSON("mapEndpoint-notVaccinated.json", simplifyVector = TRUE)
+download.file(url = paste0("https://requirements-api.joinsherpa.com/v2/map/international/CHE?language=de-DE&vaccinationStatus=NOT_VACCINATED&key=",sherpa_api_key),
+              destfile = "map-international-notvaccinated-auto.json")
 
+#data prep
+sherpa_json_nv <- fromJSON("map-international-notvaccinated-auto.json", simplifyVector = TRUE)
+
+#data prep
 sherpa_data_nv <- sherpa_json_nv$data %>%
   bind_rows() %>%
   select(name, entry, quarantine, testing) %>%
@@ -85,10 +100,10 @@ sherpa_q_nv <- sherpa_data_nv %>%
   select(3,2) %>%
   arrange(iso3)
 
-write_clip(sherpa_q_nv)
-head(sherpa_q_nv)
-
-browseURL("https://q.st.nzz.ch/editor/choropleth/85c353bb11cc62672a227f8869521189")
-
 #checking
 sherpa_q_nv %>% filter(is.na(policy))
+
+# auto
+update_chart(id = "85c353bb11cc62672a227f8869521189", 
+             data = sherpa_q_nv, 
+             notes = sherpa_note)
