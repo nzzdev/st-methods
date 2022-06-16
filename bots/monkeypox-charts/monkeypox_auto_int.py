@@ -31,6 +31,7 @@ df = df[df['Total']!=0].reset_index(drop = True)
 # format integers
 df = df.fillna(0)
 df.iloc[:, 1:] = df.iloc[:, 1:].astype(int)
+df['Country'] = df['Country'].str.strip()
 
 # sum up UK and France
 def sum_up_countries(df, subcountries, new_name):
