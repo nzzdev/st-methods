@@ -1,12 +1,10 @@
-import requests
-from requests.adapters import HTTPAdapter, Retry
-import logging
 import json
 import os
 from datetime import datetime, timedelta
 import pandas as pd
 from bs4 import BeautifulSoup
-
+from datetime import datetime, date, timedelta
+from user_agent import generate_user_agent
 
 if __name__ == '__main__':
     try:
@@ -15,16 +13,11 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
         from helpers import *
 
-        # retry if error
-        logging.basicConfig(level=logging.INFO)
-        s = requests.Session()
-        retries = Retry(total=10, backoff_factor=1,
-                        status_forcelist=[502, 503, 504])
-        s.mount('https://', HTTPAdapter(max_retries=retries))
-
+        # read data for gas imports
         # https://www.bruegel.org/publications/datasets/european-natural-gas-imports/
+        fheaders = {'user-agent': generate_user_agent()}
         url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'
-        resp = s.get(url)
+        resp = download_data(url, headers=fheaders)
         html = resp.text
 
         soup = BeautifulSoup(html, features='html.parser')
@@ -105,11 +98,77 @@ if __name__ == '__main__':
         df_lng.fillna('', inplace=True)
         df_russia.fillna('', inplace=True)
 
-        # run function
+        # create dates for Russian gas flows in Germany
+        today = date.today()
+        yesterday = today - timedelta(days=1)
+        todaystr = today.strftime('%Y-%m-%d')
+        yesterdaystr = yesterday.strftime('%Y-%m-%d')
+        startstr = '2022-02-01'
+
+        # read data for Russiand gas flows in Germany
+        url = f'https://transparency.entsog.eu/api/v1/aggregateddata.csv?forceDownload=true&from={startstr}&to={yesterdaystr}&indicator=Physical%20Flow&periodType=day&timezone=CET&limit=-1&delimiter=comma&countryKey=DE&directionKey=entry&pointsNames=Mallnow,VIP%20Waidhaus|Waidhaus%20(OGE),Greifswald%20/%20OPAL,Greifswald%20/%20NEL'
+
+        # duplicate flows (exit to Czechia until March 31st)
+        url_exit1 = f'https://transparency.entsog.eu/api/v1/aggregateddata.csv?forceDownload=true&from={startstr}&to=2022-03-31&indicator=Physical%20Flow&periodType=day&timezone=CET&limit=-1&delimiter=comma&countryKey=DE&directionKey=exit&pointsNames=Brandov%20/%20OPAL'
+
+        # duplicate flows (exit to Czechia from April 1st)
+        url_exit2 = f'https://transparency.entsog.eu/api/v1/aggregateddata.csv?forceDownload=true&from=2022-04-01&to={yesterdaystr}&indicator=Physical%20Flow&periodType=day&timezone=CET&limit=-1&delimiter=comma&countryKey=DE&directionKey=exit&pointsNames=Brandov-OPAL%20(DE)'
+
+        # save data
+        with open(os.path.join('data', 'gas_de.csv'), 'wb') as f:
+            f.write(download_data(url, headers=fheaders).content)
+        with open(os.path.join('data', 'gas_de_exit1.csv'), 'wb') as f:
+            f.write(download_data(url_exit1, headers=fheaders).content)
+        with open(os.path.join('data', 'gas_de_exit2.csv'), 'wb') as f:
+            f.write(download_data(url_exit2, headers=fheaders).content)
+
+        # read data
+        df_de = pd.read_csv('./data/gas_de.csv',
+                            encoding='utf-8', usecols=['periodFrom', 'value'])
+        df_exit1 = pd.read_csv('./data/gas_de_exit1.csv',
+                               encoding='utf-8', usecols=['periodFrom', 'value'])
+        df_exit2 = pd.read_csv('./data/gas_de_exit2.csv',
+                               encoding='utf-8', usecols=['periodFrom', 'value'])
+
+        # convert dates to DatetimeIndex and sum values
+        df_de['periodFrom'] = pd.to_datetime(
+            df_de['periodFrom'], dayfirst=True)
+        df_de.set_index(df_de['periodFrom'], inplace=True)
+        df_de = df_de.resample("D").sum()
+        df_exit1['periodFrom'] = pd.to_datetime(
+            df_exit1['periodFrom'], dayfirst=True)
+        df_exit1.set_index(df_exit1['periodFrom'], inplace=True)
+        df_exit1 = df_exit1.resample("D").sum()
+        df_exit2['periodFrom'] = pd.to_datetime(
+            df_exit2['periodFrom'], dayfirst=True)
+        df_exit2.set_index(df_exit2['periodFrom'], inplace=True)
+        df_exit2 = df_exit2.resample("D").sum()
+
+        # join dataframes with duplicate flows and subtract
+        df_exit = pd.concat([df_exit1, df_exit2], join='outer', axis=0)
+        df_de['value'] = df_de['value'] - df_exit['value']
+
+        # drop NaN
+        df_de = df_de[df_de['value'].notna()]
+
+        # convert kWh to million m3 according to calorific value of Russian gas
+        df_de['value'] = (df_de['value'] / 10300000).round(1)
+
+        # create date for chart notes
+        timecode = df_de.index[-1]
+        timecode_str = timecode.strftime('%-d. %-m. %Y')
+        notes_chart_de = 'Stand: ' + timecode_str
+
+        # convert DatetimeIndex to string
+        df_de.index = df_de.index.strftime('%Y-%m-%d')
+
+        # run Q function
         update_chart(id='1203f969609d721f3e48be4f2689fc53',
                      data=df_russia, notes=notes_chart)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
+        update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
+                     data=df_de, notes=notes_chart_de)
 
     except:
         raise

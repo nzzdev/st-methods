@@ -211,14 +211,10 @@ page = requests.get(adac)
 
 soup = BeautifulSoup(page.content, "html.parser")
 
-try:
-    text = soup.find_all('b')[6].text.strip()
-    price_e10 = pd.to_numeric(re.findall(
+text = soup.find_all('b')[1].text.strip()
+price_e10 = pd.to_numeric(re.findall(
         r'\d+\,\d+', text)[0].replace(',', '.'))
-except IndexError:
-    text = soup.find_all('b')[5].text.strip()
-    price_e10 = pd.to_numeric(re.findall(
-        r'\d+\,\d+', text)[0].replace(',', '.'))
+
 
 fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
 fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')

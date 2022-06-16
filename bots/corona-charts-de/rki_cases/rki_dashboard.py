@@ -74,7 +74,8 @@ if __name__ == '__main__':
         diff_cases = df_meta['Fälle'].astype(int)
         diff_deaths = df_meta['Tote'].astype(int)
 
-        # drop unused columns
+        # drop rows with NaN and unused columns
+        df = df[df.iloc[:, 0].notna()]
         df = df[(df.index.get_level_values(0) >= '2020-10-01')].astype(int)
         df.dropna(inplace=True)
 
