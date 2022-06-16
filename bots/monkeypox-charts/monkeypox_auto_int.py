@@ -31,7 +31,6 @@ df = df[df['Total']!=0].reset_index(drop = True)
 # format integers
 df = df.fillna(0)
 df.iloc[:, 1:] = df.iloc[:, 1:].astype(int)
-df['Country'] = df['Country'].str.strip()
 
 # sum up UK and France
 def sum_up_countries(df, subcountries, new_name):
@@ -121,23 +120,15 @@ df_worldmap.to_csv('test_worldmap.csv', index=False)
 # Countries that are not in q worldmap ids
 ignore_lst = ['Cayman Islands', 'Gibraltar']
 
-# set date for charts
-date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y")
-
 # check if all countries were merged
 if df_worldmap['Wert'].sum() != df[~df['Country'].isin(ignore_lst)]['Total'].sum():
     raise ValueError(
         'Some country names do not correspond with our world map ids. Please rename manually.')
 
-# export for worldmap
 df_worldmap = df_worldmap.sort_values('ID', key=lambda col: col.str.lower())
 df_worldmap['Wert'] = df_worldmap['Wert'].fillna("")
 
 id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc'  # linked in article
-<<<<<<< HEAD
-
-=======
->>>>>>> 2d76beeb82f172c755ef97f36a8da8fd606e4a54
 update_chart(id=id_worldmap, 
             data=df_worldmap,
             notes = date_notes)
@@ -147,13 +138,6 @@ df_q_table = df[['Land', 'Flagge', 'Bestätigt', 'Verdacht', 'Total']].rename(
     columns={'Land': '', 'Flagge': ''})
 
 id_q_table = '4acf1a0fd4dd89aef4abaeefd0da5ac6'  # linked in article
-<<<<<<< HEAD
-
 update_chart(id=id_q_table, 
             data=df_q_table,
             notes = date_notes)
-=======
-update_chart(id=id_q_table, 
-            data=df_q_table,
-            notes = date_notes)
->>>>>>> 2d76beeb82f172c755ef97f36a8da8fd606e4a54
