@@ -148,6 +148,9 @@ if __name__ == '__main__':
         df_exit = pd.concat([df_exit1, df_exit2], join='outer', axis=0)
         df_de['value'] = df_de['value'] - df_exit['value']
 
+        # drop NaN
+        df_de = df_de[df_de['value'].notna()]
+
         # convert kWh to million m3 according to calorific value of Russian gas
         df_de['value'] = (df_de['value'] / 10300000).round(1)
 
