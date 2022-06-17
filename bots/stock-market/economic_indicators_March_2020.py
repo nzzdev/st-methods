@@ -357,10 +357,8 @@ df_gas = pd.DataFrame(full_data['bars'], columns=['Datum', 'Kosten'])
 df_gas['Datum'] = pd.to_datetime(df_gas['Datum'])
 df_gas.set_index('Datum', inplace=True)
 df_gas = df_gas['Kosten'][df_gas.index >= '2022-01-01'].to_frame().dropna()
-df_gas['Jahresdurchschnitt 2019'] = df_gas['Kosten'][(
-    df_gas.index >= '2019-01-01') & (df_gas.index <= '2019-12-31')].mean()
-df_gas.rename(columns={df_gas.columns[0]: 'Jahresdurchschnitt 2022'}, inplace=True)
-df_gas = df_gas[['Jahresdurchschnitt 2019', '2020']]
+df_gas.rename(columns={df_gas.columns[0]: '2022'}, inplace=True)
+df_gas = df_gas[['2022']]
 
 # create date for chart notes
 #timecode = df_gas.index[-1]
@@ -371,7 +369,7 @@ df_gas = df_gas[['Jahresdurchschnitt 2019', '2020']]
 df_gas.index = df_gas.index.strftime('%Y-%m-%d')
 
 # run Q function
-update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas[['Jahresdurchschnitt 2019', '2022']])
+update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas)
 
 oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna()
 oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
