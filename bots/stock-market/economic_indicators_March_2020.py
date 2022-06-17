@@ -358,7 +358,8 @@ df_gas['Datum'] = pd.to_datetime(df_gas['Datum'])
 df_gas.set_index('Datum', inplace=True)
 df_gas = df_gas['Kosten'][df_gas.index >= '2022-01-01'].to_frame().dropna()
 df_gas['Jahresdurchschnitt 2019'] = df_gas['Kosten'][(
-    df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
+    df_gas.index >= '2019-01-01') & (df_gas.index <= '2019-12-31')].mean()
+df_gas.rename(columns={df_gas.columns[0]: 'Jahresdurchschnitt 2022'}, inplace=True)
 df_gas = df_gas[['Jahresdurchschnitt 2019', '2020']]
 
 # create date for chart notes
