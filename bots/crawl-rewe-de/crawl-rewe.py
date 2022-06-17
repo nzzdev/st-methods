@@ -89,7 +89,7 @@ if __name__ == '__main__':
                         ('objectsPerPage', '250'),
                         ('brand', b),
                         ('page', n),
-                        ('serviceTypes', 'DELIVERY,PARCEL'),
+                        ('serviceTypes', 'DELIVERY'),
                         ('sorting', 'NAME_ASC'),
                         # ('sorting', 'TOPSELLER_DESC'),
                         ('source', ''),

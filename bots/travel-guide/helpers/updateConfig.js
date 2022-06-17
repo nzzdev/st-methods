@@ -37,16 +37,6 @@ async function updateFiles() {
   fs.writeFileSync("q.config.json", JSON.stringify(qConfig, null, 4));
 }
 
-function updateId() {
-  let qConfig = readJSON("q.config.json");
-
-  qConfig.items[0].environments = [
-    { "name": "production", "id": `${process.env["Q_PRODUCTION_ID"]}` }
-  ];
-
-  fs.writeFileSync("q.config.json", JSON.stringify(qConfig, null, 4));
-}
-
 function updateLastUpdatedAt() {
   let qConfig = readJSON("q.config.json");
 
@@ -56,5 +46,4 @@ function updateLastUpdatedAt() {
 }
 
 exports.updateFiles = updateFiles
-exports.updateId = updateId
 exports.updateLastUpdatedAt = updateLastUpdatedAt

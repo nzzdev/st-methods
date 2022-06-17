@@ -2,7 +2,7 @@ const {originCountries, destinationCountriesToExclude, destinationCountries} = r
 const {fetchCountriesInformation, fetchTripsInformation} = require("./helpers/fetchInformation")
 const {setCountriesInformation, setTripsInformations} = require("./helpers/setInformation")
 const {writeFile} = require("./helpers/exportJSON")
-const {updateFiles, updateId, updateLastUpdatedAt} = require("./helpers/updateConfig")
+const {updateFiles, updateLastUpdatedAt} = require("./helpers/updateConfig")
 
 async function main() {
   const language = "de-DE";
@@ -10,14 +10,6 @@ async function main() {
 
   let countriesInformation = [];
   let tripsInformation = [];
-
-  if (process.exitCode === 1) return;
-  try {
-    updateId();
-  } catch (error) {
-    console.error(error);
-    process.exitCode = 1;
-  }
 
   console.log("------------------------------$");
   

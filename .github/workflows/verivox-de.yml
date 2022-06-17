@@ -3,7 +3,7 @@ name: Update Verivox Data DE
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "15 5,6,7,12,20 * * *"
+    - cron: "15 5,6,11,15,20 * * *"
   workflow_dispatch:
 
 jobs:
@@ -49,6 +49,7 @@ jobs:
           python entsog-imports.py
           python ttf-gas-stock.py
           python smard-sources.py
+          python bkarta-sprit.py
           python verivox-daily.py
         env:
           VERIVOX_USERNAME: ${{ secrets.VERIVOX_USERNAME }}

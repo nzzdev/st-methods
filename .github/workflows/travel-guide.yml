@@ -10,12 +10,34 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     defaults:
       run:
         working-directory: bots/travel-guide/
     steps:
       - uses: actions/checkout@v2
+      - name: Setup R
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: "4.0.5"
+      - name: Install system dependencies
+        run: |
+          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/R/renv
+          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/travel-guide/renv.lock') }}
+      - name: Restore R packages
+        run: |
+          install.packages("renv")
+          renv::activate()
+          renv::restore()
+        shell: Rscript {0}
+      - name: Run R scripts
+        env:
+          SHERPA_API_KEY: ${{ secrets.SHERPA_API_KEY }}
+        run: Rscript sherpa.R
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
