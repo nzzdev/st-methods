@@ -224,7 +224,7 @@ data = {'date': date.today().strftime('%Y-%m-%d'),
 
 fuel_prices = pd.DataFrame(data, index=[0])
 
-fuel_prices = fuel_prices_old.append(fuel_prices)
+fuel_prices = pd.concat([fuel_prices_old, fuel_prices], ignore_index = True)
 
 fuel_prices.drop_duplicates(subset='date', keep='last', inplace=True)
 
@@ -235,7 +235,7 @@ data = {'Date': date.today().strftime('%Y-%m-%d'),
 
 fuel_prices_de = pd.DataFrame(data, index=[0])
 
-fuel_prices_de = fuel_prices_old_de.append(fuel_prices_de)
+fuel_prices_de = pd.concat([fuel_prices_old_de, fuel_prices_de])
 
 fuel_prices_de.drop_duplicates(subset='Date', keep='last', inplace=True)
 
@@ -279,7 +279,7 @@ data = {'Datum': date.today().strftime('%Y-%m-%d'),
 
 oil_price = pd.DataFrame(data, index=[0])
 
-oil_price = oil_price_old.append(oil_price)
+oil_price = pd.concat([oil_price_old, oil_price], ignore_index = True)
 
 oil_price.drop_duplicates(subset='Datum', keep='last', inplace=True)
 
@@ -289,7 +289,7 @@ data = {'Date': date.today().strftime('%Y-%m-%d'),
 
 oil_price_de = pd.DataFrame(data, index=[0])
 
-oil_price_de = oil_price_old_de.append(oil_price_de)
+oil_price_de = pd.concat([oil_price_old_de, oil_price_de], ignore_index = True)
 
 oil_price_de.drop_duplicates(subset='Date', keep='last', inplace=True)
 
@@ -406,7 +406,7 @@ else:
 data = {'Date': date_,
         'Close': close}
 smi = pd.DataFrame(data, index=[0])
-smi = smi_old.append(smi)
+smi = pd.concat([smi_old, smi], ignore_index = True)
 smi.drop_duplicates(subset='Date', keep='last', inplace=True)
 smi.set_index('Date', inplace=True)
 smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
