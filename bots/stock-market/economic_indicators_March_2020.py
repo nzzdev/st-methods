@@ -13,9 +13,7 @@ import urllib.request
 import os
 import sys
 from fake_useragent import UserAgent
-import re
-import gettext
-import pycountry
+
 
 sys.path.append(os.path.dirname((os.path.dirname(__file__))))
 
@@ -24,19 +22,19 @@ os.chdir(os.path.dirname(__file__))
 
 # TomTom
 
-tomtom = pd.read_csv(
-    'https://raw.githubusercontent.com/ActiveConclusion/COVID19_mobility/master/tomtom_reports/tomtom_trafic_index.csv')
-ch = tomtom[(tomtom.country == 'Switzerland') & (tomtom.date >= '2019-01-01')]
-congestion_ch = ch[['date', 'congestion']].groupby(
-    'date').mean().rolling(7).mean()
-data = congestion_ch[(congestion_ch.index >= '2022-01-01')][['congestion']]
-update_chart(id='c77298787298e4fcae70369e03275be6', data=data)
+#tomtom = pd.read_csv(
+ #   'https://raw.githubusercontent.com/ActiveConclusion/COVID19_mobility/master/tomtom_reports/tomtom_trafic_index.csv')
+#ch = tomtom[(tomtom.country == 'Switzerland') & (tomtom.date >= '2019-01-01')]
+#congestion_ch = ch[['date', 'congestion']].groupby(
+ #   'date').mean().rolling(7).mean()
+#data = congestion_ch[(congestion_ch.index >= '2022-01-01')][['congestion']]
+#update_chart(id='c77298787298e4fcae70369e03275be6', data=data)
 
-de = tomtom[(tomtom.country == 'Germany') & (tomtom.date >= '2019-01-01')]
-congestion_de = de[['date', 'congestion']].groupby(
-    'date').mean().rolling(7).mean()
-data = congestion_de[(congestion_de.index >= '2022-01-01')][['congestion']]
-update_chart(id='5ac628c4bb388d36fb2f5cbc743f5f8b', data=data)
+#de = tomtom[(tomtom.country == 'Germany') & (tomtom.date >= '2019-01-01')]
+#congestion_de = de[['date', 'congestion']].groupby(
+ #   'date').mean().rolling(7).mean()
+#data = congestion_de[(congestion_de.index >= '2022-01-01')][['congestion']]
+#update_chart(id='5ac628c4bb388d36fb2f5cbc743f5f8b', data=data)
 
 
 # LKW
