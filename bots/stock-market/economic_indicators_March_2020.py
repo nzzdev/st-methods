@@ -218,7 +218,7 @@ fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
 fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')
 
 data = {'date': date.today().strftime('%Y-%m-%d'),
-        '2019': 1.6,
+        'Jahresdurchschnitt 2019': 1.6,
         '2022': price_95
         }
 
@@ -229,7 +229,7 @@ fuel_prices = pd.concat([fuel_prices_old, fuel_prices], ignore_index = True)
 fuel_prices.drop_duplicates(subset='date', keep='last', inplace=True)
 
 data = {'Date': date.today().strftime('%Y-%m-%d'),
-        '2019': 1.4005,
+        'Jahresdurchschnitt 2019': 1.4005,
         '2022': price_e10
         }
 
@@ -246,9 +246,9 @@ fuel_prices_de.index = pd.to_datetime(
     fuel_prices_de.index).strftime('%Y-%m-%d')
 
 update_chart(id='1dda540238574eac80e865faa0d4aaba',
-             data=fuel_prices[['2019', '2022']])
+             data=fuel_prices[['Jahresdurchschnitt 2019', '2022']])
 update_chart(id='5ac628c4bb388d36fb2f5cbc745073c6',
-             data=fuel_prices_de[['2019', '2022']])
+             data=fuel_prices_de[['Jahresdurchschnitt 2019', '2022']])
 
 fuel_prices.to_csv(f'./Benzinpreise.csv')
 fuel_prices_de.to_csv(f'./Benzinpreise_de.csv')
@@ -274,7 +274,7 @@ oil_price_old = pd.read_csv('./oil_price.csv')
 oil_price_old_de = pd.read_csv('./oil_price_de.csv')
 
 data = {'Datum': date.today().strftime('%Y-%m-%d'),
-        '2019': 89.62,
+        'Jahresdurchschnitt 2019': 89.62,
         '2022': price}
 
 oil_price = pd.DataFrame(data, index=[0])
@@ -284,7 +284,7 @@ oil_price = pd.concat([oil_price_old, oil_price], ignore_index = True)
 oil_price.drop_duplicates(subset='Datum', keep='last', inplace=True)
 
 data = {'Date': date.today().strftime('%Y-%m-%d'),
-        '2019': 65.77,
+        'Jahresdurchschnitt 2019': 65.77,
         '2022': price_de}
 
 oil_price_de = pd.DataFrame(data, index=[0])
@@ -299,9 +299,9 @@ oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
 oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
 
 update_chart(id='b1717dcaee838699497b647ebbc25935',
-             data=oil_price[['2019', '2022']])
+             data=oil_price[['Jahresdurchschnitt 2019', '2022']])
 update_chart(id='5ac628c4bb388d36fb2f5cbc746a7cb6',
-             data=oil_price_de[['2019', '2022']])
+             data=oil_price_de[['Jahresdurchschnitt 2019', '2022']])
 
 oil_price.to_csv(f'./oil_price.csv')
 oil_price_de.to_csv(f'./oil_price_de.csv')
@@ -328,13 +328,13 @@ dax.index = dax.index.strftime('%Y-%m-%d')
 update_chart(id='a78c9d9de3230aea314700dc582d873d', data=dax[['^GDAXI']])
 
 wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].to_frame().dropna()
-wheat['2019'] = df['Close']['KE=F'][(
+wheat['Jahresdurchschnitt 2019'] = df['Close']['KE=F'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 wheat.rename(columns={wheat.columns[0]: '2022'}, inplace=True)
-wheat = wheat[['2019', '2022']]
+wheat = wheat[['Jahresdurchschnitt 2019', '2022']]
 wheat.index = wheat.index.strftime('%Y-%m-%d')
 update_chart(id='b1717dcaee838699497b647ebbceda21',
-             data=wheat[['2019', '2022']])
+             data=wheat[['Jahresdurchschnitt 2019', '2022']])
 
 """
 gas = df['Close']['TTF=F'][df.index >= '2022-01-01'].to_frame().dropna()
@@ -370,12 +370,12 @@ df_gas.index = df_gas.index.strftime('%Y-%m-%d')
 update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas)
 
 oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna()
-oil['2019'] = df['Close']['BZ=F'][(
+oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 oil.rename(columns={oil.columns[0]: '2022'}, inplace=True)
-oil = oil[['2019', '2022']]
+oil = oil[['Jahresdurchschnitt 2019', '2022']]
 oil.index = oil.index.strftime('%Y-%m-%d')
-update_chart(id='c6aec0c9dea84bcdef43b980cd4a7e3f', data=oil[['2019', '2022']])
+update_chart(id='c6aec0c9dea84bcdef43b980cd4a7e3f', data=oil[['Jahresdurchschnitt 2019', '2022']])
 
 bitcoin = df['Close']["BTC-USD"].to_frame().dropna().round(1)
 bitcoin = bitcoin[['BTC-USD']]
