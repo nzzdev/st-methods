@@ -107,6 +107,8 @@ df_worldmap['Country'] = df_worldmap['Country'].str.replace(
     'Iran, Islamic Republic of', 'Iran')
 df_worldmap['Country'] = df_worldmap['Country'].str.replace(
     'Bahamas','The Bahamas')
+df_worldmap['Country'] = df_worldmap['Country'].str.replace(
+        'Serbia','Republic of Serbia')
 
 # merge df with ids
 df_worldmap = df_worldmap.rename(columns={'Country': 'ID', 'Total': 'Wert'})
