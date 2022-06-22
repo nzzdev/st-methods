@@ -36,7 +36,7 @@ if __name__ == '__main__':
         df_diesel.index = pd.to_datetime(df_diesel.index)
         timestamp_str = df_diesel.tail(1).index.item().strftime('%-d. %-m. %Y')
         df_diesel.index = df_diesel.index.strftime('%Y-%m-%d')
-        notes_chart = '¹ Durchschnitt oberstes und unterstes Dezentil von rund 15 000 Tankstellen.<br>Stand: ' + timestamp_str
+        notes_chart = '¹ Durchschnitt oberstes und unterstes Dezil von rund 15 000 Tankstellen.<br>Stand: ' + timestamp_str
 
         # rename column headers
         df_diesel = df_diesel.rename(
