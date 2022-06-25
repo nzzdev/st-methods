@@ -211,6 +211,8 @@ if __name__ == '__main__':
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
+            dfavg = dfavg.rolling(window=7).mean(
+            ).dropna()  # 7-day mvg average
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             # update chart with averages
@@ -223,6 +225,8 @@ if __name__ == '__main__':
             dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife.<br>Stand: ' + \
                 str(time_str_notes)
+            dfavg = dfavg.rolling(window=7).mean(
+            ).dropna()  # 7-day mvg average
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
