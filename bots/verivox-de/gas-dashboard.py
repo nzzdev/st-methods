@@ -147,7 +147,7 @@ if __name__ == '__main__':
         file = [{
             "loadSyncBeforeInit": True,
             "file": {
-                "path": "./verivox-de/data/dashboard_de.json"
+                "path": "./data/dashboard_de.json"
             }
         }]
 
