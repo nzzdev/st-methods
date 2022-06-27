@@ -122,26 +122,25 @@ if __name__ == '__main__':
             columns={df.columns[3]: 'value'}).to_dict(orient='records')
 
         # additional data for JSON file
-        # string version for 'compact' dashboard
-        """
-        # change decimal seperator
-        diff_gas = diff_gas.astype(str).replace('.', ',')
-        diff_super = diff_super.astype(str).replace('.', ',')
+        # y-axis start and ticks
+        storage_y = 0  # if y-axis starts at 0: value is optional
+        gas_y = 10
+        super_y = 1.4
+        storage_ytick = [0, 25, 50, 75, 100]
+        gas_ytick = [10, 15, 20, 25]
+        super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
-        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 80% am 1.10.',
-                        'value': f'{diff_storage}% voll', 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
-        meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': '7-Tage-Schnitt',
-                    'value': f'{diff_gas} Cent', 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'Tagesschnitt',
-                      'value': f'{diff_super} Euro', 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
-        """
-        # float version for 'normal' dashboard
-        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 80% am 1.10.',
-                        'value': diff_storage, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
-        meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': 'Cent je kWh',
-                    'value': diff_gas, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'Euro je Liter',
-                      'value': diff_super, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
+        # change decimal seperator
+        diff_storage_str = diff_storage.astype(int)
+        diff_gas_str = diff_gas.astype(str).replace('.', ',')
+        diff_super_str = diff_super.astype(str).replace('.', ',')
+
+        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 80% am 1.10.', 'value': diff_storage,
+                        'valueLabel': f'{diff_storage_str}%', 'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
+        meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': 'Cent je kWh', 'value': diff_gas,
+                    'valueLabel': f'{diff_gas_str}', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
+        meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'Euro je Liter', 'value': diff_super,
+                      'valueLabel': f'{diff_super_str}', 'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
 
         # merge dictionaries
         meta_storage['chartData'] = dict_storage
