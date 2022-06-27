@@ -89,7 +89,7 @@ if __name__ == '__main__':
         trend_storage = df_meta['Trend Speicher']
         trend_gas = df_meta['Trend Gas']
         trend_super = df_meta['Trend Benzin']
-        diff_storage = df_meta['Gasspeicher'].astype(int)
+        diff_storage = df_meta['Gasspeicher']
         diff_gas = df_gas['Gaspreis'].iloc[-1]
         diff_super = df_meta['Benzinpreis']
 
