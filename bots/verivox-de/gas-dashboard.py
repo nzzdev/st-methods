@@ -135,12 +135,12 @@ if __name__ == '__main__':
         diff_gas_str = diff_gas.astype(str).replace('.', ',')
         diff_super_str = diff_super.astype(str).replace('.', ',')
 
-        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 80% am 1.10.', 'value': diff_storage,
-                        'valueLabel': f'{diff_storage_str}%', 'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
-        meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': 'Cent je kWh', 'value': diff_gas,
-                    'valueLabel': f'{diff_gas_str}', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'Euro je Liter', 'value': diff_super,
-                      'valueLabel': f'{diff_super_str}', 'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
+        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 80% am 1.10.', 'value': diff_storage, 'valueLabel': f'{diff_storage_str}% voll',
+                        'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
+        meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': 'Cent je kWh', 'value': diff_gas, 'valueLabel': f'{diff_gas_str}',
+                    'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
+        meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'Euro je Liter', 'value': diff_super, 'valueLabel': f'{diff_super_str}',
+                      'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
 
         # merge dictionaries
         meta_storage['chartData'] = dict_storage
@@ -160,8 +160,13 @@ if __name__ == '__main__':
             }
         }]
 
+        # add chart notes
+        today_str = today.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {today_str}. Pfeile: Veränderung zum Vortag, beim Sprit zur Vorwoche. Quellen: Agsi, Verivox, Bundeskartellamt'
+
         # run Q function
-        update_chart(id='38c6dc628d74a268a1d09ed8065f7803', files=file)
+        update_chart(id='38c6dc628d74a268a1d09ed8065f7803',
+                     files=file, notes=notes_chart)
 
         # delete all csv and geojson files
         dir = 'data/'
