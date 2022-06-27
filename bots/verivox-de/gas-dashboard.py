@@ -125,8 +125,8 @@ if __name__ == '__main__':
         # y-axis start and ticks
         storage_y = 0  # if y-axis starts at 0: value is optional
         gas_y = 10
-        super_y = 1.4
-        storage_ytick = [0, 25, 50, 75, 100]
+        super_y = 1.6
+        storage_ytick = [0, 20, 40, 60, 80]
         gas_ytick = [10, 15, 20, 25]
         super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
