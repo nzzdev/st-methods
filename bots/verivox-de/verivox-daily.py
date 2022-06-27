@@ -245,13 +245,6 @@ if __name__ == '__main__':
                                       'format=topojson', './data/de-postcode-geographic-1-5.json'], stdout=subprocess.PIPE)
         output = simplified.stdout.read()
 
-        # delete all csv and geojson files
-        dir = 'data/'
-        extracted = os.listdir(dir)
-        for item in extracted:
-            if item.endswith('.csv') or item.endswith('.geojson'):
-                os.remove(os.path.join(dir, item))
-
         # prepare some data for q.config.json
         data = [[
             "lastUpdatedAt",

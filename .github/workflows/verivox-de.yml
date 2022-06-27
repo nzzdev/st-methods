@@ -51,6 +51,7 @@ jobs:
           python smard-sources.py
           python bkarta-sprit.py
           python verivox-daily.py
+          python gas-dashboard.py
         env:
           VERIVOX_USERNAME: ${{ secrets.VERIVOX_USERNAME }}
           VERIVOX_PASSWORD: ${{ secrets.VERIVOX_PASSWORD }}

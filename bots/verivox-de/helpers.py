@@ -14,7 +14,7 @@ def download_data(url, headers=""):
     return s.get(url, headers=headers)
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options=""):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options="", files=[]):  # Q helper function
     # read qConfig file
     json_file = open('./q.config.json')
     qConfig = json.load(json_file)
@@ -37,6 +37,8 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
                             {'table': transformed_data})
                     else:
                         item.get('item').update({'data': transformed_data})
+                if len(files) > 0:
+                    item['item']['files'] = files
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
                 if options != '':
