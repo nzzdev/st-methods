@@ -356,7 +356,7 @@ booster <- vaccination %>%
 
 #title <- paste(head(booster$Land, 1), "ist mit den Booster-Impfungen schon weit fortgeschritten" )
 
-notes <- paste0("Länder mit mehr als 1 Million Einwohnern. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
+notes <- paste0("Länder mit mehr als 1 Million Einwohnern. Werte über 100 bedeuten, dass in den jeweiligen Ländern ein grosser Teil der Bevölkerung schon mehrere Booster erhalten hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(vaccination$Datum), format = "%d. %m. %Y")))
 update_chart(id = '33696d9875c026f74a2335377666f2b8', data = booster, notes = notes)
 
 
