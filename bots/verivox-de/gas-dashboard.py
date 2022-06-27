@@ -161,12 +161,11 @@ if __name__ == '__main__':
         }]
 
         # add chart notes
-        today_str = today.strftime('%-d. %-m. %Y')
-        notes_chart = f'Stand: {today_str}. Pfeile: Veränderung zum Vortag, beim Sprit zur Vorwoche. Quellen: Agsi, Verivox, Bundeskartellamt'
+        #today_str = today.strftime('%-d. %-m. %Y')
+        #notes_chart = f'Stand: {today_str}. Pfeile: Veränderung zum Vortag, beim Sprit zur Vorwoche. Quellen: Agsi, Verivox, Bundeskartellamt'
 
         # run Q function
-        update_chart(id='38c6dc628d74a268a1d09ed8065f7803',
-                     files=file, notes=notes_chart)
+        update_chart(id='38c6dc628d74a268a1d09ed8065f7803', files=file)
 
         # delete all csv and geojson files
         dir = 'data/'
