@@ -33,7 +33,7 @@ if __name__ == '__main__':
         df = pd.DataFrame(full_data['bars'], columns=['Datum', 'Kosten'])
         df['Datum'] = pd.to_datetime(df['Datum'])
         df.set_index('Datum', inplace=True)
-        df = df['Kosten'][df.index >= '2021-09-01'].to_frame().dropna()
+        df = df['Kosten'][df.index >= '2021-01-01'].to_frame().dropna()
 
         # create date for chart notes
         timecode = df.index[-1]
