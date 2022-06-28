@@ -37,6 +37,7 @@ if __name__ == '__main__':
         # rename columns and remove dates before 2022-01-01
         df_gas_mean = df_gas_mean[(
             df_gas_mean.index.get_level_values(0) >= '2022-01-01')]
+        df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2022-01-01')]
         df_storage.index = df_storage.index.rename('date')
         df_storage = df_storage.rename(columns={'2022': 'Gasspeicher'})
         df_super.index = df_super.index.rename('date')
@@ -49,7 +50,7 @@ if __name__ == '__main__':
         df_gas_mean = (df_gas_mean / 200).round(2)
 
         # merge dataframes
-        df = pd.concat([df_storage, df_gas_mean, df_super], axis=1)
+        df = pd.concat([df_storage, df_gas, df_super], axis=1)
 
         # create temporary dataframe for old data in gas storage
         df_temp = df.copy().tail(90)
