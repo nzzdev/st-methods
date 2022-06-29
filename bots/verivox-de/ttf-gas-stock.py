@@ -41,7 +41,7 @@ if __name__ == '__main__':
         notes_chart = 'Stand: ' + timecode_str
 
         # convert DatetimeIndex
-        df.index = df.index.strftime('%Y-%m-%d')
+        #df.index = df.index.strftime('%Y-%m-%d')
 
         # run Q function
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd',
