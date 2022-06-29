@@ -67,5 +67,6 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
 
     # write qConfig file
     with open('../q.config.json', 'w', encoding='utf-8') as json_file:
-        json.dump(qConfig, json_file, ensure_ascii=False, indent=1)
+        json.dump(qConfig, json_file, ensure_ascii=False,
+                  indent=1, default=str)
     json_file.close()

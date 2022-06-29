@@ -165,7 +165,7 @@ if __name__ == '__main__':
         notes_chart_de = 'Stand: ' + timecode_str
 
         # convert DatetimeIndex to string
-        df_de.index = df_de.index.strftime('%Y-%m-%d')
+        #df_de.index = df_de.index.strftime('%Y-%m-%d')
 
         # run Q function
         update_chart(id='1203f969609d721f3e48be4f2689fc53',

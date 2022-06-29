@@ -99,7 +99,7 @@ if __name__ == '__main__':
             df = df.div(1000000)
 
             # convert DatetimeIndex to string
-            df.index = df.index.strftime('%Y-%m-%d')
+            #df.index = df.index.strftime('%Y-%m-%d')
 
             # run Q function
             update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',

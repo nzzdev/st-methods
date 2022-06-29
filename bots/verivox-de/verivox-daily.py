@@ -207,7 +207,7 @@ if __name__ == '__main__':
                 dfavg.interpolate(inplace=True)  # fill NaN with values
                 dfavg = dfavg.round(0).astype(int)
 
-            dfavg.index = dfavg.index.strftime('%Y-%m-%d')
+            #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung).<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
@@ -222,7 +222,7 @@ if __name__ == '__main__':
             time_dt_notes = dfavg['date'].iloc[-1]
             time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
-            dfavg.index = dfavg.index.strftime('%Y-%m-%d')
+            #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung).<br>Stand: ' + \
                 str(time_str_notes)
             dfavg = dfavg.rolling(window=7).mean(

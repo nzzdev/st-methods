@@ -125,7 +125,7 @@ if __name__ == '__main__':
         df.rename(columns={'Min': ''}, inplace=True)
         df['2022'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
-        df.index = df.index.strftime('%Y-%m-%d')
+        #df.index = df.index.strftime('%Y-%m-%d')
 
         notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
         title_perc = dfnew['2022'].iloc[-1].round(0).astype(int)
