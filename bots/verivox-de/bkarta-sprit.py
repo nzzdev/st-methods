@@ -45,8 +45,10 @@ if __name__ == '__main__':
             {'tages_mittel_min_10': '', 'tages_mittel_max_10': 'Höchster/niedrigster Preis¹', 'tages_mittel': 'Bundesschnitt'}, axis=1)
 
         # get current price for chart title
-        price_d = df_diesel['Bundesschnitt'].iloc[-1].round(2).astype(str)
-        price_s = df_super['Bundesschnitt'].iloc[-1].round(2).astype(str)
+        price_d = df_diesel['Bundesschnitt'].iloc[-1].round(
+            2).astype(str).replace('.', ',')
+        price_s = df_super['Bundesschnitt'].iloc[-1].round(
+            2).astype(str).replace('.', ',')
         title_chart_d = f'Diesel kostet im Schnitt {price_d} Euro je Liter'
         title_chart_s = f'Benzin kostet im Schnitt {price_s} Euro je Liter'
 
