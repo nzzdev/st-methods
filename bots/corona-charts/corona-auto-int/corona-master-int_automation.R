@@ -434,7 +434,7 @@ all_cum <- rolling_average_all %>%
   summarise(all_cases = sum(all_cases),
             dead = sum(dead)) %>%
   mutate(all_cases_pop = round(all_cases/(pop/100000), 1))  %>%
-  mutate(dead_pop = round(dead/(pop/100000),1))
+  mutate(dead_pop = round(dead/(pop/1000000),1))
 
 all_cum_cases <- all_cum %>%
   arrange(desc(all_cases_pop)) %>%
@@ -489,7 +489,7 @@ cases_countries <- rolling_average_all %>%
   arrange(desc(ravg_cases_pop)) %>%
   dplyr::rename(`Neue Fälle` = ravg_cases_pop)
 
-notes <- paste0("Berücksichtigt werden Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
+notes <- paste0("Berücksichtigt werden Länder mit mehr als 1 Million Einwohnern, wenn der 7-Tage-Schnitt grösser 0 ist. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'aa6f47afcb5960d3151eefaa3ef6bba7', data = cases_countries, notes = notes)
 
@@ -564,7 +564,7 @@ deaths_countries <- rolling_average_all %>%
   dplyr::rename(`Neue Todesfälle` = ravg_deaths_pop) 
 
 
-notes <- paste0("Berücksichtigt werden Länder mit mehr als 1 Million Einwohnern. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
+notes <- paste0("Berücksichtigt werden Länder mit mehr als 1 Million Einwohnern, wenn der 7-Tage-Schnitt grösser 0 ist. Als sinkend bzw. steigend gilt eine Entwicklung, wenn der aktuelle Wert im Vergleich zum Maximalwert des Landes in den letzten 14 Tagen um 5 Prozentpunkte ab- bzw. zugenommen hat. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = '12c077ec9e34e0a0817527a6a302143b', data = deaths_countries, notes = notes)
 
