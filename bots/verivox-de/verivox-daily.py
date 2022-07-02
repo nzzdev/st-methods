@@ -245,9 +245,6 @@ if __name__ == '__main__':
         simplified = subprocess.Popen(['mapshaper', './data/nzz-gas-strom.geojson', '-proj', 'crs="EPSG:4326"', '-o',
                                       'format=topojson', './data/de-postcode-geographic-1-5.json'], stdout=subprocess.PIPE)
         output = simplified.stdout.read()
-        simplified = subprocess.Popen(['mapshaper', './data/nzz-gas-strom.geojson', '-proj', 'crs="EPSG:4326"', '-o',
-                                      'format=topojson', './data/de-postcode-geographic-1-5.topojson'], stdout=subprocess.PIPE)
-        output = simplified.stdout.read()
 
         # prepare some data for q.config.json
         data = [[
