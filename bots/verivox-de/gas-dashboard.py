@@ -151,6 +151,7 @@ if __name__ == '__main__':
         dicts.append(meta_storage)
         dicts.append(meta_gas)
         dicts.append(meta_super)
+        print(dicts)
 
         with open('./data/dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, indent=4)
