@@ -216,7 +216,7 @@ if __name__ == '__main__':
                      timestamp_str, data=data, options=get_options(corona_rules_set))
         """
         update_chart(id='590776db9b66058b024b8dff27bfb8f6',
-                     data=dfde, notes='Stand: ' + timestamp_str)
+                     data=dfde, notes=f'Stand: {timestamp_str}<br>Wegen des starken Meldeverzugs zeigt die NZZ nur die Zahlen der vergangenen Woche.')
 
     except:
         raise
