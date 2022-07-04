@@ -140,6 +140,9 @@ if __name__ == '__main__':
         timestamp_dt = datetime.strptime(today, '%Y-%m-%d')
         timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
 
+        # temporary fix for missing Nowcast: remove last 7 days from RKI values
+        dfde.drop(dfde.tail(7).index, inplace=True)
+
         """
         # set Nowcast source (current day)
         for i in range(1, 4):
