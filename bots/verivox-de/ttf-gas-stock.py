@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
         # get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
         fheaders = {'user-agent': generate_user_agent()}
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5396828&historicalSpan=3'
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5408202&historicalSpan=3'
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
