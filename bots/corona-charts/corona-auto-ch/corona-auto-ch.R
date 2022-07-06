@@ -36,7 +36,7 @@ ww_zh_comb <- ww_zh_0 %>%
   full_join(ww_zh, by = "date") %>%
   rename("Gemessene Gensequenzen (in 100 Milliarden)" = old, 
          "Gemessene Gensequenzen (neue Messmethode*)" = new,
-         "Neuinfektionen" = cases)
+         "Fallzahlen" = cases)
 
 update_chart(id = "ae2fa42664db4ab375dba744d0706269", 
              data = ww_zh_comb)
