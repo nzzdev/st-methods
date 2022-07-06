@@ -501,7 +501,9 @@ ww_bag_mean <- ww_bag_stations %>%
   select(date, mean) %>%
   full_join(bag_cases_ravg, by = c("date" = "datum")) %>%
   filter(date >= "2022-02-10") %>%
-  rename("Datum" = date, "Fallzahlen" = ravg_cases, " Viruslast im Abwasser (Gensequenzen in Milliarden)*")
+  select("Datum" = date, 
+         "Fallzahlen" = ravg_cases, 
+         "Viruslast im Abwasser (Gensequenzen in Milliarden)*" = mean)
 
 update_chart(id = "eaf294e8d0fac38bd3261ab67be4d6fb",
              data = ww_bag_mean)
