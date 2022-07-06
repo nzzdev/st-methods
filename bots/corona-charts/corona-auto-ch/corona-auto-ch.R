@@ -415,14 +415,16 @@ bag_inf <- bag_total %>% select(datum, `gegenwärtig Infizierte`)
 update_chart(id = "9c87f52098e02f80740ec4a3743615b2", 
              data = bag_inf)
 
-#Rolling average of cases
+#### Rolling average of cases ####
+
 bag_cases_ravg <- bag_cases %>%
   filter(geoRegion == 'CHFL', datum <= last(datum)-2) %>%
   mutate(ravg_cases = round(rollmean(entries, 7, fill = 0, align = "right"),0)) %>%
-  select("datum", "ravg_cases") 
+  select("datum", "ravg_cases")
 
 #q-cli update
 update_chart(id = "93b53396ee7f90b1271f620a0472c112", data = bag_cases_ravg)
+
 
 # Tests (Antigen and PCR), absolute number
 
@@ -486,8 +488,25 @@ bag_kanton_choro_notes <- paste0("Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(m
 
 update_chart(id = "a2fc71a532ec45c64434712991efb41f", data = bag_kanton_choro, notes = bag_kanton_choro_notes)
 
+#### Wastewater BAG ####
 
-### Hospitalisierungen und Todesfälle
+ww_bag_stations <- read_csv(bag_data$sources$individual$csv$wasteWater$viralLoad)
+
+ww_bag_mean <- ww_bag_stations %>%
+  select(date, name, vl_mean7d) %>%
+  spread(name, vl_mean7d) %>%
+  mutate(count_na = rowSums(is.na(.))) %>%
+  filter(count_na < 25) %>%
+  mutate(mean = round(rowMeans(.[2:100], na.rm = T)/1000000000)) %>%
+  select(date, mean) %>%
+  full_join(bag_cases_ravg, by = c("date" = "datum")) %>%
+  filter(date >= "2022-02-10") %>%
+  rename("Datum" = date, "Fallzahlen" = ravg_cases, " Viruslast im Abwasser (Gensequenzen in Milliarden)*")
+
+update_chart(id = "eaf294e8d0fac38bd3261ab67be4d6fb",
+             data = ww_bag_mean)
+
+#### Hospitalisierungen und Todesfälle ####
 
 # Absolut 
 roll_ch_bag_death_hosp <- bag_cases %>%
