@@ -41,10 +41,9 @@ os.chdir(os.path.dirname(__file__))
 zurich = pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv')
 zurich['date'] = zurich['MessungDatZeit'].str[:10]
 zurich['date'] = pd.to_datetime(zurich['date'], format = '%Y-%m-%d')
-zurich = zurich.set_index('date')
+zurich.set_index('date', inplace = True)
 zurich = zurich.groupby(zurich.index)['AnzFahrzeuge'].sum().rolling(7).mean()
 
-zurich.set_index('date', inplace = True)
 zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
 
 update(id='5b6e24348e8d8ddd990c10892047973d', data = zurich[['AnzFahrzeuge']])
