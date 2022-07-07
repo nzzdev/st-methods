@@ -42,7 +42,8 @@ zurich = pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaeh
 zurich['date'] = zurich['MessungDatZeit'].str[:10]
 zurich['date'] = pd.to_datetime(zurich['date'], format = '%Y-%m-%d')
 zurich.set_index('date', inplace = True)
-zurich = zurich.groupby(zurich.index)['AnzFahrzeuge'].sum().rolling(7).mean()
+zurich = zurich.groupby(zurich.index)['AnzFahrzeuge'].sum().rolling(7).mean().reset_index()
+zurich.set_index('date', inplace = True)
 
 zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
 
