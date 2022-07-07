@@ -46,7 +46,7 @@ zurich = zurich.groupby(zurich.index)['AnzFahrzeuge'].sum().rolling(7).mean()
 
 zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
 
-update(id='5b6e24348e8d8ddd990c10892047973d', data = zurich[['AnzFahrzeuge']])
+update_chart(id='5b6e24348e8d8ddd990c10892047973d', data = zurich[['AnzFahrzeuge']])
 
 
 
