@@ -361,7 +361,7 @@ update_chart(id='1dda540238574eac80e865faa0ddbafc', data=gas[['2019', '2022']])
 """
 
 # get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
-url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5396828&historicalSpan=3'
+url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5408202&historicalSpan=3'
 resp = requests.get(url)
 json_file = resp.text
 full_data = json.loads(json_file)

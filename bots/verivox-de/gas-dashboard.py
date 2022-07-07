@@ -113,14 +113,14 @@ if __name__ == '__main__':
         #df['Gasspeicher'] = df['Gasspeicher'].fillna(0).astype(int).astype(str)
         #df['Gasspeicher'] = df['Gasspeicher'].replace(['0', '0.0'], '')
 
-        # create dictionaries for JSON file
+        # create dictionaries for JSON file and drop NaN
         dict_storage = df_storage.rename(
             columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
         # dict_gas = df_gas.rename(columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
-        dict_gas = df.drop(df.columns[[1, 3]], axis=1).rename(
-            columns={df.columns[2]: 'value'}).to_dict(orient='records')  # 7-day mvg avg
         dict_super = df.drop(df.columns[[1, 2]], axis=1).rename(
             columns={df.columns[3]: 'value'}).to_dict(orient='records')
+        dict_gas = df.drop(df.columns[[1, 3]], axis=1).rename(
+            columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')  # 7-day mvg avg
 
         # additional data for JSON file
         # y-axis start and ticks

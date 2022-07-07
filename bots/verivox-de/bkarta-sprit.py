@@ -1,6 +1,8 @@
 import os
 import pandas as pd
 import subprocess
+from datetime import datetime
+from dateutil import tz
 
 if __name__ == '__main__':
     try:
@@ -35,8 +37,11 @@ if __name__ == '__main__':
         # get date for chart notes
         df_diesel.index = pd.to_datetime(df_diesel.index)
         timestamp_str = df_diesel.tail(1).index.item().strftime('%-d. %-m. %Y')
+        tcode = tz.gettz('Europe/Berlin')
+        tcode_h = datetime.now(tcode)
+        tcode_h = tcode_h.strftime("%H. %M")
         #df_diesel.index = df_diesel.index.strftime('%Y-%m-%d')
-        notes_chart = '¹ Durchschnitt oberstes und unterstes Dezil von rund 15 000 Tankstellen.<br>Stand: ' + timestamp_str
+        notes_chart = f'¹ Durchschnitt oberstes und unterstes Dezil von rund 15 000 Tankstellen.<br>Stand: {timestamp_str}, {tcode_h} Uhr'
 
         # rename column headers
         df_diesel = df_diesel.rename(
