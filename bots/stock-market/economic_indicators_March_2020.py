@@ -36,6 +36,20 @@ os.chdir(os.path.dirname(__file__))
 #data = congestion_de[(congestion_de.index >= '2022-01-01')][['congestion']]
 #update_chart(id='5ac628c4bb388d36fb2f5cbc743f5f8b', data=data)
 
+# Zurich traffic
+
+zurich = pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv')
+zurich['date'] = zurich['MessungDatZeit'].str[:10]
+zurich['date'] = pd.to_datetime(zurich['date'], format = '%Y-%m-%d')
+zurich.set_index('date', inplace = True)
+zurich = zurich.groupby(zurich.index)['AnzFahrzeuge'].sum().rolling(7).mean().reset_index()
+zurich.set_index('date', inplace = True)
+
+zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
+
+update_chart(id='5b6e24348e8d8ddd990c10892047973d', data = zurich[['AnzFahrzeuge']])
+
+
 
 # LKW
 
