@@ -34,8 +34,11 @@ ww_zh <- read_delim("https://sensors-eawag.ch/sars/__data__/processed_normed_dat
 
 ww_zh_comb <- ww_zh_0 %>%
   full_join(ww_zh, by = "date") %>%
-  rename("Gemessene Gensequenzen (in 100 Milliarden)" = old, 
-         "Gemessene Gensequenzen (neue Messmethode*)" = new,
+  mutate(cases = cases*100/max(cases, na.rm = TRUE), 
+         old = old*100/max(new, na.rm = TRUE),
+         new = new*100/max(new, na.rm = TRUE)) %>%
+  rename("Viruslast (alte Methode)" = old, 
+         "Viruslast (neue Methode)" = new,
          "Fallzahlen" = cases)
 
 update_chart(id = "ae2fa42664db4ab375dba744d0706269", 
@@ -501,9 +504,11 @@ ww_bag_mean <- ww_bag_stations %>%
   select(date, mean) %>%
   full_join(bag_cases_ravg, by = c("date" = "datum")) %>%
   filter(date >= "2022-02-10") %>%
+ mutate(ravg_cases = ravg_cases*100/max(ravg_cases), 
+        mean = mean*100/max(mean, na.rm = TRUE)) %>%
   select("Datum" = date, 
          "Fallzahlen" = ravg_cases, 
-         "Viruslast im Abwasser (Gensequenzen in Milliarden)*" = mean)
+         "Viruslast im Abwasser" = mean)
 
 update_chart(id = "eaf294e8d0fac38bd3261ab67be4d6fb",
              data = ww_bag_mean)
