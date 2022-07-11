@@ -173,3 +173,34 @@ for i in range(number):
 provision['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 provision = provision[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 provision.to_excel(f'./output/provision_coop_' + date + '.xlsx', index = False)
+
+# Süsses & Snacks
+url = 'https://www.coop.ch/de/lebensmittel/suesses-snacks/c/m_2506?q=%3Arelevance&sort=relevance&pageSize=60&page=1'
+page = requests.get(url)
+soup = BeautifulSoup(page.content, "html.parser")
+# get number of last pagination page
+number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
+
+prices = []
+units = []
+provision = pd.DataFrame()
+
+for i in range(number):
+    url = 'https://www.coop.ch/de/lebensmittel/suesses-snacks/c/m_2506?q=%3Arelevance&sort=relevance&pageSize=60&page=' + str(i+1)
+    page = requests.get(url)
+    soup = BeautifulSoup(page.content, "html.parser")
+    meta_json = str(soup.find_all("meta")[15])
+    meta_json = meta_json.replace('<meta data-pagecontent-json=\'', '').replace('\'/>', '')
+    data = json.loads(meta_json)
+    
+    # get prices from all products
+
+    df = pd.DataFrame.from_dict(data['anchors'][0]['json']['elements'], orient = 'columns')
+
+    provision = provision.append(df)
+    provision.reset_index(drop = True, inplace = True)
+
+provision['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+provision = provision[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+provision.to_excel(f'./output/sweet_coop_' + date + '.xlsx', index = False)
+
