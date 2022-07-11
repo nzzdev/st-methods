@@ -264,35 +264,6 @@ products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 products.to_excel(f'./output/house_coop_' + date + '.xlsx', index = False)
 
-# Haushalt
-url = 'https://www.coop.ch/de/haushalt-tier/haushalt-kueche/c/m_0298?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url)
-soup = BeautifulSoup(page.content, "html.parser")
-# get number of last pagination page
-number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
-
-prices = []
-units = []
-products = pd.DataFrame()
-
-for i in range(number):
-    url = 'https://www.coop.ch/de/haushalt-tier/haushalt-kueche/c/m_0298?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=' + str(i+1)
-    page = requests.get(url)
-    soup = BeautifulSoup(page.content, "html.parser")
-    meta_json = str(soup.find_all("meta")[15])
-    meta_json = meta_json.replace('<meta data-pagecontent-json=\'', '').replace('\'/>', '')
-    data = json.loads(meta_json)
-    
-    # get prices from all products
-
-    df = pd.DataFrame.from_dict(data['anchors'][0]['json']['elements'], orient = 'columns')
-
-    products = products.append(df)
-    products.reset_index(drop = True, inplace = True)
-
-products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
-products.to_excel(f'./output/house_coop_' + date + '.xlsx', index = False)
 
 
 # Reinigen
@@ -445,7 +416,7 @@ for i in range(number):
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
-products.to_excel(f'./output/office_electronics_' + date + '.xlsx', index = False)
+products.to_excel(f'./output/electronics_' + date + '.xlsx', index = False)
 
 # Bekleidung
 url = 'https://www.coop.ch/de/haushalt-tier/bekleidung/c/m_4145?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
