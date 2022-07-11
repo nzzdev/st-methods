@@ -261,7 +261,7 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText', 'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/house_coop_' + date + '.xlsx', index = False)
 
 
@@ -293,7 +293,7 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText', 'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/clean_coop_' + date + '.xlsx', index = False)
 
 
@@ -324,7 +324,7 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'timestamp']]
 products.to_excel(f'./output/wash_coop_' + date + '.xlsx', index = False)
 
 # Toilettenpapier
@@ -354,7 +354,7 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/toilet_coop_' + date + '.xlsx', index = False)
 
 
@@ -385,7 +385,7 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'timestamp']]
 products.to_excel(f'./output/office_coop_' + date + '.xlsx', index = False)
 
 # Elektro
@@ -415,7 +415,7 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText', 'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/electronics_' + date + '.xlsx', index = False)
 
 # Bekleidung
@@ -445,7 +445,7 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/clothes_' + date + '.xlsx', index = False)
 
 
