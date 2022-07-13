@@ -397,10 +397,10 @@ bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
   mutate(Infizierte = sumTotal.x - sumTotal.y) %>%
   rename("Tote" = `sumTotal.y`) %>%
   select("datum", "Infizierte", "Tote") %>%
-  mutate(`Genesene (Schätzung)` = ((lag(Infizierte,10, default = 0)) * 0.75) + 
-           ((lag(Infizierte,20, default = 0)) * 0.10) + 
-           ((lag(Infizierte,30, default = 0)) * 0.10) +
-           ((lag(Infizierte,40, default = 0)) * 0.05)) %>%
+  mutate(`Genesene (Schätzung)` = ((lag(Infizierte,14, default = 0)) * 0.75) + 
+           ((lag(Infizierte,21, default = 0)) * 0.10) + 
+           ((lag(Infizierte,28, default = 0)) * 0.10) +
+           ((lag(Infizierte,42, default = 0)) * 0.05)) %>%
   mutate(`gegenwärtig Infizierte` = Infizierte -`Genesene (Schätzung)`) %>%
   select("datum", "Tote", "gegenwärtig Infizierte", "Genesene (Schätzung)")
 
