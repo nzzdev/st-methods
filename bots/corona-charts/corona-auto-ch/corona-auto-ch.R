@@ -37,7 +37,7 @@ ww_zh_comb <- ww_zh_0 %>%
   mutate(cases = cases*100/max(cases, na.rm = TRUE), 
          old = old*100/max(new, na.rm = TRUE),
          new = new*100/max(new, na.rm = TRUE)) %>%
-  rename("Viruslast (alte Methode)" = old, 
+  rename("Viruslast (alte Methoden)" = old, 
          "Viruslast (neue Methode)" = new,
          "Fallzahlen" = cases)
 
@@ -70,7 +70,7 @@ bfs_old <- read.csv2(text=paste0(head(readLines('https://www.bfs.admin.ch/bfssta
 bfs_all <- rbind(bfs_old, bfs) %>%  
   filter(Datum >= '2015-01-01', Alter == "65+") %>%
   select(-Alter, -Diff) %>%
-  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "erwartete Bandbreite" = "obeGrenze")
+  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "Erwartete Bandbreite" = "obeGrenze")
 
 ## Neuster Stand für die Q Grafik
 
@@ -508,7 +508,7 @@ ww_bag_mean <- ww_bag_stations %>%
         mean = mean*100/max(mean, na.rm = TRUE)) %>%
   select("Datum" = date, 
          "Fallzahlen" = ravg_cases, 
-         "Viruslast im Abwasser" = mean)
+         "Viruslast im Abwasser (Durchschnitt aller Messtationen)" = mean)
 
 update_chart(id = "eaf294e8d0fac38bd3261ab67be4d6fb",
              data = ww_bag_mean)
