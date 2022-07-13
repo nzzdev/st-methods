@@ -397,14 +397,12 @@ bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
   mutate(Infizierte = sumTotal.x - sumTotal.y) %>%
   rename("Tote" = `sumTotal.y`) %>%
   select("datum", "Infizierte", "Tote") %>%
-  mutate(`Genesene (Schätzung)` = (lag(Infizierte,10, default = 0)) ) %>%
-    #`Genesene (Schätzung)` = ((lag(Infizierte,10, default = 0)) * 0.75) + 
-     #      ((lag(Infizierte,20, default = 0)) * 0.10) + 
-      #     ((lag(Infizierte,30, default = 0)) * 0.10) +
-       #    ((lag(Infizierte,40, default = 0)) * 0.05)) %>%
+  mutate(`Genesene (Schätzung)` = ((lag(Infizierte,10, default = 0)) * 0.75) + 
+           ((lag(Infizierte,20, default = 0)) * 0.10) + 
+           ((lag(Infizierte,30, default = 0)) * 0.10) +
+           ((lag(Infizierte,40, default = 0)) * 0.05)) %>%
   mutate(`gegenwärtig Infizierte` = Infizierte -`Genesene (Schätzung)`) %>%
   select("datum", "Tote", "gegenwärtig Infizierte", "Genesene (Schätzung)")
-
 
 bag_total_title <- paste0(gsub('\\.', ',' ,toString(round(sum(tail(bag_total[,2:4], 1))/1000000, 1))), " Millionen bestätigte Infektionen und ", toString(tail(bag_total$Tote, 1)), " Todesfälle in der Schweiz")
 
