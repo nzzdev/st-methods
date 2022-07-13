@@ -323,21 +323,21 @@ roll_ch_bag_death <- roll_ch_bag_death_hosp_dash %>%
  
 roll_ch_bag_cases_trend <- bag_cases_ravg %>%
   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 14, default = 0)) %>%
   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
                      diff_pct_max < -3 ~ 'fallend',
                      TRUE ~ 'gleichbleibend',))
  
 roll_ch_bag_hosp_trend <- roll_ch_bag_hosp %>%
   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 14, default = 0)) %>%
   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
                       diff_pct_max < -3 ~ 'fallend',
                       TRUE ~ 'gleichbleibend',))
  
 roll_ch_bag_death_trend <- roll_ch_bag_death %>%
   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 14, default = 0)) %>%
   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
                       diff_pct_max < -3 ~ 'fallend',
                       TRUE ~ 'gleichbleibend',))
