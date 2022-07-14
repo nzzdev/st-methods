@@ -361,7 +361,7 @@ forJson_2$chartData <- list(bag_cases_ravg %>% filter(date >= '2020-10-01'))
  
 forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
                   date = tmp_cases$datum,
-                  value = round(last(roll_ch_bag_death$value),1),
+                  value = round(last(roll_ch_bag_death$value)),
                   color = "#05032d",
                   trend = last(roll_ch_bag_death_trend$trend),
                   chartType = "area")
