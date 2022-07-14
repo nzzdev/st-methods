@@ -10,7 +10,7 @@ library(rvest)
 library(renv)
 
 # setwd for fixes
-# setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
+setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
 
 # import helper functions
@@ -689,7 +689,7 @@ bag_var_all <- bag_var %>%
   mutate(var = case_when(variant_type == "B.1.1.7"~ "Alpha",
                          variant_type == "B.1.617.2" ~ "Delta",
                          variant_type == "B.1.1.529" ~ "Omikron",
-                         variant_type == "other_lineages" ~ "Urtyp/andere Varianten",
+                         variant_type == "other_lineages" ~ "Urtyp / andere Varianten",
                          TRUE ~ "Weitere «relevante Virusvarianten»*")) %>%
   group_by(date, var) %>%
   summarise(prct = sum(prct)) %>%
@@ -697,9 +697,9 @@ bag_var_all <- bag_var %>%
   mutate(prct_7 = round(rollmean(prct, 7, fill = NA, align = "right"),1)) %>%
   select(date, var, prct_7) %>%
   spread(var,prct_7) %>%
-  mutate(`Urtyp/andere Varianten` = round(100-(Alpha+Delta+Omikron+`Weitere «relevante Virusvarianten»*`),1)) %>%
+  mutate(`Urtyp / andere Varianten` = round(100-(Alpha+Delta+Omikron+`Weitere «relevante Virusvarianten»*`),1)) %>%
   filter(date >= "2020-10-10") %>%
-  select(date, Alpha, Delta, Omikron, `Weitere «relevante Virusvarianten»*`, `Urtyp/andere Varianten`)
+  select(date, Alpha, Delta, Omikron, `Weitere «relevante Virusvarianten»*`, `Urtyp / andere Varianten`)
 
 update_chart(id = "396fd1e1ae7c6223217d80a9c5421999",
              data = bag_var_all)
@@ -840,6 +840,8 @@ id_rel_age_q <- id_rel_age %>%
   spread(vaccination_status, per100k) %>%
   select(altersklasse_covid19, not_vaccinated, fully_vaccinated) %>%
   filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt" & altersklasse_covid19 != "0 - 9")
+
+id_rel_age_q$altersklasse_covid19 <- str_replace_all(id_rel_age_q$altersklasse_covid19," - ","–")
 
 names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Mindestens zweimal geimpft")
 
@@ -1090,10 +1092,10 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
          n3 = COVID19FirstBoosterPersons-lag(COVID19FirstBoosterPersons,1))%>%
   mutate(Erstimpfungen = rollmean(n1, 7, NA, align = "right"),
          `Zweitimpfungen*` = rollmean(n2, 7, NA, align = "right"),
-         Boosterimpfungen = rollmean(n3, 7, NA, align = "right"))%>%
-  select(date, Erstimpfungen, `Zweitimpfungen*`, Boosterimpfungen)
+         `Booster-Impfungen` = rollmean(n3, 7, NA, align = "right"))%>%
+  select(date, Erstimpfungen, `Zweitimpfungen*`, `Booster-Impfungen`)
 
-ch_vacc_persons_hist_new$Boosterimpfungen[ch_vacc_persons_hist_new$Boosterimpfungen < 20] <- NA
+ch_vacc_persons_hist_new$`Booster-Impfungen`[ch_vacc_persons_hist_new$`Booster-Impfungen` < 20] <- NA
 
 update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae",
              data = ch_vacc_persons_hist_new)
