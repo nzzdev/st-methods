@@ -280,7 +280,6 @@ update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e",
              data = df_overview,
              subtitle = subtitle)
 
-
 ### Dashboard ###
 
 bag_cases_dash <- read_csv(bag_data$sources$individual$csv$daily$cases)%>%
@@ -309,7 +308,6 @@ roll_ch_bag_death_hosp_dash <- bag_deaths_dash %>%
   select("datum", "hosp_roll", "death_roll") %>%
   rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
  
- 
 roll_ch_bag_hosp <- roll_ch_bag_death_hosp_dash %>%
   select(datum, Hospitalierungen) %>%
   filter(datum >= '2020-10-01') %>%
@@ -319,7 +317,6 @@ roll_ch_bag_death <- roll_ch_bag_death_hosp_dash %>%
   select(datum, `Todesfälle`) %>%
   filter(datum >= '2020-10-01') %>%
   rename(date = datum, value = `Todesfälle`)
- 
  
 roll_ch_bag_cases_trend <- bag_cases_ravg %>%
   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
@@ -345,17 +342,17 @@ roll_ch_bag_death_trend <- roll_ch_bag_death %>%
 forJson_1 <- data.frame(indicatorTitle = "Neue Spitaleintritte",
                    date = tmp_cases$datum,
                    indicatorSubtitle = "7-Tage-Schnitt",
-                   value = tmp_hosp$entries_diff_last,
+                   value = round(last(roll_ch_bag_hosp$value)),
                    color = "#24b39c",
                    trend = last(roll_ch_bag_hosp_trend$trend),
                    chartType = "area")
- 
+
 forJson_1$chartData <- list(roll_ch_bag_hosp)
  
- 
+tail(roll_ch_bag_hosp)
 forJson_2 <- data.frame(indicatorTitle = "Neuinfektionen",
                   date = tmp_cases$datum,
-                  value = tmp_cases$entries_diff_last,
+                  value = round(last(bag_cases_ravg$value)),
                   color = "#e66e4a",
                   trend = last(roll_ch_bag_cases_trend$trend),
                   chartType = "area")
@@ -364,7 +361,7 @@ forJson_2$chartData <- list(bag_cases_ravg %>% filter(date >= '2020-10-01'))
  
 forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
                   date = tmp_cases$datum,
-                  value = tmp_death$entries_diff_last,
+                  value = round(last(roll_ch_bag_death$value),1),
                   color = "#05032d",
                   trend = last(roll_ch_bag_death_trend$trend),
                   chartType = "area")
