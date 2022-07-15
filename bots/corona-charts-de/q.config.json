@@ -255,6 +255,19 @@
       "item": {
         "data": []
       }
+    },
+    {
+      "environments": [
+        {
+          "name": "production",
+          "id": "9b7619cde29731a44bcd04e18f7589a1"
+        }
+      ],
+      "item": {
+        "title": "",
+        "notes": "",
+        "data": []
+      }
     }
   ]
 }

@@ -52,6 +52,19 @@ if __name__ == '__main__':
         # 7-day mvg average deaths
         df_deaths.index = pd.to_datetime(df_deaths.index)
 
+        # create chart with percentages of ventilated and non-ventilated
+        df_perc = df_divi.copy()
+        df_perc = df_perc[(df_perc.index.get_level_values(0) >= '2021-01-01')]
+        df_perc['Summe'] = df_perc['Beatmet'] + df_perc['Intensiv']
+        df_perc['Beatmet'] = (df_perc['Beatmet'] / df_perc['Summe']) * 100
+        df_perc['Intensiv'] = (df_perc['Intensiv'] / df_perc['Summe']) * 100
+        df_perc = df_perc[['Beatmet', 'Intensiv']]
+        df_perc = df_perc.rename(columns={'Intensiv': 'Nicht beatmet'})
+
+        # get percentage for title of percentage chart
+        title_perc = df_perc['Beatmet'].iloc[-1].round(0).astype(int)
+        title = f'{title_perc} der Corona-Intensivpatienten werden derzeit beatmet'
+
         # create index with max value of winter 2020/21
         df_divi = df_divi[(df_divi.index.get_level_values(0) >= '2020-10-01')]
         df_divi['Intensiv'] = round(
@@ -69,17 +82,20 @@ if __name__ == '__main__':
 
         # merge dataframes and remove DatetimeIndex for Q
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
-        df.index = df.index.strftime('%Y-%m-%d')
+        #df.index = df.index.strftime('%Y-%m-%d')
 
         # get current date for chart notes
         timestamp_str = df.tail(1).index.item()
-        timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
-        timestamp_str = timestamp_dt.strftime('%-d. %-m. %Y')
+        #timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
+        timestamp_str = timestamp_str.strftime('%-d. %-m. %Y')
         notes_chart = 'Fälle und Tote: 7-Tage-Schnitt.<br>Stand: ' + timestamp_str
+        notes_chart_perc = '¹ Mechanisch beatmete Patienten müssen aufwendiger betreut werden.<br>Stand: ' + timestamp_str
 
         # run function
         update_chart(id='8eed9f1d79be72ddbd0d9d0fc27267f7',
                      data=df, notes=notes_chart)
+        update_chart(id='9b7619cde29731a44bcd04e18f7589a1',
+                     data=df, title=title, notes=notes_chart_perc)
 
     except:
         raise
