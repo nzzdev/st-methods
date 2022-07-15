@@ -89,7 +89,7 @@ if __name__ == '__main__':
         #timestamp_dt = datetime.strptime(timestamp_str, '%Y-%m-%d')
         timestamp_str = timestamp_str.strftime('%-d. %-m. %Y')
         notes_chart = 'Fälle und Tote: 7-Tage-Schnitt.<br>Stand: ' + timestamp_str
-        notes_chart_perc = '¹ Mechanisch beatmete Patienten müssen aufwendiger betreut werden.<br>Stand: ' + timestamp_str
+        notes_chart_perc = '¹ Mechanisch beatmete Patienten müssen aufwendiger betreut werden und haben ein deutlich höheres Risiko zu sterben.<br>Stand: ' + timestamp_str
 
         # run function
         update_chart(id='8eed9f1d79be72ddbd0d9d0fc27267f7',
