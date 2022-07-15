@@ -34,7 +34,7 @@ if __name__ == '__main__':
         df = pd.concat([df_cases, df_divi, df_deaths], axis=1)
 
         # check if last row in ICU column (#1) is nan, then shift ICU patients
-        if pd.isna(df.iloc[-1:, 1].item()) == True:
+        while pd.isna(df.iloc[-1:, 1].item()) == True:
             df.iloc[:, 1] = df.iloc[:, 1].shift(1)
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
