@@ -95,7 +95,7 @@ if __name__ == '__main__':
         update_chart(id='8eed9f1d79be72ddbd0d9d0fc27267f7',
                      data=df, notes=notes_chart)
         update_chart(id='9b7619cde29731a44bcd04e18f7589a1',
-                     data=df, title=title, notes=notes_chart_perc)
+                     data=df_perc, title=title, notes=notes_chart_perc)
 
     except:
         raise
