@@ -63,7 +63,7 @@ if __name__ == '__main__':
 
         # get percentage for title of percentage chart
         title_perc = df_perc['Beatmet'].iloc[-1].round(0).astype(int)
-        title = f'{title_perc} der Corona-Intensivpatienten werden derzeit beatmet'
+        title = f'{title_perc} Prozent der Corona-Intensivpatienten werden derzeit beatmet'
 
         # create index with max value of winter 2020/21
         df_divi = df_divi[(df_divi.index.get_level_values(0) >= '2020-10-01')]
