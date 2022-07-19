@@ -50,5 +50,5 @@ update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
     data = df,
     subtitle="Stündlich aktualisierte Daten",
-    notes="Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date'].strftime("%-d. %-m. %Y, %H.%M")
+    notes="Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date'].tz_localize('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M")
 )
