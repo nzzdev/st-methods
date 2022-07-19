@@ -33,7 +33,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python src/main.py
+          python src/temperatur.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
