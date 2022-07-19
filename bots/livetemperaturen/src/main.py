@@ -48,7 +48,7 @@ df = pd.pivot_table(df, index=['date', 'date_str'], columns='type', values='temp
 df = df[['Stundenminimum', 'Stundenmaximum']]
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
-    data = df.reset_index()[['date', 'Stundenminimum', 'Stundenmaximum']],
+    data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum']],
     subtitle="Stündlich aktualisierte Daten",
     notes="Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str']
 )
