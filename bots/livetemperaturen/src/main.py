@@ -44,7 +44,7 @@ df['date_str'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strfti
 df['date'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strftime("%Y-%m-%d %H:%M"))
 
 df = pd.pivot_table(df, index=['date', 'date_str'], columns='type', values='temp')
-df['Temperaturrekord'] = 36
+df['Aktueller Hitzerekord'] = 36
 
 df = df[['Stundenminimum', 'Stundenmaximum', 'Aktueller Hitzerekord']]
 update_chart(
