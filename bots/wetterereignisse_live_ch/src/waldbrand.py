@@ -133,7 +133,7 @@ for feature in geojson['features']:
     feature['properties'] = {
         'fill': colors[feature['properties']['level']],
         'label': legende[feature['properties']['level']],
-        'fill-opacity': 0.8,
+        'fill-opacity': 1,
         'stroke-opacity': 0
     }
 
