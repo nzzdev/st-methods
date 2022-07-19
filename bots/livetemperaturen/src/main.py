@@ -44,16 +44,16 @@ df['date_str'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strfti
 df['date'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strftime("%Y-%m-%d %H:%M"))
 
 df = pd.pivot_table(df, index=['date', 'date_str'], columns='type', values='temp')
-df['Hitzerekord vom 13. August 2003 (36°)'] = 36
+df['Hitzerekord von 2003 (36°)'] = 36
 
-df = df[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord vom 13. August 2003 (36°)']]
+df = df[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']]
 
 current_temp = df.reset_index().iloc[-1]['Stundenmaximum']
 current_hour = datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').hour
 
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
-    data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord vom 13. August 2003 (36°)']],
+    data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
     notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str'],
     events=[{
         'type': 'point',
