@@ -160,7 +160,7 @@ city_features = list(map(lambda x: {
           }, labels))
 
 # Open
-background = json.load(open(Path('../data/background_ch.geojson'), 'r'))
+background = json.load(open(Path('./data/background_ch.geojson'), 'r'))
 
 features = [
     geojson,

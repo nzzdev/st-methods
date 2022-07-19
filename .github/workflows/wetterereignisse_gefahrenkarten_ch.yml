@@ -1,9 +1,10 @@
-name: Wetterereignisse Live CH
+name: Wetterereignisse Gefahrenkarten CH
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "*/15 * * * *"
+    - cron: "11 * * * *"
+    - cron: "11 20 * * *"
   workflow_dispatch:
 
 jobs:
@@ -33,7 +34,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python src/temperatur.py
+          python src/waldbrand.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
