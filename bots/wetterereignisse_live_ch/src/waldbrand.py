@@ -1,4 +1,3 @@
-# %%
 import pandas as pd
 import requests
 from bs4 import BeautifulSoup
@@ -8,11 +7,13 @@ import numbers
 from pathlib import Path
 from helpers import *
 from datetime import datetime
+import os
 
-# %%
+# Set Working Directory
+os.chdir(os.path.dirname(__file__))
+
 soup = BeautifulSoup(requests.get('https://www.waldbrandgefahr.ch/de/aktuelle-gefahrenlage').text, 'html.parser')
 
-# %%
 def project_coords(coords, from_proj, to_proj):
     if len(coords) < 1:
         return []
@@ -37,17 +38,12 @@ def project_feature(feature, from_proj, to_proj):
     feature['geometry']['coordinates'] = new_coordinates
     return feature
 
-
-# %%
-from this import d
-
 div = soup.select_one('#fire_map_detail')
 url = json.loads(div.attrs['data-react-props'])['geojson']
 url = 'https://www.waldbrandgefahr.ch' + url
 
 r = requests.get(url)
 geojson = r.json()
-#geojson = {"features": []}
 
 # Sort
 geojson['features'] = sorted(geojson['features'], key=lambda x: x['properties']['level'])
@@ -86,10 +82,6 @@ for feature in geojson['features']:
     projected_features.append(project_feature(feature, swissgrid, mercator))
 geojson['features'] = projected_features
 
-
-#json.dump(geojson, open('test.geojson', 'w'))
-
-# %%
 labels = [
     {
         "coordinates": [8.540448763866461, 47.377069663836046],
