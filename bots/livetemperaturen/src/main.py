@@ -44,13 +44,14 @@ df['date_str'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strfti
 df['date'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strftime("%Y-%m-%d %H:%M"))
 
 df = pd.pivot_table(df, index=['date', 'date_str'], columns='type', values='temp')
+df['Temperaturrekord'] = 36
 
-df = df[['Stundenminimum', 'Stundenmaximum']]
+df = df[['Stundenminimum', 'Stundenmaximum', 'Temperaturrekord']]
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
     data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum']],
-    subtitle="Stündlich aktualisierte Daten",
+    # subtitle="Stündlich aktualisierte Daten",
     notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str']
 )
-print(df.reset_index().iloc[-1]['date'])
+# print(df.reset_index().iloc[-1]['date'])
 #print(df.reset_index().iloc[-1]['date'].tz_convert('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
