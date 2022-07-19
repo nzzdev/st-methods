@@ -52,7 +52,7 @@ def download_sheet(sh, name):  # function for sheet download
         print('Other URL error:', e)
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), events=None):  # Q helper function
     # read qConfig file
     json_file = open('../q.config.json')
     qConfig = json.load(json_file)
@@ -76,6 +76,8 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame()):  # Q
                             {'table': transformed_data})
                     else:
                         item.get('item').update({'data': transformed_data})
+                if events != None:
+                    item['item']['events'] = events
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
     # write qConfig file

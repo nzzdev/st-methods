@@ -51,7 +51,12 @@ update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
     data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord (36°)']],
     # subtitle="Stündlich aktualisierte Daten",
-    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str']
+    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str'],
+    events=[{
+        'type': 'point',
+        'date': df.reset_index().iloc[-1]['date'],
+        'label': "Aktuell %s°" % df.reset_index().iloc[-1]['Stundenmaximum']
+        }]
 )
 # print(df.reset_index().iloc[-1]['date'])
 #print(df.reset_index().iloc[-1]['date'].tz_convert('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
