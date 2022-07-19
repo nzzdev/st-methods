@@ -3,7 +3,7 @@ name: Update Livetemperaturen
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "5 * * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
 
 jobs:
