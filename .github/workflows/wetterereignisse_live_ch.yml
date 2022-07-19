@@ -34,6 +34,7 @@ jobs:
       - name: Run python scripts
         run: |
           python src/temperatur.py
+          python src/waldbrand.py
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:

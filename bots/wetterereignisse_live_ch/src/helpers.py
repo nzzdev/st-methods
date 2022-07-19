@@ -52,7 +52,7 @@ def download_sheet(sh, name):  # function for sheet download
         print('Other URL error:', e)
 
 
-def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), events=None):  # Q helper function
+def update_chart(id, title="", subtitle="", notes="", data=None, events=None, geojsonList = None):  # Q helper function
     # read qConfig file
     json_file = open('../q.config.json')
     qConfig = json.load(json_file)
@@ -67,7 +67,9 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), event
                     item.get('item').update({'subtitle': subtitle})
                 if notes != '':
                     item.get('item').update({'notes': notes})
-                if data.size > 0:
+
+                if (data is None) == False:
+                    item['item']['data'] = []
                     # reset_index() and T (for transpose) are used to bring column names into the first row
                     transformed_data = data.applymap(str).reset_index(
                         drop=False).T.reset_index().T.apply(list, axis=1).to_list()
@@ -78,6 +80,9 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), event
                         item.get('item').update({'data': transformed_data})
                 if events != None:
                     item['item']['events'] = events
+
+                if geojsonList != None:
+                    item['item']['geojsonList'] = geojsonList
                 print('Successfully updated item with id', id,
                       'on', environment.get('name'), 'environment')
     # write qConfig file
