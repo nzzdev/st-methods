@@ -28,7 +28,7 @@ def serialize(seriesfilter, name):
     df = pd.DataFrame(series)
     df.columns = ['date', 'temp']
     #df['date'] = df['date'].apply(lambda x: datetime.fromtimestamp(x / 1000, ''))
-    df['date'] = pd.to_datetime(df['date'], utc=True, unit='ms')
+    df['date'] = pd.to_datetime(df['date'], unit='ms')
     df['type'] = name
 
     return df
@@ -46,6 +46,6 @@ update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
     data = df,
     subtitle="Stündlich aktualisierte Daten",
-    notes="Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date'].astimezone('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M")
+    notes="Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date'].tz_localize('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M")
 )
-print(df.reset_index().iloc[-1]['date'].astimezone('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
+print(df.reset_index().iloc[-1]['date'].tz_localize('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
