@@ -12,31 +12,9 @@ import os
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
 
+# 1. Get Website and collect URL
 soup = BeautifulSoup(requests.get('https://www.waldbrandgefahr.ch/de/aktuelle-gefahrenlage').text, 'html.parser')
 
-def project_coords(coords, from_proj, to_proj):
-    if len(coords) < 1:
-        return []
-
-    if isinstance(coords[0], numbers.Number):
-        from_x, from_y = coords
-        to_x, to_y = pyproj.transform(from_proj, to_proj, from_x, from_y)
-        return [to_x, to_y]
-
-    new_coords = []
-    for coord in coords:
-        new_coords.append(project_coords(coord, from_proj, to_proj))
-    return new_coords
-
-
-def project_feature(feature, from_proj, to_proj):
-    if not 'geometry' in feature or not 'coordinates' in feature['geometry']:
-        print('Failed project feature', feature)
-        return None
-
-    new_coordinates = project_coords(feature['geometry']['coordinates'], from_proj, to_proj)
-    feature['geometry']['coordinates'] = new_coordinates
-    return feature
 
 div = soup.select_one('#fire_map_detail')
 url = json.loads(div.attrs['data-react-props'])['geojson']
@@ -45,9 +23,10 @@ url = 'https://www.waldbrandgefahr.ch' + url
 r = requests.get(url)
 geojson = r.json()
 
-# Sort
+# Sort (damit Legende richtige Reihenfolge hat)
 geojson['features'] = sorted(geojson['features'], key=lambda x: x['properties']['level'])
 
+# Definition von Farben und Labels
 colors = {
     1: '#cfdd9d',
     2: '#e0d4b1',
@@ -64,24 +43,7 @@ legende = {
     5: 'Sehr grosse Gefahr'
 }
 
-for feature in geojson['features']:
-    del feature['bbox']
-    del feature['id']
-    feature['properties'] = {
-        'fill': colors[feature['properties']['level']],
-        'label': legende[feature['properties']['level']],
-        'fill-opacity': 0.8,
-        'stroke-opacity': 0
-    }
-
-mercator = pyproj.Proj(init='epsg:4326')
-swissgrid = pyproj.Proj(init='epsg:2056')
-
-projected_features = []
-for feature in geojson['features']:
-    projected_features.append(project_feature(feature, swissgrid, mercator))
-geojson['features'] = projected_features
-
+# Städte definieren
 labels = [
     {
         "coordinates": [8.540448763866461, 47.377069663836046],
@@ -138,6 +100,51 @@ labels = [
         "labelPosition": "bottom"
     },
 ]
+
+# CRS konvertieren (dauert zu lange, will aber nicht GeoPandas nutzen...)
+
+def project_coords(coords, from_proj, to_proj):
+    if len(coords) < 1:
+        return []
+
+    if isinstance(coords[0], numbers.Number):
+        from_x, from_y = coords
+        to_x, to_y = pyproj.transform(from_proj, to_proj, from_x, from_y)
+        return [to_x, to_y]
+
+    new_coords = []
+    for coord in coords:
+        new_coords.append(project_coords(coord, from_proj, to_proj))
+    return new_coords
+
+
+def project_feature(feature, from_proj, to_proj):
+    if not 'geometry' in feature or not 'coordinates' in feature['geometry']:
+        print('Failed project feature', feature)
+        return None
+
+    new_coordinates = project_coords(feature['geometry']['coordinates'], from_proj, to_proj)
+    feature['geometry']['coordinates'] = new_coordinates
+    return feature
+
+for feature in geojson['features']:
+    del feature['bbox']
+    del feature['id']
+    feature['properties'] = {
+        'fill': colors[feature['properties']['level']],
+        'label': legende[feature['properties']['level']],
+        'fill-opacity': 0.8,
+        'stroke-opacity': 0
+    }
+
+mercator = pyproj.Proj(init='epsg:4326')
+swissgrid = pyproj.Proj(init='epsg:2056')
+
+projected_features = []
+for feature in geojson['features']:
+    projected_features.append(project_feature(feature, swissgrid, mercator))
+geojson['features'] = projected_features
+
 # Städte umwandeln
 city_features = list(map(lambda x: {
             "type": "Feature",
@@ -152,9 +159,10 @@ city_features = list(map(lambda x: {
             }
           }, labels))
 
-# Open
+# Background laden
 background = json.load(open(Path('./data/background_ch.geojson'), 'r'))
 
+# Featureliste erstellen
 features = [
     geojson,
     background,
