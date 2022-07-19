@@ -38,11 +38,13 @@ def serialize(seriesfilter, name):
 
 df = pd.concat([
     serialize('temperature_hour.SMA.de.series.2', 'Stundenminimum'),
-    serialize('temperature_hour.SMA.de.series.1', 'Stundenmittel'),
+    # serialize('temperature_hour.SMA.de.series.1', 'Stundenmittel'),
     serialize('temperature_hour.SMA.de.series.3', 'Stundenmaximum'),
 ])
 
 df = pd.pivot_table(df, index='date', columns='type', values='temp')
+
+df = df[['Stundenminimum', 'Stundenmaximum']]
 
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
