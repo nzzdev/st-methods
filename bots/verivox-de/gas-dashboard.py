@@ -27,7 +27,7 @@ if __name__ == '__main__':
 
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
         df_storage.index = pd.to_datetime(df_storage.index)
-        df_storage = df_storage.sort_index().round(0).astype(int)
+        df_storage = df_storage.sort_index().round(1)
         df_gas.index = pd.to_datetime(df_gas.index)
         df_super.index = pd.to_datetime(df_super.index)
         df_super = df_super.round(2)
@@ -132,7 +132,7 @@ if __name__ == '__main__':
         super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
         # change decimal seperator
-        diff_storage_str = diff_storage.astype(int)
+        diff_storage_str = diff_storage.astype(str).replace('.', ',')
         diff_gas_str = diff_gas.astype(str).replace('.', ',')
         diff_super_str = diff_super.astype(str).replace('.', ',')
 
