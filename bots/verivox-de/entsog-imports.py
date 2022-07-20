@@ -244,7 +244,7 @@ if __name__ == '__main__':
 
         # rename columns
         df_new = df_new.rename(columns={
-                               df_new.columns[0]: 'Jamal', df_new.columns[1]: 'Megal', df_new.columns[2]: 'Nord Stream 1'})
+                               df_new.columns[0]: 'Mallnow', df_new.columns[1]: 'Waidhaus', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
 
         # calculate sum of all pipelines and drop columns
         df_new_sum['Summe'] = df_new_sum.sum(axis=1)
