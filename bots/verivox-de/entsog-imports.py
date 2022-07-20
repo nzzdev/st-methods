@@ -116,7 +116,7 @@ if __name__ == '__main__':
         # read data for Russiand gas flows in Germany
         url = f'https://transparency.entsog.eu/api/v1/aggregateddata.csv?forceDownload=true&from={startstr}&to={yesterdaystr}&indicator=Physical%20Flow&periodType=day&timezone=CET&limit=-1&delimiter=comma&countryKey=DE&directionKey=entry&pointsNames=Mallnow,VIP%20Waidhaus|Waidhaus%20(OGE),Greifswald%20/%20OPAL,Greifswald%20/%20NEL'
 
-        url_yamal = f'https://transparency.entsog.eu/api/v1/aggregateddata.csv?forceDownload=true&from={startstr}&to={yesterdaystr}&indicator=Physical%20Flow&periodType=day&timezone=CET&limit=-1&delimiter=comma&countryKey=DE&directionKey=entry&pointsNames=Mallnow'
+        url_jamal = f'https://transparency.entsog.eu/api/v1/aggregateddata.csv?forceDownload=true&from={startstr}&to={yesterdaystr}&indicator=Physical%20Flow&periodType=day&timezone=CET&limit=-1&delimiter=comma&countryKey=DE&directionKey=entry&pointsNames=Mallnow'
 
         url_megal = f'https://transparency.entsog.eu/api/v1/aggregateddata.csv?forceDownload=true&from={startstr}&to={yesterdaystr}&indicator=Physical%20Flow&periodType=day&timezone=CET&limit=-1&delimiter=comma&countryKey=DE&directionKey=entry&pointsNames=VIP%20Waidhaus|Waidhaus%20(OGE)'
 
@@ -131,8 +131,8 @@ if __name__ == '__main__':
         # save data
         with open(os.path.join('data', 'gas_de.csv'), 'wb') as f:
             f.write(download_data(url, headers=fheaders).content)
-        with open(os.path.join('data', 'gas_yamal.csv'), 'wb') as f:
-            f.write(download_data(url_yamal, headers=fheaders).content)
+        with open(os.path.join('data', 'gas_jamal.csv'), 'wb') as f:
+            f.write(download_data(url_jamal, headers=fheaders).content)
         with open(os.path.join('data', 'gas_megal.csv'), 'wb') as f:
             f.write(download_data(url_megal, headers=fheaders).content)
         with open(os.path.join('data', 'gas_nstream.csv'), 'wb') as f:
@@ -145,7 +145,7 @@ if __name__ == '__main__':
         # read data
         df_de = pd.read_csv('./data/gas_de.csv',
                             encoding='utf-8', usecols=['periodFrom', 'value'])
-        df_yamal = pd.read_csv('./data/gas_yamal.csv',
+        df_jamal = pd.read_csv('./data/gas_jamal.csv',
                                encoding='utf-8', usecols=['periodFrom', 'value'])
         df_megal = pd.read_csv('./data/gas_megal.csv',
                                encoding='utf-8', usecols=['periodFrom', 'value'])
@@ -157,7 +157,7 @@ if __name__ == '__main__':
                                encoding='utf-8', usecols=['periodFrom', 'value'])
 
         # rename columns
-        df_yamal = df_yamal.rename(columns={'value': 'Yamal'})
+        df_jamal = df_jamal.rename(columns={'value': 'Jamal'})
         df_megal = df_megal.rename(columns={'value': 'Megal'})
         df_nstream = df_nstream.rename(columns={'value': 'Nord Stream 1'})
 
@@ -167,10 +167,10 @@ if __name__ == '__main__':
         df_de.set_index(df_de['periodFrom'], inplace=True)
         df_de = df_de.resample("D").sum()
 
-        df_yamal['periodFrom'] = pd.to_datetime(
-            df_yamal['periodFrom'], dayfirst=True)
-        df_yamal.set_index(df_yamal['periodFrom'], inplace=True)
-        df_yamal = df_yamal.resample("D").sum()
+        df_jamal['periodFrom'] = pd.to_datetime(
+            df_jamal['periodFrom'], dayfirst=True)
+        df_jamal.set_index(df_jamal['periodFrom'], inplace=True)
+        df_jamal = df_jamal.resample("D").sum()
 
         df_megal['periodFrom'] = pd.to_datetime(
             df_megal['periodFrom'], dayfirst=True)
@@ -198,19 +198,19 @@ if __name__ == '__main__':
 
         # drop NaN
         df_de = df_de[df_de['value'].notna()]
-        df_yamal = df_yamal[df_yamal['Yamal'].notna()]
+        df_jamal = df_jamal[df_jamal['Jamal'].notna()]
         df_megal = df_megal[df_megal['Megal'].notna()]
         df_nstream = df_nstream[df_nstream['Nord Stream 1'].notna()]
 
         # convert kWh to million m3 according to calorific value of Russian gas
         df_de['value'] = (df_de['value'] / 10300000).round(1)
-        df_yamal['Yamal'] = (df_yamal['Yamal'] / 10300000).round(1)
+        df_jamal['Jamal'] = (df_jamal['Jamal'] / 10300000).round(1)
         df_megal['Megal'] = (df_megal['Megal'] / 10300000).round(1)
         df_nstream['Nord Stream 1'] = (
             df_nstream['Nord Stream 1'] / 10300000).round(1)
 
         # join dataframes for pipeline chart
-        df_de2 = pd.concat([df_yamal, df_megal, df_nstream],
+        df_de2 = pd.concat([df_jamal, df_megal, df_nstream],
                            join='outer', axis=1)
 
         # replace negative numbers with zero
@@ -244,7 +244,7 @@ if __name__ == '__main__':
 
         # rename columns
         df_new = df_new.rename(columns={
-                               df_new.columns[0]: 'Yamal', df_new.columns[1]: 'Megal', df_new.columns[2]: 'Nord Stream 1'})
+                               df_new.columns[0]: 'Jamal', df_new.columns[1]: 'Megal', df_new.columns[2]: 'Nord Stream 1'})
 
         # calculate sum of all pipelines and drop columns
         df_new_sum['Summe'] = df_new_sum.sum(axis=1)
