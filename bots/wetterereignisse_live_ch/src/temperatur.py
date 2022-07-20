@@ -48,18 +48,19 @@ df['Hitzerekord von 2003 (36°)'] = 36
 
 df = df[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']]
 
-current_temp = df.reset_index().iloc[-1]['Stundenmaximum']
+current_temp = str(df.reset_index().iloc[-1]['Stundenmaximum']).replace('.', ',')
 current_hour = datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').hour
 
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
     data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
+    title = "In Zürich wird es wieder heiss, aktuell beträgt die Temperatur %s Grad" % current_temp,
     notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str'],
-    events=[{
-        'type': 'point',
-        'date': df.reset_index().iloc[-1]['date'],
-        'label': "Aktuell %s° (%s Uhr)" % (current_temp, current_hour)
-        }]
+    # events=[{
+    #     'type': 'point',
+    #     'date': df.reset_index().iloc[-1]['date'],
+    #     'label': "Aktuell %s° (%s Uhr)" % (current_temp, current_hour)
+    #     }]
 )
 # print(df.reset_index().iloc[-1]['date'])
 #print(df.reset_index().iloc[-1]['date'].tz_convert('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
