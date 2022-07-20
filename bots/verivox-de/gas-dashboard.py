@@ -128,7 +128,7 @@ if __name__ == '__main__':
         gas_y = 10
         super_y = 1.6
         storage_ytick = [0, 20, 40, 60, 80]
-        gas_ytick = [10, 14, 18, 22, 26]
+        gas_ytick = [10, 15, 20, 25, 30]
         super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
         # change decimal seperator
