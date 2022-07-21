@@ -52,7 +52,7 @@ def run(url, colors, legende):
         feature['properties'] = {
             'fill': colors[feature['properties']['level']],
             'label': legende[feature['properties']['level']],
-            'fill-opacity': 1,
+            'fill-opacity': 0.8,
             'stroke-opacity': 0
         }
 
