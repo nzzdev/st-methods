@@ -56,6 +56,7 @@ if __name__ == '__main__':
         # merge dataframes
         df = pd.concat([df_storage, df_rus, df_gas], axis=1)
         # BENZIN df = pd.concat([df_storage, df_gas, df_super], axis=1)
+        df_rus['Russisches Gas'] = df['Russisches Gas'].dropna()
 
         # create temporary dataframe for old data in gas storage and Russian gas
         df_temp = df.copy().tail(90)
@@ -72,8 +73,8 @@ if __name__ == '__main__':
         )].iloc[-1] - df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) / df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         df_meta['Trend Gas'] = round(((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
         )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
-        df_meta['Trend Importe'] = round(((df['Russisches Gas'].loc[~df['Russisches Gas'].isnull(
-        )].iloc[-1] - df['Russisches Gas'].loc[~df['Russisches Gas'].isnull()].iloc[-2]) / df['Russisches Gas'].loc[~df['Russisches Gas'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
+        df_meta['Trend Importe'] = round(((df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull(
+        )].iloc[-1] - df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) / df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         # BENZIN df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) * 100, 0)  # diff previous week
         df_meta = df_meta[['Trend Speicher', 'Trend Importe',
                            'Trend Gas', 'Gasspeicher', 'Gaspreis', 'Russisches Gas']]
