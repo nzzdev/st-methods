@@ -73,7 +73,7 @@ ids = pd.read_csv('q_countries.csv')
 
 # merge df with ids
 df = ids.merge(df, on = 'ID', how = 'left')
-df['Wert'] = df['Total'].fillna("")
+df['Wert'] = round(df['Total'].fillna(""), 0)
 
 pop = pd.read_csv('https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2022_TotalPopulationBySex.zip')
 pop = pop[pop['Time'].isin([2021])]
@@ -101,3 +101,10 @@ id_q_table = 'd0be298e35165ab925d7292335e97175'  # linked in article
 update_chart(id=id_q_table, 
             data=df_q_table,
             notes = date_notes)
+
+
+
+latest = pd.read_csv('https://raw.githubusercontent.com/globaldothealth/monkeypox/main/latest.csv')
+
+
+
