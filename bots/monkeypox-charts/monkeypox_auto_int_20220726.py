@@ -88,7 +88,7 @@ df.rename(columns = {'Total': 'Fälle gesamt'}, inplace = True)
 
 
 
-id_worldmap = '4acf1a0fd4dd89aef4abaeefd0b6f4dc'  # linked in article
+id_worldmap = 'd0be298e35165ab925d7292335e77bb7'  # linked in article
 update_chart(id=id_worldmap, 
             data=df[['ID', 'Wert']],
             notes = date_notes)
@@ -97,7 +97,7 @@ update_chart(id=id_worldmap,
 df_q_table = df[['Land', 'Fälle gesamt', 'Fälle pro 1 Mio. Einwohner']].rename(
     columns={'Land': ''})
 
-id_q_table = '4acf1a0fd4dd89aef4abaeefd0da5ac6'  # linked in article
+id_q_table = 'd0be298e35165ab925d7292335e97175'  # linked in article
 update_chart(id=id_q_table, 
             data=df_q_table,
             notes = date_notes)
