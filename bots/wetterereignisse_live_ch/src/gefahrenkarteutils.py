@@ -3,7 +3,7 @@ import pyproj
 import json
 import requests
 from shapely.geometry import shape
-from shapely.ops import transform
+from shapely.ops import transform, unary_union
 
 def run(url, colors, legende):
 
@@ -21,27 +21,38 @@ def run(url, colors, legende):
     # Sort (damit Legende richtige Reihenfolge hat)
     geojson['features'] = sorted(geojson['features'], key=lambda x: x['properties']['level'])
 
-
-    # CRS konvertieren (dauert zu lange, will aber nicht GeoPandas nutzen...)
-    for feature in geojson['features']:
-        del feature['bbox']
-        del feature['id']
-        feature['properties'] = {
-            'fill': colors[feature['properties']['level']],
-            'label': legende[feature['properties']['level']],
-            'fill-opacity': 0.8,
-            'stroke-opacity': 0
-        }
-
     mercator = pyproj.CRS('EPSG:4326')
     swissgrid = pyproj.CRS('EPSG:2056')
     project = pyproj.Transformer.from_crs(swissgrid, mercator, always_xy=True).transform
 
-    for feature in geojson['features']:
-        shp = shape(feature['geometry'])
-        feature['geometry'] = transform(project, shp).__geo_interface__
+    geojson_new = {
+        "type": "FeatureCollection",
+        "features": [],
+        "timeStamp": geojson['timeStamp']
+        }
 
-    return geojson
+    # Group shapes by level and union them
+    for level in legende:
+        
+        # Filter by level and convert to shapely geometry
+        filtered = list(filter(lambda x: x['properties']['level'] == level, geojson['features']))
+        filtered = list(map(lambda x: shape(x['geometry']), filtered))
+
+        # Add to new geojson
+        if len(filtered) > 0:
+            union = unary_union(filtered)
+            geojson_new['features'].append({
+                'type': 'Feature',
+                'properties': {
+                    'fill': colors[level],
+                    'label': legende[level],
+                    'fill-opacity': 0.8,
+                    'stroke-opacity': 0
+                },
+                'geometry': transform(project, union).__geo_interface__
+            })
+
+    return geojson_new
 
 def get_citylabels():
 
