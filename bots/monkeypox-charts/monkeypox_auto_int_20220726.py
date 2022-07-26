@@ -73,7 +73,7 @@ ids = pd.read_csv('q_countries.csv')
 
 # merge df with ids
 df = ids.merge(df, on = 'ID', how = 'left')
-df['Wert'] = round(df['Total'].fillna(""), 0)
+df['Wert'] = round(df['Total'], 0).fillna("")
 
 pop = pd.read_csv('https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2022_TotalPopulationBySex.zip')
 pop = pop[pop['Time'].isin([2021])]
@@ -105,6 +105,7 @@ update_chart(id=id_q_table,
 
 
 latest = pd.read_csv('https://raw.githubusercontent.com/globaldothealth/monkeypox/main/latest.csv')
+latest['Endemic'] = latest['ID'].str(0)
 
 
 
