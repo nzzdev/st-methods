@@ -265,6 +265,9 @@ if __name__ == '__main__':
         df_new.index = df_new.index.strftime('%Y-%m-%d')
         df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
 
+        # save clean csv for dashboard
+        df_new_sum.to_csv('./data/pipelines_de_dashboard.csv')
+
         # run Q function
         update_chart(id='1203f969609d721f3e48be4f2689fc53',
                      data=df_russia, notes=notes_chart)
