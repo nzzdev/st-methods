@@ -56,7 +56,6 @@ if __name__ == '__main__':
         # merge dataframes
         df = pd.concat([df_storage, df_rus, df_gas], axis=1)
         # BENZIN df = pd.concat([df_storage, df_gas, df_super], axis=1)
-        df_rus['Russisches Gas'] = df_rus['Russisches Gas'].dropna()
 
         # create temporary dataframe for old data in gas storage and Russian gas
         df_temp = df.copy().tail(90)
@@ -184,7 +183,7 @@ if __name__ == '__main__':
         # add chart notes
         #today_str = today.strftime('%-d. %-m. %Y')
         #notes_chart = f'Stand: {today_str}. Pfeile: Veränderung zum Vortag, beim Sprit zur Vorwoche. Quellen: Agsi, Verivox, Bundeskartellamt'
-        """
+
         # run Q function
         update_chart(id='38c6dc628d74a268a1d09ed8065f7803', files=file)
 
@@ -195,7 +194,6 @@ if __name__ == '__main__':
             if item.endswith('.csv') or item.endswith('.geojson'):
                 os.remove(os.path.join(dir, item))
         #os.remove(os.path.join(dir, 'dashboard_de.json'))
-        """
 
     except:
         raise
