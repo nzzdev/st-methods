@@ -156,7 +156,7 @@ if __name__ == '__main__':
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': 'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'in Millionen m³', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} m³',
+        meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse in Millionen m³', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} Mio. m³',
                     'yAxisStart': rus_y, 'yAxisLabels': rus_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_rus, 'chartType': 'line'}
         # BENZIN meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Super E5', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro', 'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
 
