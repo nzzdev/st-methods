@@ -138,12 +138,12 @@ if __name__ == '__main__':
         # additional data for JSON file
         # y-axis start and ticks
         storage_y = 0  # if y-axis starts at 0: value is optional
-        gas_y = 10
+        gas_y = 7
         rus_y = 0
         # BENZIN super_y = 1.6
-        storage_ytick = [0, 20, 40, 60, 80]
-        gas_ytick = [10, 15, 20, 25, 30]
-        rus_ytick = [0, 75, 150, 225, 300]
+        storage_ytick = [0, 25, 50, 75]
+        gas_ytick = [7, 14, 21, 28]
+        rus_ytick = [0, 100, 200, 300]
         # BENZIN super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
         # change decimal seperator
