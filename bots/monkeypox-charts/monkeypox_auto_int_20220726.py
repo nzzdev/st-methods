@@ -105,7 +105,8 @@ update_chart(id=id_q_table,
 
 
 latest = pd.read_csv('https://raw.githubusercontent.com/globaldothealth/monkeypox/main/latest.csv')
-latest['Endemic'] = latest['ID'].str(0)
+latest['Endemic'] = latest['ID'].str[0]
+latest = latest[latest['Endemic'] == 'N']
 
 
 
