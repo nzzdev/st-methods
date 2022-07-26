@@ -5,7 +5,6 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 from user_agent import generate_user_agent
-import subprocess
 
 if __name__ == '__main__':
     try:
@@ -227,20 +226,19 @@ if __name__ == '__main__':
         # END OLD
         """
 
-        # call Node.js script and save output as csv
-        dataunwrapper = subprocess.Popen(
-            ['node', 'dataunwrapper.js', 'kCrqD'], stdout=subprocess.PIPE)
-        output = dataunwrapper.stdout.read()
+        url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
+        resp = download_data(url_de, headers=fheaders)
+        csv_file = resp.content
         if not os.path.exists('data'):
             os.makedirs('data')
-        with open(os.path.join('data', 'node_gas_de.csv'), 'wb') as f:
-            f.write(output)
+        with open(os.path.join('data', 'pipelines_de.csv'), 'wb') as f:
+            f.write(csv_file)
 
         # read csv and convert to datetime, add one day
-        df_new = pd.read_csv('./data/node_gas_de.csv',
+        df_new = pd.read_csv('./data/pipelines_de.csv',
                              encoding='utf-8', index_col='periodFrom')
         df_new_sum = pd.read_csv(
-            './data/node_gas_de.csv', encoding='utf-8', index_col='periodFrom')
+            './data/pipelines_de.csv', encoding='utf-8', index_col='periodFrom')
 
         # rename columns
         df_new = df_new.rename(columns={
