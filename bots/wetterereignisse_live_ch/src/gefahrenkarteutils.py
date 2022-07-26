@@ -1,32 +1,9 @@
 from bs4 import BeautifulSoup
 import pyproj
-import numbers
 import json
 import requests
-
-def project_coords(coords, from_proj, to_proj):
-    if len(coords) < 1:
-        return []
-
-    if isinstance(coords[0], numbers.Number):
-        from_x, from_y = coords
-        to_x, to_y = pyproj.transform(from_proj, to_proj, from_x, from_y)
-        return [to_x, to_y]
-
-    new_coords = []
-    for coord in coords:
-        new_coords.append(project_coords(coord, from_proj, to_proj))
-    return new_coords
-
-
-def project_feature(feature, from_proj, to_proj):
-    if not 'geometry' in feature or not 'coordinates' in feature['geometry']:
-        print('Failed project feature', feature)
-        return None
-
-    new_coordinates = project_coords(feature['geometry']['coordinates'], from_proj, to_proj)
-    feature['geometry']['coordinates'] = new_coordinates
-    return feature
+from shapely.geometry import shape
+from shapely.ops import transform
 
 def run(url, colors, legende):
 
@@ -56,13 +33,13 @@ def run(url, colors, legende):
             'stroke-opacity': 0
         }
 
-    mercator = pyproj.Proj(init='epsg:4326')
-    swissgrid = pyproj.Proj(init='epsg:2056')
+    mercator = pyproj.CRS('EPSG:4326')
+    swissgrid = pyproj.CRS('EPSG:2056')
+    project = pyproj.Transformer.from_crs(swissgrid, mercator, always_xy=True).transform
 
-    projected_features = []
     for feature in geojson['features']:
-        projected_features.append(project_feature(feature, swissgrid, mercator))
-    geojson['features'] = projected_features
+        shp = shape(feature['geometry'])
+        feature['geometry'] = transform(project, shp).__geo_interface__
 
     return geojson
 
