@@ -129,7 +129,9 @@ if __name__ == '__main__':
         #df.index = df.index.strftime('%Y-%m-%d')
 
         notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
-        title_perc = dfnew['2022'].iloc[-1].round(0).astype(int)
+        # banker's rounding
+        title_perc = dfnew['2022'].iloc[-1].round(
+            1).astype(str).replace('.', ',')
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
         # run function

@@ -37,7 +37,7 @@ ww_zh_comb <- ww_zh_0 %>%
   mutate(cases = cases*100/max(cases, na.rm = TRUE), 
          old = old*100/max(new, na.rm = TRUE),
          new = new*100/max(new, na.rm = TRUE)) %>%
-  rename("Viruslast (alte Methode)" = old, 
+  rename("Viruslast (alte Methoden)" = old, 
          "Viruslast (neue Methode)" = new,
          "Fallzahlen" = cases)
 
@@ -70,7 +70,7 @@ bfs_old <- read.csv2(text=paste0(head(readLines('https://www.bfs.admin.ch/bfssta
 bfs_all <- rbind(bfs_old, bfs) %>%  
   filter(Datum >= '2015-01-01', Alter == "65+") %>%
   select(-Alter, -Diff) %>%
-  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "erwartete Bandbreite" = "obeGrenze")
+  rename("Tatsächlich verzeichnete Todesfälle" = "AnzTF_HR", " " = "untGrenze", "Erwartete Bandbreite" = "obeGrenze")
 
 ## Neuster Stand für die Q Grafik
 
@@ -280,7 +280,6 @@ update_chart(id = "2e1103d436e7d4452fc9a58ec507bb2e",
              data = df_overview,
              subtitle = subtitle)
 
-
 ### Dashboard ###
 
 bag_cases_dash <- read_csv(bag_data$sources$individual$csv$daily$cases)%>%
@@ -309,7 +308,6 @@ roll_ch_bag_death_hosp_dash <- bag_deaths_dash %>%
   select("datum", "hosp_roll", "death_roll") %>%
   rename(Hospitalierungen = hosp_roll, Todesfälle = death_roll)
  
- 
 roll_ch_bag_hosp <- roll_ch_bag_death_hosp_dash %>%
   select(datum, Hospitalierungen) %>%
   filter(datum >= '2020-10-01') %>%
@@ -320,24 +318,23 @@ roll_ch_bag_death <- roll_ch_bag_death_hosp_dash %>%
   filter(datum >= '2020-10-01') %>%
   rename(date = datum, value = `Todesfälle`)
  
- 
 roll_ch_bag_cases_trend <- bag_cases_ravg %>%
   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 14, default = 0)) %>%
   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
                      diff_pct_max < -3 ~ 'fallend',
                      TRUE ~ 'gleichbleibend',))
  
 roll_ch_bag_hosp_trend <- roll_ch_bag_hosp %>%
   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 14, default = 0)) %>%
   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
                       diff_pct_max < -3 ~ 'fallend',
                       TRUE ~ 'gleichbleibend',))
  
 roll_ch_bag_death_trend <- roll_ch_bag_death %>%
   mutate(pct_of_max = (value*100)/max(value, na.rm = T)) %>%
-  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 7, default = 0)) %>%
+  mutate(diff_pct_max = pct_of_max - lag(pct_of_max, 14, default = 0)) %>%
   mutate(trend = case_when(diff_pct_max > 3 ~ 'steigend',
                       diff_pct_max < -3 ~ 'fallend',
                       TRUE ~ 'gleichbleibend',))
@@ -345,17 +342,17 @@ roll_ch_bag_death_trend <- roll_ch_bag_death %>%
 forJson_1 <- data.frame(indicatorTitle = "Neue Spitaleintritte",
                    date = tmp_cases$datum,
                    indicatorSubtitle = "7-Tage-Schnitt",
-                   value = tmp_hosp$entries_diff_last,
+                   value = round(last(roll_ch_bag_hosp$value)),
                    color = "#24b39c",
                    trend = last(roll_ch_bag_hosp_trend$trend),
                    chartType = "area")
- 
+
 forJson_1$chartData <- list(roll_ch_bag_hosp)
  
- 
+tail(roll_ch_bag_hosp)
 forJson_2 <- data.frame(indicatorTitle = "Neuinfektionen",
                   date = tmp_cases$datum,
-                  value = tmp_cases$entries_diff_last,
+                  value = round(last(bag_cases_ravg$value)),
                   color = "#e66e4a",
                   trend = last(roll_ch_bag_cases_trend$trend),
                   chartType = "area")
@@ -364,7 +361,7 @@ forJson_2$chartData <- list(bag_cases_ravg %>% filter(date >= '2020-10-01'))
  
 forJson_3 <- data.frame(indicatorTitle = "Neue Todesfälle",
                   date = tmp_cases$datum,
-                  value = tmp_death$entries_diff_last,
+                  value = round(last(roll_ch_bag_death$value)),
                   color = "#05032d",
                   trend = last(roll_ch_bag_death_trend$trend),
                   chartType = "area")
@@ -397,14 +394,12 @@ bag_total <- merge(bag_cases, bag_deaths, by = c("geoRegion", "datum")) %>%
   mutate(Infizierte = sumTotal.x - sumTotal.y) %>%
   rename("Tote" = `sumTotal.y`) %>%
   select("datum", "Infizierte", "Tote") %>%
-  mutate(`Genesene (Schätzung)` = (lag(Infizierte,10, default = 0)) ) %>%
-    #`Genesene (Schätzung)` = ((lag(Infizierte,10, default = 0)) * 0.75) + 
-     #      ((lag(Infizierte,20, default = 0)) * 0.10) + 
-      #     ((lag(Infizierte,30, default = 0)) * 0.10) +
-       #    ((lag(Infizierte,40, default = 0)) * 0.05)) %>%
+  mutate(`Genesene (Schätzung)` = ((lag(Infizierte,14, default = 0)) * 0.75) + 
+           ((lag(Infizierte,21, default = 0)) * 0.10) + 
+           ((lag(Infizierte,28, default = 0)) * 0.10) +
+           ((lag(Infizierte,42, default = 0)) * 0.05)) %>%
   mutate(`gegenwärtig Infizierte` = Infizierte -`Genesene (Schätzung)`) %>%
   select("datum", "Tote", "gegenwärtig Infizierte", "Genesene (Schätzung)")
-
 
 bag_total_title <- paste0(gsub('\\.', ',' ,toString(round(sum(tail(bag_total[,2:4], 1))/1000000, 1))), " Millionen bestätigte Infektionen und ", toString(tail(bag_total$Tote, 1)), " Todesfälle in der Schweiz")
 
@@ -508,7 +503,7 @@ ww_bag_mean <- ww_bag_stations %>%
         mean = mean*100/max(mean, na.rm = TRUE)) %>%
   select("Datum" = date, 
          "Fallzahlen" = ravg_cases, 
-         "Viruslast im Abwasser" = mean)
+         "Viruslast im Abwasser (Durchschnitt aller Messtationen)" = mean)
 
 update_chart(id = "eaf294e8d0fac38bd3261ab67be4d6fb",
              data = ww_bag_mean)
@@ -694,7 +689,7 @@ bag_var_all <- bag_var %>%
   mutate(var = case_when(variant_type == "B.1.1.7"~ "Alpha",
                          variant_type == "B.1.617.2" ~ "Delta",
                          variant_type == "B.1.1.529" ~ "Omikron",
-                         variant_type == "other_lineages" ~ "Urtyp/andere Varianten",
+                         variant_type == "other_lineages" ~ "Urtyp / andere Varianten",
                          TRUE ~ "Weitere «relevante Virusvarianten»*")) %>%
   group_by(date, var) %>%
   summarise(prct = sum(prct)) %>%
@@ -702,9 +697,9 @@ bag_var_all <- bag_var %>%
   mutate(prct_7 = round(rollmean(prct, 7, fill = NA, align = "right"),1)) %>%
   select(date, var, prct_7) %>%
   spread(var,prct_7) %>%
-  mutate(`Urtyp/andere Varianten` = round(100-(Alpha+Delta+Omikron+`Weitere «relevante Virusvarianten»*`),1)) %>%
+  mutate(`Urtyp / andere Varianten` = round(100-(Alpha+Delta+Omikron+`Weitere «relevante Virusvarianten»*`),1)) %>%
   filter(date >= "2020-10-10") %>%
-  select(date, Alpha, Delta, Omikron, `Weitere «relevante Virusvarianten»*`, `Urtyp/andere Varianten`)
+  select(date, Alpha, Delta, Omikron, `Weitere «relevante Virusvarianten»*`, `Urtyp / andere Varianten`)
 
 update_chart(id = "396fd1e1ae7c6223217d80a9c5421999",
              data = bag_var_all)
@@ -845,6 +840,8 @@ id_rel_age_q <- id_rel_age %>%
   spread(vaccination_status, per100k) %>%
   select(altersklasse_covid19, not_vaccinated, fully_vaccinated) %>%
   filter(altersklasse_covid19 != "all" & altersklasse_covid19 != "Unbekannt" & altersklasse_covid19 != "0 - 9")
+
+id_rel_age_q$altersklasse_covid19 <- str_replace_all(id_rel_age_q$altersklasse_covid19," - ","–")
 
 names(id_rel_age_q) <- c("Altersgruppe", "Ungeimpft", "Mindestens zweimal geimpft")
 
@@ -1095,10 +1092,10 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
          n3 = COVID19FirstBoosterPersons-lag(COVID19FirstBoosterPersons,1))%>%
   mutate(Erstimpfungen = rollmean(n1, 7, NA, align = "right"),
          `Zweitimpfungen*` = rollmean(n2, 7, NA, align = "right"),
-         Boosterimpfungen = rollmean(n3, 7, NA, align = "right"))%>%
-  select(date, Erstimpfungen, `Zweitimpfungen*`, Boosterimpfungen)
+         `Booster-Impfungen` = rollmean(n3, 7, NA, align = "right"))%>%
+  select(date, Erstimpfungen, `Zweitimpfungen*`, `Booster-Impfungen`)
 
-ch_vacc_persons_hist_new$Boosterimpfungen[ch_vacc_persons_hist_new$Boosterimpfungen < 20] <- NA
+ch_vacc_persons_hist_new$`Booster-Impfungen`[ch_vacc_persons_hist_new$`Booster-Impfungen` < 20] <- NA
 
 update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae",
              data = ch_vacc_persons_hist_new)
