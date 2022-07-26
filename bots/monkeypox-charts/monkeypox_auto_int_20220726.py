@@ -69,7 +69,7 @@ df['ID'] = df['Country'].apply(lambda x: coco.convert(names=x, to='ISO3', not_fo
 # set date for charts
 date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y")
 
-ids = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/monkeypox-charts/q_countries.csv')
+ids = pd.read_csv('q_countries.csv')
 
 # merge df with ids
 df = ids.merge(df, on = 'ID', how = 'left')
