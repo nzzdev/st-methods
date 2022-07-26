@@ -72,8 +72,8 @@ if __name__ == '__main__':
         )].iloc[-1] - df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) / df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         df_meta['Trend Gas'] = round(((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
         )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
-        df_meta['Trend Importe'] = round(((df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull(
-        )].iloc[-1] - df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) / df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
+        df_meta['Trend Importe'] = round(((df['Russisches Gas'].loc[~df['Russisches Gas'].isnull(
+        )].iloc[-1] - df['Russisches Gas'].loc[~df['Russisches Gas'].isnull()].iloc[-2]) / df['Russisches Gas'].loc[~df['Russisches Gas'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         # BENZIN df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) * 100, 0)  # diff previous week
         df_meta = df_meta[['Trend Speicher', 'Trend Importe',
                            'Trend Gas', 'Gasspeicher', 'Gaspreis', 'Russisches Gas']]
