@@ -95,7 +95,7 @@ update_chart(id=id_worldmap,
 
 # export for q table
 df_q_table = df[['Land', 'Fälle gesamt', 'Fälle pro 1 Mio. Einwohner']].rename(
-    columns={'Land': ''})
+    columns={'Land': ''}).dropna(subset = ['Fälle gesamt']).sort_values(by = ['Fälle pro 1 Mio. Einwohner'], ascending = False)
 
 id_q_table = 'd0be298e35165ab925d7292335e97175'  # linked in article
 update_chart(id=id_q_table, 
