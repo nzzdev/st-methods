@@ -3,7 +3,7 @@ name: Wetterereignisse Gefahrenkarten CH
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "15 */2 * * *"
   workflow_dispatch:
 
 jobs:
