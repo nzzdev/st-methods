@@ -36,7 +36,7 @@ df['Land'] = df['Land'].str.replace('Russia', 'Russland')
 df['Land'] = df['Land'].str.replace('South Korea', 'Südkorea')
 
 # Country codes from Q Choropleth
-ids = pd.read_csv('/q_countries.csv')
+ids = pd.read_csv('q_countries.csv')
 # merge df with Q codes
 df = ids.merge(df, left_on = 'ID', right_on = 'Country_ISO3', how = 'left')
 
