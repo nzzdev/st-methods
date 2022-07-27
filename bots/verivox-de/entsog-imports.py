@@ -225,9 +225,12 @@ if __name__ == '__main__':
         #df_de.index = df_de.index.strftime('%Y-%m-%d')
         # END OLD
         """
-
+        cheaders = {
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+        }
         url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
-        resp = download_data(url_de)
+        resp = download_data(url_de, headers=cheaders)
         csv_file = resp.content
         if not os.path.exists('data'):
             os.makedirs('data')
