@@ -41,7 +41,8 @@ ids = pd.read_csv('q_countries.csv')
 df = ids.merge(df, left_on = 'ID', right_on = 'Country_ISO3', how = 'left')
 
 # set date for charts
-date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y")
+date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y") +'<br> ¹ohne Fälle aus endemischen Ländern'
+
 
 # get 2021 population data
 pop = pd.read_csv('https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2022_TotalPopulationBySex.zip')
@@ -63,6 +64,8 @@ df_q_table = df[['Land', 'Wert', 'Fälle pro 1 Mio. Einwohner']].rename(
     columns={'Land': ''}).dropna(subset = ['Wert']).sort_values(by = ['Fälle pro 1 Mio. Einwohner'], ascending = False).dropna(subset = ['Fälle pro 1 Mio. Einwohner'])
 df_q_table.rename(columns = {'Wert': 'Fälle gesamt'}, inplace = True)
 
+
+date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y")
 
 id_q_table = 'd0be298e35165ab925d7292335e97175'  # linked in article
 update_chart(id=id_q_table, 
