@@ -52,7 +52,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: | # 
-          python monkeypox_auto_int.py
+          python monkeypox_auto_int_20220726.py
       # - uses: stefanzweifel/git-auto-commit-action@v4 # <---- ?
       #   with:
       #     commit_message: update monkeypox charts #

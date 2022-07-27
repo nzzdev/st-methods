@@ -72,8 +72,8 @@ if __name__ == '__main__':
         )].iloc[-1] - df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) / df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         df_meta['Trend Gas'] = round(((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
         )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
-        df_meta['Trend Importe'] = round(((df['Russisches Gas'].loc[~df['Russisches Gas'].isnull(
-        )].iloc[-1] - df['Russisches Gas'].loc[~df['Russisches Gas'].isnull()].iloc[-2]) / df['Russisches Gas'].loc[~df['Russisches Gas'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
+        df_meta['Trend Importe'] = round(((df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull(
+        )].iloc[-1] - df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) / df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         # BENZIN df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) * 100, 0)  # diff previous week
         df_meta = df_meta[['Trend Speicher', 'Trend Importe',
                            'Trend Gas', 'Gasspeicher', 'Gaspreis', 'Russisches Gas']]
@@ -156,7 +156,7 @@ if __name__ == '__main__':
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': 'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'in Millionen m³', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} m³',
+        meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse nach Deutschland', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} Mio. m³',
                     'yAxisStart': rus_y, 'yAxisLabels': rus_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_rus, 'chartType': 'line'}
         # BENZIN meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Super E5', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro', 'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
 
