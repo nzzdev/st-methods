@@ -14,78 +14,43 @@ from helpers import *
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
 
-# read data from google sheet
-sheet_id = '1CEBhao3rMe-qtCbAgJTn5ZKQMRFWeAeaiXFpBY3gbHE'
-url = f"https://docs.google.com/spreadsheets/d/{sheet_id}/gviz/tq?tqx=out:csv"
-df_roh = pd.read_csv(url)
+# read data from Github
+latest = pd.read_csv('https://raw.githubusercontent.com/globaldothealth/monkeypox/main/latest.csv')
+latest['Endemic'] = latest['ID'].str[0]
+latest = latest[(latest['Endemic'] == 'N') & (latest['Status'] == 'confirmed')]
+latest['date'] = pd.to_datetime(latest['Date_entry'])
+latest = latest.set_index('date')
 
+# by countries
+df = latest.groupby('Country_ISO3')[
+    'ID'].count().reset_index(name = 'Wert')
 
-# Pivot wider
-df = df_roh.groupby(['Country', 'Status'])[
-    'ID'].count().unstack().reset_index()
-df = df.rename(columns={'confirmed': 'Bestätigt'})
-df.drop('discarded', inplace=True, axis=True)
-df.drop('suspected', inplace=True, axis=True)
+df = df.sort_values('Wert', ascending=False)
 
-
-# add totals column
-df['Total'] = df.iloc[:, 1:].sum(axis=True)
-df = df[df['Total']!=0].reset_index(drop = True)
-
-# format integers
-df = df.fillna(0)
-df.iloc[:, 1:] = df.iloc[:, 1:].astype(int)
-df['Country'] = df['Country'].str.strip()
-df['Country_sum'] = df['Country']
-df.loc[df['Country'].isin(['England', 'Scotland', 'Wales', 'Northern Ireland',
-'United Kingdom']), 'Country_sum'] = 'United Kingdom'
-
-df = df.groupby('Country_sum')['Total'].sum().reset_index()
-
-df = df.sort_values('Total', ascending=False)
-df.rename(columns = {'Country_sum': 'Country'}, inplace = True)
-
-# replace Country names with our worldmap ids
-df['Country'] = df['Country'].str.replace('Iran', 'Iran, Islamic Republic of')
-df['Country'] = df['Country'].str.replace('Czech Republic', 'Czechia')
-
-# remove unofficial countries
-#df = df[df['Country']!='Kosovo']
-
-
+# assign names to country codes and translate them
+df['Country'] = df['Country_ISO3'].apply(lambda x: coco.convert(names=x, to='name_short', not_found=None))
 df['Land'] = df['Country'].apply(lambda x: _(x))
-
+# manual adjustments of country names
 df['Land'] = df['Land'].str.replace('Iran, Islamische Republik', 'Iran')
 df['Land'] = df['Land'].str.replace('Russia', 'Russland')
-df['Land'] = df['Land'].str.replace('Bosnia And Herzegovina', 'Bosnien-H.')
 df['Land'] = df['Land'].str.replace('South Korea', 'Südkorea')
 
-
-df = df[['Country', 'Land', 'Total']]
-df['ID'] = df['Country'].apply(lambda x: coco.convert(names=x, to='ISO3', not_found=None))
-
-
+# Country codes from Q Choropleth
+ids = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/monkeypox-charts/q_countries.csv')
+# merge df with Q codes
+df = ids.merge(df, left_on = 'ID', right_on = 'Country_ISO3', how = 'left')
 
 # set date for charts
 date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y")
 
-ids = pd.read_csv('q_countries.csv')
-
-# merge df with ids
-df = ids.merge(df, on = 'ID', how = 'left')
-df['Wert'] = round(df['Total'], 0).fillna("")
-
+# get 2021 population data
 pop = pd.read_csv('https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2022_TotalPopulationBySex.zip')
 pop = pop[pop['Time'].isin([2021])]
-pop = pop[['ISO3_code', 'PopTotal']]
-
-
-df = df.merge(pop, left_on = 'ID', right_on = 'ISO3_code', how = 'left' )
-df['Fälle pro 1 Mio. Einwohner'] = round(df['Total']*1000/df['PopTotal'], 1)
-df.rename(columns = {'Total': 'Fälle gesamt'}, inplace = True)
-
-
-
+pop = pop[['ISO3_code', 'PopTotal']].dropna()
+# merge with df and calculate cases per 1 Mio. pop.
+df = df.merge(pop, left_on = 'Country_ISO3', right_on = 'ISO3_code', how = 'left' )
+df['Fälle pro 1 Mio. Einwohner'] = round(df['Wert']*1000/df['PopTotal'], 1)
+df['Wert'] = round(df['Wert'], 0).fillna("")
 
 
 id_worldmap = 'd0be298e35165ab925d7292335e77bb7'  # linked in article
@@ -94,8 +59,10 @@ update_chart(id=id_worldmap,
             notes = date_notes)
 
 # export for q table
-df_q_table = df[['Land', 'Fälle gesamt', 'Fälle pro 1 Mio. Einwohner']].rename(
-    columns={'Land': ''}).dropna(subset = ['Fälle gesamt']).sort_values(by = ['Fälle pro 1 Mio. Einwohner'], ascending = False)
+df_q_table = df[['Land', 'Wert', 'Fälle pro 1 Mio. Einwohner']].rename(
+    columns={'Land': ''}).dropna(subset = ['Wert']).sort_values(by = ['Fälle pro 1 Mio. Einwohner'], ascending = False)
+df_q_table.rename(columns = {'Wert': 'Fälle gesamt'}, inplace = True)
+
 
 id_q_table = 'd0be298e35165ab925d7292335e97175'  # linked in article
 update_chart(id=id_q_table, 
@@ -103,14 +70,13 @@ update_chart(id=id_q_table,
             notes = date_notes)
 
 
+# 7-day-average
+df = latest.groupby(latest.index)['Status'].count()
+df = df.rolling(7).mean().reset_index()
 
-latest = pd.read_csv('https://raw.githubusercontent.com/globaldothealth/monkeypox/main/latest.csv')
-latest['Endemic'] = latest['ID'].str[0]
-latest = latest[(latest['Endemic'] == 'N') & (latest['Status'] == 'confirmed')]
-latest['date'] = pd.to_datetime(latest['Date_entry'])
-latest = latest.set_index('date')
+date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y") +'<br> ¹ohne Fälle aus endemischen Ländern'
 
-latest.groupby(latest.index)['Status'].count().reset_index()
-
-
+update_chart(id='d0be298e35165ab925d7292335eb1ba0', 
+            data=df,
+            notes = date_notes)
 
