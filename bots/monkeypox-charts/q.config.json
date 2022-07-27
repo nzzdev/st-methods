@@ -23,6 +23,17 @@
          "table": []
        }
      }
+    },
+    {
+    "environments": [
+      {
+       "name": "production",
+       "id": "d0be298e35165ab925d7292335eb1ba0"
+      }
+     ],
+     "item": {
+      "data": []
+     }
     }
    ]
   }
