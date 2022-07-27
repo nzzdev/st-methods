@@ -106,7 +106,11 @@ update_chart(id=id_q_table,
 
 latest = pd.read_csv('https://raw.githubusercontent.com/globaldothealth/monkeypox/main/latest.csv')
 latest['Endemic'] = latest['ID'].str[0]
-latest = latest[latest['Endemic'] == 'N']
+latest = latest[(latest['Endemic'] == 'N') & (latest['Status'] == 'confirmed')]
+latest['date'] = pd.to_datetime(latest['Date_entry'])
+latest = latest.set_index('date')
+
+latest.groupby(latest.index)['Status'].count().reset_index()
 
 
 
