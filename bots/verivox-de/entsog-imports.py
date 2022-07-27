@@ -227,7 +227,7 @@ if __name__ == '__main__':
         """
 
         url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
-        resp = download_data(url_de, headers=fheaders)
+        resp = download_data(url_de)
         csv_file = resp.content
         if not os.path.exists('data'):
             os.makedirs('data')
