@@ -50,7 +50,7 @@ pop = pop[['ISO3_code', 'PopTotal']].dropna()
 # merge with df and calculate cases per 1 Mio. pop.
 df = df.merge(pop, left_on = 'Country_ISO3', right_on = 'ISO3_code', how = 'left' )
 df['Fälle pro 1 Mio. Einwohner'] = round(df['Wert']*1000/df['PopTotal'], 1)
-df['Wert'] = round(df['Wert'], 0).fillna("")
+df['Wert'] = round(df['Wert'], 0).fillna(0).astype(int).replace(0, '')
 
 
 id_worldmap = 'd0be298e35165ab925d7292335e77bb7'  # linked in article
