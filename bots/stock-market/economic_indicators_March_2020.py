@@ -238,7 +238,7 @@ price_95 = pd.to_numeric(price_95[0])
  #       r'\d+\,\d+', text)[0].replace(',', '.'))
 
 
-fuel_prices_old = pd.read_csv('./Benzinpreise.csv'c)
+fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
 #fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')
 
 data = {'date': date.today().strftime('%Y-%m-%d'),
