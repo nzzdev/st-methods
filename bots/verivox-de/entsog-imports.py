@@ -1,5 +1,6 @@
 import json
 import os
+import io
 from datetime import datetime, timedelta
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -231,17 +232,13 @@ if __name__ == '__main__':
         """
         url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
         resp = download_data(url_de, headers=fheaders)
-        csv_file = resp.content
-        if not os.path.exists('data'):
-            os.makedirs('data')
-        with open(os.path.join('data', 'pipelines_de.csv'), 'wb') as f:
-            f.write(csv_file)
+        csv_file = resp.text
 
         # read csv and convert to datetime, add one day
-        df_new = pd.read_csv('./data/pipelines_de.csv',
+        df_new = pd.read_csv(io.StringIO(csv_file),
                              encoding='utf-8', index_col='periodFrom')
-        df_new_sum = pd.read_csv(
-            './data/pipelines_de.csv', encoding='utf-8', index_col='periodFrom')
+        df_new_sum = pd.read_csv(io.StringIO(
+            csv_file), encoding='utf-8', index_col='periodFrom')
 
         # rename columns
         df_new = df_new.rename(columns={
