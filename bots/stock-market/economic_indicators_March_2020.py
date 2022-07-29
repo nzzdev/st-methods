@@ -336,22 +336,21 @@ tickers = ["EURCHF=X", "KE=F", "^GDAXI", "EURUSD=X",
            "BTC-USD", "BZ=F"]  # Subtitute for the tickers you want
 df = yf.download(tickers,  start="2019-01-01", end=date.today())
 
-euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].to_frame().dropna()
-euro = euro[['EURCHF=X']]
+euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
+
 #euro.index = euro.index.strftime('%Y-%m-%d')
 update_chart(id='1dda540238574eac80e865faa0dcab83', data=euro)
 
-dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].to_frame().dropna()
-dollar = dollar[['EURUSD=X']]
+dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
 #dollar.index = dollar.index.strftime('%Y-%m-%d')
 update_chart(id='5ac628c4bb388d36fb2f5cbc744a628c', data=dollar)
 
-dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].to_frame().dropna()
+dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
 dax = dax[['^GDAXI']]
 #dax.index = dax.index.strftime('%Y-%m-%d')
 update_chart(id='a78c9d9de3230aea314700dc582d873d', data=dax)
 
-wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].to_frame().dropna()
+wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
 wheat['Jahresdurchschnitt 2019'] = df['Close']['KE=F'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 wheat.rename(columns={wheat.columns[0]: '2022'}, inplace=True)
@@ -382,7 +381,7 @@ df_gas['Datum'] = pd.to_datetime(df_gas['Datum'])
 df_gas.set_index('Datum', inplace=True)
 df_gas = df_gas['Kosten'][df_gas.index >= '2022-01-01'].to_frame().dropna()
 df_gas.rename(columns={df_gas.columns[0]: '2022'}, inplace=True)
-df_gas = df_gas[['2022']]
+df_gas = df_gas.reset_index(level=0)
 
 # create date for chart notes
 #timecode = df_gas.index[-1]
@@ -395,21 +394,19 @@ df_gas = df_gas[['2022']]
 # run Q function
 update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas)
 
-oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna()
+oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
 oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 oil.rename(columns={oil.columns[0]: '2022'}, inplace=True)
-oil = oil[['Jahresdurchschnitt 2019', '2022']]
 #oil.index = oil.index.strftime('%Y-%m-%d')
 update_chart(id='c6aec0c9dea84bcdef43b980cd4a7e3f', data=oil)
 
-bitcoin = df['Close']["BTC-USD"].to_frame().dropna().round(1)
-bitcoin = bitcoin[['BTC-USD']]
+bitcoin = df['Close']["BTC-USD"].to_frame().dropna().round(1).reset_index(level=0)
 #bitcoin.index = bitcoin.index.strftime('%Y-%m-%d')
 update_chart(id='3ae57b07ddc738d6984ae6d72c027d3d', data=bitcoin)
 
 month1 = date.today() - pd.to_timedelta(30, unit='d')
-bitcoin1m = bitcoin.loc[(pd.to_datetime(bitcoin.index)
+bitcoin1m = bitcoin.loc[(pd.to_datetime(bitcoin.Date)
                          >= pd.to_datetime(month1))]
 update_chart(id='80a5f74298f588521786f9061c21d472',
              data=bitcoin1m)
