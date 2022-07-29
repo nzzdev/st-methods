@@ -1,6 +1,7 @@
 import json
 import os
 import io
+from time import sleep
 from datetime import datetime, timedelta
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -21,6 +22,7 @@ if __name__ == '__main__':
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
         }
+
         url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'
         resp = download_data(url, headers=fheaders)
         html = resp.text
@@ -230,19 +232,34 @@ if __name__ == '__main__':
         #df_de.index = df_de.index.strftime('%Y-%m-%d')
         # END OLD
         """
-        cheaders = {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
-        }
+
         url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
-        resp = download_data(url_de, headers=cheaders)
+        resp = download_data(url_de, headers=fheaders)
         csv_file = resp.text
 
         # read csv and convert to datetime, add one day
-        df_new = pd.read_csv(io.StringIO(csv_file),
-                             encoding='utf-8', index_col='periodFrom')
-        df_new_sum = pd.read_csv(io.StringIO(
-            csv_file), encoding='utf-8', index_col='periodFrom')
+        df_test = pd.read_csv(io.StringIO(csv_file),
+                              encoding='utf-8', index_col='periodFrom')
+
+        # check if new data is available
+        yesterday = date.today() - timedelta(days=1)
+        recent = pd.to_datetime(df_test.index[-1]).date()
+
+        # check if file is cached
+        count = 0
+        while recent != yesterday and count < 20:
+            url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
+            resp = download_data(url_de, headers=fheaders)
+            csv_file = resp.text
+            df_test = pd.read_csv(io.StringIO(csv_file),
+                                  encoding='utf-8', index_col='periodFrom')
+            recent = pd.to_datetime(df_test.index[-1]).date()
+            count = count + 1
+            sleep(0.2)
+
+        # create dataframes
+        df_new = df_test.copy()
+        df_new_sum = df_test.copy()
 
         # rename columns
         df_new = df_new.rename(columns={
@@ -270,9 +287,7 @@ if __name__ == '__main__':
         df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
 
         # save clean csv for dashboard
-        today = date.today()
-        todaystr = today.strftime('%Y-%m-%d')
-        df_new_sum.to_csv(f'./data/pipelines_de_dashboard_{todaystr}.csv')
+        df_new_sum.to_csv(f'./data/pipelines_de_dashboard.csv')
 
         # run Q function
         update_chart(id='1203f969609d721f3e48be4f2689fc53',
