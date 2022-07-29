@@ -110,6 +110,13 @@ if __name__ == '__main__':
         df_lng.fillna('', inplace=True)
         df_russia.fillna('', inplace=True)
 
+        # run Q function
+        update_chart(id='1203f969609d721f3e48be4f2689fc53',
+                     data=df_russia, notes=notes_chart)
+        update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
+                     data=df_lng, notes=notes_chart)
+        ###update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
+
         """
         # OLD
         # create dates for Russian gas flows in Germany
@@ -247,7 +254,7 @@ if __name__ == '__main__':
 
         # check if file is cached
         count = 0
-        while recent != yesterday and count < 50:
+        while recent != yesterday and count < 25:
             url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
             resp = download_data(url_de, headers=fheaders)
             csv_file = resp.text
@@ -255,50 +262,47 @@ if __name__ == '__main__':
                                   encoding='utf-8', index_col='periodFrom')
             recent = pd.to_datetime(df_test.index[-1]).date()
             count = count + 1
-            sleep(0.1)
+            sleep(0.5)
+        if recent == yesterday:
 
-        # create dataframes
-        df_new = df_test.copy()
-        df_new_sum = df_test.copy()
+            # create dataframes
+            df_new = df_test.copy()
+            df_new_sum = df_test.copy()
 
-        # rename columns
-        df_new = df_new.rename(columns={
-                               df_new.columns[0]: 'Mallnow', df_new.columns[1]: 'Waidhaus', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
+            # rename columns
+            df_new = df_new.rename(columns={
+                df_new.columns[0]: 'Mallnow', df_new.columns[1]: 'Waidhaus', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
 
-        # calculate sum of all pipelines and drop columns
-        df_new_sum['Summe'] = df_new_sum.sum(axis=1)
-        df_new_sum = df_new_sum[['Summe']]
+            # calculate sum of all pipelines and drop columns
+            df_new_sum['Summe'] = df_new_sum.sum(axis=1)
+            df_new_sum = df_new_sum[['Summe']]
 
-        # convert kWh to million m3 according to calorific value of Russian gas
-        df_new = (df_new / 10.3).round(1)
-        df_new_sum = (df_new_sum / 10.3).round(1)
+            # convert kWh to million m3 according to calorific value of Russian gas
+            df_new = (df_new / 10.3).round(1)
+            df_new_sum = (df_new_sum / 10.3).round(1)
 
-        # convert dates to DatetimeIndex and sum values
-        df_new.index = pd.to_datetime(df_new.index)
-        df_new_sum.index = pd.to_datetime(df_new_sum.index)
+            # convert dates to DatetimeIndex and sum values
+            df_new.index = pd.to_datetime(df_new.index)
+            df_new_sum.index = pd.to_datetime(df_new_sum.index)
 
-        # create date for chart notes
-        timecode = df_new.index[-1]
-        timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart_de = 'Stand: ' + timecode_str
+            # create date for chart notes
+            timecode = df_new.index[-1]
+            timecode_str = timecode.strftime('%-d. %-m. %Y')
+            notes_chart_de = 'Stand: ' + timecode_str
 
-        # convert DatetimeIndex to string
-        df_new.index = df_new.index.strftime('%Y-%m-%d')
-        df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
+            # convert DatetimeIndex to string
+            df_new.index = df_new.index.strftime('%Y-%m-%d')
+            df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
 
-        # save clean csv for dashboard
-        df_new_sum.to_csv(f'./data/pipelines_de_dashboard.csv')
+            # save clean csv for dashboard
+            df_new_sum.to_csv(f'./data/pipelines_de_dashboard.csv')
 
-        # run Q function
-        update_chart(id='1203f969609d721f3e48be4f2689fc53',
-                     data=df_russia, notes=notes_chart)
-        update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
-                     data=df_lng, notes=notes_chart)
-        #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
-        update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
-                     data=df_new_sum, notes=notes_chart_de)
-        update_chart(id='d0be298e35165ab925d7292335b3d00e',
-                     data=df_new, notes=notes_chart_de)
+            print('worked')
+            # run Q function
+            update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
+                         data=df_new_sum, notes=notes_chart_de)
+            update_chart(id='d0be298e35165ab925d7292335b3d00e',
+                         data=df_new, notes=notes_chart_de)
 
     except:
         raise
