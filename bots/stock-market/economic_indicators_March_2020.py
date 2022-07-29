@@ -49,6 +49,14 @@ zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
 
 update_chart(id='5b6e24348e8d8ddd990c10892047973d', data = zurich[['AnzFahrzeuge']])
 
+# Mobis 
+
+mobis = pd.read_csv('https://ivtmobis.ethz.ch/mobis/covid19/reports/data/kilometers_by_transport_mode.csv')
+mobis['date'] = pd.to_datetime(mobis['week_start'])
+mobis['pc_change'] = mobis['pc_change']*100
+mobis = mobis[(mobis['Mode'] == 'Car') & (mobis['date'] >= '2022-01-01')][['date', 'pc_change']]
+
+update_chart(id='bb539ba7d067f90f4fb7622d10044d91', data=[['pc_change']])
 
 
 # LKW
