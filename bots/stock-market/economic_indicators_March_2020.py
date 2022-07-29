@@ -1,5 +1,5 @@
 
-from helpers import *
+
 import pandas as pd
 import requests_html
 from datetime import date, datetime, timedelta
@@ -15,7 +15,7 @@ import sys
 from fake_useragent import UserAgent
 
 
-sys.path.append(os.path.dirname((os.path.dirname(__file__))))
+from helpers import *
 
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
