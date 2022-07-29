@@ -254,7 +254,7 @@ if __name__ == '__main__':
 
         # check if file is cached
         i = 0
-        while recent != yesterday and count < 20:
+        while recent != yesterday and i < 20:
             url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
             resp = download_data(url_de, headers=fheaders)
             csv_file = resp.text
