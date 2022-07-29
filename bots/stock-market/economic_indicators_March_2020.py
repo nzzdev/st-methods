@@ -217,7 +217,7 @@ benzin = benzin[['Reiseziel', '95']]
 benzin.rename(columns={'95': 'Benzinpreis'}, inplace=True)
 benzin.sort_values(by='Benzinpreis', ascending=False, inplace=True)
 
-update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin)
+update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin[['Reiseziel', 'Benzinpreis']])
 
 session = requests_html.HTMLSession()
 r = session.get(url)
