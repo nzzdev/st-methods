@@ -43,11 +43,11 @@ zurich['date'] = zurich['MessungDatZeit'].str[:10]
 zurich['date'] = pd.to_datetime(zurich['date'], format = '%Y-%m-%d')
 zurich.set_index('date', inplace = True)
 zurich = zurich.groupby(zurich.index)['AnzFahrzeuge'].sum().rolling(7).mean().reset_index()
-zurich.set_index('date', inplace = True)
+#zurich.set_index('date', inplace = True)
 
-zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
+#zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
 
-update_chart(id='5b6e24348e8d8ddd990c10892047973d', data = zurich[['AnzFahrzeuge']])
+update_chart(id='5b6e24348e8d8ddd990c10892047973d', data = zurich)
 
 # Mobis 
 
@@ -56,7 +56,7 @@ mobis['date'] = pd.to_datetime(mobis['week_start'])
 mobis['pc_change'] = mobis['pc_change']*100
 mobis = mobis[(mobis['Mode'] == 'Car') & (mobis['date'] >= '2022-01-01')][['date', 'pc_change']]
 
-update_chart(id='bb539ba7d067f90f4fb7622d10044d91', data=mobis[['pc_change']])
+update_chart(id='bb539ba7d067f90f4fb7622d10044d91', data=mobis)
 
 
 # LKW
@@ -86,10 +86,10 @@ lkw_2022.rename(
     columns={'gleitender 7-Tage-Durchschnitt KSB': '2022'}, inplace=True)
 
 lkw = lkw_2019.merge(lkw_2022, on='Datum', how='outer')
-lkw.set_index('Datum', inplace=True)
-lkw.index = pd.to_datetime(lkw.index).strftime('%Y-%m-%d')
+#lkw.set_index('Datum', inplace=True)
+#lkw.index = pd.to_datetime(lkw.index).strftime('%Y-%m-%d')
 
-update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data=lkw[['2019', '2022']])
+update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data=lkw)
 
 
 # Flugdaten
@@ -113,10 +113,10 @@ zh_2022['time'] = zh_2022['time'].dt.date
 zh_2019.rename(columns={'value': '2019'}, inplace=True)
 zh_2022.rename(columns={'value': '2022'}, inplace=True)
 zh = zh_2019.merge(zh_2022, on='time', how='outer')
-zh.set_index('time', inplace=True)
-zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
+#zh.set_index('time', inplace=True)
+#zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
 
-update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data=zh[['2019', '2022']])
+update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data=zh)
 
 url = 'https://www.adv.aero/corona-pandemie/woechentliche-verkehrszahlen/'
 page = requests.get(url)
