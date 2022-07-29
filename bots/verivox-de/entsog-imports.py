@@ -247,7 +247,7 @@ if __name__ == '__main__':
 
         # check if file is cached
         count = 0
-        while recent != yesterday and count < 20:
+        while recent != yesterday and count < 50:
             url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
             resp = download_data(url_de, headers=fheaders)
             csv_file = resp.text
@@ -255,7 +255,7 @@ if __name__ == '__main__':
                                   encoding='utf-8', index_col='periodFrom')
             recent = pd.to_datetime(df_test.index[-1]).date()
             count = count + 1
-            sleep(0.2)
+            sleep(0.1)
 
         # create dataframes
         df_new = df_test.copy()
