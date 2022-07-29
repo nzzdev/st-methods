@@ -58,6 +58,8 @@ if __name__ == '__main__':
             'referer': 'https://agsi.gie.eu/historical/DE',
             'authority': 'agsi.gie.eu',
             'sec-fetch-site': 'same-origin',
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
         }
 
         # create dates

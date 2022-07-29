@@ -15,7 +15,11 @@ if __name__ == '__main__':
 
         # read data for gas imports
         # https://www.bruegel.org/publications/datasets/european-natural-gas-imports/
-        fheaders = {'user-agent': generate_user_agent()}
+        fheaders = {
+            'user-agent': generate_user_agent(),
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+        }
         url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'
         resp = download_data(url, headers=fheaders)
         html = resp.text
@@ -225,12 +229,8 @@ if __name__ == '__main__':
         #df_de.index = df_de.index.strftime('%Y-%m-%d')
         # END OLD
         """
-        cheaders = {
-            'Cache-Control': 'no-cache',
-            'Pragma': 'no-cache'
-        }
         url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
-        resp = download_data(url_de, headers=cheaders)
+        resp = download_data(url_de, headers=fheaders)
         csv_file = resp.content
         if not os.path.exists('data'):
             os.makedirs('data')
