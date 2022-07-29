@@ -438,7 +438,7 @@ smi.drop_duplicates(subset='Date', keep='last', inplace=True)
 #smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
 
 update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
-smi.to_csv(f'./SMI.csv')
+smi.to_csv(f'./SMI.csv', index = False)
 
 # Benzinpreistabelle D
 
