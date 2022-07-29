@@ -347,7 +347,6 @@ dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].to_frame().dropna().r
 update_chart(id='5ac628c4bb388d36fb2f5cbc744a628c', data=dollar)
 
 dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
-dax = dax[['^GDAXI']]
 #dax.index = dax.index.strftime('%Y-%m-%d')
 update_chart(id='a78c9d9de3230aea314700dc582d873d', data=dax)
 
@@ -538,11 +537,11 @@ df.iloc[:, 1] = pd.to_numeric(df.iloc[:, 1])
 df.reset_index(level=0, inplace=True)
 df.rename(columns={0: 'Date'}, inplace=True)
 # drop index name
-df.columns.name = None
+#df.columns.name = None
 # set new index
 #df.set_index('Date', inplace=True)
-#df.index = pd.to_datetime(df.index).strftime('%Y-%m-%d')
-
+df['Date'] = pd.to_datetime(df['Date'])
+df = df[['Date', 'Estimated TWh per Year']]
 
 update_chart(id='b6873820afc5a1492240edc1b101cdd9',
              data=df)
