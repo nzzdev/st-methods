@@ -56,7 +56,7 @@ mobis['date'] = pd.to_datetime(mobis['week_start'])
 mobis['pc_change'] = mobis['pc_change']*100
 mobis = mobis[(mobis['Mode'] == 'Car') & (mobis['date'] >= '2022-01-01')][['date', 'pc_change']]
 
-update_chart(id='bb539ba7d067f90f4fb7622d10044d91', data=[['pc_change']])
+update_chart(id='bb539ba7d067f90f4fb7622d10044d91', data=mobis[['pc_change']])
 
 
 # LKW
