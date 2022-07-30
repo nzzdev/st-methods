@@ -254,7 +254,7 @@ if __name__ == '__main__':
 
         # check if file is cached
         i = 0
-        while recent != yesterday and i < 20:
+        while recent != yesterday and i < 25:
             url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
             resp = download_data(url_de, headers=fheaders)
             csv_file = resp.text
@@ -295,9 +295,8 @@ if __name__ == '__main__':
             df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
 
             # save clean csv for dashboard
-            df_new_sum.to_csv(f'./data/pipelines_de_dashboard.tsv', sep='\t')
+            df_new_sum.to_csv('./data/pipelines_de_dashboard.tsv', sep='\t')
 
-            print('worked')
             # run Q function
             update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
                          data=df_new_sum, notes=notes_chart_de)
