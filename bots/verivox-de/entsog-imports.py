@@ -115,7 +115,7 @@ if __name__ == '__main__':
                      data=df_russia, notes=notes_chart)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
-        ###update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
+        #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
         """
         # OLD
@@ -295,13 +295,28 @@ if __name__ == '__main__':
             df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
 
             # save clean csv for dashboard
-            df_new_sum.to_csv('./data/pipelines_de_dashboard.tsv', sep='\t')
+            df_new_sum.to_csv('./data/pipelines_de_sum.tsv', sep='\t')
+            df_new.to_csv('./data/pipelines_de.tsv', sep='\t')
 
             # run Q function
             update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
                          data=df_new_sum, notes=notes_chart_de)
             update_chart(id='d0be298e35165ab925d7292335b3d00e',
                          data=df_new, notes=notes_chart_de)
+        else:
+            df_new = pd.read_csv(
+                './data/pipelines_de.tsv', sep='\t', encoding='utf-8', index_col='periodFrom')
+            df_new_sum = pd.read_csv(
+                './data/pipelines_de_sum.tsv', sep='\t', encoding='utf-8', index_col='periodFrom')
 
+            # create date for chart notes
+            timecode = df_new.index[-1]
+            notes_chart_de = 'Stand: ' + timecode
+
+            # run Q function
+            update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
+                         data=df_new_sum, notes=notes_chart_de)
+            update_chart(id='d0be298e35165ab925d7292335b3d00e',
+                         data=df_new, notes=notes_chart_de)
     except:
         raise
