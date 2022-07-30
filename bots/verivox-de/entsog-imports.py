@@ -263,7 +263,7 @@ if __name__ == '__main__':
             recent = pd.to_datetime(df_test.index[-1]).date()
             i+=1
             sleep(0.5)
-        if recent != yesterday:
+        if recent == yesterday:
 
             # create dataframes
             df_new = df_test.copy()
