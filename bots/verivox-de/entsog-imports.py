@@ -261,7 +261,7 @@ if __name__ == '__main__':
             df_test = pd.read_csv(io.StringIO(csv_file),
                                   encoding='utf-8', index_col='periodFrom')
             recent = pd.to_datetime(df_test.index[-1]).date()
-            i+=1
+            i += 1
             sleep(0.5)
         if recent == yesterday:
 
