@@ -295,7 +295,7 @@ if __name__ == '__main__':
             df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
 
             # save clean csv for dashboard
-            df_new_sum.to_csv(f'./data/pipelines_de_dashboard.csv')
+            df_new_sum.to_csv(f'./data/pipelines_de_dashboard.tsv', sep='\t')
 
             print('worked')
             # run Q function
