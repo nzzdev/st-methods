@@ -36,7 +36,7 @@ if __name__ == '__main__':
 
         # get date for chart notes
         df_diesel.index = pd.to_datetime(df_diesel.index)
-        timestamp_str = df_diesel.tail(1).index.item().strftime('%-d. %-m. %Y')
+        timestamp_str = df_diesel.tail(1).index.item().strftime('%-d. %-m. %Y')
         tcode = tz.gettz('Europe/Berlin')
         tcode_h = datetime.now(tcode)
         tcode_h = tcode_h.strftime("%H. %M")

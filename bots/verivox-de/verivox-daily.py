@@ -152,7 +152,7 @@ if __name__ == '__main__':
         # time_dt = datetime.strptime(time_str, '%d.%m.%y')
         time_str = time_dt.strftime(
             '%Y-%m-%d %H:%M:%SZ')  # %Y-%m-%dT%H:%M:%S.%fZ
-        time_str_notes = time_dt.strftime('%-d. %-m. %Y')
+        time_str_notes = time_dt.strftime('%-d. %-m. %Y')
 
         # rename column headers
         dfac.rename(columns={'Postleitzahl': 'id', 'Anzahl Haushalte': 'hh',
@@ -221,7 +221,7 @@ if __name__ == '__main__':
                          data=dfavg, notes=notes_chart)
         else:
             time_dt_notes = dfavg['date'].iloc[-1]
-            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung).<br>Stand: ' + \

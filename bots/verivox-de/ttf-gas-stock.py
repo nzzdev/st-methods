@@ -41,7 +41,7 @@ if __name__ == '__main__':
 
         # create date for chart notes
         timecode = df.index[-1]
-        timecode_str = timecode.strftime('%-d. %-m. %Y')
+        timecode_str = timecode.strftime('%-d. %-m. %Y')
         notes_chart = 'Stand: ' + timecode_str
 
         # convert DatetimeIndex
