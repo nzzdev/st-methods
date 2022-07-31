@@ -103,7 +103,7 @@ if __name__ == '__main__':
         weekno = df_russia['2022'].last_valid_index()  # last non NaN value
         weekno_dt = datetime.strptime(
             weekno + '-1', '%Y-W%W-%w') + timedelta(days=7)  # get monday from next week
-        weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
+        weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Maximum/Minimum der Importe 2015–2020.<br>Stand: ' + weekno_str
 
         # replace NaN with empty strings for Q
@@ -287,7 +287,7 @@ if __name__ == '__main__':
 
             # create date for chart notes
             timecode = df_new.index[-1]
-            timecode_str = timecode.strftime('%-d. %-m. %Y')
+            timecode_str = timecode.strftime('%-d. %-m. %Y')
             notes_chart_de = 'Stand: ' + timecode_str
 
             # convert DatetimeIndex to string
@@ -311,7 +311,7 @@ if __name__ == '__main__':
 
             # create date for chart notes
             timecode = pd.to_datetime(df_new.index[-1])
-            timecode_str = timecode.strftime('%-d. %-m. %Y')
+            timecode_str = timecode.strftime('%-d. %-m. %Y')
             notes_chart_de = 'Stand: ' + timecode_str
 
             # run Q function
