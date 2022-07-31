@@ -310,8 +310,9 @@ if __name__ == '__main__':
                 './data/pipelines_de_sum.tsv', sep='\t', encoding='utf-8', index_col='periodFrom')
 
             # create date for chart notes
-            timecode = df_new.index[-1]
-            notes_chart_de = 'Stand: ' + timecode
+            timecode = pd.to_datetime(df_new.index[-1])
+            timecode_str = timecode.strftime('%-d. %-m. %Y')
+            notes_chart_de = 'Stand: ' + timecode_str
 
             # run Q function
             update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
