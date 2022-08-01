@@ -39,6 +39,9 @@ if __name__ == '__main__':
         df.set_index('Datum', inplace=True)
         df = df['Kosten'][df.index >= '2020-12-31'].to_frame().dropna()
 
+        # round numbers
+        df['Kosten'] = df['Kosten'].round(0).astype(int)
+
         # create date for chart notes
         timecode = df.index[-1]
         timecode_str = timecode.strftime('%-d. %-m. %Y')
@@ -48,8 +51,7 @@ if __name__ == '__main__':
         #df.index = df.index.strftime('%Y-%m-%d')
 
         # run Q function
-        update_chart(id='4decc4d9f742ceb683fd78fa5937acfd',
-                     notes=notes_chart, data=df)
+        #update_chart(id='4decc4d9f742ceb683fd78fa5937acfd', notes=notes_chart, data=df)
 
     except:
         raise
