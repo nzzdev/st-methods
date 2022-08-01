@@ -40,7 +40,7 @@ if __name__ == '__main__':
         df = df['Kosten'][df.index >= '2020-12-31'].to_frame().dropna()
 
         # round numbers
-        df['Kosten'] = df['Kosten'].round(0).astype(int)
+        df['Kosten'] = df['Kosten'].round(1)
 
         # create date for chart notes
         timecode = df.index[-1]
