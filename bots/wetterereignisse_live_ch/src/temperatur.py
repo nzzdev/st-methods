@@ -54,7 +54,8 @@ current_hour = datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
     data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
-    title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
+    title = "In Zürich wird es heute wieder heiss",
+    #title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
     notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str'],
     # events=[{
     #     'type': 'point',
