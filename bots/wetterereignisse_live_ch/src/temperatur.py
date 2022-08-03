@@ -4,6 +4,7 @@
 from helpers import *
 import pandas as pd
 import requests
+import pytz
 from datetime import timezone, datetime, timedelta
 import os
 
@@ -66,11 +67,16 @@ for i in range(0, 3):
 
 # print(json.dumps(events, indent=2))
 
+df = df.reset_index()
+df['date'] = df['date'].dt.strftime('%Y-%m-%d %H:%M')
+df = df.set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']]
+
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
-    data = df.reset_index().set_index('date_str')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
-    #title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
-    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str'],
+    data = df,
+    # data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
+    # title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
+    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').astimezone(pytz.timezone('Europe/Berlin')).strftime("%-d. %-m. %Y, %H.%M"),
     events = events
     # [
     #     {
