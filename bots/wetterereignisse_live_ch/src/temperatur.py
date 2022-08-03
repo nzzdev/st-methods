@@ -76,7 +76,7 @@ update_chart(
     data = df,
     # data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
     # title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
-    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').astimezone(pytz.timezone('Europe/Berlin')).strftime("%-d. %-m. %Y, %H.%M"),
+    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').strftime("%-d. %-m. %Y, %H.%M"),
     events = events
     # [
     #     {
@@ -95,3 +95,4 @@ update_chart(
     #         'label': "Aktuell %s° (%s Uhr)" % (current_temp, current_hour)
     #     }]
 )
+print(df)
