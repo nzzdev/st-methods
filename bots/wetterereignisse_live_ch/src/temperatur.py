@@ -29,6 +29,7 @@ def serialize(seriesfilter, name):
     df = pd.DataFrame(series)
     df.columns = ['date', 'temp']
     df['date'] = pd.to_datetime(df['date'], utc=True, unit='ms')
+    df['date'] = df['date'].dt.tz_convert(pytz.timezone('Europe/Berlin'))
     df['type'] = name
 
     return df
@@ -49,10 +50,6 @@ df['Hitzerekord von 2003 (36°)'] = 36
 # Spalten auswählen
 df = df[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']]
 
-# Für Annotation
-# current_temp = str(df.reset_index().iloc[-1]['Stundenmaximum']).replace('.', ',')
-# current_hour = df.reset_index().iloc[-1]['date'].hour
-
 # Annotationen hinzufügen: Höchstwerte der letzten beiden Tagen + aktuell
 now = df.reset_index().iloc[-1]['date'].normalize()
 events = []
@@ -66,16 +63,15 @@ for i in range(0, 3):
         'label': '%s° Celsius am %s' % (str(n_max.Stundenmaximum).replace('.', ','), n_max.date.strftime("%-d. %B"))
     })
 
-# Date neu formatieren für Q
-df = df.reset_index()
-df['date'] = df['date'].dt.strftime('%Y-%m-%d %H:%M')
-df = df.set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']]
+# index in Str umwandeln für Q
+df.index = df.index.strftime('%Y-%m-%d %H:%M')
 
 # Update
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
-    data = df,
+    data = df[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
     # title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
-    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').strftime("%-d. %-m. %Y, %H.%M"),
+    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').astimezone(pytz.timezone('Europe/Berlin')).strftime("%-d. %-m. %Y, %H.%M"),
     events = events
 )
+
