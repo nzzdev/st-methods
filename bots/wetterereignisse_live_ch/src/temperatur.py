@@ -17,40 +17,41 @@ headers = {
     'referer': 'https://www.meteoschweiz.admin.ch/home/messwerte.html?param=messwerte-lufttemperatur-10min&station=SMA&chart=hour'
 }
 
+# Daten abfragen
 r = requests.get('https://www.meteoschweiz.admin.ch/product/input/measured-values/chartData/temperature_hour/chartData.temperature_hour.SMA.de.json', headers = headers)
-
 data = r.json()
 
+# Resultat in Dataframe umwandeln
 def serialize(seriesfilter, name):
 
     series = list(filter(lambda x: x['id'] == seriesfilter, data['series']))[0]['data']
 
     df = pd.DataFrame(series)
     df.columns = ['date', 'temp']
-    #df['date'] = df['date'].apply(lambda x: datetime.fromtimestamp(x / 1000, ''))
     df['date'] = pd.to_datetime(df['date'], utc=True, unit='ms')
     df['type'] = name
 
     return df
 
+# Dateframes zusammenfügen
 df = pd.concat([
     serialize('temperature_hour.SMA.de.series.2', 'Stundenminimum'),
     # serialize('temperature_hour.SMA.de.series.1', 'Stundenmittel'),
     serialize('temperature_hour.SMA.de.series.3', 'Stundenmaximum'),
 ])
 
+# Daten pivotieren
+df = pd.pivot_table(df, index=['date'], columns='type', values='temp')
 
-df['date_str'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
-# df['date'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strftime("%Y-%m-%d %H:%M"))
-
-df = pd.pivot_table(df, index=['date', 'date_str'], columns='type', values='temp')
+# Hitzerekord hinzufügen
 df['Hitzerekord von 2003 (36°)'] = 36
 
+# Spalten auswählen
 df = df[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']]
 
-current_temp = str(df.reset_index().iloc[-1]['Stundenmaximum']).replace('.', ',')
-# current_hour = datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').hour
-current_hour = df.reset_index().iloc[-1]['date'].hour
+# Für Annotation
+# current_temp = str(df.reset_index().iloc[-1]['Stundenmaximum']).replace('.', ',')
+# current_hour = df.reset_index().iloc[-1]['date'].hour
 
 # Annotationen hinzufügen: Höchstwerte der letzten beiden Tagen + aktuell
 now = df.reset_index().iloc[-1]['date'].normalize()
@@ -65,34 +66,16 @@ for i in range(0, 3):
         'label': '%s° Celsius am %s' % (str(n_max.Stundenmaximum).replace('.', ','), n_max.date.strftime("%-d. %B"))
     })
 
-# print(json.dumps(events, indent=2))
-
+# Date neu formatieren für Q
 df = df.reset_index()
 df['date'] = df['date'].dt.strftime('%Y-%m-%d %H:%M')
 df = df.set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']]
 
+# Update
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
     data = df,
-    # data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
     # title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
     notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').strftime("%-d. %-m. %Y, %H.%M"),
     events = events
-    # [
-    #     {
-    #         'type': 'point',
-    #         'date': '2022-08-02 18:00',
-    #         'label': '29,2° Celsius am 2. August'
-    #     },
-    #     {
-    #         'type': 'point',
-    #         'date': '2022-08-01 17:00',
-    #         'label': '30,7° Celsius am 1. August'
-    #     },
-    #     {
-    #         'type': 'point',
-    #         'date': df.reset_index().iloc[-1]['date'],
-    #         'label': "Aktuell %s° (%s Uhr)" % (current_temp, current_hour)
-    #     }]
 )
-print(df)
