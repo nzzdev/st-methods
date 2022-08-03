@@ -62,7 +62,7 @@ for i in range(0, 3):
     events.append({
         'type': 'point',
         'date': n_max.date.strftime('%Y-%m-%d %H:%M'),
-        'label': '%s° Celsius am %s' % (str(n_max.Stundenmaximum).replace('.', ','), n_max.date.strftime("%d. %B"))
+        'label': '%s° Celsius am %s' % (str(n_max.Stundenmaximum).replace('.', ','), n_max.date.strftime("%-d. %B"))
     })
 
 # print(json.dumps(events, indent=2))
