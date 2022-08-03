@@ -15,24 +15,24 @@ jobs:
         working-directory: bots/stock-market/
     steps:
       - uses: actions/checkout@v2
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v1
-        with:
-          r-version: "4.0.5"
-      - name: Install system dependencies
-        run: |
-          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
-      - name: Cache R packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.cache/R/renv
-          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/stock-market/renv.lock') }}
-      - name: Restore R packages
-        run: |
-          install.packages("renv")
-          renv::activate()
-          renv::restore()
-        shell: Rscript {0}
+ #     - name: Setup R
+ #       uses: r-lib/actions/setup-r@v1
+ #       with:
+ #         r-version: "4.0.5"
+ #     - name: Install system dependencies
+ #       run: |
+ #         sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
+ #     - name: Cache R packages
+ #       uses: actions/cache@v2
+ #       with:
+ #         path: ~/.cache/R/renv
+ #         key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/stock-market/renv.lock') }}
+ #     - name: Restore R packages
+ #       run: |
+ #         install.packages("renv")
+ #         renv::activate()
+ #         renv::restore()
+ #       shell: Rscript {0}
       - name: Setup python
         uses: actions/setup-python@v2
         with:
