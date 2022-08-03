@@ -58,6 +58,8 @@ if __name__ == '__main__':
             'referer': 'https://agsi.gie.eu/historical/DE',
             'authority': 'agsi.gie.eu',
             'sec-fetch-site': 'same-origin',
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
         }
 
         # create dates
@@ -119,7 +121,7 @@ if __name__ == '__main__':
 
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
-        timecodestr = timecode.strftime('%-d. %-m. %Y')
+        timecodestr = timecode.strftime('%-d. %-m. %Y')
 
         # merge dataframes and convert datetime to string
         df = dfold.merge(dfnew, on='Datum', how='left')

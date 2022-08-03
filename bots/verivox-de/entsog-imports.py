@@ -1,5 +1,7 @@
 import json
 import os
+import io
+from time import sleep
 from datetime import datetime, timedelta
 import pandas as pd
 from bs4 import BeautifulSoup
@@ -15,7 +17,12 @@ if __name__ == '__main__':
 
         # read data for gas imports
         # https://www.bruegel.org/publications/datasets/european-natural-gas-imports/
-        fheaders = {'user-agent': generate_user_agent()}
+        fheaders = {
+            'user-agent': generate_user_agent(),
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+        }
+
         url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'
         resp = download_data(url, headers=fheaders)
         html = resp.text
@@ -96,12 +103,19 @@ if __name__ == '__main__':
         weekno = df_russia['2022'].last_valid_index()  # last non NaN value
         weekno_dt = datetime.strptime(
             weekno + '-1', '%Y-W%W-%w') + timedelta(days=7)  # get monday from next week
-        weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
+        weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Maximum/Minimum der Importe 2015–2020.<br>Stand: ' + weekno_str
 
         # replace NaN with empty strings for Q
         df_lng.fillna('', inplace=True)
         df_russia.fillna('', inplace=True)
+
+        # run Q function
+        update_chart(id='1203f969609d721f3e48be4f2689fc53',
+                     data=df_russia, notes=notes_chart)
+        update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
+                     data=df_lng, notes=notes_chart)
+        #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
         """
         # OLD
@@ -228,56 +242,82 @@ if __name__ == '__main__':
 
         url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
         resp = download_data(url_de, headers=fheaders)
-        csv_file = resp.content
-        if not os.path.exists('data'):
-            os.makedirs('data')
-        with open(os.path.join('data', 'pipelines_de.csv'), 'wb') as f:
-            f.write(csv_file)
+        csv_file = resp.text
 
         # read csv and convert to datetime, add one day
-        df_new = pd.read_csv('./data/pipelines_de.csv',
-                             encoding='utf-8', index_col='periodFrom')
-        df_new_sum = pd.read_csv(
-            './data/pipelines_de.csv', encoding='utf-8', index_col='periodFrom')
+        df_test = pd.read_csv(io.StringIO(csv_file),
+                              encoding='utf-8', index_col='periodFrom')
 
-        # rename columns
-        df_new = df_new.rename(columns={
-                               df_new.columns[0]: 'Mallnow', df_new.columns[1]: 'Waidhaus', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
+        # check if new data is available
+        yesterday = date.today() - timedelta(days=1)
+        recent = pd.to_datetime(df_test.index[-1]).date()
 
-        # calculate sum of all pipelines and drop columns
-        df_new_sum['Summe'] = df_new_sum.sum(axis=1)
-        df_new_sum = df_new_sum[['Summe']]
+        # check if file is cached
+        i = 0
+        while recent != yesterday and i < 25:
+            url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
+            resp = download_data(url_de, headers=fheaders)
+            csv_file = resp.text
+            df_test = pd.read_csv(io.StringIO(csv_file),
+                                  encoding='utf-8', index_col='periodFrom')
+            recent = pd.to_datetime(df_test.index[-1]).date()
+            i += 1
+            sleep(0.5)
+        if recent == yesterday:
 
-        # convert kWh to million m3 according to calorific value of Russian gas
-        df_new = (df_new / 10.3).round(1)
-        df_new_sum = (df_new_sum / 10.3).round(1)
+            # create dataframes
+            df_new = df_test.copy()
+            df_new_sum = df_test.copy()
 
-        # convert dates to DatetimeIndex and sum values
-        df_new.index = pd.to_datetime(df_new.index)
-        df_new_sum.index = pd.to_datetime(df_new_sum.index)
+            # rename columns
+            df_new = df_new.rename(columns={
+                df_new.columns[0]: 'Mallnow', df_new.columns[1]: 'Waidhaus', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
 
-        # create date for chart notes
-        timecode = df_new.index[-1]
-        timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart_de = 'Stand: ' + timecode_str
+            # calculate sum of all pipelines and drop columns
+            df_new_sum['Summe'] = df_new_sum.sum(axis=1)
+            df_new_sum = df_new_sum[['Summe']]
 
-        # convert DatetimeIndex to string
-        df_new.index = df_new.index.strftime('%Y-%m-%d')
-        df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
+            # convert kWh to million m3 according to calorific value of Russian gas
+            df_new = (df_new / 10.3).round(1)
+            df_new_sum = (df_new_sum / 10.3).round(1)
 
-        # save clean csv for dashboard
-        df_new_sum.to_csv('./data/pipelines_de_dashboard.csv')
+            # convert dates to DatetimeIndex and sum values
+            df_new.index = pd.to_datetime(df_new.index)
+            df_new_sum.index = pd.to_datetime(df_new_sum.index)
 
-        # run Q function
-        update_chart(id='1203f969609d721f3e48be4f2689fc53',
-                     data=df_russia, notes=notes_chart)
-        update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
-                     data=df_lng, notes=notes_chart)
-        #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
-        update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
-                     data=df_new_sum, notes=notes_chart_de)
-        update_chart(id='d0be298e35165ab925d7292335b3d00e',
-                     data=df_new, notes=notes_chart_de)
+            # create date for chart notes
+            timecode = df_new.index[-1]
+            timecode_str = timecode.strftime('%-d. %-m. %Y')
+            notes_chart_de = 'Stand: ' + timecode_str
 
+            # convert DatetimeIndex to string
+            df_new.index = df_new.index.strftime('%Y-%m-%d')
+            df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
+
+            # save clean csv for dashboard
+            df_new_sum.to_csv('./data/pipelines_de_sum.tsv', sep='\t')
+            df_new.to_csv('./data/pipelines_de.tsv', sep='\t')
+
+            # run Q function
+            update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
+                         data=df_new_sum, notes=notes_chart_de)
+            update_chart(id='d0be298e35165ab925d7292335b3d00e',
+                         data=df_new, notes=notes_chart_de)
+        else:
+            df_new = pd.read_csv(
+                './data/pipelines_de.tsv', sep='\t', encoding='utf-8', index_col='periodFrom')
+            df_new_sum = pd.read_csv(
+                './data/pipelines_de_sum.tsv', sep='\t', encoding='utf-8', index_col='periodFrom')
+
+            # create date for chart notes
+            timecode = pd.to_datetime(df_new.index[-1])
+            timecode_str = timecode.strftime('%-d. %-m. %Y')
+            notes_chart_de = 'Stand: ' + timecode_str
+
+            # run Q function
+            update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
+                         data=df_new_sum, notes=notes_chart_de)
+            update_chart(id='d0be298e35165ab925d7292335b3d00e',
+                         data=df_new, notes=notes_chart_de)
     except:
         raise

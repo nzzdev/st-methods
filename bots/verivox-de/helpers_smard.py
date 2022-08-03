@@ -44,7 +44,8 @@ def requestSmardData(  # request smard data with default values
             }]})
 
     # http response
-    data = s.post(url, body, headers={'user-agent': headers})
+    data = s.post(url, body, headers={
+                  'user-agent': headers, 'Cache-Control': 'no-cache', 'Pragma': 'no-cache'})
 
     # create pandas dataframe out of response string (csv)
     df = pd.read_csv(StringIO(data.text), sep=';')

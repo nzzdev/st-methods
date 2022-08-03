@@ -23,8 +23,12 @@ if __name__ == '__main__':
         """
 
         # get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
-        fheaders = {'user-agent': generate_user_agent()}
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5408202&historicalSpan=3'
+        fheaders = {
+            'user-agent': generate_user_agent(),
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache'
+        }
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5419234&historicalSpan=3'
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
@@ -35,9 +39,12 @@ if __name__ == '__main__':
         df.set_index('Datum', inplace=True)
         df = df['Kosten'][df.index >= '2020-12-31'].to_frame().dropna()
 
+        # round numbers
+        df['Kosten'] = df['Kosten'].round(1)
+
         # create date for chart notes
         timecode = df.index[-1]
-        timecode_str = timecode.strftime('%-d. %-m. %Y')
+        timecode_str = timecode.strftime('%-d. %-m. %Y')
         notes_chart = 'Stand: ' + timecode_str
 
         # convert DatetimeIndex
