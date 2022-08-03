@@ -57,12 +57,20 @@ update_chart(
     title = "In Zürich wird es heute wieder heiss",
     #title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
     notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str'],
-    # events=[{
-    #     'type': 'point',
-    #     'date': df.reset_index().iloc[-1]['date'],
-    #     'label': "Aktuell %s° (%s Uhr)" % (current_temp, current_hour)
-    #     }]
+    events=[
+        {
+            'type': 'point',
+            'date': '2022-08-02 18:00',
+            'label': '29,2° Celsius am 2. August'
+        },
+        {
+            'type': 'point',
+            'date': '2022-08-01 17:00',
+            'label': '30,7° Celsius am 1. August'
+        },
+        {
+            'type': 'point',
+            'date': df.reset_index().iloc[-1]['date'],
+            'label': "Aktuell %s° (%s Uhr)" % (current_temp, current_hour)
+        }]
 )
-# print(df.reset_index().iloc[-1]['date'])
-#print(df.reset_index().iloc[-1]['date'].tz_convert('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
-# print(datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').hour)
