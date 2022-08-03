@@ -3,6 +3,7 @@ from pathlib import Path
 from helpers import *
 from datetime import datetime
 import os
+import pytz
 import gefahrenkarteutils
 
 # Set Working Directory
@@ -43,5 +44,6 @@ features = [
 update_chart(
     id = 'd0be298e35165ab925d72923355c5379',
     geojsonList = features,
-    notes = "Stand: %s" %  datetime.strptime(geojson['timeStamp'], "%Y-%m-%dT%H:%M:%SZ").strftime('%-d. %-m. %Y, %H.%M Uhr')
+    # notes = "Stand: %s" %  datetime.strptime(geojson['timeStamp'], "%Y-%m-%dT%H:%M:%SZ").strftime('%-d. %-m. %Y, %H.%M Uhr')
+    notes = "Stand: %s" %  datetime.now(pytz.timezone('Europe/Berlin')).strftime('%-d. %-m., %H.%M Uhr')
 )

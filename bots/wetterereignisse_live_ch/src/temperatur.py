@@ -4,8 +4,8 @@
 from helpers import *
 import pandas as pd
 import requests
+import pytz
 from datetime import timezone, datetime, timedelta
-from datetime import datetime
 import os
 
 # Set Working Directory
@@ -17,51 +17,62 @@ headers = {
     'referer': 'https://www.meteoschweiz.admin.ch/home/messwerte.html?param=messwerte-lufttemperatur-10min&station=SMA&chart=hour'
 }
 
+# Daten abfragen
 r = requests.get('https://www.meteoschweiz.admin.ch/product/input/measured-values/chartData/temperature_hour/chartData.temperature_hour.SMA.de.json', headers = headers)
-
 data = r.json()
 
+# Resultat in Dataframe umwandeln
 def serialize(seriesfilter, name):
 
     series = list(filter(lambda x: x['id'] == seriesfilter, data['series']))[0]['data']
 
     df = pd.DataFrame(series)
     df.columns = ['date', 'temp']
-    #df['date'] = df['date'].apply(lambda x: datetime.fromtimestamp(x / 1000, ''))
     df['date'] = pd.to_datetime(df['date'], utc=True, unit='ms')
+    df['date'] = df['date'].dt.tz_convert(pytz.timezone('Europe/Berlin'))
     df['type'] = name
 
     return df
 
+# Dateframes zusammenfügen
 df = pd.concat([
     serialize('temperature_hour.SMA.de.series.2', 'Stundenminimum'),
     # serialize('temperature_hour.SMA.de.series.1', 'Stundenmittel'),
     serialize('temperature_hour.SMA.de.series.3', 'Stundenmaximum'),
 ])
 
+# Daten pivotieren
+df = pd.pivot_table(df, index=['date'], columns='type', values='temp')
 
-df['date_str'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
-df['date'] = df['date'].apply(lambda x: x.astimezone('Europe/Berlin').strftime("%Y-%m-%d %H:%M"))
-
-df = pd.pivot_table(df, index=['date', 'date_str'], columns='type', values='temp')
+# Hitzerekord hinzufügen
 df['Hitzerekord von 2003 (36°)'] = 36
 
+# Spalten auswählen
 df = df[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']]
 
-current_temp = str(df.reset_index().iloc[-1]['Stundenmaximum']).replace('.', ',')
-current_hour = datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').hour
+# Annotationen hinzufügen: Höchstwerte der letzten beiden Tagen + aktuell
+now = df.reset_index().iloc[-1]['date'].normalize()
+events = []
+for i in range(0, 3):
+    new_date = now - timedelta(days = i)
+    df_day = df[df.index.get_level_values('date').normalize() == (now - timedelta(days = i))].sort_values('Stundenmaximum', ascending=False).reset_index()
+    n_max = df_day.iloc[0]
+    events.append({
+        'type': 'point',
+        'date': n_max.date.strftime('%Y-%m-%d %H:%M'),
+        'label': '%s° Celsius am %s' % (str(n_max.Stundenmaximum).replace('.', ','), n_max.date.strftime("%-d. %B"))
+    })
 
+# index in Str umwandeln für Q
+df.index = df.index.strftime('%Y-%m-%d %H:%M')
+
+# Update
 update_chart(
     id = 'd0be298e35165ab925d72923352cad8b',
-    data = df.reset_index().set_index('date')[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
-    title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
-    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % df.reset_index().iloc[-1]['date_str'],
-    # events=[{
-    #     'type': 'point',
-    #     'date': df.reset_index().iloc[-1]['date'],
-    #     'label': "Aktuell %s° (%s Uhr)" % (current_temp, current_hour)
-    #     }]
+    data = df[['Stundenminimum', 'Stundenmaximum', 'Hitzerekord von 2003 (36°)']],
+    # title = "Aktuell beträgt die Temperatur in Zürich %s Grad" % current_temp,
+    subtitle = "Aktuell: %s Grad. Stündlich aktualisierte Daten, in Grad Celsius" % df.iloc[-1]['Stundenmaximum'],
+    notes="Messstation Zürich Fluntern<br />Zuletzt aktualisiert: %s Uhr" % datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').strftime("%-d. %-m. %Y, %H.%M"),
+    events = events
 )
-# print(df.reset_index().iloc[-1]['date'])
-#print(df.reset_index().iloc[-1]['date'].tz_convert('Europe/Berlin').strftime("%-d. %-m. %Y, %H.%M"))
-# print(datetime.strptime(df.reset_index().iloc[-1]['date'], '%Y-%m-%d %H:%M').hour)
+

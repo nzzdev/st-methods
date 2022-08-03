@@ -28,7 +28,7 @@ if __name__ == '__main__':
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
         }
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5408202&historicalSpan=3'
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5419234&historicalSpan=3'
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
