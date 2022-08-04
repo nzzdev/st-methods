@@ -55,13 +55,17 @@ now = df.reset_index().iloc[-1]['date'].normalize()
 events = []
 for i in range(0, 3):
     new_date = now - timedelta(days = i)
-    df_day = df[df.index.get_level_values('date').normalize() == (now - timedelta(days = i))].sort_values('Stundenmaximum', ascending=False).reset_index()
-    n_max = df_day.iloc[0]
-    events.append({
-        'type': 'point',
-        'date': n_max.date.strftime('%Y-%m-%d %H:%M'),
-        'label': '%s° Celsius am %s' % (str(n_max.Stundenmaximum).replace('.', ','), n_max.date.strftime("%-d. %B"))
-    })
+    df_day = df[
+        (df.index.get_level_values('date').normalize() == (now - timedelta(days = i))) &
+        (df.index.get_level_values('date').hour >= 8)
+    ].sort_values('Stundenmaximum', ascending=False).reset_index()
+    if len(df_day) > 0:
+        n_max = df_day.iloc[0]
+        events.append({
+            'type': 'point',
+            'date': n_max.date.strftime('%Y-%m-%d %H:%M'),
+            'label': '%s° Celsius am %s' % (str(n_max.Stundenmaximum).replace('.', ','), n_max.date.strftime("%-d. %B"))
+        })
 
 # index in Str umwandeln für Q
 df.index = df.index.strftime('%Y-%m-%d %H:%M')
