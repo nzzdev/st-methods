@@ -217,7 +217,7 @@ benzin = benzin[['Reiseziel', '95']]
 benzin.rename(columns={'95': 'Benzinpreis'}, inplace=True)
 benzin.sort_values(by='Benzinpreis', ascending=False, inplace=True)
 
-benzin_table = benzin[['Reiseziel', 'Benzinpreis']]
+benzin_table = benzin[['Reiseziel', 'Benzinpreis']].reset_index(drop = True)
 
 notes = "Die Datenbasis ist in den einzelnen Ländern sehr unterschiedlich. Ausserdem gibt es teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen. Die Datenbasis ist in den einzelnen Ländern sehr unterschiedlich. Ausserdem gibt es teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
 #update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin_table, notes = notes)

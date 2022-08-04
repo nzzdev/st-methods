@@ -665,7 +665,9 @@ hersteller <- manufacturer %>%
          `CanSino` = `CanSino`/Summe*100,
          `Sputnik V` = `Sputnik V`/Summe*100,
          `Novavax` = `Novavax`/Summe*100,
-         `Covaxin` = `Covaxin`/Summe*100) %>%
+         `Covaxin` = `Covaxin`/Summe*100,
+         `Medicago` = `Medicago`/Summe*100
+         ) %>%
   dplyr::rename(
     "AstraZeneca" = "Oxford/AstraZeneca",
     "Biontech/Pfizer" = "Pfizer/BioNTech",
