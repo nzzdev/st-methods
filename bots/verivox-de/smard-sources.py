@@ -85,7 +85,7 @@ if __name__ == '__main__':
             # get current date for chart notes
             time_dt_notes = df.index[-1] + timedelta(days=1)
             time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-            notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh). Die Daten berücksichtigen nur Meldungen gemäss EU-Transparenzverordnung (zwischen 90 und 95 Prozent der Gesamtstromerzeugung).<br>Stand: {time_str_notes}'
+            notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms.<br>Stand: {time_str_notes}'
 
             # calculate percentage for chart title
             df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
