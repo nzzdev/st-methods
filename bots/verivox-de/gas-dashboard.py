@@ -79,8 +79,8 @@ if __name__ == '__main__':
                            'Trend Gas', 'Gasspeicher', 'Gaspreis', 'Russisches Gas']]
 
         # replace percentages with strings
-        cols1 = ('Trend Speicher', 'Trend Gas')
-        cols5 = ('Trend Importe')
+        cols1 = ['Trend Speicher', 'Trend Gas']
+        cols5 = ['Trend Importe']
 
         # function for string trends (storage and gas=previous day, petrol=previous week)
         def replace_vals(df_meta):
