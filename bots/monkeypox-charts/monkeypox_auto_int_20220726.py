@@ -44,8 +44,6 @@ pop = pop[['ISO3_code', 'PopTotal']].dropna()
 # merge with df and calculate cases per 1 Mio. pop.
 df_map = df.merge(pop, left_on = 'Country_ISO3', right_on = 'ISO3_code', how = 'left' )
 df_map['Fälle pro 1 Mio. Einwohner'] = round(df_map['Wert']*1000/df_map['PopTotal'], 1)
-df_map['Wert'] = round(df_map['Wert'], 0).fillna(0).astype(int).replace(0, '')
-df_map['Fälle pro 1 Mio. Einwohner'] = df_map['Fälle pro 1 Mio. Einwohner'].fillna(0).astype(int).replace(0, '')
 
 # Country codes from Q Choropleth
 #ids = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/monkeypox-charts/q_countries.csv')
@@ -53,6 +51,7 @@ ids = pd.read_csv('./q_countries.csv')
 
 # merge df with Q codes
 df_map = ids.merge(df_map, left_on = 'ID', right_on = 'Country_ISO3', how = 'left')
+df_map['Fälle pro 1 Mio. Einwohner'] = df_map['Fälle pro 1 Mio. Einwohner'].fillna(0).replace(0, '')
 
 # set date for charts
 date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y") +'<br> ¹ohne Fälle aus endemischen Ländern'
