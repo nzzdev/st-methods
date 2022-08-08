@@ -45,7 +45,7 @@ pop = pop[['ISO3_code', 'PopTotal']].dropna()
 df_map = df.merge(pop, left_on = 'Country_ISO3', right_on = 'ISO3_code', how = 'left' )
 df_map['Fälle pro 1 Mio. Einwohner'] = round(df_map['Wert']*1000/df_map['PopTotal'], 1)
 df_map['Wert'] = round(df_map['Wert'], 0).fillna(0).astype(int).replace(0, '')
-df_map['Fälle pro 1 Mio. Einwohner'] = round(df_map['Fälle pro 1 Mio. Einwohner'], 0).fillna(0).astype(int).replace(0, '')
+df_map['Fälle pro 1 Mio. Einwohner'] = df_map['Fälle pro 1 Mio. Einwohner'].fillna(0).astype(int).replace(0, '')
 
 # Country codes from Q Choropleth
 #ids = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/monkeypox-charts/q_countries.csv')
@@ -64,11 +64,13 @@ update_chart(id=id_worldmap,
             data=df_map[['ID', 'Fälle pro 1 Mio. Einwohner']],
             notes = date_notes)
 
-# export for q table
+# q table
 # merge with df and calculate cases per 1 Mio. pop.
 df_q_table = df.merge(pop, left_on = 'Country_ISO3', right_on = 'ISO3_code', how = 'left' )
+df_q_table = df_q_table.loc[df_q_table['PopTotal'] > 1000]
 df_q_table['Fälle pro 1 Mio. Einwohner'] = round(df_q_table['Wert']*1000/df_q_table['PopTotal'], 1)
 df_q_table['Wert'] = round(df_q_table['Wert'], 0).fillna(0).astype(int).replace(0, '')
+
 
 df_q_table = df_q_table[['Land', 'Wert', 'Fälle pro 1 Mio. Einwohner']].rename(
     columns={'Land': ''}).dropna(subset = ['Wert']).sort_values(by = ['Fälle pro 1 Mio. Einwohner'], ascending = False).dropna(subset = ['Fälle pro 1 Mio. Einwohner'])
