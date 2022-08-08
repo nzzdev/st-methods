@@ -35,15 +35,6 @@ df['Land'] = df['Land'].str.replace('Iran, Islamische Republik', 'Iran')
 df['Land'] = df['Land'].str.replace('Russia', 'Russland')
 df['Land'] = df['Land'].str.replace('South Korea', 'Südkorea')
 
-# Country codes from Q Choropleth
-ids = pd.read_csv('q_countries.csv')
-# merge df with Q codes
-df = ids.merge(df, left_on = 'ID', right_on = 'Country_ISO3', how = 'left')
-
-# set date for charts
-date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y") +'<br> ¹ohne Fälle aus endemischen Ländern'
-
-
 # get 2021 population data
 pop = pd.read_csv('https://population.un.org/wpp/Download/Files/1_Indicators%20(Standard)/CSV_FILES/WPP2022_TotalPopulationBySex.zip')
 pop = pop[pop['Time'].isin([2021])]
@@ -53,10 +44,19 @@ df = df.merge(pop, left_on = 'Country_ISO3', right_on = 'ISO3_code', how = 'left
 df['Fälle pro 1 Mio. Einwohner'] = round(df['Wert']*1000/df['PopTotal'], 1)
 df['Wert'] = round(df['Wert'], 0).fillna(0).astype(int).replace(0, '')
 
+# Country codes from Q Choropleth
+ids = pd.read_csv('q_countries.csv')
+# merge df with Q codes
+df = ids.merge(df, left_on = 'ID', right_on = 'Country_ISO3', how = 'left')
+
+# set date for charts
+date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y") +'<br> ¹ohne Fälle aus endemischen Ländern'
+
+
 
 id_worldmap = 'd0be298e35165ab925d7292335e77bb7'  # linked in article
 update_chart(id=id_worldmap, 
-            data=df[['ID', 'Wert']],
+            data=df[['ID', 'Fälle pro 1 Mio. Einwohner']],
             notes = date_notes)
 
 # export for q table
