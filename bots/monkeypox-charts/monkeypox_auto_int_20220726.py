@@ -48,7 +48,9 @@ df_map['Wert'] = round(df_map['Wert'], 0).fillna(0).astype(int).replace(0, '')
 df_map['Fälle pro 1 Mio. Einwohner'] = round(df_map['Fälle pro 1 Mio. Einwohner'], 0).fillna(0).astype(int).replace(0, '')
 
 # Country codes from Q Choropleth
-ids = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/monkeypox-charts/q_countries.csv')
+#ids = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/monkeypox-charts/q_countries.csv')
+ids = pd.read_csv('./q_countries.csv')
+
 # merge df with Q codes
 df_map = ids.merge(df_map, left_on = 'ID', right_on = 'Country_ISO3', how = 'left')
 
