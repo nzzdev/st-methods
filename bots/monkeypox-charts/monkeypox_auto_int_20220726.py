@@ -43,6 +43,7 @@ pop = pop[['ISO3_code', 'PopTotal']].dropna()
 df = df.merge(pop, left_on = 'Country_ISO3', right_on = 'ISO3_code', how = 'left' )
 df['Fälle pro 1 Mio. Einwohner'] = round(df['Wert']*1000/df['PopTotal'], 1)
 df['Wert'] = round(df['Wert'], 0).fillna(0).astype(int).replace(0, '')
+df['Fälle pro 1 Mio. Einwohner'] = round(df['Fälle pro 1 Mio. Einwohner'], 0).fillna(0).astype(int).replace(0, '')
 
 # Country codes from Q Choropleth
 ids = pd.read_csv('q_countries.csv')
