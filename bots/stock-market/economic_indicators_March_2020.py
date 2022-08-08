@@ -493,27 +493,33 @@ update_chart(id='6aa31459fbbb1211b5ec05508a665b9e',
 
 # BIP Indikator
 
-url = "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa_publish.xls.download.xls/wwa_publish.xls"
-r = requests.get(url)
-open('temp.xls', 'wb').write(r.content)
+#url = "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa_publish.xls.download.xls/wwa_publish.xls"
+#r = requests.get(url)
+#open('temp.xls', 'wb').write(r.content)
 
-file = msoffcrypto.OfficeFile(open('temp.xls', 'rb'))  # read the original file
+#file = msoffcrypto.OfficeFile(open('temp.xls', 'rb'))  # read the original file
 # Fill in the password, if it can be opened directly, the default password is 'VelvetSweatshop'
-file.load_key(password='VelvetSweatshop')
-file.decrypt(open('./decrypted.xls', 'wb'))
+#file.load_key(password='VelvetSweatshop')
+#file.decrypt(open('./decrypted.xls', 'wb'))
 
-bip = pd.read_excel('./decrypted.xls', sheet_name='rel_preCovid')
-bip = bip[3:]
-bip.rename(columns={bip.columns[0]: 'year', bip.columns[1]: 'W', bip.columns[2]: 'Index'}, inplace=True)
+#bip = pd.read_excel('./decrypted.xls', sheet_name='rel_preCovid')
+#bip = bip[3:]
+#bip.rename(columns={bip.columns[0]: 'year', bip.columns[1]: 'W', bip.columns[2]: 'Index'}, inplace=True)
 
-bip.loc[bip['W'] < 10, 'KW'] = bip['year'].astype(
-    str) + '-W0' + bip['W'].astype(int).astype(str)
-bip.loc[bip['W'] >= 10, 'KW'] = bip['year'].astype(
-    str) + '-W' + bip['W'].astype(int).astype(str)
-bip = bip[['KW', 'Index']]
+#bip.loc[bip['W'] < 10, 'KW'] = bip['year'].astype(
+ #   str) + '-W0' + bip['W'].astype(int).astype(str)
+#bip.loc[bip['W'] >= 10, 'KW'] = bip['year'].astype(
+ #   str) + '-W' + bip['W'].astype(int).astype(str)
+#bip = bip[['KW', 'Index']]
 #bip.set_index('KW', inplace=True)
 
+
+bip = pd.read_csv("https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa.csv.download.csv/wwa.csv")
+bip = bip.loc[bip['structure'] == 'seco_wwa_pre_covid'][['date', 'value']]
 update_chart(id='c366afc02f262094669128cd054faf78', data=bip)
+
+
+
 
 
 # Bitcoin energy
