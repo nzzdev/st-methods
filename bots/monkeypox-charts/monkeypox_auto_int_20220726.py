@@ -76,7 +76,7 @@ df_q_table = df_q_table[['Land', 'Wert', 'Fälle pro 1 Mio. Einwohner']].rename(
 df_q_table.rename(columns = {'Wert': 'Fälle gesamt'}, inplace = True)
 
 
-date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y")
+date_notes = 'Stand: '+ datetime.now().strftime("%-d. %-m. %Y") + '<br>Nur Länder mit mehr als 1 Mio. Einwohner.'
 
 id_q_table = 'd0be298e35165ab925d7292335e97175'  # linked in article
 update_chart(id=id_q_table, 
