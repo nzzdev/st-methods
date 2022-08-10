@@ -3,7 +3,8 @@ name: Wetterereignisse Temperaturen CH
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "*/15 * * * *"
+    #- cron: "*/15 * * * *"
+    - cron: "30 * * * *"
   workflow_dispatch:
 
 jobs:
