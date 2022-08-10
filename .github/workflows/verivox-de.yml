@@ -50,6 +50,7 @@ jobs:
           python ttf-gas-stock.py
           python smard-sources.py
           python bkarta-sprit.py
+          python bnetza-verbrauch.py
           python verivox-daily-new.py
           python gas-dashboard.py
         env:
