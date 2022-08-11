@@ -123,8 +123,8 @@ if __name__ == '__main__':
             dfgas['gas'], weights=dfgas['hh']).round(0).astype(int)
 
         # calculate weighted mean for duplicate zipcodes based on households
-        dfac['hh'].replace(0, np.nan, inplace=True)
-        dfgas['hh'].replace(0, np.nan, inplace=True)
+        dfac['hh'].replace(0, 1, inplace=True)
+        dfgas['hh'].replace(0, 1, inplace=True)
         dfac = (
             dfac.groupby('id')
             .apply(lambda x: np.average(x['strom'], weights=x['hh']))
