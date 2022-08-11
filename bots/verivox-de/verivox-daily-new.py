@@ -52,28 +52,28 @@ if __name__ == '__main__':
             user=user_env,
             password=pass_env,
             account=acc_env,
-            warehouse='NZZ_WH',
-            database='NZZ',
-            schema='NZZ'
+            warehouse='COMPUTE_WH',
+            database='PRESS',
+            schema='PRESS_PARTNERS'
         )
 
         cur = con.cursor()
 
         # execute a statement that will generate a result set
-        cur.execute("USE ROLE NZZ_ROLE")
+        cur.execute("USE ROLE PRESS_ROLE")
         cur.execute(
-            "SELECT * FROM ELECTRICITY WHERE \"Datum\" = (SELECT MAX(\"Datum\") FROM ELECTRICITY)")
+            "SELECT * FROM ELECTRICITY WHERE \"Datum\" = (SELECT MAX(\"Datum\") FROM ELECTRICITY) ORDER BY \"Postleitzahl\", \"Ort\", \"Ortsteil\" ")
 
         # fetch the result set from the cursor and deliver as pandas dataframe
         df = cur.fetch_pandas_all()
         df.to_csv('./data/newest_electricity_data.csv')
 
         cur.execute(
-            "SELECT * FROM GAS WHERE \"Datum\" = (SELECT MAX(\"Datum\") FROM GAS)")
+            "SELECT * FROM GAS WHERE \"Datum\" = (SELECT MAX(\"Datum\") FROM GAS) ORDER BY \"Postleitzahl\", \"Ort\", \"Ortsteil\" ")
         df = cur.fetch_pandas_all()
         df.to_csv('./data/newest_gas_data.csv')
 
-        # read unzipped file and geojson as dataframe
+        # read csv files and geojson as dataframe
         dfac = pd.read_csv('./data/newest_electricity_data.csv', index_col=None, usecols=[
                            'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (brutto) in EUR pro Jahr', 'Datum'], dtype={'Postleitzahl': 'string'})
         dfgas = pd.read_csv('./data/newest_gas_data.csv', index_col=None, usecols=[
@@ -82,6 +82,8 @@ if __name__ == '__main__':
                            sep='\t', index_col=None, dtype={'id': 'string'})
         dfavg = pd.read_csv(
             './data/gas-strom-bundesschnitt.tsv', sep='\t', index_col=None)
+        dfpop = pd.read_csv('./data/plz_einwohner.tsv',
+                            sep='\t', index_col=None, dtype={'plz': 'string'})
 
         # GeoJSON with postal codes
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5.json')
@@ -99,11 +101,20 @@ if __name__ == '__main__':
         dfgas.rename(columns={'Postleitzahl': 'id', 'Anzahl Haushalte': 'hh',
                               'Gesamtkosten (brutto) in EUR pro Jahr': 'gas', 'Datum': 'datum'}, inplace=True)
 
-        # replace missing household data with average of adjacent rows
-        dfac['hh'].replace(0, np.nan, inplace=True)
-        dfac['hh'].interpolate(inplace=True)
-        dfgas['hh'].replace(0, np.nan, inplace=True)
-        dfgas['hh'].interpolate(inplace=True)
+        # get household estimates for postal codes with missing data
+        old_plz = 0
+        sumnan = pop = sumhh = 1
+        for i, x in enumerate(dfac['hh']):
+            if x == 0:
+                plz = dfac.loc[i, 'id']
+                if old_plz != plz:
+                    pop = dfpop[dfpop['plz'] == plz]['einwohner']
+                    sumhh = dfac[dfac['id'] == plz]['hh'].sum()
+                    sumnan = dfac[(dfac['id'] == plz)].count()['id']
+                # average persons per household 2021
+                res = ((pop / 2.02) - sumhh) / sumnan
+                dfac.loc[i, 'hh'] = max(int(res), 0)
+                old_plz = plz
 
         # calculate weighted mean for Germany
         meanac = np.average(
@@ -112,6 +123,8 @@ if __name__ == '__main__':
             dfgas['gas'], weights=dfgas['hh']).round(0).astype(int)
 
         # calculate weighted mean for duplicate zipcodes based on households
+        dfac['hh'].replace(0, np.nan, inplace=True)
+        dfgas['hh'].replace(0, np.nan, inplace=True)
         dfac = (
             dfac.groupby('id')
             .apply(lambda x: np.average(x['strom'], weights=x['hh']))
