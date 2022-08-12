@@ -38,15 +38,15 @@ if __name__ == '__main__':
         df.index = pd.to_datetime(df.index, errors='coerce')
 
         # add new column with goal
-        df = df.assign(goal=['', '', '', '', '', '', '32.32',
-                       '31.04', '36.24', '58.56', '87.76', '100.48'])
-        df = df.rename(columns={'goal': 'Nötige Einsparung¹'})
+        df = df.assign(goal=['', '', '', '', '', '', '34.34',
+                       '32.98', '38.505', '62.22', '93.245', '106.76'])
+        df = df.rename(columns={'goal': 'EU-Ziel¹'})
 
         # create timestamp for chart notes
         df.iloc[:, 0] = df.iloc[:, 0].replace('', np.nan)
         timestamp = df.iloc[:, 0].notna()[::-1].idxmax()
         timestamp_str = timestamp.strftime("%B %Y")
-        chart_notes = f'¹ Um eine Gasmangellage zu verhindern, müsste der Verbrauch bei der Stromerzeugung, in der Industrie und in den Haushalten ein Jahr lang um mindestens 20 Prozent sinken.<br><br>Stand: {timestamp_str}'
+        chart_notes = f'Gemäss Gas-Notfallplan der EU sollen alle Länder ihren Verbrauch bis März 2023 um 15 Prozent senken.<br><br>Stand: {timestamp_str}'
 
         # create dynamic chart title
         currenty = df.iloc[:, 0].loc[~df.iloc[:, 0].isnull()].iloc[-1]
