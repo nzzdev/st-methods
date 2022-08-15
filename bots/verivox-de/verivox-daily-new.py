@@ -161,29 +161,35 @@ if __name__ == '__main__':
                 dfavg = dfavg.round(0).astype(int)
 
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung).<br>Stand: ' + \
+            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung); entspricht dem Jahresverbrauch einer vierköpfigen Familie in einem Einfamilienhaus.<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             dfavg = dfavg.rolling(window=7).mean(
             ).dropna()  # 7-day mvg average
+            title_gas = dfavg['Gas'].iloc[-1].round(-1)
+            title_ac = dfavg['Strom'].iloc[-1].round(-1)
+            title_chart = f'Gas kostet bei Neuabschluss {title_gas}€ im Jahr, Strom {title_ac}€'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             # update chart with averages
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
-                         data=dfavg, notes=notes_chart)
+                         data=dfavg, notes=notes_chart, title=title_chart)
         else:
             time_dt_notes = dfavg['date'].iloc[-1]
             time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung).<br>Stand: ' + \
+            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung); entspricht dem Jahresverbrauch einer vierköpfigen Familie in einem Einfamilienhaus.<br>Stand: ' + \
                 str(time_str_notes)
             dfavg = dfavg.rolling(window=7).mean(
             ).dropna()  # 7-day mvg average
+            title_gas = dfavg['Gas'].iloc[-1].round(-1)
+            title_ac = dfavg['Strom'].iloc[-1].round(-1)
+            title_chart = f'Gas kostet bei Neuabschluss {title_gas}€ im Jahr, Strom {title_ac}€'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
-                         data=dfavg, notes=notes_chart)
+                         data=dfavg, notes=notes_chart, title=title_chart)
 
         # merge dataframes, then join geometry with verivox data and save
         df = df.merge(df21, on='id', how='outer')
