@@ -168,7 +168,7 @@ if __name__ == '__main__':
             ).dropna()  # 7-day mvg average
             title_gas = dfavg['Gas'].iloc[-1].round(-1)
             title_ac = dfavg['Strom'].iloc[-1].round(-1)
-            title_chart = f'Gas kostet bei Neuabschluss {title_gas}€ im Jahr, Strom {title_ac}€'
+            title_chart = f'Gas kostet bei Neuabschluss {int(title_gas)}€ im Jahr, Strom {int(title_ac)}€'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             # update chart with averages
@@ -185,7 +185,7 @@ if __name__ == '__main__':
             ).dropna()  # 7-day mvg average
             title_gas = dfavg['Gas'].iloc[-1].round(-1)
             title_ac = dfavg['Strom'].iloc[-1].round(-1)
-            title_chart = f'Gas kostet bei Neuabschluss {title_gas}€ im Jahr, Strom {title_ac}€'
+            title_chart = f'Gas kostet bei Neuabschluss {int(title_gas)}€ im Jahr, Strom {int(title_ac)}€'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
