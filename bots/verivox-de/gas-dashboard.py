@@ -160,7 +160,7 @@ if __name__ == '__main__':
         diff_rus_str = diff_rus.round(0).astype(int)
         # BENZIN diff_super_str = diff_super.astype(str).replace('.', ',')
 
-        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 75% am 1.9.', 'value': diff_storage, 'valueLabel': f'{diff_storage_str}% voll',
+        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 85% am 1.10.', 'value': diff_storage, 'valueLabel': f'{diff_storage_str}% voll',
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': 'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
