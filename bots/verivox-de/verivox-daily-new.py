@@ -102,6 +102,7 @@ if __name__ == '__main__':
                               'Gesamtkosten (brutto) in EUR pro Jahr': 'gas', 'Datum': 'datum'}, inplace=True)
 
         # get household estimates for postal codes with missing data
+        # electricity
         old_plz = 0
         sumnan = pop = sumhh = 1
         for i, x in enumerate(dfac['hh']):
@@ -114,6 +115,20 @@ if __name__ == '__main__':
                 # average persons per household 2021
                 res = ((pop / 2.02) - sumhh) / sumnan
                 dfac.loc[i, 'hh'] = max(int(res), 0)
+                old_plz = plz
+        # gas
+        old_plz = 0
+        sumnan = pop = sumhh = 1
+        for i, x in enumerate(dfgas['hh']):
+            if x == 0:
+                plz = dfgas.loc[i, 'id']
+                if old_plz != plz:
+                    pop = dfpop[dfpop['plz'] == plz]['einwohner']
+                    sumhh = dfgas[dfgas['id'] == plz]['hh'].sum()
+                    sumnan = dfgas[(dfgas['id'] == plz)].count()['id']
+                # average persons per household 2021
+                res = ((pop / 2.02) - sumhh) / sumnan
+                dfgas.loc[i, 'hh'] = max(int(res), 0)
                 old_plz = plz
 
         # calculate weighted mean for Germany
