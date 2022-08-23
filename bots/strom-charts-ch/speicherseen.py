@@ -39,4 +39,4 @@ update_chart(id=waterfall_q_id,
             data=waterfall_q_data,
             notes = q_date)
 
-waterfall_q_data.to_csv('test_data.csv')
+#waterfall_q_data.to_csv('test_data.csv')
