@@ -48,6 +48,7 @@ jobs:
           python agsi-gas-storage.py
           python entsog-imports.py
           python ttf-gas-stock.py
+          python epex-spot-ac.py
           python smard-sources.py
           python bkarta-sprit.py
           # python bnetza-verbrauch.py
