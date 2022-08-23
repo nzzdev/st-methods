@@ -60,11 +60,11 @@ futures_df['date'] = pd.to_datetime(futures_df['date'])
 # to q
 futures_q_id = 'de091de1c8d4f5042323dbd9e08c9548'
 
-# update_chart(id=futures_q_id, 
-#             data=futures_df,
-#             notes = q_date)
+update_chart(id=futures_q_id, 
+            data=futures_df,
+            notes = q_date)
 
-futures_df.to_csv('test_futures.csv')
+#futures_df.to_csv('test_futures.csv')
 
 
 # 02 Spotmarket
@@ -107,13 +107,17 @@ for market_url in spotmarket_urls:
 spotmarket_df = pd.DataFrame({'date': multi_year_dates, 'price':multi_year_prices})
 spotmarket_df['date'] = pd.to_datetime(spotmarket_df['date'])
 
+# calculate day means
+spotmarket_df_day = spotmarket_df.groupby(spotmarket_df.date.dt.date).mean().reset_index()
+spotmarket_df_day = spotmarket_df_day.round(2)
+
 spot_market_q_id = '046c2f2cc67578f60cc5c36ce55d27ae'
 
-# update_chart(id=spot_market_q_id, 
-#             data=spotmarket_df,
-#             notes = q_date)
+update_chart(id=spot_market_q_id, 
+            data=spotmarket_df_day,
+            notes = q_date)
 
-spotmarket_df.to_csv('test_spotmarket.csv')
+#spotmarket_df.to_csv('test_spotmarket.csv')
 
 
 # 03 Atomstrom Frankreich
@@ -163,8 +167,8 @@ akw_df_wide = akw_df_wide[['q_date','2019','2020','2021','2022']]
 
 akw_q_id = '4d6b0595264016839099c06df6bdd6af'
 
-# update_chart(id=akw_q_id, 
-#             data=akw_df_wide,
-#             notes = q_date)
+update_chart(id=akw_q_id, 
+            data=akw_df_wide,
+            notes = q_date)
 
-akw_df_wide.to_csv('test_akw.csv')
+#akw_df_wide.to_csv('test_akw.csv')
