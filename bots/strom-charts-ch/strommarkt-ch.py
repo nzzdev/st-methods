@@ -107,10 +107,14 @@ for market_url in spotmarket_urls:
 spotmarket_df = pd.DataFrame({'date': multi_year_dates, 'price':multi_year_prices})
 spotmarket_df['date'] = pd.to_datetime(spotmarket_df['date'])
 
+# calculate day means
+spotmarket_df_day = spotmarket_df.groupby(spotmarket_df.date.dt.date).mean().reset_index()
+spotmarket_df_day = spotmarket_df_day.round(2)
+
 spot_market_q_id = '046c2f2cc67578f60cc5c36ce55d27ae'
 
 update_chart(id=spot_market_q_id, 
-            data=spotmarket_df,
+            data=spotmarket_df_day,
             notes = q_date)
 
 #spotmarket_df.to_csv('test_spotmarket.csv')
