@@ -3,7 +3,7 @@ name: Update Strom Charts CH
 on:
   # Set to run at 6 am every Monday
   schedule: 
-   # - cron: "0 4 * * 1" # (for testing every 5 min) | cron:   | "*/5 * * * *"
+    - cron: "*/5 * * * *" # (for testing every 5 min) | cron: "0 4 * * 1" 
 
   workflow_dispatch:
   
@@ -34,7 +34,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: | # 
-      #    python speicherseen.py
+          python speicherseen.py
           python strommarkt-ch.py
       # - uses: stefanzweifel/git-auto-commit-action@v4 # <---- ?
       #   with:
