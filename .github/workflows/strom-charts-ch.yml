@@ -3,7 +3,7 @@ name: Update Strom Charts CH
 on:
   # Set to run at 6 am every Monday
   schedule: 
-    - cron: "*/7 * * * *" # (for testing every 5 min on Monday) | cron: "0 4 * * 1" 
+    - cron: "30 * * * *" # (for testing every 5 min on Monday) | cron: "0 4 * * 1" 
 
   workflow_dispatch:
   
