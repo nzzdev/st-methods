@@ -65,7 +65,7 @@ if __name__ == '__main__':
         df_day['price'] = df_day['price'].round(0)
 
         # get date
-        # df_day = df_day.drop(df_day.tail(1).index)
+        df_day = df_day.drop(df_day.tail(1).index)
         q_date = df_day['date'].iloc[-1]
         notes_chart = 'Stand: ' + q_date.strftime("%-d. %-m. %Y")
 
