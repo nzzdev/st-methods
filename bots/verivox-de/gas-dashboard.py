@@ -92,9 +92,9 @@ if __name__ == '__main__':
                 else:
                     df_meta[col] = 'gleichbleibend'
             for col in cols5:
-                if df_meta[col] >= 5:
+                if df_meta[col] >= 7:
                     df_meta[col] = 'steigend'
-                elif df_meta[col] <= -5:
+                elif df_meta[col] <= -7:
                     df_meta[col] = 'fallend'
                 else:
                     df_meta[col] = 'gleichbleibend'
