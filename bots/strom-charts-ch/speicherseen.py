@@ -23,13 +23,8 @@ def get_speicherseen():
 
     df_wf['Jahr'] =  df_wf['Datum'].dt.year
     df_wf['Woche'] = pd.to_datetime(df_wf.Datum).dt.strftime('-W%W')
-    df_wf['Jahr_Woche'] = '2000'+df_wf['Woche'].astype(str) 
+    df_wf['Jahr_Woche'] = '2000'+df_wf['Woche'].astype(str)
 
-    df_wf_wide = df_wf.pivot(index=['Jahr_Woche'], columns='Jahr', values='TotalCH_prct')
-
-    waterfall_q_data = df_wf_wide.iloc[:,-4:].reset_index()
-
-    return waterfall_q_data
-
+    return df_wf
 
     #waterfall_q_data.to_csv('test_data.csv')
