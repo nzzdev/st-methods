@@ -172,7 +172,7 @@ if __name__ == '__main__':
         strom_y = 30
         # NS 1 rus_y = 0
         # BENZIN super_y = 1.6
-        storage_ytick = [0, 25, 50, 75]
+        storage_ytick = [0, 25, 50, 75, 100]
         gas_ytick = [10, 20, 30, 40]
         strom_ytick = [30, 40, 50, 60]
         # NS1 rus_ytick = [0, 100, 200, 300]
