@@ -67,7 +67,8 @@ if __name__ == '__main__':
         # get date
         df_day = df_day.drop(df_day.tail(1).index)
         q_date = df_day['date'].iloc[-1]
-        notes_chart = 'Stand: ' + q_date.strftime("%-d. %-m. %Y")
+        notes_chart = '¹ Marktgebiet Deutschland/Luxemburg.<br>Stand: ' + \
+            q_date.strftime("%-d. %-m. %Y")
 
         # drop index and unused dates
         df_day = df_day.set_index('date')
