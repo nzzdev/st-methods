@@ -145,7 +145,7 @@ if __name__ == '__main__':
             # get date and drop last row with current date
             df_spot = df_spot.drop(df_spot.tail(1).index)
             q_date = df_spot.last_valid_index()
-            notes_chart = '¹ Marktgebiet Deutschland/Luxemburg.<br>Stand: ' + \
+            notes_chart = '¹ Marktgebiet Deutschland/Luxemburg (Day-Ahead).<br>Stand: ' + \
                 q_date.strftime("%-d. %-m. %Y")
 
             # drop unused dates
