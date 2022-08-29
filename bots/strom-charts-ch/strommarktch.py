@@ -49,6 +49,10 @@ def get_futures():
 
     futures_df = futures_df.rename(columns ={'close_ch':'Schweiz', 'close_fr': 'Frankreich', 'close_de':'Deutschland'})
     futures_df['date'] = pd.to_datetime(futures_df['date'])
+    
+    futures_df['Schweiz'] = futures_df['Schweiz'].round(1)
+    futures_df['Deutschland'] = futures_df['Deutschland'].round(1)
+    futures_df['Frankreich'] = futures_df['Frankreich'].round(1)
 
     return futures_df
 
