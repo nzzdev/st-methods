@@ -94,3 +94,45 @@ update_chart(id='d0be298e35165ab925d7292335eb1ba0',
             data=df,
             notes = date_notes)
 
+
+
+# BAG data
+bag_karte = pd.read_excel('https://www.bag.admin.ch/dam/bag/de/dokumente/mt/k-und-i/aktuelle-ausbrueche-pandemien/affenpocken/mpx-tabellen.xlsx.download.xlsx/BAG-Datentabellen-MPX.xlsx', sheet_name = 'Karte')
+bag = pd.read_excel('https://www.bag.admin.ch/dam/bag/de/dokumente/mt/k-und-i/aktuelle-ausbrueche-pandemien/affenpocken/mpx-tabellen.xlsx.download.xlsx/BAG-Datentabellen-MPX.xlsx', sheet_name = 'Datum')
+
+date = bag['Datum'].max().strftime("%-d. %-m. %Y")
+
+bag_karte = bag_karte[['Kanton', 'Inzidenz_pro_100000']].sort_values(by = 'Kanton', ascending = True)
+bag_karte['Inzidenz_pro_100000'] = bag_karte['Inzidenz_pro_100000'].astype(float).astype(int)
+bag_karte = bag_karte.loc[bag_karte['Kanton'] != 'LI']
+
+bag_karte.to_clipboard(index = False)
+
+q_id = '8d17d4bdff6d1379465e019d8b29f4a8'
+
+notes = 'Stand: ' + date + '. Die Werte sind gerundet.'
+
+update_chart(id = q_id, 
+            data = bag_karte,
+            notes = notes)
+
+
+bag = bag.set_index('Datum')
+
+bag = bag.rolling(14).mean().reset_index()
+
+q_id = '8d17d4bdff6d1379465e019d8b315bf6'
+
+notes = 'Stand: ' + date
+
+update_chart(id = q_id, 
+            data = bag,
+            notes = notes)
+
+
+
+
+
+
+
+
