@@ -106,10 +106,7 @@ bag_karte = bag_karte[['Kanton', 'Inzidenz_pro_100000']].sort_values(by = 'Kanto
 bag_karte['Inzidenz_pro_100000'] = bag_karte['Inzidenz_pro_100000'].astype(float).astype(int)
 bag_karte = bag_karte.loc[bag_karte['Kanton'] != 'LI']
 
-bag_karte.to_clipboard(index = False)
-
 q_id = '8d17d4bdff6d1379465e019d8b29f4a8'
-
 notes = 'Stand: ' + date + '. Die Werte sind gerundet.'
 
 update_chart(id = q_id, 
@@ -118,11 +115,9 @@ update_chart(id = q_id,
 
 
 bag = bag.set_index('Datum')
-
 bag = bag.rolling(14).mean().reset_index()
 
 q_id = '8d17d4bdff6d1379465e019d8b315bf6'
-
 notes = 'Stand: ' + date
 
 update_chart(id = q_id, 
