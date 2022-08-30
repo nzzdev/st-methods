@@ -24,7 +24,7 @@ def run(futures, spotmarket, speicherseen):
     json_spotmarket = {
             "indicatorTitle": "Spotmarkt",
             "date": df_spotmarket.iloc[-1]['date'],
-            "indicatorSubtitle": "per MWh, Day-ahead-Auktion",
+            "indicatorSubtitle": "kurzfristige Lieferung pro MWh Strom",
             "value": df_spotmarket.iloc[-1]['value'],
             "valueLabel": "%s Euro" % str(df_spotmarket.iloc[-1]['value']).replace('.', ','),
             "yAxisStart": 0,
@@ -49,7 +49,7 @@ def run(futures, spotmarket, speicherseen):
     json_futures = {
             "indicatorTitle": "Terminmarkt",
             "date": df_futures.iloc[-1]['date'],
-            "indicatorSubtitle": "Abschlusspreise per MWh, Q1 2023",
+            "indicatorSubtitle": "Lieferung im Q1 2023 pro MWh Strom",
             "value": df_futures.iloc[-1]['value'],
             "valueLabel": "%s Euro" % str(df_futures.iloc[-1]['value']).replace('.', ','),
             "yAxisStart": 0,
