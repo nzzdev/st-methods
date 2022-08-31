@@ -159,7 +159,7 @@ if __name__ == '__main__':
         df_strom['date'] = pd.to_datetime(
             df_strom['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_ns['date'] = pd.to_datetime(
-            df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d %H:%M:%S')
+            df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         # RUS GAS df_rus['date'] = pd.to_datetime(df_rus['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         # BENZIN df_super['date'] = pd.to_datetime(df_super['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         timestamp_str = df['date'].tail(1).item()
