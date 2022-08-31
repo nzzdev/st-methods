@@ -357,6 +357,9 @@ if __name__ == '__main__':
         timecode_str = timecode.strftime('%-d. %-m., %-H')
         notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
         
+        # replace NaN with 0
+        df_ns = df_ns.fillna(0)
+        
         # save clean csv for dashboard
         df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
 
