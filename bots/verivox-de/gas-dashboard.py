@@ -94,11 +94,11 @@ if __name__ == '__main__':
         )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         df_meta['Trend Strom'] = round(((df['Strompreis'].loc[~df['Strompreis'].isnull(
         )].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
-        if (df_ns['Nord Stream 1'].iloc[-1]) == 0.0 and (df_ns['Nord Stream 1'].iloc[-2] == 0.0):
+        if (df_ns['Nord Stream 1'].iloc[-1]) == 0.0 and (df_ns['Nord Stream 1'].iloc[-25] == 0.0):
             df_meta['Trend NS1'] = 0.0
         else:
-            df_meta['Trend NS1'] = round(((df_ns['Nord Stream 1'].iloc[-1] - df_ns['Nord Stream 1'].iloc[-2]
-                                           ) / df_ns['Nord Stream 1'].iloc[-2]) * 100, 0)  # diff previous hour
+            df_meta['Trend NS1'] = round(((df_ns['Nord Stream 1'].iloc[-1] - df_ns['Nord Stream 1'].iloc[-25]
+                                           ) / df_ns['Nord Stream 1'].iloc[-25]) * 100, 0)  # diff previous hour
         # RUS GAS df_meta['Trend Importe'] = round(((df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-1] - df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) / df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         # BENZIN df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) * 100, 0)  # diff previous week
         df_meta = df_meta[['Trend Speicher', 'Trend Gas',
@@ -227,7 +227,6 @@ if __name__ == '__main__':
         # RUS GAS dicts.append(meta_rus)
         dicts.append(meta_ns)
         dicts.append(meta_gas)
-        print(meta_ns)
         # STROM dicts.append(meta_strom)
         # BENZIN dicts.append(meta_super)
         with open('./data/dashboard_de.json', 'w') as fp:
