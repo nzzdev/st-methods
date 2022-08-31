@@ -341,5 +341,24 @@ if __name__ == '__main__':
                          data=df_new_sum, notes=notes_chart_de)
             update_chart(id='d0be298e35165ab925d7292335b3d00e',
                          data=df_new, notes=notes_chart_de)
+
+        # nord stream 1 only
+        url_ns = 'https://static.dwcdn.net/data/LtmFL.csv'
+        resp = download_data(url_ns, headers=fheaders)
+        csv_file = resp.text
+
+        # read csv and convert to datetime
+        df_ns = pd.read_csv(io.StringIO(csv_file),
+                            encoding='utf-8', index_col='periodFrom')
+        df_ns.index = pd.to_datetime(df_ns.index)
+
+        # create date for chart notes
+        timecode = pd.to_datetime(df_ns.index[-1])
+        timecode_str = timecode.strftime('%-d. %-m., %-H')
+        notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
+
+        # run Q function
+        update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
+                     data=df_ns, notes=notes_chart_ns)
     except:
         raise
