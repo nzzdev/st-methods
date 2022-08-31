@@ -356,6 +356,9 @@ if __name__ == '__main__':
         timecode = pd.to_datetime(df_ns.index[-1])
         timecode_str = timecode.strftime('%-d. %-m., %-H')
         notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
+        
+        # save clean csv for dashboard
+        df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
 
         # run Q function
         update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
