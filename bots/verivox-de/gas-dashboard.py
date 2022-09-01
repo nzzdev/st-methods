@@ -225,8 +225,8 @@ if __name__ == '__main__':
         dicts = []
         dicts.append(meta_storage)
         # RUS GAS dicts.append(meta_rus)
-        dicts.append(meta_ns)
         dicts.append(meta_gas)
+        dicts.append(meta_ns)
         # STROM dicts.append(meta_strom)
         # BENZIN dicts.append(meta_super)
         with open('./data/dashboard_de.json', 'w') as fp:
