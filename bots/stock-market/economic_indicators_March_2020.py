@@ -22,39 +22,43 @@ os.chdir(os.path.dirname(__file__))
 
 # TomTom
 
-#tomtom = pd.read_csv(
- #   'https://raw.githubusercontent.com/ActiveConclusion/COVID19_mobility/master/tomtom_reports/tomtom_trafic_index.csv')
+# tomtom = pd.read_csv(
+#   'https://raw.githubusercontent.com/ActiveConclusion/COVID19_mobility/master/tomtom_reports/tomtom_trafic_index.csv')
 #ch = tomtom[(tomtom.country == 'Switzerland') & (tomtom.date >= '2019-01-01')]
-#congestion_ch = ch[['date', 'congestion']].groupby(
- #   'date').mean().rolling(7).mean()
+# congestion_ch = ch[['date', 'congestion']].groupby(
+#   'date').mean().rolling(7).mean()
 #data = congestion_ch[(congestion_ch.index >= '2022-01-01')][['congestion']]
 #update_chart(id='c77298787298e4fcae70369e03275be6', data=data)
 
 #de = tomtom[(tomtom.country == 'Germany') & (tomtom.date >= '2019-01-01')]
-#congestion_de = de[['date', 'congestion']].groupby(
- #   'date').mean().rolling(7).mean()
+# congestion_de = de[['date', 'congestion']].groupby(
+#   'date').mean().rolling(7).mean()
 #data = congestion_de[(congestion_de.index >= '2022-01-01')][['congestion']]
 #update_chart(id='5ac628c4bb388d36fb2f5cbc743f5f8b', data=data)
 
 # Zurich traffic
 
-zurich = pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv')
+zurich = pd.read_csv(
+    'https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv')
 zurich['date'] = zurich['MessungDatZeit'].str[:10]
-zurich['date'] = pd.to_datetime(zurich['date'], format = '%Y-%m-%d')
-zurich.set_index('date', inplace = True)
-zurich = zurich.groupby(zurich.index)['AnzFahrzeuge'].sum().rolling(7).mean().reset_index()
+zurich['date'] = pd.to_datetime(zurich['date'], format='%Y-%m-%d')
+zurich.set_index('date', inplace=True)
+zurich = zurich.groupby(zurich.index)[
+    'AnzFahrzeuge'].sum().rolling(7).mean().reset_index()
 #zurich.set_index('date', inplace = True)
 
 #zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
 
-update_chart(id='5b6e24348e8d8ddd990c10892047973d', data = zurich)
+update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=zurich)
 
-# Mobis 
+# Mobis
 
-mobis = pd.read_csv('https://ivtmobis.ethz.ch/mobis/covid19/reports/data/kilometers_by_transport_mode.csv')
+mobis = pd.read_csv(
+    'https://ivtmobis.ethz.ch/mobis/covid19/reports/data/kilometers_by_transport_mode.csv')
 mobis['date'] = pd.to_datetime(mobis['week_start'])
 mobis['pc_change'] = mobis['pc_change']*100
-mobis = mobis[(mobis['Mode'] == 'Car') & (mobis['date'] >= '2022-01-01')][['date', 'pc_change']]
+mobis = mobis[(mobis['Mode'] == 'Car') & (
+    mobis['date'] >= '2022-01-01')][['date', 'pc_change']]
 
 update_chart(id='bb539ba7d067f90f4fb7622d10044d91', data=mobis)
 
@@ -217,7 +221,7 @@ benzin = benzin[['Reiseziel', '95']]
 benzin.rename(columns={'95': 'Benzinpreis'}, inplace=True)
 benzin.sort_values(by='Benzinpreis', ascending=False, inplace=True)
 
-benzin_table = benzin[['Reiseziel', 'Benzinpreis']].reset_index(drop = True)
+benzin_table = benzin[['Reiseziel', 'Benzinpreis']].reset_index(drop=True)
 
 notes = "Die Datenbasis ist in den einzelnen Ländern sehr unterschiedlich. Ausserdem gibt es teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen. Die Datenbasis ist in den einzelnen Ländern sehr unterschiedlich. Ausserdem gibt es teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
 #update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin_table, notes = notes)
@@ -234,8 +238,8 @@ price_95 = pd.to_numeric(price_95[0])
 #soup = BeautifulSoup(page.content, "html.parser")
 
 #text = soup.find_all('b')[1].text.strip()
-#price_e10 = pd.to_numeric(re.findall(
- #       r'\d+\,\d+', text)[0].replace(',', '.'))
+# price_e10 = pd.to_numeric(re.findall(
+#       r'\d+\,\d+', text)[0].replace(',', '.'))
 
 
 fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
@@ -248,14 +252,14 @@ data = {'date': date.today().strftime('%Y-%m-%d'),
 
 fuel_prices = pd.DataFrame(data, index=[0])
 
-fuel_prices = pd.concat([fuel_prices_old, fuel_prices], ignore_index = True)
+fuel_prices = pd.concat([fuel_prices_old, fuel_prices], ignore_index=True)
 
 fuel_prices.drop_duplicates(subset='date', keep='last', inplace=True)
 
-#data = {'Date': date.today().strftime('%Y-%m-%d'),
- #       'Jahresdurchschnitt 2019': 1.4005,
-  #      '2022': price_e10
-   #     }
+# data = {'Date': date.today().strftime('%Y-%m-%d'),
+#       'Jahresdurchschnitt 2019': 1.4005,
+#      '2022': price_e10
+#     }
 
 #fuel_prices_de = pd.DataFrame(data, index=[0])
 
@@ -266,16 +270,16 @@ fuel_prices.drop_duplicates(subset='date', keep='last', inplace=True)
 #fuel_prices.set_index('date', inplace=True)
 #fuel_prices_de.set_index('Date', inplace=True)
 #fuel_prices.index = pd.to_datetime(fuel_prices.index).strftime('%Y-%m-%d')
-#fuel_prices_de.index = pd.to_datetime(
- #   fuel_prices_de.index).strftime('%Y-%m-%d')
+# fuel_prices_de.index = pd.to_datetime(
+#   fuel_prices_de.index).strftime('%Y-%m-%d')
 
 update_chart(id='1dda540238574eac80e865faa0d4aaba',
              data=fuel_prices)
-#update_chart(id='5ac628c4bb388d36fb2f5cbc745073c6',
- #            data=fuel_prices_de[['Jahresdurchschnitt 2019', '2022']])
+# update_chart(id='5ac628c4bb388d36fb2f5cbc745073c6',
+#            data=fuel_prices_de[['Jahresdurchschnitt 2019', '2022']])
 
-fuel_prices.to_csv(f'./Benzinpreise.csv', index = False)
-#fuel_prices_de.to_csv(f'./Benzinpreise_de.csv')
+fuel_prices.to_csv(f'./Benzinpreise.csv', index=False)
+# fuel_prices_de.to_csv(f'./Benzinpreise_de.csv')
 
 
 url = 'https://www.heizoel24.ch/heizoelpreise'
@@ -304,7 +308,7 @@ data = {'Datum': date.today().strftime('%Y-%m-%d'),
 
 oil_price = pd.DataFrame(data, index=[0])
 
-oil_price = pd.concat([oil_price_old, oil_price], ignore_index = True)
+oil_price = pd.concat([oil_price_old, oil_price], ignore_index=True)
 
 oil_price.drop_duplicates(subset='Datum', keep='last', inplace=True)
 
@@ -314,7 +318,7 @@ data = {'Date': date.today().strftime('%Y-%m-%d'),
 
 oil_price_de = pd.DataFrame(data, index=[0])
 
-oil_price_de = pd.concat([oil_price_old_de, oil_price_de], ignore_index = True)
+oil_price_de = pd.concat([oil_price_old_de, oil_price_de], ignore_index=True)
 
 oil_price_de.drop_duplicates(subset='Date', keep='last', inplace=True)
 
@@ -328,8 +332,8 @@ update_chart(id='b1717dcaee838699497b647ebbc25935',
 update_chart(id='5ac628c4bb388d36fb2f5cbc746a7cb6',
              data=oil_price_de)
 
-oil_price.to_csv(f'./oil_price.csv', index = False)
-oil_price_de.to_csv(f'./oil_price_de.csv', index = False)
+oil_price.to_csv(f'./oil_price.csv', index=False)
+oil_price_de.to_csv(f'./oil_price_de.csv', index=False)
 
 
 # Stock market data
@@ -337,20 +341,24 @@ tickers = ["EURCHF=X", "KE=F", "^GDAXI", "EURUSD=X",
            "BTC-USD", "BZ=F"]  # Subtitute for the tickers you want
 df = yf.download(tickers,  start="2019-01-01", end=date.today())
 
-euro = df['Close']['EURCHF=X'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
+euro = df['Close']['EURCHF=X'][df.index >=
+                               '2022-01-01'].to_frame().dropna().reset_index(level=0)
 
 #euro.index = euro.index.strftime('%Y-%m-%d')
 update_chart(id='1dda540238574eac80e865faa0dcab83', data=euro)
 
-dollar = df['Close']['EURUSD=X'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
+dollar = df['Close']['EURUSD=X'][df.index >=
+                                 '2022-01-01'].to_frame().dropna().reset_index(level=0)
 #dollar.index = dollar.index.strftime('%Y-%m-%d')
 update_chart(id='5ac628c4bb388d36fb2f5cbc744a628c', data=dollar)
 
-dax = df['Close']['^GDAXI'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
+dax = df['Close']['^GDAXI'][df.index >=
+                            '2022-01-01'].to_frame().dropna().reset_index(level=0)
 #dax.index = dax.index.strftime('%Y-%m-%d')
 update_chart(id='a78c9d9de3230aea314700dc582d873d', data=dax)
 
-wheat = df['Close']['KE=F'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
+wheat = df['Close']['KE=F'][df.index >=
+                            '2022-01-01'].to_frame().dropna().reset_index(level=0)
 wheat['Jahresdurchschnitt 2019'] = df['Close']['KE=F'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 wheat.rename(columns={wheat.columns[1]: '2022'}, inplace=True)
@@ -370,7 +378,7 @@ update_chart(id='1dda540238574eac80e865faa0ddbafc', data=gas[['2019', '2022']])
 """
 
 # get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
-url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5419234&historicalSpan=3'
+url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5429405&historicalSpan=3'
 resp = requests.get(url)
 json_file = resp.text
 full_data = json.loads(json_file)
@@ -394,7 +402,8 @@ df_gas = df_gas.reset_index(level=0)
 # run Q function
 update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas)
 
-oil = df['Close']['BZ=F'][df.index >= '2022-01-01'].to_frame().dropna().reset_index(level=0)
+oil = df['Close']['BZ=F'][df.index >=
+                          '2022-01-01'].to_frame().dropna().reset_index(level=0)
 oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
@@ -431,13 +440,13 @@ else:
 data = {'Date': date_,
         'Close': close}
 smi = pd.DataFrame(data, index=[0])
-smi = pd.concat([smi_old, smi], ignore_index = True)
+smi = pd.concat([smi_old, smi], ignore_index=True)
 smi.drop_duplicates(subset='Date', keep='last', inplace=True)
 #smi.set_index('Date', inplace=True)
 #smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
 
 update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
-smi.to_csv(f'./SMI.csv', index = False)
+smi.to_csv(f'./SMI.csv', index=False)
 
 # Benzinpreistabelle D
 
@@ -497,29 +506,27 @@ update_chart(id='6aa31459fbbb1211b5ec05508a665b9e',
 #r = requests.get(url)
 #open('temp.xls', 'wb').write(r.content)
 
-#file = msoffcrypto.OfficeFile(open('temp.xls', 'rb'))  # read the original file
+# file = msoffcrypto.OfficeFile(open('temp.xls', 'rb'))  # read the original file
 # Fill in the password, if it can be opened directly, the default password is 'VelvetSweatshop'
-#file.load_key(password='VelvetSweatshop')
+# file.load_key(password='VelvetSweatshop')
 #file.decrypt(open('./decrypted.xls', 'wb'))
 
 #bip = pd.read_excel('./decrypted.xls', sheet_name='rel_preCovid')
 #bip = bip[3:]
 #bip.rename(columns={bip.columns[0]: 'year', bip.columns[1]: 'W', bip.columns[2]: 'Index'}, inplace=True)
 
-#bip.loc[bip['W'] < 10, 'KW'] = bip['year'].astype(
- #   str) + '-W0' + bip['W'].astype(int).astype(str)
-#bip.loc[bip['W'] >= 10, 'KW'] = bip['year'].astype(
- #   str) + '-W' + bip['W'].astype(int).astype(str)
+# bip.loc[bip['W'] < 10, 'KW'] = bip['year'].astype(
+#   str) + '-W0' + bip['W'].astype(int).astype(str)
+# bip.loc[bip['W'] >= 10, 'KW'] = bip['year'].astype(
+#   str) + '-W' + bip['W'].astype(int).astype(str)
 #bip = bip[['KW', 'Index']]
 #bip.set_index('KW', inplace=True)
 
 
-bip = pd.read_csv("https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa.csv.download.csv/wwa.csv")
+bip = pd.read_csv(
+    "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa.csv.download.csv/wwa.csv")
 bip = bip.loc[bip['structure'] == 'seco_wwa_pre_covid'][['date', 'value']]
 update_chart(id='c366afc02f262094669128cd054faf78', data=bip)
-
-
-
 
 
 # Bitcoin energy
