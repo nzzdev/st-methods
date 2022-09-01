@@ -114,6 +114,13 @@ if __name__ == '__main__':
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
+        # temporary fix for wrong storage data
+        dfnew.set_index('Datum', inplace=True)
+        dfnew.at['2022-08-20', '2022'] = 79.55
+        dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
+                     encoding='utf-8', index=True)
+        dfnew = dfnew.reset_index(level=0)
+
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
         dfnew['Datum'] = pd.to_datetime(dfnew['Datum'])
@@ -128,9 +135,6 @@ if __name__ == '__main__':
         df.rename(columns={'Min': ''}, inplace=True)
         df['2022'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
-
-        # temporary fix for wrong storage data
-        df.at['2022-08-20 00:00:00', '2022'] = 79.55
         #df.index = df.index.strftime('%Y-%m-%d')
 
         notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
