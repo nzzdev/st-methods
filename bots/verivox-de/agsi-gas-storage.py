@@ -128,6 +128,9 @@ if __name__ == '__main__':
         df.rename(columns={'Min': ''}, inplace=True)
         df['2022'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
+
+        # temporary fix for wrong storage data
+        df.at['2022-08-20 00:00:00', '2022'] = 79.55
         #df.index = df.index.strftime('%Y-%m-%d')
 
         notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
@@ -137,8 +140,7 @@ if __name__ == '__main__':
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
         # run function
-        update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
-                     data=df, title=title, notes=notes_chart)
+        #update_chart(id='cc9eff02ba0867d71af4fbc25304797b', data=df, title=title, notes=notes_chart)
 
     except:
         raise
