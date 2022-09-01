@@ -185,7 +185,7 @@ if __name__ == '__main__':
         # additional data for JSON file
         # y-axis start and ticks
         storage_y = 0  # if y-axis starts at 0: value is optional
-        gas_y = 10
+        gas_y = 0
         strom_y = 30
         ns_y = 0
         # RUS GAS rus_y = 0
