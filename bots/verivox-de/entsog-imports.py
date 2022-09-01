@@ -358,7 +358,7 @@ if __name__ == '__main__':
         # if file is cached
         if recent != today:
             # create dataframes with old data
-            df_ns = pd.read_csv('./data/pipelines_de.tsv',
+            df_ns = pd.read_csv('./data/pipelines_de_ns.tsv',
                                 sep='\t', encoding='utf-8', index_col='periodFrom')
 
             # create date for chart notes
