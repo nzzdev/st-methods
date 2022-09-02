@@ -350,13 +350,15 @@ if __name__ == '__main__':
         # read csv and convert to datetime
         df_ns = pd.read_csv(io.StringIO(csv_file),
                             encoding='utf-8', index_col='periodFrom')
+        df_old = pd.read_csv('./data/pipelines_de_ns.tsv',
+                             sep='\t', encoding='utf-8', index_col='periodFrom')
         df_ns.index = pd.to_datetime(df_ns.index)
 
         today = date.today()
         recent = pd.to_datetime(df_ns.index[-1]).date()
 
         # if file is cached
-        if recent != today:
+        if len(df_ns) < len(df_old):
             # create dataframes with old data
             df_ns = pd.read_csv('./data/pipelines_de_ns.tsv',
                                 sep='\t', encoding='utf-8', index_col='periodFrom')
