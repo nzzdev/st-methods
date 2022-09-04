@@ -370,7 +370,7 @@ if __name__ == '__main__':
 
             # replace NaN with 0 and convert GWh to million m3
             df_ns = df_ns.fillna(0)
-            df_ns = (df_ns / 10.3).round(1)
+            df_ns = (df_ns / 10.3).round(4)
 
             # run Q function
             update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
@@ -383,7 +383,7 @@ if __name__ == '__main__':
 
             # replace NaN with 0 and convert GWh to million m3
             df_ns = df_ns.fillna(0)
-            df_ns = (df_ns / 10.3).round(1)
+            df_ns = (df_ns / 10.3).round(4)
 
             # save clean csv for dashboard
             df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
