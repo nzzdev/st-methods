@@ -162,7 +162,7 @@ if __name__ == '__main__':
             df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d %H:%M:%S')
         # RUS GAS df_rus['date'] = pd.to_datetime(df_rus['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         # BENZIN df_super['date'] = pd.to_datetime(df_super['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
-        timestamp_str = df['date'].tail(1).item()
+        timestamp_str = df_ns['date'].tail(1).item()
 
         # OLD replace NaN with empty string for old storage data
         # df['Gasspeicher'] = df['Gasspeicher'].fillna(0).astype(int).astype(str)
