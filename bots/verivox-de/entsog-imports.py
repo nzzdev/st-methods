@@ -368,9 +368,8 @@ if __name__ == '__main__':
             timecode_str = timecode.strftime('%-d. %-m., %-H')
             notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
 
-            # replace NaN with 0 and convert GWh to million m3
+            # replace NaN with 0
             df_ns = df_ns.fillna(0)
-            df_ns = (df_ns / 10.3).round(4)
 
             # run Q function
             update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
