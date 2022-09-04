@@ -193,7 +193,7 @@ if __name__ == '__main__':
         storage_ytick = [0, 25, 50, 75, 100]
         gas_ytick = [0, 15, 30, 45]
         strom_ytick = [30, 40, 50, 60]
-        ns_ytick = [0, 5, 10, 15]
+        ns_ytick = [0, 0.5, 1, 1.5]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
         # BENZIN super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
@@ -211,7 +211,7 @@ if __name__ == '__main__':
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
         # meta_strom = {'indicatorTitle': 'Strompreis', 'date': timestamp_str, 'indicatorSubtitle': 'je kWh für Neukunden', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent', 'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_ns = {'indicatorTitle': 'Nord Stream 1', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse pro Stunde', 'value': diff_ns,
-                   'valueLabel': f'{diff_ns_str} GWh', 'yAxisStart': strom_y, 'yAxisLabels': ns_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_ns, 'chartType': 'line'}
+                   'valueLabel': f'{diff_ns_str} Mio. m³', 'yAxisStart': strom_y, 'yAxisLabels': ns_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_ns, 'chartType': 'line'}
         # RUS GAS meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse nach Deutschland', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} Mio. m³', 'yAxisStart': rus_y, 'yAxisLabels': rus_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_rus, 'chartType': 'line'}
         # BENZIN meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Super E5', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro', 'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
 

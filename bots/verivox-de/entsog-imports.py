@@ -304,7 +304,7 @@ if __name__ == '__main__':
                 df_new_sum['Summe'] = df_new_sum.sum(axis=1)
                 df_new_sum = df_new_sum[['Summe']]
 
-                # convert kWh to million m3 according to calorific value of Russian gas
+                # convert GWh to million m3 according to calorific value of Russian gas
                 df_new = (df_new / 10.3).round(1)
                 df_new_sum = (df_new_sum / 10.3).round(1)
 
@@ -368,8 +368,9 @@ if __name__ == '__main__':
             timecode_str = timecode.strftime('%-d. %-m., %-H')
             notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
 
-            # replace NaN with 0
+            # replace NaN with 0 and convert GWh to million m3
             df_ns = df_ns.fillna(0)
+            df_ns = (df_ns / 10.3).round(1)
 
             # run Q function
             update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
@@ -380,8 +381,9 @@ if __name__ == '__main__':
             timecode_str = timecode.strftime('%-d. %-m., %-H')
             notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
 
-            # replace NaN with 0
+            # replace NaN with 0 and convert GWh to million m3
             df_ns = df_ns.fillna(0)
+            df_ns = (df_ns / 10.3).round(1)
 
             # save clean csv for dashboard
             df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
