@@ -355,7 +355,7 @@ update_chart(id='b1717dcaee838699497b647ebbceda21',
 
 import market_ids
 
-market_id = market_id
+market_id = '5429405'
 
 url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
 resp = requests.get(url)
