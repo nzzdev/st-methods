@@ -14,26 +14,6 @@ import os
 #import sys
 from fake_useragent import UserAgent
 
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-from webdriver_manager.core.utils import ChromeType
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.chrome.service import Service
-
-chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
-
-chrome_options = Options()
-options = [
-    "--headless",
-    "--disable-gpu",
-    "--window-size=1920,1200",
-    "--ignore-certificate-errors",
-    "--disable-extensions",
-    "--no-sandbox",
-    "--disable-dev-shm-usage"
-]
-for option in options:
-    chrome_options.add_argument(option)
 
 
 from helpers import *
@@ -41,21 +21,6 @@ from helpers import *
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
 
-# TomTom
-
-# tomtom = pd.read_csv(
-#   'https://raw.githubusercontent.com/ActiveConclusion/COVID19_mobility/master/tomtom_reports/tomtom_trafic_index.csv')
-#ch = tomtom[(tomtom.country == 'Switzerland') & (tomtom.date >= '2019-01-01')]
-# congestion_ch = ch[['date', 'congestion']].groupby(
-#   'date').mean().rolling(7).mean()
-#data = congestion_ch[(congestion_ch.index >= '2022-01-01')][['congestion']]
-#update_chart(id='c77298787298e4fcae70369e03275be6', data=data)
-
-#de = tomtom[(tomtom.country == 'Germany') & (tomtom.date >= '2019-01-01')]
-# congestion_de = de[['date', 'congestion']].groupby(
-#   'date').mean().rolling(7).mean()
-#data = congestion_de[(congestion_de.index >= '2022-01-01')][['congestion']]
-#update_chart(id='5ac628c4bb388d36fb2f5cbc743f5f8b', data=data)
 
 # Zurich traffic
 
@@ -209,7 +174,6 @@ update_chart(id='85c353bb11cc62672a227f886950b782', data=origin)
 url = 'https://www.tcs.ch/de/camping-reisen/reiseinformationen/wissenswertes/fahrkosten-gebuehren/benzinpreise.php'
 
 # Opens a website and read its binary contents (HTTP Response Body)
-
 
 def url_get_contents(url):
 
@@ -388,25 +352,9 @@ wheat = wheat[['Date', 'Jahresdurchschnitt 2019', '2022']]
 update_chart(id='b1717dcaee838699497b647ebbceda21',
              data=wheat)
 
-"""
-gas = df['Close']['TTF=F'][df.index >= '2022-01-01'].to_frame().dropna()
-gas['2019'] = df['Close']['TTF=F'][(
-    df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
-gas.rename(columns={gas.columns[0]: '2022'}, inplace=True)
-gas = gas[['2019', '2022']]
-gas.index = gas.index.strftime('%Y-%m-%d')
-update_chart(id='1dda540238574eac80e865faa0ddbafc', data=gas[['2019', '2022']])
-"""
 
-# get market id from https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data
-url = 'https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data'
 
-driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
-driver.get(url)
-time.sleep(5)
-soup = BeautifulSoup(driver.page_source, "html.parser")
-element = soup.find('tr', {'class': 'table-bigdata--selected cursor-pointer hover:bg-gray focus:outline-none'})
-market_id = re.search(r'\d+', str(element)).group()
+market_id = '5429405'
 
 url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
 resp = requests.get(url)
