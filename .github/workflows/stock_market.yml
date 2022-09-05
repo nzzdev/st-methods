@@ -53,7 +53,7 @@ jobs:
       - name: Remove Chrome
         run: sudo apt purge google-chrome-stable
       - name: Install software
-        run: sudo apt install -y chromium-browser
+        run: sudo apt install -y chromium-browser==105.0.5195.102
       - name: Run python scripts
         run: |
           python economic_indicators_March_2020.py
