@@ -42,11 +42,6 @@ if __name__ == '__main__':
         # round numbers
         df['Kosten'] = df['Kosten'].round(0).astype(int)
 
-        # create date for chart notes
-        timecode = df.index[-1]
-        timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat; aktueller Tag: durchschnittlicher Intraday-Preis.<br>Stand: ' + timecode_str
-
         # get latest intraday data
         url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=5429405'
         resp = download_data(url, headers=fheaders)
@@ -67,6 +62,11 @@ if __name__ == '__main__':
 
         # create final dataframe with historical and intraday data
         df_full = pd.concat([df, df_intra])
+
+        # create date for chart notes
+        timecode = df_full.index[-1]
+        timecode_str = timecode.strftime('%-d. %-m. %Y')
+        notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat; aktueller Tag: durchschnittlicher Intraday-Preis.<br>Stand: ' + timecode_str
 
         # convert DatetimeIndex
         #df.index = df.index.strftime('%Y-%m-%d')
