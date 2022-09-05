@@ -7,12 +7,33 @@ import re
 import yfinance as yf
 from bs4 import BeautifulSoup
 from html_table_parser.parser import HTMLTableParser
-import msoffcrypto
+#import msoffcrypto
 import requests
 import urllib.request
 import os
-import sys
+#import sys
 from fake_useragent import UserAgent
+
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.core.utils import ChromeType
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+
+chrome_service = Service(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install())
+
+chrome_options = Options()
+options = [
+    "--headless",
+    "--disable-gpu",
+    "--window-size=1920,1200",
+    "--ignore-certificate-errors",
+    "--disable-extensions",
+    "--no-sandbox",
+    "--disable-dev-shm-usage"
+]
+for option in options:
+    chrome_options.add_argument(option)
 
 
 from helpers import *
@@ -377,8 +398,17 @@ gas.index = gas.index.strftime('%Y-%m-%d')
 update_chart(id='1dda540238574eac80e865faa0ddbafc', data=gas[['2019', '2022']])
 """
 
-# get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
-url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=5429405&historicalSpan=3'
+# get market id from https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data
+url = 'https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data'
+
+driver = webdriver.Chrome(service=chrome_service, options=chrome_options)
+driver.get(url)
+time.sleep(5)
+soup = BeautifulSoup(driver.page_source, "html.parser")
+element = soup.find('tr', {'class': 'table-bigdata--selected cursor-pointer hover:bg-gray focus:outline-none'})
+market_id = re.search(r'\d+', str(element)).group()
+
+url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
 resp = requests.get(url)
 json_file = resp.text
 full_data = json.loads(json_file)
