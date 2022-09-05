@@ -13,6 +13,7 @@ import urllib.request
 import os
 #import sys
 from fake_useragent import UserAgent
+from deep_translator import GoogleTranslator
 
 
 
@@ -427,24 +428,18 @@ smi.to_csv(f'./SMI.csv', index=False)
 
 # Benzinpreistabelle D
 
-#kurs = euro['EURCHF=X'].tail(1).values
-#benzin_de = benzin.copy()
-#benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
-#eu = pd.read_excel('https://ec.europa.eu/energy/observatory/reports/latest_prices_raw_data.xlsx')
-#eu = eu.loc[eu['Product Name'] == 'Euro-super 95'].copy()
-#eu['Benzinpreis'] = round(pd.to_numeric(eu['Weekly price with taxes'].str.replace(',', '')) / 1000, 2)
-# german = gettext.translation('iso3166', pycountry.LOCALES_DIR,
-#                             languages=['de'])
-# german.install()
+kurs = euro['EURCHF=X'].tail(1).values
+benzin_de = benzin.copy()
+benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
+eu = pd.read_excel('https://ec.europa.eu/energy/observatory/reports/latest_prices_raw_data.xlsx')
+eu = eu.loc[eu['Product Name'] == 'Euro-super 95'].copy()
+eu['Benzinpreis'] = round(pd.to_numeric(eu['Weekly price with taxes'].str.replace(',', '')) / 1000, 2)
+eu['Reiseziel'] = eu['Country Name'].apply(lambda x: GoogleTranslator(source='auto', target='de').translate(x))
+eu = pd.concat([benzin_de[benzin_de['Reiseziel'] == 'Schweiz'][['Reiseziel', 'Benzinpreis']], eu[['Reiseziel', 'Benzinpreis']]])
+eu.sort_values(by='Benzinpreis', ascending=False, inplace=True)
+eu.rename_axis(None, axis=1, inplace = True)
 
-#eu['Reiseziel'] = eu['Country EU Code'].apply(lambda x: _(pycountry.countries.get(alpha_2 = x).name))
-
-#eu = benzin_de[benzin_de['Reiseziel'] == 'Schweiz'].append(eu[['Reiseziel', 'Benzinpreis']])
-#eu = eu.sort_values(by = 'Benzinpreis', ascending = False)
-
-#eu.set_index('Reiseziel', inplace = True)
-
-#update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu[['Benzinpreis']])
+update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu)
 
 
 # Unternehmen, die Russland verlassen
