@@ -24,3 +24,4 @@ fake_useragent==0.1.11
 regex==2022.4.24
 pycountry==22.3.5
 python-gettext==4.0
+deep-translator==1.8.3
