@@ -45,7 +45,28 @@ if __name__ == '__main__':
         # create date for chart notes
         timecode = df.index[-1]
         timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat.<br>Stand: ' + timecode_str
+        notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat; aktueller Tag: durchschnittlicher Intraday-Preis.<br>Stand: ' + timecode_str
+
+        # get latest intraday data
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=5429405'
+        resp = download_data(url, headers=fheaders)
+        json_file = resp.text
+        full_data = json.loads(json_file)
+
+        # create dataframe and format date column
+        df_intra = pd.DataFrame(full_data['bars'], columns=[
+                                'Datum', 'Intraday'])
+        df_intra['Datum'] = pd.to_datetime(df_intra['Datum'])
+        df_intra.set_index('Datum', inplace=True)
+
+        # calculate intraday mean and drop everything except last row
+        df_intra['Kosten'] = df_intra['Intraday'].mean()
+        df_intra = df_intra.drop(df_intra.index.to_list()[0:-1], axis=0)
+        df_intra = df_intra.drop('Intraday', axis=1)
+        df_intra['Kosten'] = df_intra['Kosten'].round(0).astype(int)
+
+        # create final dataframe with historical and intraday data
+        df_full = pd.concat([df, df_intra])
 
         # convert DatetimeIndex
         #df.index = df.index.strftime('%Y-%m-%d')
