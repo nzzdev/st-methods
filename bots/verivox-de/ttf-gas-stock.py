@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
         # run Q function
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd',
-                     notes=notes_chart, data=df)
+                     notes=notes_chart, data=df_full)
 
     except:
         raise
