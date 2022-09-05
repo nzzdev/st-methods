@@ -207,6 +207,7 @@ benzin.rename(columns={'95': 'Benzinpreis'}, inplace=True)
 benzin.sort_values(by='Benzinpreis', ascending=False, inplace=True)
 
 benzin_table = benzin[['Reiseziel', 'Benzinpreis']]
+benzin_table['Benzinpreis'] = benzin_table['Benzinpreis'].astype(str)
 
 notes = "Die Datenbasis ist in den einzelnen Ländern sehr unterschiedlich. Ausserdem gibt es teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen. Die Datenbasis ist in den einzelnen Ländern sehr unterschiedlich. Ausserdem gibt es teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
 update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin_table, notes = notes)
@@ -352,9 +353,9 @@ wheat = wheat[['Date', 'Jahresdurchschnitt 2019', '2022']]
 update_chart(id='b1717dcaee838699497b647ebbceda21',
              data=wheat)
 
+import market_ids
 
-
-market_id = '5429405'
+market_id = market_id
 
 url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
 resp = requests.get(url)
