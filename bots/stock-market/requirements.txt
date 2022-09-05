@@ -25,4 +25,4 @@ regex==2022.4.24
 pycountry==22.3.5
 python-gettext==4.0
 webdriver-manager==3.8.3
-selenium==4.4.3
+selenium
