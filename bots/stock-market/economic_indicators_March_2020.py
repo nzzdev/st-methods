@@ -353,7 +353,7 @@ wheat = wheat[['Date', 'Jahresdurchschnitt 2019', '2022']]
 update_chart(id='b1717dcaee838699497b647ebbceda21',
              data=wheat)
 
-import market_ids
+from market_ids import *
 
 url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
 resp = requests.get(url)
