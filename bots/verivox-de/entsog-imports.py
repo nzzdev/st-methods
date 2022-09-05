@@ -284,7 +284,7 @@ if __name__ == '__main__':
 
             # rename columns
             df_new = df_new.rename(columns={
-                df_new.columns[0]: 'Mallnow', df_new.columns[1]: 'Waidhaus', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
+                df_new.columns[0]: 'Jamal (Mallnow)', df_new.columns[1]: 'Transgas (Waidhaus)', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
 
             # check if data is corrupted
             if (df_new['Greifswald (Nord Stream 1)'].iloc[-1] == 0.0) and (df_new['Greifswald (Nord Stream 1)'].iloc[-2] != 0.0):
