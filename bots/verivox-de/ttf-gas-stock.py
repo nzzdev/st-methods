@@ -29,7 +29,7 @@ if __name__ == '__main__':
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
         }
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' & market_id & '&historicalSpan=3'
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         df['Kosten'] = df['Kosten'].round(0).astype(int)
 
         # get latest intraday data
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=' & market_id
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=' + market_id
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
