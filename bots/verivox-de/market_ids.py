@@ -11,51 +11,79 @@ import pandas as pd
 
 date = date.today()
 
-### Market IDs
+
+# Market IDs from https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5429405
 
 if (date >= pd.to_datetime('2022-09-01')) & (date <= pd.to_datetime('2022-09-30')):
     market_id = '5429405'
 
+# from https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5439161
+
 if (date >= pd.to_datetime('2022-10-01')) & (date <= pd.to_datetime('2022-10-31')):    
     market_id = "5439161"
+
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5460494
 
 if (date >= pd.to_datetime('2022-11-01')) & (date <= pd.to_datetime('2022-11-30')):    
     market_id = "5460494"
 
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5477499
+
 if (date >= pd.to_datetime('2022-12-01')) & (date <= pd.to_datetime('2022-12-31')):    
     market_id = "5477499"
 
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5493476
 
 if (date >= pd.to_datetime('2023-01-01')) & (date <= pd.to_datetime('2023-01-31')):    
     market_id = "5493476"
 
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5508663
+
 if (date >= pd.to_datetime('2023-02-01')) & (date <= pd.to_datetime('2024-02-28')):    
     market_id = "5508663"
 
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5519350
+
 if (date >= pd.to_datetime('2023-03-01')) & (date <= pd.to_datetime('2023-03-31')):    
     market_id = "5519350"
-    
+
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5544919
+
 if (date >= pd.to_datetime('2023-04-01')) & (date <= pd.to_datetime('2023-04-30')):    
     market_id = "5544919"
-    
+
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5564180
+
 if (date >= pd.to_datetime('2023-05-01')) & (date <= pd.to_datetime('2023-05-31')):    
     market_id = "5564180"
 
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5577209
+
 if (date >= pd.to_datetime('2023-06-01')) & (date <= pd.to_datetime('2023-06-30')):    
     market_id = "5577209"
+
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5586285
     
 if (date >= pd.to_datetime('2023-07-01')) & (date <= pd.to_datetime('2023-07-31')):    
     market_id = "5586285"
-    
+
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5600523
+
 if (date >= pd.to_datetime('2023-08-01')) & (date <= pd.to_datetime('2023-08-31')):    
     market_id = "5600523"
 
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5614690
+
 if (date >= pd.to_datetime('2023-09-01')) & (date <= pd.to_datetime('2023-09-30')):    
     market_id = "5614690"
-    
+
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5640640
+
 if (date >= pd.to_datetime('2023-10-01')) & (date <= pd.to_datetime('2023-10-31')):    
     market_id = "5640640"
-    
+
+# https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5667240
+
 if (date >= pd.to_datetime('2023-11-01')) & (date <= pd.to_datetime('2023-11-30')):
     market_id = "5667240"
     
