@@ -130,15 +130,15 @@ if __name__ == '__main__':
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
+        notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
 
-        # merge dataframes and convert datetime to string
+        # merge dataframes
         df = dfold.merge(dfnew, on='Datum', how='left')
         df.rename(columns={'Min': ''}, inplace=True)
         df['2022'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
-        #df.index = df.index.strftime('%Y-%m-%d')
+        # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
 
-        notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
         # banker's rounding
         title_perc = dfnew['2022'].iloc[-1].round(
             1).astype(str).replace('.', ',')
