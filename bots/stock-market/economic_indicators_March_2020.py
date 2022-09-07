@@ -325,7 +325,7 @@ oil_price_de.to_csv(f'./oil_price_de.csv', index=False)
 
 # Stock market data
 tickers = ["EURCHF=X", "KE=F", "^GDAXI", "EURUSD=X",
-           "BTC-USD", "BZ=F"]  # Subtitute for the tickers you want
+           "BTC-USD", "BZX22.NYM"]  # Subtitute for the tickers you want
 df = yf.download(tickers,  start="2019-01-01", end=date.today())
 
 euro = df['Close']['EURCHF=X'][df.index >=
@@ -380,9 +380,9 @@ df_gas = df_gas.reset_index(level=0)
 # run Q function
 update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas)
 
-oil = df['Close']['BZ=F'][df.index >=
+oil = df['Close']['BZX22.NYM'][df.index >=
                           '2022-01-01'].to_frame().dropna().reset_index(level=0)
-oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
+oil['Jahresdurchschnitt 2019'] = df['Close']['BZX22.NYM'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
 #oil.index = oil.index.strftime('%Y-%m-%d')
