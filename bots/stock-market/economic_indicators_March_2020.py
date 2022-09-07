@@ -380,13 +380,15 @@ df_gas = df_gas.reset_index(level=0)
 # run Q function
 update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas)
 
+#oil = pd.read_csv('https://www.marketwatch.com/investing/future/brn00/downloaddatapartial?startdate=01/03/2022%2000:00:00&enddate=09/06/2022%2023:59:59&daterange=d30&frequency=p1d&csvdownload=true&downloadpartial=false&newdates=false&countrycode=uk')
+
 oil = df['Close']['BZX22.NYM'][df.index >=
                           '2022-01-01'].to_frame().dropna().reset_index(level=0)
-oil['Jahresdurchschnitt 2019'] = df['Close']['BZX22.NYM'][(
-    df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
+#oil['Jahresdurchschnitt 2019'] = df['Close']['BZX22.NYM'][(
+ #   df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
 #oil.index = oil.index.strftime('%Y-%m-%d')
-oil = oil[['Date', 'Jahresdurchschnitt 2019', '2022']]
+oil = oil[['Date', '2022']]
 
 update_chart(id='c6aec0c9dea84bcdef43b980cd4a7e3f', data=oil)
 
@@ -399,7 +401,6 @@ bitcoin1m = bitcoin.loc[(pd.to_datetime(bitcoin.Date)
                          >= pd.to_datetime(month1))]
 update_chart(id='80a5f74298f588521786f9061c21d472',
              data=bitcoin1m)
-
 
 smi_old = pd.read_csv('./SMI.csv')
 
