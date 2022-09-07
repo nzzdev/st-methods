@@ -115,12 +115,13 @@ if __name__ == '__main__':
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
         # temporary fix for wrong storage data
+        """
         dfnew.set_index('Datum', inplace=True)
         dfnew.at['2022-08-20', '2022'] = 79.55
         dfnew.at['2022-09-05', '2022'] = 86.50
-        dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
-                     encoding='utf-8', index=True)
+        dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
+        """
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
