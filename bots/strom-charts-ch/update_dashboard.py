@@ -87,7 +87,7 @@ def run(futures, spotmarket, speicherseen):
 
     # ---------- Create Q
     fn =  Path('./dashboard_ch.json')
-    json.dump([json_speicherseen, json_spotmarket, json_futures], open(fn, 'w'), default=str)
+    json.dump([json_spotmarket, json_futures, json_speicherseen], open(fn, 'w'), default=str)
 
     file = [{
         "loadSyncBeforeInit": True,
