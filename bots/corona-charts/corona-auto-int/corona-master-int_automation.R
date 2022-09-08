@@ -443,7 +443,7 @@ all_cum_cases <- all_cum %>%
   select(Land, all_cases_pop)
 
 title <- paste(head(all_cum_cases$Land, 1), "hat gemessen an der Bevölkerungszahl insgesamt am meisten Fälle gemeldet")
-notes <- paste0("Länder mit mehr als 1 Million Einwohnern.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(all_ctry$date), format = "%d. %m. %Y")))
+notes <- paste0("Länder mit mehr als 1 Million Einwohnern. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: ", gsub("\\b0(\\d)\\b", "\\1", format(max(all_ctry$date), format = "%d. %m. %Y")))
 update_chart(id = '7c647e0bd14b018f4f4f91aa86eb1872', data = all_cum_cases, notes = notes, title = title)
 
 
@@ -515,7 +515,7 @@ all_cum_deaths <- all_cum %>%
 
 title <- paste(head(all_cum_deaths$Land, 1), "hat gemessen an der Bevölkerungszahl am meisten Tote zu beklagen")
 
-notes <- paste0("Länder mit mehr als 1 Million Einwohnern. <br>Stand: "
+notes <- paste0("Länder mit mehr als 1 Million Einwohnern. GB = Grossbritannien, VAE = Vereinigte Arabische Emirate.<br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
 update_chart(id = 'c7004f4d1b11f50ecbbd2d4a1849f329', data = all_cum_deaths, notes = notes, title = title)
 
