@@ -390,6 +390,7 @@ oil.sort_values(by = 'Date', ascending = True, inplace = True)
 #oil['Jahresdurchschnitt 2019'] = df['Close']['BZX22.NYM'][(
  #   df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
 oil = oil[['Date', 'Close']]
+oil = oil[oil['Date'] >= '2022-01-01']
 
 oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
 
@@ -413,8 +414,8 @@ smi = pd.read_csv('https://www.marketwatch.com/investing/index/smi/downloaddatap
 smi['Date'] = pd.to_datetime(smi['Date'], format = '%m/%d/%Y')
 smi.sort_values(by = 'Date', ascending = True, inplace = True)
 smi = smi[['Date', 'Close']]
-smi.rename(columns={smi.columns[1]: '2022'}, inplace=True)
-smi = smi[['Date', 'Close']]
+smi = smi[smi['Date'] >= '2022-01-01']
+
 smi.rename(columns={smi.columns[1]: '2022'}, inplace=True)
 
 #smi_old = pd.read_csv('./SMI.csv')
