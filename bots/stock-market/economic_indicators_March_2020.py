@@ -417,6 +417,7 @@ smi = smi[['Date', 'Close']]
 smi = smi[smi['Date'] >= '2022-01-01']
 
 smi.rename(columns={smi.columns[1]: '2022'}, inplace=True)
+smi['2022'] = pd.to_numeric(smi['2022'].str.replace(',', ''))
 
 #smi_old = pd.read_csv('./SMI.csv')
 
