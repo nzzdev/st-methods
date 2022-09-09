@@ -385,7 +385,6 @@ oil = pd.read_csv('https://www.marketwatch.com/investing/future/brn00/downloadda
 oil['Date'] = pd.to_datetime(oil['Date'], format = '%m/%d/%Y')
 oil.sort_values(by = 'Date', ascending = True, inplace = True)
 
-
 #oil = df['Close']['BZX22.NYM'][df.index >=
  #                         '2022-01-01'].to_frame().dropna().reset_index(level=0)
 #oil['Jahresdurchschnitt 2019'] = df['Close']['BZX22.NYM'][(
@@ -393,6 +392,7 @@ oil.sort_values(by = 'Date', ascending = True, inplace = True)
 oil = oil[['Date', 'Close']]
 
 oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
+
 #oil.index = oil.index.strftime('%Y-%m-%d')
 
 update_chart(id='c6aec0c9dea84bcdef43b980cd4a7e3f', data=oil)
@@ -407,30 +407,40 @@ bitcoin1m = bitcoin.loc[(pd.to_datetime(bitcoin.Date)
 update_chart(id='80a5f74298f588521786f9061c21d472',
              data=bitcoin1m)
 
-smi_old = pd.read_csv('./SMI.csv')
 
-url = 'https://www.marketwatch.com/investing/index/smi?countrycode=ch'
-page = requests.get(url)
 
-soup = BeautifulSoup(page.content, "html.parser")
-results = soup.find(class_="table__cell u-semi").text.strip()
-close = pd.to_numeric(results.replace(',', ''))
+smi = pd.read_csv('https://www.marketwatch.com/investing/index/smi/downloaddatapartial?startdate=01/01/2021%2000:00:00&enddate=09/08/2022%2000:00:00&daterange=d30&frequency=p1d&csvdownload=true&downloadpartial=false&newdates=false&countrycode=ch')
+smi['Date'] = pd.to_datetime(smi['Date'], format = '%m/%d/%Y')
+smi.sort_values(by = 'Date', ascending = True, inplace = True)
+smi = smi[['Date', 'Close']]
+smi.rename(columns={smi.columns[1]: '2022'}, inplace=True)
+smi = smi[['Date', 'Close']]
+smi.rename(columns={smi.columns[1]: '2022'}, inplace=True)
 
-if date.today().weekday() == 0:
-    date_ = (date.today() - timedelta(3)).strftime('%Y-%m-%d')
-else:
-    date_ = (date.today() - timedelta(1)).strftime('%Y-%m-%d')
+#smi_old = pd.read_csv('./SMI.csv')
 
-data = {'Date': date_,
-        'Close': close}
-smi = pd.DataFrame(data, index=[0])
-smi = pd.concat([smi_old, smi], ignore_index=True)
-smi.drop_duplicates(subset='Date', keep='last', inplace=True)
+#url = 'https://www.marketwatch.com/investing/index/smi?countrycode=ch''
+#page = requests.get(url)
+
+#soup = BeautifulSoup(page.content, "html.parser")
+#results = soup.find(class_="table__cell u-semi").text.strip()
+#close = pd.to_numeric(results.replace(',', ''))
+
+#if date.today().weekday() == 0:
+ #   date_ = (date.today() - timedelta(3)).strftime('%Y-%m-%d')
+#else:
+ #   date_ = (date.today() - timedelta(1)).strftime('%Y-%m-%d')
+
+#data = {'Date': date_,
+ #       'Close': close}
+#smi = pd.DataFrame(data, index=[0])
+#smi = pd.concat([smi_old, smi], ignore_index=True)
+#smi.drop_duplicates(subset='Date', keep='last', inplace=True)
 #smi.set_index('Date', inplace=True)
 #smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
 
 update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
-smi.to_csv(f'./SMI.csv', index=False)
+#smi.to_csv(f'./SMI.csv', index=False)
 
 # Benzinpreistabelle D
 
