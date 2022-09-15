@@ -489,6 +489,43 @@ notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 update_chart(id='6aa31459fbbb1211b5ec05508a665b9e',
              data=df, notes=notes)
 
+table = soup.find_all('table', class_ = 'responsive-enabled')
+df = {}
+for j in range(0, 5):
+    all_ = []
+    for i in table[j].find_all('td'):
+        all_.append(i.text)
+
+    firms = []
+    countries = []
+    for i in range(0, len(all_), 4):
+        firms.append(all_[i])
+
+    for i in range(3, len(all_), 4):
+        countries.append(all_[i])
+
+    firms = [i.strip() for i in firms]
+    countries = [i.strip() for i in countries]
+
+    df[j] = pd.DataFrame({'firm': firms, 'country': countries})
+
+df[0]['status'] = 'Festhalten am Russland-Geschäft'
+df[1]['status'] = 'Zurückhalten von Russland-Investitionen'
+df[2]['status'] = 'Reduzierung des Russland-Geschäfts'
+df[3]['status'] = 'Suspendierung des Russland-Geschäfts'
+df[4]['status'] = 'Endgültiger Rückzug aus Russland'
+
+list_ = pd.concat([df[0], df[1]])
+list_ = pd.concat([list_, df[2]])
+list_ = pd.concat([list_, df[3]])
+list_ = pd.concat([list_, df[4]])
+
+list_[['firm', 'status']][list_['country'] == 'Switzerland'].groupby('status').count().reset_index().sort_values(by = 'firm', ascending = False)
+update_chart(id = '83caf1c1cfcfaf76da2c577a9e7f4f4a', data = list_, notes = notes)
+
+list_[['firm', 'status']][list_['country'] == 'Germany'].groupby('status').count().reset_index().sort_values(by = 'firm', ascending = False)
+update_chart(id = '8676bad64564b4740f74b6d5d04f4bf4', data = list_, notes = notes)
+
 
 # BIP Indikator
 
