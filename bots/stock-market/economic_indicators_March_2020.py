@@ -520,11 +520,10 @@ list_ = pd.concat([list_, df[2]])
 list_ = pd.concat([list_, df[3]])
 list_ = pd.concat([list_, df[4]])
 
-list_[['firm', 'status']][list_['country'] == 'Switzerland'].groupby('status').count().reset_index().sort_values(by = 'firm', ascending = False)
-update_chart(id = '83caf1c1cfcfaf76da2c577a9e7f4f4a', data = list_, notes = notes)
 
-list_[['firm', 'status']][list_['country'] == 'Germany'].groupby('status').count().reset_index().sort_values(by = 'firm', ascending = False)
-update_chart(id = '8676bad64564b4740f74b6d5d04f4bf4', data = list_, notes = notes)
+update_chart(id = '83caf1c1cfcfaf76da2c577a9e7f4f4a', data = list_[['firm', 'status']][list_['country'] == 'Switzerland'].groupby('status').count().reset_index().sort_values(by = 'firm', ascending = False), notes = notes)
+
+update_chart(id = '8676bad64564b4740f74b6d5d04f4bf4', data = list_[['firm', 'status']][list_['country'] == 'Germany'].groupby('status').count().reset_index().sort_values(by = 'firm', ascending = False), notes = notes)
 
 
 # BIP Indikator
