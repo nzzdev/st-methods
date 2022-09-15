@@ -593,7 +593,7 @@ url = 'https://coinmarketcap.com/'
 page = requests.get(url)
 
 soup = BeautifulSoup(page.content, "html.parser")
-results = soup.find('table', class_="h7vnx2-2 czTsgW cmc-table")
+results = soup.find('table', {'class' : "h7vnx2-2 juYUEZ cmc-table"})
 
 market_cap = []
 for i in range(0, 10):
