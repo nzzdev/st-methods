@@ -593,16 +593,17 @@ url = 'https://coinmarketcap.com/'
 page = requests.get(url)
 
 soup = BeautifulSoup(page.content, "html.parser")
-results = soup.find('table', {'class' : "h7vnx2-2 wfBiO cmc-table"})
+
+results = soup.find_all('table')
 
 market_cap = []
 for i in range(0, 10):
     market_cap.append(re.sub(
-        "[^0-9]", "", results.find_all('span', class_='sc-1ow4cwt-1 ieFnWP')[i].text.strip()))
+        "[^0-9]", "", results[0].find_all('span', class_='sc-1ow4cwt-1 ieFnWP')[i].text.strip()))
 
 crypto = []
 for i in range(0, 10):
-    crypto.append(results.find_all(
+    crypto.append(results[0].find_all(
         'p', class_='sc-1eb5slv-0 iworPT')[i].text.strip())
 
 df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
