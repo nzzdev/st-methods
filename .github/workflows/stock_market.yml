@@ -52,7 +52,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python economic_indicators_March_2020.py
+          python economic_indicators.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: :!*.json
