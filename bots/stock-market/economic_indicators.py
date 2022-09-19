@@ -23,6 +23,20 @@ from helpers import *
 os.chdir(os.path.dirname(__file__))
 
 
+# Monitoring Consumption Switzerland
+
+consum_ch = pd.read_csv("https://drive.switch.ch/index.php/s/yLISs3KVE7ASE68/download?path=%2F1_OVERVIEW%20DATA&files=MCS_Overview_Data.csv")
+consum_ch = consum_ch[consum_ch['TRANSACTIONS'] != 'ATM_DEPOSIT']
+consum_ch['DATE'] = pd.to_datetime(consum_ch['DATE'], format = '%Y-%m-%d')
+
+consum_ch['week'] = consum_ch['DATE'].dt.week
+consum_ch['year'] = consum_ch['DATE'].dt.year
+consum_ch.loc[(consum_ch.week == 52) & (consum_ch.year == 2022), 'year'] = '2021'
+consum_ch.loc[(consum_ch.week == 53) & (consum_ch.year == 2021), 'year'] = '2020'
+
+consum_ch['week_year'] = consum_ch['year'].astype(str) + '-' + consum_ch['week'].astype(str)
+
+
 # Zurich traffic
 
 zurich = pd.read_csv(
