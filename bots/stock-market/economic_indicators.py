@@ -34,7 +34,26 @@ consum_ch['year'] = consum_ch['DATE'].dt.year
 consum_ch.loc[(consum_ch.week == 52) & (consum_ch.year == 2022), 'year'] = '2021'
 consum_ch.loc[(consum_ch.week == 53) & (consum_ch.year == 2021), 'year'] = '2020'
 
-consum_ch['week_year'] = consum_ch['year'].astype(str) + '-' + consum_ch['week'].astype(str)
+consum_ch = consum_ch[['week', 'year', 'AMOUNTCHF']].groupby(['week', 'year']).sum().reset_index()
+
+
+consum_ch_2019 = consum_ch[(consum_ch['year'] == 2019) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
+consum_ch_2020 = consum_ch[(consum_ch['year'] == 2020) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
+consum_ch_2021 = consum_ch[(consum_ch['year'] == 2021) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
+consum_ch_2022 = consum_ch[(consum_ch['year'] == 2022) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
+
+consum_ch_2019.rename(columns = {'AMOUNTCHF': '2019'}, inplace = True)
+consum_ch_2020.rename(columns = {'AMOUNTCHF': '2020'}, inplace = True)
+consum_ch_2021.rename(columns = {'AMOUNTCHF': '2021'}, inplace = True)
+consum_ch_2022.rename(columns = {'AMOUNTCHF': '2022'}, inplace = True)
+
+
+q_data = consum_ch_2020.merge(consum_ch_2021, on = 'week')
+q_data = q_data.merge(consum_ch_2022, on = 'week', how = 'outer')
+q_data['KW'] = '2022-W' + q_data['week'].astype(str)
+q_data = q_data[['KW', '2020', '2021', '2022']]
+
+update_chart(id='909e73515b8785336ef65c05d0fa36c7', data=q_data)
 
 
 # Zurich traffic
