@@ -55,10 +55,10 @@ def get_data(url):
     # return session.get(url)
     return session.get(url, headers=headers)
 
-r = requests.get('https://www.coop.ch/de/lebensmittel/brot-backwaren/c/m_0115/facets?q=%3AmostlyBought&sort=mostlyBought&pageSize=60&compiledTemplates%5B%5D=productTile-new&openFilter=worldNameFacet&changedFilter=worldNameFacet&_=1663678558780')
+r = requests.get('https://www.coop.ch/de/lebensmittel/brot-backwaren/c/m_0115/facets?q=%3AmostlyBought&sort=mostlyBought&pageSize=60&compiledTemplates%5B%5D=productTile-new&openFilter=worldNameFacet&changedFilter=worldNameFacet&_=1663678558780', headers=headers)
 print(r.text)
 print(r)
-exit()
+raise Exception("Exit")
 
 
 # Brot
