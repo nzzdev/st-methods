@@ -19,6 +19,8 @@ os.chdir(os.path.dirname(__file__))
 # Brot
 url = 'https://www.coop.ch/de/lebensmittel/brot-backwaren/c/m_0115?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=1'
 page = requests.get(url)
+print(page.text)
+print(page)
 soup = BeautifulSoup(page.content, "html.parser")
 soup.find_all('a', class_ = 'pagination__page')
 
