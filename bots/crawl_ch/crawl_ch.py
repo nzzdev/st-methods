@@ -56,6 +56,8 @@ def get_data(url):
 url = 'https://www.coop.ch/de/lebensmittel/brot-backwaren/c/m_0115?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=1'
 #page = requests.get(url, headers=headers)
 page = get_data(url)
+print(page.text)
+print(page)
 
 # Delete gateways
 gateway.shutdown()
