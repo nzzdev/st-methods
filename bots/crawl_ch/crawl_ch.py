@@ -15,10 +15,18 @@ sys.path.append(os.path.dirname((os.path.dirname(__file__))))
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
 
+headers = {
+    'accept': '*/*',
+    'accept-encoding': 'gzip, deflate, br',
+    'origin': 'https://www.coop.ch',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'cross-site',
+    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
+}
 
 # Brot
 url = 'https://www.coop.ch/de/lebensmittel/brot-backwaren/c/m_0115?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url)
+page = requests.get(url, headers=headers)
 print(page.text)
 print(page)
 soup = BeautifulSoup(page.content, "html.parser")
