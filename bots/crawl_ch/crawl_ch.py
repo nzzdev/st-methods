@@ -7,6 +7,7 @@ import json
 import os
 import sys
 import openpyxl
+from requests_ip_rotator import ApiGateway
 
 
 
@@ -33,11 +34,34 @@ headers = {
     'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
 }
 
+# Create AWS-Gateway
+key = os.environ['AWS_GATEWAY_KEY']
+secret = os.environ['AWS_GATEWAY_SECRET']
+
+# Create gateway object and initialise in AWS
+gateway = ApiGateway("https://www.coop.ch", access_key_id = key, access_key_secret = secret)
+gateway.start()
+
+# Assign gateway to session
+session = requests.Session()
+session.mount("https://www.coop.ch", gateway)
+
+# Moved Requests Get to a function in case we need to change it again (everywhere)
+def get_data(url):
+    return session.get(url, headers=headers)
+
+
+
 # Brot
 url = 'https://www.coop.ch/de/lebensmittel/brot-backwaren/c/m_0115?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
-print(page.text)
-print(page)
+#page = requests.get(url, headers=headers)
+page = get_data(url)
+
+# Delete gateways
+gateway.shutdown()
+
+# print(page.text)
+# print(page)
 soup = BeautifulSoup(page.content, "html.parser")
 soup.find_all('a', class_ = 'pagination__page')
 
