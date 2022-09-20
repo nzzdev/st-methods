@@ -6,7 +6,7 @@ import requests
 import json
 import os
 import sys
-import openpyxl
+#import openpyxl
 from requests_ip_rotator import ApiGateway
 
 
