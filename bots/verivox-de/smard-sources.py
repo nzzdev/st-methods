@@ -47,7 +47,7 @@ if __name__ == '__main__':
         ################################
         modules = REALIZED_POWER_GENERATION
         df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=(
-            int(time.time()) * 1000) - (24*3600)*373000)  # 365000 = 1 year
+            int(time.time()) * 1000) - (24*3600)*455000)  # 373000 = 1 year + last week
 
         # check if data is corrupted
         errors = 0
@@ -55,7 +55,7 @@ if __name__ == '__main__':
             sleep(2)
             errors += 1
             df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=(
-                int(time.time()) * 1000) - (24*3600)*373000)  # 365000 = 1 year
+                int(time.time()) * 1000) - (24*3600)*455000)  # 373000 = 1 year + last week 365000
         else:
             # fix wrong decimal
             df.to_csv('./data/smard_fixed.csv', sep=';',
@@ -155,5 +155,6 @@ if __name__ == '__main__':
             # run Q function
             update_chart(id='90005812afc9964bbfe4f952f51d6a57',
                          notes=notes_chart, data=df_spot)
+
     except:
         raise
