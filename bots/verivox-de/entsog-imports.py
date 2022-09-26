@@ -315,7 +315,7 @@ if __name__ == '__main__':
                 # create date for chart notes
                 timecode = df_new.index[-1]
                 timecode_str = timecode.strftime('%-d. %-m. %Y')
-                notes_chart_de = 'Stand: ' + timecode_str
+                notes_chart_de = '¹ Bei dem Gas, das am Übergangspunkt Waidhaus ankommt, handelt es sich u.a. um Re-Importe.<br>Stand: ' + timecode_str
 
                 # convert DatetimeIndex to string
                 df_new.index = df_new.index.strftime('%Y-%m-%d')
