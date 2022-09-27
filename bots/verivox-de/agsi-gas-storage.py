@@ -150,7 +150,7 @@ if __name__ == '__main__':
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
 
         # add row with current date for step-after chart
-        dftrend.loc[dftrend.shape[0]] = ['']
+        dftrend.loc[dftrend.shape[0]] = [None]
         timecodetrend = timecode + timedelta(days=1)
         dftrend.rename({dftrend.index[-1]: timecodetrend}, inplace=True)
 
