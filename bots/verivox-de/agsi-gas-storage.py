@@ -82,7 +82,7 @@ if __name__ == '__main__':
         s.mount('https://', HTTPAdapter(max_retries=retries))
 
         # create header and get data from 2022
-        header = (f"Datum,2022"+'\n')
+        header = (f"Datum,2022,Trend"+'\n')
         with open(f'./data/{todaystr}-gasspeicher.csv', 'w') as file:
             file.write(header)
             for n in range(1, pages):
@@ -104,13 +104,18 @@ if __name__ == '__main__':
                         level['gasDayStart'] +
                         ',' +
                         level['full'] +
+                        ',' +
+                        level['trend'] +
                         '\n')
+
                 # original query
                 # https://agsi.gie.eu/api?country=DE&from=2013-04-15&to=2022-05-16&page=1&size=300
 
         # retrieve data from 2011-2022
         dfnew = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', index_col=None)
+            f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', '2022'])
+        dftrend = pd.read_csv(
+            f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', 'Trend'])
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
@@ -126,19 +131,31 @@ if __name__ == '__main__':
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
         dfnew['Datum'] = pd.to_datetime(dfnew['Datum'])
+        dftrend['Datum'] = pd.to_datetime(dftrend['Datum'])
         dfnew = dfnew.sort_values(by='Datum', ascending=True)
+        dftrend = dftrend.sort_values(by='Datum', ascending=True)
 
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
+        notes_chart_trend = 'Stand: ' + timecodestr
 
         # merge dataframes
         df = dfold.merge(dfnew, on='Datum', how='left')
         df.rename(columns={'Min': ''}, inplace=True)
         df['2022'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
+        dftrend.set_index('Datum', inplace=True)
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
+
+        # add row with current date for step-after chart
+        dftrend.loc[dftrend.shape[0]] = ['']
+        timecodetrend = timecode + timedelta(days=1)
+        dftrend.rename({dftrend.index[-1]: timecodetrend}, inplace=True)
+
+        # delete data before May 2022
+        dftrend = dftrend[(dftrend.index.get_level_values(0) >= '2022-05-01')]
 
         # banker's rounding
         title_perc = dfnew['2022'].iloc[-1].round(
@@ -148,6 +165,8 @@ if __name__ == '__main__':
         # run function
         update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
                      data=df, title=title, notes=notes_chart)
+        update_chart(id='0fc405116af43382d715e046012ac4df',
+                     data=dftrend, notes=notes_chart_trend)
 
     except:
         raise
