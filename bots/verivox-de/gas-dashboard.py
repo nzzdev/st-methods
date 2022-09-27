@@ -19,7 +19,7 @@ if __name__ == '__main__':
         todaystr = today.strftime('%Y-%m-%d')
 
         df_storage = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum')
+            f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', '2022'])
         df_gas = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
                              encoding='utf-8', usecols=['date', 'Gas'], index_col='date')
         df_strom = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
