@@ -195,13 +195,13 @@ if __name__ == '__main__':
         # additional data for JSON file
         # y-axis start and ticks
         storage_y = 0  # if y-axis starts at 0: value is optional
-        gas_y = 0
+        gas_y = 5
         strom_y = 30
         ns_y = 0
         # RUS GAS rus_y = 0
         # BENZIN super_y = 1.6
         storage_ytick = [0, 25, 50, 75, 100]
-        gas_ytick = [0, 15, 30, 45]
+        gas_ytick = [5, 20, 35, 50]
         strom_ytick = [30, 40, 50, 60]
         ns_ytick = [0, 0.5, 1, 1.5]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
