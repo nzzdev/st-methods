@@ -44,8 +44,8 @@ if __name__ == '__main__':
         df = df[['Datum', '', 'Höchst-/Tiefststand¹', '2022']]
 
         # add new column with goal
-        df = df.assign(goal=['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1334.5', '1283.5', '1239.3', '1163.65', '1213.8', '1165.35', '1232.5',
-                       '1335.35', '1374.45', '1301.35', '1399.95', '1539.35', '1566.55', '1912.5', '2257.6', '2211.7', '2277.15', '2606.1', '2977.55', '2893.4', '3407.65', '3488.4', '3664.35', '3146.7', '3611.65', '2710.65'])
+        df = df.assign(goal=['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1238.45', '1219.75', '1249.5', '1299.65', '1339.6',
+                       '1381.25', '1429.7', '1513', '1671.1', '1940.55', '2045.95', '2161.55', '2233.8', '2533.85', '2674.1', '2901.9', '3235.95', '3334.55', '3428.05', '3468.85', '3195.15', '2899.35'])
         df = df.rename(columns={'goal': 'EU-Ziel²'})
 
         # convert date column to index
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         timestamp = df.iloc[:, 2].notna()[::-1].idxmax()
         timestamp_notes = timestamp + pd.DateOffset(days=1)
         timestamp_notes_str = timestamp.strftime('%-d. %-m. %Y')
-        chart_notes = f'¹ Maximum/Minimum des Verbrauchs 2018-2021.<br>² Gemäss Gas-Notfallplan der EU sollen alle Länder ihren Verbrauch bis März 2023 um 15 Prozent gegenüber 2021 senken.<br><br>Stand: {timestamp_notes_str}'
+        chart_notes = f'¹ Maximum/Minimum des Verbrauchs 2018-2021.<br>² Gemäss Gas-Notfallplan der EU sollen alle Länder ihren Verbrauch von Anfang August 2022 bis März 2023 um 15 Prozent senken, verglichen mit dem Durchschnittsverbrauch der vergangenen fünf Jahre in diesem Zeitraum.<br><br>Stand: {timestamp_notes_str}'
 
         # create dynamic chart title
         currenty = df.iloc[:, 2].loc[~df.iloc[:, 2].isnull()].iloc[-1]
