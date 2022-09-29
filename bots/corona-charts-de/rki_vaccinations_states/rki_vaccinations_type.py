@@ -45,13 +45,13 @@ if __name__ == '__main__':
                       values='Anzahl').fillna(0).astype(int).reset_index()
 
         # sort and rename columns
-        df = df[['Impfdatum', 'Comirnaty', 'AstraZeneca',
-                 'Moderna', 'Janssen', 'Novavax']]
-        df = df.rename(columns={'Comirnaty': 'Biontech¹', 'AstraZeneca': 'AstraZeneca¹',
-                       'Moderna': 'Moderna²', 'Janssen': 'J&J¹'}).set_index('Impfdatum')
+        df = df[['Impfdatum', 'Comirnaty',
+                 'Comirnaty bivalent (Original/Omikron)', 'Spikevax', 'Spikevax bivalent (Original/Omikron)', 'Nuvaxovid', 'Valneva', 'Vaxzevria', 'Jcovden']]
+        df = df.rename(columns={'Vaxzevria': 'AstraZeneca¹', 'Jcovden': 'J&J¹', 'Comirnaty': 'Biontech', 'Spikevax': 'Moderna', 'Nuvaxovid': 'Novavax', 'Valneva': 'Valneva',
+                       'Comirnaty bivalent (Original/Omikron)': 'Biontech (Omikron)', 'Spikevax bivalent (Original/Omikron)': 'Moderna (Omikron)'}).set_index('Impfdatum')
 
         # show date in chart notes
-        notes_chart = '¹ Die Lieferungen von AstraZeneca und J&J sollen bis auf weiteres an Drittstaaten gespendet werden; im November wurden 10,2 Millionen Biontech-Dosen gespendet.<br>² Deutschland verzichtete im Sommer 2021 zugunsten von anderen EU-Staaten auf Lieferungen von Moderna.<br>Stand: ' + timestamp_str
+        notes_chart = '¹ Lieferungen von AstraZeneca und J&J werden inzwischen gespendet. Im Sommer 2021 verzichtete Deutschland zugunsten von anderen EU-Staaten zudem auf Lieferungen von Moderna.<br>Stand: ' + timestamp_str
 
         # run function
         update_chart(id='504d12c24392d6de848975cc5bc93b16',
