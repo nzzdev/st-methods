@@ -87,12 +87,12 @@ if __name__ == '__main__':
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df_temp.copy().tail(1)
-        df_meta['Trend Speicher'] = round(((df['Gasspeicher'].loc[~df['Gasspeicher'].isnull(
-        )].iloc[-1] - df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) / df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
-        df_meta['Trend Gas'] = round(((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
-        )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
-        df_meta['Trend Strom'] = round(((df['Strompreis'].loc[~df['Strompreis'].isnull(
-        )].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
+        df_meta['Trend Speicher'] = ((df['Gasspeicher'].loc[~df['Gasspeicher'].isnull(
+        )].iloc[-1] - df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) / df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) * 100  # diff previous day
+        df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
+        )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100  # diff previous day
+        df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull(
+        )].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) * 100  # diff previous day
         """
         # NS1        
         if (df_ns['Nord Stream 1'].iloc[-1]) == 0.0 and (df_ns['Nord Stream 1'].iloc[-25] == 0.0):
@@ -117,9 +117,9 @@ if __name__ == '__main__':
         # function for string trends (storage and gas=previous day, petrol=previous week)
         def replace_vals(df_meta):
             for col in cols1:
-                if df_meta[col] >= 1:
+                if df_meta[col] >= 0.2:
                     df_meta[col] = 'steigend'
-                elif df_meta[col] <= -1:
+                elif df_meta[col] <= -0.2:
                     df_meta[col] = 'fallend'
                 else:
                     df_meta[col] = 'gleichbleibend'
