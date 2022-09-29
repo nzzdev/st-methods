@@ -55,7 +55,7 @@ if __name__ == '__main__':
         df.iloc[:, 2] = df.iloc[:, 2].replace('', np.nan)
         timestamp = df.iloc[:, 2].notna()[::-1].idxmax()
         timestamp_notes = timestamp + pd.DateOffset(days=1)
-        timestamp_notes_str = timestamp.strftime('%-d. %-m. %Y')
+        timestamp_notes_str = timestamp_notes.strftime('%-d. %-m. %Y')
         chart_notes = f'¹ Maximum/Minimum des Verbrauchs 2018-2021.<br>² Gemäss Gas-Notfallplan der EU sollen alle Länder ihren Verbrauch von Anfang August 2022 bis März 2023 um 15 Prozent senken, verglichen mit dem Durchschnittsverbrauch der vergangenen fünf Jahre in diesem Zeitraum.<br><br>Stand: {timestamp_notes_str}'
 
         # create dynamic chart title
