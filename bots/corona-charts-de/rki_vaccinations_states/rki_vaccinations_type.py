@@ -59,7 +59,6 @@ if __name__ == '__main__':
         # show date in chart notes
         notes_chart = '¹ Lieferungen von AstraZeneca und J&J werden inzwischen gespendet. Im Sommer 2021 verzichtete Deutschland zugunsten von anderen EU-Staaten zudem auf Lieferungen von Moderna.<br>Stand: ' + timestamp_str
 
-        df.to_clipboard()
         # run function
         update_chart(id='504d12c24392d6de848975cc5bc93b16',
                      data=df, notes=notes_chart)
