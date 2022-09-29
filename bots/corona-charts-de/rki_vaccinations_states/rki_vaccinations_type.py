@@ -45,14 +45,8 @@ if __name__ == '__main__':
                       values='Anzahl').fillna(0).astype(int).reset_index()
 
         # sort and rename columns
-        """
-        df = df[['Impfdatum', 'Comirnaty', 'AstraZeneca',
-                 'Moderna', 'Janssen', 'Novavax']]
-        df = df.rename(columns={'Comirnaty': 'Biontech¹', 'AstraZeneca': 'AstraZeneca¹',
-                       'Moderna': 'Moderna²', 'Janssen': 'J&J¹'}).set_index('Impfdatum')
-        """
-        df = df[['Impfdatum', 'Comirnaty', 'Spikevax',
-                 'Comirnaty bivalent (Original/Omikron)', 'Spikevax bivalent (Original/Omikron)', 'Nuvaxovid', 'Valneva', 'Vaxzevria', 'Jcovden']]
+        df = df[['Impfdatum', 'Comirnaty',
+                 'Comirnaty bivalent (Original/Omikron)', 'Spikevax', 'Spikevax bivalent (Original/Omikron)', 'Nuvaxovid', 'Valneva', 'Vaxzevria', 'Jcovden']]
         df = df.rename(columns={'Vaxzevria': 'AstraZeneca¹', 'Jcovden': 'J&J¹', 'Comirnaty': 'Biontech', 'Spikevax': 'Moderna', 'Nuvaxovid': 'Novavax', 'Valneva': 'Valneva',
                        'Comirnaty bivalent (Original/Omikron)': 'Biontech (Omikron)', 'Spikevax bivalent (Original/Omikron)': 'Moderna (Omikron)'}).set_index('Impfdatum')
 
