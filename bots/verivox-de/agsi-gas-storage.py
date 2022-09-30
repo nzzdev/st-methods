@@ -172,7 +172,7 @@ if __name__ == '__main__':
         elif current >= 0.2:
             chart_title = 'Gasspeicher füllen sich'
         else:
-            chart_title = 'Gasverbrauch füllen sich kaum noch'
+            chart_title = 'Gasspeicher füllen sich kaum noch'
 
         # add row with current date for step-after chart
         dftrend.loc[dftrend.shape[0]] = [None]
