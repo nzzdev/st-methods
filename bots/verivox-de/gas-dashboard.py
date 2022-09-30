@@ -20,6 +20,8 @@ if __name__ == '__main__':
 
         df_storage = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', '2022'])
+        df_storage_trend = pd.read_csv(
+            f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Trend'])
         df_gas = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
                              encoding='utf-8', usecols=['date', 'Gas'], index_col='date')
         df_strom = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
@@ -33,6 +35,8 @@ if __name__ == '__main__':
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
         df_storage.index = pd.to_datetime(df_storage.index)
         df_storage = df_storage.sort_index().round(1)
+        df_storage_trend.index = pd.to_datetime(df_storage_trend.index)
+        df_storage_trend = df_storage_trend.sort_index()
         df_gas.index = pd.to_datetime(df_gas.index)
         df_strom.index = pd.to_datetime(df_strom.index)
         df_rus.index = pd.to_datetime(df_rus.index)
@@ -54,6 +58,7 @@ if __name__ == '__main__':
         # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2021-01-01')]
         df_storage.index = df_storage.index.rename('date')
         df_storage = df_storage.rename(columns={'2022': 'Gasspeicher'})
+        df_storage_trend.index = df_storage_trend.index.rename('date')
         df_rus.index = df_rus.index.rename('date')
         df_rus = df_rus.rename(columns={'Summe': 'Russisches Gas'})
         # BENZIN df_super.index = df_super.index.rename('date')
@@ -87,8 +92,7 @@ if __name__ == '__main__':
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df_temp.copy().tail(1)
-        df_meta['Trend Speicher'] = ((df['Gasspeicher'].loc[~df['Gasspeicher'].isnull(
-        )].iloc[-1] - df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) / df['Gasspeicher'].loc[~df['Gasspeicher'].isnull()].iloc[-2]) * 100  # diff previous day
+        df_meta['Trend Speicher'] = df_storage_trend['Trend'].iloc[-2]
         df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
         )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100  # diff previous day
         df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull(
