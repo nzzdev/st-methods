@@ -167,9 +167,9 @@ if __name__ == '__main__':
         # create dynamic chart title for trend chart
         current = dftrend['Trend'].iloc[-1] * 10
         print(current)
-        if current <= 0.2:
+        if current <= -0.05:
             chart_title = 'Gasspeicher leeren sich'
-        elif current >= 0.2:
+        elif current >= 0.05:
             chart_title = 'Gasspeicher füllen sich'
         else:
             chart_title = 'Gasspeicher füllen sich kaum noch'
