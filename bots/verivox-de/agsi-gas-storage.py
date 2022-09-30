@@ -115,7 +115,9 @@ if __name__ == '__main__':
         dfnew = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', '2022'])
         dftrend = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', '2022'])
+            f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', 'Trend'])
+        dfall = pd.read_csv(
+            f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
@@ -149,9 +151,12 @@ if __name__ == '__main__':
         dftrend.set_index('Datum', inplace=True)
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
 
-        # calculate percentage change
-        dftrend['Trend'] = dftrend['2022'].pct_change()*100
-        dftrend = dftrend.drop('2022', axis=1)
+        # temporary fix for wrong trend data
+        dftrend.at['2022-09-28', 'Trend'] = -0.22
+        dfall.set_index('Datum', inplace=True)
+        dfall.at['2022-09-28', 'Trend'] = -0.22
+        dfall.to_csv(f'./data/{todaystr}-gasspeicher.csv',
+                     encoding='utf-8', index=True)
 
         # create dynamic chart title for trend chart
         current = dftrend['Trend'].iloc[-1]
@@ -161,15 +166,6 @@ if __name__ == '__main__':
             chart_title = 'Gasspeicher füllen sich'
         else:
             chart_title = 'Gasverbrauch füllen sich nur langsam'
-
-        """
-        # temporary fix for wrong trend data
-        dftrend.at['2022-09-28', 'Trend'] = -0.22
-        dfall.set_index('Datum', inplace=True)
-        dfall.at['2022-09-28', 'Trend'] = -0.22
-        dfall.to_csv(f'./data/{todaystr}-gasspeicher.csv',
-                     encoding='utf-8', index=True)
-        """
 
         # add row with current date for step-after chart
         dftrend.loc[dftrend.shape[0]] = [None]
