@@ -151,6 +151,7 @@ if __name__ == '__main__':
         dftrend.set_index('Datum', inplace=True)
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
 
+        """
         # temporary fix for wrong trend data
         dftrend.at['2022-09-28', 'Trend'] = -0.22
         dfall.set_index('Datum', inplace=True)
@@ -161,6 +162,7 @@ if __name__ == '__main__':
         dfall.at['2022-05-13', 'Trend'] = 0.65
         dfall.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
+        """
 
         # create dynamic chart title for trend chart
         current = dftrend['Trend'].iloc[-1]
