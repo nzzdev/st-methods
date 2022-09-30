@@ -165,13 +165,14 @@ if __name__ == '__main__':
         """
 
         # create dynamic chart title for trend chart
-        current = dftrend['Trend'].iloc[-1]
-        if current <= 0:
+        current = dftrend['Trend'].iloc[-1] * 10
+        print(current)
+        if current <= 0.2:
             chart_title = 'Gasspeicher leeren sich'
-        elif current >= 0.1:
+        elif current >= 0.2:
             chart_title = 'Gasspeicher füllen sich'
         else:
-            chart_title = 'Gasverbrauch füllen sich nur langsam'
+            chart_title = 'Gasverbrauch füllen sich kaum noch'
 
         # add row with current date for step-after chart
         dftrend.loc[dftrend.shape[0]] = [None]
@@ -187,10 +188,8 @@ if __name__ == '__main__':
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
         # run function
-        update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
-                     data=df, title=title, notes=notes_chart)
-        update_chart(id='0fc405116af43382d715e046012ac4df',
-                     data=dftrend, title=chart_title, notes=notes_chart_trend)
+        #update_chart(id='cc9eff02ba0867d71af4fbc25304797b', data=df, title=title, notes=notes_chart)
+        #update_chart(id='0fc405116af43382d715e046012ac4df', data=dftrend, title=chart_title, notes=notes_chart_trend)
 
     except:
         raise
