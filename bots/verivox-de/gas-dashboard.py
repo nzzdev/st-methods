@@ -92,7 +92,7 @@ if __name__ == '__main__':
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df_temp.copy().tail(1)
-        df_meta['Trend Speicher'] = df_storage_trend['Trend'].iloc[-2]
+        df_meta['Trend Speicher'] = df_storage_trend['Trend'].iloc[-1]
         df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
         )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100  # diff previous day
         df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull(
