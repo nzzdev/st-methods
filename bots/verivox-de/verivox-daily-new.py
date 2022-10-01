@@ -179,8 +179,7 @@ if __name__ == '__main__':
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung); entspricht dem Jahresverbrauch einer vierköpfigen Familie in einem Einfamilienhaus.<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
-            dfavg = dfavg.rolling(window=7).mean(
-            ).dropna()  # 7-day mvg average
+            # dfavg = dfavg.rolling(window=7).mean().dropna()  # 7-day mvg average
             title_gas = dfavg['Gas'].iloc[-1].round(-1)
             title_ac = dfavg['Strom'].iloc[-1].round(-1)
             title_chart = f'Gas kostet bei Neuabschluss {int(title_gas)} Euro im Jahr, Strom {int(title_ac)} Euro'
@@ -196,8 +195,7 @@ if __name__ == '__main__':
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (ohne Grundversorgung); entspricht dem Jahresverbrauch einer vierköpfigen Familie in einem Einfamilienhaus.<br>Stand: ' + \
                 str(time_str_notes)
-            dfavg = dfavg.rolling(window=7).mean(
-            ).dropna()  # 7-day mvg average
+            # dfavg = dfavg.rolling(window=7).mean().dropna()  # 7-day mvg average
             title_gas = dfavg['Gas'].iloc[-1].round(-1)
             title_ac = dfavg['Strom'].iloc[-1].round(-1)
             title_chart = f'Gas kostet bei Neuabschluss {int(title_gas)} Euro im Jahr, Strom {int(title_ac)} Euro'
