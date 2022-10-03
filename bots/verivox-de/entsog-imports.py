@@ -236,11 +236,11 @@ if __name__ == '__main__':
         notes_chart_de = 'Stand: ' + timecode_str
 
         # convert DatetimeIndex to string
-        #df_de.index = df_de.index.strftime('%Y-%m-%d')
+        # df_de.index = df_de.index.strftime('%Y-%m-%d')
         # END OLD
         """
 
-        url_de = 'https://static.dwcdn.net/data/kCrqD.csv'
+        url_de = 'https://static.dwcdn.net/data/iIPEJ.csv'
         resp = download_data(url_de, headers=fheaders)
         csv_file = resp.text
 
@@ -254,7 +254,7 @@ if __name__ == '__main__':
 
         # check if file is cached
         i = 0
-        while recent != yesterday and i < 25:
+        while recent != yesterday and i < 15:
             url_de = 'https://static.dwcdn.net/data/iIPEJ.csv'
             resp = download_data(url_de, headers=fheaders)
             csv_file = resp.text
@@ -343,52 +343,32 @@ if __name__ == '__main__':
                          data=df_new, notes=notes_chart_de)
 
         # nord stream 1 only
-        url_ns = 'https://static.dwcdn.net/data/LtmFL.csv'
-        resp = download_data(url_ns, headers=fheaders)
+        url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
+        resp = download_data(url, headers=fheaders)
         csv_file = resp.text
 
-        # read csv and convert to datetime
-        df_ns = pd.read_csv(io.StringIO(csv_file),
-                            encoding='utf-8', index_col='periodFrom')
-        df_old = pd.read_csv('./data/pipelines_de_ns.tsv',
-                             sep='\t', encoding='utf-8', index_col='periodFrom')
-        df_ns.index = pd.to_datetime(df_ns.index)
+        # read csv, drop columns
+        df_ns = pd.read_csv(io.StringIO(csv_file), encoding='utf-8',
+                            sep=';', decimal=',', index_col=None)
+        df_ns = df_ns.drop(df_ns.columns[[1, 2, 3, 4, 5, 6, 7, 8, 10]], axis=1)
 
-        today = date.today()
-        recent = pd.to_datetime(df_ns.index[-1]).date()
+        # convert date string to datetime
+        df_ns[df_ns.columns[0]] = pd.to_datetime(
+            df_ns[df_ns.columns[0]], format='%d.%m.%Y')
 
-        # if file is cached
-        if len(df_ns) < len(df_old):
-            # create dataframes with old data
-            df_ns = pd.read_csv('./data/pipelines_de_ns.tsv',
-                                sep='\t', encoding='utf-8', index_col='periodFrom')
+        # set date as index
+        df_ns = df_ns.set_index(df_ns.columns[0])
 
-            # create date for chart notes
-            timecode = pd.to_datetime(df_ns.index[-1])
-            timecode_str = timecode.strftime('%-d. %-m., %-H')
-            notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
+        # convert GWh to million m3 according to calorific value of Russian gas
+        df_ns = (df_ns / 10.3).round(1)
 
-            # replace NaN with 0
-            df_ns = df_ns.fillna(0)
+        # get latest date for chart notes
+        timecode = df_ns.index[-1]
+        timecodestr = timecode.strftime('%-d. %-m. %Y')
+        notes_chart = 'Stand: ' + timecodestr
 
-            # run Q function
-            update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
-                         data=df_ns, notes=notes_chart_ns)
-        else:
-            # create date for chart notes
-            timecode = pd.to_datetime(df_ns.index[-1])
-            timecode_str = timecode.strftime('%-d. %-m., %-H')
-            notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
-
-            # replace NaN with 0 and convert GWh to million m3
-            df_ns = df_ns.fillna(0)
-            df_ns = (df_ns / 10.3).round(4)
-
-            # save clean csv for dashboard
-            df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
-
-            # run Q function
-            update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
-                         data=df_ns, notes=notes_chart_ns)
+        # run Q function
+        update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
+                     data=df_ns, notes=notes_chart_ns)
     except:
         raise
