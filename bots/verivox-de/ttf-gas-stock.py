@@ -74,7 +74,7 @@ if __name__ == '__main__':
         notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat; aktueller Tag: durchschnittlicher Intraday-Preis.<br>Stand: ' + timecode_str
 
         # convert DatetimeIndex
-        df_full.index = df_full.index.strftime('%Y-%m-%d')
+        #df_full.index = df_full.index.strftime('%Y-%m-%d')
 
         # run Q function
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd',
