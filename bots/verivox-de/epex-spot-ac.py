@@ -7,10 +7,9 @@ from user_agent import generate_user_agent
 if __name__ == '__main__':
     try:
 
-        from helpers import *
-
-        # set Working Directory
+        # set working directory
         os.chdir(os.path.dirname(__file__))
+        from helpers import *
 
         fheaders = {
             'user-agent': generate_user_agent(),
@@ -79,6 +78,11 @@ if __name__ == '__main__':
         df_day.index = pd.to_datetime(df_day.index)
         df_day = df_day['2021-01-01': q_date]
         df_day['price'] = df_day['price'].astype(int)
+
+        # debugging
+        print(df_day)
+        print(title)
+        print(notes_chart)
 
         # run Q function
         update_chart(id='90005812afc9964bbfe4f952f51d6a57',
