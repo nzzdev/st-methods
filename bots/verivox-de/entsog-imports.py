@@ -369,6 +369,6 @@ if __name__ == '__main__':
 
         # run Q function
         update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
-                     data=df_ns, notes=notes_chart_ns)
+                     data=df_ns, notes=notes_chart)
     except:
         raise
