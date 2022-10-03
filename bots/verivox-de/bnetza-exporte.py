@@ -43,7 +43,7 @@ if __name__ == '__main__':
 
         # dynamic chart title
         title_gwh = df[df.columns[0]].iloc[-1].round(0).astype(int)
-        title = f'Deutschland exportiert täglich rund {title_gwh} GWh Gas'
+        title = f'Deutschland exportiert derzeit {title_gwh} GWh Gas am Tag'
 
         # run Q function
         update_chart(id='332e931d1de8fc64f1b04d2612c7d75e',
