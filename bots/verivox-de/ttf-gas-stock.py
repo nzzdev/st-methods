@@ -29,7 +29,8 @@ if __name__ == '__main__':
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
         }
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + \
+            market_id + '&historicalSpan=3'
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
@@ -64,6 +65,10 @@ if __name__ == '__main__':
         # create final dataframe with historical and intraday data
         df_full = pd.concat([df, df_intra])
 
+        # dynamic chart title
+        title_mwh = df_full[df_full.columns[0]].iloc[-1].round(0).astype(int)
+        title = f'Gas kostet an der Börse derzeit {title_mwh} Euro je MWh'
+
         # create date for chart notes
         timecode = df_full.index[-1]
         timecode_str = timecode.strftime('%-d. %-m. %Y')
@@ -74,7 +79,7 @@ if __name__ == '__main__':
 
         # run Q function
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd',
-                     notes=notes_chart, data=df_full)
+                     title=title, notes=notes_chart, data=df_full)
 
     except:
         raise

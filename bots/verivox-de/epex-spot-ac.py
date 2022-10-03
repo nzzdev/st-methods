@@ -76,8 +76,12 @@ if __name__ == '__main__':
         df_day = df_day['2021-01-01': q_date]
         df_day['price'] = df_day['price'].astype(int)
 
+        # dynamic chart title
+        title_mwh = df_day[df_day.columns[0]].iloc[-1].round(0).astype(int)
+        title = f'Strom kostet an der Börse derzeit {title_mwh} Euro je MWh'
+
         # run Q function
         update_chart(id='90005812afc9964bbfe4f952f51d6a57',
-                     notes=notes_chart, data=df_day)
+                     title=title, notes=notes_chart, data=df_day)
     except:
         raise

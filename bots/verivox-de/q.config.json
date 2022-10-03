@@ -21,6 +21,7 @@
                 }
             ],
             "item": {
+                "title": "",
                 "notes": "",
                 "data": []
             }
@@ -33,6 +34,7 @@
                 }
             ],
             "item": {
+                "title": "",
                 "notes": "",
                 "data": []
             }
