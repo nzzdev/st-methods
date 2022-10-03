@@ -367,7 +367,9 @@ if __name__ == '__main__':
         timecodestr = timecode.strftime('%-d. %-m. %Y')
         notes_chart = 'Stand: ' + timecodestr
 
-        # save clean csv for dashboard
+        # rename columns and save clean csv for dashboard
+        df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
+        df_ns.index = df_ns.index.rename('periodFrom')
         df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
 
         # run Q function

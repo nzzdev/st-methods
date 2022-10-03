@@ -47,7 +47,6 @@ if __name__ == '__main__':
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
         df_strom_mean = df_strom.rolling(window=7).mean().dropna()
         df_strom_mean.index = pd.to_datetime(df_strom_mean.index)
-        df_ns.index = pd.to_datetime(df_ns.index)
 
         # rename columns and remove dates before 2022-01-01
         df_gas_mean = df_gas_mean[(
@@ -67,7 +66,6 @@ if __name__ == '__main__':
         df_gas_mean = df_gas_mean.rename(columns={'Gas': 'Gaspreis'})
         df_strom = df_strom.rename(columns={'Strom': 'Strompreis'})
         df_strom_mean = df_strom_mean.rename(columns={'Strom': 'Strompreis'})
-        df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
         df_ns.index = df_ns.index.rename('date')
 
         # convert 20 MWh to 20000 kWh and euro to cent / 4 MWh to 4000 kWh
