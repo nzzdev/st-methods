@@ -36,14 +36,14 @@ if __name__ == '__main__':
         # get latest date for chart notes
         timecode = df.index[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = 'Stand: ' + timecodestr
+        notes_chart = '¹ Die Exporte beinhalten sämtliche Gasflüsse von Deutschland in angrenzende Staaten, unabhängig davon, wo das Gas bestellt wurde.<br>Stand: ' + timecodestr
 
         # calculate 7-day mvg average
         df = df.rolling(window=7).mean().dropna()
 
         # dynamic chart title
         title_gwh = df[df.columns[0]].iloc[-1].round(0).astype(int)
-        title = f'Deutschland exportiert derzeit {title_gwh} GWh Gas am Tag'
+        title = f'Deutschland exportiert¹ derzeit {title_gwh} GWh Gas am Tag'
 
         # run Q function
         update_chart(id='332e931d1de8fc64f1b04d2612c7d75e',
