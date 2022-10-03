@@ -152,9 +152,14 @@ if __name__ == '__main__':
             df_spot = df_spot['2021-01-01': q_date]
             df_spot['Deutschland/Luxemburg[€/MWh]'] = df_spot['Deutschland/Luxemburg[€/MWh]'].astype(
                 int)
+
+            # dynamic chart title
+            title_mwh = df_spot[df_spot.columns[0]].iloc[-1]
+            title = f'Strom kostet an der Börse derzeit {title_mwh} Euro je MWh'
+
             # run Q function
             update_chart(id='90005812afc9964bbfe4f952f51d6a57',
-                         notes=notes_chart, data=df_spot)
+                         title=title, notes=notes_chart, data=df_spot)
 
     except:
         raise
