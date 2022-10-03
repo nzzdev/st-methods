@@ -41,9 +41,13 @@ if __name__ == '__main__':
         # calculate 7-day mvg average
         df = df.rolling(window=7).mean().dropna()
 
+        # dynamic chart title
+        title_gwh = df[df.columns[0]].iloc[-1].round(0).astype(int)
+        title = f'Deutschland exportiert täglich rund {title_gwh} GWh Gas'
+
         # run Q function
         update_chart(id='332e931d1de8fc64f1b04d2612c7d75e',
-                     data=df, notes=notes_chart)
+                     data=df, title=title, notes=notes_chart)
 
     except:
         raise
