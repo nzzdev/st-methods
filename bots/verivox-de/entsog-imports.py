@@ -367,6 +367,9 @@ if __name__ == '__main__':
         timecodestr = timecode.strftime('%-d. %-m. %Y')
         notes_chart = 'Stand: ' + timecodestr
 
+        # save clean csv for dashboard
+        df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
+
         # run Q function
         update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
                      data=df_ns, notes=notes_chart)
