@@ -70,18 +70,15 @@ if __name__ == '__main__':
         notes_chart = '¹ Marktgebiet Deutschland/Luxemburg.<br>Stand: ' + \
             q_date.strftime("%-d. %-m. %Y")
 
+        # dynamic chart title
+        title_mwh = df_day[df_day.columns[1]].iloc[-1].round(0).astype(int)
+        title = f'Strom kostet an der Börse derzeit {title_mwh} Euro je MWh'
+
         # drop index and unused dates
         df_day = df_day.set_index('date')
         df_day.index = pd.to_datetime(df_day.index)
         df_day = df_day['2021-01-01': q_date]
         df_day['price'] = df_day['price'].astype(int)
-
-        # dynamic chart title
-        title_mwh = df_day[df_day.columns[0]].iloc[-1].round(0).astype(int)
-        title = f'Strom kostet an der Börse derzeit {title_mwh} Euro je MWh'
-
-        # convert DatetimeIndex
-        df_day.index = df_day.index.strftime('%Y-%m-%d')
 
         # run Q function
         update_chart(id='90005812afc9964bbfe4f952f51d6a57',
