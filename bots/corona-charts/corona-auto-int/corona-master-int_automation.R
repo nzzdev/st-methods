@@ -653,21 +653,12 @@ hersteller <- manufacturer %>%
   group_by(Land, Hersteller) %>%
   summarize(Anzahl_Impfdosen = sum(Anzahl_Impfdosen)) %>%
   ungroup() %>%
-  spread(Hersteller, Anzahl_Impfdosen) %>%
+  group_by(Land) %>%
+  mutate(Percent = Anzahl_Impfdosen*100 / sum(Anzahl_Impfdosen)) %>%
+  select(-Anzahl_Impfdosen) %>%
+  ungroup() %>%
+  spread(Hersteller, Percent) %>%
   mutate_all(~replace(., is.na(.), 0)) %>%
-  mutate(Summe = Moderna + `Oxford/AstraZeneca` + `Pfizer/BioNTech` + `Johnson&Johnson` + Sinovac + `Sinopharm/Beijing` + `CanSino` + `Sputnik V` + `Novavax` + `Covaxin`) %>%
-  mutate(Moderna = Moderna/Summe*100,
-         `Oxford/AstraZeneca` = `Oxford/AstraZeneca`/Summe*100,
-         `Pfizer/BioNTech` = `Pfizer/BioNTech`/Summe*100,
-         Sinovac = Sinovac/Summe*100,
-         `Sinopharm/Beijing` = `Sinopharm/Beijing`/Summe*100,
-         `Johnson&Johnson` = `Johnson&Johnson`/Summe*100,
-         `CanSino` = `CanSino`/Summe*100,
-         `Sputnik V` = `Sputnik V`/Summe*100,
-         `Novavax` = `Novavax`/Summe*100,
-         `Covaxin` = `Covaxin`/Summe*100,
-         `Medicago` = `Medicago`/Summe*100
-         ) %>%
   dplyr::rename(
     "AstraZeneca" = "Oxford/AstraZeneca",
     "Biontech/Pfizer" = "Pfizer/BioNTech",
@@ -675,8 +666,10 @@ hersteller <- manufacturer %>%
     )
 
 hersteller <- hersteller %>%
-  select(-Summe)  %>%
   relocate(Land, `Biontech/Pfizer`, AstraZeneca, Moderna, `Johnson & Johnson`, CanSino, `Sinopharm/Beijing`, Sinovac)
+
+hersteller$Andere = rowSums(hersteller[ , -c(1, 2, 3, 4, 5, 6, 7, 8, 9)], na.rm=TRUE)
+hersteller <- hersteller %>% select(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 'Andere'))
 
 notes <- paste0("Daten sind nur für eine begrenzte Zahl Länder verfügbar. Nur Länder mit mehr als 1 Million Einwohner. <br>Stand: "
                 , gsub("\\b0(\\d)\\b", "\\1", format(max(rolling_average_all$date), format = "%d. %m. %Y")))
