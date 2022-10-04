@@ -913,13 +913,14 @@ update_chart(id = "e039a1c64b33e327ecbbd17543e518d3", data = vaccchart_kant, not
 # second doses
 
 vacc_ch_persons_kant <- ch_vacc_persons %>%
+  filter(type != 'COVID19VaccSixMonthsPersons') %>%
   filter(geoRegion != "FL" & geoRegion != "CHFL"  & geoRegion != "CH") %>%
   filter(date == max(date)) %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
   left_join(pop[,c(1:2)], by = c("geoRegion" = "ktabk")) %>%
   select(-pop, -sumTotal, -geoRegion, -date) %>%
   spread(type, per100) %>%
-  select(-COVID19AtLeastOneDosePersons) %>%
+  select(-COVID19AtLeastOneDosePersons, -COVID19SecondBoosterPersons) %>%
   mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
   rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
          "Einmal geimpft" = COVID19PartiallyVaccPersons,
