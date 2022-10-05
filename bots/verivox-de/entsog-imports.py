@@ -369,7 +369,7 @@ if __name__ == '__main__':
         notes_chart_ns = 'Stand: ' + timecodestr
 
         # rename columns and save clean csv for dashboard
-        df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
+        df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
         df_ns.index = df_ns.index.rename('periodFrom')
         df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
 
