@@ -273,7 +273,7 @@ if __name__ == '__main__':
         # create old date for chart notes
         timecode = pd.to_datetime(old_data.index[-1])
         timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart_de = '¹ Bei dem Gas, das am Übergangspunkt Waidhaus ankommt, handelt es sich u.a. um Re-Importe.<br>Stand: ' + timecode_str
+        notes_chart_de = 'Stand: ' + timecode_str
 
         # if there is new data
         if recent == yesterday:
@@ -284,7 +284,7 @@ if __name__ == '__main__':
 
             # rename columns
             df_new = df_new.rename(columns={
-                df_new.columns[0]: 'Jamal (Mallnow)', df_new.columns[1]: 'Transgas (Waidhaus)¹', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
+                df_new.columns[0]: 'Jamal (Mallnow)', df_new.columns[1]: 'Transgas (Waidhaus)', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
 
             # check if data is corrupted
             if (df_new['Greifswald (Nord Stream 1)'].iloc[-1] == 0.0) and (df_new['Greifswald (Nord Stream 1)'].iloc[-2] != 0.0):
@@ -315,7 +315,7 @@ if __name__ == '__main__':
                 # create date for chart notes
                 timecode = df_new.index[-1]
                 timecode_str = timecode.strftime('%-d. %-m. %Y')
-                notes_chart_de = '¹ Bei dem Gas, das am Übergangspunkt Waidhaus ankommt, handelt es sich u.a. um Re-Importe.<br>Stand: ' + timecode_str
+                notes_chart_de = 'Stand: ' + timecode_str
 
                 # convert DatetimeIndex to string
                 df_new.index = df_new.index.strftime('%Y-%m-%d')
