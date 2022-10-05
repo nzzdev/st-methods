@@ -29,7 +29,7 @@ consum_ch = pd.read_csv("https://drive.switch.ch/index.php/s/yLISs3KVE7ASE68/dow
 consum_ch = consum_ch[consum_ch['TRANSACTIONS'] != 'ATM_DEPOSIT']
 consum_ch['DATE'] = pd.to_datetime(consum_ch['DATE'], format = '%Y-%m-%d')
 
-consum_ch['week'] = consum_ch['DATE'].dt.week
+consum_ch['week'] = consum_ch['DATE'].dt.isocalendar().week
 consum_ch['year'] = consum_ch['DATE'].dt.year
 consum_ch.loc[(consum_ch.week == 52) & (consum_ch.year == 2022), 'year'] = '2021'
 consum_ch.loc[(consum_ch.week == 53) & (consum_ch.year == 2021), 'year'] = '2020'
@@ -73,14 +73,14 @@ update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=zurich)
 
 # Mobis
 
-mobis = pd.read_csv(
-    'https://ivtmobis.ethz.ch/mobis/covid19/reports/data/kilometers_by_transport_mode.csv')
-mobis['date'] = pd.to_datetime(mobis['week_start'])
-mobis['pc_change'] = mobis['pc_change']*100
-mobis = mobis[(mobis['Mode'] == 'Car') & (
-    mobis['date'] >= '2022-01-01')][['date', 'pc_change']]
+#mobis = pd.read_csv(
+ #   'https://ivtmobis.ethz.ch/mobis/covid19/reports/data/kilometers_by_transport_mode.csv')
+#mobis['date'] = pd.to_datetime(mobis['week_start'])
+#mobis['pc_change'] = mobis['pc_change']*100
+#mobis = mobis[(mobis['Mode'] == 'Car') & (
+ #   mobis['date'] >= '2022-01-01')][['date', 'pc_change']]
 
-update_chart(id='bb539ba7d067f90f4fb7622d10044d91', data=mobis)
+#update_chart(id='bb539ba7d067f90f4fb7622d10044d91', data=mobis)
 
 
 # LKW
