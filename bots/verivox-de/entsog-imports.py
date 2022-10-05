@@ -342,7 +342,8 @@ if __name__ == '__main__':
             update_chart(id='d0be298e35165ab925d7292335b3d00e',
                          data=df_new, notes=notes_chart_de)
 
-        # nord stream 1 only
+        """
+        # Nord stream 1 only Bundesnetzagentur
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
         resp = download_data(url, headers=fheaders)
         csv_file = resp.text
@@ -365,7 +366,7 @@ if __name__ == '__main__':
         # get latest date for chart notes
         timecode = df_ns.index[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = 'Stand: ' + timecodestr
+        notes_chart_ns = 'Stand: ' + timecodestr
 
         # rename columns and save clean csv for dashboard
         df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
@@ -375,5 +376,56 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
                      data=df_ns, notes=notes_chart)
+        """
+
+        # nord stream 1 only
+        url_ns = 'https://static.dwcdn.net/data/LtmFL.csv'
+        resp = download_data(url_ns, headers=fheaders)
+        csv_file = resp.text
+
+        # read csv and convert to datetime
+        df_ns = pd.read_csv(io.StringIO(csv_file),
+                            encoding='utf-8', index_col='periodFrom')
+        df_old = pd.read_csv('./data/pipelines_de_ns.tsv',
+                             sep='\t', encoding='utf-8', index_col='periodFrom')
+        df_ns.index = pd.to_datetime(df_ns.index)
+
+        today = date.today()
+        recent = pd.to_datetime(df_ns.index[-1]).date()
+
+        # if file is cached
+        if len(df_ns) < len(df_old):
+            # create dataframes with old data
+            df_ns = pd.read_csv('./data/pipelines_de_ns.tsv',
+                                sep='\t', encoding='utf-8', index_col='periodFrom')
+
+            # create date for chart notes
+            timecode = pd.to_datetime(df_ns.index[-1])
+            timecode_str = timecode.strftime('%-d. %-m., %-H')
+            notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
+
+            # replace NaN with 0
+            df_ns = df_ns.fillna(0)
+
+            # run Q function
+            update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
+                         data=df_ns, notes=notes_chart_ns)
+        else:
+            # create date for chart notes
+            timecode = pd.to_datetime(df_ns.index[-1])
+            timecode_str = timecode.strftime('%-d. %-m., %-H')
+            notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
+
+            # replace NaN with 0 and convert GWh to million m3
+            df_ns = df_ns.fillna(0)
+            df_ns = (df_ns / 10.3).round(4)
+
+            # save clean csv for dashboard
+            df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
+
+            # run Q function
+            update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
+                         data=df_ns, notes=notes_chart_ns)
+
     except:
         raise
