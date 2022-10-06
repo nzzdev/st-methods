@@ -357,8 +357,7 @@ oil_price_de.to_csv(f'./oil_price_de.csv', index=False)
 
 
 # Stock market data
-tickers = ["EURCHF=X", "KE=F", "^GDAXI", "EURUSD=X",
-           "BTC-USD", "BZX22.NYM"]  # Subtitute for the tickers you want
+tickers = ["EURCHF=X", "KE=F", "^GDAXI", "EURUSD=X","BTC-USD"]  # Subtitute for the tickers you want
 df = yf.download(tickers,  start="2019-01-01", end=date.today())
 
 euro = df['Close']['EURCHF=X'][df.index >=
