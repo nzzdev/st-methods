@@ -58,18 +58,36 @@ update_chart(id='909e73515b8785336ef65c05d0fa36c7', data=q_data)
 
 # Zurich traffic
 
-zurich = pd.read_csv(
+zurich_2022 = pd.read_csv(
     'https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv')
-zurich['date'] = zurich['MessungDatZeit'].str[:10]
-zurich['date'] = pd.to_datetime(zurich['date'], format='%Y-%m-%d')
-zurich.set_index('date', inplace=True)
-zurich = zurich.groupby(zurich.index)[
-    'AnzFahrzeuge'].sum().rolling(7).mean().reset_index()
-#zurich.set_index('date', inplace = True)
+zurich_2022['date'] = zurich_2022['MessungDatZeit'].str[:10]
+zurich_2022['date'] = pd.to_datetime(zurich_2022['date'], format='%Y-%m-%d')
+zurich_2022.set_index('date', inplace=True)
+zurich_2022 = zurich_2022.groupby(zurich_2022.index)[
+    'AnzFahrzeuge'].sum().rolling(30).mean().reset_index()
 
-#zurich.index = pd.to_datetime(zurich.index).strftime('%Y-%m-%d')
+zurich_2019 = pd.read_csv(
+    'https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2019.csv')
+zurich_2019['date'] = zurich_2019['MessungDatZeit'].str[:10]
+zurich_2019['date'] = pd.to_datetime(zurich_2019['date'], format='%Y-%m-%d')
+zurich_2019.set_index('date', inplace=True)
+zurich_2019 = zurich_2019.groupby(zurich_2019.index)[
+    'AnzFahrzeuge'].sum().rolling(30).mean().reset_index()
+
+zurich_2022['month'] = zurich_2022['date'].dt.month
+zurich_2019['month'] = zurich_2019['date'].dt.month
+zurich_2022['day'] = zurich_2022['date'].dt.day
+zurich_2019['day'] = zurich_2019['date'].dt.day
+
+zurich_2022.rename(columns = {'AnzFahrzeuge': '2022'}, inplace = True)
+zurich_2019.rename(columns = {'AnzFahrzeuge': '2019'}, inplace = True)
+zurich_2019 = zurich_2019[['month', 'day', '2019']]
+
+to_q = zurich_2019.merge(zurich_2022, on = ['day', 'month'])
+to_q = to_q[['date', '2019', '2022']]
 
 update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=zurich)
+
 
 # Mobis
 
