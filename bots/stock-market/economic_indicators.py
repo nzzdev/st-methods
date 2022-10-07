@@ -441,8 +441,6 @@ oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
 oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
 oil = oil[['Date', 'Jahresdurchschnitt 2019', '2022']]
 
-oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
-
 update_chart(id='c6aec0c9dea84bcdef43b980cd4a7e3f', data=oil)
 
 bitcoin = df['Close']["BTC-USD"].to_frame().dropna().round(1).reset_index(level=0)
