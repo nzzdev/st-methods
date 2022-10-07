@@ -375,7 +375,7 @@ oil_price_de.to_csv(f'./oil_price_de.csv', index=False)
 
 
 # Stock market data
-tickers = ["EURCHF=X", "KE=F", "^GDAXI", "EURUSD=X","BTC-USD"]  # Subtitute for the tickers you want
+tickers = ["EURCHF=X", "KE=F", "^GDAXI", "EURUSD=X","BTC-USD", "BZ=F"]  # Subtitute for the tickers you want
 df = yf.download(tickers,  start="2019-01-01", end=date.today())
 
 euro = df['Close']['EURCHF=X'][df.index >=
@@ -430,21 +430,18 @@ df_gas = df_gas.reset_index(level=0)
 # run Q function
 update_chart(id='1dda540238574eac80e865faa0ddbafc', data=df_gas)
 
-oil = pd.read_csv('https://www.marketwatch.com/investing/future/brn00/downloaddatapartial?startdate=01/01/2021%2000:00:00&enddate=09/08/2022%2000:00:00&daterange=d30&frequency=p1d&csvdownload=true&downloadpartial=false&newdates=false&countrycode=uk')
+date_today = date.today().strftime("%m/%d/%Y")
 
-oil['Date'] = pd.to_datetime(oil['Date'], format = '%m/%d/%Y')
-oil.sort_values(by = 'Date', ascending = True, inplace = True)
 
-#oil = df['Close']['BZX22.NYM'][df.index >=
- #                         '2022-01-01'].to_frame().dropna().reset_index(level=0)
-#oil['Jahresdurchschnitt 2019'] = df['Close']['BZX22.NYM'][(
- #   df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
-oil = oil[['Date', 'Close']]
-oil = oil[oil['Date'] >= '2022-01-01']
+
+oil = df['Close']['BZ=F'][df.index >=
+                         '2022-01-01'].to_frame().dropna().reset_index(level=0)
+oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
+    df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
+oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
+oil = oil[['Date', 'Jahresdurchschnitt 2019', '2022']]
 
 oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
-
-#oil.index = oil.index.strftime('%Y-%m-%d')
 
 update_chart(id='c6aec0c9dea84bcdef43b980cd4a7e3f', data=oil)
 
@@ -459,15 +456,13 @@ update_chart(id='80a5f74298f588521786f9061c21d472',
              data=bitcoin1m)
 
 
-
-smi = pd.read_csv('https://www.marketwatch.com/investing/index/smi/downloaddatapartial?startdate=01/01/2021%2000:00:00&enddate=09/08/2022%2000:00:00&daterange=d30&frequency=p1d&csvdownload=true&downloadpartial=false&newdates=false&countrycode=ch')
-smi['Date'] = pd.to_datetime(smi['Date'], format = '%m/%d/%Y')
-smi.sort_values(by = 'Date', ascending = True, inplace = True)
-smi = smi[['Date', 'Close']]
-smi = smi[smi['Date'] >= '2022-01-01']
+smi = pd.read_csv('https://www.six-group.com/exchanges/downloads/indexdata/hsmi.csv', sep = ';', skiprows = 4)
+smi['DATE'] = pd.to_datetime(smi['DATE'], format = '%d.%m.%Y')
+smi.sort_values(by = 'DATE', ascending = True, inplace = True)
+smi = smi[['DATE', 'Close']]
+smi = smi[smi['DATE'] >= '2022-01-01']
 
 smi.rename(columns={smi.columns[1]: '2022'}, inplace=True)
-smi['2022'] = pd.to_numeric(smi['2022'].str.replace(',', ''))
 
 #smi_old = pd.read_csv('./SMI.csv')
 
