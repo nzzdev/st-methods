@@ -222,7 +222,7 @@ if __name__ == '__main__':
         month_last = (month_first + timedelta(days=32)
                       ).replace(day=1)-timedelta(days=1)  # 2022-10-31 etc.
         month_nice = month_first.strftime('%B')  # Oktober etc.
-        month_file = month_first.strftime('%m')  # 10 etc.
+        month_file = month_first.strftime('%Y-%m')  # 2022-10 etc.
 
         if today == month_last:
 
@@ -290,7 +290,7 @@ if __name__ == '__main__':
                                     'Tweet']).append(dftop_ja)
 
             dftop_ja.to_json(
-                f'./data/{month_file}-ja-diff.json', orient='values')
+                f'./data/{month_file}-ja-diff-monthly.json', orient='values')
 
     except:
         raise
