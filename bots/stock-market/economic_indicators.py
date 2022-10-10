@@ -253,17 +253,36 @@ benzin = benzin[1:]
 benzin = benzin[benzin.Reiseziel != 'Russland']
 
 benzin['95'] = pd.to_numeric(benzin['95']).round(2)
-benzin['98'] = pd.to_numeric(benzin['98']).round(2)
-benzin.loc[benzin['95'].isna(), '95'] = benzin['98']
-benzin = benzin[['Reiseziel', '95']]
-benzin.rename(columns={'95': 'Benzinpreis'}, inplace=True)
+benzin['Diesel'] = pd.to_numeric(benzin['Diesel']).round(2)
+benzin['95-E10'] = pd.to_numeric(benzin['95-E10']).round(2)
+benzin.loc[benzin['95'].isna(), '95'] = benzin['95-E10']
+benzin.rename(columns={'95': 'Benzin'}, inplace=True)
 
-benzin_table = benzin[['Reiseziel', 'Benzinpreis']]
-benzin_table.sort_values(by='Benzinpreis', ascending=False, inplace=True)
+benzin_table = benzin[['Reiseziel', 'Benzin', 'Diesel']]
+benzin_table.sort_values(by='Benzin', ascending=False, inplace=True)
 benzin_table.rename_axis(None, axis=1, inplace = True)
 
-notes = "Die Datenbasis ist in den einzelnen Ländern sehr unterschiedlich. Ausserdem gibt es teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
+Reiseziele = [
+'Deutschland',
+'Niederlande',
+'Belgien',
+'Dänemark',
+'Schweiz',
+'Grossbritannien',
+'Spanien',
+'Österreich',
+'Italien',
+'Luxemburg',
+'Tschechische Republik',
+'Frankreich',
+'Polen' ]
+
+benzin_table_2 = benzin_table.loc[benzin_table['Reiseziel'].isin(Reiseziele)].copy()
+
+notes = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
 update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin_table, notes = notes)
+update_chart(id = '5d54f8c74468704fbcb15b97cb56c6c5', data = benzin_table_2, notes = notes)
+
 
 session = requests_html.HTMLSession()
 r = session.get(url)
@@ -492,17 +511,28 @@ update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
 
 kurs = euro['EURCHF=X'].tail(1).values
 benzin_de = benzin.copy()
-benzin_de['Benzinpreis'] = round((benzin_de['Benzinpreis']/kurs), 2)
+benzin_de['Benzin'] = round((benzin_de['Benzin']/kurs), 2)
+benzin_de['Diesel'] = round((benzin_de['Diesel']/kurs), 2)
+
 eu = pd.read_excel('https://ec.europa.eu/energy/observatory/reports/latest_prices_raw_data.xlsx')
-eu = eu.loc[eu['Product Name'] == 'Euro-super 95'].copy()
-eu['Benzinpreis'] = round(pd.to_numeric(eu['Weekly price with taxes'].str.replace(',', '')) / 1000, 2)
+eu = eu.loc[(eu['Product Name'] == 'Euro-super 95') | (eu['Product Name'] == 'Automotive gas oil')].copy()
+eu['Weekly price with taxes'] = round(pd.to_numeric(eu['Weekly price with taxes'].str.replace(',', '')) / 1000, 2)
+eu = eu[['Country Name', 'Product Name', 'Weekly price with taxes']]
+eu = eu.pivot(index='Country Name', columns='Product Name', values='Weekly price with taxes').reset_index()
+eu.rename(columns = {'Euro-super 95': 'Benzin', 'Automotive gas oil': 'Diesel'}, inplace = True)
+
 eu['Reiseziel'] = eu['Country Name'].apply(lambda x: GoogleTranslator(source='auto', target='de').translate(x))
-eu = pd.concat([benzin_de[benzin_de['Reiseziel'] == 'Schweiz'][['Reiseziel', 'Benzinpreis']], eu[['Reiseziel', 'Benzinpreis']]])
-eu.sort_values(by='Benzinpreis', ascending=False, inplace=True)
+eu = pd.concat([benzin_de[benzin_de['Reiseziel'] == 'Schweiz'][['Reiseziel', 'Benzin', 'Diesel']], eu])
+eu.sort_values(by='Benzin', ascending=False, inplace=True)
 eu.rename_axis(None, axis=1, inplace = True)
+eu.drop(columns=['Country Name'], inplace = True)
 
-update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu)
+eu_2 = eu.loc[eu['Reiseziel'].isin(Reiseziele)]
 
+notes = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
+
+update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu, notes = notes)
+update_chart(id = '9f87a00d3791c108c1b6c0edb4a392dd', data = eu_2, notes = notes)
 
 # Unternehmen, die Russland verlassen
 
