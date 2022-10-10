@@ -280,8 +280,10 @@ Reiseziele = [
 benzin_table_2 = benzin_table.loc[benzin_table['Reiseziel'].isin(Reiseziele)].copy()
 
 notes = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
+notes_2 = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen."
+
 update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin_table, notes = notes)
-update_chart(id = '5d54f8c74468704fbcb15b97cb56c6c5', data = benzin_table_2, notes = notes)
+update_chart(id = '5d54f8c74468704fbcb15b97cb56c6c5', data = benzin_table_2, notes = notes_2)
 
 
 session = requests_html.HTMLSession()
@@ -529,10 +531,8 @@ eu.drop(columns=['Country Name'], inplace = True)
 
 eu_2 = eu.loc[eu['Reiseziel'].isin(Reiseziele)]
 
-notes = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
-
-update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu, notes = notes)
-update_chart(id = '9f87a00d3791c108c1b6c0edb4a392dd', data = eu_2, notes = notes)
+update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu, notes = notes_2)
+update_chart(id = '9f87a00d3791c108c1b6c0edb4a392dd', data = eu_2, notes = notes_2)
 
 # Unternehmen, die Russland verlassen
 
