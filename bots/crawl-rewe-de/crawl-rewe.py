@@ -2,6 +2,7 @@ import requests
 from requests.adapters import HTTPAdapter, Retry
 import logging
 import json
+import locale
 import os
 from datetime import date, timedelta
 from time import sleep
@@ -76,9 +77,16 @@ if __name__ == '__main__':
         header = (f"Datum;ID;Marke;Name;Preis;Gewicht"+'\n')
         brands = ['ja!', 'REWE Beste Wahl', 'REWE', 'REWE Bio']
 
+        # set working directory and locale
         os.chdir(os.path.dirname(__file__))
+        locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
         if not os.path.exists('data'):
             os.makedirs('data')
+
+        ################
+        # daily prices #
+        ################
+        # get current prices
         with open(f"./data/{today}-rewe.csv", 'w') as file:
             file.write(header)
             for b in brands:
@@ -161,6 +169,7 @@ if __name__ == '__main__':
             df['Wichtig?'] = df.index.isin(values)
             df.to_csv(f'./data/{today}-rewe-diff.csv', sep=';')
 
+        # create JSON for Twitter
         if not df_ja.empty:
             # create dataframe with ja! products and calculate price change
             df_ja['Name'] = df_ja['Name'].astype(
@@ -204,6 +213,84 @@ if __name__ == '__main__':
                 '0000000'], columns=['Tweet']).append(df_ja)
             # df_ja.to_csv(f'./data/{today}-ja-diff.csv', sep=';', index=False)
             df_ja.to_json(f'./data/{today}-ja-diff.json', orient='values')
+
+        ###################
+        # monthly summary #
+        ###################
+        # get first day of current and last month
+        month_first = today.replace(day=1)  # 2022-10-01 etc.
+        month_last = (month_first + timedelta(days=32)
+                      ).replace(day=1)-timedelta(days=1)  # 2022-10-31 etc.
+        month_nice = month_first.strftime('%B')  # Oktober etc.
+        month_file = month_first.strftime('%Y-%m')  # 2022-10 etc.
+
+        if today == month_last:
+
+            # create JSON for monthly price changes
+            dftopnew = pd.read_csv(f'./data/{today}-rewe.csv', sep=';', usecols=[
+                'ID', 'Preis', 'Marke', 'Name'], index_col='ID')
+            dftopold = pd.read_csv(f'./data/{month_first}-rewe.csv',
+                                   sep=';', usecols=['ID', 'Preis'], index_col='ID')
+
+            dftopold.rename(columns={'Preis': month_first}, inplace=True)
+            dftopnew.rename(columns={'Preis': today}, inplace=True)
+            dftop = pd.merge(dftopnew, dftopold,
+                             left_index=True, right_index=True)
+            dftop[today] = dftop[today] - dftop[month_first]
+
+            # only keep products with price changes
+            dftop = dftop[dftop[today] != 0]
+
+            # create new dataframe with ja! products only
+            dftop_ja = dftop.copy()
+            dftop_ja = dftop_ja[dftop_ja['Marke'] == 'ja!']
+
+            # create dataframe with ja! products and calculate price change
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace(r'[Jj]a!\s', r'', regex=True)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace(r'\s\d.*', r'', regex=True)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace(r'\smit\s.*', r'', regex=True)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace('  Arabica-Robusta-Mischung', '', regex=False)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace(' ca.', '', regex=False)
+            dftop_ja['Marke'] = ((((dftop_ja[month_first] + dftop_ja[today]) -
+                                   dftop_ja[month_first])/dftop_ja[month_first])*100).round(0).astype(int)
+            dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
+            dftop_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
+
+            # drop pseudo duplicates (like "Joghurt") and get top 5
+            dftop_ja = dftop_ja.drop_duplicates(subset='Name', keep='first')
+            dftop_ja = dftop_ja.head(5)
+
+            dftop_ja['Prozent'] = dftop_ja['Prozent'].apply(
+                lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
+            dftop_ja['Prozent'] = dftop_ja['Prozent'].str.replace(
+                '-', '', regex=False)
+            dftop_ja.drop([month_first], axis=1, inplace=True)
+            dftop_ja.rename(columns={today: 'Veränderung'}, inplace=True)
+
+            # convert cents to euro and add currency
+            dftop_ja['Veränderung'] = dftop_ja['Veränderung'] / 100.0
+            dftop_ja['Veränderung'] = dftop_ja['Veränderung'].apply(
+                lambda x: f'+{x}€' if x >= 0 else f'{x}€')
+            dftop_ja['Veränderung'] = dftop_ja['Veränderung'].str.replace(
+                '.', ',', regex=False)
+            dftop_ja['Tweet'] = dftop_ja['Prozent'] + ' ' + dftop_ja['Name'] + \
+                ': ' + dftop_ja['Veränderung'] + '\n'
+            dftop_ja = dftop_ja[['Tweet']]
+
+            # add Tweet intro
+            count = dftop_ja.shape[0]
+            intro = [
+                f'Top 5 Preiserhöhungen bei #Rewe & #Aldi im {month_nice}:\n\n']
+            dftop_ja = pd.DataFrame([intro], index=['0000000'], columns=[
+                                    'Tweet']).append(dftop_ja)
+
+            dftop_ja.to_json(
+                f'./data/{month_file}-ja-diff-monthly.json', orient='values')
 
     except:
         raise

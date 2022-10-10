@@ -1,6 +1,5 @@
 import os
 import io
-import locale
 import numpy as np
 import pandas as pd
 from user_agent import generate_user_agent
@@ -11,7 +10,7 @@ if __name__ == '__main__':
 
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
-        locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
+        # locale.setlocale(locale.LC_TIME, 'de_DE.UTF-8')
 
         fheaders = {
             'user-agent': generate_user_agent(),
