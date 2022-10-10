@@ -279,8 +279,8 @@ Reiseziele = [
 
 benzin_table_2 = benzin_table.loc[benzin_table['Reiseziel'].isin(Reiseziele)].copy()
 
-notes = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
-notes_2 = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher als Grössenordnung zu verstehen."
+notes = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher nicht immer tagesaktuell und als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
+notes_2 = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher nicht immer tagesaktuell und als Grössenordnung zu verstehen."
 
 update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin_table, notes = notes)
 update_chart(id = '5d54f8c74468704fbcb15b97cb56c6c5', data = benzin_table_2, notes = notes_2)
