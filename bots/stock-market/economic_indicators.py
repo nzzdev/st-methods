@@ -86,7 +86,8 @@ zurich_2019 = zurich_2019[['month', 'day', '2019']]
 to_q = zurich_2019.merge(zurich_2022, on = ['day', 'month'])
 to_q = to_q[['date', '2019', '2022']]
 
-update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=to_q)
+notes = 'Fahrzeuge können mehrfach gezählt werden.'
+update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=to_q, notes = notes)
 
 
 # Mobis
