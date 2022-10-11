@@ -333,8 +333,10 @@ fuel_prices.drop_duplicates(subset='date', keep='last', inplace=True)
 # fuel_prices_de.index = pd.to_datetime(
 #   fuel_prices_de.index).strftime('%Y-%m-%d')
 
+title = "Benzin kostet im Schnitt " + str(price_95) + " Franken pro Liter"
+
 update_chart(id='1dda540238574eac80e865faa0d4aaba',
-             data=fuel_prices)
+             data = fuel_prices, title = title)
 # update_chart(id='5ac628c4bb388d36fb2f5cbc745073c6',
 #            data=fuel_prices_de[['Jahresdurchschnitt 2019', '2022']])
 
@@ -528,6 +530,21 @@ eu = pd.concat([benzin_de[benzin_de['Reiseziel'] == 'Schweiz'][['Reiseziel', 'Be
 eu.sort_values(by='Benzin', ascending=False, inplace=True)
 eu.rename_axis(None, axis=1, inplace = True)
 eu.drop(columns=['Country Name'], inplace = True)
+
+Reiseziele = [
+'Deutschland',
+'Niederlande',
+'Belgien',
+'Dänemark',
+'Schweiz',
+'Grossbritannien',
+'Spanien',
+'Österreich',
+'Italien',
+'Luxemburg',
+'Tschechien',
+'Frankreich',
+'Polen' ]
 
 eu_2 = eu.loc[eu['Reiseziel'].isin(Reiseziele)]
 
