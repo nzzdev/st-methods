@@ -950,15 +950,12 @@ vacc_persons_ch <- ch_vacc_persons %>%
            type != "COVID19SecondBoosterPersons") %>%
   arrange(desc(per100))
 
-
 title_vacc_ch <- paste0(gsub('\\.', ',', toString(vacc_persons_ch$per100[vacc_persons_ch$type == "Doppelt geimpft*"])), ' Prozent der Schweizer Bevölkerung ist doppelt geimpft')
 
 update_chart(id = "8022cf0d0f108d3a2f65d2d360266789",
              data = vacc_persons_ch,
              notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", ch_vacc_date), 
              title = title_vacc_ch)
-
-
 
 ### Schweiz geimpft nach Altersgruppen
 
