@@ -944,7 +944,10 @@ vacc_persons_ch <- ch_vacc_persons %>%
   mutate(type = dplyr::recode(type, COVID19FullyVaccPersons = "Doppelt geimpft*", 
                               COVID19PartiallyVaccPersons = "Einmal geimpft",
                               COVID19FirstBoosterPersons = "Booster erhalten")) %>%
-  filter(type != "COVID19AtLeastOneDosePersons" & type != "COVID19NotVaccPersons") %>%
+  filter(type != "COVID19AtLeastOneDosePersons" & 
+           type != "COVID19NotVaccPersons" & 
+           type != "COVID19VaccSixMonthsPersons" &
+           type != "COVID19SecondBoosterPersons") %>%
   arrange(desc(per100))
 
 
