@@ -333,7 +333,9 @@ fuel_prices.drop_duplicates(subset='date', keep='last', inplace=True)
 # fuel_prices_de.index = pd.to_datetime(
 #   fuel_prices_de.index).strftime('%Y-%m-%d')
 
-title = "Benzin kostet im Schnitt " + str(price_95) + " Franken pro Liter"
+title_price = str(price_95).replace('.', ',')
+
+title = "Benzin kostet im Schnitt " + title_price + " Franken pro Liter"
 
 update_chart(id='1dda540238574eac80e865faa0d4aaba',
              data = fuel_prices, title = title)
