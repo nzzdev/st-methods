@@ -100,7 +100,7 @@ if __name__ == '__main__':
         df_divi_full = pd.concat(
             [df_divi_missing, df_divi], join='outer', axis=0)
         df_divi_full = df_divi_full.fillna('')
-        df_divi_full = df_divi_full[['Nicht mechanisch beatmet¹', 'Beatmet']]
+        df_divi_full = df_divi_full[['Beatmet', 'Nicht mechanisch beatmet¹']]
 
         # get current date for chart notes
         timestamp_str = df.tail(1).index.item()
