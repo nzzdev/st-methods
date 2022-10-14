@@ -59,7 +59,8 @@ if __name__ == '__main__':
         df_perc['Beatmet'] = (df_perc['Beatmet'] / df_perc['Summe']) * 100
         df_perc['Intensiv'] = (df_perc['Intensiv'] / df_perc['Summe']) * 100
         df_perc = df_perc[['Beatmet', 'Intensiv']]
-        df_perc = df_perc.rename(columns={'Intensiv': 'Nicht beatmet'})
+        df_perc = df_perc.rename(
+            columns={'Intensiv': 'Nicht mechanisch beatmet'})
 
         # get percentage for title of percentage chart
         title_perc = df_perc['Beatmet'].iloc[-1].round(0).astype(int)
