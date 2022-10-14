@@ -79,8 +79,8 @@ if __name__ == '__main__':
             timestamp_str
 
         # insert id manually and run function
-        update_chart(id='ab97925bcc5055b33011fb4d3326e163',
-                     data=dfpatients, notes=notes_chartpatients)
+        # for DIVI patients see rki_index.py
+        #update_chart(id='ab97925bcc5055b33011fb4d3326e163', data=dfpatients, notes=notes_chartpatients)
         update_chart(id='ca6ad78976cf6de104f01ab6f59ce114',
                      data=dfbeds, notes=notes_chartbeds)
 
