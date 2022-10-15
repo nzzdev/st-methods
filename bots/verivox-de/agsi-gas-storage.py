@@ -128,6 +128,8 @@ if __name__ == '__main__':
         dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
+
+        # drop trend
         dfnew = dfnew.drop('Trend', axis=1)
 
         # convert date column to datetime
