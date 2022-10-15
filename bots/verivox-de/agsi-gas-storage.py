@@ -113,20 +113,13 @@ if __name__ == '__main__':
 
         # retrieve data from 2011-2022
         dfnew = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', '2022'])
+            f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dftrend = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', 'Trend'])
         dfall = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
-
-        # convert date column to datetime
-        dfold['Datum'] = pd.to_datetime(dfold['Datum'])
-        dfnew['Datum'] = pd.to_datetime(dfnew['Datum'])
-        dftrend['Datum'] = pd.to_datetime(dftrend['Datum'])
-        dfnew = dfnew.sort_values(by='Datum', ascending=True)
-        dftrend = dftrend.sort_values(by='Datum', ascending=True)
 
         # temporary fix for wrong storage data
         dfnew.set_index('Datum', inplace=True)
@@ -135,6 +128,13 @@ if __name__ == '__main__':
         dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
+
+        # convert date column to datetime
+        dfold['Datum'] = pd.to_datetime(dfold['Datum'])
+        dfnew['Datum'] = pd.to_datetime(dfnew['Datum'])
+        dftrend['Datum'] = pd.to_datetime(dftrend['Datum'])
+        dfnew = dfnew.sort_values(by='Datum', ascending=True)
+        dftrend = dftrend.sort_values(by='Datum', ascending=True)
 
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
@@ -186,10 +186,8 @@ if __name__ == '__main__':
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
         # run function
-        update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
-                     data=df, title=title, notes=notes_chart)
-        update_chart(id='0fc405116af43382d715e046012ac4df',
-                     data=dftrend, title=chart_title, notes=notes_chart_trend)
+        #update_chart(id='cc9eff02ba0867d71af4fbc25304797b', data=df, title=title, notes=notes_chart)
+        #update_chart(id='0fc405116af43382d715e046012ac4df',data=dftrend, title=chart_title, notes=notes_chart_trend)
 
     except:
         raise
