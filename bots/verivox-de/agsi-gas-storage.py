@@ -128,6 +128,14 @@ if __name__ == '__main__':
         dfnew = dfnew.sort_values(by='Datum', ascending=True)
         dftrend = dftrend.sort_values(by='Datum', ascending=True)
 
+        # temporary fix for wrong storage data
+        dfnew.set_index('Datum', inplace=True)
+        dfnew.at['2022-10-13', '2022'] = 94.97
+        dfnew.at['2022-10-12', '2022'] = 94.97
+        dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
+                     encoding='utf-8', index=True)
+        dfnew = dfnew.reset_index(level=0)
+
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
@@ -154,14 +162,6 @@ if __name__ == '__main__':
         dfall.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
         """
-
-        # temporary fix for wrong storage data
-        dfnew.set_index('Datum', inplace=True)
-        dfnew.at['2022-10-13', '2022'] = 94.97
-        dfnew.at['2022-10-12', '2022'] = 94.97
-        dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
-                     encoding='utf-8', index=True)
-        dfnew = dfnew.reset_index(level=0)
 
         # create dynamic chart title for trend chart
         current = dftrend['Trend'].iloc[-1] * 10
