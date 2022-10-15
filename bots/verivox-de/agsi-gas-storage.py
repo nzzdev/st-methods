@@ -186,8 +186,10 @@ if __name__ == '__main__':
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
         # run function
-        #update_chart(id='cc9eff02ba0867d71af4fbc25304797b', data=df, title=title, notes=notes_chart)
-        #update_chart(id='0fc405116af43382d715e046012ac4df',data=dftrend, title=chart_title, notes=notes_chart_trend)
+        update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
+                     data=df, title=title, notes=notes_chart)
+        update_chart(id='0fc405116af43382d715e046012ac4df',
+                     data=dftrend, title=chart_title, notes=notes_chart_trend)
 
     except:
         raise
