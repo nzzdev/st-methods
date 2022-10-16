@@ -121,6 +121,7 @@ if __name__ == '__main__':
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
+        """
         # temporary fix for wrong storage data
         dfnew.set_index('Datum', inplace=True)
         dfnew.at['2022-10-13', '2022'] = 95.14
@@ -128,6 +129,7 @@ if __name__ == '__main__':
         dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
+        """
 
         # drop trend
         dfnew = dfnew.drop('Trend', axis=1)
