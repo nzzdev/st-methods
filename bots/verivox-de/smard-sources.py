@@ -47,7 +47,7 @@ if __name__ == '__main__':
         ################################
         modules = REALIZED_POWER_GENERATION
         df = smard.requestSmardData(
-            modulIDs=modules, timestamp_from_in_milliseconds=1629237600000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+            modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
 
         # check if data is corrupted
         errors = 0
@@ -55,7 +55,7 @@ if __name__ == '__main__':
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1629237600000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+                modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
         else:
             # fix wrong decimal
             df.to_csv('./data/smard_fixed.csv', sep=';',
@@ -105,9 +105,10 @@ if __name__ == '__main__':
             # convert DatetimeIndex to string
             # df.index = df.index.strftime('%Y-%m-%d')
 
+            print(df)
+            df.to_clipboard()
             # run Q function
-            update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
-                         data=df, notes=notes_chart, title=title_chart)
+            #update_chart(id='e468de3ac9c422bcd0924e26b60a2af8', data=df, notes=notes_chart, title=title_chart)
 
         ###########################
         # API request spot market #
@@ -158,8 +159,7 @@ if __name__ == '__main__':
             title = f'Strom kostet an der Börse {title_mwh} Euro je MWh'
 
             # run Q function
-            update_chart(id='90005812afc9964bbfe4f952f51d6a57',
-                         title=title, notes=notes_chart, data=df_spot)
+            #update_chart(id='90005812afc9964bbfe4f952f51d6a57', title=title, notes=notes_chart, data=df_spot)
 
     except:
         raise
