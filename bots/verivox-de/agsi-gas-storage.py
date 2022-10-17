@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
         # retrieve data from 2011-2022
         dfnew = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', '2022'])
+            f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dftrend = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', 'Trend'])
         dfall = pd.read_csv(
@@ -121,14 +121,18 @@ if __name__ == '__main__':
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
-        # temporary fix for wrong storage data
         """
+        # temporary fix for wrong storage data
         dfnew.set_index('Datum', inplace=True)
-        dfnew.at['2022-08-20', '2022'] = 79.55
-        dfnew.at['2022-09-05', '2022'] = 86.50
-        dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index=True)
+        dfnew.at['2022-10-13', '2022'] = 95.14
+        dfnew.at['2022-10-12', '2022'] = 94.97
+        dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
+                     encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
         """
+
+        # drop trend
+        dfnew = dfnew.drop('Trend', axis=1)
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])

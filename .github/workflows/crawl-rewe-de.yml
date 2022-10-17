@@ -3,7 +3,7 @@ name: Update Food Prices DE
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "0 10 * * *"
+    - cron: "0,5,10 10 * * *"
   workflow_dispatch:
 
 jobs:
