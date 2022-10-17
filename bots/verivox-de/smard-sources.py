@@ -69,11 +69,11 @@ if __name__ == '__main__':
             df = df.groupby(['Datum']).sum()
 
             # create new columns and drop the old ones
-            df['Gas'] = df['Erdgas[MWh]']
             df['Kernkraft'] = df['Kernenergie[MWh]']
-            df['Kohle'] = df['Braunkohle[MWh]'] + df['Steinkohle[MWh]']
+            df['Gas'] = df['Erdgas[MWh]']
             df['Sonstige'] = df['Pumpspeicher[MWh]'] + \
                 df['Sonstige Konventionelle[MWh]']
+            df['Kohle'] = df['Braunkohle[MWh]'] + df['Steinkohle[MWh]']
             df['Erneuerbare'] = df['Biomasse[MWh]'] + df['Wasserkraft[MWh]'] + df['Wind Offshore[MWh]'] + \
                 df['Wind Offshore[MWh]'] + df['Wind Onshore[MWh]'] + \
                 df['Photovoltaik[MWh]'] + df['Sonstige Erneuerbare[MWh]']
