@@ -261,6 +261,11 @@ if __name__ == '__main__':
             dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
             dftop_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
 
+            # Fix for large quantities
+            bulkpacks = {'Apfelsaft': 'Apfelsaft 6l', 'Multivitaminsaft': 'Multivitaminsaft 6l', 'Orangensaft': 'Orangensaft 6l', 'Orangennektar': 'Orangennektar 9l', 'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur':
+                         'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg'}
+            dftop_ja['Name'] = dftop_ja['Name'].astype(str).replace(bulkpacks)
+
             # drop pseudo duplicates (like "Joghurt") and get top 5
             dftop_ja = dftop_ja.drop_duplicates(subset='Name', keep='first')
             dftop_ja = dftop_ja.head(5)
