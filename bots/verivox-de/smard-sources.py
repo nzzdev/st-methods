@@ -46,16 +46,16 @@ if __name__ == '__main__':
         # API request power generation #
         ################################
         modules = REALIZED_POWER_GENERATION
-        df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=(
-            int(time.time()) * 1000) - (24*3600)*455000)  # 373000 = 1 year + last week
+        df = smard.requestSmardData(
+            modulIDs=modules, timestamp_from_in_milliseconds=1627164000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
 
         # check if data is corrupted
         errors = 0
         while ('Uhrzeit' not in df.columns) and (errors < 5):
             sleep(2)
             errors += 1
-            df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=(
-                int(time.time()) * 1000) - (24*3600)*455000)  # 373000 = 1 year + last week 365000
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1627164000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
         else:
             # fix wrong decimal
             df.to_csv('./data/smard_fixed.csv', sep=';',
