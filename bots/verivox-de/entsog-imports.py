@@ -292,9 +292,14 @@ if __name__ == '__main__':
                 df_new = old_data
                 df_new_sum = old_data_sum
 
+                if df_new_sum['Summe'][-1] > 0:
+                    chart_title = 'Nach Deutschland fliesst kaum noch russisches Gas'
+                else:
+                    chart_title = 'Nach Deutschland fliesst kein russisches Gas mehr'
+
                 # run Q function
                 update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
-                             data=df_new_sum, notes=notes_chart_de)
+                             data=df_new_sum, notes=notes_chart_de, title=chart_title)
                 update_chart(id='d0be298e35165ab925d7292335b3d00e',
                              data=df_new, notes=notes_chart_de)
 
@@ -325,9 +330,14 @@ if __name__ == '__main__':
                 df_new_sum.to_csv('./data/pipelines_de_sum.tsv', sep='\t')
                 df_new.to_csv('./data/pipelines_de.tsv', sep='\t')
 
+                if df_new_sum['Summe'][-1] > 0:
+                    chart_title = 'Nach Deutschland fliesst kaum noch russisches Gas'
+                else:
+                    chart_title = 'Nach Deutschland fliesst kein russisches Gas mehr'
+
                 # run Q function
                 update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
-                             data=df_new_sum, notes=notes_chart_de)
+                             data=df_new_sum, notes=notes_chart_de, title=chart_title)
                 update_chart(id='d0be298e35165ab925d7292335b3d00e',
                              data=df_new, notes=notes_chart_de)
 
@@ -336,9 +346,14 @@ if __name__ == '__main__':
             df_new = old_data
             df_new_sum = old_data_sum
 
+            if df_new_sum['Summe'][-1] > 0:
+                chart_title = 'Nach Deutschland fliesst kaum noch russisches Gas'
+            else:
+                chart_title = 'Nach Deutschland fliesst kein russisches Gas mehr'
+
             # run Q function
             update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
-                         data=df_new_sum, notes=notes_chart_de)
+                         data=df_new_sum, notes=notes_chart_de, title=chart_title)
             update_chart(id='d0be298e35165ab925d7292335b3d00e',
                          data=df_new, notes=notes_chart_de)
 
