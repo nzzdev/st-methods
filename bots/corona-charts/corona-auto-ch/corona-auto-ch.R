@@ -177,26 +177,12 @@ bag_var <- read.csv(bag_data$sources$individual$csv$daily$virusVariantsWgs)%>%
 
 
 
-#### Update Overview (Zahlenübersicht oben)
+
+### Dashboard ###
 
 tmp_cases <- read_csv(bag_data$sources$individual$csv$daily$cases) %>%
   filter(datum == max(datum), geoRegion == 'CHFL')
 
-new_infections <- paste0("+ ", tmp_cases$entries_diff_last)
-
-tmp_hosp <- read_csv(bag_data$sources$individual$csv$daily$hosp) %>%
-  filter(datum == max(datum), geoRegion == 'CHFL')
-
-new_hosp <- paste0('+ ', tmp_hosp$entries_diff_last)
-
-tmp_death <- read_csv(bag_data$sources$individual$csv$daily$death) %>%
-  filter(datum == max(datum), geoRegion == 'CHFL')
-
-new_death <- paste0('+ ', tmp_death$entries_diff_last)
-
-
-
-### Dashboard ###
 
 bag_cases_ravg <- bag_cases %>%
   filter(geoRegion == 'CHFL', datum >= "2020-02-28" & datum <= last(datum)-2) %>%
@@ -396,9 +382,9 @@ ww_bag_mean <- ww_bag_stations %>%
   filter(count_na < 25) %>%
   mutate(mean = round(rowMeans(.[2:100], na.rm = T)/1000000000)) %>%
   select(date, mean) %>%
-  full_join(bag_cases_ravg, by = c("date" = "datum")) %>%
+  full_join(bag_cases_ravg, by = c("date" = "date")) %>%
   filter(date >= "2022-02-10") %>%
- mutate(ravg_cases = ravg_cases*100/max(ravg_cases), 
+ mutate(ravg_cases = value*100/max(value), 
         mean = mean*100/max(mean, na.rm = TRUE)) %>%
   select("Datum" = date, 
          "Fallzahlen" = ravg_cases, 
@@ -598,19 +584,11 @@ ch_death_vacc <- read_csv(bag_data$sources$individual$csv$daily$deathVaccPersons
 #  filter(vaccine == "all") %>%
   mutate(type = "Todesfälle")
 
-# ch_inf_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
-#   filter(vaccine == "all")
-# 
-
 ch_hosp_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$hospVaccPersons) %>% 
   filter(vaccine == "all")
 
-# 
-# ch_death_vacc_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$casesVaccPersons) %>%
-#   filter(vaccine == "all")
 
 #### Impfdurchbrüche ####
-# By Manuf. - one-off
 
 id_total <- rbind(ch_hosp_vacc, ch_death_vacc) %>%
   filter(vaccine == "all") %>%
