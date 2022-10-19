@@ -676,12 +676,12 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
   select(-pop, -sumTotal, -geoRegion, -date) %>%
   spread(type, per100) %>%
   select(-COVID19AtLeastOneDosePersons) %>%
-  mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons, ) %>%
+  mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
   rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
          "Einmal geimpft" = COVID19PartiallyVaccPersons,
          "Dreimal geimpft" = COVID19FirstBoosterPersons,
          "Viermal geimpft" = COVID19SecondBoosterPersons) %>%
-  mutate("Dreimal geimpft" = "Dreimal geimpft" - "Viermal geimpft") %>%
+  mutate(`Dreimal geimpft` = `Dreimal geimpft` - `Viermal geimpft`) %>%
   arrange(desc(`Doppelt geimpft*`+`Einmal geimpft`+`Dreimal geimpft`+`Viermal geimpft`))
 
 title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
@@ -727,14 +727,14 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
   spread(type,per100PersonsTotal) %>%
   mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
   rename('Altersklasse' = altersklasse_covid19, 
-         "Doppelt geimpft *" = COVID19FullyVaccPersons,
+         "Doppelt geimpft*" = COVID19FullyVaccPersons,
          "Einfach geimpft" = COVID19PartiallyVaccPersons,
          "Dreimal geimpft" = COVID19FirstBoosterPersons,
          "Viermal geimpft" = COVID19SecondBoosterPersons) %>%
-  mutate(`Doppelt geimpft *` = round(`Doppelt geimpft *`, 1),
+  mutate(`Doppelt geimpft*` = round(`Doppelt geimpft*`, 1),
          `Einfach geimpft` = round(`Einfach geimpft`, 1),
          `Dreimal geimpft` = round(`Dreimal geimpft`-`Viermal geimpft`, 1))  %>%
-  select(Altersklasse, `Viermal geimpft`, `Dreimal geimpft`, `Doppelt geimpft *`, `Einfach geimpft`) %>%
+  select(Altersklasse, `Viermal geimpft`, `Dreimal geimpft`, `Doppelt geimpft*`, `Einfach geimpft`) %>%
   arrange(desc(`Altersklasse`))
 
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
