@@ -676,12 +676,13 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
   select(-pop, -sumTotal, -geoRegion, -date) %>%
   spread(type, per100) %>%
   select(-COVID19AtLeastOneDosePersons) %>%
-  mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons-COVID19SecondBoosterPersons) %>%
+  mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons, ) %>%
   rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
          "Einmal geimpft" = COVID19PartiallyVaccPersons,
-         "Ersten Booster erhalten" = COVID19FirstBoosterPersons,
-         "Zweiten Booster erhalten" = COVID19SecondBoosterPersons) %>%
-  arrange(desc(`Doppelt geimpft*`+`Einmal geimpft`+`Ersten Booster erhalten`+`Zweiten Booster erhalten`))
+         "Dreimal geimpft" = COVID19FirstBoosterPersons,
+         "Viermal geimpft" = COVID19SecondBoosterPersons) %>%
+  mutate("Dreimal geimpft" = "Dreimal geimpft" - "Viermal geimpft") %>%
+  arrange(desc(`Doppelt geimpft*`+`Einmal geimpft`+`Dreimal geimpft`+`Viermal geimpft`))
 
 title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
 
@@ -724,16 +725,16 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
   filter(date ==last(date), age_group_type == "age_group_AKL10") %>%
   select(altersklasse_covid19, per100PersonsTotal,type) %>%
   spread(type,per100PersonsTotal) %>%
+  mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
   rename('Altersklasse' = altersklasse_covid19, 
-         "Doppelt geimpft" = COVID19FullyVaccPersons,
+         "Doppelt geimpft *" = COVID19FullyVaccPersons,
          "Einfach geimpft" = COVID19PartiallyVaccPersons,
-         "Ersten Booster erhalten" = COVID19FirstBoosterPersons,
-         "Zweiten Booster erhalten" = COVID19SecondBoosterPersons) %>%
-  mutate(`Doppelt geimpft` = round(`Doppelt geimpft`-`Ersten Booster erhalten`-`Zweiten Booster erhalten`, 1),
+         "Dreimal geimpft" = COVID19FirstBoosterPersons,
+         "Viermal geimpft" = COVID19SecondBoosterPersons) %>%
+  mutate(`Doppelt geimpft *` = round(`Doppelt geimpft *`, 1),
          `Einfach geimpft` = round(`Einfach geimpft`, 1),
-         `Ersten Booster erhalten` = round(`Ersten Booster erhalten`, 1),  
-         `Zweiten Booster erhalten` = round(`Zweiten Booster erhalten`, 1))  %>%
-  select(Altersklasse, `Ersten Booster erhalten`, `Zweiten Booster erhalten`, `Doppelt geimpft`, `Einfach geimpft`) %>%
+         `Dreimal geimpft` = round(`Dreimal geimpft`-`Viermal geimpft`, 1))  %>%
+  select(Altersklasse, `Viermal geimpft`, `Dreimal geimpft`, `Doppelt geimpft *`, `Einfach geimpft`) %>%
   arrange(desc(`Altersklasse`))
 
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
