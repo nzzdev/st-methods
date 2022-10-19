@@ -665,12 +665,6 @@ update_chart(id = "32933cfe729928ecb4906a82bdcc4f9f",
              data = id_rel_age_q)
 
 
-
-
-
-
-
-
 # second doses
 
 vacc_ch_persons_kant <- ch_vacc_persons %>%
@@ -681,11 +675,12 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
   left_join(pop[,c(1:2)], by = c("geoRegion" = "ktabk")) %>%
   select(-pop, -sumTotal, -geoRegion, -date) %>%
   spread(type, per100) %>%
-  select(-COVID19AtLeastOneDosePersons, -COVID19SecondBoosterPersons) %>%
-  mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons) %>%
+  select(-COVID19AtLeastOneDosePersons) %>%
+  mutate(COVID19FullyVaccPersons = COVID19FullyVaccPersons-COVID19FirstBoosterPersons-COVID19SecondBoosterPersons) %>%
   rename("Doppelt geimpft*" = COVID19FullyVaccPersons, 
          "Einmal geimpft" = COVID19PartiallyVaccPersons,
-         "Booster erhalten" = COVID19FirstBoosterPersons) %>%
+         "Ersten Booster erhalten" = COVID19FirstBoosterPersons,
+         "Zweiten Booster erhalten" = COVID19SecondBoosterPersons) %>%
   arrange(desc(`Doppelt geimpft*`+`Einmal geimpft`+`Booster erhalten`))
 
 title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
@@ -706,12 +701,12 @@ vacc_persons_ch <- ch_vacc_persons %>%
   mutate(per100 =round(100*sumTotal/pop,1)) %>%
   select(-pop, -sumTotal, -date, -geoRegion) %>%
   mutate(type = dplyr::recode(type, COVID19FullyVaccPersons = "Doppelt geimpft*", 
-                              COVID19PartiallyVaccPersons = "Einmal geimpft",
-                              COVID19FirstBoosterPersons = "Booster erhalten")) %>%
+                              COVID19SecondBoosterPersons = "Zweiten Booster erhalten",
+                              COVID19FirstBoosterPersons = "Ersten Booster erhalten")) %>%
   filter(type != "COVID19AtLeastOneDosePersons" & 
            type != "COVID19NotVaccPersons" & 
            type != "COVID19VaccSixMonthsPersons" &
-           type != "COVID19SecondBoosterPersons") %>%
+           type != "COVID19PartiallyVaccPersons") %>%
   arrange(desc(per100))
 
 title_vacc_ch <- paste0(gsub('\\.', ',', toString(vacc_persons_ch$per100[vacc_persons_ch$type == "Doppelt geimpft*"])), ' Prozent der Schweizer Bevölkerung ist doppelt geimpft')
@@ -725,18 +720,20 @@ update_chart(id = "8022cf0d0f108d3a2f65d2d360266789",
 ### Schweiz geimpft nach Altersgruppen
 
 vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersons) %>%
-  filter(geoRegion == 'CHFL', type %in% c("COVID19FullyVaccPersons", "COVID19PartiallyVaccPersons", "COVID19FirstBoosterPersons")) %>%
+  filter(geoRegion == 'CHFL', type %in% c("COVID19FullyVaccPersons", "COVID19PartiallyVaccPersons", "COVID19FirstBoosterPersons", "COVID19SecondBoosterPersons")) %>%
   filter(date ==last(date), age_group_type == "age_group_AKL10") %>%
   select(altersklasse_covid19, per100PersonsTotal,type) %>%
   spread(type,per100PersonsTotal) %>%
   rename('Altersklasse' = altersklasse_covid19, 
          "Doppelt geimpft" = COVID19FullyVaccPersons,
          "Einfach geimpft" = COVID19PartiallyVaccPersons,
-         "Booster erhalten" = COVID19FirstBoosterPersons) %>%
-  mutate(`Doppelt geimpft` = round(`Doppelt geimpft`-`Booster erhalten`, 1),
+         "Ersten Booster erhalten" = COVID19FirstBoosterPersons,
+         "Zweiten Booster erhalten" = COVID19SecondBoosterPersons) %>%
+  mutate(`Doppelt geimpft` = round(`Doppelt geimpft`-`Ersten Booster erhalten`-`Zweiten Booster erhalten`, 1),
          `Einfach geimpft` = round(`Einfach geimpft`, 1),
-         `Booster erhalten` = round(`Booster erhalten`, 1))  %>%
-  select(Altersklasse, `Booster erhalten`, `Doppelt geimpft`, `Einfach geimpft`) %>%
+         `Ersten Booster erhalten` = round(`Ersten Booster erhalten`, 1),  
+         `Zweiten Booster erhalten` = round(`Zweiten Booster erhalten`, 1))  %>%
+  select(Altersklasse, `Ersten Booster erhalten`, `Zweiten Booster erhalten`, `Doppelt geimpft`, `Einfach geimpft`) %>%
   arrange(desc(`Altersklasse`))
 
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
@@ -747,7 +744,7 @@ vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$va
   deframe() %>%
   format(format = "%d. %m. %Y")
 
-title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Booster erhalten`), "Prozent der Ältesten sind geboostert")
+title <- paste("Rund", round(vacc_ch_age[vacc_ch_age$Altersklasse == "80+",]$`Zweiten Booster erhalten`), "Prozent der Ältesten sind zweimal geboostert")
 
 update_chart(id = "674ce1e7cf4282ae2db76136cb301ba1", 
              data = vacc_ch_age, 
@@ -785,11 +782,13 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
   spread(type, sumTotal) %>%
   mutate(n1 = COVID19AtLeastOneDosePersons-lag(COVID19AtLeastOneDosePersons), 
          n2 = COVID19FullyVaccPersons-lag(COVID19FullyVaccPersons,1),
-         n3 = COVID19FirstBoosterPersons-lag(COVID19FirstBoosterPersons,1))%>%
+         n3 = COVID19FirstBoosterPersons-lag(COVID19FirstBoosterPersons,1),
+         n4 = COVID19SecondBoosterPersons-lag(COVID19SecondBoosterPersons,1))%>%
   mutate(Erstimpfungen = rollmean(n1, 7, NA, align = "right"),
          `Zweitimpfungen*` = rollmean(n2, 7, NA, align = "right"),
-         `Booster-Impfungen` = rollmean(n3, 7, NA, align = "right"))%>%
-  select(date, Erstimpfungen, `Zweitimpfungen*`, `Booster-Impfungen`)
+         `Erste Booster-Impfungen` = rollmean(n3, 7, NA, align = "right"),
+         `Zweite Booster-Impfungen` = rollmean(n4, 7, NA, align = "right"))%>%
+  select(date, Erstimpfungen, `Zweitimpfungen*`, `Erste Booster-Impfungen`, `Zweite Booster-Impfungen`)
 
 ch_vacc_persons_hist_new$`Booster-Impfungen`[ch_vacc_persons_hist_new$`Booster-Impfungen` < 20] <- NA
 
