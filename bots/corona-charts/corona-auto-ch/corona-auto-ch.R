@@ -690,6 +690,9 @@ vacc_ch_persons_kant <- ch_vacc_persons %>%
 
 title_vacc_kant <- paste("In", head(vacc_ch_persons_kant$kt, 1), "sind am meisten Menschen geimpft")
 
+
+ch_vacc_date <- gsub("\\b0(\\d)\\b", "\\1", format(max(ch_vacc_persons$date), format = "%d. %m. %Y"))
+
 update_chart(id = "54381c24b03b4bb9d1017bb91511e21d",
              data = vacc_ch_persons_kant,
              notes = paste0("* Inkl. Genesene mit einer Impfdosis und Personen, die einen Ein-Dosis-Impfstoff erhalten haben.<br>Stand: ", ch_vacc_date), 
