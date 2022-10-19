@@ -16,17 +16,6 @@
       "environments": [
         {
           "name": "production",
-          "id": "9c87f52098e02f80740ec4a3743615b2"
-        }
-      ],
-      "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "ae2fa42664db4ab375dba744d0706269"
         }
       ],
@@ -51,19 +40,6 @@
         {
           "name": "production",
           "id": "d84021d6716b1e848bd91a20e2b63cb0"
-        }
-      ],
-      "item": {
-        "title": "",
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "f649302cbf7dd462f339d0cc35d9695a"
         }
       ],
       "item": {
@@ -221,18 +197,6 @@
       "environments": [
         {
           "name": "production",
-          "id": "e039a1c64b33e327ecbbd17543e518d3"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "674ce1e7cf4282ae2db76136cb301ba1"
         }
       ],
@@ -245,57 +209,10 @@
       "environments": [
         {
           "name": "production",
-          "id": "ce1529d1facf24bb5bef83a3df033bfc"
-        }
-      ],
-      "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
           "id": "b5f3df8202d94e6cba27c93a5230cd0e"
         }
       ],
       "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "15326b5086f1007b7c67825700c2d149"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "e5aee99aec92ee1365613b671ef405f7"
-        }
-      ],
-      "item": {
-        "notes": "",
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "1dc855a085bcadbf7a93ebf5b584336e"
-        }
-      ],
-      "item": {
-        "notes": "",
         "data": []
       }
     },
@@ -378,19 +295,6 @@
       ],
       "item": {
         "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "2e1103d436e7d4452fc9a58ec507bb2e"
-        }
-      ],
-      "item": {
-        "data": {
-          "table": []
-        }
       }
     },
     {
@@ -611,17 +515,6 @@
         {
           "name": "production",
           "id": "d6e523e17e1d929e6277292aea017e6e"
-        }
-      ],
-      "item": {
-        "data": []
-      }
-    },
-    {
-      "environments": [
-        {
-          "name": "production",
-          "id": "396fd1e1ae7c6223217d80a9c5417e1f"
         }
       ],
       "item": {
