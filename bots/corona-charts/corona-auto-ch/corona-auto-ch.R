@@ -734,7 +734,7 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
   mutate(`Doppelt geimpft*` = round(`Doppelt geimpft*`, 1),
          `Einfach geimpft` = round(`Einfach geimpft`, 1),
          `Dreimal geimpft` = round(`Dreimal geimpft`-`Viermal geimpft`, 1))  %>%
-  select(Altersklasse, `Viermal geimpft`, `Dreimal geimpft`, `Doppelt geimpft*`, `Einfach geimpft`) %>%
+  select(Altersklasse, `Einfach geimpft`, `Doppelt geimpft*`, `Dreimal geimpft`, `Viermal geimpft`) %>%
   arrange(desc(`Altersklasse`))
 
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
