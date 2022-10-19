@@ -790,7 +790,8 @@ ch_vacc_persons_hist_new <- ch_vacc_persons %>%
          `Zweite Booster-Impfungen` = rollmean(n4, 7, NA, align = "right"))%>%
   select(date, Erstimpfungen, `Zweitimpfungen*`, `Erste Booster-Impfungen`, `Zweite Booster-Impfungen`)
 
-ch_vacc_persons_hist_new$`Booster-Impfungen`[ch_vacc_persons_hist_new$`Booster-Impfungen` < 20] <- NA
+ch_vacc_persons_hist_new$`Erste Booster-Impfungen`[ch_vacc_persons_hist_new$`Erste Booster-Impfungen` < 20] <- NA
+ch_vacc_persons_hist_new$`Zweite Booster-Impfungen`[ch_vacc_persons_hist_new$`Zweite Booster-Impfungen` < 20] <- NA
 
 update_chart(id = "82aee9959c2dd62ec398e00a2d3eb5ae",
              data = ch_vacc_persons_hist_new)
