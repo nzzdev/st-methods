@@ -737,10 +737,10 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
   select(Altersklasse, `Einfach geimpft`, `Doppelt geimpft*`, `Dreimal geimpft`, `Viermal geimpft`) %>%
   arrange(desc(`Altersklasse`))
 
-vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersonsV2) %>%
+vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersons) %>%
   select(date) %>% 
   filter(date == max(date)) %>% 
-  mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 1), "%Y-%W-%u")+2) %>%
+  mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 5), "%Y-%W-%u")) %>%
   unique() %>%
   deframe() %>%
   format(format = "%d. %m. %Y")
