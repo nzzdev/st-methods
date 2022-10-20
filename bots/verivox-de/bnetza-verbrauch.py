@@ -66,7 +66,7 @@ if __name__ == '__main__':
         elif diffy >= 2:
             chart_title = 'Deutschland verfehlt derzeit das Gas-Sparziel der EU'
         else:
-            chart_title = 'Deutschland spart deutlich mehr Gas als von der EU gefordert'
+            chart_title = 'Deutschland spart derzeit mehr Gas als von der EU gefordert'
         df.iloc[:, 2] = df.iloc[:, 2].replace(np.nan, '')
 
         # run Q function
