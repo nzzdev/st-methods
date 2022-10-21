@@ -35,9 +35,11 @@ jobs:
       - name: Run python scripts
         run: | # 
           python main.py
-      # - uses: stefanzweifel/git-auto-commit-action@v4 # <---- ?
-      #   with:
-      #     commit_message: update strom charts ch #
+          python stromverbrauch.py
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          file_pattern: :!*.json
+          commit_message: Upload swiss energy data
       - name: Setup Node.js 
         uses: actions/setup-node@v2
         with:
@@ -49,11 +51,11 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
-#      - name: Log failure to slack
-#        if: always()
-#        uses: ravsamhq/notify-slack-action@v1
-#        with:
-#          status: ${{ job.status }}
-#          notify_when: "failure"
-#        env:
-#          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+      - name: Log failure to slack
+        if: always()
+        uses: ravsamhq/notify-slack-action@v1
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
