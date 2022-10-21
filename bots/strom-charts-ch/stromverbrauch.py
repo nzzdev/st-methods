@@ -14,7 +14,7 @@ from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
 from fake_useragent import UserAgent
 import requests
-
+import locale
 
 from helpers import *
 
@@ -176,9 +176,11 @@ df_final.drop('Datum', axis = 1, inplace = True)
 #Wir benennen die Spalten noch um
 df_final.rename(columns={"Aktuelle_Last_geschätzt" : "Aktuelle Daten","Unsicherheitsbereich_oben" : " ", "Unsicherheitsbereich_unten" : "Unsicherheitsbereich"}, inplace=True)
 
-df_final.loc[df_final['Aktuelle Daten'].isna(), 'Tag'].min() 
+this_month = df_final.loc[df_final['Aktuelle Daten'].notna(), 'Tag'].min().month_name(locale = 'de_DE.UTF-8')
+this_year = df_final.loc[df_final['Aktuelle Daten'].notna(), 'Tag'].min().year + 1
 
-notes = 'Die Daten ab Oktober 2022 beruhen auf tagesaktuellen Lastdaten, die um einen Korrekturfaktor bereinigt wurden. Diese Angaben sind mit einer Unsicherheit behaftet. Der Unsicherheitsbereich (95-Prozent-Konfidenzintervall) ist grafisch dargestellt. Lesebeispiel: Dass sicher Strom gespart wird, lässt sich erst sagen, wenn der Unsicherheitsbereich unterhalb der Vorjahreslinie liegt.'
+
+notes = 'Die Daten ab ' + str(this_month) + ' ' + str(this_year) + ' beruhen auf tagesaktuellen Lastdaten, die um einen Korrekturfaktor bereinigt wurden. Diese Angaben sind mit einer Unsicherheit behaftet. Der Unsicherheitsbereich (95-Prozent-Konfidenzintervall) ist grafisch dargestellt. Lesebeispiel: Dass sicher Strom gespart wird, lässt sich erst sagen, wenn der Unsicherheitsbereich unterhalb der Vorjahreslinie liegt.'
 update_chart(id='187d672099ad87048552f370cc5a0def', data=to_q, notes = notes)
 
 
