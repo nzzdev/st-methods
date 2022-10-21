@@ -6,7 +6,10 @@ on:
     - cron: "0 4 * * *"
 
   workflow_dispatch:
-  
+
+env:
+  LANG: "de_DE.UTF-8"
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +18,10 @@ jobs:
         working-directory: bots/strom-charts-ch/
     steps:
       - uses: actions/checkout@v2
+      - name: de_DE.UTF-8
+        run: |
+          sudo locale-gen de_DE.UTF-8
+          sudo update-locale LANG=de_DE.UTF-8
       - name: Setup python
         uses: actions/setup-python@v2
         with:
