@@ -181,7 +181,7 @@ this_year = df_final.loc[df_final['Aktuelle Daten'].notna(), 'Tag'].min().year +
 
 
 notes = 'Die Daten ab ' + str(this_month) + ' ' + str(this_year) + ' beruhen auf tagesaktuellen Lastdaten, die um einen Korrekturfaktor bereinigt wurden. Diese Angaben sind mit einer Unsicherheit behaftet. Der Unsicherheitsbereich (95-Prozent-Konfidenzintervall) ist grafisch dargestellt. Lesebeispiel: Dass sicher Strom gespart wird, lässt sich erst sagen, wenn der Unsicherheitsbereich unterhalb der Vorjahreslinie liegt.'
-update_chart(id='187d672099ad87048552f370cc5a0def', data=to_q, notes = notes)
+update_chart(id='187d672099ad87048552f370cc5a0def', data=df_final, notes = notes)
 
 
 
