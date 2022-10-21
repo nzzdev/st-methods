@@ -3,7 +3,7 @@
 """
 Created on Fri Oct 21 10:12:12 2022
 
-@author: florianseliger
+@author: florianseliger, matthias benz
 """
 
 import pandas as pd
