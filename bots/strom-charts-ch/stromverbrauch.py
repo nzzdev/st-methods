@@ -14,6 +14,7 @@ from bs4 import BeautifulSoup
 import requests
 import os
 import locale
+locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
 
 from helpers import *
 
