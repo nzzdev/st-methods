@@ -8,13 +8,11 @@ Created on Fri Oct 21 10:12:12 2022
 
 import pandas as pd
 import numpy as np
-import datetime as dt
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 from bs4 import BeautifulSoup
-from fake_useragent import UserAgent
 import requests
-import locale
+import os
 
 from helpers import *
 
@@ -105,7 +103,7 @@ entsoe = pd.DataFrame(data.items(), columns = ['Tag', 'Last'])
 
 swiss_energy = pd.concat([swiss_energy[['Tag', 'Last']], entsoe], ignore_index = True)
 
-swiss_energy.to_csv('./swiss_energy.csv', index = False)
+swiss_energy.to_csv(f'./swiss_energy.csv', index = False)
 
 #MWh -> GWh
 swiss_energy.iloc[:, 1:] = swiss_energy.iloc[:, 1:].div(1000)
