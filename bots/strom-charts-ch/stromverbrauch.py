@@ -61,7 +61,7 @@ swissgrid.drop(swissgrid.tail(1).index,inplace=True)
 
 ## Swiss energy data
 
-swiss_energy = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/strom-charts-ch/swiss_energy.csv')
+swiss_energy = pd.read_csv('./swiss_energy.csv')
 swiss_energy['Tag'] = pd.to_datetime(swiss_energy['Tag'])
 swiss_energy['Tag'] = swiss_energy['Tag'].dt.date
 
@@ -105,7 +105,7 @@ entsoe = pd.DataFrame(data.items(), columns = ['Tag', 'Last'])
 
 swiss_energy = pd.concat([swiss_energy[['Tag', 'Last']], entsoe], ignore_index = True)
 
-swiss_energy.to_csv('swiss_energy.csv', index = False)
+swiss_energy.to_csv('./swiss_energy.csv', index = False)
 
 #MWh -> GWh
 swiss_energy.iloc[:, 1:] = swiss_energy.iloc[:, 1:].div(1000)
