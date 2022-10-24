@@ -1,69 +1,24 @@
 
 import pandas as pd
-from datetime import date, datetime, timedelta
+from datetime import date, datetime
 from bs4 import BeautifulSoup
 import requests
 import json
 import os
-import sys
-#import openpyxl
-# from requests_ip_rotator import ApiGateway
+from fake_useragent import UserAgent
 
 
-
-sys.path.append(os.path.dirname((os.path.dirname(__file__))))
 
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
 
-# Headers for HTTP_Request
-headers = {
-    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-    'accept-encoding': 'gzip, deflate, br',
-    'accept-language': 'de-DE,de;q=0.9',
-    'cache-control': 'no-cache',
-    'pragma': 'no-cache',
-    'sec-ch-ua': '"Google Chrome";v="105", "Not)A;Brand";v="8", "Chromium";v="105"',
-    'sec-ch-ua-mobile': '?0',
-    'sec-ch-ua-platform': "macOS",
-    'sec-fetch-dest': 'document',
-    'sec-fetch-mode': 'navigate',
-    'sec-fetch-site': 'none',
-    'sec-fetch-user': '?1',
-    'upgrade-insecure-requests': '1',
-    'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-}
 
-
-# Create AWS-Gateway
-#key = os.environ['AWS_GATEWAY_KEY']
-#secret = os.environ['AWS_GATEWAY_SECRET']
-
-# Create gateway object and initialise in AWS
-# gateway = ApiGateway("https://www.coop.ch", access_key_id = key, access_key_secret = secret, regions=["eu-west-3"])
-# gateway.start(force=True)
-
-# Assign gateway to session
-
-# Moved Requests Get to a function in case we need to change it again (everywhere)
-def get_data(url):
-    return requests.get(url, headers=headers)
 
 # Brot
 url = 'https://www.coop.ch/de/lebensmittel/brot-backwaren/c/m_0115?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=1'
-
-# page = requests.get(url, headers=headers, proxies=proxies)
-page = get_data(url)
-print(page.text)
-print(page)
-
-# Delete gateways
-# gateway.shutdown()
-
-# print(page.text)
-# print(page)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
-soup.find_all('a', class_ = 'pagination__page')
 
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -89,7 +44,7 @@ for i in range(number):
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 
 date = date.today().strftime("%Y-%m-%d")
 
@@ -97,8 +52,10 @@ products.to_excel(f'./output/bread_coop_' + date + '.xlsx', index = False)
 
 #Milchprodukte
 url = 'https://www.coop.ch/de/lebensmittel/milchprodukte-eier/c/m_0055?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
+
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
 
@@ -122,13 +79,15 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 products.to_excel(f'./output/milk_coop_' + date + '.xlsx', index = False)
 
 # Gemüse & Früchte
 url = 'https://www.coop.ch/de/lebensmittel/fruechte-gemuese/c/m_0001?page=1&pageSize=60&q=%3AmostlyBought&sort=mostlyBought'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
+
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
 
@@ -152,13 +111,15 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
     
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 products.to_excel(f'./output/vegi_coop_' + date + '.xlsx', index = False)
 
 # Fleisch
 url = 'https://www.coop.ch/de/lebensmittel/fleisch-fisch/c/m_0087?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
+
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
 
@@ -183,12 +144,13 @@ for i in range(number):
 
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 products.to_excel(f'./output/meat_coop_' + date + '.xlsx', index = False)
 
 # Vorräte
 url = 'https://www.coop.ch/de/lebensmittel/vorraete/c/m_0140?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -213,12 +175,13 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 products.to_excel(f'./output/provision_coop_' + date + '.xlsx', index = False)
 
 # Süsses & Snacks
 url = 'https://www.coop.ch/de/lebensmittel/suesses-snacks/c/m_2506?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -243,12 +206,13 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 products.to_excel(f'./output/sweet_coop_' + date + '.xlsx', index = False)
 
 # Getränke
 url = 'https://www.coop.ch/de/lebensmittel/getraenke/c/m_2242?sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -273,12 +237,13 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'declarationIcons', 'timestamp']]
 products.to_excel(f'./output/drinks_coop_' + date + '.xlsx', index = False)
 
 # Haushalt
 url = 'https://www.coop.ch/de/haushalt-tier/haushalt-kueche/c/m_0298?q=%3AtopRated&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -303,14 +268,15 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/house_coop_' + date + '.xlsx', index = False)
 
 
 
 # Reinigen
 url = 'https://www.coop.ch/de/haushalt-tier/reinigung-putzen/c/m_0279?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -335,15 +301,15 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/clean_coop_' + date + '.xlsx', index = False)
 
 
 
 # Toilettenpapier
 url = 'https://www.coop.ch/de/haushalt-tier/toiletten-haushaltpapier/c/m_0288?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
-soup = BeautifulSoup(page.content, "html.parser")
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
 
@@ -367,13 +333,14 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/toilet_coop_' + date + '.xlsx', index = False)
 
 
 # Büro
 url = 'https://www.coop.ch/de/haushalt-tier/buero-papeterie/c/m_0314?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -398,12 +365,13 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/office_coop_' + date + '.xlsx', index = False)
 
 # Elektro
 url = 'https://www.coop.ch/de/haushalt-tier/elektroartikel-batterien/c/m_0324?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -428,12 +396,13 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel', 'timestamp']]
 products.to_excel(f'./output/electronics_' + date + '.xlsx', index = False)
 
 # Bekleidung
 url = 'https://www.coop.ch/de/haushalt-tier/bekleidung/c/m_4145?q=%3Arelevance&sort=mostlyBought&pageSize=60&page=1'
-page = requests.get(url, headers=headers)
+ua_str = UserAgent().chrome
+page = requests.get(url, headers={"User-Agent": ua_str})
 soup = BeautifulSoup(page.content, "html.parser")
 # get number of last pagination page
 number = pd.to_numeric(soup.find_all('a', class_ = 'pagination__page')[-1].text)
@@ -458,7 +427,7 @@ for i in range(number):
     products.reset_index(drop = True, inplace = True)
 
 products['timestamp'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-products = products[['id', 'title', 'href', 'quantity', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'timestamp']]
+products = products[['id', 'title', 'href', 'ratingAmount', 'ratingValue', 'brand', 'price', 'priceContext', 'priceContextHiddenText',	'priceContextPrice',	'priceContextAmount',	'udoCat', 'productAriaLabel',	'timestamp']]
 products.to_excel(f'./output/clothes_' + date + '.xlsx', index = False)
 
 
