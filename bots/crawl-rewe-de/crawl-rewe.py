@@ -253,6 +253,8 @@ if __name__ == '__main__':
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'\smit\s.*', r'', regex=True)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace('  Type', '', regex=False)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace('  Arabica-Robusta-Mischung', '', regex=False)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(' ca.', '', regex=False)
