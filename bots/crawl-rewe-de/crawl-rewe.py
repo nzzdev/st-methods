@@ -182,6 +182,10 @@ if __name__ == '__main__':
                 str).str.replace('  Arabica-Robusta-Mischung', '', regex=False)
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(' ca.', '', regex=False)
+            df_ja['Name'] = df_ja['Name'].astype(
+                str).str.replace('  Type', '', regex=False)
+            df_ja['Name'] = df_ja['Name'].astype(
+                str).str.replace('  Typ', '', regex=False)
             df_ja['Marke'] = ((((df_ja[yesterday] + df_ja[today]) -
                                 df_ja[yesterday])/df_ja[yesterday])*100).round(0).astype(int)
             df_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
@@ -253,11 +257,13 @@ if __name__ == '__main__':
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'\smit\s.*', r'', regex=True)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
-                str).str.replace('  Type', '', regex=False)
-            dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace('  Arabica-Robusta-Mischung', '', regex=False)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(' ca.', '', regex=False)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace('  Type', '', regex=False)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace('  Typ', '', regex=False)
             dftop_ja['Marke'] = ((((dftop_ja[month_first] + dftop_ja[today]) -
                                    dftop_ja[month_first])/dftop_ja[month_first])*100).round(0).astype(int)
             dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
