@@ -1145,6 +1145,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-10-28;8598425;REWE Beste Wahl;Rewe Beste Wahl Grill & Kamin Anzünder Öko 32 Stück;299;32 Stück
 2022-10-28;8415305;REWE Beste Wahl;Rewe Beste Wahl Ingwer gemahlen 28g;199;28g (1 kg = 71,07 €)
 2022-10-28;8294079;REWE Beste Wahl;Rewe Beste Wahl Mango 500g;299;500g (1 kg = 5,98 €)
+2022-10-28;8424727;REWE Beste Wahl;Rewe Beste Wahl Oregano gerebelt 20g;199;20g (1 kg = 99,50 €)
 2022-10-28;7166365;REWE Beste Wahl;Rewe Beste Wahl Rinder-Gulasch mit Spätzle in pikanter Sauce 400g;379;400g (1 kg = 9,48 €)
 2022-10-28;7014151;REWE Beste Wahl;Rewe Beste Wahl Sanft & Fruchtig Aprikose 270g;119;270g (1 kg = 4,41 €)
 2022-10-28;7014092;REWE Beste Wahl;Rewe Beste Wahl Sanft & Fruchtig Himbeere 60% 270g;119;270g (1 kg = 4,41 €)
@@ -1268,9 +1269,10 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-10-28;1006852;REWE Bio;REWE Bio Edelvollmilch-Schokolade 100g;129;100g (1 kg = 12,90 €)
 2022-10-28;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;249;6 Stück
 2022-10-28;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;249;1 Stück
-2022-10-28;200348;REWE Bio;REWE Bio Emmentaler 150g;199;150g (1 kg = 13,27 €)
 2022-10-28;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
+2022-10-28;200348;REWE Bio;REWE Bio Emmentaler 150g;199;150g (1 kg = 13,27 €)
 2022-10-28;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
+2022-10-28;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
 2022-10-28;8381730;REWE Bio;REWE Bio Erbseneintopf 400g;199;400g (1 kg = 4,98 €)
 2022-10-28;2903350;REWE Bio;REWE Bio Erdnüsse 250g;199;250g (1 kg = 7,96 €)
 2022-10-28;8255376;REWE Bio;REWE Bio Fenchel-Anis-Kümmel Tee 40g;149;40g (1 kg = 37,25 €)
