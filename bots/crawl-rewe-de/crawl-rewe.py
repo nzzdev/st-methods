@@ -154,7 +154,11 @@ if __name__ == '__main__':
 
         # create new dataframe with ja! products only
         df_ja = df.copy()
+
         df_ja = df_ja[df_ja['Marke'] == 'ja!']
+
+        bulkpacks = {'Apfelsaft': 'Apfelsaft 6l', 'Multivitaminsaft': 'Multivitaminsaft 6l', 'Orangensaft': 'Orangensaft 6l', 'Orangennektar': 'Orangennektar 9l', 'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur':
+                     'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg'}
 
         if not df.empty:
             # keep column with price changes only
@@ -186,6 +190,46 @@ if __name__ == '__main__':
                 str).str.replace('  Type', '', regex=False)
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace('  Typ', '', regex=False)
+
+            # Fix for large quantities
+            df_ja['Name'] = df_ja['Name'].astype(str).replace(bulkpacks)
+
+            ########################################
+            # NEW FORMAT: ⬆️76% Mehl: €0,45 » €0,79#
+            ########################################
+
+            # get full prices instead of change - delete for old format
+            df_ja[today] = df_ja[today] + df_ja[yesterday]
+
+            # calculate percentage change
+            df_ja['Marke'] = (
+                ((df_ja[today] - df_ja[yesterday])/df_ja[yesterday])*100).round(0).astype(int)
+            df_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
+            df_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
+            df_ja['Prozent'] = df_ja['Prozent'].apply(
+                lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
+            df_ja['Prozent'] = df_ja['Prozent'].str.replace(
+                '-', '', regex=False)
+
+            # convert cents to euro and add currency
+            df_ja[yesterday] = df_ja[yesterday] / 100.0
+            df_ja[yesterday] = df_ja[yesterday].astype(str).str.replace(
+                '.', ',', regex=False)
+            df_ja[today] = df_ja[today] / 100.0
+            df_ja[today] = df_ja[today].astype(str).str.replace(
+                '.', ',', regex=False)
+
+            # join dataframes
+            df_ja['Tweet'] = df_ja['Prozent'] + ' ' + df_ja['Name'] + \
+                ': €' + df_ja[yesterday] + ' » €' + df_ja[today] + '\n'
+            df_ja = df_ja[['Tweet']]
+
+            """"
+            #################################
+            # OLD FORMAT: ⬆️76% Mehl: +0,34€#
+            #################################
+
+            # calculate percentage change
             df_ja['Marke'] = ((((df_ja[yesterday] + df_ja[today]) -
                                 df_ja[yesterday])/df_ja[yesterday])*100).round(0).astype(int)
             df_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
@@ -194,18 +238,24 @@ if __name__ == '__main__':
                 lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
             df_ja['Prozent'] = df_ja['Prozent'].str.replace(
                 '-', '', regex=False)
+
             df_ja.drop([yesterday], axis=1, inplace=True)
             df_ja.rename(columns={today: 'Veränderung'}, inplace=True)
+
             # convert cents to euro and add currency
             df_ja['Veränderung'] = df_ja['Veränderung'] / 100.0
             df_ja['Veränderung'] = df_ja['Veränderung'].apply(
                 lambda x: f'+{x}€' if x >= 0 else f'{x}€')
             df_ja['Veränderung'] = df_ja['Veränderung'].str.replace(
                 '.', ',', regex=False)
+            
+            # join dataframes
             # df_ja['Tweet'] = df_ja[['Prozent', 'Name', 'Veränderung']].agg(' '.join, axis=1)
             df_ja['Tweet'] = df_ja['Prozent'] + ' ' + df_ja['Name'] + \
                 ': ' + df_ja['Veränderung'] + '\n'
             df_ja = df_ja[['Tweet']]
+            """
+
             # add Tweet intro
             count = df_ja.shape[0]
             if count > 1:
@@ -228,7 +278,7 @@ if __name__ == '__main__':
         month_nice = month_first.strftime('%B')  # Oktober etc.
         month_file = month_first.strftime('%Y-%m')  # 2022-10 etc.
 
-        if today == month_last:
+        if today != month_last:
 
             # create JSON for monthly price changes
             dftopnew = pd.read_csv(f'./data/{today}-rewe.csv', sep=';', usecols=[
@@ -249,6 +299,9 @@ if __name__ == '__main__':
             dftop_ja = dftop.copy()
             dftop_ja = dftop_ja[dftop_ja['Marke'] == 'ja!']
 
+            # get full prices instead of change - delete for old format
+            dftop_ja[today] = dftop_ja[today] + dftop_ja[month_first]
+
             # create dataframe with ja! products and calculate price change
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
@@ -264,35 +317,37 @@ if __name__ == '__main__':
                 str).str.replace('  Type', '', regex=False)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace('  Typ', '', regex=False)
-            dftop_ja['Marke'] = ((((dftop_ja[month_first] + dftop_ja[today]) -
-                                   dftop_ja[month_first])/dftop_ja[month_first])*100).round(0).astype(int)
-            dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
-            dftop_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
 
             # Fix for large quantities
-            bulkpacks = {'Apfelsaft': 'Apfelsaft 6l', 'Multivitaminsaft': 'Multivitaminsaft 6l', 'Orangensaft': 'Orangensaft 6l', 'Orangennektar': 'Orangennektar 9l', 'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur':
-                         'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg'}
             dftop_ja['Name'] = dftop_ja['Name'].astype(str).replace(bulkpacks)
+
+            # calculate percentage change
+            dftop_ja['Marke'] = (
+                ((dftop_ja[today] - dftop_ja[month_first])/dftop_ja[month_first])*100).round(0).astype(int)
+            dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
+            dftop_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
 
             # drop pseudo duplicates (like "Joghurt") and get top 5
             dftop_ja = dftop_ja.drop_duplicates(subset='Name', keep='first')
             dftop_ja = dftop_ja.head(5)
 
+            # calculate percentage change
             dftop_ja['Prozent'] = dftop_ja['Prozent'].apply(
                 lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
             dftop_ja['Prozent'] = dftop_ja['Prozent'].str.replace(
                 '-', '', regex=False)
-            dftop_ja.drop([month_first], axis=1, inplace=True)
-            dftop_ja.rename(columns={today: 'Veränderung'}, inplace=True)
 
             # convert cents to euro and add currency
-            dftop_ja['Veränderung'] = dftop_ja['Veränderung'] / 100.0
-            dftop_ja['Veränderung'] = dftop_ja['Veränderung'].apply(
-                lambda x: f'+{x}€' if x >= 0 else f'{x}€')
-            dftop_ja['Veränderung'] = dftop_ja['Veränderung'].str.replace(
+            dftop_ja[month_first] = dftop_ja[month_first] / 100.0
+            dftop_ja[month_first] = dftop_ja[month_first].astype(str).str.replace(
                 '.', ',', regex=False)
+            dftop_ja[today] = dftop_ja[today] / 100.0
+            dftop_ja[today] = dftop_ja[today].astype(str).str.replace(
+                '.', ',', regex=False)
+
+            # join dataframes
             dftop_ja['Tweet'] = dftop_ja['Prozent'] + ' ' + dftop_ja['Name'] + \
-                ': ' + dftop_ja['Veränderung'] + '\n'
+                ': €' + dftop_ja[month_first] + ' » €' + dftop_ja[today] + '\n'
             dftop_ja = dftop_ja[['Tweet']]
 
             # add Tweet intro
@@ -304,6 +359,7 @@ if __name__ == '__main__':
 
             dftop_ja.to_json(
                 f'./data/{month_file}-ja-diff-monthly.json', orient='values')
+            print(dftop_ja)
 
     except:
         raise
