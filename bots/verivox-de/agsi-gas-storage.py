@@ -116,6 +116,8 @@ if __name__ == '__main__':
             f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dftrend = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', 'Trend'])
+        dfall = pd.read_csv(
+            f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
@@ -129,25 +131,15 @@ if __name__ == '__main__':
         dfnew = dfnew.reset_index(level=0)
         """
 
+        # drop trend
+        dfnew = dfnew.drop('Trend', axis=1)
+
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
         dfnew['Datum'] = pd.to_datetime(dfnew['Datum'])
         dftrend['Datum'] = pd.to_datetime(dftrend['Datum'])
         dfnew = dfnew.sort_values(by='Datum', ascending=True)
         dftrend = dftrend.sort_values(by='Datum', ascending=True)
-
-        # fix for possible duplicate indices
-        dfnew.set_index('Datum', inplace=True)
-        dftrend.set_index('Datum', inplace=True)
-        dfnew = dfnew[~dfnew.index.duplicated(keep='first')]
-        dftrend = dftrend[~dftrend.index.duplicated(keep='first')]
-        dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
-                     encoding='utf-8', index=True)
-        dfnew = dfnew.reset_index(level=0)
-        dftrend = dftrend.reset_index(level=0)
-
-        # drop trend
-        dfnew = dfnew.drop('Trend', axis=1)
 
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
@@ -162,6 +154,19 @@ if __name__ == '__main__':
         df.set_index('Datum', inplace=True)
         dftrend.set_index('Datum', inplace=True)
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
+
+        """
+        # temporary fix for wrong trend data
+        dftrend.at['2022-09-28', 'Trend'] = -0.22
+        dfall.set_index('Datum', inplace=True)
+        dfall.at['2022-09-28', 'Trend'] = -0.22
+        dftrend.at['2022-05-26', 'Trend'] = 0.83
+        dfall.at['2022-05-26', 'Trend'] = 0.83
+        dftrend.at['2022-05-13', 'Trend'] = 0.65
+        dfall.at['2022-05-13', 'Trend'] = 0.65
+        dfall.to_csv(f'./data/{todaystr}-gasspeicher.csv',
+                     encoding='utf-8', index=True)
+        """
 
         # create dynamic chart title for trend chart
         current = dftrend['Trend'].iloc[-1] * 10
