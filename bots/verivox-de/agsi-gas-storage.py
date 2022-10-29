@@ -150,61 +150,46 @@ if __name__ == '__main__':
         dfnew = dfnew.drop('Trend', axis=1)
 
         # get latest date for chart notes
-        if len(dfnew) > 0:
-            timecode = dfnew['Datum'].iloc[-1]
-            timecodestr = timecode.strftime('%-d. %-m. %Y')
-            notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
-            notes_chart_trend = 'Stand: ' + timecodestr
+        timecode = dfnew['Datum'].iloc[-1]
+        timecodestr = timecode.strftime('%-d. %-m. %Y')
+        notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
+        notes_chart_trend = 'Stand: ' + timecodestr
 
-            # merge dataframes
-            df = dfold.merge(dfnew, on='Datum', how='left')
-            df.rename(columns={'Min': ''}, inplace=True)
-            df['2022'].fillna('', inplace=True)
-            df.set_index('Datum', inplace=True)
-            dftrend.set_index('Datum', inplace=True)
-            # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
+        # merge dataframes
+        df = dfold.merge(dfnew, on='Datum', how='left')
+        df.rename(columns={'Min': ''}, inplace=True)
+        df['2022'].fillna('', inplace=True)
+        df.set_index('Datum', inplace=True)
+        dftrend.set_index('Datum', inplace=True)
+        # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
 
-            # create dynamic chart title for trend chart
-            current = dftrend['Trend'].iloc[-1] * 10
-            if current <= -0.2:
-                chart_title = 'Gasspeicher leeren sich'
-            elif current >= 0.2:
-                chart_title = 'Gasspeicher füllen sich'
-            else:
-                chart_title = 'Gasspeicher füllen sich kaum noch'
-
-            # add row with current date for step-after chart
-            dftrend.loc[dftrend.shape[0]] = [None]
-            timecodetrend = timecode + timedelta(days=1)
-            dftrend.rename({dftrend.index[-1]: timecodetrend}, inplace=True)
-
-            # delete data before May 2022
-            dftrend = dftrend[(
-                dftrend.index.get_level_values(0) >= '2022-05-01')]
-
-            # banker's rounding
-            title_perc = dfnew['2022'].iloc[-1].round(
-                1).astype(str).replace('.', ',')
-            title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
-
-            # save as tsv
-            df.to_csv('./data/gas-storage-full.tsv', sep='\t')
-            dftrend.to_csv('./data/gas-storage-trend.tsv', sep='\t')
-
-            # run function
-            update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
-                         data=df, title=title, notes=notes_chart)
-            update_chart(id='0fc405116af43382d715e046012ac4df',
-                         data=dftrend, title=chart_title, notes=notes_chart_trend)
+        # create dynamic chart title for trend chart
+        current = dftrend['Trend'].iloc[-1] * 10
+        if current <= -0.2:
+            chart_title = 'Gasspeicher leeren sich'
+        elif current >= 0.2:
+            chart_title = 'Gasspeicher füllen sich'
         else:
-            df = pd.read_csv('./data/gas-storage-full.tsv',
-                             sep='\t', encoding='utf-8', index_col='Datum')
-            dftrend = pd.read_csv(
-                './data/gas-storage-trend.tsv', sep='\t', encoding='utf-8', index_col='Datum')
+            chart_title = 'Gasspeicher füllen sich kaum noch'
 
-            # run function
-            update_chart(id='cc9eff02ba0867d71af4fbc25304797b', data=df)
-            update_chart(id='0fc405116af43382d715e046012ac4df', data=dftrend)
+        # add row with current date for step-after chart
+        dftrend.loc[dftrend.shape[0]] = [None]
+        timecodetrend = timecode + timedelta(days=1)
+        dftrend.rename({dftrend.index[-1]: timecodetrend}, inplace=True)
+
+        # delete data before May 2022
+        dftrend = dftrend[(dftrend.index.get_level_values(0) >= '2022-05-01')]
+
+        # banker's rounding
+        title_perc = dfnew['2022'].iloc[-1].round(
+            1).astype(str).replace('.', ',')
+        title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
+
+        # run function
+        update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
+                     data=df, title=title, notes=notes_chart)
+        update_chart(id='0fc405116af43382d715e046012ac4df',
+                     data=dftrend, title=chart_title, notes=notes_chart_trend)
 
     except:
         raise
