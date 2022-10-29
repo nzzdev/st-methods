@@ -75,11 +75,6 @@ if __name__ == '__main__':
         df_strom = (df_strom / 40).round(2)
         df_strom_mean = (df_strom_mean / 40).round(2)
 
-        # debugging
-        print(df_storage)
-        print(df_gas)
-        print(df_strom)
-
         # merge dataframes
         df = pd.concat([df_storage, df_gas, df_strom], axis=1)
         # RUS GAS df = pd.concat([df_storage, df_rus, df_gas], axis=1)
