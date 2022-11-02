@@ -62,7 +62,7 @@ if __name__ == '__main__':
         df_strom = df_strom.rename(columns={'Strom': 'Strompreis'})
         df_strom_mean = df_strom_mean.rename(columns={'Strom': 'Strompreis'})
         df_ns.index = df_ns.index.rename('date')
-        df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
+        df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
 
         # convert 20 MWh to 20000 kWh and euro to cent / 4 MWh to 4000 kWh
         df_gas = (df_gas / 200).round(2)
