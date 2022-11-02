@@ -27,7 +27,7 @@ if __name__ == '__main__':
         df_strom = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
                                encoding='utf-8', usecols=['date', 'Strom'], index_col='date')
         df_ns = pd.read_csv('./data/pipelines_ns.tsv',
-                            sep='\t', encoding='utf-8', index_col='.')
+                            sep='\t', encoding='utf-8', index_col='periodFrom')
         # BENZIN df_super = pd.read_csv('./data/node_super.csv', encoding='utf-8', usecols=['day', 'tages_mittel'], index_col='day')
 
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
