@@ -103,6 +103,7 @@ def get_spotmarket():
     # calculate day means
     spotmarket_df_day = spotmarket_df.groupby(spotmarket_df.date.dt.date).mean().reset_index()
     spotmarket_df_day = spotmarket_df_day.round(2)
+    spotmarket_df_day = spotmarket_df_day.dropna()
 
     return spotmarket_df_day
 
