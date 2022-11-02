@@ -30,9 +30,9 @@ if __name__ == '__main__':
 
         # read csv
         df_diesel = pd.read_csv('./data/node_diesel.csv',
-                                encoding='utf-8', usecols=['day', 'tages_mittel_min_10', 'tages_mittel_max_10', 'tages_mittel'], index_col=0)
+                                encoding='utf-8', usecols=['day', 'Durchschnitt unterstes Dezil', 'Durchschnitt oberstes Dezil', 'Durchschnittspreis'], index_col=0)
         df_super = pd.read_csv('./data/node_super.csv',
-                               encoding='utf-8', usecols=['day', 'tages_mittel_min_10', 'tages_mittel_max_10', 'tages_mittel'], index_col=0)
+                               encoding='utf-8', usecols=['day', 'Durchschnitt unterstes Dezil', 'Durchschnitt oberstes Dezil', 'Durchschnittspreis'], index_col=0)
 
         # get date for chart notes
         df_diesel.index = pd.to_datetime(df_diesel.index)
@@ -51,9 +51,9 @@ if __name__ == '__main__':
 
         # rename column headers
         df_diesel = df_diesel.rename(
-            {'tages_mittel_min_10': '', 'tages_mittel_max_10': 'Höchster/niedrigster Preis¹', 'tages_mittel': 'Bundesschnitt'}, axis=1)
+            {'Durchschnitt unterstes Dezil': '', 'Durchschnitt oberstes Dezil': 'Höchster/niedrigster Preis¹', 'Durchschnittspreis': 'Bundesschnitt'}, axis=1)
         df_super = df_super.rename(
-            {'tages_mittel_min_10': '', 'tages_mittel_max_10': 'Höchster/niedrigster Preis¹', 'tages_mittel': 'Bundesschnitt'}, axis=1)
+            {'Durchschnitt unterstes Dezil': '', 'Durchschnitt oberstes Dezil': 'Höchster/niedrigster Preis¹', 'Durchschnittspreis': 'Bundesschnitt'}, axis=1)
 
         # get current price for chart title
         price_d = df_diesel['Bundesschnitt'].iloc[-1].round(
@@ -63,10 +63,11 @@ if __name__ == '__main__':
         title_chart_d = f'Diesel kostet im Schnitt {price_d} Euro je Liter'
         title_chart_s = f'Benzin kostet im Schnitt {price_s} Euro je Liter'
 
-        print(notes_chart)
         # run Q function
-        #update_chart(id='458d885de84d6eb558874e221f294a93', data=df_diesel, title=title_chart_d, notes=notes_chart)
-        #update_chart(id='458d885de84d6eb558874e221f2c09c0', data=df_super, title=title_chart_s, notes=notes_chart)
+        update_chart(id='458d885de84d6eb558874e221f294a93',
+                     data=df_diesel, title=title_chart_d, notes=notes_chart)
+        update_chart(id='458d885de84d6eb558874e221f2c09c0',
+                     data=df_super, title=title_chart_s, notes=notes_chart)
 
     except:
         raise
