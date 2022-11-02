@@ -66,7 +66,7 @@ if __name__ == '__main__':
         # replace commas and 'None' string with NaN and drop last row (KW53)
         cols = ['Minimum', 'Maximum', '2022']
         df_lng[cols] = df_lng[cols].replace(',', '', regex=True).astype(float)
-        df_russia[cols] = df_lng[cols].replace(
+        df_russia[cols] = df_russia[cols].replace(
             ',', '', regex=True).astype(float)
         df_lng[cols] = df_lng[cols].apply(
             pd.to_numeric, errors='coerce', axis=1)
@@ -118,7 +118,7 @@ if __name__ == '__main__':
                      data=df_russia, notes=notes_chart)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
-        #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
+        ##update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
         # Nord stream 1 to DE Bundesnetzagentur
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
