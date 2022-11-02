@@ -26,10 +26,8 @@ if __name__ == '__main__':
                              encoding='utf-8', usecols=['date', 'Gas'], index_col='date')
         df_strom = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
                                encoding='utf-8', usecols=['date', 'Strom'], index_col='date')
-        df_rus = pd.read_csv(
-            './data/pipelines_de_sum.tsv', sep='\t', encoding='utf-8', index_col='periodFrom')
-        df_ns = pd.read_csv(
-            './data/pipelines_de_ns.tsv', sep='\t', encoding='utf-8', index_col='periodFrom')
+        df_ns = pd.read_csv('./data/pipelines_ns.tsv',
+                            sep='\t', encoding='utf-8', index_col='.')
         # BENZIN df_super = pd.read_csv('./data/node_super.csv', encoding='utf-8', usecols=['day', 'tages_mittel'], index_col='day')
 
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
@@ -39,7 +37,6 @@ if __name__ == '__main__':
         df_storage_trend = df_storage_trend.sort_index()
         df_gas.index = pd.to_datetime(df_gas.index)
         df_strom.index = pd.to_datetime(df_strom.index)
-        df_rus.index = pd.to_datetime(df_rus.index)
         df_ns.index = pd.to_datetime(df_ns.index)
         # BENZIN df_super.index = pd.to_datetime(df_super.index)
         # BENZIN df_super = df_super.round(2)
@@ -58,8 +55,6 @@ if __name__ == '__main__':
         df_storage.index = df_storage.index.rename('date')
         df_storage = df_storage.rename(columns={'2022': 'Gasspeicher'})
         df_storage_trend.index = df_storage_trend.index.rename('date')
-        df_rus.index = df_rus.index.rename('date')
-        df_rus = df_rus.rename(columns={'Summe': 'Russisches Gas'})
         # BENZIN df_super.index = df_super.index.rename('date')
         # BENZIN df_super = df_super.rename(columns={'tages_mittel': 'Benzinpreis'})
         df_gas = df_gas.rename(columns={'Gas': 'Gaspreis'})
@@ -77,7 +72,6 @@ if __name__ == '__main__':
 
         # merge dataframes
         df = pd.concat([df_storage, df_gas, df_strom], axis=1)
-        # RUS GAS df = pd.concat([df_storage, df_rus, df_gas], axis=1)
         # BENZIN df = pd.concat([df_storage, df_gas, df_super], axis=1)
 
         # create temporary dataframe for old data in gas storage and Russian gas
@@ -96,15 +90,6 @@ if __name__ == '__main__':
         )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100  # diff previous day
         df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull(
         )].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) * 100  # diff previous day
-        """
-        # NS1        
-        if (df_ns['Nord Stream 1'].iloc[-1]) == 0.0 and (df_ns['Nord Stream 1'].iloc[-25] == 0.0):
-            df_meta['Trend NS1'] = 0.0
-        else:
-            df_meta['Trend NS1'] = round(((df_ns['Nord Stream 1'].iloc[-1] - df_ns['Nord Stream 1'].iloc[-25]
-                                           ) / df_ns['Nord Stream 1'].iloc[-25]) * 100, 0)  # diff previous hour
-        """
-        # RUS GAS df_meta['Trend Importe'] = round(((df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-1] - df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) / df_rus['Russisches Gas'].loc[~df_rus['Russisches Gas'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
         # BENZIN df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) * 100, 0)  # diff previous week
 
         # NS1 df_meta = df_meta[['Trend Speicher', 'Trend Gas', 'Trend NS1', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
@@ -160,7 +145,6 @@ if __name__ == '__main__':
         df_gas = df_gas.reset_index()
         df_strom = df_strom.reset_index()
         df_ns = df_ns.reset_index()
-        # RUS GAS df_rus = df_rus.reset_index()
         # BENZIN df_super = df_super.reset_index()
         df['date'] = pd.to_datetime(
             df['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
@@ -172,7 +156,6 @@ if __name__ == '__main__':
             df_strom['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_ns['date'] = pd.to_datetime(
             df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d %H:%M:%S')
-        # RUS GAS df_rus['date'] = pd.to_datetime(df_rus['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         # BENZIN df_super['date'] = pd.to_datetime(df_super['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         timestamp_str = df_gas['date'].tail(1).item()
 
@@ -184,7 +167,6 @@ if __name__ == '__main__':
         dict_storage = df_storage.rename(
             columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
         # dict_gas = df_gas.rename(columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
-        # RUS GAS dict_rus = df_rus.rename(columns={df.columns[2]: 'value'}).to_dict(orient='records')
         # BENZIN dict_super = df.drop(df.columns[[1, 2]], axis=1).rename(columns={df.columns[3]: 'value'}).to_dict(orient='records')
         dict_gas = df.drop(df.columns[[1, 3]], axis=1).rename(
             columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')

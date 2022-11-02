@@ -63,8 +63,11 @@ if __name__ == '__main__':
         df_russia.drop(df_russia.columns[3], axis=1, inplace=True)
         df_lng.drop(df_lng.columns[3], axis=1, inplace=True)
 
-        # replace 'None' string with NaN and drop last row (KW53)
+        # replace commas and 'None' string with NaN and drop last row (KW53)
         cols = ['Minimum', 'Maximum', '2022']
+        df_lng[cols] = df_lng[cols].replace(',', '', regex=True).astype(float)
+        df_russia[cols] = df_lng[cols].replace(
+            ',', '', regex=True).astype(float)
         df_lng[cols] = df_lng[cols].apply(
             pd.to_numeric, errors='coerce', axis=1)
         df_russia[cols] = df_russia[cols].apply(
@@ -116,6 +119,47 @@ if __name__ == '__main__':
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
         #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
+
+        # Nord stream 1 to DE Bundesnetzagentur
+        url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
+        resp = download_data(url, headers=fheaders)
+        csv_file = resp.text
+
+        # read csv, drop columns
+        df_ns = pd.read_csv(io.StringIO(csv_file), encoding='utf-8',
+                            sep=';', decimal=',', index_col=None)
+        df_ns = df_ns.drop(
+            df_ns.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 11]], axis=1)
+
+        # convert date string to datetime
+        df_ns[df_ns.columns[0]] = pd.to_datetime(
+            df_ns[df_ns.columns[0]], format='%d.%m.%Y')
+
+        # set date as index
+        df_ns = df_ns.set_index(df_ns.columns[0])
+
+        # convert GWh to million m3 according to calorific value of Russian gas
+        df_ns = (df_ns / 10.3).round(1)
+
+        # create dynamic chart title
+        if df_ns['Russland'][-1] > 0:
+            chart_title = 'Über Nord Stream 1 fliesst kaum noch russisches Gas'
+        else:
+            chart_title = 'Über Nord Stream 1 fliesst kein russisches Gas mehr'
+
+        # get latest date for chart notes
+        timecode = df_ns.index[-1]
+        timecodestr = timecode.strftime('%-d. %-m. %Y')
+        notes_chart_ns = 'Stand: ' + timecodestr
+
+        # rename columns and save clean csv for dashboard
+        df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
+        df_ns.index = df_ns.index.rename('periodFrom')
+        df_ns.to_csv('./data/pipelines_ns.tsv', sep='\t')
+
+        # run Q function
+        update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
+                     data=df_ns, notes=notes_chart_ns, title=chart_title)
 
         """
         # OLD
@@ -239,208 +283,6 @@ if __name__ == '__main__':
         # df_de.index = df_de.index.strftime('%Y-%m-%d')
         # END OLD
         """
-
-        url_de = 'https://static.dwcdn.net/data/iIPEJ.csv'
-        resp = download_data(url_de, headers=fheaders)
-        csv_file = resp.text
-
-        # read csv and convert to datetime, add one day
-        df_test = pd.read_csv(io.StringIO(csv_file),
-                              encoding='utf-8', index_col='periodFrom')
-
-        # check if new data is available
-        yesterday = date.today() - timedelta(days=1)
-        recent = pd.to_datetime(df_test.index[-1]).date()
-
-        # check if file is cached
-        i = 0
-        while recent != yesterday and i < 15:
-            url_de = 'https://static.dwcdn.net/data/iIPEJ.csv'
-            resp = download_data(url_de, headers=fheaders)
-            csv_file = resp.text
-            df_test = pd.read_csv(io.StringIO(csv_file),
-                                  encoding='utf-8', index_col='periodFrom')
-            recent = pd.to_datetime(df_test.index[-1]).date()
-            i += 1
-            sleep(0.5)
-
-        # create dataframes with old data
-        old_data = pd.read_csv('./data/pipelines_de.tsv',
-                               sep='\t', encoding='utf-8', index_col='periodFrom')
-        old_data_sum = pd.read_csv(
-            './data/pipelines_de_sum.tsv', sep='\t', encoding='utf-8', index_col='periodFrom')
-
-        # create old date for chart notes
-        timecode = pd.to_datetime(old_data.index[-1])
-        timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart_de = 'Stand: ' + timecode_str
-
-        # if there is new data
-        if recent == yesterday:
-
-            # create dataframes
-            df_new = df_test.copy()
-            df_new_sum = df_test.copy()
-
-            # rename columns
-            df_new = df_new.rename(columns={
-                df_new.columns[0]: 'Jamal (Mallnow)', df_new.columns[1]: 'Transgas (Waidhaus)', df_new.columns[2]: 'Greifswald (Nord Stream 1)'})
-
-            # check if data is corrupted
-            if (df_new['Greifswald (Nord Stream 1)'].iloc[-1] == 0.0) and (df_new['Greifswald (Nord Stream 1)'].iloc[-2] != 0.0):
-
-                df_new = old_data
-                df_new_sum = old_data_sum
-
-                if df_new_sum['Summe'][-1] > 0:
-                    chart_title = 'Nach Deutschland fliesst kaum noch russisches Gas'
-                else:
-                    chart_title = 'Nach Deutschland fliesst kein russisches Gas mehr'
-
-                # run Q function
-                update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
-                             data=df_new_sum, notes=notes_chart_de, title=chart_title)
-                update_chart(id='d0be298e35165ab925d7292335b3d00e',
-                             data=df_new, notes=notes_chart_de)
-
-            # data is not corrupted
-            else:
-                # calculate sum of all pipelines and drop columns
-                df_new_sum['Summe'] = df_new_sum.sum(axis=1)
-                df_new_sum = df_new_sum[['Summe']]
-
-                # convert GWh to million m3 according to calorific value of Russian gas
-                df_new = (df_new / 10.3).round(1)
-                df_new_sum = (df_new_sum / 10.3).round(1)
-
-                # convert dates to DatetimeIndex and sum values
-                df_new.index = pd.to_datetime(df_new.index)
-                df_new_sum.index = pd.to_datetime(df_new_sum.index)
-
-                # create date for chart notes
-                timecode = df_new.index[-1]
-                timecode_str = timecode.strftime('%-d. %-m. %Y')
-                notes_chart_de = 'Stand: ' + timecode_str
-
-                # convert DatetimeIndex to string
-                df_new.index = df_new.index.strftime('%Y-%m-%d')
-                df_new_sum.index = df_new_sum.index.strftime('%Y-%m-%d')
-
-                # save clean csv for dashboard
-                df_new_sum.to_csv('./data/pipelines_de_sum.tsv', sep='\t')
-                df_new.to_csv('./data/pipelines_de.tsv', sep='\t')
-
-                if df_new_sum['Summe'][-1] > 0:
-                    chart_title = 'Nach Deutschland fliesst kaum noch russisches Gas'
-                else:
-                    chart_title = 'Nach Deutschland fliesst kein russisches Gas mehr'
-
-                # run Q function
-                update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
-                             data=df_new_sum, notes=notes_chart_de, title=chart_title)
-                update_chart(id='d0be298e35165ab925d7292335b3d00e',
-                             data=df_new, notes=notes_chart_de)
-
-        # no new data
-        else:
-            df_new = old_data
-            df_new_sum = old_data_sum
-
-            if df_new_sum['Summe'][-1] > 0:
-                chart_title = 'Nach Deutschland fliesst kaum noch russisches Gas'
-            else:
-                chart_title = 'Nach Deutschland fliesst kein russisches Gas mehr'
-
-            # run Q function
-            update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
-                         data=df_new_sum, notes=notes_chart_de, title=chart_title)
-            update_chart(id='d0be298e35165ab925d7292335b3d00e',
-                         data=df_new, notes=notes_chart_de)
-
-        """
-        # Nord stream 1 only Bundesnetzagentur
-        url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
-        resp = download_data(url, headers=fheaders)
-        csv_file = resp.text
-
-        # read csv, drop columns
-        df_ns = pd.read_csv(io.StringIO(csv_file), encoding='utf-8',
-                            sep=';', decimal=',', index_col=None)
-        df_ns = df_ns.drop(df_ns.columns[[1, 2, 3, 4, 5, 6, 7, 8, 10]], axis=1)
-
-        # convert date string to datetime
-        df_ns[df_ns.columns[0]] = pd.to_datetime(
-            df_ns[df_ns.columns[0]], format='%d.%m.%Y')
-
-        # set date as index
-        df_ns = df_ns.set_index(df_ns.columns[0])
-
-        # convert GWh to million m3 according to calorific value of Russian gas
-        df_ns = (df_ns / 10.3).round(1)
-
-        # get latest date for chart notes
-        timecode = df_ns.index[-1]
-        timecodestr = timecode.strftime('%-d. %-m. %Y')
-        notes_chart_ns = 'Stand: ' + timecodestr
-
-        # rename columns and save clean csv for dashboard
-        df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
-        df_ns.index = df_ns.index.rename('periodFrom')
-        df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
-
-        # run Q function
-        update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
-                     data=df_ns, notes=notes_chart)
-        """
-
-        # nord stream 1 only
-        url_ns = 'https://static.dwcdn.net/data/LtmFL.csv'
-        resp = download_data(url_ns, headers=fheaders)
-        csv_file = resp.text
-
-        # read csv and convert to datetime
-        df_ns = pd.read_csv(io.StringIO(csv_file),
-                            encoding='utf-8', index_col='periodFrom')
-        df_old = pd.read_csv('./data/pipelines_de_ns.tsv',
-                             sep='\t', encoding='utf-8', index_col='periodFrom')
-        df_ns.index = pd.to_datetime(df_ns.index)
-
-        today = date.today()
-        recent = pd.to_datetime(df_ns.index[-1]).date()
-
-        # if file is cached
-        if len(df_ns) < len(df_old):
-            # create dataframes with old data
-            df_ns = pd.read_csv('./data/pipelines_de_ns.tsv',
-                                sep='\t', encoding='utf-8', index_col='periodFrom')
-
-            # create date for chart notes
-            timecode = pd.to_datetime(df_ns.index[-1])
-            timecode_str = timecode.strftime('%-d. %-m., %-H')
-            notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
-
-            # replace NaN with 0
-            df_ns = df_ns.fillna(0)
-
-            # run Q function
-            update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
-                         data=df_ns, notes=notes_chart_ns)
-        else:
-            # create date for chart notes
-            timecode = pd.to_datetime(df_ns.index[-1])
-            timecode_str = timecode.strftime('%-d. %-m., %-H')
-            notes_chart_ns = 'Stand: ' + timecode_str + ' Uhr'
-
-            # replace NaN with 0 and convert GWh to million m3
-            df_ns = df_ns.fillna(0)
-            df_ns = (df_ns / 10.3).round(4)
-
-            # save clean csv for dashboard
-            df_ns.to_csv('./data/pipelines_de_ns.tsv', sep='\t')
-
-            # run Q function
-            update_chart(id='cc57f43ae1554e09c09a2d8f76355ddb',
-                         data=df_ns, notes=notes_chart_ns)
 
     except:
         raise
