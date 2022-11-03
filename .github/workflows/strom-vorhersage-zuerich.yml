@@ -27,7 +27,7 @@ jobs:
           pip install -r requirements.txt
       - name: Run python scripts
         run: |
-          python prediction_zuerich.py
+          python ./prediction_zuerich.py
       - name: Setup Node.js 
         uses: actions/setup-node@v3
         with:
