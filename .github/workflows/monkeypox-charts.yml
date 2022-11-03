@@ -1,4 +1,4 @@
-name: "[Deaktiviert] Update Monkeypox Charts"
+name: "zz [Deaktiviert] Update Monkeypox Charts"
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
