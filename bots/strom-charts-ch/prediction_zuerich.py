@@ -6,6 +6,8 @@
   Q-Charts:
   * Alle: https://q.st.nzz.ch/editor/chart/85c9e635bfeae3a127d9c9db9059cc83
   * Privathaushalte: 
+
+  Um die Modelle zu trainieren: https://github.com/nzzdev/energyconsumption-zurich-model
 """
 
 import math
@@ -149,7 +151,5 @@ config = {
 
 # Store
 json.dump(config, open(Path('./q.config.json'), 'w'), ensure_ascii=False, indent=1, default=str)
-
-
-
-
+print(Path('./q.config.json'))
+print(Path('./q.config.json').resolve())
