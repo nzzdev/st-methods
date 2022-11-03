@@ -5,7 +5,8 @@
 #
 #  Q-Charts:
 #   * Alle: https://q.st.nzz.ch/editor/chart/85c9e635bfeae3a127d9c9db9059cc83
-#   * Privathaushalte: 
+#   * Privathaushalte: https://q.st.nzz.ch/editor/chart/85c9e635bfeae3a127d9c9db90640964
+#   * Unternehmen: https://q.st.nzz.ch/editor/chart/8a89ec29d240ad709dc0c77b7f75e967
 #
 #  Um die Modelle zu trainieren: https://github.com/nzzdev/energyconsumption-zurich-model
 
@@ -83,6 +84,9 @@ df_consumption['consumption_total'] = df_consumption['consumption_ne5'] + df_con
 # Join
 df_data = df_consumption.join(df_temperature, "date").reset_index(drop=False)
 
+# Drop Na
+df_data = df_data.dropna(subset=['consumption_total', 'temperature'], how='any')
+
 # Calc Cos Sin
 df_data['CosYearTemp'] = df_data.apply(lambda row: row['temperature'] * math.cos(row['date'].dayofyear * 2 * math.pi / 365), axis=1)
 df_data['SinYearTemp'] = df_data.apply(lambda row: row['temperature'] * math.sin(row['date'].dayofyear * 2 * math.pi / 365), axis=1)
@@ -112,6 +116,8 @@ def build_result_df(df, forecastTrain):
   return df
 
 def predict(modelpath, df_data, column):
+    print("🔮 Predict %s, use model %s" % (column, modelpath.name))
+
     # Load model
     with open(modelpath, 'r') as fin:
         m = model_from_json(fin.read())
@@ -128,6 +134,8 @@ def predict(modelpath, df_data, column):
 # -------------- PREDICT
 # Für alle berechnen
 df_predict_all = predict(Path('./zh-models/totalconsumption_rolling7day.json'), df_data, 'consumption_total')
+df_predict_ne7 = predict(Path('./zh-models/ne7consumption_rolling7day.json'), df_data, 'consumption_ne7')
+df_predict_ne5 = predict(Path('./zh-models/ne5consumption_rolling7day.json'), df_data, 'consumption_ne5')
 
 # -------------- CREATE q.config.json
 
@@ -135,18 +143,44 @@ transform_df = lambda df: df.applymap(str).reset_index(drop=False).T.reset_index
 notes = "Methode: Dieses Modell berechnet den zu erwartenden Stromverbrauch anhand des Wetters. Dazu wurde ein Algorithmus mit Stromdaten aus den Vorjahren (ab 2010) und den entsprechenden Tagestemperaturen trainiert. Die Berechnung erfolgte mit der Programmbibliothek «Prophet» von Facebook. Entwickelt wurde das Modell von EWZ.<br />Zuletzt aktualisiert: %s Uhr" % datetime.datetime.now().astimezone(pytz.timezone('Europe/Berlin')).strftime("%-d. %-m. %Y, %H.%M")
 
 config = {
-    "items": [{
-         "environments": [
-            {
-                "name": "production",
-                "id": "85c9e635bfeae3a127d9c9db9059cc83"
+    "items": [
+        {
+            "environments": [
+                {
+                    "name": "production",
+                    "id": "85c9e635bfeae3a127d9c9db9059cc83"
+                }
+            ],
+            "item": {
+                "notes": notes,
+                "data": transform_df(df_predict_all)
             }
-        ],
-        "item": {
-            "notes": notes,
-            "data": transform_df(df_predict_all)
-        }
-    }]
+        },
+        {
+            "environments": [
+                {
+                    "name": "production",
+                    "id": "85c9e635bfeae3a127d9c9db90640964"
+                }
+            ],
+            "item": {
+                "notes": notes,
+                "data": transform_df(df_predict_ne7)
+            }
+        },
+        {
+            "environments": [
+                {
+                    "name": "production",
+                    "id": "8a89ec29d240ad709dc0c77b7f75e967"
+                }
+            ],
+            "item": {
+                "notes": notes,
+                "data": transform_df(df_predict_ne5)
+            }
+        },
+    ]
 }
 
 # Store
