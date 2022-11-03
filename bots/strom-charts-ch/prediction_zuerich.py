@@ -1,14 +1,13 @@
-"""
-  Achtung: Dieses Script nicht in der gleichen Action wie die anderen Stromcharts laufen lassen. Zwei Gründe:
-  * Braucht zwingend Python 3.8
-  * Überschreibt q.config.json
 
-  Q-Charts:
-  * Alle: https://q.st.nzz.ch/editor/chart/85c9e635bfeae3a127d9c9db9059cc83
-  * Privathaushalte: 
-
-  Um die Modelle zu trainieren: https://github.com/nzzdev/energyconsumption-zurich-model
-"""
+#  Achtung: Dieses Script nicht in der gleichen Action wie die anderen Stromcharts laufen lassen. Zwei Gründe:
+#   * Braucht zwingend Python 3.8
+#   * Überschreibt q.config.json
+#
+#   Q-Charts:
+#   * Alle: https://q.st.nzz.ch/editor/chart/85c9e635bfeae3a127d9c9db9059cc83
+#   * Privathaushalte: 
+#
+#   Um die Modelle zu trainieren: https://github.com/nzzdev/energyconsumption-zurich-model
 
 
 import os
