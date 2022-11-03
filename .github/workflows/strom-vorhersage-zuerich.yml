@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./
+        working-directory: bots/strom-charts-ch/
     steps:
       - uses: actions/checkout@v3
       - name: Setup python

@@ -151,5 +151,3 @@ config = {
 
 # Store
 json.dump(config, open(Path('./q.config.json'), 'w'), ensure_ascii=False, indent=1, default=str)
-print(Path('./q.config.json'))
-print(Path('./q.config.json').resolve())
