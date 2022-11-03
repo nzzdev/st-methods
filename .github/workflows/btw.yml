@@ -1,4 +1,4 @@
-name: Update Bundestagswahl
+name: "[zzDeaktiviert] Update Bundestagswahl"
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions

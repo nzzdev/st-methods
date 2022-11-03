@@ -2,7 +2,7 @@
 # The map can be found here: https://q.st.nzz.ch/item/6d5dfa85d3d67a928ec2d1903d39b280
 # Responsible for this bot: kaspar.manz@nzz.ch
 
-name: Update Greek Wildfires
+name: "[zzDeaktiviert] Update Greek Wildfires"
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions

@@ -1,4 +1,4 @@
-name: Wetterereignisse Temperaturen CH
+name: "[zzDeaktiviert] Wetterereignisse Temperaturen CH"
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions

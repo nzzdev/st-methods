@@ -1,4 +1,4 @@
-name: Update Hochwasser Charts
+name: "[zzDeaktiviert] Update Hochwasser Charts"
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
