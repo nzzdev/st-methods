@@ -10,6 +10,11 @@
   Um die Modelle zu trainieren: https://github.com/nzzdev/energyconsumption-zurich-model
 """
 
+
+import os
+print(__file__)
+os.chdir(os.path.dirname(__file__))
+
 import math
 import pandas as pd
 from pathlib import Path
@@ -17,7 +22,6 @@ from prophet.serialize import model_from_json
 import requests
 import datetime
 import json
-import os
 
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
