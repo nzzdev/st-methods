@@ -17,6 +17,7 @@ import requests
 import datetime
 import json
 import os
+import pytz
 
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
@@ -131,7 +132,7 @@ df_predict_all = predict(Path('./zh-models/totalconsumption_rolling7day.json'), 
 # -------------- CREATE q.config.json
 
 transform_df = lambda df: df.applymap(str).reset_index(drop=False).T.reset_index(drop=False).T.apply(list, axis=1).to_list()
-notes = "Methode: Dieses Modell berechnet den zu erwartenden Stromverbrauch anhand des Wetters. Dazu wurde ein Algorithmus mit Stromdaten aus den Vorjahren (ab 2010) und den entsprechenden Tagestemperaturen trainiert. Die Berechnung erfolgte mit der Programmbibliothek «Prophet» von Facebook. Entwickelt wurde das Modell von EWZ.<br />Zuletzt aktualisiert: %s Uhr" % datetime.datetime.now().strftime("%-d. %-m. %Y, %H.%M")
+notes = "Methode: Dieses Modell berechnet den zu erwartenden Stromverbrauch anhand des Wetters. Dazu wurde ein Algorithmus mit Stromdaten aus den Vorjahren (ab 2010) und den entsprechenden Tagestemperaturen trainiert. Die Berechnung erfolgte mit der Programmbibliothek «Prophet» von Facebook. Entwickelt wurde das Modell von EWZ.<br />Zuletzt aktualisiert: %s Uhr" % datetime.datetime.now().astimezone(pytz.timezone('Europe/Berlin')).strftime("%-d. %-m. %Y, %H.%M")
 
 config = {
     "items": [{
