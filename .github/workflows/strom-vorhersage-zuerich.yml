@@ -3,6 +3,8 @@ name: Update Strom Prediction Zürich
 on:
   # workflow_call:  
   # Schedule makes this bot run in regular intervals, without any interventions
+  schedule: 
+    - cron: "0 14 * * *"
   workflow_dispatch:
 jobs:
   build:
