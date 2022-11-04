@@ -777,8 +777,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-04;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;399;500ml (1 l = 7,98 €)
 2022-11-04;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2022-11-04;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;179;1l
-2022-11-04;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;179;1l
 2022-11-04;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;179;1l
+2022-11-04;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;179;1l
 2022-11-04;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;329;250g (1 kg = 13,16 €)
 2022-11-04;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets Praktisch Grätenfrei 475g;359;475g (1 kg = 7,56 €)
 2022-11-04;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1279,7 +1279,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-04;7822905;REWE Bio;REWE Bio Schwarzer Tee 35g, 20 Beutel;149;35g (1 kg = 42,57 €)
 2022-11-04;8108322;REWE Bio;REWE Bio Schwarzkümmel ganz 50g;199;50g (1 kg = 39,80 €)
 2022-11-04;7082861;REWE Bio;REWE Bio Schwarzwälder Schinken 70g;299;70g (1 kg = 42,71 €)
-2022-11-04;1475953;REWE Bio;REWE Bio Schweine Hackfleisch 300g;599;300g (1 kg = 19,97 €)
 2022-11-04;1287057;REWE Bio;REWE Bio Schweine Minutensteaks;607;1 Stück ca. 210 g (1 kg = 28,90 €)
 2022-11-04;1287061;REWE Bio;REWE Bio Schweine Nackensteaks 500g;1145;1 Stück ca. 500 g (1 kg = 22,90 €)
 2022-11-04;1287106;REWE Bio;REWE Bio Schweine Stielkotelett;1045;1 Stück ca. 500 g (1 kg = 20,90 €)
