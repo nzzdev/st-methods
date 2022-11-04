@@ -92,7 +92,7 @@ df_data['CosYearTemp'] = df_data.apply(lambda row: row['temperature'] * math.cos
 df_data['SinYearTemp'] = df_data.apply(lambda row: row['temperature'] * math.sin(row['date'].dayofyear * 2 * math.pi / 365), axis=1)
 
 # Rolling
-df_data = df_data.rolling(window=7, on='date').mean().dropna()[:-7]
+df_data = df_data.rolling(window=7, on='date').mean().dropna()#[:-7]
 
 # Only 2022
 df_data = df_data[df_data.date >= datetime.datetime(2022, 1, 1)]
