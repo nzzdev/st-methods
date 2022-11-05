@@ -410,7 +410,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-05;6564984;ja!;ja! Spätzle Frischei Nudeln 500g;139;500g (1 kg = 2,78 €)
 2022-11-05;7916381;ja!;ja! Steinofen Baguette 250g;99;250g (1 kg = 3,96 €)
 2022-11-05;8089206;ja!;ja! Steinofen Pizza Margherita 3x300g;259;3x300g (1 kg = 2,88 €)
-2022-11-05;8021080;ja!;ja! Steinofen Pizza Thunfisch 2x355g;319;2x355g (1 kg = 4,49 €)
 2022-11-05;2662089;ja!;ja! Streichgut gesalzen 250g;209;250g (1 kg = 8,36 €)
 2022-11-05;2662082;ja!;ja! Streichgut ungesalzen 250g;209;250g (1 kg = 8,36 €)
 2022-11-05;8431040;ja!;ja! Streichhölzer 3er Pack 100 Stück;69;3 Stück
@@ -860,7 +859,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-05;116774;REWE Beste Wahl;REWE Beste Wahl Schnittbohnen 330g;149;330g (1 kg = 4,52 €)
 2022-11-05;192964;REWE Beste Wahl;REWE Beste Wahl Schoko Waffelröllchen Vollmilch 125g;119;125g (1 kg = 9,52 €)
 2022-11-05;7273139;REWE Beste Wahl;REWE Beste Wahl Schokobrötchen 360g;169;360g (1 kg = 4,69 €)
-2022-11-05;126938;REWE Beste Wahl;REWE Beste Wahl Schokokeks Vollmilch 125g;89;125g (1 kg = 7,12 €)
 2022-11-05;470737;REWE Beste Wahl;REWE Beste Wahl Schokokeks Zartbitter 125g;89;125g (1 kg = 7,12 €)
 2022-11-05;920085;REWE Beste Wahl;REWE Beste Wahl Schwarze Bohnen in Chilisauce 400g;129;400g (1 kg = 3,23 €)
 2022-11-05;135299;REWE Beste Wahl;REWE Beste Wahl Schwarzer Johannisbeer-Nektar 1l;149;1l
@@ -884,8 +882,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-05;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2022-11-05;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2022-11-05;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2022-11-05;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2022-11-05;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2022-11-05;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2022-11-05;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2022-11-05;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;219;110g (1 kg = 19,91 €)
 2022-11-05;137788;REWE Beste Wahl;REWE Beste Wahl Spargelstangen kurz 175g;219;170g (1 kg = 12,88 €)
@@ -1381,6 +1379,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-05;2937503;REWE Bio;REWE Bio Wiener Würstchen 250g;399;250g (1 kg = 15,96 €)
 2022-11-05;2561874;REWE Bio;REWE Bio Ziegenfrischkäse 150g;219;150g (1 kg = 14,60 €)
 2022-11-05;7010182;REWE Bio;REWE Bio Ziegenfrischkäse mit rosa Pfeffer 100g;189;100g (1 kg = 18,90 €)
+2022-11-05;8222704;REWE Bio;REWE Bio Ziegenkäse mild 120g;299;120g (1 kg = 24,92 €)
 2022-11-05;43657;REWE Bio;REWE Bio Zitrone 1 Stück;99;1 Stück
 2022-11-05;7589883;REWE Bio;REWE Bio Zitrone 500g im Netz;199;500g (1 kg = 3,98 €)
 2022-11-05;535509;REWE Bio;REWE Bio Zitronen Sorbet 500ml;269;500ml (1 l = 5,38 €)
