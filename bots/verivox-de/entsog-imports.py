@@ -159,6 +159,7 @@ if __name__ == '__main__':
         timecode = df_ns.index[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
         notes_chart_ns = 'Stand: ' + timecodestr
+        notes_chart_total = '¹ inklusive möglicher Ringflüsse.<br>Stand: ' + timecodestr
 
         # rename columns and save clean csv for dashboard
         df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
@@ -169,7 +170,7 @@ if __name__ == '__main__':
         update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
                      data=df_ns, notes=notes_chart_ns, title=chart_title)
         update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5',
-                     data=df_total, notes=notes_chart_ns)
+                     data=df_total, notes=notes_chart_total)
 
         """
         # OLD
