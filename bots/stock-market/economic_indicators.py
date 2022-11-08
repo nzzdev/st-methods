@@ -691,12 +691,14 @@ results = soup.find_all('table')
 market_cap = []
 for i in range(0, 10):
     market_cap.append(re.sub(
-        "[^0-9]", "", results[0].find_all('span', class_='sc-1ow4cwt-1 ieFnWP')[i].text.strip()))
+        "[^0-9]", "", results[0].find_all('span', class_='sc-289ac22e-0 POZfD')[i].text.strip()))
+    
 
 crypto = []
 for i in range(0, 10):
     crypto.append(results[0].find_all(
-        'div', class_='sc-1prm8qw-0 pbu8wv-0 bDXgoH')[i].text.strip())
+        'div', class_='sc-aef7b723-0 sc-6110f1f2-0 bQEQZd')[i].text.strip())
+    
 
 
 
