@@ -140,7 +140,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-08;8613805;ja!;ja! Geleefrüchte 250g;119;250g (1 kg = 4,76 €)
 2022-11-08;7144685;ja!;ja! Geniesser-Menü Multipack Jelly 15x100g;319;15x100g (1 kg = 2,13 €)
 2022-11-08;7146084;ja!;ja! Genießer-Menü Multipack Fleisch 15x100g;319;15x100g (1 kg = 2,13 €)
-2022-11-08;8439178;ja!;ja! Geriebener Mozzarella 250g;259;250g (1 kg = 10,36 €)
 2022-11-08;8075412;ja!;ja! Geschirrtabs All-in-1 840g;395;840g (1 kg = 4,70 €)
 2022-11-08;592755;ja!;ja! Gnocchi di Patate 500g;99;500g (1 kg = 1,98 €)
 2022-11-08;3151583;ja!;ja! Gold entkoffeiniert 100g;319;100g (1 kg = 31,90 €)
@@ -639,7 +638,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-08;7904097;REWE Beste Wahl;REWE Beste Wahl Milde Orange 0,33l;65;0,33l (1 l = 1,97 €)
 2022-11-08;7901727;REWE Beste Wahl;REWE Beste Wahl Milde Orange 1l;139;1l
 2022-11-08;7902625;REWE Beste Wahl;REWE Beste Wahl Milder Apfel 0,33l;55;0,33l (1 l = 1,67 €)
-2022-11-08;7896504;REWE Beste Wahl;REWE Beste Wahl Milder Apfel 1l;119;1l
 2022-11-08;8593925;REWE Beste Wahl;REWE Beste Wahl Milder Multi 0,33l;59;0,33l (1 l = 1,79 €)
 2022-11-08;8640590;REWE Beste Wahl;REWE Beste Wahl Milder Multi 1l;139;1l
 2022-11-08;336931;REWE Beste Wahl;REWE Beste Wahl Mildes Weinsauerkraut 770g;99;770g (1 kg = 1,29 €)
@@ -749,8 +747,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-08;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2022-11-08;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2022-11-08;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2022-11-08;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2022-11-08;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2022-11-08;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2022-11-08;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;119;170g (1 kg = 7 €)
 2022-11-08;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;219;110g (1 kg = 19,91 €)
 2022-11-08;137788;REWE Beste Wahl;REWE Beste Wahl Spargelstangen kurz 175g;219;170g (1 kg = 12,88 €)
@@ -904,7 +902,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-08;2745102;REWE Bio;REWE Bio Aufstrich Mango-Papaya-Curry 180g;149;180g (1 kg = 8,28 €)
 2022-11-08;2333554;REWE Bio;REWE Bio Avocado 1 Stück;179;1 Stück
 2022-11-08;8231031;REWE Bio;REWE Bio Baby Mais Hirse Flips 30g;79;30g (1 kg = 26,33 €)
-2022-11-08;3140940;REWE Bio;REWE Bio Bacon 70g;179;70g (1 kg = 25,57 €)
 2022-11-08;3018245;REWE Bio;REWE Bio Bananenchips gesüßt 300g;199;300g (1 kg = 6,63 €)
 2022-11-08;1045916;REWE Bio;REWE Bio Basilikum im Topf;159;NaN
 2022-11-08;276692;REWE Bio;REWE Bio Basmatireis 500g;199;500g (1 kg = 3,98 €)
