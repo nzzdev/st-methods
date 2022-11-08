@@ -453,7 +453,7 @@ bag_age_deaths  <- bag_deaths_age %>%
   mutate(date = paste0(year, "-W", KW)) %>%
   select(date, altersklasse_covid19, sum) %>%
   spread(altersklasse_covid19, sum) %>%
-  select(date, `0–64`,`65+`) 
+  select(date, `0 - 64`,`65+`) 
 
 update_chart(id = "ec163329f1a1a5698ef5d1ee7587b3d6", data = bag_age_deaths)
 
