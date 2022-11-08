@@ -436,20 +436,24 @@ update_chart(id = "ae2fa42664db4ab375dba744d0712df3", data = hosp_with_corr)
 # Todesfälle und Hospitalisierungen absolut nach Altersklasse 
 
 bag_deaths_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$death) %>%
-  select("altersklasse_covid19", "geoRegion", "datum", "entries", "sumTotal") %>%
-  mutate(KW = substr(datum, 5, 6), year = substr(datum, 1, 4))
+  filter(geoRegion == 'CHFL') %>%
+  select("altersklasse_covid19", "geoRegion", "date", "entries") %>%
+  distinct() %>%
+  mutate(KW = substr(date, 5, 6), year = substr(date, 1, 4)) %>% 
+  group_by(KW, year, altersklasse_covid19) %>%
+  summarize(sum = sum(entries)) %>% distinct() %>% ungroup()
+
 
 bag_hosp_age <- read_csv(bag_data$sources$individual$csv$weekly$byAge$hosp) %>%
   select("altersklasse_covid19", "geoRegion", "datum", "entries", "sumTotal")  %>%
   mutate(KW = substr(datum, 5, 6), year = substr(datum, 1, 4))
 
 bag_age_deaths  <- bag_deaths_age %>%
-  filter(!is.na(datum), altersklasse_covid19 != "Unbekannt", geoRegion == 'CHFL', (year >= '2021' | (year == '2020' & KW >= '52' ) )) %>%
-  mutate(datum = paste0(year, "-W", KW)) %>%
-  select(datum, altersklasse_covid19, entries) %>%
-  spread(altersklasse_covid19, entries) %>%
-  mutate(`0–59` = `0 - 9` +  `10 - 19` + `20 - 29` +  `30 - 39` + `40 - 49` +  `50 - 59`, `60–79` = `60 - 69` +  `70 - 79`) %>%
-  select(datum, `0–59`,`60–79`, `80+`) 
+  filter(!is.na(date), altersklasse_covid19 != "Unbekannt", (year >= '2021' | (year == '2020' & KW >= '52' ) )) %>%
+  mutate(date = paste0(year, "-W", KW)) %>%
+  select(date, altersklasse_covid19, sum) %>%
+  spread(altersklasse_covid19, sum) %>%
+  select(date, `0–64`,`65+`) 
 
 update_chart(id = "ec163329f1a1a5698ef5d1ee7587b3d6", data = bag_age_deaths)
 
