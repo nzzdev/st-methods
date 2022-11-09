@@ -282,7 +282,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-09;7835907;ja!;ja! Maxi Teelichter 12 Stück;349;12 Stück
 2022-11-09;8602560;ja!;ja! Meersalz 110g;109;110g (1 kg = 9,91 €)
 2022-11-09;8696982;ja!;ja! Mehrkorn Toastbrötchen 335g;99;335g (1 kg = 2,96 €)
-2022-11-09;7914158;ja!;ja! Mehrkornbrötchen 8 Stück 560g;119;560g (1 kg = 2,13 €)
 2022-11-09;8381825;ja!;ja! Mehrweg Frische-Deckel für 500g Becher 2 Stück;99;2 Stück
 2022-11-09;1374472;ja!;ja! Mett-Enden geräuchert 300g;299;300g (1 kg = 9,97 €)
 2022-11-09;2107010;ja!;ja! Milchreis 500g;99;500g (1 kg = 1,98 €)
@@ -708,7 +707,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-09;994559;REWE Beste Wahl;REWE Beste Wahl Kalifornische Mandeln gehackt 100g;159;100g (1 kg = 15,90 €)
 2022-11-09;994582;REWE Beste Wahl;REWE Beste Wahl Kalifornische Mandeln gehobelt 100g;159;100g (1 kg = 15,90 €)
 2022-11-09;994552;REWE Beste Wahl;REWE Beste Wahl Kalifornische Mandeln gemahlen 100g;159;100g (1 kg = 15,90 €)
-2022-11-09;710582;REWE Beste Wahl;REWE Beste Wahl Kapern Surfines 60g;99;60g (1 kg = 16,50 €)
 2022-11-09;710583;REWE Beste Wahl;REWE Beste Wahl Kapernäpfel in Weißweinessig 130g;169;130g (1 kg = 13 €)
 2022-11-09;8412459;REWE Beste Wahl;REWE Beste Wahl Kardamom gemahlen 25g;199;25g (1 kg = 79,60 €)
 2022-11-09;1981279;REWE Beste Wahl;REWE Beste Wahl Karotten gewürfelt 850ml;159;530g (1 kg = 3 €)
@@ -911,7 +909,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-09;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;219;110g (1 kg = 19,91 €)
 2022-11-09;137788;REWE Beste Wahl;REWE Beste Wahl Spargelstangen kurz 175g;219;170g (1 kg = 12,88 €)
 2022-11-09;7090266;REWE Beste Wahl;REWE Beste Wahl Spitz & Bube Eier Bodenhaltung 6 Stück;159;6 Stück
-2022-11-09;2788389;REWE Beste Wahl;REWE Beste Wahl Spitz & Bube Freilandhaltung 6 Stück;199;6 Stück
 2022-11-09;133405;REWE Beste Wahl;REWE Beste Wahl Stachelbeeren gezuckert 390g;219;390g (1 kg = 5,62 €)
 2022-11-09;137794;REWE Beste Wahl;REWE Beste Wahl Stangenspargel 320g;329;320g (1 kg = 10,28 €)
 2022-11-09;7902451;REWE Beste Wahl;REWE Beste Wahl Steakhouse Frites vegan 750g;169;750g (1 kg = 2,25 €)
@@ -1123,8 +1120,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-09;1006863;REWE Bio;REWE Bio Edelbitter-Schokolade 60% Cacao 100g;129;100g (1 kg = 12,90 €)
 2022-11-09;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;249;1 Stück
 2022-11-09;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;289;250g (1 kg = 11,56 €)
-2022-11-09;200348;REWE Bio;REWE Bio Emmentaler 150g;199;150g (1 kg = 13,27 €)
 2022-11-09;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
+2022-11-09;200348;REWE Bio;REWE Bio Emmentaler 150g;199;150g (1 kg = 13,27 €)
 2022-11-09;8381730;REWE Bio;REWE Bio Erbseneintopf 400g;199;400g (1 kg = 4,98 €)
 2022-11-09;2903350;REWE Bio;REWE Bio Erdnüsse 250g;199;250g (1 kg = 7,96 €)
 2022-11-09;8255376;REWE Bio;REWE Bio Fenchel-Anis-Kümmel Tee 40g;149;40g (1 kg = 37,25 €)
