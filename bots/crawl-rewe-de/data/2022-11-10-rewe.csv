@@ -383,7 +383,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-10;7042886;ja!;ja! Salami Sticks Pikant 100g;219;100g (1 kg = 21,90 €)
 2022-11-10;6878636;ja!;ja! Salzstangen mit Meersalz 250g;69;250g (1 kg = 2,76 €)
 2022-11-10;7121696;ja!;ja! Sandwich Eis Fürst Pückler Art 8x90ml;169;8x90ml (1 l = 2,35 €)
-2022-11-10;7011318;ja!;ja! Sauerkirschen entsteint & gezuckert 350g;139;350g (1 kg = 3,97 €)
 2022-11-10;4507940;ja!;ja! Saure Sahne 200g;65;200g (1 kg = 3,25 €)
 2022-11-10;8100477;ja!;ja! Schaschlikspieße 20cm 125 Stück;149;125 Stück
 2022-11-10;6387934;ja!;ja! Schinkenwurst 200g;129;200g (1 kg = 6,45 €)
@@ -673,7 +672,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-10;8659391;REWE Beste Wahl;REWE Beste Wahl Hafer Joghurt Natur vegan 400g;149;400g (1 kg = 3,73 €)
 2022-11-10;994524;REWE Beste Wahl;REWE Beste Wahl Haselnusskerne gemahlen 100g;179;100g (1 kg = 17,90 €)
 2022-11-10;8330642;REWE Beste Wahl;REWE Beste Wahl Haselnusskerne geröstet & gehackt 100g;179;100g (1 kg = 17,90 €)
-2022-11-10;2184091;REWE Beste Wahl;REWE Beste Wahl Heidelbeer-Konfitüre 340g;169;340g (1 kg = 4,97 €)
 2022-11-10;7144527;REWE Beste Wahl;REWE Beste Wahl Heidelbeeren 500g;299;500g (1 kg = 5,98 €)
 2022-11-10;8427595;REWE Beste Wahl;REWE Beste Wahl Herzchen Mix 60g;119;60g (1 kg = 19,83 €)
 2022-11-10;8333175;REWE Beste Wahl;REWE Beste Wahl Herzogin Kartoffeln 600g;139;600g (1 kg = 2,32 €)
@@ -832,8 +830,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-10;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;399;500ml (1 l = 7,98 €)
 2022-11-10;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2022-11-10;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;169;1l
-2022-11-10;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;169;1l
 2022-11-10;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;179;1l
+2022-11-10;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;169;1l
 2022-11-10;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets Praktisch Grätenfrei 475g;359;475g (1 kg = 7,56 €)
 2022-11-10;8005928;REWE Beste Wahl;REWE Beste Wahl Paprika Edelsüß gemahlen 50g;189;50g (1 kg = 37,80 €)
 2022-11-10;8560198;REWE Beste Wahl;REWE Beste Wahl Paprika edelsüß gemahlen 39g;189;39g (1 kg = 48,46 €)
@@ -905,7 +903,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-10;126938;REWE Beste Wahl;REWE Beste Wahl Schokokeks Vollmilch 125g;89;125g (1 kg = 7,12 €)
 2022-11-10;470737;REWE Beste Wahl;REWE Beste Wahl Schokokeks Zartbitter 125g;89;125g (1 kg = 7,12 €)
 2022-11-10;3261314;REWE Beste Wahl;REWE Beste Wahl Schokolade Edel Bitter 72% 100g;89;100g (1 kg = 8,90 €)
-2022-11-10;920085;REWE Beste Wahl;REWE Beste Wahl Schwarze Bohnen in Chilisauce 400g;129;400g (1 kg = 3,23 €)
 2022-11-10;135299;REWE Beste Wahl;REWE Beste Wahl Schwarzer Johannisbeer-Nektar 1l;149;1l
 2022-11-10;2184092;REWE Beste Wahl;REWE Beste Wahl Schwarzkirsch-Konfitüre 340g;169;340g (1 kg = 4,97 €)
 2022-11-10;117509;REWE Beste Wahl;REWE Beste Wahl Schwarzwurzeln 320g;179;290g (1 kg = 6,17 €)
@@ -1032,6 +1029,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-10;7782048;REWE Beste Wahl;REWE Beste Wahl leichte Kochcreme 250ml;99;250ml (1 l = 3,96 €)
 2022-11-10;7211940;REWE Beste Wahl;REWE Beste Wahl stückige Tomaten 400g;99;400g (1 kg = 2,48 €)
 2022-11-10;8338446;REWE Beste Wahl;REWE Bestel Wahl Muskatnuss ganz 12g;189;12g (1 kg = 157,50 €)
+2022-11-10;7985572;REWE Beste Wahl;REWE Kaffekuchen Quark 440g;259;440g (1 kg = 5,89 €)
 2022-11-10;1041191;REWE Beste Wahl;REWE Rispentomaten Aromatico 250g;279;250g (1 kg = 11,16 €)
 2022-11-10;7254096;REWE Beste Wahl;REWE beste Wahl Kidney Bohnen 212ml;79;145g (1 kg = 5,45 €)
 2022-11-10;8283301;REWE Beste Wahl;REWE beste Wahl Mini Laugen-Mix 10er;229;518g (1 kg = 4,42 €)
@@ -1101,7 +1099,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-10;7955323;REWE Bio;REWE Bio Apfelmark 360g;99;360g (1 kg = 2,75 €)
 2022-11-10;208859;REWE Bio;REWE Bio Apfelmark 700g;149;700g (1 kg = 2,13 €)
 2022-11-10;2186674;REWE Bio;REWE Bio Apfelrotkohl tafelfertig 385g;129;385g (1 kg = 3,35 €)
-2022-11-10;254615;REWE Bio;REWE Bio Apfelsaft naturtrüb 1l;169;1l
 2022-11-10;7292476;REWE Bio;REWE Bio Apfelschorle naturtrüb 0,75l;119;0,75l (1 l = 1,59 €)
 2022-11-10;940052;REWE Bio;REWE Bio Aprikose Fruchtaufstrich 250g;199;250g (1 kg = 7,96 €)
 2022-11-10;2745102;REWE Bio;REWE Bio Aufstrich Mango-Papaya-Curry 180g;149;180g (1 kg = 8,28 €)
@@ -1163,8 +1160,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-10;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;249;6 Stück
 2022-11-10;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;249;1 Stück
 2022-11-10;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;289;250g (1 kg = 11,56 €)
-2022-11-10;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2022-11-10;200348;REWE Bio;REWE Bio Emmentaler 150g;199;150g (1 kg = 13,27 €)
+2022-11-10;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2022-11-10;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2022-11-10;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
 2022-11-10;2903350;REWE Bio;REWE Bio Erdnüsse 250g;199;250g (1 kg = 7,96 €)
