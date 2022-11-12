@@ -35,7 +35,7 @@ jobs:
         shell: Rscript {0}
       - name: Run R scripts
         run: |
-          Rscript us-midterms-2022.R
+          Rscript ap-api-2022.R
           Rscript
       - name: Setup Node.js
         uses: actions/setup-node@v3
