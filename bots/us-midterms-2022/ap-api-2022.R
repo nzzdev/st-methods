@@ -7,13 +7,13 @@ library(tidyverse)
 library(jsonlite)
 
 # setwd for fixes
-setwd("~/Documents/GitHub/st-methods/bots/us-midterms-2022")
+# setwd("~/Documents/GitHub/st-methods/bots/us-midterms-2022")
 
 # #renv
 # library(renv)
 # renv::init()
 # renv::snapshot()
-renv::restore()
+
 # API Access 
 api <- fromJSON("https://api.ap.org/v3/elections/2022-11-08?apikey=RM9PsVHsJzKBniAlAn6movmTgxTFRwdS&format=json&resultsType=l") 
 # api_fips <- fromJSON("https://api.ap.org/v3/elections/2022-11-08?level=fipscode&apikey=RM9PsVHsJzKBniAlAn6movmTgxTFRwdS&format=json&resultsType=t") 
