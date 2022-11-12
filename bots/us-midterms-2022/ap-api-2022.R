@@ -15,7 +15,9 @@ library(jsonlite)
 # renv::snapshot()
 
 # API Access 
+
 api <- fromJSON("https://api.ap.org/v3/elections/2022-11-08?apikey=RM9PsVHsJzKBniAlAn6movmTgxTFRwdS&format=json&resultsType=l") 
+
 # api_fips <- fromJSON("https://api.ap.org/v3/elections/2022-11-08?level=fipscode&apikey=RM9PsVHsJzKBniAlAn6movmTgxTFRwdS&format=json&resultsType=t") 
 
 # api_fips2 <- api_fips$races
@@ -227,7 +229,7 @@ bars_tab
 
 source("./helpers.R")
 
-time <- paste0(str_sub(Sys.time(), 12, 16), " Uhr")
+time <- paste0(as.numeric(str_sub(Sys.time(), 12, 13))+1,".", as.numeric(str_sub(Sys.time(), 15, 16)), " Uhr")
 
 update_chart(id = "8a89ec29d240ad709dc0c77b7f861387", 
              data = senate_tab,
