@@ -229,7 +229,7 @@ bars_tab
 
 source("./helpers.R")
 
-time <- paste0(as.numeric(str_sub(Sys.time(), 12, 13))+1,".", as.numeric(str_sub(Sys.time(), 15, 16)), " Uhr")
+time <- paste0(as.numeric(str_sub(Sys.time(), 12, 13))+1,".", str_sub(Sys.time(), 15, 16), " Uhr")
 
 update_chart(id = "8a89ec29d240ad709dc0c77b7f861387", 
              data = senate_tab,
