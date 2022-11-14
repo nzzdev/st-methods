@@ -263,7 +263,6 @@ benzin_table.sort_values(by='Benzin', ascending=False, inplace=True)
 benzin_table.rename_axis(None, axis=1, inplace = True)
 
 Reiseziele = [
-'Deutschland',
 'Niederlande',
 'Belgien',
 'Dänemark',
