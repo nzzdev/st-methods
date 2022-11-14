@@ -547,6 +547,7 @@ Reiseziele = [
 'Frankreich',
 'Polen' ]
 
+eu = eu[['Reiseziel', 'Benzin', 'Diesel']]
 eu_2 = eu.loc[eu['Reiseziel'].isin(Reiseziele)]
 
 update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu, notes = notes_2)
