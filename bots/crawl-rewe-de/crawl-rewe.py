@@ -278,7 +278,7 @@ if __name__ == '__main__':
         month_nice = month_first.strftime('%B')  # Oktober etc.
         month_file = month_first.strftime('%Y-%m')  # 2022-10 etc.
 
-        if today != month_last:
+        if today == month_last:
 
             # create JSON for monthly price changes
             dftopnew = pd.read_csv(f'./data/{today}-rewe.csv', sep=';', usecols=[
@@ -359,7 +359,6 @@ if __name__ == '__main__':
 
             dftop_ja.to_json(
                 f'./data/{month_file}-ja-diff-monthly.json', orient='values')
-            print(dftop_ja)
 
     except:
         raise

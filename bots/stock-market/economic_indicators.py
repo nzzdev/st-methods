@@ -263,7 +263,6 @@ benzin_table.sort_values(by='Benzin', ascending=False, inplace=True)
 benzin_table.rename_axis(None, axis=1, inplace = True)
 
 Reiseziele = [
-'Deutschland',
 'Niederlande',
 'Belgien',
 'Dänemark',
@@ -515,10 +514,10 @@ update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
 
 # Benzinpreistabelle D
 
-kurs = euro['EURCHF=X'].tail(1).values
-benzin_de = benzin.copy()
-benzin_de['Benzin'] = round((benzin_de['Benzin']/kurs), 2)
-benzin_de['Diesel'] = round((benzin_de['Diesel']/kurs), 2)
+#kurs = euro['EURCHF=X'].tail(1).values
+#benzin_de = benzin.copy()
+#benzin_de['Benzin'] = round((benzin_de['Benzin']/kurs), 2)
+#benzin_de['Diesel'] = round((benzin_de['Diesel']/kurs), 2)
 
 eu = pd.read_excel('https://ec.europa.eu/energy/observatory/reports/latest_prices_raw_data.xlsx')
 eu = eu.loc[(eu['Product Name'] == 'Euro-super 95') | (eu['Product Name'] == 'Automotive gas oil')].copy()
@@ -528,7 +527,7 @@ eu = eu.pivot(index='Country Name', columns='Product Name', values='Weekly price
 eu.rename(columns = {'Euro-super 95': 'Benzin', 'Automotive gas oil': 'Diesel'}, inplace = True)
 
 eu['Reiseziel'] = eu['Country Name'].apply(lambda x: GoogleTranslator(source='auto', target='de').translate(x))
-eu = pd.concat([benzin_de[benzin_de['Reiseziel'] == 'Schweiz'][['Reiseziel', 'Benzin', 'Diesel']], eu])
+#eu = pd.concat([benzin_de[benzin_de['Reiseziel'] == 'Schweiz'][['Reiseziel', 'Benzin', 'Diesel']], eu])
 eu.sort_values(by='Benzin', ascending=False, inplace=True)
 eu.rename_axis(None, axis=1, inplace = True)
 eu.drop(columns=['Country Name'], inplace = True)
@@ -538,7 +537,6 @@ Reiseziele = [
 'Niederlande',
 'Belgien',
 'Dänemark',
-'Schweiz',
 'Grossbritannien',
 'Spanien',
 'Österreich',
@@ -548,6 +546,7 @@ Reiseziele = [
 'Frankreich',
 'Polen' ]
 
+eu = eu[['Reiseziel', 'Benzin', 'Diesel']]
 eu_2 = eu.loc[eu['Reiseziel'].isin(Reiseziele)]
 
 update_chart(id = 'a78c9d9de3230aea314700dc5855b330', data = eu, notes = notes_2)
@@ -692,12 +691,14 @@ results = soup.find_all('table')
 market_cap = []
 for i in range(0, 10):
     market_cap.append(re.sub(
-        "[^0-9]", "", results[0].find_all('span', class_='sc-1ow4cwt-1 ieFnWP')[i].text.strip()))
+        "[^0-9]", "", results[0].find_all('span', class_='sc-65d3c89-0 koTgbF')[i].text.strip()))
+
 
 crypto = []
 for i in range(0, 10):
     crypto.append(results[0].find_all(
-        'div', class_='sc-1prm8qw-0 pbu8wv-0 bDXgoH')[i].text.strip())
+        'div', class_='sc-aef7b723-0 sc-6110f1f2-1 jxcfYN name-area')[i].text.strip())
+
 
 
 

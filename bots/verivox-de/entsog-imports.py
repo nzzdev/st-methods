@@ -118,24 +118,32 @@ if __name__ == '__main__':
                      data=df_russia, notes=notes_chart)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
-        ##update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
+        #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
         # Nord stream 1 to DE Bundesnetzagentur
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
         resp = download_data(url, headers=fheaders)
         csv_file = resp.text
 
-        # read csv, drop columns
+        # read csv
         df_ns = pd.read_csv(io.StringIO(csv_file), encoding='utf-8',
                             sep=';', decimal=',', index_col=None)
+
+        # clean dataframe for NS1 and total imports
+        df_total = df_ns.copy()
+        df_total = df_total.drop(
+            df_total.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], axis=1)
         df_ns = df_ns.drop(
             df_ns.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 11]], axis=1)
 
         # convert date string to datetime
+        df_total[df_total.columns[0]] = pd.to_datetime(
+            df_total[df_total.columns[0]], format='%d.%m.%Y')
         df_ns[df_ns.columns[0]] = pd.to_datetime(
             df_ns[df_ns.columns[0]], format='%d.%m.%Y')
 
         # set date as index
+        df_total = df_total.set_index(df_total.columns[0])
         df_ns = df_ns.set_index(df_ns.columns[0])
 
         # convert GWh to million m3 according to calorific value of Russian gas
@@ -151,6 +159,7 @@ if __name__ == '__main__':
         timecode = df_ns.index[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
         notes_chart_ns = 'Stand: ' + timecodestr
+        notes_chart_total = '¹ inklusive möglicher Ringflüsse.<br>Stand: ' + timecodestr
 
         # rename columns and save clean csv for dashboard
         df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
@@ -160,6 +169,8 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
                      data=df_ns, notes=notes_chart_ns, title=chart_title)
+        update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5',
+                     data=df_total, notes=notes_chart_total)
 
         """
         # OLD
