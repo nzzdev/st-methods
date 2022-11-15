@@ -32,7 +32,7 @@ headers = {
     'sec-fetch-site': 'same-origin',
     'referer': 'https://www.meteoschweiz.admin.ch/home/messwerte.html?param=messwerte-lufttemperatur-10min&station=REH&chart=day'
 }
-data = requests.get('https://www.meteoschweiz.admin.ch/product/input/measured-values/chartData/temperature_day/chartData.temperature_day.REH.de.json', headers=headers)
+data = requests.get('https://www.meteoschweiz.admin.ch/product/output/measured-values/chartData/temperature_day/chartData.temperature_day.REH.de.json', headers=headers)
 data = data.json()
 
 # Filter by Serie
