@@ -444,7 +444,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-16;7774209;ja!;ja! Snow Flakes 750g;249;750g (1 kg = 3,32 €)
 2022-11-16;8294464;ja!;ja! Sofort-Gelatine weiß 30g;99;30g (1 kg = 33 €)
 2022-11-16;8196129;ja!;ja! Soft Früchtchen Kaubonbons 500g;189;500g (1 kg = 3,78 €)
-2022-11-16;3151969;ja!;ja! Soft-Datteln 250g;225;250g (1 kg = 9 €)
 2022-11-16;3151967;ja!;ja! Soft-Feigen getrocknet 250g;225;250g (1 kg = 9 €)
 2022-11-16;3151944;ja!;ja! Soft-Pflaumen 250g;289;250g (1 kg = 11,56 €)
 2022-11-16;687999;ja!;ja! Spaghetti 500g;99;500g (1 kg = 1,98 €)
@@ -548,8 +547,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-16;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2022-11-16;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2022-11-16;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2022-11-16;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;99;1l
 2022-11-16;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;159;1l
+2022-11-16;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;99;1l
 2022-11-16;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2022-11-16;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2022-11-16;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;239;475g (1 kg = 5,03 €)
