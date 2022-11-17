@@ -71,6 +71,7 @@ house_tab$winners[house_tab$winners != "republicans" &
 
 house_tab$winners[house_tab$state_id == "CA-15"] <- "democrats"
 house_tab$winners[house_tab$state_id == "CA-34"] <- "democrats"
+house_tab$winners[house_tab$state_id == "ME-2"] <- "democrats"
 
 house_tab <- house_tab %>% select(-state_id)
 
