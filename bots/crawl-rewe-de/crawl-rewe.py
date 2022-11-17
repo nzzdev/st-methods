@@ -158,7 +158,7 @@ if __name__ == '__main__':
         df_ja = df_ja[df_ja['Marke'] == 'ja!']
 
         bulkpacks = {'Apfelsaft': 'Apfelsaft 6l', 'Multivitaminsaft': 'Multivitaminsaft 6l', 'Orangensaft': 'Orangensaft 6l', 'Orangennektar': 'Orangennektar 9l', 'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur':
-                     'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg'}
+                     'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg', 'Weizenmehl Type': 'Weizenmehl'}
 
         if not df.empty:
             # keep column with price changes only
@@ -186,10 +186,6 @@ if __name__ == '__main__':
                 str).str.replace('  Arabica-Robusta-Mischung', '', regex=False)
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(' ca.', '', regex=False)
-            df_ja['Name'] = df_ja['Name'].astype(
-                str).str.replace('  Type', '', regex=False)
-            df_ja['Name'] = df_ja['Name'].astype(
-                str).str.replace('  Typ', '', regex=False)
 
             # Fix for large quantities
             df_ja['Name'] = df_ja['Name'].astype(str).replace(bulkpacks)
@@ -353,7 +349,7 @@ if __name__ == '__main__':
             # add Tweet intro
             count = dftop_ja.shape[0]
             intro = [
-                f'Top 5 Preiserhöhungen bei #Rewe & #Aldi im {month_nice}:\n\n']
+                f'Top 5 Preiserhöhungen bei #Rewe im {month_nice}:\n\n']
             dftop_ja = pd.DataFrame([intro], index=['0000000'], columns=[
                                     'Tweet']).append(dftop_ja)
 
