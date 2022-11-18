@@ -349,7 +349,7 @@ if __name__ == '__main__':
             # add Tweet intro
             count = dftop_ja.shape[0]
             intro = [
-                f'Top 5 Preiserhöhungen bei #Rewe im {month_nice}:\n\n']
+                f'Top 5 Preiserhöhungen bei #Rewe und #Aldi im {month_nice}:\n\n']
             dftop_ja = pd.DataFrame([intro], index=['0000000'], columns=[
                                     'Tweet']).append(dftop_ja)
 
