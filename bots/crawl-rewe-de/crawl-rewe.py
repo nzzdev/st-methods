@@ -158,7 +158,7 @@ if __name__ == '__main__':
         df_ja = df_ja[df_ja['Marke'] == 'ja!']
 
         bulkpacks = {'Apfelsaft': 'Apfelsaft 6l', 'Multivitaminsaft': 'Multivitaminsaft 6l', 'Orangensaft': 'Orangensaft 6l', 'Orangennektar': 'Orangennektar 9l', 'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur':
-                     'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg', 'Weizenmehl Type': 'Weizenmehl'}
+                     'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg', 'Weizenmehl Type': 'Weizenmehl', 'Dinkelmehl Typ': 'Dinkelmehl'}
 
         if not df.empty:
             # keep column with price changes only
