@@ -685,9 +685,21 @@ for i in range(0, 10):
 
 df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
 
-#df.set_index('crypto', inplace=True)
-
 notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 
 update_chart(id='9640becc888e8a5d878819445105edce',
              data=df, notes=notes)
+
+
+from pandas_datareader import data
+tickers = ['BTC-USD', 'ETH-USD', 'USDT-USD', 'BNB-USD', 'USDC-USD', 'BUSD-USD', 'XRP-USD', 'ADA-USD', 'DOGE-USD', 'MATIC-USD',
+           'DOT-USD', 'DAI-USD', 'LTC-USD', 'WTRX-USD', 'SHIB-USD', 'HEX-USD', 'SOL-USD', 'TRX-USD', 'UNI7083-USD',
+           'LEO-USD', 'STETH-USD', 'WBTC-USD','AVAX-USD', 'LINK-USD', 'ATOM-USD', 'ETC-USD', 'XMR-USD', 'XLM-USD',
+           'BCH-USD', 'TON11419-USD']
+
+data.get_quote_yahoo(tickers)['marketCap']
+
+data.get_quote_yahoo(tickers)['longName']
+
+
+
