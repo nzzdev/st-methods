@@ -1252,8 +1252,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-23;1006852;REWE Bio;REWE Bio Edelvollmilch-Schokolade 100g;129;100g (1 kg = 12,90 €)
 2022-11-23;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;249;1 Stück
 2022-11-23;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;289;250g (1 kg = 11,56 €)
-2022-11-23;200348;REWE Bio;REWE Bio Emmentaler 150g;229;150g (1 kg = 15,27 €)
 2022-11-23;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
+2022-11-23;200348;REWE Bio;REWE Bio Emmentaler 150g;229;150g (1 kg = 15,27 €)
 2022-11-23;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2022-11-23;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
 2022-11-23;8381730;REWE Bio;REWE Bio Erbseneintopf 400g;199;400g (1 kg = 4,98 €)
@@ -1390,7 +1390,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-11-23;8289217;REWE Bio;REWE Bio Milder Früchtetee 44g;149;44g (1 kg = 33,86 €)
 2022-11-23;8277549;REWE Bio;REWE Bio Mini Berner Würstchen Schwein 185g;349;185g (1 kg = 18,86 €)
 2022-11-23;8498663;REWE Bio;REWE Bio Mini-Kartoffel-Taschen 300g;269;300g (1 kg = 8,97 €)
-2022-11-23;1272042;REWE Bio;REWE Bio Minze im Topf;179;1 Stück
 2022-11-23;200385;REWE Bio;REWE Bio Mozzarella 125g;129;125g (1 kg = 10,32 €)
 2022-11-23;2024958;REWE Bio;REWE Bio Nackenscheiben 200g;458;1 Stück ca. 200 g (1 kg = 22,90 €)
 2022-11-23;7816381;REWE Bio;REWE Bio Naturland 5 Korn Müsli 750g;229;750g (1 kg = 3,05 €)
