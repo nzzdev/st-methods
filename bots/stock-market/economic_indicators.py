@@ -680,9 +680,7 @@ for i in range(0, 10):
 crypto = []
 for i in range(0, 10):
     crypto.append(results[0].find_all(
-        'div', class_='sc-aef7b723-0 sc-6110f1f2-1 jxcfYN name-area')[i].text.strip())
-
-
+        'div', class_='sc-aef7b723-0 LCOyB')[i].text.strip())
 
 
 df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
