@@ -680,7 +680,7 @@ for i in range(0, 10):
 crypto = []
 for i in range(0, 10):
     crypto.append(results[0].find_all(
-        'div', class_='sc-aef7b723-0 LCOyB')[i].text.strip())
+        'div', class_='sc-aef7b723-0 sc-2f217aa4-1 emviyU name-area')[i].contents[0].text.strip())
 
 
 df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
@@ -691,15 +691,15 @@ update_chart(id='9640becc888e8a5d878819445105edce',
              data=df, notes=notes)
 
 
-from pandas_datareader import data
-tickers = ['BTC-USD', 'ETH-USD', 'USDT-USD', 'BNB-USD', 'USDC-USD', 'BUSD-USD', 'XRP-USD', 'ADA-USD', 'DOGE-USD', 'MATIC-USD',
-           'DOT-USD', 'DAI-USD', 'LTC-USD', 'WTRX-USD', 'SHIB-USD', 'HEX-USD', 'SOL-USD', 'TRX-USD', 'UNI7083-USD',
-           'LEO-USD', 'STETH-USD', 'WBTC-USD','AVAX-USD', 'LINK-USD', 'ATOM-USD', 'ETC-USD', 'XMR-USD', 'XLM-USD',
-           'BCH-USD', 'TON11419-USD']
+#from pandas_datareader import data
+#tickers = ['BTC-USD', 'ETH-USD', 'USDT-USD', 'BNB-USD', 'USDC-USD', 'BUSD-USD', 'XRP-USD', 'ADA-USD', 'DOGE-USD', 'MATIC-USD',
+ #          'DOT-USD', 'DAI-USD', 'LTC-USD', 'WTRX-USD', 'SHIB-USD', 'HEX-USD', 'SOL-USD', 'TRX-USD', 'UNI7083-USD',
+ #          'LEO-USD', 'STETH-USD', 'WBTC-USD','AVAX-USD', 'LINK-USD', 'ATOM-USD', 'ETC-USD', 'XMR-USD', 'XLM-USD',
+ #          'BCH-USD', 'TON11419-USD']
 
-data.get_quote_yahoo(tickers)['marketCap']
+#data.get_quote_yahoo(tickers)['marketCap']
 
-data.get_quote_yahoo(tickers)['longName']
+
 
 
 
