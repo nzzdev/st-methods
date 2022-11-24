@@ -20,8 +20,7 @@ jobs:
       - name: Install R packages
       - run: R -e 'install.packages(c("tidyverse", "rvest"))'
       - name: Run R scripts
-        run: |
-          Rscript uk-polls.R
+        run:  Rscript uk-polls.R
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
