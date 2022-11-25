@@ -663,32 +663,28 @@ update_chart(id='b6873820afc5a1492240edc1b101cdd9',
 
 # 10 largest crypto currencies
 
-url = 'https://coinmarketcap.com/'
+#url = 'https://coinmarketcap.com/'
 
-page = requests.get(url)
+#page = requests.get(url)
 
-soup = BeautifulSoup(page.content, "html.parser")
+#soup = BeautifulSoup(page.content, "html.parser")
 
-results = soup.find_all('table')
+#results = soup.find_all('table')
 
-market_cap = []
-for i in range(0, 10):
-    market_cap.append(re.sub(
-        "[^0-9]", "", results[0].find_all('span', class_='sc-65d3c89-0 koTgbF')[i].text.strip()))
+#market_cap = []
+#for i in range(0, 10):
+ #   market_cap.append(re.sub(
+  #      "[^0-9]", "", results[0].find_all('span', class_='sc-b2299d0c-0 bcJsCG')[i].text.strip()))
+
+#crypto = []
+#for i in range(0, 10):
+ #   crypto.append(results[0].find_all(
+  #      'p', class_ = 'sc-e225a64a-0 ePTNty')[i].contents[0].text.strip())
 
 
-crypto = []
-for i in range(0, 10):
-    crypto.append(results[0].find_all(
-        'div', class_='sc-aef7b723-0 sc-2f217aa4-1 emviyU name-area')[i].contents[0].text.strip())
+#df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
 
 
-df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
-
-notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
-
-update_chart(id='9640becc888e8a5d878819445105edce',
-             data=df, notes=notes)
 
 
 #from pandas_datareader import data
@@ -700,6 +696,28 @@ update_chart(id='9640becc888e8a5d878819445105edce',
 #data.get_quote_yahoo(tickers)['marketCap']
 
 
+# defining the html contents of a URL.
+xhtml = url_get_contents(url).decode('utf-8')
 
+# Defining the HTMLTableParser object
+p = HTMLTableParser()
 
+# feeding the html contents in the HTMLTableParser object
+p.feed(xhtml)
+
+df = pd.DataFrame(p.tables[0]).dropna()
+df.columns = df.iloc[0]
+df = df[1:]
+df[["Name", "Name_1", "Name_2"]] = df["Name"].str.split("(\d)", n=1, expand=True)
+
+df[["Market Cap1", "Market Cap"]] = df["Market Cap"].str.split(expand = True)
+
+df['Market Cap'] = df['Market Cap'].str.replace(r'\D', '', regex=True)
+
+df = df[['Name', 'Market Cap']].copy()
+
+notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
+
+update_chart(id='9640becc888e8a5d878819445105edce',
+             data=df, notes=notes)
 
