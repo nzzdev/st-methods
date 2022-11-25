@@ -1,6 +1,6 @@
 # Automated Scripts
 
-This directory contains scripts that automate the update process of charts. Typically a script fetches data from a data source, transforms it and updates a chart with the new data. These scripts are usually written in [R](https://www.r-project.org/), [Python](https://www.python.org/) or [JavaScript](https://nodejs.org/) and us the [Q cli](https://github.com/nzzdev/q-cli) to update the chart with new data in Q. Finally, [Github Actions](https://github.com/features/actions) is used to run these scripts on a schedule.
+This directory contains scripts that automate the update process of charts. Typically, a script fetches data from a data source, transforms it and updates a chart with the new data. These scripts are usually written in [R](https://www.r-project.org/), [Python](https://www.python.org/) or [JavaScript](https://nodejs.org/) and use the [Q cli](https://github.com/nzzdev/q-cli) to update the chart with new data in Q. Finally, [Github Actions](https://github.com/features/actions) is used to run these scripts on a schedule.
 
 ## How to add a new automated script
 
