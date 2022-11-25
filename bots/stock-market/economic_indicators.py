@@ -663,7 +663,7 @@ update_chart(id='b6873820afc5a1492240edc1b101cdd9',
 
 # 10 largest crypto currencies
 
-#url = 'https://coinmarketcap.com/'
+url = 'https://coinmarketcap.com/'
 
 #page = requests.get(url)
 
