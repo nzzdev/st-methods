@@ -697,7 +697,7 @@ url = 'https://coinmarketcap.com/'
 
 
 # defining the html contents of a URL.
-xhtml = url_get_contents(url).decode('latin1')
+xhtml = url_get_contents(url).decode('latin-1')
 
 # Defining the HTMLTableParser object
 p = HTMLTableParser()
