@@ -716,6 +716,8 @@ df['Market Cap'] = df['Market Cap'].str.replace(r'\D', '', regex=True)
 
 df = df[['Name', 'Market Cap']].copy()
 
+df.rename_axis(None, axis=1, inplace = True)
+
 notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 
 update_chart(id='9640becc888e8a5d878819445105edce',
