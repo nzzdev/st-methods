@@ -13,6 +13,9 @@ library(rvest)
 # renv::snapshot()
 # renv::restore()
 
+# import helper functions
+source("./helpers.R")
+
 #read-in
 url <- read_html("https://datawrapper.dwcdn.net/Jvco9/") %>%
   as.character() %>%
