@@ -34,8 +34,7 @@ jobs:
           renv::restore()
         shell: Rscript {0}
       - name: Run R scripts
-        run: |
-          Rscript ap-api-2022.R
+        run:  Rscript ap-api-2022.R
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:

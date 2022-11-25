@@ -6,6 +6,13 @@ options(scipen=999)
 library(tidyverse)
 library(rvest)
 
+# comment out for editing
+# setwd("~/Documents/GitHub/st-methods/bots/polls")
+# install.packages("renv")
+# renv::init()
+# renv::snapshot()
+# renv::restore()
+
 #read-in
 url <- read_html("https://datawrapper.dwcdn.net/Jvco9/") %>%
   as.character() %>%
