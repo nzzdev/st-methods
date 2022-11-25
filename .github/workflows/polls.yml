@@ -24,7 +24,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/R/renv
-          key: ${{ runner.os }}-r-4.2.2-renv-${{ hashFiles('./bots/polls/renv.lock') }}
+          key: ${{ runner.os }}-r-4.2.2-renv-${{ hashFiles('bots/polls/renv.lock') }}
       - name: Restore R packages
         run: |
           install.packages("renv")
