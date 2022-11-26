@@ -695,34 +695,33 @@ url = 'https://coinmarketcap.com/'
 
 #data.get_quote_yahoo(tickers)['marketCap']
 
-try:
+
 # defining the html contents of a URL.
-    xhtml = url_get_contents(url).decode('latin-1')
+xhtml = url_get_contents(url).decode('latin-1')
 
 # Defining the HTMLTableParser object
-    p = HTMLTableParser()
+p = HTMLTableParser()
 
 # feeding the html contents in the HTMLTableParser object
-    p.feed(xhtml)
+p.feed(xhtml)
 
-    df = pd.DataFrame(p.tables[0]).dropna()
-    df.columns = df.iloc[0]
-    df = df[1:]
-    df[["Name", "Name_1", "Name_2"]] = df["Name"].str.split("(\d)", n=1, expand=True)
+df = pd.DataFrame(p.tables[0]).dropna()
+df.columns = df.iloc[0]
+df = df[1:]
+df[["Name", "Name_1", "Name_2"]] = df["Name"].str.split("(\d)", n=1, expand=True)
 
-    df[["Market Cap1", "Market Cap"]] = df["Market Cap"].str.split(expand = True)
+df[["Market Cap1", "Market Cap"]] = df["Market Cap"].str.split(expand = True)
 
-    df['Market Cap'] = df['Market Cap'].str.replace(r'\D', '', regex=True)
+df['Market Cap'] = df['Market Cap'].str.replace(r'\D', '', regex=True)
 
-    df = df[['Name', 'Market Cap']].copy()
+df = df[['Name', 'Market Cap']].copy()
 
-    df.rename_axis(None, axis=1, inplace = True)
+df.rename_axis(None, axis=1, inplace = True)
 
-    notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
+notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 
-    #update_chart(id='9640becc888e8a5d878819445105edce',
-           #  data=df, notes=notes)
+update_chart(id='9640becc888e8a5d878819445105edce',
+                 data=df, notes=notes)
     
-except:
-    pass
+
 
