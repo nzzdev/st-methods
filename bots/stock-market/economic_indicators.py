@@ -720,8 +720,8 @@ try:
 
     notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 
-    update_chart(id='9640becc888e8a5d878819445105edce',
-             data=df, notes=notes)
+    #update_chart(id='9640becc888e8a5d878819445105edce',
+           #  data=df, notes=notes)
     
 except:
     pass
