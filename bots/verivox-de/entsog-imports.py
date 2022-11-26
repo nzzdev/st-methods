@@ -65,9 +65,8 @@ if __name__ == '__main__':
 
         # replace commas and 'None' string with NaN and drop last row (KW53)
         cols = ['Minimum', 'Maximum', '2022']
-        df_lng[cols] = df_lng[cols].replace(',', '', regex=True).astype(float)
-        df_russia[cols] = df_russia[cols].replace(
-            ',', '', regex=True).astype(float)
+        df_lng[cols] = df_lng[cols].replace(',', '', regex=True)
+        df_russia[cols] = df_russia[cols].replace(',', '', regex=True)
         df_lng[cols] = df_lng[cols].apply(
             pd.to_numeric, errors='coerce', axis=1)
         df_russia[cols] = df_russia[cols].apply(
