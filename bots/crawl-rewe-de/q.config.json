@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "environments": [
+        {
+          "name": "production",
+          "id": "83caf1c1cfcfaf76da2c577a9efa0cfa"
+        }
+      ],
+      "item": {
+        "notes": "",
+        "data": {
+          "table": []
+        }
+      }
+    }
+  ]
+}
