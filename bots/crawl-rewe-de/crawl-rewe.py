@@ -112,6 +112,7 @@ if __name__ == '__main__':
         today = date.today()
         yesterday = date.today() - timedelta(days=1)
         todaynice = today.strftime('%-d.%-m.')
+        todaynicey = today.strftime('%-d. %-m. %Y')
 
         # retry if error
         logging.basicConfig(level=logging.INFO)
@@ -465,7 +466,7 @@ if __name__ == '__main__':
         df_t_y.set_index('', inplace=True)
         df_t_y.rename({'Name': ' '}, axis=1, inplace=True)
 
-        notes_chart = '¹ Die Preise der Rewe-Eigenmarke entsprechen in der Regel den Aldi-Preisen.<br>Stand: ' + todaynice
+        notes_chart = '¹ Die Preise der Rewe-Eigenmarke entsprechen in der Regel den Aldi-Preisen.<br>Stand: ' + todaynicey
 
         # run Q function
         update_chart(id='83caf1c1cfcfaf76da2c577a9efa0cfa',
