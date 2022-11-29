@@ -316,18 +316,35 @@ if __name__ == '__main__':
         ###################
         # get first day of current and last month
         month_first = today.replace(day=1)  # 2022-10-01 etc.
+        month_first1 = month_first + timedelta(days=1)
+        month_first2 = month_first + timedelta(days=2)
         month_last = (month_first + timedelta(days=32)
                       ).replace(day=1)-timedelta(days=1)  # 2022-10-31 etc.
+        month_last1 = month_last - timedelta(days=1)
+        month_last2 = month_last - timedelta(days=2)
         month_nice = month_first.strftime('%B')  # Oktober etc.
         month_file = month_first.strftime('%Y-%m')  # 2022-10 etc.
 
         if today == month_last:
 
             # create JSON for monthly price changes
-            dftopnew = pd.read_csv(f'./data/{today}-rewe.csv', sep=';', usecols=[
-                'ID', 'Preis', 'Marke', 'Name'], index_col='ID')
-            dftopold = pd.read_csv(f'./data/{month_first}-rewe.csv',
-                                   sep=';', usecols=['ID', 'Preis'], index_col='ID')
+            o1 = pd.read_csv(f'./data/{month_first}-rewe.csv',
+                             sep=';', usecols=['ID', 'Preis', 'Marke', 'Name'], index_col='ID')
+            o2 = pd.read_csv(f'./data/{month_first1}-rewe.csv',
+                             sep=';', usecols=['ID', 'Preis', 'Marke', 'Name'], index_col='ID')
+            o3 = pd.read_csv(f'./data/{month_first2}-rewe.csv',
+                             sep=';', usecols=['ID', 'Preis', 'Marke', 'Name'], index_col='ID')
+            n1 = pd.read_csv(f'./data/{today}-rewe.csv',
+                             sep=';', usecols=['ID', 'Preis'], index_col='ID')
+            n2 = pd.read_csv(f'./data/{month_last1}-rewe.csv',
+                             sep=';', usecols=['ID', 'Preis'], index_col='ID')
+            n3 = pd.read_csv(f'./data/{month_last2}-rewe.csv',
+                             sep=';', usecols=['ID', 'Preis'], index_col='ID')
+
+            dftopold = o1.combine_first(o2)
+            dftopold = dftopold.combine_first(o3)
+            dftopnew = n1.combine_first(n2)
+            dftopnew = dftopnew.combine_first(n3)
 
             dftopold.rename(columns={'Preis': month_first}, inplace=True)
             dftopnew.rename(columns={'Preis': today}, inplace=True)
@@ -412,8 +429,8 @@ if __name__ == '__main__':
                            '-rewe.csv', sep=';', on_bad_lines='skip')
         df_t = df_t[df_t['Marke'] == 'ja!']
 
-        df_y = pd.read_csv('https://raw.githubusercontent.com/nzzdev/st-methods/master/bots/crawl-rewe-de/data/' +
-                           past.strftime('%Y-%m-%d') + '-rewe.csv', sep=';', on_bad_lines='skip')
+        df_y = pd.read_csv('./data/' + past.strftime('%Y-%m-%d') +
+                           '-rewe.csv', sep=';', on_bad_lines='skip')
         df_y = df_y[df_y['Marke'] == 'ja!']
 
         df_t = df_t.dropna(subset='Preis')
