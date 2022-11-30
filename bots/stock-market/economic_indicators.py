@@ -633,7 +633,7 @@ update_chart(id='c366afc02f262094669128cd054faf78', data=bip)
 # Bitcoin energy
 
 url = 'https://api.everviz.com/gsheet?googleSpreadsheetKey=1bLjXWHG4IXO8_CyMKRl1tSN8hTn3AFOlxfBISyQ6zM0&worksheet=A1:ZZ'
-ua_str = UserAgent().chrome
+ua_str = UserAgent(verify_ssl=False).chrome
 
 r = requests.get(url, headers={"User-Agent": ua_str})
 data = r.json()
