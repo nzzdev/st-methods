@@ -51,32 +51,41 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Uhrzeit' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
                 modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
         else:
             # fix wrong decimal
+            df = df.replace('-', '', regex=False)
             df.to_csv('./data/smard_fixed.csv', sep=';',
                       encoding='utf-8', index=False)
             df = pd.read_csv('./data/smard_fixed.csv', sep=';', thousands='.',
-                             decimal=',', index_col=None, dtype={'Datum': 'string', 'Uhrzeit': 'string'})
+                             decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
             # drop time and convert dates to DatetimeIndex
-            df.drop('Uhrzeit', axis=1, inplace=True)
+            df.drop('Anfang', axis=1, inplace=True)
+            df.drop('Ende', axis=1, inplace=True)
             df['Datum'] = pd.to_datetime(df['Datum'], format="%d.%m.%Y")
+
+            # old decimal fix
+            #df.loc[:, df.columns != 'Datum'] = df.loc[:, df.columns != 'Datum'].replace('\.', '', regex=True)
+            #df.loc[:, df.columns != 'Datum'] = df.loc[:, df.columns != 'Datum'].replace('\,', '.', regex=True).astype(float)
+
             df = df.groupby(['Datum']).sum()
 
             # create new columns and drop the old ones
-            df['Kernkraft'] = df['Kernenergie[MWh]']
-            df['Gas'] = df['Erdgas[MWh]']
-            df['Sonstige'] = df['Pumpspeicher[MWh]'] + \
-                df['Sonstige Konventionelle[MWh]']
-            df['Kohle'] = df['Braunkohle[MWh]'] + df['Steinkohle[MWh]']
-            df['Erneuerbare'] = df['Biomasse[MWh]'] + df['Wasserkraft[MWh]'] + df['Wind Offshore[MWh]'] + \
-                df['Wind Offshore[MWh]'] + df['Wind Onshore[MWh]'] + \
-                df['Photovoltaik[MWh]'] + df['Sonstige Erneuerbare[MWh]']
+            df['Kernkraft'] = df['Kernenergie [MWh] Originale Auflösungen']
+            df['Gas'] = df['Erdgas [MWh] Originale Auflösungen']
+            df['Sonstige'] = df['Pumpspeicher [MWh] Originale Auflösungen'] + \
+                df['Sonstige Konventionelle [MWh] Originale Auflösungen']
+            df['Kohle'] = df['Braunkohle [MWh] Originale Auflösungen'] + \
+                df['Steinkohle [MWh] Originale Auflösungen']
+            df['Erneuerbare'] = df['Biomasse [MWh] Originale Auflösungen'] + df['Wasserkraft [MWh] Originale Auflösungen'] + df['Wind Offshore [MWh] Originale Auflösungen'] + \
+                df['Wind Offshore [MWh] Originale Auflösungen'] + df['Wind Onshore [MWh] Originale Auflösungen'] + \
+                df['Photovoltaik [MWh] Originale Auflösungen'] + \
+                df['Sonstige Erneuerbare [MWh] Originale Auflösungen']
             df.drop(list(df)[0:12], axis=1, inplace=True)
 
             # convert to week and drop first and last row with partial values
@@ -118,28 +127,31 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Uhrzeit' not in df_spot.columns) and (errors < 5):
+        while ('Anfang' not in df_spot.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df_spot = smard.requestSmardData(
                 modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=1608764400000)  # 2021/1/1: 1609455600000
         else:
             # fix wrong decimal
+            df = df.replace('-', '', regex=False)
             df_spot.to_csv('./data/smard_spot.csv', sep=';',
                            encoding='utf-8', index=False)
             df_spot = pd.read_csv('./data/smard_spot.csv', sep=';', thousands='.', decimal=',',
-                                  index_col=None, dtype={'Datum': 'string', 'Uhrzeit': 'string'})
+                                  index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
             # drop time and convert dates to DatetimeIndex
-            df_spot.drop('Uhrzeit', axis=1, inplace=True)
+            df_spot.drop('Anfang', axis=1, inplace=True)
+            df_spot.drop('Ende', axis=1, inplace=True)
             df_spot['Datum'] = pd.to_datetime(
                 df_spot['Datum'], format="%d.%m.%Y")
 
+            df_spot.to_clipboard()
             # calculate daily mean and 7-day moving average
             df_spot = df_spot.groupby(['Datum']).mean()
-            df_spot['Deutschland/Luxemburg[€/MWh]'] = df_spot['Deutschland/Luxemburg[€/MWh]'].rolling(
+            df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'].rolling(
                 window=7).mean().dropna()
-            df_spot['Deutschland/Luxemburg[€/MWh]'] = df_spot['Deutschland/Luxemburg[€/MWh]'].round(
+            df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'].round(
                 0)
 
             # get current date
@@ -150,7 +162,7 @@ if __name__ == '__main__':
 
             # drop unused dates
             df_spot = df_spot['2021-01-01': q_date]
-            df_spot['Deutschland/Luxemburg[€/MWh]'] = df_spot['Deutschland/Luxemburg[€/MWh]'].astype(
+            df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'].astype(
                 int)
 
             # dynamic chart title
