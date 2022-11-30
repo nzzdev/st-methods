@@ -67,10 +67,8 @@ if __name__ == '__main__':
         cols = ['Minimum', 'Maximum', '2022']
         df_lng[cols] = df_lng[cols].replace(',', '', regex=True)
         df_russia[cols] = df_russia[cols].replace(',', '', regex=True)
-        df_lng[cols] = df_lng[cols].apply(
-            pd.to_numeric, errors='coerce', axis=1)
-        df_russia[cols] = df_russia[cols].apply(
-            pd.to_numeric, errors='coerce', axis=1)
+        #df_lng[cols] = df_lng[cols].apply(pd.to_numeric, errors='coerce', axis=1)
+        #df_russia[cols] = df_russia[cols].apply(pd.to_numeric, errors='coerce', axis=1)
         df_lng.drop(df_lng.tail(1).index, inplace=True)
         df_russia.drop(df_russia.tail(1).index, inplace=True)
 
