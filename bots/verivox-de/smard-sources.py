@@ -146,7 +146,6 @@ if __name__ == '__main__':
             df_spot['Datum'] = pd.to_datetime(
                 df_spot['Datum'], format="%d.%m.%Y")
 
-            df_spot.to_clipboard()
             # calculate daily mean and 7-day moving average
             df_spot = df_spot.groupby(['Datum']).mean()
             df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'].rolling(
