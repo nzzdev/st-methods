@@ -2,9 +2,9 @@ name: Crawl Coop prices
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run it at 8:45 and 22:45.
+  # This will run it at 8:45, 14:45 and 22:45.
   schedule:
-    - cron: "45 6,20 * * *"
+    - cron: "45 6,12,20 * * *"
   workflow_dispatch:
 
 jobs:
@@ -52,11 +52,11 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
-      - name: Log failure to slack
-        if: always()
-        uses: ravsamhq/notify-slack-action@v1
-        with:
-          status: ${{ job.status }}
-          notify_when: "failure"
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+      #- name: Log failure to slack
+       # if: always()
+        #uses: ravsamhq/notify-slack-action@v1
+        #with:
+         # status: ${{ job.status }}
+          #notify_when: "failure"
+        #env:
+         # SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
