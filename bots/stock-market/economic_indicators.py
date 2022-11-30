@@ -14,6 +14,7 @@ import os
 #import sys
 from fake_useragent import UserAgent
 from deep_translator import GoogleTranslator
+from pandas_datareader import data
 
 
 
@@ -665,21 +666,21 @@ update_chart(id='b6873820afc5a1492240edc1b101cdd9',
 
 url = 'https://coinmarketcap.com/'
 
-#page = requests.get(url)
+page = requests.get(url)
 
-#soup = BeautifulSoup(page.content, "html.parser")
+soup = BeautifulSoup(page.content, "html.parser")
 
-#results = soup.find_all('table')
+results = soup.find_all('table')
 
-#market_cap = []
-#for i in range(0, 10):
- #   market_cap.append(re.sub(
-  #      "[^0-9]", "", results[0].find_all('span', class_='sc-b2299d0c-0 bcJsCG')[i].text.strip()))
+market_cap = []
+for i in range(0, 10):
+    market_cap.append(re.sub(
+      "[^0-9]", "", results[0].find_all('span', class_='sc-b2299d0c-0 bcJsCG')[i].text.strip()))
 
-#crypto = []
-#for i in range(0, 10):
- #   crypto.append(results[0].find_all(
-  #      'p', class_ = 'sc-e225a64a-0 ePTNty')[i].contents[0].text.strip())
+crypto = []
+for i in range(0, 10):
+    crypto.append(results[0].find_all(
+       'p', class_ = 'sc-e225a64a-0 ePTNty')[i].contents[0].text.strip())
 
 
 #df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
@@ -687,13 +688,45 @@ url = 'https://coinmarketcap.com/'
 
 
 
-#from pandas_datareader import data
-#tickers = ['BTC-USD', 'ETH-USD', 'USDT-USD', 'BNB-USD', 'USDC-USD', 'BUSD-USD', 'XRP-USD', 'ADA-USD', 'DOGE-USD', 'MATIC-USD',
- #          'DOT-USD', 'DAI-USD', 'LTC-USD', 'WTRX-USD', 'SHIB-USD', 'HEX-USD', 'SOL-USD', 'TRX-USD', 'UNI7083-USD',
- #          'LEO-USD', 'STETH-USD', 'WBTC-USD','AVAX-USD', 'LINK-USD', 'ATOM-USD', 'ETC-USD', 'XMR-USD', 'XLM-USD',
- #          'BCH-USD', 'TON11419-USD']
 
-#data.get_quote_yahoo(tickers)['marketCap']
+tickers = ['BTC-USD', 'ETH-USD', 'USDT-USD', 'BNB-USD', 'USDC-USD', 'BUSD-USD', 'XRP-USD', 'ADA-USD', 'DOGE-USD', 'MATIC-USD',
+           'DOT-USD', 'DAI-USD', 'LTC-USD', 'WTRX-USD', 'SHIB-USD', 'HEX-USD', 'SOL-USD', 'TRX-USD', 'UNI7083-USD',
+           'LEO-USD', 'STETH-USD', 'WBTC-USD','AVAX-USD', 'LINK-USD', 'ATOM-USD', 'ETC-USD', 'XMR-USD', 'XLM-USD',
+           'BCH-USD', 'TON11419-USD']
+
+df = data.get_quote_yahoo(tickers)['marketCap']
+df = df.head(10).copy().to_frame()
+
+df.loc[df.index == 'BTC-USD', 'currency'] = 'Bitcoin'
+df.loc[df.index == 'ETH-USD', 'currency'] = 'Ethereum'
+df.loc[df.index == 'USDT-USD', 'currency'] = 'Tether'
+df.loc[df.index == 'BNB-USD', 'currency'] = 'BNB'
+df.loc[df.index == 'USDC-USD', 'currency'] = 'USD Coin'
+df.loc[df.index == 'BUSD-USD', 'currency'] = 'Binance USD'
+df.loc[df.index == 'XRP-USD', 'currency'] = 'XRP'
+df.loc[df.index == 'DOGE-USD', 'currency'] = 'Dogecoin'
+df.loc[df.index == 'ADA-USD', 'currency'] = 'Cardano'
+df.loc[df.index == 'MATIC-USD', 'currency'] = 'Polygon'
+df.loc[df.index == 'DOT-USD', 'currency'] = 'Polkadot'
+df.loc[df.index == 'DAI-USD', 'currency'] = 'Dai'
+df.loc[df.index == 'LTC-USD', 'currency'] = 'Litecoin'
+df.loc[df.index == 'SHIB-USD', 'currency'] = 'Shiba Inu'
+df.loc[df.index == 'TRX-USD', 'currency'] = 'Tron'
+df.loc[df.index == 'SOL-USD', 'currency'] = 'Solana'
+df.loc[df.index == 'UNI7083-USD', 'currency'] = 'Uniswap'
+df.loc[df.index == 'AVAX-USD', 'currency'] = 'Avalanche'
+df.loc[df.index == 'LINK-USD', 'currency'] = 'Chainlink'
+df.loc[df.index == 'LEO-USD', 'currency'] = 'UNUS SED LEO'
+df.loc[df.index == 'WBTC-USD', 'currency'] = 'Wrapped Bitcoin'
+df.loc[df.index == 'ATOM-USD', 'currency'] = 'Cosmos'
+df.loc[df.index == 'ETC-USD', 'currency'] = 'Ethereum Classic'
+df.loc[df.index == 'XMR-USD', 'currency'] = 'Monero'
+df.loc[df.index == 'XLM-USD', 'currency'] = 'Stellar'
+df.loc[df.index == 'TON11419-USD', 'currency'] = 'Toncoin'
+df.loc[df.index == 'BCH-USD', 'currency'] = 'Bitcoin Cash'
+
+
+
 
 
 # defining the html contents of a URL.
