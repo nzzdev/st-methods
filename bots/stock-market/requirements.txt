@@ -20,7 +20,7 @@ requests_html==0.10.0
 html-table-parser-python3==0.2.0
 openpyxl==3.0.9
 xlrd==1.2.0
-fake_useragent==0.1.11
+fake_useragent==0.1.13
 regex==2022.4.24
 pycountry==22.3.5
 python-gettext==4.0
