@@ -664,23 +664,23 @@ update_chart(id='b6873820afc5a1492240edc1b101cdd9',
 
 # 10 largest crypto currencies
 
-url = 'https://coinmarketcap.com/'
+#url = 'https://coinmarketcap.com/'
 
-page = requests.get(url)
+#page = requests.get(url)
 
-soup = BeautifulSoup(page.content, "html.parser")
+#soup = BeautifulSoup(page.content, "html.parser")
 
-results = soup.find_all('table')
+#results = soup.find_all('table')
 
-market_cap = []
-for i in range(0, 10):
-    market_cap.append(re.sub(
-      "[^0-9]", "", results[0].find_all('span', class_='sc-b2299d0c-0 bcJsCG')[i].text.strip()))
+#market_cap = []
+#for i in range(0, 10):
+ #   market_cap.append(re.sub(
+  #    "[^0-9]", "", results[0].find_all('span', class_='sc-b2299d0c-0 bcJsCG')[i].text.strip()))
 
-crypto = []
-for i in range(0, 10):
-    crypto.append(results[0].find_all(
-       'p', class_ = 'sc-e225a64a-0 ePTNty')[i].contents[0].text.strip())
+#crypto = []
+#for i in range(0, 10):
+ #   crypto.append(results[0].find_all(
+  #     'p', class_ = 'sc-e225a64a-0 ePTNty')[i].contents[0].text.strip())
 
 
 #df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
@@ -726,30 +726,30 @@ df.loc[df.index == 'TON11419-USD', 'currency'] = 'Toncoin'
 df.loc[df.index == 'BCH-USD', 'currency'] = 'Bitcoin Cash'
 
 
-
+df = df[['currency','marketCap']]
 
 
 # defining the html contents of a URL.
-xhtml = url_get_contents(url).decode('latin-1')
+#xhtml = url_get_contents(url).decode('latin-1')
 
 # Defining the HTMLTableParser object
-p = HTMLTableParser()
+#p = HTMLTableParser()
 
 # feeding the html contents in the HTMLTableParser object
-p.feed(xhtml)
+#p.feed(xhtml)
 
-df = pd.DataFrame(p.tables[0]).dropna()
-df.columns = df.iloc[0]
-df = df[1:]
-df[["Name", "Name_1", "Name_2"]] = df["Name"].str.split("(\d)", n=1, expand=True)
+#df = pd.DataFrame(p.tables[0]).dropna()
+#df.columns = df.iloc[0]
+#df = df[1:]
+#df[["Name", "Name_1", "Name_2"]] = df["Name"].str.split("(\d)", n=1, expand=True)
 
-df[["Market Cap1", "Market Cap"]] = df["Market Cap"].str.split(expand = True)
+#df[["Market Cap1", "Market Cap"]] = df["Market Cap"].str.split(expand = True)
 
-df['Market Cap'] = df['Market Cap'].str.replace(r'\D', '', regex=True)
+#df['Market Cap'] = df['Market Cap'].str.replace(r'\D', '', regex=True)
 
-df = df[['Name', 'Market Cap']].copy()
+#df = df[['Name', 'Market Cap']].copy()
 
-df.rename_axis(None, axis=1, inplace = True)
+#df.rename_axis(None, axis=1, inplace = True)
 
 notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 
