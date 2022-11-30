@@ -14,7 +14,7 @@ import os
 #import sys
 from fake_useragent import UserAgent
 from deep_translator import GoogleTranslator
-from pandas_datareader import data
+from pandas_datareader import data as yahoo_data
 
 
 
@@ -694,7 +694,7 @@ tickers = ['BTC-USD', 'ETH-USD', 'USDT-USD', 'BNB-USD', 'USDC-USD', 'BUSD-USD', 
            'LEO-USD', 'STETH-USD', 'WBTC-USD','AVAX-USD', 'LINK-USD', 'ATOM-USD', 'ETC-USD', 'XMR-USD', 'XLM-USD',
            'BCH-USD', 'TON11419-USD']
 
-df = data.get_quote_yahoo(tickers)['marketCap']
+df = yahoo_data.get_quote_yahoo(tickers)['marketCap']
 df = df.head(10).copy().to_frame()
 
 df.loc[df.index == 'BTC-USD', 'currency'] = 'Bitcoin'
