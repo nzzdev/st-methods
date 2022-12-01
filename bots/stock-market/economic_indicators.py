@@ -767,8 +767,6 @@ tickers = ["CSGN.SW"]  # Subtitute for the tickers you want
 df_1 = yf.download(tickers,  period = "1y", interval = "1d")
 df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
 
-df_2.to_clipboard(index=False)
-
 update_chart(id='9039ce8be0b7e1650165751c47d993d4',
                  data=df_1)
 
