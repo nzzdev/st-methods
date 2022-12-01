@@ -765,14 +765,14 @@ update_chart(id='9640becc888e8a5d878819445105edce',
 
 tickers = ["CS"]  # Subtitute for the tickers you want
 df_1 = yf.download(tickers,  period = "1y", interval = "1d")
-df_1 = df_1['Close'].reset_index(level = 0)
+df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
 
 update_chart(id='99039ce8be0b7e1650165751c47d56ad3',
                  data=df_1)
 
 
-#df_2 = yf.download(tickers,  period = "1w", interval = "1m")
-#df_2 = df_2['Close'].reset_index(level = 0) 
+#df_2 = yf.download(tickers,  period = "1w", interval = "1h")
+#df_2 = df_2['Close'].to_frame().dropna().reset_index(level = 0)
 
 #update_chart(id='9039ce8be0b7e1650165751c47d571bc',
  #                data=df_2)
