@@ -771,10 +771,10 @@ update_chart(id='99039ce8be0b7e1650165751c47d56ad3',
                  data=df_1)
 
 
-df_2 = yf.download(tickers,  period = "1w", interval = "1m")
-df_2 = df_2['Close'].reset_index(level = 0) 
+#df_2 = yf.download(tickers,  period = "1w", interval = "1m")
+#df_2 = df_2['Close'].reset_index(level = 0) 
 
-update_chart(id='9039ce8be0b7e1650165751c47d571bc',
-                 data=df_2)
+#update_chart(id='9039ce8be0b7e1650165751c47d571bc',
+ #                data=df_2)
 
 
