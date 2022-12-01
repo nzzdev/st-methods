@@ -64,13 +64,12 @@ if __name__ == '__main__':
             df = pd.read_csv('./data/smard_fixed.csv', sep=';', thousands='.',
                              decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates to DatetimeIndex
+            # drop time and convert dates
             df.drop('Anfang', axis=1, inplace=True)
             df.drop('Ende', axis=1, inplace=True)
             df['Datum'] = pd.to_datetime(df['Datum'], format="%d.%m.%Y")
 
             # old decimal fix
-            #df.loc[:, df.columns != 'Datum'] = df.loc[:, df.columns != 'Datum'].replace('\.', '', regex=True)
             #df.loc[:, df.columns != 'Datum'] = df.loc[:, df.columns != 'Datum'].replace('\,', '.', regex=True).astype(float)
 
             df = df.groupby(['Datum']).sum()
