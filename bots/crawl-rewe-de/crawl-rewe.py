@@ -428,6 +428,11 @@ if __name__ == '__main__':
             dftop_ja.to_json(
                 f'./data/{month_file}-ja-diff-monthly.json', orient='values')
 
+            # cleanup
+            del [[oldcsv, newcsv, df, df_ja, o1, o2, o3, n1,
+                  n2, n3, dftopold, dftopnew, dftop, dftop_ja]]
+            gc.collect()
+
         ################
         # Preismonitor #
         ################
@@ -496,11 +501,6 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='83caf1c1cfcfaf76da2c577a9efa0cfa',
                      data=df_t_y, notes=notes_chart)
-
-        # cleanup
-        del [[oldcsv, newcsv, df, df_ja, o1, o2, o3, n1, n2, n3,
-              dftopold, dftopnew, dftop, dftop_ja, df_t, df_y, df_t_y]]
-        gc.collect()
 
         #####################################################################################
         # PICKUP 1931258                                                                    #
