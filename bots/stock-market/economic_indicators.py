@@ -726,7 +726,7 @@ df.loc[df.index == 'TON11419-USD', 'currency'] = 'Toncoin'
 df.loc[df.index == 'BCH-USD', 'currency'] = 'Bitcoin Cash'
 
 
-df = df[['currency','marketCap']]
+df = df[['currency','marketCap']].sort_values(by = ['marketCap'], ascending = False)
 
 
 # defining the html contents of a URL.
