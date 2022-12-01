@@ -414,6 +414,10 @@ wheat = wheat[['Date', 'Jahresdurchschnitt 2019', '2022']]
 update_chart(id='b1717dcaee838699497b647ebbceda21',
              data=wheat)
 
+cs = df['Close']['CS'][df.index >=
+                               '2022-01-01'].to_frame().dropna().reset_index(level=0)
+
+
 from market_ids import *
 
 url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
@@ -756,5 +760,22 @@ notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 update_chart(id='9640becc888e8a5d878819445105edce',
                  data=df, notes=notes)
     
+
+
+# More stock market data
+
+tickers = ["CS"]  # Subtitute for the tickers you want
+df_1 = yf.download(tickers,  period = "1y", interval = "1d")
+df_1 = df_1['Close'].reset_index(level = 0)
+
+update_chart(id='99039ce8be0b7e1650165751c47d56ad3',
+                 data=df_1)
+
+
+df_2 = yf.download(tickers,  period = "1w", interval = "1m")
+df_2 = df_2['Close'].reset_index(level = 0) 
+
+update_chart(id='9039ce8be0b7e1650165751c47d571bc',
+                 data=df_2)
 
 
