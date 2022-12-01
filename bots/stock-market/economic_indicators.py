@@ -414,8 +414,7 @@ wheat = wheat[['Date', 'Jahresdurchschnitt 2019', '2022']]
 update_chart(id='b1717dcaee838699497b647ebbceda21',
              data=wheat)
 
-cs = df['Close']['CS'][df.index >=
-                               '2022-01-01'].to_frame().dropna().reset_index(level=0)
+
 
 
 from market_ids import *
