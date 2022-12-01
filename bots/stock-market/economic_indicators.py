@@ -771,10 +771,12 @@ update_chart(id='9039ce8be0b7e1650165751c47d993d4',
                  data=df_1)
 
 
-#df_2 = yf.download(tickers,  period = "7d", interval = "1m")
-#df_2 = df_2['Close'].to_frame().dropna().reset_index(level = 0)
+df_2 = yf.download(tickers,  period = "7d", interval = "1m")
+df_2 = df_2['Close'].to_frame().dropna().reset_index(level = 0)
 
-#update_chart(id='9039ce8be0b7e1650165751c47d571bc',
- #              data=df_2)
+df_2['Datetime'] = pd.to_datetime(df_2['Datetime']).dt.strftime('%Y-%m-%d %H:%M')
+
+update_chart(id='9039ce8be0b7e1650165751c47d571bc',
+              data=df_2)
 
 
