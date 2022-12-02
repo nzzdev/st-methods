@@ -376,19 +376,6 @@
     "data": [
     ]
    }
-  },
-  {
-   "environments": [
-    {
-     "name": "production",
-     "id": "53dcf67825b59f9a226adacf9ea2ca2d"
-    }
-   ],
-   "item": {
-    "notes": "",
-    "data": [
-    ]
-   }
   }
  ]
 }
