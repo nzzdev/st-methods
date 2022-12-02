@@ -18,7 +18,7 @@ jobs:
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.0.5"
+          r-version: "4.2.2"
       - name: Install system dependencies
         run: |
           sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
@@ -26,7 +26,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.cache/R/renv
-          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
+          key: ${{ runner.os }}-r-4.2.2-renv-${{ hashFiles('./bots/corona-charts/renv.lock') }}
       - name: Restore R packages
         run: |
           install.packages("renv")
