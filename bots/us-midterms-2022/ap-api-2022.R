@@ -2,10 +2,12 @@
 
 #prep
 rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
+update.packages(ask = F)
 options(scipen=999)
 library(tidyverse)
 library(jsonlite)
 
+update.packages(ask = F)
 # # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/us-midterms-2022")
 # 
