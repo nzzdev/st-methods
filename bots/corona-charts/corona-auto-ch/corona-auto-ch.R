@@ -9,6 +9,9 @@ library(zoo)
 library(rvest)
 library(renv)
 
+#if tidyverse causes github error
+update.packages(ask = F)
+
 # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
