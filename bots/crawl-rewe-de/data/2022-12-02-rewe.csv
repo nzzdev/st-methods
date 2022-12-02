@@ -629,6 +629,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-02;7163013;REWE Beste Wahl;REWE Beste Wahl Dekor Küchentücher 3x80 Blatt;339;3x80 Stück
 2022-12-02;7160863;REWE Beste Wahl;REWE Beste Wahl Dekor Toilettenpapier 3-lagig 8x150 Blatt;339;8x150stück
 2022-12-02;8775448;REWE Beste Wahl;REWE Beste Wahl Delikatess Feinschmecker Salami 70g;179;70g (1 kg = 25,57 €)
+2022-12-02;314470;REWE Beste Wahl;REWE Beste Wahl Delikatess-Fleischsalat mit Gurken 200g;109;200g (1 kg = 5,45 €)
 2022-12-02;314472;REWE Beste Wahl;REWE Beste Wahl Delikatess-Geflügelsalat 200g;159;200g (1 kg = 7,95 €)
 2022-12-02;135750;REWE Beste Wahl;REWE Beste Wahl Delikatess-Gourmetsalami 80g;179;80g (1 kg = 22,38 €)
 2022-12-02;135754;REWE Beste Wahl;REWE Beste Wahl Delikatess-Käsesalami 80g;179;80g (1 kg = 22,38 €)
@@ -897,8 +898,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-02;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;399;500ml (1 l = 7,98 €)
 2022-12-02;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2022-12-02;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2022-12-02;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2022-12-02;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2022-12-02;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2022-12-02;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;329;250g (1 kg = 13,16 €)
 2022-12-02;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets Praktisch Grätenfrei 475g;359;475g (1 kg = 7,56 €)
 2022-12-02;8005928;REWE Beste Wahl;REWE Beste Wahl Paprika Edelsüß gemahlen 50g;189;50g (1 kg = 37,80 €)
