@@ -7,7 +7,9 @@ options(scipen=999)
 library(tidyverse)
 library(jsonlite)
 
-update.packages(ask = F)
+# #if tidyverse causes github error
+# update.packages(ask = F)
+
 # # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/us-midterms-2022")
 # 
