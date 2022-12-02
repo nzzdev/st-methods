@@ -6,9 +6,9 @@ options(scipen=999)
 library(tidyverse)
 library(jsonlite)
 
-# setwd for fixes
+# # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/us-midterms-2022")
-
+# 
 # #renv
 # library(renv)
 # renv::init()
