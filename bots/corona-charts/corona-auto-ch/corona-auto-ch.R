@@ -9,7 +9,6 @@ library(tidyverse)
 library(jsonlite)
 library(zoo)
 library(rvest)
-library(renv)
 
 # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
