@@ -4,14 +4,12 @@
 rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
 # #if tidyverse causes github error
 # update.packages(ask = F)
+
 options(scipen=999)
 library(tidyverse)
 library(jsonlite)
-
-
 # # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/us-midterms-2022")
-# 
 # #renv
 # library(renv)
 # renv::init()
