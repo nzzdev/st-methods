@@ -2,15 +2,14 @@
 
 #prep
 rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
+#if tidyverse causes github error
+update.packages(ask = F)
 options(scipen=999)
 library(tidyverse)
 library(jsonlite)
 library(zoo)
 library(rvest)
 library(renv)
-
-#if tidyverse causes github error
-update.packages(ask = F)
 
 # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
