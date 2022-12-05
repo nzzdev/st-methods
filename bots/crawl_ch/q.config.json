@@ -1,0 +1,17 @@
+{
+ "items": [
+    {
+       "environments": [
+        {
+         "name": "production",
+         "id": "8676bad64564b4740f74b6d5d0757a95"
+        }
+       ],
+       "item": {
+         "data": {
+           "table": []
+         }
+       }
+      }
+ ]
+}
