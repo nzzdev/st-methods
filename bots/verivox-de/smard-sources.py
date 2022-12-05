@@ -75,16 +75,16 @@ if __name__ == '__main__':
             df = df.groupby(['Datum']).sum()
 
             # create new columns and drop the old ones
-            df['Kernkraft'] = df['Kernenergie [MWh] Originale Auflösungen']
-            df['Gas'] = df['Erdgas [MWh] Originale Auflösungen']
-            df['Sonstige'] = df['Pumpspeicher [MWh] Originale Auflösungen'] + \
-                df['Sonstige Konventionelle [MWh] Originale Auflösungen']
-            df['Kohle'] = df['Braunkohle [MWh] Originale Auflösungen'] + \
-                df['Steinkohle [MWh] Originale Auflösungen']
-            df['Erneuerbare'] = df['Biomasse [MWh] Originale Auflösungen'] + df['Wasserkraft [MWh] Originale Auflösungen'] + df['Wind Offshore [MWh] Originale Auflösungen'] + \
-                df['Wind Offshore [MWh] Originale Auflösungen'] + df['Wind Onshore [MWh] Originale Auflösungen'] + \
-                df['Photovoltaik [MWh] Originale Auflösungen'] + \
-                df['Sonstige Erneuerbare [MWh] Originale Auflösungen']
+            df['Kernkraft'] = df['Kernenergie [MWh] Originalauflösungen']
+            df['Gas'] = df['Erdgas [MWh] Originalauflösungen']
+            df['Sonstige'] = df['Pumpspeicher [MWh] Originalauflösungen'] + \
+                df['Sonstige Konventionelle [MWh] Originalauflösungen']
+            df['Kohle'] = df['Braunkohle [MWh] Originalauflösungen'] + \
+                df['Steinkohle [MWh] Originalauflösungen']
+            df['Erneuerbare'] = df['Biomasse [MWh] Originalauflösungen'] + df['Wasserkraft [MWh] Originalauflösungen'] + df['Wind Offshore [MWh] Originalauflösungen'] + \
+                df['Wind Offshore [MWh] Originalauflösungen'] + df['Wind Onshore [MWh] Originalauflösungen'] + \
+                df['Photovoltaik [MWh] Originalauflösungen'] + \
+                df['Sonstige Erneuerbare [MWh] Originalauflösungen']
             df.drop(list(df)[0:12], axis=1, inplace=True)
 
             # convert to week and drop first and last row with partial values
@@ -147,9 +147,9 @@ if __name__ == '__main__':
 
             # calculate daily mean and 7-day moving average
             df_spot = df_spot.groupby(['Datum']).mean()
-            df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'].rolling(
+            df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].rolling(
                 window=7).mean().dropna()
-            df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'].round(
+            df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].round(
                 0)
 
             # get current date
@@ -160,7 +160,7 @@ if __name__ == '__main__':
 
             # drop unused dates
             df_spot = df_spot['2021-01-01': q_date]
-            df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originale Auflösungen'].astype(
+            df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].astype(
                 int)
 
             # dynamic chart title
