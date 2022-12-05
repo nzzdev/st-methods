@@ -367,6 +367,9 @@ df_t_y.sort_values(by = ['Differenz'], inplace = True, ascending = False)
 df_t_y = df_t_y[['', 'title', 'Alter Preis', 'Neuer Preis']].copy()
 df_t_y.rename({'title': ''}, axis = 1, inplace = True)
 
+
+notes = '↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: ' + today.strftime('%d. %m. %Y')
+
 update_chart(id = '8676bad64564b4740f74b6d5d0757a95',
                  data = df_t_y, notes=notes)
 
