@@ -1116,7 +1116,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-05;1045891;REWE Beste Wahl;Schnittlauch im Topf;159;NaN
 2022-12-05;1033906;REWE;Cherry Romatomaten 250g;79;250g (1 kg = 3,16 €)
 2022-12-05;1045889;REWE;Krause Petersilie im Topf;159;1 Stück
-2022-12-05;7741450;REWE;REWE Bio Hummus pikant vegan 200g;129;200g (1 kg = 6,45 €)
 2022-12-05;8114415;REWE;REWE Bio Zuckermais vakuumiert 400g;199;400g (1 kg = 4,98 €)
 2022-12-05;7871419;REWE;REWE Brotzeit-Eier aus Bodenhaltung 6 Stück;179;6 Stück
 2022-12-05;1930502;REWE Bio;Bio Banane ca. 200g;38;1 Stück ca. 200 g (1 kg = 1,89 €)
@@ -1297,6 +1296,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-05;7866921;REWE Bio;REWE Bio Holzofenpizza Spinat-Feta 410g;299;410g (1 kg = 7,29 €)
 2022-12-05;8643029;REWE Bio;REWE Bio Holzofenpizza Vegetariana 410g;299;410g (1 kg = 7,29 €)
 2022-12-05;7272521;REWE Bio;REWE Bio Honig-Dinkel gepufft 200g;179;200g (1 kg = 8,95 €)
+2022-12-05;7741450;REWE Bio;REWE Bio Hummus pikant vegan 200g;129;200g (1 kg = 6,45 €)
 2022-12-05;7033383;REWE Bio;REWE Bio Hähnchen Brustfilet Joghurt Knoblauch 320g;1117;1 Stück ca. 320 g (1 kg = 34,90 €)
 2022-12-05;7034166;REWE Bio;REWE Bio Hähnchen Brustfilet Joghurt Paprika 320g;1117;1 Stück ca. 320 g (1 kg = 34,90 €)
 2022-12-05;1267674;REWE Bio;REWE Bio Hähnchen ca. 1,3kg;1937;1 Stück ca. 1300 g (1 kg = 14,90 €)
@@ -1389,7 +1389,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-05;1279059;REWE Bio;REWE Bio Orangensaft 1l;279;1l
 2022-12-05;8255354;REWE Bio;REWE Bio Oregano gerebelt 15g;249;15g (1 kg = 166 €)
 2022-12-05;333139;REWE Bio;REWE Bio Original Nürnberger Rostbratwürstchen 160g;359;160g (1 kg = 22,44 €)
-2022-12-05;8015318;REWE Bio;REWE Bio Paprika rot ca. 200g;100;1 Stück ca. 200 g (1 kg = 4,99 €)
 2022-12-05;204051;REWE Bio;REWE Bio Paprika-Lyoner 70g;149;70g (1 kg = 21,29 €)
 2022-12-05;8683343;REWE Bio;REWE Bio Parmigiano Reggiano 150g;429;150g (1 kg = 28,60 €)
 2022-12-05;294936;REWE Bio;REWE Bio Passata passierte Tomaten 700g;139;700g (1 kg = 1,99 €)
