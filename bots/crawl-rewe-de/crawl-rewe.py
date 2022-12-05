@@ -212,6 +212,13 @@ if __name__ == '__main__':
         bulkpacks = {'Apfelsaft': 'Apfelsaft 6l', 'Multivitaminsaft': 'Multivitaminsaft 6l', 'Orangensaft': 'Orangensaft 6l', 'Orangennektar': 'Orangennektar 9l', 'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur': 'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg',
                      'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg', 'Weizenmehl Type': 'Weizenmehl', 'Dinkelmehl Typ': 'Dinkelmehl', 'Delikatess-': '', 'Delikatess ': '', 'Feiner ': '', 'Feine ': '', 'Hauchzarter ': '', 'Hauchzartes ': '', 'Saftige ': '', 'Arabica-Robusta-Mischung': ''}
 
+        homeappliance = [8428651, 8431556, 8442236, 8440282]
+
+        # drop home appliance
+        df_ja.reset_index(inplace=True)
+        df_ja = df_ja[~df_ja['ID'].isin(homeappliance)]
+        df_ja.set_index('ID', inplace=True)
+
         """
 
         if not df.empty:
@@ -367,6 +374,11 @@ if __name__ == '__main__':
             dftop_ja = dftop.copy()
             dftop_ja = dftop_ja[dftop_ja['Marke'] == 'ja!']
 
+            # drop home appliance
+            dftop_ja.reset_index(inplace=True)
+            dftop_ja = dftop_ja[~dftop_ja['ID'].isin(homeappliance)]
+            dftop_ja.set_index('ID', inplace=True)
+
             # get full prices instead of change - delete for old format
             dftop_ja[today] = dftop_ja[today] + dftop_ja[month_first]
 
@@ -457,6 +469,9 @@ if __name__ == '__main__':
         df_y.rename({'Preis': 'Alter Preis'}, axis=1, inplace=True)
 
         df_t_y = df_t.merge(df_y, on=['ID', 'Name'])
+
+        # drop home appliance
+        df_t_y = df_t_y[~df_t_y['ID'].isin(homeappliance)]
 
         df_t_y['Differenz'] = (((df_t_y['Neuer Preis'] - df_t_y['Alter Preis']) /
                                df_t_y['Alter Preis'])*100).round(0).astype(int)
@@ -559,9 +574,9 @@ if __name__ == '__main__':
             'sec-fetch-site': 'same-origin',
         }
 
-        ################
-        # daily prices #
-        ################
+        #######################
+        # daily prices PICKUP #
+        #######################
         # get current prices
         with open(f"./data/{today}-rewe-pickup.csv", 'w') as file:
             file.write(header)
@@ -630,6 +645,11 @@ if __name__ == '__main__':
         # create new dataframe with ja! products only
         df_ja = df.copy()
 
+        # drop home appliance
+        df_ja.reset_index(inplace=True)
+        df_ja = df_ja[~df_ja['ID'].isin(homeappliance)]
+        df_ja.set_index('ID', inplace=True)
+
         # create JSON for Twitter
         if not df_ja.empty:
             # create dataframe with ja! products and calculate price change
@@ -689,9 +709,9 @@ if __name__ == '__main__':
             df_ja.to_json(
                 f'./data/{today}-ja-diff-pickup.json', orient='values')
 
-        ###################
-        # monthly summary #
-        ###################
+        ##########################
+        # monthly summary PICKUP #
+        ##########################
         # get first day of current and last month
         month_first = today.replace(day=1)  # 2022-10-01 etc.
         month_first1 = month_first + timedelta(days=1)
@@ -736,6 +756,11 @@ if __name__ == '__main__':
             # create new dataframe with ja! products only
             dftop_ja = dftop.copy()
             #dftop_ja = dftop_ja[dftop_ja['Marke'] == 'ja!']
+
+            # drop home appliance
+            dftop_ja.reset_index(inplace=True)
+            dftop_ja = dftop_ja[~dftop_ja['ID'].isin(homeappliance)]
+            dftop_ja.set_index('ID', inplace=True)
 
             # get full prices instead of change - delete for old format
             dftop_ja[today] = dftop_ja[today] + dftop_ja[month_first]
