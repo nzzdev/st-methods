@@ -479,10 +479,10 @@ if __name__ == '__main__':
         df_t_y = df_t_y[df_t_y['Differenz'] != 0]
         df_t_y.sort_values(by=['Differenz'], inplace=True, ascending=False)
 
-        df_t_y.loc[df_t_y['Differenz'] > 0, ''] = ' ↑ '
-        df_t_y.loc[df_t_y['Differenz'] < 0, ''] = ' ↓ '
-        #df_t_y.loc[df_t_y['Differenz'] > 0, ''] = ' ↑ '
-        #df_t_y.loc[df_t_y['Differenz'] < 0, ''] = ' ↓ '
+        # df_t_y.loc[df_t_y['Differenz'] > 0, ''] = ' ↑ '
+        # df_t_y.loc[df_t_y['Differenz'] < 0, ''] = ' ↓ '
+        df_t_y[''] = df_t_y['Differenz'].apply(
+            lambda x: f'+{x}' if x >= 0 else f'{x}')
         #df_t_y['Neuer Preis'] = df_t_y['Neuer Preis'].apply(lambda x: f'➚ +{x}%' if x >= 0 else f'➘ -{x}%')
         #df_t_y['Alter Preis'] = df_t_y['Alter Preis'].apply(lambda x: f'➚ +{x}%' if x >= 0 else f'➘ -{x}%')
 
