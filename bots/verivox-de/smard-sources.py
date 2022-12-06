@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
             # create new columns and drop the old ones
             df['Kernkraft'] = df['Kernenergie [MWh] Originalauflösungen']
-            df['Gas'] = df['Erdgas [MWh] Originalauflösungen']
+            df['Erdgas'] = df['Erdgas [MWh] Originalauflösungen']
             df['Sonstige'] = df['Sonstige Konventionelle [MWh] Originalauflösungen']
             df['Pumpen'] = df['Pumpspeicher [MWh] Originalauflösungen']
             df['Kohle'] = df['Braunkohle [MWh] Originalauflösungen'] + \
@@ -103,7 +103,7 @@ if __name__ == '__main__':
 
             # calculate percentage for chart title
             df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
-            perc_gas = (df_perc['Gas'].iloc[-1]*100).round(0).astype(int)
+            perc_gas = (df_perc['Erdgas'].iloc[-1]*100).round(0).astype(int)
             if perc_gas > 1:
                 title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
             else:
@@ -113,7 +113,7 @@ if __name__ == '__main__':
             df_dash = df.div(df.sum(axis=1), axis=0)
             df_dash = (df_dash * 100).round(0).astype(int)
             df_dash = df_dash[~(df_dash.index < '2021-01-04 00:00:00')]
-            column_sum = ['Gas', 'Sonstige', 'Kohle']
+            column_sum = ['Erdgas', 'Sonstige', 'Kohle']
             df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
             df_dash = df_dash[['Fossile Abhängigkeit']]
 
