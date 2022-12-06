@@ -262,7 +262,7 @@ for file in os.listdir(f'./output/'):
         df_ = pd.read_excel(f'./output/' + file)
         df_t = pd.concat([df_t, df_], ignore_index = True)
 
-df_t = df_t.dropna(subset = 'price').reset_index(drop = True)
+df_t = df_t.dropna(subset = ['price']).reset_index(drop = True)
 
 # exclude "Aktionen" and clean
 df_t = df_t[~df_t['productAriaLabel'].str.contains('Aktion')]
@@ -301,7 +301,7 @@ for i in food_drinks:
                 continue
             break
         
-df_y = df_y.dropna(subset = 'price').reset_index(drop = True)
+df_y = df_y.dropna(subset = ['price']).reset_index(drop = True)
 
 # exclude "Aktionen" and clean
 df_y = df_y[~df_y['productAriaLabel'].str.contains('Aktion')]
