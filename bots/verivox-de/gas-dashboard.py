@@ -198,12 +198,14 @@ if __name__ == '__main__':
         gas_y = 0
         strom_y = 0
         ns_y = 0
+        fossile_y = 0
         # RUS GAS rus_y = 0
         # BENZIN super_y = 1.6
         storage_ytick = [0, 25, 50, 75, 100]
         gas_ytick = [0, 15, 30, 45]
         strom_ytick = [0, 20, 40, 60]
         ns_ytick = [0, 0.5, 1, 1.5]
+        fossile_ytick = [0, 25, 50, 75]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
         # BENZIN super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
@@ -223,7 +225,7 @@ if __name__ == '__main__':
         meta_strom = {'indicatorTitle': 'Strompreis', 'date': timestamp_str, 'indicatorSubtitle': 'je kWh für Neukunden', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': timestamp_str, 'indicatorSubtitle': 'bei der Stromerzeugung',
-                        'value': diff_fossile, 'valueLabel': f'{diff_fossile_str}%', 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
+                        'value': diff_fossile, 'valueLabel': f'{diff_fossile_str}%', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
 
         # NS 1 meta_ns = {'indicatorTitle': 'Nord Stream 1', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse pro Stunde', 'value': diff_ns, 'valueLabel': f'{diff_ns_str} Mio. m³', 'yAxisStart': strom_y, 'yAxisLabels': ns_ytick, 'yAxisLabelDecimals': 1, 'color': '#ce4631', 'trend': trend_ns, 'chartType': 'line'}
         # RUS GAS meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse nach Deutschland', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} Mio. m³', 'yAxisStart': rus_y, 'yAxisLabels': rus_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_rus, 'chartType': 'line'}
