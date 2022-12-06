@@ -117,6 +117,10 @@ if __name__ == '__main__':
             df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
             df_dash = df_dash[['Fossile Abhängigkeit']]
 
+            # combine conventional
+            df['Sonstige'] = df['Sonstige'] + df['Pumpen']
+            df = df.drop('Pumpen', axis=1)
+
             # drop unused columns and convert to terawatt
             df = df[~(df.index < '2021-07-18 00:00:00')]
             df = df.div(1000000)
