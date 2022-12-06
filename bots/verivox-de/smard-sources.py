@@ -46,16 +46,18 @@ if __name__ == '__main__':
         # API request power generation #
         ################################
         modules = REALIZED_POWER_GENERATION
+        # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
         df = smard.requestSmardData(
-            modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+            modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
 
         # check if data is corrupted
         errors = 0
         while ('Anfang' not in df.columns) and (errors < 10):
             sleep(2)
             errors += 1
+            # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
         else:
             # fix wrong decimal
             df = df.replace('-', '', regex=False)
@@ -110,12 +112,13 @@ if __name__ == '__main__':
             # calculate percentage for dashboard
             df_dash = df.div(df.sum(axis=1), axis=0)
             df_dash = (df_dash * 100).round(0).astype(int)
-            df_dash = df_dash[~(df_dash.index < '2022-01-09 00:00:00')]
+            df_dash = df_dash[~(df_dash.index < '2021-01-04 00:00:00')]
             column_sum = ['Gas', 'Sonstige', 'Kohle']
             df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
             df_dash = df_dash[['Fossile Abhängigkeit']]
 
-            # convert to terawatt
+            # drop unused columns and convert to terawatt
+            df = df[~(df.index < '2021-07-18 00:00:00')]
             df = df.div(1000000)
 
             df_dash.to_csv('./data/smard_percentage.csv')
