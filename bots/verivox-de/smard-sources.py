@@ -79,8 +79,8 @@ if __name__ == '__main__':
             # create new columns and drop the old ones
             df['Kernkraft'] = df['Kernenergie [MWh] Originalauflösungen']
             df['Gas'] = df['Erdgas [MWh] Originalauflösungen']
-            df['Sonstige'] = df['Pumpspeicher [MWh] Originalauflösungen'] + \
-                df['Sonstige Konventionelle [MWh] Originalauflösungen']
+            df['Sonstige'] = df['Sonstige Konventionelle [MWh] Originalauflösungen']
+            df['Pumpen'] = df['Pumpspeicher [MWh] Originalauflösungen']
             df['Kohle'] = df['Braunkohle [MWh] Originalauflösungen'] + \
                 df['Steinkohle [MWh] Originalauflösungen']
             df['Erneuerbare'] = df['Biomasse [MWh] Originalauflösungen'] + df['Wasserkraft [MWh] Originalauflösungen'] + df['Wind Offshore [MWh] Originalauflösungen'] + \
