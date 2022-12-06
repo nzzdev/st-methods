@@ -209,8 +209,8 @@ if __name__ == '__main__':
 
         df_ja = df_ja[df_ja['Marke'] == 'ja!']
 
-        bulkpacks = {'Apfelsaft': 'Apfelsaft 6l', 'Multivitaminsaft': 'Multivitaminsaft 6l', 'Orangensaft': 'Orangensaft 6l', 'Orangennektar': 'Orangennektar 9l', 'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur': 'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg',
-                     'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis': 'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg', 'Weizenmehl Type': 'Weizenmehl', 'Dinkelmehl Typ': 'Dinkelmehl', 'Delikatess-': '', 'Delikatess ': '', 'Feiner ': '', 'Feine ': '', 'Hauchzarter ': '', 'Hauchzartes ': '', 'Saftige ': '', 'Arabica-Robusta-Mischung': ''}
+        bulkpacks = {'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur': 'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis':
+                     'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg', 'Weizenmehl Type': 'Weizenmehl', 'Dinkelmehl Typ': 'Dinkelmehl', 'Delikatess-': '', 'Delikatess ': '', 'Feiner ': '', 'Feine ': '', 'Hauchzarter ': '', 'Hauchzartes ': '', 'Saftige ': '', 'Arabica-Robusta-Mischung': ''}
 
         homeappliance = [8428651, 8431556, 8442236, 8440282]
 
@@ -479,10 +479,10 @@ if __name__ == '__main__':
         df_t_y = df_t_y[df_t_y['Differenz'] != 0]
         df_t_y.sort_values(by=['Differenz'], inplace=True, ascending=False)
 
-        df_t_y.loc[df_t_y['Differenz'] > 0, ''] = ' ↑ '
-        df_t_y.loc[df_t_y['Differenz'] < 0, ''] = ' ↓ '
-        #df_t_y.loc[df_t_y['Differenz'] > 0, ''] = ' ↑ '
-        #df_t_y.loc[df_t_y['Differenz'] < 0, ''] = ' ↓ '
+        # df_t_y.loc[df_t_y['Differenz'] > 0, ''] = ' ↑ '
+        # df_t_y.loc[df_t_y['Differenz'] < 0, ''] = ' ↓ '
+        df_t_y[''] = df_t_y['Differenz'].apply(
+            lambda x: f'+{x}' if x >= 0 else f'{x}')
         #df_t_y['Neuer Preis'] = df_t_y['Neuer Preis'].apply(lambda x: f'➚ +{x}%' if x >= 0 else f'➘ -{x}%')
         #df_t_y['Alter Preis'] = df_t_y['Alter Preis'].apply(lambda x: f'➚ +{x}%' if x >= 0 else f'➘ -{x}%')
 
