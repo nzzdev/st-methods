@@ -28,6 +28,8 @@ if __name__ == '__main__':
                                encoding='utf-8', usecols=['date', 'Strom'], index_col='date')
         df_ns = pd.read_csv('./data/pipelines_ns.tsv',
                             sep='\t', encoding='utf-8', index_col='periodFrom')
+        df_fossile = pd.read_csv(
+            './data/smard_percentage.csv', encoding='utf-8', index_col='Datum')
         # BENZIN df_super = pd.read_csv('./data/node_super.csv', encoding='utf-8', usecols=['day', 'tages_mittel'], index_col='day')
 
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
@@ -44,6 +46,8 @@ if __name__ == '__main__':
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
         df_strom_mean = df_strom.rolling(window=7).mean().dropna()
         df_strom_mean.index = pd.to_datetime(df_strom_mean.index)
+        df_fossile.index = pd.to_datetime(df_fossile.index)
+        df_fossile = df_fossile.sort_index().round(1)
 
         # rename columns and remove dates before 2022-01-01
         df_gas_mean = df_gas_mean[(
@@ -63,6 +67,7 @@ if __name__ == '__main__':
         df_strom_mean = df_strom_mean.rename(columns={'Strom': 'Strompreis'})
         df_ns.index = df_ns.index.rename('date')
         df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
+        df_fossile.index = df_fossile.index.rename('date')
 
         # convert 20 MWh to 20000 kWh and euro to cent / 4 MWh to 4000 kWh
         df_gas = (df_gas / 200).round(2)
@@ -71,36 +76,42 @@ if __name__ == '__main__':
         df_strom_mean = (df_strom_mean / 40).round(2)
 
         # merge dataframes
-        df = pd.concat([df_storage, df_gas, df_strom], axis=1)
+        df = pd.concat([df_gas, df_strom, df_fossile], axis=1)
+        # STORAGE df = pd.concat([df_storage, df_gas, df_strom], axis=1)
         # BENZIN df = pd.concat([df_storage, df_gas, df_super], axis=1)
 
         # create temporary dataframe for old data in gas storage and Russian gas
         df_temp = df.copy().tail(90)
 
-        # check if last row in gas storage/Russian gas column is NaN, then shift numbers
-        while pd.isna(df_temp.iloc[-1:, 0].item()) == True:
-            df_temp.iloc[:, 0] = df_temp.iloc[:, 0].shift(1)
+        # check if last row in gas storage (0)/fossile (2) column is NaN, then shift numbers
+        while pd.isna(df_temp.iloc[-1:, 2].item()) == True:
+            df_temp.iloc[:, 2] = df_temp.iloc[:, 2].shift(1)
+
         # RUS GAS while pd.isna(df_temp.iloc[-1:, 1].item()) == True:
             # df_temp.iloc[:, 1] = df_temp.iloc[:, 1].shift(1)
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df_temp.copy().tail(1)
-        df_meta['Trend Speicher'] = df_storage_trend['Trend'].iloc[-1] * 10
+        # df_meta['Trend Speicher'] = df_storage_trend['Trend'].iloc[-1] * 10
         df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
         )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100  # diff previous day
         df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull(
         )].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) * 100  # diff previous day
+        df_meta['Trend Fossile'] = ((df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull(
+        )].iloc[-1] - df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull()].iloc[-2]) / df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull()].iloc[-2]) * 100
         # BENZIN df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) * 100, 0)  # diff previous week
 
         # NS1 df_meta = df_meta[['Trend Speicher', 'Trend Gas', 'Trend NS1', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
-        df_meta = df_meta[['Trend Speicher', 'Trend Gas',
-                           'Trend Strom', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
+        # STORAGE df_meta = df_meta[['Trend Speicher', 'Trend Gas', 'Trend Strom', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
+        df_meta = df_meta[['Trend Gas', 'Trend Strom', 'Trend Fossile',
+                           'Gaspreis', 'Strompreis', 'Fossile Abhängigkeit']]
 
         # STROM/NS1: change cols1/cols7
         # replace percentages with strings
         # NS1 cols1 = ['Trend Speicher', 'Trend Gas']
-        cols1 = ['Trend Speicher', 'Trend Gas', 'Trend Strom']
         # NS1 cols7 = ['Trend NS1']
+        # STORAGE cols1 = ['Trend Speicher', 'Trend Gas', 'Trend Strom']
+        cols1 = ['Trend Gas', 'Trend Strom', 'Trend Fossile']
 
         # function for string trends (storage and gas=previous day, petrol=previous week)
         def replace_vals(df_meta):
@@ -126,36 +137,40 @@ if __name__ == '__main__':
 
         # get last values of df_meta as objects
         df_meta = df_meta.iloc[0]
-        trend_storage = df_meta['Trend Speicher']
+        # STORAGE trend_storage = df_meta['Trend Speicher']
         trend_gas = df_meta['Trend Gas']
         trend_strom = df_meta['Trend Strom']
+        trend_fossile = df_meta['Trend Fossile']
         # NS1 trend_ns = df_meta['Trend NS1']
         # RUS GAS trend_rus = df_meta['Trend Importe']
         # BENZIN trend_super = df_meta['Trend Benzin']
-        diff_storage = df_meta['Gasspeicher']
+        # STORAGE diff_storage = df_meta['Gasspeicher']
         diff_gas = df_gas['Gaspreis'].iloc[-1]
         diff_strom = df_strom['Strompreis'].iloc[-1]
         diff_ns = df_ns['Nord Stream 1'].iloc[-1].round(2)
+        diff_fossile = df_fossile['Fossile Abhängigkeit'].iloc[-1]
         # RUS GAS diff_rus = df_meta['Russisches Gas']
         # BENZIN diff_super = df_meta['Benzinpreis']
 
         # get current date for chart notes and reset index
         df = df.reset_index()
-        df_storage = df_storage.reset_index()
+        # STORAGE df_storage = df_storage.reset_index()
         df_gas = df_gas.reset_index()
         df_strom = df_strom.reset_index()
         df_ns = df_ns.reset_index()
+        df_fossile = df_fossile.reset_index()
         # BENZIN df_super = df_super.reset_index()
         df['date'] = pd.to_datetime(
             df['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
-        df_storage['date'] = pd.to_datetime(
-            df_storage['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
+        # df_storage['date'] = pd.to_datetime(df_storage['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_gas['date'] = pd.to_datetime(
             df_gas['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_strom['date'] = pd.to_datetime(
             df_strom['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_ns['date'] = pd.to_datetime(
             df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d %H:%M:%S')
+        df_fossile['date'] = pd.to_datetime(
+            df_fossile['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         # BENZIN df_super['date'] = pd.to_datetime(df_super['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         timestamp_str = df_gas['date'].tail(1).item()
 
@@ -164,14 +179,15 @@ if __name__ == '__main__':
         # df['Gasspeicher'] = df['Gasspeicher'].replace(['0', '0.0'], '')
 
         # create dictionaries for JSON file and drop NaN
-        dict_storage = df_storage.rename(
-            columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
         # dict_gas = df_gas.rename(columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
         # BENZIN dict_super = df.drop(df.columns[[1, 2]], axis=1).rename(columns={df.columns[3]: 'value'}).to_dict(orient='records')
+        # STORAGE dict_storage = df_storage.rename(columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
         dict_gas = df.drop(df.columns[[1, 3]], axis=1).rename(
             columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')
         dict_strom = df.drop(df.columns[[1, 2]], axis=1).rename(
             columns={df.columns[3]: 'value'}).dropna().to_dict(orient='records')
+        dict_fossile = df_fossile.rename(
+            columns={df_fossile.columns[1]: 'value'}).to_dict(orient='records')
         df_ns['Nord Stream 1'] = df_ns['Nord Stream 1'].round(2).astype(float)
         dict_ns = df_ns.rename(
             columns={'Nord Stream 1': 'value'}).dropna().to_dict(orient='records')
@@ -192,35 +208,41 @@ if __name__ == '__main__':
         # BENZIN super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
         # change decimal seperator
-        diff_storage_str = diff_storage.astype(str).replace('.', ',')
+        # STORAGE diff_storage_str = diff_storage.astype(str).replace('.', ',')
         diff_gas_str = diff_gas.astype(str).replace('.', ',')
         diff_strom_str = diff_strom.astype(str).replace('.', ',')
         diff_ns_str = diff_ns.astype(str).replace('.', ',')
+        diff_fossile_str = diff_fossile.astype(str)
+        diff_fossile = diff_fossile.astype(float)
         # RUS GAS diff_rus_str = diff_rus.round(0).astype(int)
         # BENZIN diff_super_str = diff_super.astype(str).replace('.', ',')
 
-        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 40% am 1.2.23', 'value': diff_storage, 'valueLabel': f'{diff_storage_str}% voll',
-                        'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
+        # STORAGE meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': timestamp_str, 'indicatorSubtitle': 'Ziel: 40% am 1.2.23', 'value': diff_storage, 'valueLabel': f'{diff_storage_str}% voll', 'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': timestamp_str, 'indicatorSubtitle': 'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
         meta_strom = {'indicatorTitle': 'Strompreis', 'date': timestamp_str, 'indicatorSubtitle': 'je kWh für Neukunden', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
+        meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': timestamp_str, 'indicatorSubtitle': 'bei der Stromerzeugung',
+                        'value': diff_fossile, 'valueLabel': f'{diff_fossile_str}%', 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
+
         # NS 1 meta_ns = {'indicatorTitle': 'Nord Stream 1', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse pro Stunde', 'value': diff_ns, 'valueLabel': f'{diff_ns_str} Mio. m³', 'yAxisStart': strom_y, 'yAxisLabels': ns_ytick, 'yAxisLabelDecimals': 1, 'color': '#ce4631', 'trend': trend_ns, 'chartType': 'line'}
         # RUS GAS meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse nach Deutschland', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} Mio. m³', 'yAxisStart': rus_y, 'yAxisLabels': rus_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_rus, 'chartType': 'line'}
         # BENZIN meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Super E5', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro', 'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
 
         # merge dictionaries
-        meta_storage['chartData'] = dict_storage
+        # STORAGE meta_storage['chartData'] = dict_storage
         meta_gas['chartData'] = dict_gas
         meta_strom['chartData'] = dict_strom
+        meta_fossile['chartData'] = dict_fossile
         # NS1 meta_ns['chartData'] = dict_ns
         # RUS GAS meta_rus['chartData'] = dict_rus
         # BENZIN meta_super['chartData'] = dict_super
         dicts = []
-        dicts.append(meta_storage)
+        # STORAGE dicts.append(meta_storage)
         # RUS GAS dicts.append(meta_rus)
         dicts.append(meta_gas)
         dicts.append(meta_strom)
+        dicts.append(meta_fossile)
         # NS1 dicts.append(meta_ns)
         # BENZIN dicts.append(meta_super)
         with open('./data/dashboard_de.json', 'w') as fp:

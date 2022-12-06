@@ -51,7 +51,7 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df.columns) and (errors < 10):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
@@ -107,8 +107,18 @@ if __name__ == '__main__':
             else:
                 title_chart = f'{perc_gas} Prozent des Stroms stammt derzeit aus Erdgas'
 
+            # calculate percentage for dashboard
+            df_dash = df.div(df.sum(axis=1), axis=0)
+            df_dash = (df_dash * 100).round(0).astype(int)
+            df_dash = df_dash[~(df_dash.index < '2022-01-09 00:00:00')]
+            column_sum = ['Gas', 'Sonstige', 'Kohle']
+            df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
+            df_dash = df_dash[['Fossile Abhängigkeit']]
+
             # convert to terawatt
             df = df.div(1000000)
+
+            df_dash.to_csv('./data/smard_percentage.csv')
 
             # convert DatetimeIndex to string
             # df.index = df.index.strftime('%Y-%m-%d')
