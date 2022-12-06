@@ -88,7 +88,7 @@ if __name__ == '__main__':
             df_temp.iloc[:, 2] = df_temp.iloc[:, 2].shift(1)
 
         # RUS GAS while pd.isna(df_temp.iloc[-1:, 1].item()) == True:
-            # df_temp.iloc[:, 1] = df_temp.iloc[:, 1].shift(1)
+           # df_temp.iloc[:, 1] = df_temp.iloc[:, 1].shift(1)
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df_temp.copy().tail(1)
@@ -182,10 +182,10 @@ if __name__ == '__main__':
         # dict_gas = df_gas.rename(columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
         # BENZIN dict_super = df.drop(df.columns[[1, 2]], axis=1).rename(columns={df.columns[3]: 'value'}).to_dict(orient='records')
         # STORAGE dict_storage = df_storage.rename(columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
-        dict_gas = df.drop(df.columns[[1, 3]], axis=1).rename(
+        dict_gas = df.drop(df.columns[[2, 3]], axis=1).rename(
+            columns={df.columns[1]: 'value'}).dropna().to_dict(orient='records')
+        dict_strom = df.drop(df.columns[[1, 3]], axis=1).rename(
             columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')
-        dict_strom = df.drop(df.columns[[1, 2]], axis=1).rename(
-            columns={df.columns[3]: 'value'}).dropna().to_dict(orient='records')
         dict_fossile = df_fossile.rename(
             columns={df_fossile.columns[1]: 'value'}).to_dict(orient='records')
         df_ns['Nord Stream 1'] = df_ns['Nord Stream 1'].round(2).astype(float)
