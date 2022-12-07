@@ -3,6 +3,7 @@ import io
 import numpy as np
 import pandas as pd
 from user_agent import generate_user_agent
+import gc
 
 if __name__ == '__main__':
     try:
@@ -18,6 +19,9 @@ if __name__ == '__main__':
             'Pragma': 'no-cache'
         }
 
+        ##########
+        # NORMAL #
+        ##########
         # download data
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081208'
         resp = download_data(url, headers=fheaders)
@@ -39,8 +43,8 @@ if __name__ == '__main__':
 
         # rename and reorder columns
         df = df.rename(columns={
-                       df.columns[0]: 'Datum', df.columns[2]: '', df.columns[3]: 'Höchst-/Tiefststand¹'})
-        df = df[['Datum', '', 'Höchst-/Tiefststand¹', '2022']]
+                       df.columns[0]: 'Datum', df.columns[2]: '', df.columns[3]: '3-Jahres-Mittel'})
+        df = df[['Datum', '', '3-Jahres-Mittel', '2022']]
 
         # add new column with goal
         df = df.assign(goal=['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '1238.45', '1219.75', '1249.5', '1299.65', '1339.6',
@@ -70,8 +74,55 @@ if __name__ == '__main__':
         df.iloc[:, 2] = df.iloc[:, 2].replace(np.nan, '')
 
         # run Q function
-        update_chart(id='df32c18d6ba570e13338190d2936f17d',
-                     data=df, title=chart_title, notes=chart_notes)
+        update_chart(id='df32c18d6ba570e13338190d2936f17d', data=df, title=chart_title, notes=chart_notes)
+
+        # cleanup
+        del [[df]]
+        gc.collect()
+
+        #############
+        # BEREINIGT #
+        #############
+
+        # download data
+        url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1090950'
+        resp = download_data(url, headers=fheaders)
+        csv_file = resp.text
+
+        # read csv, drop last column with weather and convert to str
+        df = pd.read_csv(io.StringIO(csv_file), encoding='utf-8',
+                         sep=';', decimal=',', index_col=None)
+        df = df.drop(df.columns[[2, 3]], axis=1)
+
+        # rename and reorder columns
+        df = df.rename(columns={
+                       df.columns[0]: 'Datum', df.columns[1]: 'Ziel¹', df.columns[2]: '3-Jahres-Mittel', df.columns[3]: '2022'})
+        df = df[['Datum', '3-Jahres-Mittel', '2022', 'Ziel¹']]
+
+        # convert date column to index
+        df = df.set_index('Datum')
+        df.index = pd.to_datetime(df.index)
+
+        # convert total imports to terrawatts
+        df = df.div(1000)
+
+        # create timestamp for chart notes
+        timestamp = df.index[-1]
+        timestamp_notes = timestamp + pd.DateOffset(days=1)
+        timestamp_notes_str = timestamp_notes.strftime('%-d. %-m. %Y')
+        chart_notes = f'¹ Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br><br>Stand: {timestamp_notes_str}'
+
+        # create dynamic chart title
+        diff = (df['2022'].iloc[-1] / df['3-Jahres-Mittel'].iloc[-1])-1
+        if diff < -0.25:
+            chart_title = 'Deutschland erfüllt derzeit sein Sparziel'
+        elif diff >= -0.25 and diff <= -0.15:
+            chart_title = 'Deutschland verfehlt derzeit sein Sparziel knapp'
+        else:
+            chart_title = 'Deutschland verfehlt sein Sparziel derzeit deutlich'
+
+        # run Q function
+        update_chart(id='48eb730db09047043a6a34a319789817', data=df, title=chart_title, notes=chart_notes)
 
     except:
         raise
