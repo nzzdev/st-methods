@@ -205,7 +205,7 @@ if __name__ == '__main__':
         gas_ytick = [0, 15, 30, 45]
         strom_ytick = [0, 20, 40, 60]
         ns_ytick = [0, 0.5, 1, 1.5]
-        fossile_ytick = [20, 40, 60, 80]
+        fossile_ytick = [20, 35, 50, 65]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
         # BENZIN super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
 
