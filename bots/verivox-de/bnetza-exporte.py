@@ -39,7 +39,7 @@ if __name__ == '__main__':
         notes_chart = '¹ Die Exporte beinhalten sämtliche Gasflüsse von Deutschland in angrenzende Staaten, unabhängig davon, wo das Gas bestellt wurde.<br>Stand: ' + timecodestr
 
         # calculate 7-day mvg average
-        df = df.rolling(window=7).mean().dropna()
+        #df = df.rolling(window=7).mean().dropna()
 
         # convert total exports to terrawatts
         df = df.div(1000)
