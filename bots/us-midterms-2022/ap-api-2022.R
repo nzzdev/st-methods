@@ -161,6 +161,9 @@ senate_tab$incumbent_party[senate_tab$incumbent_party != "republicans" &
 senate_tab$winners_party[senate_tab$state == "AK"] <- "republicans"
 senate_tab$winners_name[senate_tab$state == "AK"]  <- "Lisa Murkowski"
 
+senate_tab$winners_party[senate_tab$state == "GA"] <- "democrats"
+senate_tab$winners_name[senate_tab$state == "AK"]  <- "Raphael Warnock"
+
 table(senate_tab$winners_party)
 
 #write_csv(senate_tab, "senate-election.csv")
