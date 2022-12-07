@@ -143,6 +143,9 @@ if __name__ == '__main__':
         df_total = df_total.set_index(df_total.columns[0])
         df_ns = df_ns.set_index(df_ns.columns[0])
 
+        # convert total imports to terrawatts
+        df_total = df_total.div(1000)
+
         # convert GWh to million m3 according to calorific value of Russian gas
         df_ns = (df_ns / 10.3).round(1)
 
@@ -151,12 +154,16 @@ if __name__ == '__main__':
             chart_title = 'Über Nord Stream 1 fliesst kaum noch russisches Gas'
         else:
             chart_title = 'Über Nord Stream 1 fliesst kein russisches Gas mehr'
+        title_twh = df_total[df_total.columns[0]
+                             ].iloc[-1].round(1).astype(float)
+        title_twh = title_twh.astype(str).replace('.', ',')
+        chart_title_total = f'Deutschland importiert¹ derzeit {title_twh} TWh Gas am Tag'
 
         # get latest date for chart notes
         timecode = df_ns.index[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
         notes_chart_ns = 'Stand: ' + timecodestr
-        notes_chart_total = '¹ inklusive möglicher Ringflüsse.<br>Stand: ' + timecodestr
+        notes_chart_total = '¹ inklusive möglicher Ringflüsse und Bestellungen aus anderen Staaten.<br>Stand: ' + timecodestr
 
         # rename columns and save clean csv for dashboard
         df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
@@ -166,8 +173,8 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
                      data=df_ns, notes=notes_chart_ns, title=chart_title)
-        update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5',
-                     data=df_total, notes=notes_chart_total)
+        update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5', data=df_total,
+                     notes=notes_chart_total, title=chart_title_total)
 
         """
         # OLD
