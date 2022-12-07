@@ -97,8 +97,8 @@ if __name__ == '__main__':
 
         # rename and reorder columns
         df = df.rename(columns={
-                       df.columns[0]: 'Datum', df.columns[1]: 'Ziel²', df.columns[2]: 'Mittel¹', df.columns[3]: '2022'})
-        df = df[['Datum', 'Mittel¹', '2022', 'Ziel²']]
+                       df.columns[0]: 'Datum', df.columns[1]: 'Ziel²', df.columns[2]: 'Normaler Verbrauch¹', df.columns[3]: '2022'})
+        df = df[['Datum', 'Normaler Verbrauch¹', '2022', 'Ziel²']]
 
         # convert date column to index
         df = df.set_index('Datum')
@@ -111,10 +111,10 @@ if __name__ == '__main__':
         timestamp = df.index[-1]
         timestamp_notes = timestamp + pd.DateOffset(days=1)
         timestamp_notes_str = timestamp_notes.strftime('%-d. %-m. %Y')
-        chart_notes = f'¹ Referenzverbrauch 2018-2021, temperaturbereinigt.<br>² Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br>Stand: {timestamp_notes_str}'
+        chart_notes = f'¹ Mittelwert 2018-2021, temperaturbereinigt.<br>² Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br>Stand: {timestamp_notes_str}'
 
         # create dynamic chart title
-        diff = (df['2022'].iloc[-1] / df['Mittel¹'].iloc[-1])-1
+        diff = (df['2022'].iloc[-1] / df['Normaler Verbrauch¹'].iloc[-1])-1
         if diff < -0.25:
             chart_title = 'Deutschland erfüllt derzeit sein Sparziel'
         elif diff >= -0.25 and diff <= -0.15:
