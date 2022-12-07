@@ -118,7 +118,7 @@ if __name__ == '__main__':
         if diff < -0.25:
             chart_title = 'Deutschland erfüllt derzeit sein Sparziel'
         elif diff >= -0.25 and diff <= -0.15:
-            chart_title = 'Deutschland verfehlt derzeit sein Sparziel knapp'
+            chart_title = 'Deutschland verfehlt sein Sparziel derzeit knapp'
         else:
             chart_title = 'Deutschland verfehlt sein Sparziel derzeit deutlich'
 
