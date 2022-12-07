@@ -74,7 +74,8 @@ if __name__ == '__main__':
         df.iloc[:, 2] = df.iloc[:, 2].replace(np.nan, '')
 
         # run Q function
-        update_chart(id='df32c18d6ba570e13338190d2936f17d', data=df, title=chart_title, notes=chart_notes)
+        update_chart(id='df32c18d6ba570e13338190d2936f17d',
+                     data=df, title=chart_title, notes=chart_notes)
 
         # cleanup
         del [[df]]
@@ -96,8 +97,8 @@ if __name__ == '__main__':
 
         # rename and reorder columns
         df = df.rename(columns={
-                       df.columns[0]: 'Datum', df.columns[1]: 'Ziel¹', df.columns[2]: '3-Jahres-Mittel', df.columns[3]: '2022'})
-        df = df[['Datum', '3-Jahres-Mittel', '2022', 'Ziel¹']]
+                       df.columns[0]: 'Datum', df.columns[1]: 'Ziel²', df.columns[2]: '3-Jahres-Mittel¹', df.columns[3]: '2022'})
+        df = df[['Datum', '3-Jahres-Mittel¹', '2022', 'Ziel²']]
 
         # convert date column to index
         df = df.set_index('Datum')
@@ -110,10 +111,10 @@ if __name__ == '__main__':
         timestamp = df.index[-1]
         timestamp_notes = timestamp + pd.DateOffset(days=1)
         timestamp_notes_str = timestamp_notes.strftime('%-d. %-m. %Y')
-        chart_notes = f'¹ Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br><br>Stand: {timestamp_notes_str}'
+        chart_notes = f'¹ temperaturbereinigter Referenzverbrauch 2018-2021.<br>² Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br><br>Stand: {timestamp_notes_str}'
 
         # create dynamic chart title
-        diff = (df['2022'].iloc[-1] / df['3-Jahres-Mittel'].iloc[-1])-1
+        diff = (df['2022'].iloc[-1] / df['3-Jahres-Mittel¹'].iloc[-1])-1
         if diff < -0.25:
             chart_title = 'Deutschland erfüllt derzeit sein Sparziel'
         elif diff >= -0.25 and diff <= -0.15:
@@ -122,7 +123,8 @@ if __name__ == '__main__':
             chart_title = 'Deutschland verfehlt sein Sparziel derzeit deutlich'
 
         # run Q function
-        update_chart(id='48eb730db09047043a6a34a319789817', data=df, title=chart_title, notes=chart_notes)
+        update_chart(id='48eb730db09047043a6a34a319789817',
+                     data=df, title=chart_title, notes=chart_notes)
 
     except:
         raise
