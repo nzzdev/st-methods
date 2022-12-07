@@ -7,6 +7,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 from user_agent import generate_user_agent
+import numpy as np
 
 if __name__ == '__main__':
     try:
@@ -100,7 +101,8 @@ if __name__ == '__main__':
         # set week number as index and create date for chart notes
         df_lng.set_index('Datum', inplace=True)
         df_russia.set_index('Datum', inplace=True)
-        weekno = df_russia['2022'].last_valid_index()  # last non NaN value
+        weekno = df_russia['2022'].replace(
+            r'^\s*$', np.nan, regex=True).last_valid_index()  # replace empty strings and check last non NaN value
         weekno_dt = datetime.strptime(
             weekno + '-1', '%Y-W%W-%w') + timedelta(days=7)  # get monday from next week
         weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
