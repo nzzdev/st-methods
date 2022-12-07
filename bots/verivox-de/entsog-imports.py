@@ -157,7 +157,7 @@ if __name__ == '__main__':
         title_twh = df_total[df_total.columns[0]
                              ].iloc[-1].round(1).astype(float)
         title_twh = title_twh.astype(str).replace('.', ',')
-        chart_title_total = f'Deutschland importiert¹ derzeit {title_twh} TWh Gas am Tag'
+        chart_title_total = f'Deutschland importiert derzeit {title_twh} TWh Gas am Tag'
 
         # get latest date for chart notes
         timecode = df_ns.index[-1]
