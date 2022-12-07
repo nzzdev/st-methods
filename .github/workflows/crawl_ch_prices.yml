@@ -38,6 +38,7 @@ jobs:
           AWS_GATEWAY_SECRET: ${{ secrets.AWS_GATEWAY_SECRET }}
         run: |
           python crawl_ch.py
+          git pull
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Upload excel files with prices
