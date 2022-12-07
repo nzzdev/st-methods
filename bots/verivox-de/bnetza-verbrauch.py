@@ -111,7 +111,7 @@ if __name__ == '__main__':
         timestamp = df.index[-1]
         timestamp_notes = timestamp + pd.DateOffset(days=1)
         timestamp_notes_str = timestamp_notes.strftime('%-d. %-m. %Y')
-        chart_notes = f'¹ temperaturbereinigter Referenzverbrauch 2018-2021.<br>² Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br><br>Stand: {timestamp_notes_str}'
+        chart_notes = f'¹ temperaturbereinigter Referenzverbrauch 2018-2021.<br>² Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br>Stand: {timestamp_notes_str}'
 
         # create dynamic chart title
         diff = (df['2022'].iloc[-1] / df['3-Jahres-Mittel¹'].iloc[-1])-1
