@@ -42,6 +42,18 @@
       ],
       [
        "↑",
+       "Proteinbrot",
+       "2.3",
+       "2.5"
+      ],
+      [
+       "↑",
+       "Kartoffeln",
+       "2.95",
+       "3.2"
+      ],
+      [
+       "↑",
        "Trauben weiss",
        "2.8",
        "2.95"
@@ -54,24 +66,6 @@
       ],
       [
        "↑",
-       "Kartoffeln",
-       "2.95",
-       "3.2"
-      ],
-      [
-       "↑",
-       "Proteinbrot",
-       "2.3",
-       "2.5"
-      ],
-      [
-       "↑",
-       "Apfelschorle",
-       "8.35",
-       "8.4"
-      ],
-      [
-       "↑",
        "Polenta Maisgriess",
        "0.95",
        "1.0"
@@ -81,24 +75,6 @@
        "Müsli Riegel Apfel",
        "1.8",
        "1.95"
-      ],
-      [
-       "↑",
-       "Langkornreis Parboiled",
-       "1.1",
-       "1.2"
-      ],
-      [
-       "↑",
-       "Müsli Riegel Schoko",
-       "1.8",
-       "1.95"
-      ],
-      [
-       "↑",
-       "Kuchenteig Block",
-       "1.7",
-       "1.75"
       ],
       [
        "↑",
@@ -129,6 +105,30 @@
        "Riegel Schok & Erdnuss",
        "1.8",
        "1.95"
+      ],
+      [
+       "↑",
+       "Apfelschorle",
+       "8.35",
+       "8.4"
+      ],
+      [
+       "↑",
+       "Müsli Riegel Schoko",
+       "1.8",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Kuchenteig Block",
+       "1.7",
+       "1.75"
+      ],
+      [
+       "↑",
+       "Langkornreis Parboiled",
+       "1.1",
+       "1.2"
       ],
       [
        "↓",
@@ -180,7 +180,7 @@
       ]
      ]
     },
-    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 07. 12. 2022"
+    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 08. 12. 2022"
    }
   }
  ]
