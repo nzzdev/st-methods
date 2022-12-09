@@ -114,6 +114,8 @@ if __name__ == '__main__':
         chart_notes = f'¹ Mittelwert 2018-2021, temperaturbereinigt.<br>² Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br>Stand: {timestamp_notes_str}'
 
         # create dynamic chart title
+        # OLD
+        """
         diff = (df['2022'].iloc[-1] / df['Normaler Verbrauch¹'].iloc[-1])-1
         if diff < -0.25:
             chart_title = 'Deutschland erfüllt derzeit sein Sparziel'
@@ -121,6 +123,15 @@ if __name__ == '__main__':
             chart_title = 'Deutschland verfehlt sein Sparziel derzeit knapp'
         else:
             chart_title = 'Deutschland verfehlt sein Sparziel derzeit deutlich'
+        """
+        diff = (df['2022'].iloc[-1] / df['Normaler Verbrauch¹'].iloc[-1])-1
+        diff_nice = abs((diff*100).round(0).astype(int))
+        if diff < 0:
+            chart_title = f'Deutschland verbraucht derzeit {diff_nice} Prozent weniger Gas als üblich'
+        elif diff > 0:
+            chart_title = f'Deutschland verbraucht derzeit {diff_nice} Prozent mehr Gas als üblich'
+        else:
+            chart_title = 'Deutschland verbraucht derzeit so viel Gas wie üblich'
 
         # run Q function
         update_chart(id='48eb730db09047043a6a34a319789817',
