@@ -42,6 +42,12 @@
       ],
       [
        "↑",
+       "Pizzateig eckig ausgewallt",
+       "2.8",
+       "2.95"
+      ],
+      [
+       "↑",
        "Proteinbrot",
        "2.3",
        "2.5"
@@ -60,9 +66,33 @@
       ],
       [
        "↑",
-       "Pizzateig eckig ausgewallt",
-       "2.8",
-       "2.95"
+       "Frischback Baguettes",
+       "0.9",
+       "1.0"
+      ],
+      [
+       "↑",
+       "Langkornreis Parboiled",
+       "1.1",
+       "1.2"
+      ],
+      [
+       "↑",
+       "Riegel Schok & Erdnuss",
+       "1.8",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Müsli Riegel Apfel",
+       "1.8",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Müsli Riegel Schoko",
+       "1.8",
+       "1.95"
       ],
       [
        "↑",
@@ -72,9 +102,15 @@
       ],
       [
        "↑",
-       "Müsli Riegel Apfel",
-       "1.8",
-       "1.95"
+       "Apfelschorle",
+       "8.35",
+       "8.4"
+      ],
+      [
+       "↑",
+       "Kuchenteig Block",
+       "1.7",
+       "1.75"
       ],
       [
        "↑",
@@ -95,52 +131,16 @@
        "1.0"
       ],
       [
-       "↑",
-       "Frischback Baguettes",
-       "0.9",
-       "1.0"
-      ],
-      [
-       "↑",
-       "Riegel Schok & Erdnuss",
-       "1.8",
+       "↓",
+       "Dattel Tomaten",
+       "2.0",
        "1.95"
-      ],
-      [
-       "↑",
-       "Apfelschorle",
-       "8.35",
-       "8.4"
-      ],
-      [
-       "↑",
-       "Müsli Riegel Schoko",
-       "1.8",
-       "1.95"
-      ],
-      [
-       "↑",
-       "Kuchenteig Block",
-       "1.7",
-       "1.75"
-      ],
-      [
-       "↑",
-       "Langkornreis Parboiled",
-       "1.1",
-       "1.2"
       ],
       [
        "↓",
        "Karotten",
        "2.65",
        "2.55"
-      ],
-      [
-       "↓",
-       "Dattel Tomaten",
-       "2.0",
-       "1.95"
       ],
       [
        "↓",
@@ -180,7 +180,7 @@
       ]
      ]
     },
-    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 08. 12. 2022"
+    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 09. 12. 2022"
    }
   }
  ]
