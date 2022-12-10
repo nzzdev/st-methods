@@ -111,7 +111,7 @@ if __name__ == '__main__':
 
             # calculate percentage for dashboard
             df_dash = df.div(df.sum(axis=1), axis=0)
-            df_dash = (df_dash * 100).round(0).astype(int)
+            df_dash = (df_dash * 100).round(1)
             df_dash = df_dash[~(df_dash.index < '2021-01-04 00:00:00')]
             column_sum = ['Erdgas', 'Sonstige', 'Kohle']
             df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
@@ -131,8 +131,7 @@ if __name__ == '__main__':
             # df.index = df.index.strftime('%Y-%m-%d')
 
             # run Q function
-            update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
-                         data=df, notes=notes_chart, title=title_chart)
+            update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',data=df, notes=notes_chart, title=title_chart)
 
         ###########################
         # API request spot market #
@@ -185,8 +184,7 @@ if __name__ == '__main__':
             title = f'Strom kostet an der Börse {title_mwh} Euro je MWh'
 
             # run Q function
-            update_chart(id='90005812afc9964bbfe4f952f51d6a57',
-                         title=title, notes=notes_chart, data=df_spot)
+            update_chart(id='90005812afc9964bbfe4f952f51d6a57', title=title, notes=notes_chart, data=df_spot)
 
     except:
         raise

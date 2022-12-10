@@ -74,8 +74,7 @@ if __name__ == '__main__':
         df.iloc[:, 2] = df.iloc[:, 2].replace(np.nan, '')
 
         # run Q function
-        update_chart(id='df32c18d6ba570e13338190d2936f17d',
-                     data=df, title=chart_title, notes=chart_notes)
+        update_chart(id='df32c18d6ba570e13338190d2936f17d', data=df, title=chart_title, notes=chart_notes)
 
         # cleanup
         del [[df]]
@@ -133,9 +132,10 @@ if __name__ == '__main__':
         else:
             chart_title = 'Deutschland verbraucht derzeit so viel Gas wie üblich'
 
+        # write to CSV for dashboard
+        df.to_csv('./data/gasverbrauch.csv', encoding='utf-8', index=True)
         # run Q function
-        update_chart(id='48eb730db09047043a6a34a319789817',
-                     data=df, title=chart_title, notes=chart_notes)
+        update_chart(id='48eb730db09047043a6a34a319789817', data=df, title=chart_title, notes=chart_notes)
 
     except:
         raise
