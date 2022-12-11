@@ -275,7 +275,7 @@ if __name__ == '__main__':
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': timestamp_str, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
-        meta_usage = {'indicatorTitle': 'Gasverbrauch', 'date': timestamp_str, 'indicatorSubtitle': f'im Vergleich zu den Vorjahren am {timestamp_str_usage}',
+        meta_usage = {'indicatorTitle': 'Eingespartes Gas', 'date': timestamp_str, 'indicatorSubtitle': f'im Vergleich zu den Vorjahren am {timestamp_str_usage}',
                       'value': u_diff, 'valueLabel': f'{diff_usage_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_fossile, 'chartType': 'line'}
 
         # NS 1 meta_ns = {'indicatorTitle': 'Nord Stream 1', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse pro Stunde', 'value': diff_ns, 'valueLabel': f'{diff_ns_str} Mio. m³', 'yAxisStart': strom_y, 'yAxisLabels': ns_ytick, 'yAxisLabelDecimals': 1, 'color': '#ce4631', 'trend': trend_ns, 'chartType': 'line'}
