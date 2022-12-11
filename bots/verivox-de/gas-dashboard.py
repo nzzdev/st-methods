@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import sys
 import json
-from datetime import date
+from datetime import date, timedelta
 
 if __name__ == '__main__':
     try:
@@ -210,8 +210,8 @@ if __name__ == '__main__':
         timestamp_str_storage = df_storage['date'].tail(1).item()
         timestamp_str_storage = pd.to_datetime(
             timestamp_str_storage).strftime('%-d. %-m.')
-        timestamp_str_fossile = pd.to_datetime(
-            df_fossile['date'].tail(1).item()).strftime('KW %U')
+        timestamp_str_fossile = (pd.to_datetime(
+            df_fossile['date'].tail(1).item()) - timedelta(days=1)).strftime('KW %U')  # tail(2)=last week
 
         # OLD replace NaN with empty string for old storage data
         # df['Gasspeicher'] = df['Gasspeicher'].fillna(0).astype(int).astype(str)
@@ -270,7 +270,7 @@ if __name__ == '__main__':
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': timestamp_str, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
-        meta_usage = {'indicatorTitle': 'Gasverbrauch', 'date': timestamp_str, 'indicatorSubtitle': f'Abweichung vom üblichen Verbrauch am {timestamp_str_usage}',
+        meta_usage = {'indicatorTitle': 'Gasverbrauch', 'date': timestamp_str, 'indicatorSubtitle': f'Abweichung vom üblichen Verbrauch',
                       'value': u_diff, 'valueLabel': f'{diff_usage_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_fossile, 'chartType': 'line'}
 
         # NS 1 meta_ns = {'indicatorTitle': 'Nord Stream 1', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse pro Stunde', 'value': diff_ns, 'valueLabel': f'{diff_ns_str} Mio. m³', 'yAxisStart': strom_y, 'yAxisLabels': ns_ytick, 'yAxisLabelDecimals': 1, 'color': '#ce4631', 'trend': trend_ns, 'chartType': 'line'}
