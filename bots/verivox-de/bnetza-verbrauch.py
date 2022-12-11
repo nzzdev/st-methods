@@ -74,7 +74,8 @@ if __name__ == '__main__':
         df.iloc[:, 2] = df.iloc[:, 2].replace(np.nan, '')
 
         # run Q function
-        update_chart(id='df32c18d6ba570e13338190d2936f17d', data=df, title=chart_title, notes=chart_notes)
+        update_chart(id='df32c18d6ba570e13338190d2936f17d',
+                     data=df, title=chart_title, notes=chart_notes)
 
         # cleanup
         del [[df]]
@@ -108,7 +109,7 @@ if __name__ == '__main__':
 
         # create timestamp for chart notes
         timestamp = df.index[-1]
-        timestamp_notes = timestamp + pd.DateOffset(days=1)
+        timestamp_notes = timestamp  # + pd.DateOffset(days=1)
         timestamp_notes_str = timestamp_notes.strftime('%-d. %-m. %Y')
         chart_notes = f'¹ Mittelwert 2018-2021, temperaturbereinigt.<br>² Ziel ist eine temperaturbereinigte Einsparung von mehr als 25 Prozent Gas.<br>Stand: {timestamp_notes_str}'
 
@@ -135,7 +136,8 @@ if __name__ == '__main__':
         # write to CSV for dashboard
         df.to_csv('./data/gasverbrauch.csv', encoding='utf-8', index=True)
         # run Q function
-        update_chart(id='48eb730db09047043a6a34a319789817', data=df, title=chart_title, notes=chart_notes)
+        update_chart(id='48eb730db09047043a6a34a319789817',
+                     data=df, title=chart_title, notes=chart_notes)
 
     except:
         raise
