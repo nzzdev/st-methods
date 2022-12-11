@@ -106,9 +106,14 @@ if __name__ == '__main__':
                    df_usage['Vorjahr'].iloc[-1])-1)*100
         u_diffy = ((df_usage['Gasverbrauch'].iloc[-2] /
                     df_usage['Vorjahr'].iloc[-2])-1)*100
-        u_diff_diffy = u_diff - u_diffy
+        u_diff_diffy = u_diffy - u_diff  # change order for usage instead savings
         u_diff = u_diff.round(1)
-        u_diff_str = f'{u_diff:+g}'
+        # u_diff_str = f'{u_diff:+g}' # + sign for usage
+        # convert to negative/positive number
+        if u_diff > 0:
+            u_diff_str = -abs(u_diff)
+        else:
+            u_diff_str = +abs(u_diff)
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df_temp.copy().tail(1)
@@ -258,7 +263,7 @@ if __name__ == '__main__':
         diff_ns_str = diff_ns.astype(str).replace('.', ',')
         diff_fossile_str = diff_fossile.astype(str).replace('.', ',')
         diff_fossile = diff_fossile.astype(float)
-        diff_usage_str = u_diff_str.replace('.', ',')
+        diff_usage_str = u_diff_str.astype(str).replace('.', ',')
         # RUS GAS diff_rus_str = diff_rus.round(0).astype(int)
         # BENZIN diff_super_str = diff_super.astype(str).replace('.', ',')
 
@@ -270,7 +275,7 @@ if __name__ == '__main__':
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': timestamp_str, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
-        meta_usage = {'indicatorTitle': 'Gasverbrauch', 'date': timestamp_str, 'indicatorSubtitle': f'Abweichung vom üblichen Verbrauch',
+        meta_usage = {'indicatorTitle': 'Gasverbrauch', 'date': timestamp_str, 'indicatorSubtitle': f'im Vergleich zu den Vorjahren am {timestamp_str_usage}',
                       'value': u_diff, 'valueLabel': f'{diff_usage_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_fossile, 'chartType': 'line'}
 
         # NS 1 meta_ns = {'indicatorTitle': 'Nord Stream 1', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse pro Stunde', 'value': diff_ns, 'valueLabel': f'{diff_ns_str} Mio. m³', 'yAxisStart': strom_y, 'yAxisLabels': ns_ytick, 'yAxisLabelDecimals': 1, 'color': '#ce4631', 'trend': trend_ns, 'chartType': 'line'}
