@@ -554,8 +554,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-13;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2022-12-13;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2022-12-13;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2022-12-13;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;159;1l
 2022-12-13;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;99;1l
+2022-12-13;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;159;1l
 2022-12-13;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2022-12-13;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2022-12-13;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;259;475g (1 kg = 5,45 €)
@@ -1321,6 +1321,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-13;8055541;REWE Bio;REWE Bio Joghurt mild mit Heidelbeere-Cassis 500g;179;500g (1 kg = 3,58 €)
 2022-12-13;8337727;REWE Bio;REWE Bio Joghurt mild mit Stracciatella 500g;189;500g (1 kg = 3,78 €)
 2022-12-13;2277758;REWE Bio;REWE Bio Junge Erbsen 450g;149;450g (1 kg = 3,31 €)
+2022-12-13;1255627;REWE Bio;REWE Bio Kaffeesahne 165g;89;165g (1 kg = 5,39 €)
 2022-12-13;7283403;REWE Bio;REWE Bio Kaisergemüse 450g;149;450g (1 kg = 3,31 €)
 2022-12-13;8296586;REWE Bio;REWE Bio Kalamata Oliven ohne Stein 180g;299;180g (1 kg = 16,61 €)
 2022-12-13;8109025;REWE Bio;REWE Bio Kamillen Tee 30g;149;30g (1 kg = 49,67 €)
