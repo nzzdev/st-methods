@@ -227,8 +227,9 @@ if __name__ == '__main__':
         # BENZIN dict_super = df.drop(df.columns[[1, 2]], axis=1).rename(columns={df.columns[3]: 'value'}).to_dict(orient='records')
         dict_storage = df_storage.rename(
             columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
-        dict_gas = df.drop(df.columns[[2, 3]], axis=1).rename(
-            columns={df.columns[1]: 'value'}).dropna().to_dict(orient='records')
+        #dict_gas = df.drop(df.columns[[2, 3]], axis=1).rename(columns={df.columns[1]: 'value'}).dropna().to_dict(orient='records')
+        dict_gas = df_gas.rename(
+            columns={df_gas.columns[1]: 'value'}).to_dict(orient='records')
         dict_strom = df.drop(df.columns[[1, 3]], axis=1).rename(
             columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')
         dict_fossile = df_fossile.rename(
