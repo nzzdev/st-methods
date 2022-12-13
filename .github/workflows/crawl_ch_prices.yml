@@ -39,6 +39,15 @@ jobs:
         run: |
           python crawl_ch.py
           git pull
+      - name: Sleep for 30 seconds
+        uses: jakejarvis/wait-action@master
+        with:
+          time: '60s'
+      - name: Run python scripts
+        env: 
+          AWS_GATEWAY_KEY: ${{ secrets.AWS_GATEWAY_KEY }}
+          AWS_GATEWAY_SECRET: ${{ secrets.AWS_GATEWAY_SECRET }}
+        run: |
           python preismonitor.py
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
