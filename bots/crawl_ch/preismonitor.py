@@ -16,18 +16,33 @@ import os
 today = dt.today()
 past = today - timedelta(days = 28)
 
-# data from today
+week_day = today.isocalendar()[2]
+
+# get starting date (Monday) for the respective week
+start_date = today - timedelta(days=week_day-1) 
+
+# Prints the list of dates in a current week
+dates = [str((start_date + timedelta(days=i)).date()) for i in range(7)]
+
+
+
+food_drinks = ('drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread')
 
 df_t = pd.DataFrame()
-
-for file in os.listdir(f'./output/'): 
-    if fnmatch.fnmatch(file, '*coop_' + today.strftime('%Y-%m-%d') + '.xlsx'):
-            
-        df_ = pd.read_excel(f'./output/' + file)
+for i in food_drinks:
+    try:
+        df_ = pd.read_excel(f'./output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
         df_t = pd.concat([df_t, df_], ignore_index = True)
-
-        df_t = df_t.dropna(subset = ['price']).reset_index(drop = True)
-            
+    except:
+        for j in dates:
+            try:
+                df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
+                df_t = pd.concat([df_t, df_], ignore_index = True)
+            except:
+                continue
+            break
+        
+df_t = df_t.dropna(subset = ['price']).reset_index(drop = True)
      
 
 # exclude "Aktionen" and clean
@@ -47,8 +62,6 @@ start_date = past - timedelta(days=week_day-1)
 
 # Prints the list of dates in a current week
 dates = [str((start_date + timedelta(days=i)).date()) for i in range(7)]
-del dates[0]
-
 
 
 food_drinks = ('drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread')
