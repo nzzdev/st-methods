@@ -1,12 +1,11 @@
 
 import pandas as pd
-from datetime import date, datetime as dt, timedelta
+from datetime import date, datetime as dt
 from bs4 import BeautifulSoup
 import requests
 import json
 import os
 from fake_useragent import UserAgent
-import fnmatch
 
 
 
