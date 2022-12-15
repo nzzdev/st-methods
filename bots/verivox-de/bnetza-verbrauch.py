@@ -104,6 +104,12 @@ if __name__ == '__main__':
         df = df.set_index('Datum')
         df.index = pd.to_datetime(df.index)
 
+        # convert to float
+        cols = df.columns
+        # cols.remove('Datum')
+        for col in cols:
+            df[col] = df[col].astype(float)
+
         # convert total imports to terrawatts
         df = df.div(1000)
 
@@ -135,6 +141,7 @@ if __name__ == '__main__':
 
         # write to CSV for dashboard
         df.to_csv('./data/gasverbrauch.csv', encoding='utf-8', index=True)
+
         # run Q function
         update_chart(id='48eb730db09047043a6a34a319789817',
                      data=df, title=chart_title, notes=chart_notes)
