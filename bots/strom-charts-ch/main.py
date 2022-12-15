@@ -31,5 +31,5 @@ df_speicherseen = speicherseen.get_speicherseen()
 """
   Update q.config
 """
-update_article.run(df_futures, df_spotmarket, df_atomstrom_fr, df_speicherseen)
+update_article.run(df_futures, df_spotmarket, df_atomstrom_fr, df_speicherseen, landesverbrauch)
 update_dashboard.run(df_futures, df_spotmarket, df_speicherseen)
