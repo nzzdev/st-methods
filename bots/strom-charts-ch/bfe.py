@@ -11,24 +11,29 @@ import json
 from urllib.request import urlopen
 from datetime import timedelta, date
 
-url = 'https://www.energiedashboard.admin.ch/api/strom-verbrauch/historical-values'
+from helpers import *
 
-response = urlopen(url)
+def get_bfe():
+    url = 'https://www.energiedashboard.admin.ch/api/strom-verbrauch/historical-values'
 
-data_json = json.loads(response.read())
+    response = urlopen(url)
 
-landesverbrauch = pd.DataFrame(data_json['entries'])
+    data_json = json.loads(response.read())
 
-landesverbrauch = landesverbrauch[['date', 'fiveYearMin', 'fiveYearMax', 'fiveYearMittelwert', 'landesverbrauch', 'landesverbrauchGeschaetzt', 'landesverbrauchPrognose']]
+    landesverbrauch = pd.DataFrame(data_json['entries'])
 
-landesverbrauch['date'] = pd.to_datetime(landesverbrauch['date'])
+    landesverbrauch = landesverbrauch[['date', 'fiveYearMin', 'fiveYearMax', 'fiveYearMittelwert', 'landesverbrauch', 'landesverbrauchGeschaetzt', 'landesverbrauchPrognose']]
 
-landesverbrauch = landesverbrauch.loc[landesverbrauch['date'] >= pd.to_datetime(date.today() - timedelta(days=125))]
+    landesverbrauch['date'] = pd.to_datetime(landesverbrauch['date'])
 
-landesverbrauch.rename(columns = {'fiveYearMin': '', 
+    landesverbrauch = landesverbrauch.loc[landesverbrauch['date'] >= pd.to_datetime(date.today() - timedelta(days=125))]
+
+    landesverbrauch.rename(columns = {'fiveYearMin': '', 
                                   'fiveYearMax': 'Minimum/Maximum¹',
                                   'fiveYearMittelwert': '5-Jahres-Mittelwert',
                                   'landesverbrauch': 'Landesverbrauch',
                                   'landesverbrauchGeschaetzt': 'Geschätzter Verbrauch',
                                   'landesverbrauchPrognose': 'Prognose'
                                   }, inplace = True)
+
+    return landesverbrauch
