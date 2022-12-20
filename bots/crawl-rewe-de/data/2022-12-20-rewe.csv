@@ -408,6 +408,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-20;8671841;ja!;ja! Rote Grütze 500g;199;500g (1 kg = 3,98 €)
 2022-12-20;8043011;ja!;ja! Roter Bandit 11x47ml;219;517ml (1 l = 4,24 €)
 2022-12-20;2594349;ja!;ja! Räucherlachs 200g;499;200g (1 kg = 24,95 €)
+2022-12-20;3156228;ja!;ja! Saftige Pastete mit Rind 300g;70;300g (1 kg = 2,33 €)
 2022-12-20;7938679;ja!;ja! Sahne Pudding Schoko 200g;49;200g (1 kg = 2,45 €)
 2022-12-20;8529987;ja!;ja! Sahne Pudding Vanillegeschmack 200g;49;200g (1 kg = 2,45 €)
 2022-12-20;43593;ja!;ja! Sahne Schmelzkäsezubereitung 200g;179;200g (1 kg = 8,95 €)
@@ -658,7 +659,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-20;1413012;REWE Beste Wahl;REWE Beste Wahl Duo Schoko-Creme 400g;169;400g (1 kg = 4,23 €)
 2022-12-20;2331793;REWE Beste Wahl;REWE Beste Wahl Duo-Muffins Backmischung 335g;199;380g (1 kg = 5,24 €)
 2022-12-20;8131642;REWE Beste Wahl;REWE Beste Wahl Eco Color Waschmittel 1,5l - 22 WL;349;1,50l (1 l = 2,33 €)
-2022-12-20;8217836;REWE Beste Wahl;REWE Beste Wahl Eco Hand Spülmittel Aloe Vera 500ml;95;500ml (1 l = 1,90 €)
 2022-12-20;7220526;REWE Beste Wahl;REWE Beste Wahl Eco Recycling Taschentücher Box 100 Stück;145;100 Stück
 2022-12-20;8218945;REWE Beste Wahl;REWE Beste Wahl Eco WC-Reiniger Zitrus 750ml;129;750ml (1 l = 1,72 €)
 2022-12-20;450444;REWE Beste Wahl;REWE Beste Wahl Edel-Nuss-Mix 125g;269;125g (1 kg = 21,52 €)
@@ -936,6 +936,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-20;477541;REWE Beste Wahl;REWE Beste Wahl Pilztopf 315g;199;315g (1 kg = 6,32 €)
 2022-12-20;3288679;REWE Beste Wahl;REWE Beste Wahl Pink Grapefruit Direktsaft 1l;199;1l
 2022-12-20;8435547;REWE Beste Wahl;REWE Beste Wahl Pita Brottasche zum Befüllen 400g, 5 Stück;179;400g (1 kg = 4,48 €)
+2022-12-20;8587177;REWE Beste Wahl;REWE Beste Wahl Pretzel Bites Honey Mustard Onion 130g;99;130g (1 kg = 7,62 €)
 2022-12-20;7165511;REWE Beste Wahl;REWE Beste Wahl Putengeschnetzeltes mit Nudeln in Champingnonrahmsauce 400g;349;400g (1 kg = 8,73 €)
 2022-12-20;1051481;REWE Beste Wahl;REWE Beste Wahl Rahmspinat mild gewürzt 500g;119;500g (1 kg = 2,38 €)
 2022-12-20;2241405;REWE Beste Wahl;REWE Beste Wahl Raspelschokolade Vollmilch 100g;109;100g (1 kg = 10,90 €)
