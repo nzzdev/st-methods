@@ -19,6 +19,7 @@ if __name__ == '__main__':
             'Pragma': 'no-cache'
         }
 
+        """
         ##########
         # NORMAL #
         ##########
@@ -80,6 +81,7 @@ if __name__ == '__main__':
         # cleanup
         del [[df]]
         gc.collect()
+        """
 
         #############
         # BEREINIGT #
