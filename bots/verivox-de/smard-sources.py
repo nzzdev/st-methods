@@ -241,7 +241,7 @@ if __name__ == '__main__':
             """
 
             # get current date for chart notes
-            time_dt_notes = df_trade.index[-1] + timedelta(days=1)
+            time_dt_notes = df_trade.index[-2] + timedelta(days=1)
             time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             notes_chart = f'Stand: {time_str_notes}'
 
