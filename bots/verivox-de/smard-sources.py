@@ -32,6 +32,9 @@ if __name__ == '__main__':
         PHYSICAL_POWER_FLOW = [31000714, 31000140, 31000569, 31000145, 31000574, 31000570, 31000139, 31000568,
                                31000138, 31000567, 31000146, 31000575, 31000144, 31000573, 31000142, 31000571, 31000143, 31000572, 31000141]
 
+        # commercial trade Germany/France
+        COMMERCIAL_TRADE_FRANCE = [22004546, 22004404]
+
         # spot market
         SPOT_MARKET = [8004169]
 
@@ -52,7 +55,7 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 10):
+        while ('Anfang' not in df.columns) and (errors < 5):
             sleep(2)
             errors += 1
             # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
@@ -131,7 +134,8 @@ if __name__ == '__main__':
             # df.index = df.index.strftime('%Y-%m-%d')
 
             # run Q function
-            update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',data=df, notes=notes_chart, title=title_chart)
+            update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
+                         data=df, notes=notes_chart, title=title_chart)
 
         ###########################
         # API request spot market #
@@ -184,7 +188,72 @@ if __name__ == '__main__':
             title = f'Strom kostet an der Börse {title_mwh} Euro je MWh'
 
             # run Q function
-            update_chart(id='90005812afc9964bbfe4f952f51d6a57', title=title, notes=notes_chart, data=df_spot)
+            update_chart(id='90005812afc9964bbfe4f952f51d6a57',
+                         title=title, notes=notes_chart, data=df_spot)
 
+        ################
+        # TRADE FRANCE #
+        ################
+
+        modules = COMMERCIAL_TRADE_FRANCE
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        else:
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed.csv', sep=';',
+                            encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed.csv', sep=';', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # calculate net electricity exports
+            df_trade['Saldo'] = df_trade['Frankreich (Export) [MWh] Originalauflösungen'] - \
+                abs(df_trade['Frankreich (Import) [MWh] Originalauflösungen'])
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+
+            """
+            # update first row for prettier x-axis
+            df_trade['Datum'] = df_trade.index
+            df_trade['Datum'].iloc[0] = '2021-01-01'
+            df_trade.set_index('Datum', inplace=True)
+            """
+
+            # get current date for chart notes
+            time_dt_notes = df_trade.index[-1] + timedelta(days=1)
+            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+            notes_chart = f'Stand: {time_str_notes}'
+
+            # dynamic chart title
+            last_value = df_trade['Saldo'].iloc[-2]
+            if last_value > 714.032:
+                title = 'Neuer Rekordwert beim Strom-Export nach Frankreich'
+            else:
+                title = 'Kein neuer Rekordwert beim Strom-Export nach Frankreich'
+
+            # run Q function
+            update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
+                         title=title, notes=notes_chart, data=df_trade)
     except:
         raise
