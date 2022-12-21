@@ -257,6 +257,9 @@ if __name__ == '__main__':
             df_trade.set_index('Datum', inplace=True)
             """
 
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+
             # save tsv
             df_trade.to_csv('./data/smard_trade_fixed.tsv',
                             sep='\t', encoding='utf-8', index=True)
