@@ -938,6 +938,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-21;7178737;REWE Beste Wahl;REWE Beste Wahl Recycling Toilettenpapier 4-lagig 8x160 Blatt;379;NaN
 2022-12-21;8247853;REWE Beste Wahl;REWE Beste Wahl Regenbogen-Forellen 2 Stück, 500g;399;500g (1 kg = 7,98 €)
 2022-12-21;3029456;REWE Beste Wahl;REWE Beste Wahl Reis-Wildlachs-Pfanne 750g;369;750g (1 kg = 4,92 €)
+2022-12-21;8470640;REWE Beste Wahl;REWE Beste Wahl Respeggt Eier Freilandhaltung 10 Stück;259;10 Stück
 2022-12-21;8191030;REWE Beste Wahl;REWE Beste Wahl Rhabarbernektar 1l;119;1l
 2022-12-21;2455271;REWE Beste Wahl;REWE Beste Wahl Rindergulasch 400g;449;400g (1 kg = 11,23 €)
 2022-12-21;1421084;REWE Beste Wahl;REWE Beste Wahl Risotto-Reis 500g;199;500g (1 kg = 3,98 €)
@@ -998,8 +999,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-21;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2022-12-21;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2022-12-21;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2022-12-21;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2022-12-21;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2022-12-21;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2022-12-21;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2022-12-21;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2022-12-21;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
