@@ -61,13 +61,13 @@ if __name__ == '__main__':
             # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
             df = smard.requestSmardData(
                 modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
-        else:
+        if ('Anfang' in df.columns):
             # fix wrong decimal
             df = df.replace('-', '', regex=False)
-            df.to_csv('./data/smard_fixed.csv', sep=';',
+            df.to_csv('./data/smard_fixed.tsv', sep='\t',
                       encoding='utf-8', index=False)
-            df = pd.read_csv('./data/smard_fixed.csv', sep=';', thousands='.',
-                             decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            df = pd.read_csv('./data/smard_fixed.tsv', sep='\t', thousands='.', decimal=',',
+                             index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
             # drop time and convert dates
             df.drop('Anfang', axis=1, inplace=True)
@@ -83,7 +83,7 @@ if __name__ == '__main__':
             df['Kernkraft'] = df['Kernenergie [MWh] Originalauflösungen']
             df['Erdgas'] = df['Erdgas [MWh] Originalauflösungen']
             df['Sonstige'] = df['Sonstige Konventionelle [MWh] Originalauflösungen']
-            df['Pumpen'] = df['Pumpspeicher [MWh] Originalauflösungen']
+            df['Pumpspeicher'] = df['Pumpspeicher [MWh] Originalauflösungen']
             df['Kohle'] = df['Braunkohle [MWh] Originalauflösungen'] + \
                 df['Steinkohle [MWh] Originalauflösungen']
             df['Erneuerbare'] = df['Biomasse [MWh] Originalauflösungen'] + df['Wasserkraft [MWh] Originalauflösungen'] + df['Wind Offshore [MWh] Originalauflösungen'] + \
@@ -99,43 +99,51 @@ if __name__ == '__main__':
             df.drop(df.tail(1).index, inplace=True)
             df.drop(df.head(1).index, inplace=True)
 
-            # get current date for chart notes
-            time_dt_notes = df.index[-1] + timedelta(days=1)
-            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-            notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms.<br>Stand: {time_str_notes}'
+            # save tsv
+            df.to_csv('./data/smard_fixed.tsv', sep='\t',
+                      encoding='utf-8', index=True)
 
-            # calculate percentage for chart title
-            df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
-            perc_gas = (df_perc['Erdgas'].iloc[-1]*100).round(0).astype(int)
-            if perc_gas > 1:
-                title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
-            else:
-                title_chart = f'{perc_gas} Prozent des Stroms stammt derzeit aus Erdgas'
+        # read tsv (old or new)
+        df = pd.read_csv('./data/smard_fixed.tsv', sep='\t', index_col='Datum')
+        df.index = pd.to_datetime(df.index)
 
-            # calculate percentage for dashboard
-            df_dash = df.div(df.sum(axis=1), axis=0)
-            df_dash = (df_dash * 100).round(1)
-            df_dash = df_dash[~(df_dash.index < '2021-01-04 00:00:00')]
-            column_sum = ['Erdgas', 'Sonstige', 'Kohle']
-            df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
-            df_dash = df_dash[['Fossile Abhängigkeit']]
+        # get current date for chart notes
+        time_dt_notes = df.index[-1] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms.<br>Stand: {time_str_notes}'
 
-            # combine conventional
-            df['Sonstige'] = df['Sonstige'] + df['Pumpen']
-            df = df.drop('Pumpen', axis=1)
+        # calculate percentage for chart title
+        df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
+        perc_gas = (df_perc['Erdgas'].iloc[-1]*100).round(0).astype(int)
+        if perc_gas > 1:
+            title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
+        else:
+            title_chart = f'{perc_gas} Prozent des Stroms stammt derzeit aus Erdgas'
 
-            # drop unused columns and convert to terawatt
-            df = df[~(df.index < '2021-07-18 00:00:00')]
-            df = df.div(1000000)
+        # calculate percentage for dashboard
+        df_dash = df.div(df.sum(axis=1), axis=0)
+        df_dash = (df_dash * 100).round(1)
+        df_dash = df_dash[~(df_dash.index < '2021-01-04 00:00:00')]
+        column_sum = ['Erdgas', 'Sonstige', 'Kohle']
+        df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
+        df_dash = df_dash[['Fossile Abhängigkeit']]
 
-            df_dash.to_csv('./data/smard_percentage.csv')
+        # combine conventional
+        df['Sonstige'] = df['Sonstige'] + df['Pumpspeicher']
+        df = df.drop('Pumpspeicher', axis=1)
 
-            # convert DatetimeIndex to string
-            # df.index = df.index.strftime('%Y-%m-%d')
+        # drop unused columns and convert to terawatt
+        df = df[~(df.index < '2021-07-18 00:00:00')]
+        df = df.div(1000000)
 
-            # run Q function
-            update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
-                         data=df, notes=notes_chart, title=title_chart)
+        df_dash.to_csv('./data/smard_percentage.csv')
+
+        # convert DatetimeIndex to string
+        # df.index = df.index.strftime('%Y-%m-%d')
+
+        # run Q function
+        update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
+                     data=df, notes=notes_chart, title=title_chart)
 
         ###########################
         # API request spot market #
@@ -151,12 +159,12 @@ if __name__ == '__main__':
             errors += 1
             df_spot = smard.requestSmardData(
                 modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=1608764400000)  # 2021/1/1: 1609455600000
-        else:
+        if ('Anfang' in df_spot.columns):
             # fix wrong decimal
             df = df.replace('-', '', regex=False)
-            df_spot.to_csv('./data/smard_spot.csv', sep=';',
+            df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
                            encoding='utf-8', index=False)
-            df_spot = pd.read_csv('./data/smard_spot.csv', sep=';', thousands='.', decimal=',',
+            df_spot = pd.read_csv('./data/smard_spot.tsv', sep='\t', thousands='.', decimal=',',
                                   index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
             # drop time and convert dates to DatetimeIndex
@@ -172,24 +180,33 @@ if __name__ == '__main__':
             df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].round(
                 0)
 
-            # get current date
-            # df_spot = df_spot.drop(df_spot.tail(1).index) # drop last row with current date
-            q_date = df_spot.last_valid_index()
-            notes_chart = '¹ Marktgebiet Deutschland/Luxemburg (Day-Ahead).<br>Stand: ' + \
-                q_date.strftime("%-d. %-m. %Y")
+            # save tsv
+            df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
+                           encoding='utf-8', index=True)
 
-            # drop unused dates
-            df_spot = df_spot['2021-01-01': q_date]
-            df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].astype(
-                int)
+        # read tsv (old or new)
+        df_spot = pd.read_csv('./data/smard_spot.tsv',
+                              sep='\t', index_col='Datum')
+        df_spot.index = pd.to_datetime(df_spot.index)
 
-            # dynamic chart title
-            title_mwh = df_spot[df_spot.columns[0]].iloc[-1]
-            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh'
+        # get current date
+        # df_spot = df_spot.drop(df_spot.tail(1).index) # drop last row with current date
+        q_date = df_spot.last_valid_index()
+        notes_chart = '¹ Marktgebiet Deutschland/Luxemburg (Day-Ahead).<br>Stand: ' + \
+            q_date.strftime("%-d. %-m. %Y")
 
-            # run Q function
-            update_chart(id='90005812afc9964bbfe4f952f51d6a57',
-                         title=title, notes=notes_chart, data=df_spot)
+        # drop unused dates
+        df_spot = df_spot['2021-01-01': q_date]
+        df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].astype(
+            int)
+
+        # dynamic chart title
+        title_mwh = df_spot[df_spot.columns[0]].iloc[-1]
+        title = f'Strom kostet an der Börse {title_mwh} Euro je MWh'
+
+        # run Q function
+        update_chart(id='90005812afc9964bbfe4f952f51d6a57',
+                     title=title, notes=notes_chart, data=df_spot)
 
         ################
         # TRADE FRANCE #
@@ -207,12 +224,12 @@ if __name__ == '__main__':
             # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
             df = smard.requestSmardData(
                 modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
-        else:
+        if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed.csv', sep=';',
-                            encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed.csv', sep=';', thousands='.',
+            df_trade.to_csv('./data/smard_trade_fixed.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed.tsv', sep='\t', thousands='.',
                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
             # drop time and convert dates
@@ -240,20 +257,29 @@ if __name__ == '__main__':
             df_trade.set_index('Datum', inplace=True)
             """
 
-            # get current date for chart notes
-            time_dt_notes = df_trade.index[-2] + timedelta(days=1)
-            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-            notes_chart = f'Stand: {time_str_notes}'
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed.tsv',
+                            sep='\t', encoding='utf-8', index=True)
 
-            # dynamic chart title
-            last_value = df_trade['Saldo'].iloc[-2]
-            if last_value > 714.032:
-                title = 'Neuer Rekordwert beim Strom-Export nach Frankreich'
-            else:
-                title = 'Kein neuer Rekordwert beim Strom-Export nach Frankreich'
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
 
-            # run Q function
-            update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
-                         title=title, notes=notes_chart, data=df_trade)
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value > 714.032:
+            title = 'Neuer Rekordwert beim Strom-Export nach Frankreich'
+        else:
+            title = 'Kein neuer Rekordwert beim Strom-Export nach Frankreich'
+
+        # run Q function
+        update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
+                     title=title, notes=notes_chart, data=df_trade)
+
     except:
         raise
