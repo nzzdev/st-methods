@@ -132,7 +132,7 @@ if __name__ == '__main__':
         df['Sonstige'] = df['Sonstige'] + df['Pumpspeicher']
         df = df.drop('Pumpspeicher', axis=1)
 
-        # drop unused columns and convert to terawatt
+        # drop unused rows and convert to terawatt
         df = df[~(df.index < '2021-07-18 00:00:00')]
         df = df.div(1000000)
 
@@ -161,7 +161,7 @@ if __name__ == '__main__':
                 modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=1608764400000)  # 2021/1/1: 1609455600000
         if ('Anfang' in df_spot.columns):
             # fix wrong decimal
-            df = df.replace('-', '', regex=False)
+            df_spot = df_spot.replace('-', '', regex=False)
             df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
                            encoding='utf-8', index=False)
             df_spot = pd.read_csv('./data/smard_spot.tsv', sep='\t', thousands='.', decimal=',',
@@ -177,8 +177,8 @@ if __name__ == '__main__':
             df_spot = df_spot.groupby(['Datum']).mean()
             df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].rolling(
                 window=7).mean().dropna()
-            df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].round(
-                0)
+            df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot[
+                'Deutschland/Luxemburg [€/MWh] Originalauflösungen'].round(0)
 
             # save tsv
             df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
@@ -196,6 +196,7 @@ if __name__ == '__main__':
             q_date.strftime("%-d. %-m. %Y")
 
         # drop unused dates
+        #df_spot = df_spot[df_spot.any(1)]
         df_spot = df_spot['2021-01-01': q_date]
         df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].astype(
             int)
