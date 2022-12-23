@@ -107,6 +107,7 @@ if __name__ == '__main__':
         u_diffy = ((df_usage['Gasverbrauch'].iloc[-8] /
                     df_usage['Vorjahr'].iloc[-8])-1)*100
         u_diff_diffy = u_diffy - u_diff  # change order for usage instead savings
+        u_diff = u_diff.round(1)
         # u_diff_str = f'{u_diff:+g}' # + sign for usage
         # convert to negative/positive number
         if u_diff > 0:
