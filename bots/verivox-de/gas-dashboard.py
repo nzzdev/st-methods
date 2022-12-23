@@ -124,7 +124,7 @@ if __name__ == '__main__':
         df_meta['Trend Fossile'] = ((df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull(
         )].iloc[-1] - df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull()].iloc[-2]) / df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull()].iloc[-2]) * 100
         df_meta['Trend Speicher'] = df_storage_trend['Trend'].iloc[-1] * 10
-        df_meta['Trend Verbrauch'] = u_diff_diffy
+        df_meta['Trend Verbrauch'] = u_diff_diffy*10
         # BENZIN df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-8]) * 100, 0)  # diff previous week
 
         # NS1 df_meta = df_meta[['Trend Speicher', 'Trend Gas', 'Trend NS1', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
@@ -143,9 +143,9 @@ if __name__ == '__main__':
         # function for string trends (storage and gas=previous day, petrol=previous week)
         def replace_vals(df_meta):
             for col in cols1:
-                if df_meta[col] >= 0.1:
+                if df_meta[col] >= 0.2:
                     df_meta[col] = 'steigend'
-                elif df_meta[col] <= -0.1:
+                elif df_meta[col] <= -0.2:
                     df_meta[col] = 'fallend'
                 else:
                     df_meta[col] = 'gleichbleibend'
