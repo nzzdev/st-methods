@@ -421,6 +421,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-27;6320406;ja!;ja! Schinkenwürfel 2x125g;249;2x125g (1 kg = 9,96 €)
 2022-12-27;64840;ja!;ja! Schlagsahne 200g;99;200g (1 kg = 4,95 €)
 2022-12-27;8187819;ja!;ja! Schmand 200g;99;200g (1 kg = 4,95 €)
+2022-12-27;8130752;ja!;ja! Schmelzkäse Allgäuer 250g;199;250g (1 kg = 7,96 €)
 2022-12-27;8135665;ja!;ja! Schmelzkäse Chester 250g;199;250g (1 kg = 7,96 €)
 2022-12-27;8231192;ja!;ja! Schmelzkäse Toast 250g;199;250g (1 kg = 7,96 €)
 2022-12-27;7971810;ja!;ja! Schnellhefter A4 Beschriftungsstreifen 10 Stück;199;10 Stück
@@ -1141,7 +1142,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-27;8710249;REWE Bio;REWE Bio + vegan Haferdrink Pulver glutenfrei 300g;499;300g (1 kg = 16,63 €)
 2022-12-27;8774648;REWE Bio;REWE Bio + vegan Hummus Natur 200g;129;200g (1 kg = 6,45 €)
 2022-12-27;7963454;REWE Bio;REWE Bio + vegan Kokos Natur 400g;169;400g (1 kg = 4,23 €)
-2022-12-27;8090294;REWE Bio;REWE Bio + vegan Mandel Drink Natur 1l;179;1l
 2022-12-27;8578130;REWE Bio;REWE Bio + vegan Mozzarisella Mozzarella-Ersatz 150g;279;150g (1 kg = 18,60 €)
 2022-12-27;2587749;REWE Bio;REWE Bio + vegan Reis Drink Natur 1l;149;1l
 2022-12-27;7981357;REWE Bio;REWE Bio + vegan Remoulade 250g;169;250ml (1 l = 6,76 €)
@@ -1245,8 +1245,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-27;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;249;6 Stück
 2022-12-27;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;249;1 Stück
 2022-12-27;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;289;250g (1 kg = 11,56 €)
-2022-12-27;200348;REWE Bio;REWE Bio Emmentaler 150g;229;150g (1 kg = 15,27 €)
 2022-12-27;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
+2022-12-27;200348;REWE Bio;REWE Bio Emmentaler 150g;229;150g (1 kg = 15,27 €)
 2022-12-27;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2022-12-27;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
 2022-12-27;8381730;REWE Bio;REWE Bio Erbseneintopf 400g;199;400g (1 kg = 4,98 €)
@@ -1378,7 +1378,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2022-12-27;8705549;REWE Bio;REWE Bio Mehrfrucht 250g;199;250g (1 kg = 7,96 €)
 2022-12-27;877992;REWE Bio;REWE Bio Mehrfruchtsaft Früchte Mix 1l;199;1l
 2022-12-27;7996075;REWE Bio;REWE Bio Mehrkorn Landbrötchen 300g;129;300g (1 kg = 4,30 €)
-2022-12-27;198410;REWE Bio;REWE Bio Mehrkorn-Brötchen 300g;269;300g (1 kg = 8,97 €)
 2022-12-27;8289217;REWE Bio;REWE Bio Milder Früchtetee 44g;149;44g (1 kg = 33,86 €)
 2022-12-27;8277549;REWE Bio;REWE Bio Mini Berner Würstchen Schwein 185g;349;185g (1 kg = 18,86 €)
 2022-12-27;8498663;REWE Bio;REWE Bio Mini-Kartoffel-Taschen 300g;269;300g (1 kg = 8,97 €)
