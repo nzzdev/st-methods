@@ -174,7 +174,7 @@ if __name__ == '__main__':
                 df_spot['Datum'], format="%d.%m.%Y")
 
             # calculate daily mean and 7-day moving average
-            df_spot = df_spot.groupby(['Datum']).mean()
+            df_spot = df_spot.resample('D', on='Datum').mean()
             df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].rolling(
                 window=7).mean().dropna()
             df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot[
@@ -198,6 +198,7 @@ if __name__ == '__main__':
         # drop unused dates
         #df_spot = df_spot[df_spot.any(1)]
         df_spot = df_spot['2021-01-01': q_date]
+        df_spot = df_spot[df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].notna()]
         df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].astype(
             int)
 
