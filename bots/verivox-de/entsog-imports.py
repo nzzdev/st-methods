@@ -131,7 +131,7 @@ if __name__ == '__main__':
         # clean dataframe for NS1 and total imports
         df_total = df_ns.copy()
         df_total = df_total.drop(
-            df_total.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]], axis=1)
+            df_total.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], axis=1)
         df_ns = df_ns.drop(
             df_ns.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]], axis=1)
 
@@ -147,6 +147,11 @@ if __name__ == '__main__':
 
         # convert total imports to terrawatts
         df_total = df_total.div(1000)
+
+        # change column order
+        df_total = df_total[['Deutschland Import', 'LNG']]
+        df_total = df_total.rename(
+            columns={'Deutschland Import': 'Gesamt', 'LNG': 'Direkt importiertes LNG'})
 
         # convert GWh to million m3 according to calorific value of Russian gas
         df_ns = (df_ns / 10.3).round(1)
