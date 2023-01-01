@@ -145,6 +145,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-01;8277959;ja!;ja! Entkoffeinierte Kaffee Pads 20 Stück;219;144g (1 kg = 15,21 €)
 2023-01-01;8322056;ja!;ja! Erbsen extra fein 3x212g;159;3x420g (1 kg = 3,79 €)
 2023-01-01;8335038;ja!;ja! Erbsen sehr fein mit Möhren sehr fein 265g;89;265g (1 kg = 3,36 €)
+2023-01-01;570608;ja!;ja! Erbseneintopf mit Rauchspeck 800g;199;800g (1 kg = 2,49 €)
 2023-01-01;570610;ja!;ja! Erbseneintopf mit Würstchen 800g;229;800g (1 kg = 2,86 €)
 2023-01-01;7396228;ja!;ja! Erdbeer-Konfitüre extra 450g;139;450g (1 kg = 3,09 €)
 2023-01-01;7004010;ja!;ja! Erdnüsse pikant gewürzt 150g;79;150g (1 kg = 5,27 €)
@@ -569,8 +570,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-01;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2023-01-01;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-01-01;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2023-01-01;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;169;1l
 2023-01-01;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;99;1l
+2023-01-01;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;169;1l
 2023-01-01;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-01-01;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-01-01;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;259;475g (1 kg = 5,45 €)
@@ -915,8 +916,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-01;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;399;500ml (1 l = 7,98 €)
 2023-01-01;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-01-01;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-01-01;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-01-01;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-01-01;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-01-01;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;329;250g (1 kg = 13,16 €)
 2023-01-01;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets Praktisch Grätenfrei 475g;359;475g (1 kg = 7,56 €)
 2023-01-01;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
