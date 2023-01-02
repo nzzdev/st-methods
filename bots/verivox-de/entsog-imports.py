@@ -151,7 +151,7 @@ if __name__ == '__main__':
         # change column order
         df_total = df_total[['Deutschland Import', 'LNG']]
         df_total = df_total.rename(
-            columns={'Deutschland Import': 'Gesamt', 'LNG': 'Direkt importiertes LNG'})
+            columns={'Deutschland Import': 'Gesamt-Importe', 'LNG': 'Direkt-Importe LNG'})
 
         # convert GWh to million m3 according to calorific value of Russian gas
         df_ns = (df_ns / 10.3).round(1)
@@ -161,10 +161,16 @@ if __name__ == '__main__':
             chart_title = 'Über Nord Stream 1 fliesst kaum noch russisches Gas'
         else:
             chart_title = 'Über Nord Stream 1 fliesst kein russisches Gas mehr'
-        title_twh = df_total[df_total.columns[0]
-                             ].iloc[-1].round(1).astype(float)
-        title_twh = title_twh.astype(str).replace('.', ',')
-        chart_title_total = f'Deutschland importiert derzeit {title_twh} TWh Gas am Tag'
+
+        # old
+        #title_twh = df_total[df_total.columns[0]].iloc[-1].round(1).astype(float)
+        #title_twh = title_twh.astype(str).replace('.', ',')
+        #chart_title_total = f'Deutschland importiert derzeit {title_twh} TWh Gas am Tag'
+
+        title_twh = (df_total[df_total.columns[1]].iloc[-1] /
+                     df_total[df_total.columns[0]].iloc[-1]) * 100
+        title_twh = title_twh.round(0).astype(int)
+        chart_title_total = f'Anteil des direkt importierten LNG liegt derzeit bei {title_twh} Prozent'
 
         # get latest date for chart notes
         timecode = df_ns.index[-1]
