@@ -190,7 +190,8 @@ if __name__ == '__main__':
         df_spot.index = pd.to_datetime(df_spot.index)
 
         # get current date
-        # df_spot = df_spot.drop(df_spot.tail(1).index) # drop last row with current date
+        # drop last row with current date to avoid constant commits
+        df_spot = df_spot.drop(df_spot.tail(1).index)
         q_date = df_spot.last_valid_index()
         notes_chart = '¹ Marktgebiet Deutschland/Luxemburg (Day-Ahead).<br>Stand: ' + \
             q_date.strftime("%-d. %-m. %Y")
