@@ -167,7 +167,6 @@ def get_atomstrom_frankreich():
     akw_df_wide = akw_df.pivot(index='date', columns='year', values='volume').reset_index()
 
     akw_df_wide['q_date'] = '2000-W' + akw_df_wide['date'].astype(str)
-    akw_df_wide.to_clipboard()
 
     # 2023 Stand Anfang Januar 2023 noch nicht vorhanden. Deshalb hier Check.
     columns = ['q_date','2019','2020','2021','2022']
