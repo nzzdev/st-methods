@@ -451,11 +451,11 @@ if __name__ == '__main__':
 
         past = today - timedelta(days=30)
         df_t = pd.read_csv('./data/' + today.strftime('%Y-%m-%d') +
-                           '-rewe.csv', sep=';', on_bad_lines='skip')
+                           '-rewe-pickup.csv', sep=';', on_bad_lines='skip')
         df_t = df_t[df_t['Marke'] == 'ja!']
 
         df_y = pd.read_csv('./data/' + past.strftime('%Y-%m-%d') +
-                           '-rewe.csv', sep=';', on_bad_lines='skip')
+                           '-rewe-pickup.csv', sep=';', on_bad_lines='skip')
         df_y = df_y[df_y['Marke'] == 'ja!']
 
         df_t = df_t.dropna(subset='Preis')
