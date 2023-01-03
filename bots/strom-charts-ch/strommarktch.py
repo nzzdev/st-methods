@@ -1,7 +1,14 @@
+"""
+  Update 3. Januar 2023 @simonhuwiler
+  - Jahr 2023 hinzugefügt, mit Check, ob es existiert.
+  - Woche 53 entfernt. Die ist gleich wie Woche 0 des nächsten Jahres. Da in der ersten Woche des Januars jedoch nicht abgeschlossen, sind plötzlich unvollständige Daten drin.
+
+"""
+
 import pandas as pd
 import json
 import requests
-from urllib.request import urlopen
+import requests
 from datetime import datetime as dt
 import os
 
@@ -31,7 +38,7 @@ def get_futures():
         r = requests.get(url, headers=futures_headers)
         data = r.json()
         
-        df =pd.DataFrame(data['results']['items'])
+        df = pd.DataFrame(data['results']['items'])
         df['date'] = pd.to_datetime(df['tradedatetimegmt'], format='%m/%d/%Y %I:%M:%S %p')
         df.drop('tradedatetimegmt', axis=1, inplace=True)
 
@@ -63,11 +70,18 @@ def get_futures():
 # 02 Spotmarket
 def get_spotmarket():
     spotmarket_base = 'https://www.energy-charts.info/charts/price_spot_market/data/ch/year_'
-    spotmarket_urls = [spotmarket_base+ str(i) + '.json' for i in range(2020, 2023)]
+    spotmarket_urls = [spotmarket_base+ str(i) + '.json' for i in range(2020, 2024)]
 
     def read_json(url, selection):
-        response = urlopen(url)
-        data_json = json.loads(response.read())
+        response = requests.get(url)
+
+        # Jahr 2023 Stand 3. Januar 2023 noch nicht aufgeschaltet. Deshalb hier Check, ob existiert
+        if response.status_code == 404:
+            print("🤬 API-Down oder nicht aufgeschaltet. URL:")
+            print(url)
+            return []
+        
+        data_json = response.json()
         
         timestamps = data_json[0]['xAxisValues'] 
         datetimes = [dt.fromtimestamp(stamp/1000).strftime('%Y-%m-%d %H:%M')  for stamp in timestamps]
@@ -94,8 +108,8 @@ def get_spotmarket():
 
 
     for market_url in spotmarket_urls:
-        multi_year_dates = multi_year_dates +read_json(market_url, 'dates')
-        multi_year_prices = multi_year_prices +read_json(market_url, 'prices')
+        multi_year_dates = multi_year_dates + read_json(market_url, 'dates')
+        multi_year_prices = multi_year_prices + read_json(market_url, 'prices')
 
     spotmarket_df = pd.DataFrame({'date': multi_year_dates, 'price':multi_year_prices})
     spotmarket_df['date'] = pd.to_datetime(spotmarket_df['date'])
@@ -113,11 +127,11 @@ def get_spotmarket():
 # 03 Atomstrom Frankreich
 def get_atomstrom_frankreich():
     akw_base = 'https://www.energy-charts.info/charts/energy/data/fr/week_'
-    akw_urls = [akw_base+ str(i) + '.json' for i in range(2019, 2023)]
+    akw_urls = [akw_base+ str(i) + '.json' for i in range(2019, 2024)]
 
     def read_json_akw(url, selection):
-        response = urlopen(url)
-        data_json = json.loads(response.read())
+        response = requests.get(url)
+        data_json = response.json()
         
         timestamps = data_json[0]['xAxisValues'] 
         
@@ -131,16 +145,16 @@ def get_atomstrom_frankreich():
                     volume = elem['data']
         
         if selection == 'dates':
-            return timestamps
+            return timestamps[0:52]
         if selection == 'volume':
-            return volume
+            return volume[0:52]
 
     akw_dates = []
     akw_volume = []
     akw_year = []
 
     for url in akw_urls:
-        akw_dates = akw_dates +read_json_akw(url, 'dates')
+        akw_dates = akw_dates + read_json_akw(url, 'dates')
         akw_volume = akw_volume +read_json_akw(url, 'volume')
         akw_year = akw_year + len(read_json_akw(url, 'dates')) * [url[-9:-5]]
 
@@ -153,7 +167,13 @@ def get_atomstrom_frankreich():
     akw_df_wide = akw_df.pivot(index='date', columns='year', values='volume').reset_index()
 
     akw_df_wide['q_date'] = '2000-W' + akw_df_wide['date'].astype(str)
-    akw_df_wide = akw_df_wide[['q_date','2019','2020','2021','2022']]
+    akw_df_wide.to_clipboard()
+
+    # 2023 Stand Anfang Januar 2023 noch nicht vorhanden. Deshalb hier Check.
+    columns = ['q_date','2019','2020','2021','2022']
+    if '2023' in akw_df_wide.columns:
+        columns.append('2023')
+    akw_df_wide = akw_df_wide[columns]
 
     return akw_df_wide
 
