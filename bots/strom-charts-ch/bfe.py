@@ -3,7 +3,12 @@
 """
 Created on Thu Dec 15 10:28:51 2022
 
+Updates:
+ - Neue API: Die alte liefert nur Werte bis 2022, aber mit falschen Datum. Wird vielleicht geflickt... @simonhuwiler
+
 @author: florianseliger
+
+
 """
 
 import pandas as pd
@@ -14,7 +19,7 @@ from datetime import timedelta, date
 from helpers import *
 
 def get_bfe():
-    url = 'https://www.energiedashboard.admin.ch/api/strom-verbrauch/historical-values'
+    url = 'https://www.energiedashboard.admin.ch/api/v2/strom-verbrauch/landesverbrauch-mit-prognose'
 
     response = urlopen(url)
 
