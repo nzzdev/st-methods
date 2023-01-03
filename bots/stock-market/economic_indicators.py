@@ -382,7 +382,8 @@ oil_price_de.drop_duplicates(subset='Date', keep='last', inplace=True)
 #oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
 #oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
 
-# Update @simonhuwiler: Auskommentiert gemäss Florian
+# Update @simonhuwiler: Auskommentiert gemäss Florian.
+# # Achtung, auch aus q.config entfernt!
 # update_chart(id='b1717dcaee838699497b647ebbc25935',
 #              data=oil_price)
 # update_chart(id='5ac628c4bb388d36fb2f5cbc746a7cb6',

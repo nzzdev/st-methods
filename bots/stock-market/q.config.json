@@ -121,32 +121,6 @@
    "environments": [
     {
      "name": "production",
-     "id": "b1717dcaee838699497b647ebbc25935"
-    }
-   ],
-   "item": {
-    "notes": "",
-    "data": [
-    ]
-   }
-  },
-  {
-   "environments": [
-    {
-     "name": "production",
-     "id": "5ac628c4bb388d36fb2f5cbc746a7cb6"
-    }
-   ],
-   "item": {
-    "notes": "",
-    "data": [
-    ]
-   }
-  },
-  {
-   "environments": [
-    {
-     "name": "production",
      "id": "1dda540238574eac80e865faa0dcab83"
     }
    ],
