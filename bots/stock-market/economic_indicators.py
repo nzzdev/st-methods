@@ -321,8 +321,15 @@ title_price = str(price_95).replace('.', ',')
 
 title = "Benzin kostet im Schnitt " + title_price + " Franken pro Liter"
 
+# Workaround @simonhuwiler:
+# - Jahresdurchschnitt entfernen
+# - 2022 umbenennen in "Benzinpreis"
+df_tmp = fuel_prices.copy()
+df_tmp.rename(columns={'2022': 'Benzinpreis'}, inplace=True)
+df_tmp = df_tmp[['date', 'Benzinpreis']]
+
 update_chart(id='1dda540238574eac80e865faa0d4aaba',
-             data = fuel_prices, title = title)
+             data = df_tmp, title = title)
 # update_chart(id='5ac628c4bb388d36fb2f5cbc745073c6',
 #            data=fuel_prices_de[['Jahresdurchschnitt 2019', '2022']])
 
