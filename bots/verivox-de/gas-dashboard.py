@@ -19,7 +19,7 @@ if __name__ == '__main__':
         todaystr = today.strftime('%Y-%m-%d')
 
         df_storage = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', '2022'])
+            f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', '2023'])
         df_storage_trend = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Trend'])
         df_gas = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
@@ -61,7 +61,7 @@ if __name__ == '__main__':
             df_strom_mean.index.get_level_values(0) >= '2022-01-01')]
         # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2021-01-01')]
         df_storage.index = df_storage.index.rename('date')
-        df_storage = df_storage.rename(columns={'2022': 'Gasspeicher'})
+        df_storage = df_storage.rename(columns={'2023': 'Gasspeicher'})
         df_storage_trend.index = df_storage_trend.index.rename('date')
         # BENZIN df_super.index = df_super.index.rename('date')
         # BENZIN df_super = df_super.rename(columns={'tages_mittel': 'Benzinpreis'})

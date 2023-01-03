@@ -65,7 +65,7 @@ if __name__ == '__main__':
         # create dates
         today = date.today()
         todaystr = today.strftime('%Y-%m-%d')
-        endstr = '2022-01-01'
+        endstr = '2023-01-01'
 
         # calculate number of pages needed
         start = datetime.strptime(todaystr, "%Y-%m-%d") + timedelta(days=300)
@@ -81,8 +81,8 @@ if __name__ == '__main__':
                         status_forcelist=[502, 503, 504])
         s.mount('https://', HTTPAdapter(max_retries=retries))
 
-        # create header and get data from 2022
-        header = (f"Datum,2022,Trend"+'\n')
+        # create header and get data from 2023
+        header = (f"Datum,2023,Trend"+'\n')
         with open(f'./data/{todaystr}-gasspeicher.csv', 'w') as file:
             file.write(header)
             for n in range(1, pages):
@@ -111,7 +111,7 @@ if __name__ == '__main__':
                 # original query
                 # https://agsi.gie.eu/api?country=DE&from=2013-04-15&to=2022-05-16&page=1&size=300
 
-        # retrieve data from 2011-2022
+        # retrieve data from 2011-2023
         dfnew = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dftrend = pd.read_csv(
@@ -152,13 +152,13 @@ if __name__ == '__main__':
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Maximum/Minimum der Füllstände 2011-2021.<br>Stand: ' + timecodestr
+        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2011-2021.<br>Stand: ' + timecodestr
         notes_chart_trend = 'Stand: ' + timecodestr
 
         # merge dataframes
         df = dfold.merge(dfnew, on='Datum', how='left')
         df.rename(columns={'Min': ''}, inplace=True)
-        df['2022'].fillna('', inplace=True)
+        df['2023'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
         dftrend.set_index('Datum', inplace=True)
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
@@ -181,7 +181,7 @@ if __name__ == '__main__':
         dftrend = dftrend[(dftrend.index.get_level_values(0) >= '2022-05-01')]
 
         # banker's rounding
-        title_perc = dfnew['2022'].iloc[-1].round(
+        title_perc = dfnew['2023'].iloc[-1].round(
             1).astype(str).replace('.', ',')
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
