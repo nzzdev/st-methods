@@ -23,7 +23,6 @@ import pytz
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
 
-
 # -------------- DAILY WEATHER
 # Get Daily weather data
 headers = {
@@ -55,6 +54,7 @@ if df_temperature.index.min() > datetime.datetime(2022, 1, 1):
     df_old = pd.read_csv(Path('./data/REH.csv'))
     df_old['date'] = pd.to_datetime(df_old['date'])#.dt.date
     df_old = df_old[df_old.date < df_temperature.index.min()]
+    df_old.set_index('date', inplace=True)
     df_temperature = pd.concat([df_old, df_temperature])
     df_temperature = df_temperature.sort_values('date')
 
