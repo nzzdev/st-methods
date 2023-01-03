@@ -14,6 +14,7 @@ import os
 #import sys
 from fake_useragent import UserAgent
 from deep_translator import GoogleTranslator
+from pandas_datareader import data as yahoo_data
 
 
 
@@ -262,27 +263,11 @@ benzin_table = benzin[['Reiseziel', 'Benzin', 'Diesel']]
 benzin_table.sort_values(by='Benzin', ascending=False, inplace=True)
 benzin_table.rename_axis(None, axis=1, inplace = True)
 
-Reiseziele = [
-'Niederlande',
-'Belgien',
-'Dänemark',
-'Schweiz',
-'Grossbritannien',
-'Spanien',
-'Österreich',
-'Italien',
-'Luxemburg',
-'Tschechische Republik',
-'Frankreich',
-'Polen' ]
-
-benzin_table_2 = benzin_table.loc[benzin_table['Reiseziel'].isin(Reiseziele)].copy()
-
 notes = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher nicht immer tagesaktuell und als Grössenordnung zu verstehen. Für Finnland wird der Preis für einen Liter bleifrei 98 ausgewiesen."
 notes_2 = "Es gibt teilweise einen grossen Verzug bei den Preismeldungen. Die Preise sind daher nicht immer tagesaktuell und als Grössenordnung zu verstehen."
 
 update_chart(id = '4359e80ee2738a55d5f04f1409ffebf1', data = benzin_table, notes = notes)
-update_chart(id = '5d54f8c74468704fbcb15b97cb56c6c5', data = benzin_table_2, notes = notes_2)
+update_chart(id = '5d54f8c74468704fbcb15b97cb56c6c5', data = benzin_table, notes = notes_2)
 
 
 session = requests_html.HTMLSession()
@@ -429,6 +414,9 @@ wheat = wheat[['Date', 'Jahresdurchschnitt 2019', '2022']]
 update_chart(id='b1717dcaee838699497b647ebbceda21',
              data=wheat)
 
+
+
+
 from market_ids import *
 
 url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + market_id + '&historicalSpan=3'
@@ -533,7 +521,6 @@ eu.rename_axis(None, axis=1, inplace = True)
 eu.drop(columns=['Country Name'], inplace = True)
 
 Reiseziele = [
-'Deutschland',
 'Niederlande',
 'Belgien',
 'Dänemark',
@@ -650,7 +637,7 @@ update_chart(id='c366afc02f262094669128cd054faf78', data=bip)
 # Bitcoin energy
 
 url = 'https://api.everviz.com/gsheet?googleSpreadsheetKey=1bLjXWHG4IXO8_CyMKRl1tSN8hTn3AFOlxfBISyQ6zM0&worksheet=A1:ZZ'
-ua_str = UserAgent().chrome
+ua_str = UserAgent(verify_ssl=False).chrome
 
 r = requests.get(url, headers={"User-Agent": ua_str})
 data = r.json()
@@ -680,33 +667,110 @@ update_chart(id='b6873820afc5a1492240edc1b101cdd9',
 
 # 10 largest crypto currencies
 
-url = 'https://coinmarketcap.com/'
+#url = 'https://coinmarketcap.com/'
 
-page = requests.get(url)
+#page = requests.get(url)
 
-soup = BeautifulSoup(page.content, "html.parser")
+#soup = BeautifulSoup(page.content, "html.parser")
 
-results = soup.find_all('table')
+#results = soup.find_all('table')
 
-market_cap = []
-for i in range(0, 10):
-    market_cap.append(re.sub(
-        "[^0-9]", "", results[0].find_all('span', class_='sc-65d3c89-0 koTgbF')[i].text.strip()))
+#market_cap = []
+#for i in range(0, 10):
+ #   market_cap.append(re.sub(
+  #    "[^0-9]", "", results[0].find_all('span', class_='sc-b2299d0c-0 bcJsCG')[i].text.strip()))
 
-
-crypto = []
-for i in range(0, 10):
-    crypto.append(results[0].find_all(
-        'div', class_='sc-aef7b723-0 sc-6110f1f2-1 jxcfYN name-area')[i].text.strip())
-
+#crypto = []
+#for i in range(0, 10):
+ #   crypto.append(results[0].find_all(
+  #     'p', class_ = 'sc-e225a64a-0 ePTNty')[i].contents[0].text.strip())
 
 
+#df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
 
-df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
 
-#df.set_index('crypto', inplace=True)
+
+
+
+tickers = ['BTC-USD', 'ETH-USD', 'USDT-USD', 'BNB-USD', 'USDC-USD', 'BUSD-USD', 'XRP-USD', 'ADA-USD', 'DOGE-USD', 'MATIC-USD',
+           'DOT-USD', 'DAI-USD', 'LTC-USD', 'WTRX-USD', 'SHIB-USD', 'HEX-USD', 'SOL-USD', 'TRX-USD', 'UNI7083-USD',
+           'LEO-USD', 'STETH-USD', 'WBTC-USD','AVAX-USD', 'LINK-USD', 'ATOM-USD', 'ETC-USD', 'XMR-USD', 'XLM-USD',
+           'BCH-USD', 'TON11419-USD']
+
+df = yahoo_data.get_quote_yahoo(tickers)['marketCap']
+df = df.head(10).copy().to_frame()
+
+df.loc[df.index == 'BTC-USD', 'currency'] = 'Bitcoin'
+df.loc[df.index == 'ETH-USD', 'currency'] = 'Ethereum'
+df.loc[df.index == 'USDT-USD', 'currency'] = 'Tether'
+df.loc[df.index == 'BNB-USD', 'currency'] = 'BNB'
+df.loc[df.index == 'USDC-USD', 'currency'] = 'USD Coin'
+df.loc[df.index == 'BUSD-USD', 'currency'] = 'Binance USD'
+df.loc[df.index == 'XRP-USD', 'currency'] = 'XRP'
+df.loc[df.index == 'DOGE-USD', 'currency'] = 'Dogecoin'
+df.loc[df.index == 'ADA-USD', 'currency'] = 'Cardano'
+df.loc[df.index == 'MATIC-USD', 'currency'] = 'Polygon'
+df.loc[df.index == 'DOT-USD', 'currency'] = 'Polkadot'
+df.loc[df.index == 'DAI-USD', 'currency'] = 'Dai'
+df.loc[df.index == 'LTC-USD', 'currency'] = 'Litecoin'
+df.loc[df.index == 'SHIB-USD', 'currency'] = 'Shiba Inu'
+df.loc[df.index == 'TRX-USD', 'currency'] = 'Tron'
+df.loc[df.index == 'SOL-USD', 'currency'] = 'Solana'
+df.loc[df.index == 'UNI7083-USD', 'currency'] = 'Uniswap'
+df.loc[df.index == 'AVAX-USD', 'currency'] = 'Avalanche'
+df.loc[df.index == 'LINK-USD', 'currency'] = 'Chainlink'
+df.loc[df.index == 'LEO-USD', 'currency'] = 'UNUS SED LEO'
+df.loc[df.index == 'WBTC-USD', 'currency'] = 'Wrapped Bitcoin'
+df.loc[df.index == 'ATOM-USD', 'currency'] = 'Cosmos'
+df.loc[df.index == 'ETC-USD', 'currency'] = 'Ethereum Classic'
+df.loc[df.index == 'XMR-USD', 'currency'] = 'Monero'
+df.loc[df.index == 'XLM-USD', 'currency'] = 'Stellar'
+df.loc[df.index == 'TON11419-USD', 'currency'] = 'Toncoin'
+df.loc[df.index == 'BCH-USD', 'currency'] = 'Bitcoin Cash'
+
+
+df = df[['currency','marketCap']].sort_values(by = ['marketCap'], ascending = False)
+
+
+# defining the html contents of a URL.
+#xhtml = url_get_contents(url).decode('latin-1')
+
+# Defining the HTMLTableParser object
+#p = HTMLTableParser()
+
+# feeding the html contents in the HTMLTableParser object
+#p.feed(xhtml)
+
+#df = pd.DataFrame(p.tables[0]).dropna()
+#df.columns = df.iloc[0]
+#df = df[1:]
+#df[["Name", "Name_1", "Name_2"]] = df["Name"].str.split("(\d)", n=1, expand=True)
+
+#df[["Market Cap1", "Market Cap"]] = df["Market Cap"].str.split(expand = True)
+
+#df['Market Cap'] = df['Market Cap'].str.replace(r'\D', '', regex=True)
+
+#df = df[['Name', 'Market Cap']].copy()
+
+#df.rename_axis(None, axis=1, inplace = True)
 
 notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 
 update_chart(id='9640becc888e8a5d878819445105edce',
-             data=df, notes=notes)
+                 data=df, notes=notes)
+    
+
+
+# More stock market data
+
+tickers = ["CSGN.SW"]  # Subtitute for the tickers you want
+df_1 = yf.download(tickers,  period = "1y", interval = "1d")
+df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
+
+update_chart(id='9039ce8be0b7e1650165751c47d993d4',
+                 data=df_1)
+
+
+
+
+

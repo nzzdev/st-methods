@@ -39,11 +39,15 @@ if __name__ == '__main__':
         notes_chart = '¹ Die Exporte beinhalten sämtliche Gasflüsse von Deutschland in angrenzende Staaten, unabhängig davon, wo das Gas bestellt wurde.<br>Stand: ' + timecodestr
 
         # calculate 7-day mvg average
-        df = df.rolling(window=7).mean().dropna()
+        #df = df.rolling(window=7).mean().dropna()
+
+        # convert total exports to terrawatts
+        df = df.div(1000)
 
         # dynamic chart title
-        title_gwh = df[df.columns[0]].iloc[-1].round(0).astype(int)
-        title = f'Deutschland exportiert¹ derzeit {title_gwh} GWh Gas am Tag'
+        title_twh = df[df.columns[0]].iloc[-1].round(1).astype(float)
+        title_twh = title_twh.astype(str).replace('.', ',')
+        title = f'Deutschland exportiert derzeit {title_twh} TWh Gas am Tag'
 
         # run Q function
         update_chart(id='332e931d1de8fc64f1b04d2612c7d75e',

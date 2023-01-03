@@ -65,6 +65,17 @@
     "item": {
      "data": []
     }
+   },
+  {
+    "environments": [
+     {
+      "name": "production",
+      "id": "e41fb785ca9af558a19582476dafef33"
+     }
+    ],
+    "item": {
+     "data": []
+    }
    }
  ]
 }

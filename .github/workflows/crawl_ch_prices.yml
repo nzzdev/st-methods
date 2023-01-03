@@ -2,14 +2,14 @@ name: Crawl Coop prices
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
-  # This will run it at 8:45 and 22:45.
+  # This will run it at 8:45, 14:45 and 22:45.
   schedule:
-    - cron: "45 6,20 * * *"
+    - cron: "45 6,12,20 * * *"
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     defaults:
       run:
         working-directory: bots/crawl_ch/
@@ -22,7 +22,7 @@ jobs:
       - name: Get pip cache dir
         id: pip-cache
         run: |
-          echo "::set-output name=dir::$(pip cache dir)"
+          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
       - name: Cache python packages
         uses: actions/cache@v3
         with:
@@ -38,6 +38,7 @@ jobs:
           AWS_GATEWAY_SECRET: ${{ secrets.AWS_GATEWAY_SECRET }}
         run: |
           python crawl_ch.py
+          git pull
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Upload excel files with prices
@@ -59,4 +60,5 @@ jobs:
           status: ${{ job.status }}
           notify_when: "failure"
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+         SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+

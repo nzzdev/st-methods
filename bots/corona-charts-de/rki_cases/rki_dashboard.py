@@ -71,8 +71,8 @@ if __name__ == '__main__':
         trend_cases = df_meta['Trend Fälle']
         trend_deaths = df_meta['Trend Tote']
         diff_icu = df_meta['Diff ICU'].astype(int)
-        diff_cases = df_meta['Fälle'].astype(int)
-        diff_deaths = df_meta['Tote'].astype(int)
+        diff_cases = df_cases['Fälle'].iloc[-1].astype(int)
+        diff_deaths = df_deaths['Tote'].iloc[-1].astype(int)
 
         # drop rows with NaN and unused columns
         df = df[df.iloc[:, 0].notna()]

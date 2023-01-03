@@ -2,13 +2,14 @@
 
 #prep
 rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
+# #if tidyverse causes github error
+# update.packages(ask = F)
+
 options(scipen=999)
 library(tidyverse)
 library(jsonlite)
-
-# setwd for fixes
+# # setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/us-midterms-2022")
-
 # #renv
 # library(renv)
 # renv::init()
@@ -59,6 +60,26 @@ house_tab <- rbind(house_tab, house_row) %>% as_tibble()
 
 row.names(house_tab) <- NULL
 
+# AK RCV RESULTS
+house_rcv <- api$races %>%
+  filter(officeName == "U.S. House" & 
+           raceType == "RCV General Election")
+
+house_rcv_ak <- house_rcv$reportingUnits[[1]]$candidates %>% as.data.frame()
+
+if("winner" %in% colnames(house_rcv_ak))
+{
+  if("X" %in% house_rcv_ak$winner)
+  {
+    house_tab$winners[house_tab$state_id == "AK-1"] <- house_rcv_ak %>% filter(winner == "X") %>% select(party) %>% as.vector()
+  } else
+  {
+    house_tab$winners[house_tab$state_id == "AK-1"] <- "NA"
+  }
+} else {
+  house_tab$winners[house_tab$state_id == "AK-1"] <- "NA"
+}
+
 house_tab$state <- unlist(house_tab$state)
 house_tab$winners <- unlist(house_tab$winners)
 house_tab$state_id <- unlist(house_tab$state_id)
@@ -71,13 +92,13 @@ house_tab$winners[house_tab$winners != "republicans" &
 
 house_tab$winners[house_tab$state_id == "CA-15"] <- "democrats"
 house_tab$winners[house_tab$state_id == "CA-34"] <- "democrats"
+house_tab$winners[house_tab$state_id == "ME-2"] <- "democrats"
 
 house_tab <- house_tab %>% select(-state_id)
 
 table(house_tab$winners)
 
 #write_csv(house_tab, "house-election.csv")
-
 
 #### Senate ####
 #INCLUDE special election in OK (4 years) and "Primary" in LA, EXCLUDE special eletion in CA (only rest of 2022), exclude Ranked Choice Elections (RCV)
@@ -138,7 +159,10 @@ senate_tab$incumbent_party[senate_tab$incumbent_party != "republicans" &
 
 
 senate_tab$winners_party[senate_tab$state == "AK"] <- "republicans"
-senate_tab$winners_name[senate_tab$state == "AK"]  <- "Lisa Murkowski oder Kelly Tshibaka*"
+senate_tab$winners_name[senate_tab$state == "AK"]  <- "Lisa Murkowski"
+
+senate_tab$winners_party[senate_tab$state == "GA"] <- "democrats"
+senate_tab$winners_name[senate_tab$state == "AK"]  <- "Raphael Warnock"
 
 table(senate_tab$winners_party)
 

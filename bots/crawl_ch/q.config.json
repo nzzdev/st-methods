@@ -1,0 +1,265 @@
+{
+ "items": [
+  {
+   "environments": [
+    {
+     "name": "production",
+     "id": "8676bad64564b4740f74b6d5d0757a95"
+    }
+   ],
+   "item": {
+    "data": {
+     "table": [
+      [
+       "",
+       "",
+       "Alter Preis",
+       "Neuer Preis"
+      ],
+      [
+       "↑",
+       "Pic-Nic Import Eier aus Bodenhaltung",
+       "3.3",
+       "4.95"
+      ],
+      [
+       "↑",
+       "Eier Bodenhaltung",
+       "3.9",
+       "5.5"
+      ],
+      [
+       "↑",
+       "Olivenöl vergine",
+       "4.7",
+       "6.0"
+      ],
+      [
+       "↑",
+       "Auberginen",
+       "1.95",
+       "2.8"
+      ],
+      [
+       "↑",
+       "Lindenblütentee",
+       "1.95",
+       "2.5"
+      ],
+      [
+       "↑",
+       "Chips Sour Cream & Onion",
+       "2.95",
+       "3.5"
+      ],
+      [
+       "↑",
+       "Café Chicorée",
+       "4.95",
+       "5.5"
+      ],
+      [
+       "↑",
+       "Ahornsirup",
+       "5.95",
+       "6.4"
+      ],
+      [
+       "↑",
+       "Wave Chips hot & spicy",
+       "1.95",
+       "2.35"
+      ],
+      [
+       "↑",
+       "Tee Hagebutten",
+       "1.25",
+       "1.65"
+      ],
+      [
+       "↑",
+       "Waved Chips Paprika",
+       "1.95",
+       "2.35"
+      ],
+      [
+       "↑",
+       "Zopfmehl",
+       "1.5",
+       "1.9"
+      ],
+      [
+       "↑",
+       "Space Snack Cream",
+       "1.6",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Kaffeegebäck Choco",
+       "1.95",
+       "2.2"
+      ],
+      [
+       "↑",
+       "Kaffeegebäck Butter",
+       "1.95",
+       "2.2"
+      ],
+      [
+       "↑",
+       "Fencheltee",
+       "1.4",
+       "1.6"
+      ],
+      [
+       "↑",
+       "Früchtetee",
+       "0.95",
+       "1.2"
+      ],
+      [
+       "↑",
+       "Trauben weiss",
+       "2.7",
+       "2.95"
+      ],
+      [
+       "↑",
+       "Kartoffeln",
+       "2.95",
+       "3.2"
+      ],
+      [
+       "↑",
+       "Ãlplermagronen",
+       "1.75",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Spiralen",
+       "1.75",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Proteinbrot",
+       "2.3",
+       "2.5"
+      ],
+      [
+       "↑",
+       "Riegel Schok & Erdnuss",
+       "1.8",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Müsli Riegel Apfel",
+       "1.8",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Saurer Halbrahm",
+       "2.75",
+       "2.9"
+      ],
+      [
+       "↑",
+       "Kuchenteig Block",
+       "1.7",
+       "1.75"
+      ],
+      [
+       "↑",
+       "Apfelschorle",
+       "8.35",
+       "8.4"
+      ],
+      [
+       "↑",
+       "Yeah!",
+       "2.2",
+       "2.3"
+      ],
+      [
+       "↑",
+       "Langkornreis Parboiled",
+       "1.1",
+       "1.2"
+      ],
+      [
+       "↑",
+       "Müsli Riegel Schoko",
+       "1.8",
+       "1.95"
+      ],
+      [
+       "↑",
+       "Zucchetti",
+       "2.5",
+       "2.6"
+      ],
+      [
+       "↑",
+       "Polenta Maisgriess",
+       "0.95",
+       "1.0"
+      ],
+      [
+       "↓",
+       "Dattel Tomaten",
+       "2.0",
+       "1.95"
+      ],
+      [
+       "↓",
+       "Karotten",
+       "2.65",
+       "2.55"
+      ],
+      [
+       "↓",
+       "Clementinen",
+       "4.15",
+       "3.95"
+      ],
+      [
+       "↓",
+       "Radieschen Bund",
+       "1.5",
+       "1.3"
+      ],
+      [
+       "↓",
+       "Blumenkohl 1kg",
+       "3.5",
+       "3.2"
+      ],
+      [
+       "↓",
+       "Gurken",
+       "2.4",
+       "2.0"
+      ],
+      [
+       "↓",
+       "Broccoli",
+       "2.95",
+       "2.1"
+      ],
+      [
+       "↓",
+       "Orangen",
+       "4.95",
+       "3.5"
+      ]
+     ]
+    },
+    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 12. 12. 2022"
+   }
+  }
+ ]
+}

@@ -7,3 +7,10 @@ __pycache__
 .ipynb_checkpoints
 .idea/
 .github/workflows/verivox-de.yml
+bots/crawl-rewe-de/crawl-rewe-test.py
+bots/verivox-de/data/backup_2022/gasexporte-full.csv
+bots/verivox-de/data/backup_2022/gasexporte.csv
+bots/verivox-de/data/backup_2022/gasverbrauch-bereinigt-full.csv
+bots/verivox-de/data/backup_2022/gasverbrauch-bereinigt.csv
+bots/verivox-de/data/backup_2022/gasverbrauch-unbereinigt-full.csv
+bots/verivox-de/data/backup_2022/gasverbrauch-unbereinigt.csv

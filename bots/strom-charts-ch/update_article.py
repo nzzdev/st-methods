@@ -1,7 +1,7 @@
-from datetime import datetime as dt
+from datetime import datetime as dt, timedelta
 from helpers import *
 
-def run(futures, spotmarket, atomstrom_fr, speicherseen):
+def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe):
     # set date
     q_date = 'Stand: '+ dt.now().strftime("%-d. %-m. %Y")    
     q_date_ = 'Preise für die Schweiz erst ab März 2022 verfügbar. <br>Stand: '+ dt.now().strftime("%-d. %-m. %Y") 
@@ -25,4 +25,10 @@ def run(futures, spotmarket, atomstrom_fr, speicherseen):
     update_chart(id = '69bd37806691fc0c2e6786eb38efea63', 
                 data = speicherseen.pivot(index=['Jahr_Woche'], columns='Jahr', values='TotalCH_prct').iloc[:,-4:].reset_index(),
                 notes = q_date)
+    
+    # BfE Dashboard
+    update_chart(id = "e41fb785ca9af558a19582476dafef33", 
+                data = bfe,
+                notes = '¹ Minimum/Maximum der letzten 5 Jahre.<br>Der Landesverbrauch enthält den gesamten Verbrauch von Haushalten, Gewerbe, Landwirtschaft, Dienstleistungen, Industrie und Verkehr (sogenannter Endverbrauch) zuzüglich Übertragungs- und Verteilverluste (Netzverluste). Zudem ist der Stromverbrauch für den Betrieb von Speicherpump-Kraftwerken enthalten. <br>Stand: ' + (dt.now() - timedelta(days=1)).strftime("%-d. %-m. %Y"))  
+
 

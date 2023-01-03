@@ -15,11 +15,11 @@ jobs:
       run:
         working-directory: bots/travel-guide/
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Setup R
-        uses: r-lib/actions/setup-r@v1
+        uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.0.5"
+          r-version: "4.2.2"
       - name: Install system dependencies
         run: |
           sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
@@ -27,7 +27,7 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ~/.cache/R/renv
-          key: ${{ runner.os }}-r-4.0.5-renv-${{ hashFiles('./bots/travel-guide/renv.lock') }}
+          key: ${{ runner.os }}-r-4.2.2-renv-${{ hashFiles('./bots/travel-guide/renv.lock') }}
       - name: Restore R packages
         run: |
           install.packages("renv")
@@ -41,7 +41,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14"
+          node-version: "16"
       - name: Cache npm packages
         uses: actions/cache@v2
         with:

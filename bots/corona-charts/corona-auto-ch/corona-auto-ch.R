@@ -2,16 +2,22 @@
 
 #prep
 rm(list=ls(all=TRUE)) # Alles bisherige im Arbeitssprecher loeschen
+# #if tidyverse causes github error
+# update.packages(ask = F)
 options(scipen=999)
 library(tidyverse)
 library(jsonlite)
 library(zoo)
 library(rvest)
-library(renv)
 
-# setwd for fixes
+# #setwd for fixes
 # setwd("~/Documents/GitHub/st-methods/bots/corona-charts")
 # setwd("/Users/simon/Documents/projects/st-methods/bots/corona-charts/")
+# 
+# #renv
+# library(renv)
+# renv::init()
+# renv::snapshot()
 
 # import helper functions
 

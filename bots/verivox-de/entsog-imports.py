@@ -7,6 +7,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 from datetime import datetime, date, timedelta
 from user_agent import generate_user_agent
+import numpy as np
 
 if __name__ == '__main__':
     try:
@@ -65,13 +66,10 @@ if __name__ == '__main__':
 
         # replace commas and 'None' string with NaN and drop last row (KW53)
         cols = ['Minimum', 'Maximum', '2022']
-        df_lng[cols] = df_lng[cols].replace(',', '', regex=True).astype(float)
-        df_russia[cols] = df_russia[cols].replace(
-            ',', '', regex=True).astype(float)
-        df_lng[cols] = df_lng[cols].apply(
-            pd.to_numeric, errors='coerce', axis=1)
-        df_russia[cols] = df_russia[cols].apply(
-            pd.to_numeric, errors='coerce', axis=1)
+        df_lng[cols] = df_lng[cols].replace(',', '', regex=True)
+        df_russia[cols] = df_russia[cols].replace(',', '', regex=True)
+        #df_lng[cols] = df_lng[cols].apply(pd.to_numeric, errors='coerce', axis=1)
+        #df_russia[cols] = df_russia[cols].apply(pd.to_numeric, errors='coerce', axis=1)
         df_lng.drop(df_lng.tail(1).index, inplace=True)
         df_russia.drop(df_russia.tail(1).index, inplace=True)
 
@@ -103,7 +101,8 @@ if __name__ == '__main__':
         # set week number as index and create date for chart notes
         df_lng.set_index('Datum', inplace=True)
         df_russia.set_index('Datum', inplace=True)
-        weekno = df_russia['2022'].last_valid_index()  # last non NaN value
+        weekno = df_russia['2022'].replace(
+            r'^\s*$', np.nan, regex=True).last_valid_index()  # replace empty strings and check last non NaN value
         weekno_dt = datetime.strptime(
             weekno + '-1', '%Y-W%W-%w') + timedelta(days=7)  # get monday from next week
         weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
@@ -134,7 +133,7 @@ if __name__ == '__main__':
         df_total = df_total.drop(
             df_total.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]], axis=1)
         df_ns = df_ns.drop(
-            df_ns.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 11]], axis=1)
+            df_ns.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]], axis=1)
 
         # convert date string to datetime
         df_total[df_total.columns[0]] = pd.to_datetime(
@@ -146,6 +145,14 @@ if __name__ == '__main__':
         df_total = df_total.set_index(df_total.columns[0])
         df_ns = df_ns.set_index(df_ns.columns[0])
 
+        # convert total imports to terrawatts
+        df_total = df_total.div(1000)
+
+        # change column order
+        df_total = df_total[['Deutschland Import', 'LNG']]
+        df_total = df_total.rename(
+            columns={'Deutschland Import': 'Gesamt-Importe', 'LNG': 'Direkt-Importe LNG'})
+
         # convert GWh to million m3 according to calorific value of Russian gas
         df_ns = (df_ns / 10.3).round(1)
 
@@ -155,11 +162,21 @@ if __name__ == '__main__':
         else:
             chart_title = 'Über Nord Stream 1 fliesst kein russisches Gas mehr'
 
+        # old
+        #title_twh = df_total[df_total.columns[0]].iloc[-1].round(1).astype(float)
+        #title_twh = title_twh.astype(str).replace('.', ',')
+        #chart_title_total = f'Deutschland importiert derzeit {title_twh} TWh Gas am Tag'
+
+        title_twh = (df_total[df_total.columns[1]].iloc[-1] /
+                     df_total[df_total.columns[0]].iloc[-1]) * 100
+        title_twh = title_twh.round(0).astype(int)
+        chart_title_total = f'Anteil des direkt importierten LNG liegt derzeit bei {title_twh} Prozent'
+
         # get latest date for chart notes
         timecode = df_ns.index[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
         notes_chart_ns = 'Stand: ' + timecodestr
-        notes_chart_total = '¹ inklusive möglicher Ringflüsse.<br>Stand: ' + timecodestr
+        notes_chart_total = '¹ inklusive möglicher Ringflüsse und Bestellungen aus anderen Staaten.<br>Stand: ' + timecodestr
 
         # rename columns and save clean csv for dashboard
         df_ns = df_ns.rename(columns={'nordstream1': 'Nord Stream 1'})
@@ -169,8 +186,8 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
                      data=df_ns, notes=notes_chart_ns, title=chart_title)
-        update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5',
-                     data=df_total, notes=notes_chart_total)
+        update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5', data=df_total,
+                     notes=notes_chart_total, title=chart_title_total)
 
         """
         # OLD

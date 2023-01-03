@@ -4,12 +4,12 @@ on:
   # Schedule makes this bot run in regular intervals, without any interventions
   # This will run it at 7:45 and 23:45.
   schedule:
-    - cron: "45 5,10,21 * * *"
+    - cron: "45 5,9,13,17,21 * * *"
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     defaults:
       run:
         working-directory: bots/stock-market/
@@ -53,6 +53,7 @@ jobs:
       - name: Run python scripts
         run: |
           python economic_indicators.py
+          git pull
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: :!*.json
@@ -72,7 +73,7 @@ jobs:
         if: always()
         uses: ravsamhq/notify-slack-action@v1
         with:
-          status: ${{ job.status }}
-          notify_when: "failure"
+         status: ${{ job.status }}
+         notify_when: "failure"
         env:
-          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}
+         SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_SLACK }}

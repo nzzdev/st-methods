@@ -1,10 +1,10 @@
-name: US-Midterms 2022
+name: "[zzDeaktiviert] US-Midterms 2022"
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   # This will run every 5 mins until stopped
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -34,8 +34,7 @@ jobs:
           renv::restore()
         shell: Rscript {0}
       - name: Run R scripts
-        run: |
-          Rscript ap-api-2022.R
+        run:  Rscript ap-api-2022.R
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
