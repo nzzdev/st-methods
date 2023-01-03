@@ -382,10 +382,11 @@ oil_price_de.drop_duplicates(subset='Date', keep='last', inplace=True)
 #oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
 #oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
 
-update_chart(id='b1717dcaee838699497b647ebbc25935',
-             data=oil_price)
-update_chart(id='5ac628c4bb388d36fb2f5cbc746a7cb6',
-             data=oil_price_de)
+# Update @simonhuwiler: Auskommentiert gemäss Florian
+# update_chart(id='b1717dcaee838699497b647ebbc25935',
+#              data=oil_price)
+# update_chart(id='5ac628c4bb388d36fb2f5cbc746a7cb6',
+#              data=oil_price_de)
 
 oil_price.to_csv(f'./oil_price.csv', index=False)
 oil_price_de.to_csv(f'./oil_price_de.csv', index=False)
@@ -415,8 +416,10 @@ wheat = df['Close']['KE=F'][df.index >=
                             '2022-01-01'].to_frame().dropna().reset_index(level=0)
 wheat['Jahresdurchschnitt 2019'] = df['Close']['KE=F'][(
     df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
-wheat.rename(columns={wheat.columns[1]: '2022'}, inplace=True)
-wheat = wheat[['Date', 'Jahresdurchschnitt 2019', '2022']]
+# Update 3. Januar 2022 @simonhuwiler: 2022 umbenannt in "Weizenpreis", Jahresdurchschnitt entfernt
+wheat.rename(columns={wheat.columns[1]: 'Weizenpreis'}, inplace=True)
+wheat = wheat[['Date', 'Weizenpreis']]
+#wheat = wheat[['Date', 'Jahresdurchschnitt 2019', '2022']]
 #wheat.index = wheat.index.strftime('%Y-%m-%d')
 update_chart(id='b1717dcaee838699497b647ebbceda21',
              data=wheat)
