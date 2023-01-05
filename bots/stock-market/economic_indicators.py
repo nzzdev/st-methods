@@ -59,36 +59,36 @@ update_chart(id='909e73515b8785336ef65c05d0fa36c7', data=q_data)
 
 # Zurich traffic
 
-zurich_2022 = pd.read_csv(
-    'https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv')
-zurich_2022['date'] = zurich_2022['MessungDatZeit'].str[:10]
-zurich_2022['date'] = pd.to_datetime(zurich_2022['date'], format='%Y-%m-%d')
-zurich_2022.set_index('date', inplace=True)
-zurich_2022 = zurich_2022.groupby(zurich_2022.index)[
-    'AnzFahrzeuge'].sum().rolling(30).mean().reset_index()
+df_raw = pd.concat([
+    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2018.csv'), # 2018, damit der roll. Schnitt im 2019 gleich vom 1. Januar startet
+    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2019.csv'),
+    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv'),
+    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2023.csv'),
+])
 
-zurich_2019 = pd.read_csv(
-    'https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2019.csv')
-zurich_2019['date'] = zurich_2019['MessungDatZeit'].str[:10]
-zurich_2019['date'] = pd.to_datetime(zurich_2019['date'], format='%Y-%m-%d')
-zurich_2019.set_index('date', inplace=True)
-zurich_2019 = zurich_2019.groupby(zurich_2019.index)[
-    'AnzFahrzeuge'].sum().rolling(30).mean().reset_index()
+# Set Date
+df_raw['date'] = pd.to_datetime(df_raw['MessungDatZeit']).dt.normalize()
+df_raw.set_index('date', inplace=True)
 
-zurich_2022['month'] = zurich_2022['date'].dt.month
-zurich_2019['month'] = zurich_2019['date'].dt.month
-zurich_2022['day'] = zurich_2022['date'].dt.day
-zurich_2019['day'] = zurich_2019['date'].dt.day
+# Group
+df_raw = df_raw.groupby(df_raw.index)['AnzFahrzeuge'].sum().rolling(30).mean().reset_index()
 
-zurich_2022.rename(columns = {'AnzFahrzeuge': '2022'}, inplace = True)
-zurich_2019.rename(columns = {'AnzFahrzeuge': '2019'}, inplace = True)
-zurich_2019 = zurich_2019[['month', 'day', '2019']]
+# 2018 entfernen
+df_raw = df_raw[df_raw.date >= '2019-01-01']
 
-to_q = zurich_2019.merge(zurich_2022, on = ['day', 'month'])
-to_q = to_q[['date', '2019', '2022']]
+df = df_raw.copy()
+
+# Add normalized Date (Year 2022 for every date)
+df['date_normalized'] = df.date.apply(lambda x: date(2022, x.month, x.day))
+
+# Pivo
+df = df.pivot_table(index=df.date_normalized, columns=df.date.dt.year, values='AnzFahrzeuge').reset_index()
+
+# Columns to string (for Q)
+df.columns = list(map(str, df.columns))
 
 notes = 'Fahrzeuge können mehrfach gezählt werden.'
-update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=to_q, notes = notes)
+update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=df, notes = notes)
 
 
 # Mobis
@@ -164,6 +164,7 @@ zh.columns = list(map(str, zh.columns))
 zh.drop(columns=['2020', '2021'], inplace=True)
 
 update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data=zh)
+
 
 # Verkehrszahlen
 url = 'https://www.adv.aero/corona-pandemie/woechentliche-verkehrszahlen/'
