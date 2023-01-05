@@ -147,21 +147,25 @@ zh = zh.loc[(zh['rnwy'] == 'all') & (zh['route'] == 'total') & (
 zh = zh[['time', 'value']]
 zh = zh.set_index('time')
 zh = zh.rolling(7).mean().reset_index()
-zh_2022 = zh.loc[zh['time'] >= '2022-01-01'].copy()
-zh_2019 = zh.loc[(zh['time'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
-                 (zh['time'].dt.date <= date(2022, 12, 31) -
-                  timedelta(366) - timedelta(2*365))
-                 ].copy()
-zh_2019['time'] = zh_2019['time'].dt.date + timedelta(366) + timedelta(2*365)
-zh_2022['time'] = zh_2022['time'].dt.date
-zh_2019.rename(columns={'value': '2019'}, inplace=True)
-zh_2022.rename(columns={'value': '2022'}, inplace=True)
-zh = zh_2019.merge(zh_2022, on='time', how='outer')
-#zh.set_index('time', inplace=True)
-#zh.index = pd.to_datetime(zh.index).strftime('%Y-%m-%d')
+
+# Drop 29.2.2020
+zh = zh[zh.time != '2020-02-29']
+
+# Add Date with year 2019
+zh['date_normalized'] = zh['time'].apply(lambda x: date(2020, x.month, x.day))
+
+# Pivot
+zh = zh.pivot_table(index=zh.date_normalized, columns=zh.time.dt.year, values='value').reset_index()
+
+# Columns to string
+zh.columns = list(map(str, zh.columns))
+
+# Drop 2020, 2021
+zh.drop(columns=['2020', '2021'], inplace=True)
 
 update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data=zh)
 
+# Verkehrszahlen
 url = 'https://www.adv.aero/corona-pandemie/woechentliche-verkehrszahlen/'
 page = requests.get(url)
 
