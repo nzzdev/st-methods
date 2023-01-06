@@ -183,6 +183,13 @@ if __name__ == '__main__':
         df_ns.index = df_ns.index.rename('periodFrom')
         df_ns.to_csv('./data/pipelines_ns.tsv', sep='\t')
 
+        # imports as percentage for dashboard
+        df_dash = df_total.copy()
+        df_dash['LNG'] = (df_dash[df_dash.columns[1]] /
+                          df_dash[df_dash.columns[0]]) * 100
+        df_dash = df_dash[['LNG']]
+        df_dash.to_csv('./data/german-imports.csv')
+
         # run Q function
         update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
                      data=df_ns, notes=notes_chart_ns, title=chart_title)
