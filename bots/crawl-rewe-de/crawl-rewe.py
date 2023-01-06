@@ -445,78 +445,6 @@ if __name__ == '__main__':
                   n2, n3, dftopold, dftopnew, dftop, dftop_ja]]
             gc.collect()
 
-        ################
-        # Preismonitor #
-        ################
-
-        past = today - timedelta(days=30)
-        df_t = pd.read_csv('./data/' + today.strftime('%Y-%m-%d') +
-                           '-rewe-pickup.csv', sep=';', on_bad_lines='skip')
-        df_t = df_t[df_t['Marke'] == 'ja!']
-
-        df_y = pd.read_csv('./data/' + past.strftime('%Y-%m-%d') +
-                           '-rewe-pickup.csv', sep=';', on_bad_lines='skip')
-        df_y = df_y[df_y['Marke'] == 'ja!']
-
-        df_t = df_t.dropna(subset='Preis')
-        df_y = df_y.dropna(subset='Preis')
-        df_t['Preis'] = df_t['Preis']/100
-        df_y['Preis'] = df_y['Preis']/100
-
-        df_t = df_t[['ID', 'Name', 'Preis', 'Gewicht']]
-        df_y = df_y[['ID', 'Name', 'Preis', 'Gewicht']]
-        df_t.rename({'Preis': 'Neuer Preis'}, axis=1, inplace=True)
-        df_y.rename({'Preis': 'Alter Preis'}, axis=1, inplace=True)
-
-        df_t_y = df_t.merge(df_y, on=['ID', 'Name'])
-
-        # drop home appliance
-        df_t_y = df_t_y[~df_t_y['ID'].isin(homeappliance)]
-
-        df_t_y['Differenz'] = (((df_t_y['Neuer Preis'] - df_t_y['Alter Preis']) /
-                               df_t_y['Alter Preis'])*100).round(0).astype(int)
-        df_t_y['Differenz'] = df_t_y['Differenz']
-        df_t_y = df_t_y[df_t_y['Differenz'] != 0]
-        df_t_y.sort_values(by=['Differenz'], inplace=True, ascending=False)
-
-        # df_t_y.loc[df_t_y['Differenz'] > 0, ''] = ' ↑ '
-        # df_t_y.loc[df_t_y['Differenz'] < 0, ''] = ' ↓ '
-        df_t_y[''] = df_t_y['Differenz'].apply(
-            lambda x: f'+{x}' if x >= 0 else f'{x}')
-        #df_t_y['Neuer Preis'] = df_t_y['Neuer Preis'].apply(lambda x: f'➚ +{x}%' if x >= 0 else f'➘ -{x}%')
-        #df_t_y['Alter Preis'] = df_t_y['Alter Preis'].apply(lambda x: f'➚ +{x}%' if x >= 0 else f'➘ -{x}%')
-
-        # drop pseudo duplicates (like "Joghurt")
-        df_t_y = df_t_y.drop_duplicates(subset='Name', keep='first')
-
-        df_t_y.sort_values(by=['Differenz'], inplace=True, ascending=False)
-        #df_t_y['Veränderung'] = '»'
-        df_t_y = df_t_y[['', 'Name', 'Alter Preis', 'Neuer Preis']]
-        #df_t_y.rename({'Veränderung': ''}, axis = 1, inplace = True)
-
-        # title fixes
-        df_t_y['Name'] = df_t_y['Name'].astype(
-            str).str.replace(r'[Jj]a!\s', r'', regex=True)
-        df_t_y['Name'] = df_t_y['Name'].astype(
-            str).str.replace(r'\s\d.*', r'', regex=True)
-        df_t_y['Name'] = df_t_y['Name'].astype(
-            str).str.replace(r'\smit\s.*', r'', regex=True)
-        df_t_y['Name'] = df_t_y['Name'].astype(
-            str).str.replace(' ca.', '', regex=False)
-
-        # Fix for large quantities
-        df_t_y['Name'] = df_t_y['Name'].astype(str).replace(bulkpacks)
-
-        #df_t_y.rename({'Differenz': '%'}, axis = 1, inplace = True)
-        df_t_y.set_index('', inplace=True)
-        df_t_y.rename({'Name': ' '}, axis=1, inplace=True)
-
-        notes_chart = '¹ Die Preise der Rewe-Eigenmarke entsprechen in der Regel den Aldi-Preisen.<br>Stand: ' + todaynicey
-
-        # run Q function
-        update_chart(id='83caf1c1cfcfaf76da2c577a9efa0cfa',
-                     data=df_t_y, notes=notes_chart)
-
         #####################################################################################
         # PICKUP 1931258                                                                    #
         # https://www.rewe.de/marktseite/berlin-gesundbrunnen/1931258/rewe-center-badstr-4/ #
@@ -708,6 +636,78 @@ if __name__ == '__main__':
                 '0000000'], columns=['Tweet']).append(df_ja)
             df_ja.to_json(
                 f'./data/{today}-ja-diff-pickup.json', orient='values')
+
+        ################
+        # Preismonitor #
+        ################
+
+        past = today - timedelta(days=30)
+        df_t = pd.read_csv('./data/' + today.strftime('%Y-%m-%d') +
+                           '-rewe-pickup.csv', sep=';', on_bad_lines='skip')
+        df_t = df_t[df_t['Marke'] == 'ja!']
+
+        df_y = pd.read_csv('./data/' + past.strftime('%Y-%m-%d') +
+                           '-rewe-pickup.csv', sep=';', on_bad_lines='skip')
+        df_y = df_y[df_y['Marke'] == 'ja!']
+
+        df_t = df_t.dropna(subset='Preis')
+        df_y = df_y.dropna(subset='Preis')
+        df_t['Preis'] = df_t['Preis']/100
+        df_y['Preis'] = df_y['Preis']/100
+
+        df_t = df_t[['ID', 'Name', 'Preis', 'Gewicht']]
+        df_y = df_y[['ID', 'Name', 'Preis', 'Gewicht']]
+        df_t.rename({'Preis': 'Neuer Preis'}, axis=1, inplace=True)
+        df_y.rename({'Preis': 'Alter Preis'}, axis=1, inplace=True)
+
+        df_t_y = df_t.merge(df_y, on=['ID', 'Name'])
+
+        # drop home appliance
+        df_t_y = df_t_y[~df_t_y['ID'].isin(homeappliance)]
+
+        df_t_y['Differenz'] = (((df_t_y['Neuer Preis'] - df_t_y['Alter Preis']) /
+                               df_t_y['Alter Preis'])*100).round(0).astype(int)
+        df_t_y['Differenz'] = df_t_y['Differenz']
+        df_t_y = df_t_y[df_t_y['Differenz'] != 0]
+        df_t_y.sort_values(by=['Differenz'], inplace=True, ascending=False)
+
+        # df_t_y.loc[df_t_y['Differenz'] > 0, ''] = ' ↑ '
+        # df_t_y.loc[df_t_y['Differenz'] < 0, ''] = ' ↓ '
+        df_t_y[''] = df_t_y['Differenz'].apply(
+            lambda x: f'+{x}' if x >= 0 else f'{x}')
+        #df_t_y['Neuer Preis'] = df_t_y['Neuer Preis'].apply(lambda x: f'➚ +{x}%' if x >= 0 else f'➘ -{x}%')
+        #df_t_y['Alter Preis'] = df_t_y['Alter Preis'].apply(lambda x: f'➚ +{x}%' if x >= 0 else f'➘ -{x}%')
+
+        # drop pseudo duplicates (like "Joghurt")
+        df_t_y = df_t_y.drop_duplicates(subset='Name', keep='first')
+
+        df_t_y.sort_values(by=['Differenz'], inplace=True, ascending=False)
+        #df_t_y['Veränderung'] = '»'
+        df_t_y = df_t_y[['', 'Name', 'Alter Preis', 'Neuer Preis']]
+        #df_t_y.rename({'Veränderung': ''}, axis = 1, inplace = True)
+
+        # title fixes
+        df_t_y['Name'] = df_t_y['Name'].astype(
+            str).str.replace(r'[Jj]a!\s', r'', regex=True)
+        df_t_y['Name'] = df_t_y['Name'].astype(
+            str).str.replace(r'\s\d.*', r'', regex=True)
+        df_t_y['Name'] = df_t_y['Name'].astype(
+            str).str.replace(r'\smit\s.*', r'', regex=True)
+        df_t_y['Name'] = df_t_y['Name'].astype(
+            str).str.replace(' ca.', '', regex=False)
+
+        # Fix for large quantities
+        df_t_y['Name'] = df_t_y['Name'].astype(str).replace(bulkpacks)
+
+        #df_t_y.rename({'Differenz': '%'}, axis = 1, inplace = True)
+        df_t_y.set_index('', inplace=True)
+        df_t_y.rename({'Name': ' '}, axis=1, inplace=True)
+
+        notes_chart = '¹ Die Preise der Rewe-Eigenmarke entsprechen in der Regel den Aldi-Preisen.<br>Stand: ' + todaynicey
+
+        # run Q function
+        update_chart(id='83caf1c1cfcfaf76da2c577a9efa0cfa',
+                     data=df_t_y, notes=notes_chart)
 
         ##########################
         # monthly summary PICKUP #
