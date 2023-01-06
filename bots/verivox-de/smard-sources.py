@@ -180,6 +180,9 @@ if __name__ == '__main__':
             df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot[
                 'Deutschland/Luxemburg [€/MWh] Originalauflösungen'].round(0)
 
+            # drop last row with current date to avoid constant commits
+            df_spot = df_spot.drop(df_spot.tail(1).index)
+
             # save tsv
             df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
                            encoding='utf-8', index=True)
@@ -190,8 +193,6 @@ if __name__ == '__main__':
         df_spot.index = pd.to_datetime(df_spot.index)
 
         # get current date
-        # drop last row with current date to avoid constant commits
-        df_spot = df_spot.drop(df_spot.tail(1).index)
         q_date = df_spot.last_valid_index()
         notes_chart = '¹ Marktgebiet Deutschland/Luxemburg (Day-Ahead).<br>Stand: ' + \
             q_date.strftime("%-d. %-m. %Y")
