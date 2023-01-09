@@ -11,6 +11,10 @@ from datetime import datetime as dt, timedelta
 import fnmatch
 import os
 
+from helpers import *
+# Set Working Directory
+os.chdir(os.path.dirname(__file__))
+
 ### Preismonitor
 
 today = dt.today()
