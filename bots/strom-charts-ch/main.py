@@ -1,6 +1,8 @@
+# coding=utf-8 
 # Dieses File ist Entrypoint für folgende Aktualisierungen:
 #   Charts im Artikel
 #   Dashboard
+
 
 import os
 
@@ -9,6 +11,7 @@ import speicherseen
 import bfe
 import update_article
 import update_dashboard
+
 
 """
    Preparation
