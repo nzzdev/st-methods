@@ -26,35 +26,33 @@ os.chdir(os.path.dirname(__file__))
 
 # Monitoring Consumption Switzerland
 
-consum_ch = pd.read_csv("https://drive.switch.ch/index.php/s/yLISs3KVE7ASE68/download?path=%2F1_OVERVIEW%20DATA&files=MCS_Overview_Data.csv")
-consum_ch = consum_ch[consum_ch['TRANSACTIONS'] != 'ATM_DEPOSIT']
-consum_ch['DATE'] = pd.to_datetime(consum_ch['DATE'], format = '%Y-%m-%d')
+#consum_ch = pd.read_csv("https://drive.switch.ch/index.php/s/yLISs3KVE7ASE68/download?path=%2F1_OVERVIEW%20DATA&files=MCS_Overview_Data.csv")
+#consum_ch = consum_ch[consum_ch['TRANSACTIONS'] != 'ATM_DEPOSIT']
+#consum_ch['DATE'] = pd.to_datetime(consum_ch['DATE'], format = '%Y-%m-%d')
 
-consum_ch['week'] = consum_ch['DATE'].dt.isocalendar().week
-consum_ch['year'] = consum_ch['DATE'].dt.year
-consum_ch.loc[(consum_ch.week == 52) & (consum_ch.year == 2022), 'year'] = '2021'
-consum_ch.loc[(consum_ch.week == 53) & (consum_ch.year == 2021), 'year'] = '2020'
+#consum_ch['week'] = consum_ch['DATE'].dt.isocalendar().week
+#consum_ch['year'] = consum_ch['DATE'].dt.year
+#consum_ch.loc[(consum_ch.week == 52) & (consum_ch.year == 2022), 'year'] = '2021'
+#consum_ch.loc[(consum_ch.week == 53) & (consum_ch.year == 2021), 'year'] = '2020'
 
-consum_ch = consum_ch[['week', 'year', 'AMOUNTCHF']].groupby(['week', 'year']).sum().reset_index()
+#consum_ch = consum_ch[['week', 'year', 'AMOUNTCHF']].groupby(['week', 'year']).sum().reset_index()
 
+#consum_ch_2019 = consum_ch[(consum_ch['year'] == 2019) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
+#consum_ch_2020 = consum_ch[(consum_ch['year'] == 2020) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
+#consum_ch_2021 = consum_ch[(consum_ch['year'] == 2021) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
+#consum_ch_2022 = consum_ch[(consum_ch['year'] == 2022) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
 
-consum_ch_2019 = consum_ch[(consum_ch['year'] == 2019) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
-consum_ch_2020 = consum_ch[(consum_ch['year'] == 2020) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
-consum_ch_2021 = consum_ch[(consum_ch['year'] == 2021) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
-consum_ch_2022 = consum_ch[(consum_ch['year'] == 2022) & (consum_ch['week'] >= 1) ][['week', 'AMOUNTCHF']]
+#consum_ch_2019.rename(columns = {'AMOUNTCHF': '2019'}, inplace = True)
+#consum_ch_2020.rename(columns = {'AMOUNTCHF': '2020'}, inplace = True)
+#consum_ch_2021.rename(columns = {'AMOUNTCHF': '2021'}, inplace = True)
+#consum_ch_2022.rename(columns = {'AMOUNTCHF': '2022'}, inplace = True)
 
-consum_ch_2019.rename(columns = {'AMOUNTCHF': '2019'}, inplace = True)
-consum_ch_2020.rename(columns = {'AMOUNTCHF': '2020'}, inplace = True)
-consum_ch_2021.rename(columns = {'AMOUNTCHF': '2021'}, inplace = True)
-consum_ch_2022.rename(columns = {'AMOUNTCHF': '2022'}, inplace = True)
+#q_data = consum_ch_2020.merge(consum_ch_2021, on = 'week')
+#q_data = q_data.merge(consum_ch_2022, on = 'week', how = 'outer')
+#q_data['KW'] = '2022-W' + q_data['week'].astype(str)
+#q_data = q_data[['KW', '2020', '2021', '2022']]
 
-
-q_data = consum_ch_2020.merge(consum_ch_2021, on = 'week')
-q_data = q_data.merge(consum_ch_2022, on = 'week', how = 'outer')
-q_data['KW'] = '2022-W' + q_data['week'].astype(str)
-q_data = q_data[['KW', '2020', '2021', '2022']]
-
-update_chart(id='909e73515b8785336ef65c05d0fa36c7', data=q_data)
+#update_chart(id='909e73515b8785336ef65c05d0fa36c7', data=q_data)
 
 
 # Zurich traffic
@@ -81,7 +79,7 @@ df = df_raw.copy()
 # Add normalized Date (Year 2022 for every date)
 df['date_normalized'] = df.date.apply(lambda x: date(2022, x.month, x.day))
 
-# Pivo
+# Pivot
 df = df.pivot_table(index=df.date_normalized, columns=df.date.dt.year, values='AnzFahrzeuge').reset_index()
 
 # Columns to string (for Q)
@@ -203,29 +201,29 @@ update_chart(id='7a53d2e458b7ba35c25526a2c21d3956',
 
 # Sanktionen
 
-timeline = pd.read_csv(
-    'https://raw.githubusercontent.com/correctiv/ru-sanctions-dashboard/main/src/data/sanctions_timeline_2014-2022.csv')
+#timeline = pd.read_csv(
+ #   'https://raw.githubusercontent.com/correctiv/ru-sanctions-dashboard/main/src/data/sanctions_timeline_2014-2022.csv')
 #timeline.set_index('start', inplace=True)
 #timeline.index = pd.to_datetime(timeline.index).strftime('%Y-%m-%d')
 
-update_chart(id='2a1327d75c83a9c4ea49f935dd3705ef',
-             data=timeline)
+#update_chart(id='2a1327d75c83a9c4ea49f935dd3705ef',
+ #            data=timeline)
 
-origin = pd.read_csv(
-    'https://raw.githubusercontent.com/correctiv/ru-sanctions-dashboard/main/src/data/recent_origin_aggregation_table.csv')
-origin = origin.iloc[1:, :]
-cols = origin.iloc[:, 1:].columns.tolist()
-origin['start'] = pd.to_datetime(origin.start)
+#origin = pd.read_csv(
+ #   'https://raw.githubusercontent.com/correctiv/ru-sanctions-dashboard/main/src/data/recent_origin_aggregation_table.csv')
+#origin = origin.iloc[1:, :]
+#cols = origin.iloc[:, 1:].columns.tolist()
+#origin['start'] = pd.to_datetime(origin.start)
 
-origin[cols] = origin[cols].apply(pd.to_numeric, errors='coerce')
+#origin[cols] = origin[cols].apply(pd.to_numeric, errors='coerce')
 
-origin['all'] = origin.iloc[:, 1:].sum(axis=1)
-origin = origin[['start', 'all']].sort_values(by='start')
+#origin['all'] = origin.iloc[:, 1:].sum(axis=1)
+#origin = origin[['start', 'all']].sort_values(by='start')
 
 #origin.set_index('start', inplace=True)
 #origin.index = pd.to_datetime(origin.index).strftime('%Y-%m-%d')
 
-update_chart(id='85c353bb11cc62672a227f886950b782', data=origin)
+#update_chart(id='85c353bb11cc62672a227f886950b782', data=origin)
 
 
 # Energie
@@ -281,22 +279,11 @@ price_95 = r.html.xpath(
     '//*[@id="blockContentcontentInner"]/div[1]/div/div/div[3]/div/div[1]/table/tbody/tr[1]/td[2]/div/text()')
 price_95 = pd.to_numeric(price_95[0])
 
-#adac = 'https://www.adac.de/news/aktueller-spritpreis/'
-#page = requests.get(adac)
-
-#soup = BeautifulSoup(page.content, "html.parser")
-
-#text = soup.find_all('b')[1].text.strip()
-# price_e10 = pd.to_numeric(re.findall(
-#       r'\d+\,\d+', text)[0].replace(',', '.'))
-
 
 fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
-#fuel_prices_old_de = pd.read_csv('./Benzinpreise_de.csv')
 
 data = {'date': date.today().strftime('%Y-%m-%d'),
-        'Jahresdurchschnitt 2019': 1.6,
-        '2022': price_95
+        'Benzinpreis': price_95
         }
 
 fuel_prices = pd.DataFrame(data, index=[0])
@@ -305,38 +292,12 @@ fuel_prices = pd.concat([fuel_prices_old, fuel_prices], ignore_index=True)
 
 fuel_prices.drop_duplicates(subset='date', keep='last', inplace=True)
 
-# data = {'Date': date.today().strftime('%Y-%m-%d'),
-#       'Jahresdurchschnitt 2019': 1.4005,
-#      '2022': price_e10
-#     }
-
-#fuel_prices_de = pd.DataFrame(data, index=[0])
-
-#fuel_prices_de = pd.concat([fuel_prices_old_de, fuel_prices_de])
-
-#fuel_prices_de.drop_duplicates(subset='Date', keep='last', inplace=True)
-
-#fuel_prices.set_index('date', inplace=True)
-#fuel_prices_de.set_index('Date', inplace=True)
-#fuel_prices.index = pd.to_datetime(fuel_prices.index).strftime('%Y-%m-%d')
-# fuel_prices_de.index = pd.to_datetime(
-#   fuel_prices_de.index).strftime('%Y-%m-%d')
-
 title_price = str(price_95).replace('.', ',')
 
 title = "Benzin kostet im Schnitt " + title_price + " Franken pro Liter"
 
-# Workaround @simonhuwiler:
-# - Jahresdurchschnitt entfernen
-# - 2022 umbenennen in "Benzinpreis"
-df_tmp = fuel_prices.copy()
-df_tmp.rename(columns={'2022': 'Benzinpreis'}, inplace=True)
-df_tmp = df_tmp[['date', 'Benzinpreis']]
-
 update_chart(id='1dda540238574eac80e865faa0d4aaba',
-             data = df_tmp, title = title)
-# update_chart(id='5ac628c4bb388d36fb2f5cbc745073c6',
-#            data=fuel_prices_de[['Jahresdurchschnitt 2019', '2022']])
+             data = fuel_prices, title = title)
 
 fuel_prices.to_csv(f'./Benzinpreise.csv', index=False)
 # fuel_prices_de.to_csv(f'./Benzinpreise_de.csv')
