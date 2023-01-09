@@ -69,59 +69,61 @@ def get_futures():
 
 # 02 Spotmarket
 def get_spotmarket():
-    spotmarket_base = 'https://www.energy-charts.info/charts/price_spot_market/data/ch/year_'
-    spotmarket_urls = [spotmarket_base+ str(i) + '.json' for i in range(2020, 2024)]
+    
+    spotmarket_df_day = pd.read_json('https://www.energiedashboard.admin.ch/api/preise/strom-boerse')
 
-    def read_json(url, selection):
-        response = requests.get(url)
+    #spotmarket_base = 'https://www.energy-charts.info/charts/price_spot_market/data/ch/year_'
+    #spotmarket_urls = [spotmarket_base+ str(i) + '.json' for i in range(2020, 2024)]
+
+    #def read_json(url, selection):
+        #response = requests.get(url)
 
         # Jahr 2023 Stand 3. Januar 2023 noch nicht aufgeschaltet. Deshalb hier Check, ob existiert
-        if response.status_code == 404:
-            print("🤬 API-Down oder nicht aufgeschaltet. URL:")
-            print(url)
-            return []
+        #if response.status_code == 404:
+         #   print("🤬 API-Down oder nicht aufgeschaltet. URL:")
+          #  print(url)
+           # return []
         
-        data_json = response.json()
+        #data_json = response.json()
         
-        timestamps = data_json[0]['xAxisValues'] 
-        datetimes = [dt.fromtimestamp(stamp/1000).strftime('%Y-%m-%d %H:%M')  for stamp in timestamps]
+        #timestamps = data_json[0]['xAxisValues'] 
+        #datetimes = [dt.fromtimestamp(stamp/1000).strftime('%Y-%m-%d %H:%M')  for stamp in timestamps]
         
         #als jsons noch alle gleich waren
         #prices = data_json[4]['data']
         
         # find element containing our prices
-        for elem in data_json:
-            try:
-                if 'Day Ahead Auktion' in elem['name']['de']:
-                    prices = elem['data']
-            except:
-                if 'Day Ahead Auktion' in elem['name'][0]['de']:
-                    prices = elem['data']
+        #for elem in data_json:
+         #   try:
+          #      if 'Day Ahead Auktion' in elem['name']['de']:
+           #         prices = elem['data']
+            #except:
+             #   if 'Day Ahead Auktion' in elem['name'][0]['de']:
+              #      prices = elem['data']
         
-        if selection == 'dates':
-            return datetimes
-        if selection == 'prices':
-            return prices
+        #if selection == 'dates':
+         #   return datetimes
+        #if selection == 'prices':
+         #   return prices
 
-    multi_year_dates = []
-    multi_year_prices = []
+    #multi_year_dates = []
+    #multi_year_prices = []
 
 
-    for market_url in spotmarket_urls:
-        multi_year_dates = multi_year_dates + read_json(market_url, 'dates')
-        multi_year_prices = multi_year_prices + read_json(market_url, 'prices')
+    #for market_url in spotmarket_urls:
+     #   multi_year_dates = multi_year_dates + read_json(market_url, 'dates')
+      #  multi_year_prices = multi_year_prices + read_json(market_url, 'prices')
 
-    spotmarket_df = pd.DataFrame({'date': multi_year_dates, 'price':multi_year_prices})
-    spotmarket_df['date'] = pd.to_datetime(spotmarket_df['date'])
+    #spotmarket_df = pd.DataFrame({'date': multi_year_dates, 'price':multi_year_prices})
+    #spotmarket_df['date'] = pd.to_datetime(spotmarket_df['date'])
 
     # calculate day means
-    spotmarket_df_day = spotmarket_df.groupby(spotmarket_df.date.dt.date).mean().reset_index()
-    spotmarket_df_day = spotmarket_df_day.round(2)
-    spotmarket_df_day = spotmarket_df_day.dropna()
+    #spotmarket_df_day = spotmarket_df.groupby(spotmarket_df.date.dt.date).mean().reset_index()
+    #spotmarket_df_day = spotmarket_df_day.round(2)
+    #spotmarket_df_day = spotmarket_df_day.dropna()
 
     return spotmarket_df_day
 
-    #spotmarket_df.to_csv('test_spotmarket.csv')
 
 
 # 03 Atomstrom Frankreich
