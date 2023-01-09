@@ -292,7 +292,7 @@ fuel_prices = pd.concat([fuel_prices_old, fuel_prices], ignore_index=True)
 
 fuel_prices.drop_duplicates(subset='date', keep='last', inplace=True)
 
-title_price = str(price_95).replace('.', ',')
+title_price = str(price_95)#.replace('.', ',')
 
 title = "Benzin kostet im Schnitt " + title_price + " Franken pro Liter"
 
