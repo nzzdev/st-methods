@@ -14,7 +14,6 @@ def run(futures, spotmarket, speicherseen):
 
     # ---------- Spotmarket
     # Trend: rollender 7-Tage-Schnitt
-    df_spotmarket = spotmarket[spotmarket.date >= date(2021, 1, 1)]
 
     df_spotmarket.rename(columns={'price': 'value'}, inplace=True)
 
