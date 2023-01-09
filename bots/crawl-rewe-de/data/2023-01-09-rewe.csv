@@ -254,6 +254,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-09;8187754;ja!;ja! Kaffeeweißer 250g;139;250g (1 kg = 5,56 €)
 2023-01-09;2290204;ja!;ja! Kaisergemüse 1kg;199;1000g
 2023-01-09;7257866;ja!;ja! Kakaopulver Instant 800g;299;800g (1 kg = 3,74 €)
+2023-01-09;546026;ja!;ja! Kamillentee 37,5g, 25 Beutel;65;37,50g (1 kg = 17,33 €)
 2023-01-09;8553081;ja!;ja! Kartoffel Wedges 750g;199;750g (1 kg = 2,65 €)
 2023-01-09;7923861;ja!;ja! Kartoffelpuffer 600g;179;600g (1 kg = 2,98 €)
 2023-01-09;2270576;ja!;ja! Kartoffeltopf mit Würstchen 800g;229;800g (1 kg = 2,86 €)
@@ -446,6 +447,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-09;7774209;ja!;ja! Snow Flakes 750g;249;750g (1 kg = 3,32 €)
 2023-01-09;8294464;ja!;ja! Sofort-Gelatine weiß 30g;99;30g (1 kg = 33 €)
 2023-01-09;8196129;ja!;ja! Soft Früchtchen Kaubonbons 500g;189;500g (1 kg = 3,78 €)
+2023-01-09;3151969;ja!;ja! Soft-Datteln 250g;225;250g (1 kg = 9 €)
 2023-01-09;3151967;ja!;ja! Soft-Feigen getrocknet 250g;225;250g (1 kg = 9 €)
 2023-01-09;3151944;ja!;ja! Soft-Pflaumen 250g;289;250g (1 kg = 11,56 €)
 2023-01-09;5805210;ja!;ja! Sonnenblumenmargarine 500g;169;500g (1 kg = 3,38 €)
@@ -556,8 +558,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-09;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2023-01-09;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-01-09;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2023-01-09;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;169;1l
 2023-01-09;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2023-01-09;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;169;1l
 2023-01-09;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-01-09;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-01-09;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;259;475g (1 kg = 5,45 €)
@@ -937,6 +939,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-09;7178737;REWE Beste Wahl;REWE Beste Wahl Recycling Toilettenpapier 4-lagig 8x160 Blatt;379;NaN
 2023-01-09;8247853;REWE Beste Wahl;REWE Beste Wahl Regenbogen-Forellen 2 Stück, 500g;399;500g (1 kg = 7,98 €)
 2023-01-09;3029456;REWE Beste Wahl;REWE Beste Wahl Reis-Wildlachs-Pfanne 750g;369;750g (1 kg = 4,92 €)
+2023-01-09;8470640;REWE Beste Wahl;REWE Beste Wahl Respeggt Eier Freilandhaltung 10 Stück;259;10 Stück
 2023-01-09;8191030;REWE Beste Wahl;REWE Beste Wahl Rhabarbernektar 1l;119;1l
 2023-01-09;2455271;REWE Beste Wahl;REWE Beste Wahl Rindergulasch 400g;449;400g (1 kg = 11,23 €)
 2023-01-09;1421084;REWE Beste Wahl;REWE Beste Wahl Risotto-Reis 500g;199;500g (1 kg = 3,98 €)
