@@ -36,7 +36,6 @@ jobs:
       - name: Run R scripts
         run: |
           Rscript corona-auto-ch/corona-auto-ch.R
-          Rscript corona-auto-int/corona-master-int_automation.R
         #  Rscript owid_vaccinations_worldwide/owid_vaccinations_worldwide.R
       - name: Setup Node.js
         uses: actions/setup-node@v3
