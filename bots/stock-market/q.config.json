@@ -53,19 +53,6 @@
    }
   },
   {
-   "environments": [
-    {
-     "name": "production",
-     "id": "2a1327d75c83a9c4ea49f935dd3705ef"
-    }
-   ],
-   "item": {
-    "notes": "",
-    "data": [
-    ]
-   }
-  },
-  {
      "environments": [
       {
        "name": "production",
