@@ -389,10 +389,10 @@ date_today = date.today().strftime("%m/%d/%Y")
 
 oil = df['Close']['BZ=F'][df.index >=
                          '2022-01-01'].to_frame().dropna().reset_index(level=0)
-oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
-    df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
-oil.rename(columns={oil.columns[1]: '2022'}, inplace=True)
-oil = oil[['Date', 'Jahresdurchschnitt 2019', '2022']]
+#oil['Jahresdurchschnitt 2019'] = df['Close']['BZ=F'][(
+ #   df.index >= '2019-01-01') & (df.index <= '2019-12-31')].mean()
+oil.rename(columns={oil.columns[1]: 'Ölpreis'}, inplace=True)
+oil = oil[['Date', 'Ölpreis']]
 
 update_chart(id='c6aec0c9dea84bcdef43b980cd4a7e3f', data=oil)
 
@@ -415,37 +415,9 @@ smi = smi[smi['DATE'] >= '2022-01-01']
 
 smi.rename(columns={smi.columns[1]: '2022'}, inplace=True)
 
-#smi_old = pd.read_csv('./SMI.csv')
-
-#url = 'https://www.marketwatch.com/investing/index/smi?countrycode=ch''
-#page = requests.get(url)
-
-#soup = BeautifulSoup(page.content, "html.parser")
-#results = soup.find(class_="table__cell u-semi").text.strip()
-#close = pd.to_numeric(results.replace(',', ''))
-
-#if date.today().weekday() == 0:
- #   date_ = (date.today() - timedelta(3)).strftime('%Y-%m-%d')
-#else:
- #   date_ = (date.today() - timedelta(1)).strftime('%Y-%m-%d')
-
-#data = {'Date': date_,
- #       'Close': close}
-#smi = pd.DataFrame(data, index=[0])
-#smi = pd.concat([smi_old, smi], ignore_index=True)
-#smi.drop_duplicates(subset='Date', keep='last', inplace=True)
-#smi.set_index('Date', inplace=True)
-#smi.index = pd.to_datetime(smi.index).strftime('%Y-%m-%d')
-
 update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
-#smi.to_csv(f'./SMI.csv', index=False)
 
 # Benzinpreistabelle D
-
-#kurs = euro['EURCHF=X'].tail(1).values
-#benzin_de = benzin.copy()
-#benzin_de['Benzin'] = round((benzin_de['Benzin']/kurs), 2)
-#benzin_de['Diesel'] = round((benzin_de['Diesel']/kurs), 2)
 
 eu = pd.read_excel('https://ec.europa.eu/energy/observatory/reports/latest_prices_raw_data.xlsx')
 eu = eu.loc[(eu['Product Name'] == 'Euro-super 95') | (eu['Product Name'] == 'Automotive gas oil')].copy()
@@ -547,27 +519,6 @@ update_chart(id = '8676bad64564b4740f74b6d5d04f4bf4', data = list_[['firm', 'sta
 
 # BIP Indikator
 
-#url = "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa_publish.xls.download.xls/wwa_publish.xls"
-#r = requests.get(url)
-#open('temp.xls', 'wb').write(r.content)
-
-# file = msoffcrypto.OfficeFile(open('temp.xls', 'rb'))  # read the original file
-# Fill in the password, if it can be opened directly, the default password is 'VelvetSweatshop'
-# file.load_key(password='VelvetSweatshop')
-#file.decrypt(open('./decrypted.xls', 'wb'))
-
-#bip = pd.read_excel('./decrypted.xls', sheet_name='rel_preCovid')
-#bip = bip[3:]
-#bip.rename(columns={bip.columns[0]: 'year', bip.columns[1]: 'W', bip.columns[2]: 'Index'}, inplace=True)
-
-# bip.loc[bip['W'] < 10, 'KW'] = bip['year'].astype(
-#   str) + '-W0' + bip['W'].astype(int).astype(str)
-# bip.loc[bip['W'] >= 10, 'KW'] = bip['year'].astype(
-#   str) + '-W' + bip['W'].astype(int).astype(str)
-#bip = bip[['KW', 'Index']]
-#bip.set_index('KW', inplace=True)
-
-
 bip = pd.read_csv(
     "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa.csv.download.csv/wwa.csv")
 bip = bip.loc[bip['structure'] == 'seco_wwa_pre_covid'][['date', 'value']]
@@ -607,31 +558,6 @@ update_chart(id='b6873820afc5a1492240edc1b101cdd9',
 
 # 10 largest crypto currencies
 
-#url = 'https://coinmarketcap.com/'
-
-#page = requests.get(url)
-
-#soup = BeautifulSoup(page.content, "html.parser")
-
-#results = soup.find_all('table')
-
-#market_cap = []
-#for i in range(0, 10):
- #   market_cap.append(re.sub(
-  #    "[^0-9]", "", results[0].find_all('span', class_='sc-b2299d0c-0 bcJsCG')[i].text.strip()))
-
-#crypto = []
-#for i in range(0, 10):
- #   crypto.append(results[0].find_all(
-  #     'p', class_ = 'sc-e225a64a-0 ePTNty')[i].contents[0].text.strip())
-
-
-#df = pd.DataFrame(data={'crypto': crypto, 'market_cap': market_cap})
-
-
-
-
-
 tickers = ['BTC-USD', 'ETH-USD', 'USDT-USD', 'BNB-USD', 'USDC-USD', 'BUSD-USD', 'XRP-USD', 'ADA-USD', 'DOGE-USD', 'MATIC-USD',
            'DOT-USD', 'DAI-USD', 'LTC-USD', 'WTRX-USD', 'SHIB-USD', 'HEX-USD', 'SOL-USD', 'TRX-USD', 'UNI7083-USD',
            'LEO-USD', 'STETH-USD', 'WBTC-USD','AVAX-USD', 'LINK-USD', 'ATOM-USD', 'ETC-USD', 'XMR-USD', 'XLM-USD',
@@ -670,29 +596,6 @@ df.loc[df.index == 'BCH-USD', 'currency'] = 'Bitcoin Cash'
 
 
 df = df[['currency','marketCap']].sort_values(by = ['marketCap'], ascending = False)
-
-
-# defining the html contents of a URL.
-#xhtml = url_get_contents(url).decode('latin-1')
-
-# Defining the HTMLTableParser object
-#p = HTMLTableParser()
-
-# feeding the html contents in the HTMLTableParser object
-#p.feed(xhtml)
-
-#df = pd.DataFrame(p.tables[0]).dropna()
-#df.columns = df.iloc[0]
-#df = df[1:]
-#df[["Name", "Name_1", "Name_2"]] = df["Name"].str.split("(\d)", n=1, expand=True)
-
-#df[["Market Cap1", "Market Cap"]] = df["Market Cap"].str.split(expand = True)
-
-#df['Market Cap'] = df['Market Cap'].str.replace(r'\D', '', regex=True)
-
-#df = df[['Name', 'Market Cap']].copy()
-
-#df.rename_axis(None, axis=1, inplace = True)
 
 notes = 'Stand: ' + date.today().strftime('%d. %m. %Y')
 
