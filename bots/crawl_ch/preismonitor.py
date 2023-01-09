@@ -26,7 +26,7 @@ dates = [str((start_date + timedelta(days=i)).date()) for i in range(7)]
 
 
 
-food_drinks = ('drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread')
+food_drinks = ['drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread']
 
 df_t = pd.DataFrame()
 for i in food_drinks:
@@ -41,6 +41,9 @@ for i in food_drinks:
             except:
                 continue
             break
+        
+
+        
         
 df_t = df_t.dropna(subset = ['price']).reset_index(drop = True)
      
@@ -64,7 +67,7 @@ start_date = past - timedelta(days=week_day-1)
 dates = [str((start_date + timedelta(days=i)).date()) for i in range(7)]
 
 
-food_drinks = ('drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread')
+food_drinks = ['drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread']
 
 df_y = pd.DataFrame()
 for i in food_drinks:
