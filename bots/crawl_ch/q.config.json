@@ -18,247 +18,367 @@
       ],
       [
        "↑",
-       "Pic-Nic Import Eier aus Bodenhaltung",
-       "3.3",
-       "4.95"
+       "Schweins-Steak Nierstück",
+       "12.6",
+       "21.4"
       ],
       [
        "↑",
-       "Eier Bodenhaltung",
+       "Zedernkerne",
+       "5.7",
+       "6.7"
+      ],
+      [
+       "↑",
+       "ASC Forellenfilets geräuchert",
+       "5.95",
+       "6.95"
+      ],
+      [
+       "↑",
+       "Blütenhonig cremig",
        "3.9",
-       "5.5"
+       "4.5"
       ],
       [
        "↑",
-       "Olivenöl vergine",
-       "4.7",
-       "6.0"
+       "Honig flüssig",
+       "3.9",
+       "4.5"
       ],
       [
        "↑",
-       "Auberginen",
-       "1.95",
-       "2.8"
+       "Äpfel",
+       "3.95",
+       "4.5"
       ],
       [
        "↑",
-       "Lindenblütentee",
-       "1.95",
-       "2.5"
+       "Clementinen",
+       "3.95",
+       "4.5"
       ],
       [
        "↑",
-       "Chips Sour Cream & Onion",
-       "2.95",
+       "Schmelzkäsescheiben",
+       "1.65",
+       "2.1"
+      ],
+      [
+       "↑",
+       "Würfelzucker",
+       "1.5",
+       "2.0"
+      ],
+      [
+       "↑",
+       "Feinkristallzucker",
+       "0.9",
+       "1.3"
+      ],
+      [
+       "↑",
+       "Blütenhonig Squeezer",
+       "4.0",
+       "4.4"
+      ],
+      [
+       "↑",
+       "Edamer Käsewürfel",
+       "3.1",
        "3.5"
       ],
       [
        "↑",
-       "Café Chicorée",
-       "4.95",
-       "5.5"
-      ],
-      [
-       "↑",
-       "Ahornsirup",
-       "5.95",
-       "6.4"
-      ],
-      [
-       "↑",
-       "Wave Chips hot & spicy",
-       "1.95",
-       "2.35"
-      ],
-      [
-       "↑",
-       "Tee Hagebutten",
-       "1.25",
-       "1.65"
-      ],
-      [
-       "↑",
-       "Waved Chips Paprika",
-       "1.95",
-       "2.35"
-      ],
-      [
-       "↑",
-       "Zopfmehl",
-       "1.5",
-       "1.9"
-      ],
-      [
-       "↑",
-       "Space Snack Cream",
-       "1.6",
+       "Gugelhopf",
+       "1.65",
        "1.95"
       ],
       [
        "↑",
-       "Kaffeegebäck Choco",
+       "Milchreis",
+       "1.0",
+       "1.25"
+      ],
+      [
+       "↑",
+       "Käsemischung Gratin & Pizza",
+       "4.7",
+       "4.9"
+      ],
+      [
+       "↑",
+       "Radieschen Bund",
+       "1.3",
+       "1.5"
+      ],
+      [
+       "↑",
+       "Mascarpone",
+       "3.0",
+       "3.2"
+      ],
+      [
+       "↑",
+       "Manchego DOP mild",
+       "4.75",
+       "4.95"
+      ],
+      [
+       "↑",
+       "Maasdamer Classic",
        "1.95",
-       "2.2"
+       "2.15"
       ],
       [
        "↑",
-       "Kaffeegebäck Butter",
-       "1.95",
-       "2.2"
-      ],
-      [
-       "↑",
-       "Fencheltee",
-       "1.4",
-       "1.6"
-      ],
-      [
-       "↑",
-       "Früchtetee",
-       "0.95",
-       "1.2"
-      ],
-      [
-       "↑",
-       "Trauben weiss",
-       "2.7",
-       "2.95"
-      ],
-      [
-       "↑",
-       "Kartoffeln",
+       "Feta",
        "2.95",
        "3.2"
       ],
       [
        "↑",
-       "Ãlplermagronen",
-       "1.75",
-       "1.95"
+       "Frischkäse",
+       "1.95",
+       "2.15"
       ],
       [
        "↑",
-       "Spiralen",
-       "1.75",
-       "1.95"
+       "Crème fraîche",
+       "5.0",
+       "5.2"
       ],
       [
        "↑",
-       "Proteinbrot",
+       "Vorzugsbutter Mödeli",
+       "3.25",
+       "3.45"
+      ],
+      [
+       "↑",
+       "Yeah!",
        "2.3",
        "2.5"
       ],
       [
        "↑",
-       "Riegel Schok & Erdnuss",
+       "Halbrahm ohne Zucker",
+       "3.9",
+       "3.95"
+      ],
+      [
+       "↑",
+       "Vacherin Fribourgeois Classic",
+       "3.9",
+       "4.0"
+      ],
+      [
+       "↑",
+       "Vollrahm ohne Zucker",
+       "3.9",
+       "3.95"
+      ],
+      [
+       "↑",
+       "Kaffeerahm",
        "1.8",
-       "1.95"
+       "1.9"
       ],
       [
        "↑",
-       "Müsli Riegel Apfel",
+       "Halbrahm",
+       "2.6",
+       "2.7"
+      ],
+      [
+       "↑",
+       "Toast",
+       "2.05",
+       "2.15"
+      ],
+      [
+       "↑",
+       "Toast dunkel",
+       "2.05",
+       "2.15"
+      ],
+      [
+       "↑",
+       "Fairtrade Soft Cake Orange",
        "1.8",
-       "1.95"
+       "1.9"
       ],
       [
        "↑",
-       "Saurer Halbrahm",
-       "2.75",
-       "2.9"
-      ],
-      [
-       "↑",
-       "Kuchenteig Block",
-       "1.7",
-       "1.75"
-      ],
-      [
-       "↑",
-       "Apfelschorle",
-       "8.35",
-       "8.4"
-      ],
-      [
-       "↑",
-       "Yeah!",
-       "2.2",
-       "2.3"
-      ],
-      [
-       "↑",
-       "Langkornreis Parboiled",
-       "1.1",
-       "1.2"
-      ],
-      [
-       "↑",
-       "Müsli Riegel Schoko",
+       "Fairtrade Soft Cake Himbeere",
        "1.8",
-       "1.95"
+       "1.9"
       ],
       [
        "↑",
-       "Zucchetti",
+       "Erdbeer Roulade",
        "2.5",
        "2.6"
       ],
       [
        "↑",
-       "Polenta Maisgriess",
-       "0.95",
+       "Caffé Macchiato",
+       "2.8",
+       "2.9"
+      ],
+      [
+       "↑",
+       "Freilandeier CH",
+       "4.95",
+       "5.1"
+      ],
+      [
+       "↑",
+       "Vollrahm",
+       "3.35",
+       "3.5"
+      ],
+      [
+       "↑",
+       "Mozzarella Stange",
+       "1.9",
+       "2.0"
+      ],
+      [
+       "↑",
+       "Caffé Espresso",
+       "2.8",
+       "2.9"
+      ],
+      [
+       "↑",
+       "Erdnussflips",
+       "0.9",
        "1.0"
+      ],
+      [
+       "↑",
+       "Joghurt griechischer Art",
+       "4.05",
+       "4.15"
+      ],
+      [
+       "↑",
+       "Kopfsalat grün",
+       "1.4",
+       "1.5"
+      ],
+      [
+       "↑",
+       "Kakao Roulade",
+       "2.5",
+       "2.6"
+      ],
+      [
+       "↑",
+       "Freilandeier CH PicNic",
+       "3.4",
+       "3.5"
+      ],
+      [
+       "↑",
+       "Mozzarella",
+       "1.4",
+       "1.5"
+      ],
+      [
+       "↑",
+       "Magerquark",
+       "1.2",
+       "1.3"
+      ],
+      [
+       "↑",
+       "Caffé Senza",
+       "2.8",
+       "2.9"
       ],
       [
        "↓",
        "Dattel Tomaten",
-       "2.0",
-       "1.95"
+       "1.95",
+       "1.8"
       ],
       [
        "↓",
-       "Karotten",
-       "2.65",
-       "2.55"
+       "Petit Beurre",
+       "1.8",
+       "1.75"
       ],
       [
        "↓",
-       "Clementinen",
-       "4.15",
-       "3.95"
-      ],
-      [
-       "↓",
-       "Radieschen Bund",
-       "1.5",
-       "1.3"
-      ],
-      [
-       "↓",
-       "Blumenkohl 1kg",
-       "3.5",
-       "3.2"
-      ],
-      [
-       "↓",
-       "Gurken",
-       "2.4",
-       "2.0"
+       "Fondue fixfertig",
+       "3.95",
+       "3.9"
       ],
       [
        "↓",
        "Broccoli",
-       "2.95",
-       "2.1"
+       "2.1",
+       "1.95"
+      ],
+      [
+       "↓",
+       "Zucchetti",
+       "2.6",
+       "2.3"
+      ],
+      [
+       "↓",
+       "Knuspermüesli Nature",
+       "3.6",
+       "3.25"
       ],
       [
        "↓",
        "Orangen",
+       "3.5",
+       "2.9"
+      ],
+      [
+       "↓",
+       "Blumenkohl 1kg",
+       "3.2",
+       "2.6"
+      ],
+      [
+       "↓",
+       "Grana Padano DOP Keil",
+       "6.25",
+       "5.6"
+      ],
+      [
+       "↓",
+       "Auberginen",
+       "2.8",
+       "2.1"
+      ],
+      [
+       "↓",
+       "Frittieröl",
+       "5.4",
+       "4.3"
+      ],
+      [
+       "↓",
+       "Eier Bodenhaltung",
+       "5.5",
+       "3.95"
+      ],
+      [
+       "↓",
+       "Pic-Nic Import Eier aus Bodenhaltung",
        "4.95",
-       "3.5"
+       "3.3"
       ]
      ]
     },
-    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 12. 12. 2022"
+    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 09. 01. 2023"
    }
   }
  ]
