@@ -303,57 +303,20 @@ fuel_prices.to_csv(f'./Benzinpreise.csv', index=False)
 # fuel_prices_de.to_csv(f'./Benzinpreise_de.csv')
 
 
-url = 'https://www.heizoel24.ch/heizoelpreise'
-session = requests_html.HTMLSession()
-r = session.get(url)
 
-price = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
+oil_price = pd.read_json('https://www.heizoel24.ch/api/site/3/prices/history?amount=3000&productId=1&rangeType=11')
+oil_price_de = pd.read_json('https://www.heizoel24.de/api/site/1/prices/history?amount=3000&productId=1&rangeType=11')
 
-url_de = 'https://www.heizoel24.de/heizoelpreise'
-session = requests_html.HTMLSession()
-r = session.get(url_de)
+oil_price = oil_price[['DateTime', 'Price']]
+oil_price_de = oil_price_de[['DateTime', 'Price']]
 
-price_de = r.html.xpath('//*[@id="price-faq-acc-0"]/div/div/text()')[0]
+oil_price = oil_price[oil_price['DateTime'] >= '2022-01-01']
+oil_price_de = oil_price_de[oil_price_de['DateTime'] >= '2022-01-01']
 
-price = pd.to_numeric(re.findall(r'\d+\,\d+', price)[0].replace(',', '.'))
-price_de = pd.to_numeric(re.findall(
-    r'\d+\,\d+', price_de)[0].replace(',', '.'))
-
-oil_price_old = pd.read_csv('./oil_price.csv')
-oil_price_old_de = pd.read_csv('./oil_price_de.csv')
-
-
-data = {'Datum': date.today().strftime('%Y-%m-%d'),
-        'Jahresdurchschnitt 2019': 89.62,
-        '2022': price}
-
-oil_price = pd.DataFrame(data, index=[0])
-
-oil_price = pd.concat([oil_price_old, oil_price], ignore_index=True)
-
-oil_price.drop_duplicates(subset='Datum', keep='last', inplace=True)
-
-data = {'Date': date.today().strftime('%Y-%m-%d'),
-        'Jahresdurchschnitt 2019': 65.77,
-        '2022': price_de}
-
-oil_price_de = pd.DataFrame(data, index=[0])
-
-oil_price_de = pd.concat([oil_price_old_de, oil_price_de], ignore_index=True)
-
-oil_price_de.drop_duplicates(subset='Date', keep='last', inplace=True)
-
-#oil_price.set_index('Datum', inplace=True)
-#oil_price_de.set_index('Date', inplace=True)
-#oil_price.index = pd.to_datetime(oil_price.index).strftime('%Y-%m-%d')
-#oil_price_de.index = pd.to_datetime(oil_price_de.index).strftime('%Y-%m-%d')
-
-# Update @simonhuwiler: Auskommentiert gemäss Florian.
-# # Achtung, auch aus q.config entfernt!
-# update_chart(id='b1717dcaee838699497b647ebbc25935',
-#              data=oil_price)
-# update_chart(id='5ac628c4bb388d36fb2f5cbc746a7cb6',
-#              data=oil_price_de)
+update_chart(id='b1717dcaee838699497b647ebbc25935',
+             data=oil_price)
+update_chart(id='5ac628c4bb388d36fb2f5cbc746a7cb6',
+             data=oil_price_de)
 
 oil_price.to_csv(f'./oil_price.csv', index=False)
 oil_price_de.to_csv(f'./oil_price_de.csv', index=False)
