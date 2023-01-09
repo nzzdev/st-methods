@@ -99,8 +99,8 @@ if __name__ == '__main__':
 
         # rename and reorder columns
         df = df.rename(columns={
-                       df.columns[0]: 'Datum', df.columns[1]: 'Ziel²', df.columns[2]: 'Normaler Verbrauch¹', df.columns[3]: '2022'})
-        df = df[['Datum', 'Normaler Verbrauch¹', '2022', 'Ziel²']]
+                       df.columns[0]: 'Datum', df.columns[1]: 'Ziel²', df.columns[2]: 'Normaler Verbrauch¹', df.columns[3]: 'Aktuell'})
+        df = df[['Datum', 'Normaler Verbrauch¹', 'Aktuell', 'Ziel²']]
 
         # convert date column to index
         df = df.set_index('Datum')
@@ -124,7 +124,7 @@ if __name__ == '__main__':
         # create dynamic chart title
         # OLD
         """
-        diff = (df['2022'].iloc[-1] / df['Normaler Verbrauch¹'].iloc[-1])-1
+        diff = (df['Aktuell'].iloc[-1] / df['Normaler Verbrauch¹'].iloc[-1])-1
         if diff < -0.25:
             chart_title = 'Deutschland erfüllt derzeit sein Sparziel'
         elif diff >= -0.25 and diff <= -0.15:
@@ -132,7 +132,7 @@ if __name__ == '__main__':
         else:
             chart_title = 'Deutschland verfehlt sein Sparziel derzeit deutlich'
         """
-        diff = (df['2022'].iloc[-1] / df['Normaler Verbrauch¹'].iloc[-1])-1
+        diff = (df['Aktuell'].iloc[-1] / df['Normaler Verbrauch¹'].iloc[-1])-1
         diff_nice = abs((diff*100).round(0).astype(int))
         if diff < 0:
             chart_title = f'Deutschland verbraucht derzeit {diff_nice} Prozent weniger Gas als üblich'

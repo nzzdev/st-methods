@@ -66,19 +66,6 @@
    }
   },
   {
-   "environments": [
-    {
-     "name": "production",
-     "id": "85c353bb11cc62672a227f886950b782"
-    }
-   ],
-   "item": {
-    "notes": "",
-    "data": [
-    ]
-   }
-  },
-  {
      "environments": [
       {
        "name": "production",
@@ -304,19 +291,6 @@
     {
      "name": "production",
      "id": "8676bad64564b4740f74b6d5d04f4bf4"
-    }
-   ],
-   "item": {
-    "notes": "",
-    "data": [
-    ]
-   }
-  },
-  {
-   "environments": [
-    {
-     "name": "production",
-     "id": "909e73515b8785336ef65c05d0fa36c7"
     }
    ],
    "item": {

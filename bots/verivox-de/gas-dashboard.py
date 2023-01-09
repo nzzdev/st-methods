@@ -31,7 +31,7 @@ if __name__ == '__main__':
         df_fossile = pd.read_csv(
             './data/smard_percentage.csv', encoding='utf-8', index_col='Datum')
         df_usage = pd.read_csv(
-            './data/gasverbrauch.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Normaler Verbrauch¹', '2022'])
+            './data/gasverbrauch.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Normaler Verbrauch¹', 'Aktuell'])
         df_lng = pd.read_csv(
             './data/german-imports.csv', encoding='utf-8', index_col='.')
         # BENZIN df_super = pd.read_csv('./data/node_super.csv', encoding='utf-8', usecols=['day', 'tages_mittel'], index_col='day')
@@ -78,7 +78,7 @@ if __name__ == '__main__':
         df_fossile.index = df_fossile.index.rename('date')
         df_usage.index = df_usage.index.rename('date')
         df_usage = df_usage.rename(
-            columns={'Normaler Verbrauch¹': 'Vorjahr', '2022': 'Gasverbrauch'})
+            columns={'Normaler Verbrauch¹': 'Vorjahr', 'Aktuell': 'Gasverbrauch'})
         df_lng.index = df_lng.index.rename('date')
 
         # convert 20 MWh to 20000 kWh and euro to cent / 4 MWh to 4000 kWh
