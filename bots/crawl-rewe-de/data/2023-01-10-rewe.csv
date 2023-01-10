@@ -558,8 +558,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-10;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2023-01-10;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-01-10;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2023-01-10;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;169;1l
 2023-01-10;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2023-01-10;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;169;1l
 2023-01-10;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-01-10;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-01-10;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;259;475g (1 kg = 5,45 €)
@@ -996,8 +996,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-10;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2023-01-10;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-01-10;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-01-10;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-01-10;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-01-10;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-01-10;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-01-10;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-01-10;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
@@ -1237,8 +1237,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-10;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;249;6 Stück
 2023-01-10;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;249;1 Stück
 2023-01-10;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;289;250g (1 kg = 11,56 €)
-2023-01-10;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-01-10;200348;REWE Bio;REWE Bio Emmentaler 150g;229;150g (1 kg = 15,27 €)
+2023-01-10;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-01-10;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2023-01-10;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
 2023-01-10;8381730;REWE Bio;REWE Bio Erbseneintopf 400g;199;400g (1 kg = 4,98 €)
@@ -1324,7 +1324,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-10;194192;REWE Bio;REWE Bio Joghurt mild 150g;45;150g (1 kg = 3 €)
 2023-01-10;8304439;REWE Bio;REWE Bio Joghurt mild 3,8% 500g;139;500g (1 kg = 2,78 €)
 2023-01-10;1144899;REWE Bio;REWE Bio Joghurt mild 500g;119;500g (1 kg = 2,38 €)
-2023-01-10;784614;REWE Bio;REWE Bio Joghurt mild Aprikose-Pfirsich 150g;55;150g (1 kg = 3,67 €)
 2023-01-10;784612;REWE Bio;REWE Bio Joghurt mild Erdbeer-Himbeer 150g;55;150g (1 kg = 3,67 €)
 2023-01-10;784809;REWE Bio;REWE Bio Joghurt mild Heidelbeere 150g;55;150g (1 kg = 3,67 €)
 2023-01-10;784792;REWE Bio;REWE Bio Joghurt mild Stracciatella 150g;55;150g (1 kg = 3,67 €)
