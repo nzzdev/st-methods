@@ -28,8 +28,7 @@ def get_futures():
     ids = [('ch', 'FC'), ('fr', 'F7'), ('de', 'DE')]
 
     base = 'https://webservice-eex.gvsi.com/query/json/getDaily/close/offexchtradevolumeeex/onexchtradevolumeeex/tradedatetimegmt/?priceSymbol=%22%2FE.'
-    
-    middle = 'FCBQV23%22&chartstartdate=2022%2F11%2F24&chartstopdate='
+    middle = 'BQF23%22&chartstartdate=2021%2F07%2F07&chartstopdate='
 
     stopdate = str(dt.today().year) + '%2F' + str(dt.today().strftime('%m')) + '%2F'+ str(dt.today().strftime('%d'))
     end = '&dailybarinterval=Days&aggregatepriceselection=First'
