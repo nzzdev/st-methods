@@ -15,24 +15,24 @@ def run(futures, spotmarket, speicherseen):
     # ---------- Spotmarket
     # Trend: rollender 7-Tage-Schnitt
 
-    df_spotmarket.rename(columns={'price': 'value'}, inplace=True)
+    spotmarket.rename(columns={'preisEUR': 'value'}, inplace=True)
 
-    df_trend = df_spotmarket.copy()
+    df_trend = spotmarket.copy()
     df_trend['roll'] = df_trend['value'].rolling(window=7).mean()
 
     json_spotmarket = {
             "indicatorTitle": "Spotmarkt",
-            "date": df_spotmarket.iloc[-1]['date'],
+            "date": spotmarket.iloc[-1]['date'],
             "indicatorSubtitle": "kurzfristige Lieferung pro MWh",
-            "value": df_spotmarket.iloc[-1]['value'],
-            "valueLabel": "%s Euro" % str(df_spotmarket.iloc[-1]['value']).replace('.', ','),
+            "value": spotmarket.iloc[-1]['value'],
+            "valueLabel": "%s Euro" % str(spotmarket.iloc[-1]['value']).replace('.', ','),
             "yAxisStart": 0,
             "yAxisLabels": [0, 200, 400, 600, 800 ],
             "yAxisLabelDecimals": 0,
             "color": "#374e8e",
             "trend": trend2str(df_trend),
             "chartType": "area",
-            "chartData": df_spotmarket.to_dict('records')
+            "chartData": spotmarket.to_dict('records')
     }
 
 
