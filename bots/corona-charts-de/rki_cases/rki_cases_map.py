@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 import gc
 from datetime import datetime, timedelta
 import sys
@@ -58,6 +59,18 @@ if __name__ == '__main__':
         # calculate trend and add to new Inzidenz column
         dftable['Trend'] = (
             ((df.iloc[:, -4] - df.iloc[:, -11]) / df.iloc[:, -11]) * 100)
+        # remove inf values
+        dftable['Trend'] = dftable['Trend'].replace(
+            [np.inf, -np.inf], np.nan)
+        # replace rows with unplausible trend/Nachmeldungen
+        dftable['Trend'][(dftable['Trend'] >= 500)] = np.nan
+        dftable['Trend'][(dftable['Trend'] == -100)] = np.nan
+
+        #dftable = dftable[dftable['Trend'] > 500] = '-'
+        #dftable['Trend'] = dftable['Trend'].apply(lambda x: x.replace('.0', ''))
+        #dftable['Trend'] = dftable.dropna()
+        #dftable = dftable[~(dftable['Trend'] > 500)]
+
         dftable['Trend_arrow'] = ''
         dftable['Trend_arrow'][(dftable['Trend'] <= -5)] = '➘ '
         dftable['Trend_arrow'][(dftable['Trend'] >= 5)] = '➚ '
@@ -65,6 +78,7 @@ if __name__ == '__main__':
                                & (dftable['Trend'] > -5)] = '➙ '
         # add arrows to trend and ignore regions with NaN values
         dftable['Trend_tmp'] = dftable['Trend'].round(0)
+
         dftable['Trend_tmp'] = dftable['Trend_tmp'].apply(
             lambda x: '+'+str(x) if x > 0 else x)
         dftable['Trend'][dftable['Trend'].notnull()] = dftable['Trend_arrow'] + \
@@ -97,6 +111,10 @@ if __name__ == '__main__':
 
         # rearrange columns
         dftable = dftable[['Land', 'Trend', 'Inzidenz']]
+
+        # replace empty strings with NaN and -
+        dftable['Trend'] = dftable['Trend'].replace('', np.nan, regex=False)
+        dftable['Trend'] = dftable['Trend'].fillna('-')
 
         # set chart notes
         notes_chart = 'Farbskala dynamisch.<br>Stand: ' + timestamp_str
