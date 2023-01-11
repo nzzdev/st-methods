@@ -179,7 +179,7 @@ update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data=zh)
    # data.append([ele for ele in cols if ele])
 
 #passagiere = pd.DataFrame(data[1:], columns=['KW in 2022', '2019_datum',
-                          '2021_datum', '2022_datum', '2019', '2021', '2022', '%22/21', '%22/19'])
+    #                      '2021_datum', '2022_datum', '2019', '2021', '2022', '%22/21', '%22/19'])
 #passagiere = passagiere[['KW in 2022', '2019', '2022']].copy()
 
 #passagiere['2019'] = pd.to_numeric(
