@@ -165,38 +165,38 @@ update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data=zh)
 
 
 # Verkehrszahlen
-url = 'https://www.adv.aero/corona-pandemie/woechentliche-verkehrszahlen/'
-page = requests.get(url)
+#url = 'https://www.adv.aero/corona-pandemie/woechentliche-verkehrszahlen/'
+#page = requests.get(url)
 
-soup = BeautifulSoup(page.content, "html.parser")
-results = soup.find('table', class_="alignleft")
+#soup = BeautifulSoup(page.content, "html.parser")
+#results = soup.find('table', class_="alignleft")
 
-data = []
-rows = results.find_all('tr')
-for row in rows:
-    cols = row.find_all('td')
-    cols = [ele.text.strip() for ele in cols]
-    data.append([ele for ele in cols if ele])
+#data = []
+#rows = results.find_all('tr')
+#for row in rows:
+ #   cols = row.find_all('td')
+  #  cols = [ele.text.strip() for ele in cols]
+   # data.append([ele for ele in cols if ele])
 
-passagiere = pd.DataFrame(data[1:], columns=['KW in 2022', '2019_datum',
+#passagiere = pd.DataFrame(data[1:], columns=['KW in 2022', '2019_datum',
                           '2021_datum', '2022_datum', '2019', '2021', '2022', '%22/21', '%22/19'])
-passagiere = passagiere[['KW in 2022', '2019', '2022']].copy()
+#passagiere = passagiere[['KW in 2022', '2019', '2022']].copy()
 
-passagiere['2019'] = pd.to_numeric(
-    passagiere['2019'].str.replace('.', '', regex=False))
-passagiere['2022'] = pd.to_numeric(
-    passagiere['2022'].str.replace('.', '', regex=False))
-passagiere['KW in 2022'] = pd.to_numeric(passagiere['KW in 2022'])
-passagiere.loc[passagiere['KW in 2022'] < 10,
-               'KW'] = '2022-W0' + passagiere['KW in 2022'].astype(str)
-passagiere.loc[passagiere['KW in 2022'] >= 10,
-               'KW'] = '2022-W' + passagiere['KW in 2022'].astype(str)
+#passagiere['2019'] = pd.to_numeric(
+ #   passagiere['2019'].str.replace('.', '', regex=False))
+#passagiere['2022'] = pd.to_numeric(
+ #   passagiere['2022'].str.replace('.', '', regex=False))
+#passagiere['KW in 2022'] = pd.to_numeric(passagiere['KW in 2022'])
+#passagiere.loc[passagiere['KW in 2022'] < 10,
+ #              'KW'] = '2022-W0' + passagiere['KW in 2022'].astype(str)
+#passagiere.loc[passagiere['KW in 2022'] >= 10,
+ #              'KW'] = '2022-W' + passagiere['KW in 2022'].astype(str)
 
-passagiere = passagiere[['KW', '2019', '2022']].copy()
+#passagiere = passagiere[['KW', '2019', '2022']].copy()
 #passagiere.set_index('KW', inplace=True)
 
-update_chart(id='7a53d2e458b7ba35c25526a2c21d3956',
-             data=passagiere)
+#update_chart(id='7a53d2e458b7ba35c25526a2c21d3956',
+ #            data=passagiere)
 
 
 # Sanktionen
