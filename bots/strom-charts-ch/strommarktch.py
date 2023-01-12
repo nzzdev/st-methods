@@ -230,4 +230,6 @@ def get_atomstrom_frankreich():
 
     akw_df = akw_df[pd.to_datetime(akw_df['date']) >= '2022-01-01']
     
+    akw_df = akw_df[['date', 'volume']]
+    
     return akw_df
