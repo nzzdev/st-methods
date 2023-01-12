@@ -48,7 +48,7 @@ def run(futures, spotmarket, speicherseen):
     json_futures = {
             "indicatorTitle": "Terminmarkt",
             "date": df_futures.iloc[-1]['Datum'],
-            "indicatorSubtitle": "Lieferung im Januar 2024 pro MWh",
+            "indicatorSubtitle": "Lieferung in 2024 pro MWh",
             "value": df_futures.iloc[-1]['value'],
             "valueLabel": "%s Euro" % str(df_futures.iloc[-1]['value']).replace('.', ','),
             "yAxisStart": 0,
