@@ -7,7 +7,7 @@ def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe):
     q_date_ = 'Preise für die Schweiz erst ab März 2022 verfügbar. <br>Stand: '+ dt.now().strftime("%-d. %-m. %Y") 
 
     # Futures
-    update_chart(id = "de091de1c8d4f5042323dbd9e08c9548", 
+    update_chart(id = "ac32d7e80793b5151ea699162152edd5", 
                 data = futures,
                 notes = q_date_)
 
@@ -17,7 +17,7 @@ def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe):
                 notes = q_date)
 
     # Atomkraft Fr
-    update_chart(id = "4d6b0595264016839099c06df6bdd6af", 
+    update_chart(id = "ac32d7e80793b5151ea699162154295a", 
                 data = atomstrom_fr,
                 notes = q_date)
 
