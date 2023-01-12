@@ -48,6 +48,12 @@
       ],
       [
        "↑",
+       "Clementinen",
+       "3.95",
+       "4.5"
+      ],
+      [
+       "↑",
        "Äpfel",
        "3.95",
        "4.5"
@@ -66,18 +72,6 @@
       ],
       [
        "↑",
-       "Clementinen",
-       "3.95",
-       "4.5"
-      ],
-      [
-       "↑",
-       "Edamer Käsewürfel",
-       "3.1",
-       "3.5"
-      ],
-      [
-       "↑",
        "Blütenhonig Squeezer",
        "4.0",
        "4.4"
@@ -87,6 +81,12 @@
        "Feinkristallzucker",
        "0.9",
        "1.3"
+      ],
+      [
+       "↑",
+       "Edamer Käsewürfel",
+       "3.1",
+       "3.5"
       ],
       [
        "↑",
@@ -102,9 +102,9 @@
       ],
       [
        "↑",
-       "Milchreis",
-       "1.0",
-       "1.25"
+       "Radieschen Bund",
+       "1.3",
+       "1.5"
       ],
       [
        "↑",
@@ -114,45 +114,15 @@
       ],
       [
        "↑",
-       "Käsemischung Gratin & Pizza",
-       "4.7",
-       "4.9"
-      ],
-      [
-       "↑",
-       "Radieschen Bund",
-       "1.3",
-       "1.5"
-      ],
-      [
-       "↑",
-       "Mascarpone",
-       "3.0",
-       "3.2"
-      ],
-      [
-       "↑",
-       "Frischkäse",
-       "1.95",
-       "2.15"
-      ],
-      [
-       "↑",
-       "Feta",
-       "2.95",
-       "3.2"
-      ],
-      [
-       "↑",
-       "Maasdamer Classic",
-       "1.95",
-       "2.15"
-      ],
-      [
-       "↑",
        "Crème fraîche",
        "5.0",
        "5.2"
+      ],
+      [
+       "↑",
+       "Milchreis",
+       "1.0",
+       "1.25"
       ],
       [
        "↑",
@@ -162,13 +132,55 @@
       ],
       [
        "↑",
+       "Mascarpone",
+       "3.0",
+       "3.2"
+      ],
+      [
+       "↑",
+       "Feta",
+       "2.95",
+       "3.2"
+      ],
+      [
+       "↑",
+       "Käsemischung Gratin & Pizza",
+       "4.7",
+       "4.9"
+      ],
+      [
+       "↑",
+       "Frischkäse",
+       "1.95",
+       "2.15"
+      ],
+      [
+       "↑",
        "Yeah!",
        "2.3",
        "2.5"
       ],
       [
        "↑",
-       "Halbrahm ohne Zucker",
+       "Maasdamer Classic",
+       "1.95",
+       "2.15"
+      ],
+      [
+       "↑",
+       "Kaffeerahm",
+       "1.8",
+       "1.9"
+      ],
+      [
+       "↑",
+       "Caffé Macchiato",
+       "2.8",
+       "2.9"
+      ],
+      [
+       "↑",
+       "Vollrahm ohne Zucker",
        "3.9",
        "3.95"
       ],
@@ -180,27 +192,9 @@
       ],
       [
        "↑",
-       "Vollrahm ohne Zucker",
+       "Halbrahm ohne Zucker",
        "3.9",
        "3.95"
-      ],
-      [
-       "↑",
-       "Halbrahm",
-       "2.6",
-       "2.7"
-      ],
-      [
-       "↑",
-       "Kaffeerahm",
-       "1.8",
-       "1.9"
-      ],
-      [
-       "↑",
-       "Toast",
-       "2.05",
-       "2.15"
       ],
       [
        "↑",
@@ -228,9 +222,9 @@
       ],
       [
        "↑",
-       "Caffé Macchiato",
-       "2.8",
-       "2.9"
+       "Toast",
+       "2.05",
+       "2.15"
       ],
       [
        "↑",
@@ -240,9 +234,9 @@
       ],
       [
        "↑",
-       "Vollrahm",
-       "3.35",
-       "3.5"
+       "Halbrahm",
+       "2.6",
+       "2.7"
       ],
       [
        "↑",
@@ -264,9 +258,15 @@
       ],
       [
        "↑",
-       "Joghurt griechischer Art",
-       "4.05",
-       "4.15"
+       "Blumenkohl 1kg",
+       "2.5",
+       "2.6"
+      ],
+      [
+       "↑",
+       "Vollrahm",
+       "3.35",
+       "3.5"
       ],
       [
        "↑",
@@ -299,6 +299,12 @@
        "1.5"
       ],
       [
+       "↑",
+       "Joghurt griechischer Art",
+       "4.05",
+       "4.15"
+      ],
+      [
        "↓",
        "Fondue fixfertig",
        "3.95",
@@ -315,12 +321,6 @@
        "Petit Beurre",
        "1.8",
        "1.75"
-      ],
-      [
-       "↓",
-       "Broccoli",
-       "2.1",
-       "1.95"
       ],
       [
        "↓",
@@ -342,21 +342,15 @@
       ],
       [
        "↓",
-       "Blumenkohl 1kg",
-       "3.2",
-       "2.6"
+       "Grana Padano DOP Keil",
+       "6.25",
+       "5.6"
       ],
       [
        "↓",
        "Auberginen",
        "2.8",
        "2.1"
-      ],
-      [
-       "↓",
-       "Grana Padano DOP Keil",
-       "6.25",
-       "5.6"
       ],
       [
        "↓",
@@ -378,7 +372,7 @@
       ]
      ]
     },
-    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 11. 01. 2023"
+    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 12. 01. 2023"
    }
   }
  ]
