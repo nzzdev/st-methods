@@ -76,7 +76,8 @@ def get_futures():
     futures_df['Datum'] = pd.to_datetime(futures_df['Datum'])
     futures_df.set_index('Datum', inplace=True)
     futures_df = futures_df['Preis'][futures_df.index >= '2022-01-01'].to_frame().dropna()
-    futures_df = futures_df.reset_index(level=0)
+    futures_df['Datum'] = futures_df.index
+    futures_df = futures_df[['Datum', 'Preis']]
     
     return futures_df
 

@@ -4,12 +4,12 @@ from helpers import *
 def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe):
     # set date
     q_date = 'Stand: '+ dt.now().strftime("%-d. %-m. %Y")    
-    q_date_ = 'Preise für die Schweiz erst ab März 2022 verfügbar. <br>Stand: '+ dt.now().strftime("%-d. %-m. %Y") 
+    #q_date_ = 'Preise für die Schweiz erst ab März 2022 verfügbar. <br>Stand: '+ dt.now().strftime("%-d. %-m. %Y") 
 
     # Futures
     update_chart(id = "ac32d7e80793b5151ea699162152edd5", 
                 data = futures,
-                notes = q_date_)
+                notes = q_date)
 
     # Spotmarket
     update_chart(id = "046c2f2cc67578f60cc5c36ce55d27ae", 
