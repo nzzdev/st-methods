@@ -399,8 +399,10 @@
     }
    ],
    "item": {
+    "notes": "",
     "data": [
-     ]
+    ]
+   }
   },
   {
    "environments": [
@@ -1923,9 +1925,9 @@
     }
    ],
    "item": {
+    "notes": "",
     "data": [
-    ],
-    "notes": "Stand: 10. 1. 2023"
+    ]
    }
   },
   {
