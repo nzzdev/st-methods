@@ -38,16 +38,19 @@ def run(futures, spotmarket, speicherseen):
 
     # ---------- Futures
     df_futures = futures[['Datum', 'Preis']]
-    df_futures.rename(columns={'Preis': 'value'}, inplace=True)
+    df_futures.rename(columns={
+        'Preis': 'value',
+        'Datum': 'date'
+        }, inplace=True)
     df_futures = df_futures.dropna(subset=['value'])
-    df_futures['Datum'] = df_futures['Datum'].dt.date
+    df_futures['date'] = df_futures['date'].dt.date
 
     df_trend = df_futures.copy()
     df_trend['roll'] = df_trend['value'].rolling(window=7).mean()
 
     json_futures = {
             "indicatorTitle": "Terminmarkt",
-            "date": df_futures.iloc[-1]['Datum'],
+            "date": df_futures.iloc[-1]['date'],
             "indicatorSubtitle": "Lieferung in 2024 pro MWh",
             "value": df_futures.iloc[-1]['value'],
             "valueLabel": "%s Euro" % str(df_futures.iloc[-1]['value']).replace('.', ','),
