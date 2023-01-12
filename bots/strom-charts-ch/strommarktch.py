@@ -73,7 +73,7 @@ def get_futures():
 
     # create dataframe and format date column
     futures_df = pd.DataFrame(full_data['bars'], columns=['Datum', 'Preis'])
-    futures_df['Datum'] = pd.to_datetime(df['Datum'])
+    futures_df['Datum'] = pd.to_datetime(futures_df['Datum'])
     futures_df.set_index('Datum', inplace=True)
     futures_df = df['Preis'][df.index >= '2022-01-01'].to_frame().dropna()
     futures_df = futures_df.reset_index(level=0)
