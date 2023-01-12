@@ -40,9 +40,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Run python scripts
-        run: | # 
+        run: |  
           python main.py
           python stromverbrauch.py
+          git pull
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: :!*.json
@@ -50,7 +51,7 @@ jobs:
       - name: Setup Node.js 
         uses: actions/setup-node@v3
         with:
-          node-version: "14"
+          node-version: "16"
       - name: Install node packages
         run: npm install -g @nzz/q-cli
       - name: Run Q cli
