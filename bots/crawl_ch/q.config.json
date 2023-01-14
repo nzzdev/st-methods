@@ -24,15 +24,15 @@
       ],
       [
        "↑",
-       "ASC Forellenfilets geräuchert",
-       "5.95",
-       "6.95"
-      ],
-      [
-       "↑",
        "Zedernkerne",
        "5.7",
        "6.7"
+      ],
+      [
+       "↑",
+       "ASC Forellenfilets geräuchert",
+       "5.95",
+       "6.95"
       ],
       [
        "↑",
@@ -44,12 +44,6 @@
        "↑",
        "Honig flüssig",
        "3.9",
-       "4.5"
-      ],
-      [
-       "↑",
-       "Clementinen",
-       "3.95",
        "4.5"
       ],
       [
@@ -72,6 +66,12 @@
       ],
       [
        "↑",
+       "Clementinen",
+       "3.95",
+       "4.5"
+      ],
+      [
+       "↑",
        "Blütenhonig Squeezer",
        "4.0",
        "4.4"
@@ -84,63 +84,15 @@
       ],
       [
        "↑",
-       "Feinkristallzucker",
-       "0.9",
-       "1.3"
-      ],
-      [
-       "↑",
        "Gugelhopf",
        "1.65",
        "1.95"
       ],
       [
        "↑",
-       "Zwiebeln",
-       "2.1",
-       "2.4"
-      ],
-      [
-       "↑",
-       "Radieschen Bund",
-       "1.3",
-       "1.5"
-      ],
-      [
-       "↑",
        "Manchego DOP mild",
        "4.75",
        "4.95"
-      ],
-      [
-       "↑",
-       "Crème fraîche",
-       "5.0",
-       "5.2"
-      ],
-      [
-       "↑",
-       "Milchreis",
-       "1.0",
-       "1.25"
-      ],
-      [
-       "↑",
-       "Vorzugsbutter Mödeli",
-       "3.25",
-       "3.45"
-      ],
-      [
-       "↑",
-       "Mascarpone",
-       "3.0",
-       "3.2"
-      ],
-      [
-       "↑",
-       "Feta",
-       "2.95",
-       "3.2"
       ],
       [
        "↑",
@@ -156,6 +108,42 @@
       ],
       [
        "↑",
+       "Milchreis",
+       "1.0",
+       "1.25"
+      ],
+      [
+       "↑",
+       "Feta",
+       "2.95",
+       "3.2"
+      ],
+      [
+       "↑",
+       "Crème fraîche",
+       "5.0",
+       "5.2"
+      ],
+      [
+       "↑",
+       "Mascarpone",
+       "3.0",
+       "3.2"
+      ],
+      [
+       "↑",
+       "Radieschen Bund",
+       "1.3",
+       "1.5"
+      ],
+      [
+       "↑",
+       "Vorzugsbutter Mödeli",
+       "3.25",
+       "3.45"
+      ],
+      [
+       "↑",
        "Yeah!",
        "2.3",
        "2.5"
@@ -168,25 +156,13 @@
       ],
       [
        "↑",
-       "Kaffeerahm",
-       "1.8",
-       "1.9"
-      ],
-      [
-       "↑",
-       "Caffé Macchiato",
-       "2.8",
-       "2.9"
-      ],
-      [
-       "↑",
-       "Vollrahm ohne Zucker",
+       "Halbrahm ohne Zucker",
        "3.9",
        "3.95"
       ],
       [
        "↑",
-       "Halbrahm ohne Zucker",
+       "Vollrahm ohne Zucker",
        "3.9",
        "3.95"
       ],
@@ -198,9 +174,9 @@
       ],
       [
        "↑",
-       "Toast dunkel",
-       "2.05",
-       "2.15"
+       "Kaffeerahm",
+       "1.8",
+       "1.9"
       ],
       [
        "↑",
@@ -222,15 +198,9 @@
       ],
       [
        "↑",
-       "Toast",
-       "2.05",
-       "2.15"
-      ],
-      [
-       "↑",
-       "Freilandeier CH",
-       "4.95",
-       "5.1"
+       "Caffé Macchiato",
+       "2.8",
+       "2.9"
       ],
       [
        "↑",
@@ -240,21 +210,15 @@
       ],
       [
        "↑",
-       "Freilandeier CH PicNic",
-       "3.4",
-       "3.5"
+       "Magerquark",
+       "1.2",
+       "1.3"
       ],
       [
        "↑",
        "Caffé Espresso",
        "2.8",
        "2.9"
-      ],
-      [
-       "↑",
-       "Erdnussflips",
-       "0.9",
-       "1.0"
       ],
       [
        "↑",
@@ -270,9 +234,9 @@
       ],
       [
        "↑",
-       "Mozzarella Stange",
-       "1.9",
-       "2.0"
+       "Freilandeier CH PicNic",
+       "3.4",
+       "3.5"
       ],
       [
        "↑",
@@ -282,21 +246,21 @@
       ],
       [
        "↑",
-       "Magerquark",
-       "1.2",
-       "1.3"
-      ],
-      [
-       "↑",
-       "Caffé Senza",
-       "2.8",
-       "2.9"
+       "Freilandeier CH",
+       "4.95",
+       "5.1"
       ],
       [
        "↑",
        "Mozzarella",
        "1.4",
        "1.5"
+      ],
+      [
+       "↑",
+       "Caffé Senza",
+       "2.8",
+       "2.9"
       ],
       [
        "↑",
@@ -342,15 +306,15 @@
       ],
       [
        "↓",
-       "Auberginen",
-       "2.8",
-       "2.1"
-      ],
-      [
-       "↓",
        "Grana Padano DOP Keil",
        "6.25",
        "5.6"
+      ],
+      [
+       "↓",
+       "Auberginen",
+       "2.8",
+       "2.1"
       ],
       [
        "↓",
@@ -360,19 +324,13 @@
       ],
       [
        "↓",
-       "Eier Bodenhaltung",
-       "5.5",
-       "3.95"
-      ],
-      [
-       "↓",
        "Pic-Nic Import Eier aus Bodenhaltung",
        "4.95",
        "3.3"
       ]
      ]
     },
-    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 13. 01. 2023"
+    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 14. 01. 2023"
    }
   }
  ]
