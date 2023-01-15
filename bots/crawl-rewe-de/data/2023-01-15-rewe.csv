@@ -561,8 +561,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-15;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2023-01-15;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-01-15;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2023-01-15;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-01-15;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;169;1l
+2023-01-15;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-01-15;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-01-15;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-01-15;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;259;475g (1 kg = 5,45 €)
@@ -907,8 +907,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-15;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;399;500ml (1 l = 7,98 €)
 2023-01-15;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-01-15;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-01-15;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-01-15;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-01-15;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-01-15;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;329;250g (1 kg = 13,16 €)
 2023-01-15;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets Praktisch Grätenfrei 475g;359;475g (1 kg = 7,56 €)
 2023-01-15;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1205,7 +1205,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-15;8611706;REWE Bio;REWE Bio Brechbohnen 185g;109;185g (1 kg = 5,89 €)
 2023-01-15;742294;REWE Bio;REWE Bio Brechbohnen 450g;149;450g (1 kg = 3,31 €)
 2023-01-15;2245231;REWE Bio;REWE Bio Broccoli 1 Stück;249;1 Stück
-2023-01-15;273709;REWE Bio;REWE Bio Broccoli 300g;159;300g (1 kg = 5,30 €)
 2023-01-15;1136740;REWE Bio;REWE Bio Buttergemüse 300g;139;300g (1 kg = 4,63 €)
 2023-01-15;7103535;REWE Bio;REWE Bio Butterkäse mild 150g;239;150g (1 kg = 15,93 €)
 2023-01-15;1323529;REWE Bio;REWE Bio Caffe Latte 250ml;95;250ml (1 l = 3,80 €)
