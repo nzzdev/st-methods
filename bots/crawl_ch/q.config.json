@@ -48,7 +48,7 @@
       ],
       [
        "↑",
-       "Äpfel",
+       "Clementinen",
        "3.95",
        "4.5"
       ],
@@ -66,15 +66,9 @@
       ],
       [
        "↑",
-       "Clementinen",
+       "Äpfel",
        "3.95",
        "4.5"
-      ],
-      [
-       "↑",
-       "Blütenhonig Squeezer",
-       "4.0",
-       "4.4"
       ],
       [
        "↑",
@@ -84,15 +78,15 @@
       ],
       [
        "↑",
-       "Gugelhopf",
-       "1.65",
-       "1.95"
+       "Blütenhonig Squeezer",
+       "4.0",
+       "4.4"
       ],
       [
        "↑",
-       "Manchego DOP mild",
-       "4.75",
-       "4.95"
+       "Gugelhopf",
+       "1.65",
+       "1.95"
       ],
       [
        "↑",
@@ -135,6 +129,12 @@
        "Radieschen Bund",
        "1.3",
        "1.5"
+      ],
+      [
+       "↑",
+       "Manchego DOP mild",
+       "4.75",
+       "4.95"
       ],
       [
        "↑",
@@ -330,7 +330,7 @@
       ]
      ]
     },
-    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 14. 01. 2023"
+    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 15. 01. 2023"
    }
   }
  ]
