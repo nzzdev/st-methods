@@ -35,14 +35,14 @@ food_drinks = ['drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread']
 df_t = pd.DataFrame()
 for i in food_drinks:
     try:
-        #df_ = pd.read_excel(f'./output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
-        df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
+        df_ = pd.read_excel(f'./output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
+        #df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
         df_t = pd.concat([df_t, df_], ignore_index = True)
     except:
         for j in dates:
             try:
-                #df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
-                df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + j + '.xlsx')
+                df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
+                #df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + j + '.xlsx')
                 df_t = pd.concat([df_t, df_], ignore_index = True)
             except:
                 continue
@@ -78,14 +78,14 @@ food_drinks = ['drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread']
 df_y = pd.DataFrame()
 for i in food_drinks:
     try:
-        #df_ = pd.read_excel(f'./output/' + i + '_coop_' + past.strftime('%Y-%m-%d') + '.xlsx')
-        df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + past.strftime('%Y-%m-%d') + '.xlsx')
+        df_ = pd.read_excel(f'./output/' + i + '_coop_' + past.strftime('%Y-%m-%d') + '.xlsx')
+        #df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + past.strftime('%Y-%m-%d') + '.xlsx')
         df_y = pd.concat([df_y, df_], ignore_index = True)
     except:
         for j in dates:
             try:
-                #df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
-                df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + j + '.xlsx')
+                df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
+                #df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + j + '.xlsx')
                 df_y = pd.concat([df_y, df_], ignore_index = True)
             except:
                 continue
