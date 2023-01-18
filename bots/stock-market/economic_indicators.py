@@ -112,24 +112,28 @@ lkw = lkw[['Datum', 'gleitender 7-Tage-Durchschnitt KSB']]
 lkw['Datum'] = pd.to_datetime(lkw['Datum'])
 lkw = lkw.rename_axis(None, axis=1)
 
-lkw_2022 = lkw.loc[lkw['Datum'] >= '2022-01-01'].copy()
+lkw_2023 = lkw.loc[lkw['Datum'] >= '2023-01-01'].copy()
+lkw_2022 = lkw.loc[(lkw['Datum'] >= '2022-01-01') & (lkw['Datum'] <= '2022-12-31')].copy()
 lkw_2019 = lkw.loc[(lkw['Datum'].dt.date >= date(2022, 1, 1) - timedelta(366) - timedelta(2*365)) &
                    (lkw['Datum'].dt.date <= date(2022, 12, 31) -
                     timedelta(366) - timedelta(2*365))
                    ].copy()
 
 lkw_2019['Datum'] = lkw_2019['Datum'].dt.date + \
-    timedelta(366) + timedelta(2*365)
-lkw_2022['Datum'] = lkw_2022['Datum'].dt.date
+    timedelta(366) + timedelta(3*365)
+lkw_2022['Datum'] = lkw_2022['Datum'].dt.date + timedelta(365)
 
 lkw_2019.rename(
     columns={'gleitender 7-Tage-Durchschnitt KSB': '2019'}, inplace=True)
 lkw_2022.rename(
     columns={'gleitender 7-Tage-Durchschnitt KSB': '2022'}, inplace=True)
+lkw_2023.rename(
+    columns={'gleitender 7-Tage-Durchschnitt KSB': '2023'}, inplace=True)
 
 lkw = lkw_2019.merge(lkw_2022, on='Datum', how='outer')
-#lkw.set_index('Datum', inplace=True)
-#lkw.index = pd.to_datetime(lkw.index).strftime('%Y-%m-%d')
+lkw['Datum'] = pd.to_datetime(lkw['Datum'])
+
+lkw = lkw.merge(lkw_2023, on='Datum', how='outer')
 
 update_chart(id='5ac628c4bb388d36fb2f5cbc7441bfc7', data=lkw)
 
