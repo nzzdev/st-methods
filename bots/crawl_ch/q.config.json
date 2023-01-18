@@ -24,15 +24,15 @@
       ],
       [
        "↑",
-       "ASC Forellenfilets geräuchert",
-       "5.95",
-       "6.95"
-      ],
-      [
-       "↑",
        "Zedernkerne",
        "5.7",
        "6.7"
+      ],
+      [
+       "↑",
+       "ASC Forellenfilets geräuchert",
+       "5.95",
+       "6.95"
       ],
       [
        "↑",
@@ -72,15 +72,9 @@
       ],
       [
        "↑",
-       "Zwiebeln",
-       "2.1",
-       "2.4"
-      ],
-      [
-       "↑",
-       "Manchego DOP mild",
-       "4.75",
-       "4.95"
+       "Mascarpone",
+       "3.0",
+       "3.2"
       ],
       [
        "↑",
@@ -90,21 +84,27 @@
       ],
       [
        "↑",
-       "Mascarpone",
-       "3.0",
-       "3.2"
-      ],
-      [
-       "↑",
        "Käsemischung Gratin & Pizza",
        "4.7",
        "4.9"
       ],
       [
        "↑",
+       "Manchego DOP mild",
+       "4.75",
+       "4.95"
+      ],
+      [
+       "↑",
        "Vorzugsbutter Mödeli",
        "3.25",
        "3.45"
+      ],
+      [
+       "↑",
+       "Feta",
+       "2.95",
+       "3.2"
       ],
       [
        "↑",
@@ -120,18 +120,6 @@
       ],
       [
        "↑",
-       "Feta",
-       "2.95",
-       "3.2"
-      ],
-      [
-       "↑",
-       "Yeah!",
-       "2.3",
-       "2.5"
-      ],
-      [
-       "↑",
        "Erbsen",
        "3.4",
        "3.6"
@@ -144,21 +132,15 @@
       ],
       [
        "↑",
-       "Toast",
-       "2.05",
-       "2.15"
+       "Yeah!",
+       "2.3",
+       "2.5"
       ],
       [
        "↑",
-       "Toast dunkel",
-       "2.05",
-       "2.15"
-      ],
-      [
-       "↑",
-       "Halbrahm ohne Zucker",
-       "3.9",
-       "3.95"
+       "Halbrahm",
+       "2.6",
+       "2.7"
       ],
       [
        "↑",
@@ -168,15 +150,39 @@
       ],
       [
        "↑",
-       "Vollrahm ohne Zucker",
-       "3.9",
-       "3.95"
+       "Joghurt griechischer Art",
+       "4.05",
+       "4.15"
+      ],
+      [
+       "↑",
+       "Caffé Macchiato",
+       "2.8",
+       "2.9"
       ],
       [
        "↑",
        "Kaffeerahm",
        "1.8",
        "1.9"
+      ],
+      [
+       "↑",
+       "Vollrahm ohne Zucker",
+       "3.9",
+       "3.95"
+      ],
+      [
+       "↑",
+       "Halbrahm ohne Zucker",
+       "3.9",
+       "3.95"
+      ],
+      [
+       "↑",
+       "Toast",
+       "2.05",
+       "2.15"
       ],
       [
        "↑",
@@ -198,33 +204,27 @@
       ],
       [
        "↑",
-       "Halbrahm",
-       "2.6",
-       "2.7"
+       "Toast dunkel",
+       "2.05",
+       "2.15"
       ],
       [
        "↑",
-       "Caffé Macchiato",
-       "2.8",
-       "2.9"
+       "Freilandeier CH PicNic",
+       "3.4",
+       "3.5"
       ],
       [
        "↑",
-       "Magerquark",
-       "1.2",
-       "1.3"
+       "Mozzarella",
+       "1.4",
+       "1.5"
       ],
       [
        "↑",
-       "Joghurt griechischer Art",
-       "4.05",
-       "4.15"
-      ],
-      [
-       "↑",
-       "Mozzarella Stange",
-       "1.9",
-       "2.0"
+       "Kopfsalat grün",
+       "1.3",
+       "1.4"
       ],
       [
        "↑",
@@ -240,27 +240,21 @@
       ],
       [
        "↑",
+       "Freilandeier CH",
+       "4.95",
+       "5.1"
+      ],
+      [
+       "↑",
        "Radieschen Bund",
        "1.5",
        "1.6"
       ],
       [
        "↑",
-       "Mozzarella",
-       "1.4",
-       "1.5"
-      ],
-      [
-       "↑",
-       "Kakao Roulade",
-       "2.5",
-       "2.6"
-      ],
-      [
-       "↑",
-       "Freilandeier CH PicNic",
-       "3.4",
-       "3.5"
+       "Mozzarella Stange",
+       "1.9",
+       "2.0"
       ],
       [
        "↑",
@@ -270,9 +264,15 @@
       ],
       [
        "↑",
-       "Freilandeier CH",
-       "4.95",
-       "5.1"
+       "Magerquark",
+       "1.2",
+       "1.3"
+      ],
+      [
+       "↑",
+       "Kakao Roulade",
+       "2.5",
+       "2.6"
       ],
       [
        "↓",
@@ -294,15 +294,21 @@
       ],
       [
        "↓",
+       "Blumenkohl 1kg",
+       "2.5",
+       "2.3"
+      ],
+      [
+       "↓",
        "Zucchetti",
        "2.5",
        "2.3"
       ],
       [
        "↓",
-       "Blumenkohl 1kg",
-       "2.5",
-       "2.3"
+       "Schweinswürstli",
+       "4.45",
+       "4.2"
       ],
       [
        "↓",
@@ -342,7 +348,7 @@
       ]
      ]
     },
-    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 17. 01. 2023"
+    "notes": "↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: 18. 01. 2023"
    }
   }
  ]
