@@ -55,7 +55,7 @@ def run(futures, spotmarket, speicherseen):
             "value": df_futures.iloc[-1]['value'],
             "valueLabel": "%s Euro" % str(df_futures.iloc[-1]['value']).replace('.', ','),
             "yAxisStart": 0,
-            "yAxisLabels": [0, 500, 1000, 1500, 800 ],
+            "yAxisLabels": [0, 250, 500, 750, 1000, 1250 ],
             "yAxisLabelDecimals": 0,
             "color": "#374e8e",
             "trend": trend2str(df_trend),
