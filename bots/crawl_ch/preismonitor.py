@@ -35,14 +35,14 @@ food_drinks = ['drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread']
 df_t = pd.DataFrame()
 for i in food_drinks:
     try:
-        df_ = pd.read_excel(f'./output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
-        #df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
+        #df_ = pd.read_excel(f'./output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
+        df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + today.strftime('%Y-%m-%d') + '.xlsx')
         df_t = pd.concat([df_t, df_], ignore_index = True)
     except:
         for j in dates:
             try:
-                df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
-                #df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + j + '.xlsx')
+                #df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
+                df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + j + '.xlsx')
                 df_t = pd.concat([df_t, df_], ignore_index = True)
             except:
                 continue
@@ -78,14 +78,14 @@ food_drinks = ['drinks', 'sweet', 'provision', 'meat', 'vegi', 'milk', 'bread']
 df_y = pd.DataFrame()
 for i in food_drinks:
     try:
-        df_ = pd.read_excel(f'./output/' + i + '_coop_' + past.strftime('%Y-%m-%d') + '.xlsx')
-        #df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + past.strftime('%Y-%m-%d') + '.xlsx')
+        #df_ = pd.read_excel(f'./output/' + i + '_coop_' + past.strftime('%Y-%m-%d') + '.xlsx')
+        df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + past.strftime('%Y-%m-%d') + '.xlsx')
         df_y = pd.concat([df_y, df_], ignore_index = True)
     except:
         for j in dates:
             try:
-                df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
-                #df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + j + '.xlsx')
+                #df_ = pd.read_excel(f'./output/' + i + '_coop_' + j + '.xlsx')
+                df_ = pd.read_excel('/Users/florianseliger/Documents/GitHub/st-methods/bots/crawl_ch/output/' + i + '_coop_' + j + '.xlsx')
                 df_y = pd.concat([df_y, df_], ignore_index = True)
             except:
                 continue
@@ -110,11 +110,13 @@ df_t_y = df_t.merge(df_y, on = ['id', 'title', 'priceContextAmount'])
 df_t_y.drop_duplicates(inplace = True)
 
 df_t_y['Differenz'] = df_t_y['Neuer Preis'] - df_t_y['Alter Preis']
+df_t_y['perc_change'] = df_t_y['Differenz']*100/df_t_y['Alter Preis']
+df_t_y['perc_change'] = df_t_y['perc_change'].round(1)
 df_t_y['Differenz'] = df_t_y['Differenz'].round(1)
 df_t_y = df_t_y[df_t_y['Differenz'] != 0]
 
-df_t_y.loc[df_t_y['Differenz'] > 0, ''] = '↑' 
-df_t_y.loc[df_t_y['Differenz'] < 0, ''] = '↓' 
+#df_t_y.loc[df_t_y['Differenz'] > 0, ''] = '↑' 
+#df_t_y.loc[df_t_y['Differenz'] < 0, ''] = '↓' 
 
 
 df_t_y['title'] = df_t_y['title'].str.replace(' ca.', '', regex = False)
@@ -154,11 +156,13 @@ df_t_y['title'] = df_t_y['title'].astype(
 df_t_y['title'] = df_t_y['title'].astype(str).replace(bulkpacks)
 
 df_t_y.sort_values(by = ['Differenz'], inplace = True, ascending = False)
+
+df_t_y.rename(columns = {'perc_change': ''}, inplace = True)
 df_t_y = df_t_y[['', 'title', 'Alter Preis', 'Neuer Preis']].copy()
 df_t_y.rename({'title': ''}, axis = 1, inplace = True)
 
 
-notes = '↑: Teurer im Vergleich zu vor einem Monat, <br>↓: Billiger im Vergleich zu vor einem Monat.<br>Stand: ' + today.strftime('%d. %m. %Y')
+notes = 'Stand: ' + today.strftime('%d. %m. %Y')
 
 update_chart(id = '8676bad64564b4740f74b6d5d0757a95',
                  data = df_t_y, notes=notes)
