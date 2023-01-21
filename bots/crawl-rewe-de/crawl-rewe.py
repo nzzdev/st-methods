@@ -212,6 +212,9 @@ if __name__ == '__main__':
         bulkpacks = {'Hamburger': 'Hamburger 1kg', 'Chicken Nuggets': 'Chicken Nuggets 1kg', 'Cevapcici für Pfanne und Grill': 'Cevapcici 1kg', 'Hähnchenschenkel natur': 'Hähnchenschenkel natur 1kg', 'Sahnejoghurt nach griechischer Art': 'Sahnejoghurt griechische Art 1kg', 'Basmati Reis': 'Basmati Reis 1kg', 'Parboiled Spitzenreis Langkornreis':
                      'Parboiled Langkornreis 1kg', 'Blumenkohl': 'Blumenkohl 1kg', 'Rosenkohl': 'Rosenkohl 1kg', 'Brechbohnen': 'Brechbohnen 1kg', 'Weizenmehl Type': 'Weizenmehl', 'Dinkelmehl Typ': 'Dinkelmehl', 'Delikatess-': '', 'Delikatess ': '', 'Feiner ': '', 'Feine ': '', 'Hauchzarter ': '', 'Hauchzartes ': '', 'Saftige ': '', 'Arabica-Robusta-Mischung': ''}
 
+        juice = {'Apfelnektar 6x1,5l': 'Apfelnektar (9l)', 'Orangennektar 6x1,5l': 'Orangennektar (9l)', 'Apfelsaft 6x1l': 'Apfelsaft (6l)', 'Apfelschorle 6x1,5l': 'Apfelschorle (9l)', 'Multivitaminsaft 6x1l': 'Multivitaminsaft (6l)', 'Orangensaft 6x1l': 'Orangensaft (6l)', 'Apfel Holunder Schorle 6x0,5l':
+                 'Apfel Holunder Schorle (3l)', 'Apfel Rhabarber Schorle 6x0,5l': 'Apfel Rhabarber Schorle (3l)', 'Apfelschorle 6x0,5l': 'Apfelschorle (3l)', 'Mineralwasser Classic 6x0,5l': 'Mineralwasser Classic (3l)', 'Mineralwasser Classic 6x1,5l': 'Mineralwasser Classic (9l)', 'Mineralwasser Medium 6x0,5l': 'Mineralwasser Medium (3l)', 'Mineralwasser Medium 6x1,5l': 'Mineralwasser Medium (9l)', 'Mineralwasser Still 6x0,5l': 'Mineralwasser Still (3l)', 'Mineralwasser Still 6x1,5l': 'Mineralwasser Still (9l)', 'Mineralwasser Medium 0,5l': 'Mineralwasser Medium (0,5l)'}
+
         homeappliance = [8428651, 8431556, 8442236, 8440282]
 
         # drop home appliance
@@ -240,6 +243,8 @@ if __name__ == '__main__':
             # create dataframe with ja! products and calculate price change
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
+            # Fix for juice products before quantity removal
+            df_ja['Name'] = df_ja['Name'].astype(str).replace(juice)
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(r'\s\d.*', r'', regex=True)
             df_ja['Name'] = df_ja['Name'].astype(
@@ -385,6 +390,8 @@ if __name__ == '__main__':
             # create dataframe with ja! products and calculate price change
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
+            # Fix for juice products before quantity removal
+            dftop_ja['Name'] = dftop_ja['Name'].astype(str).replace(juice)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'\s\d.*', r'', regex=True)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
@@ -583,6 +590,8 @@ if __name__ == '__main__':
             # create dataframe with ja! products and calculate price change
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
+            # Fix for juice products before quantity removal
+            df_ja['Name'] = df_ja['Name'].astype(str).replace(juice)
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(r'\s\d.*', r'', regex=True)
             df_ja['Name'] = df_ja['Name'].astype(
@@ -689,6 +698,8 @@ if __name__ == '__main__':
         # title fixes
         df_t_y['Name'] = df_t_y['Name'].astype(
             str).str.replace(r'[Jj]a!\s', r'', regex=True)
+        # Fix for juice products before quantity removal
+        df_t_y['Name'] = df_t_y['Name'].astype(str).replace(juice)
         df_t_y['Name'] = df_t_y['Name'].astype(
             str).str.replace(r'\s\d.*', r'', regex=True)
         df_t_y['Name'] = df_t_y['Name'].astype(
@@ -768,6 +779,8 @@ if __name__ == '__main__':
             # create dataframe with ja! products and calculate price change
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
+            # Fix for juice products before quantity removal
+            dftop_ja['Name'] = dftop_ja['Name'].astype(str).replace(juice)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'\s\d.*', r'', regex=True)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
