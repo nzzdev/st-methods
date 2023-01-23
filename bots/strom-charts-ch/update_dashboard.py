@@ -78,7 +78,7 @@ def run(landesverbrauch, spotmarket, speicherseen):
         'Landesverbrauch': 'value'
         }, inplace=True)
     df = df.dropna(subset=['value'])
-    df_['date'] = df['date'].dt.date
+    df['date'] = df['date'].dt.date
 
     df_trend = df.copy()
     df_trend['roll'] = df_trend['value'].rolling(window=10).mean()
