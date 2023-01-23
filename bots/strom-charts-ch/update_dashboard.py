@@ -81,7 +81,7 @@ def run(landesverbrauch, spotmarket, speicherseen):
     df['date'] = df['date'].dt.date
 
     df_trend = df.copy()
-    df_trend['roll'] = df_trend['value'].rolling(window=10).mean()
+    df_trend['roll'] = df_trend['value'].rolling(window=7).mean()
 
     json_futures = {
             "indicatorTitle": "Stromverbrauch",
