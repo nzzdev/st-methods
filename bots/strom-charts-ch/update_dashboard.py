@@ -88,7 +88,7 @@ def run(landesverbrauch, spotmarket, speicherseen):
             "date": df.iloc[-1]['date'],
             "indicatorSubtitle": "Geschätzter Landesverbrauch",
             "value": df.iloc[-1]['value'],
-            "valueLabel": "%s Euro" % str(df.iloc[-1]['value']).replace('.', ','),
+            "valueLabel": "%s GWh" % str(df.iloc[-1]['value']).replace('.', ','),
             "yAxisStart": 0,
             "yAxisLabels": [0, 100, 200, 300 ],
             "yAxisLabelDecimals": 0,
