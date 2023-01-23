@@ -68,30 +68,34 @@ def run(landesverbrauch, spotmarket, speicherseen):
     
     
     #----------- Landesverbrauch
-    df_landesverbrauch = landesverbrauch[['Datum', 'Landesverbrauch']]
-    df_landesverbrauch.rename(columns={
-        'Landesverbrauch': 'value',
-        'Datum': 'date'
-        }, inplace=True)
-    df_landesverbrauch = df_landesverbrauch.dropna(subset=['value'])
-    df_landesverbaruch['date'] = df_landesverbrauch['date'].dt.date
+    df = df_bfe[['date', 'Landesverbrauch', 'Geschätzter Verbrauch']]
 
-    df_trend = df_landesverbrauch.copy()
+    df.loc[df['Landesverbrauch'].isna(), 'Landesverbrauch'] = df['Geschätzter Verbrauch']
+
+    df = df.dropna(subset = ['Landesverbrauch']).copy()
+    df = df[['date', 'Landesverbrauch']]
+    df.rename(columns={
+        'Landesverbrauch': 'value'
+        }, inplace=True)
+    df = df.dropna(subset=['value'])
+    df_['date'] = df['date'].dt.date
+
+    df_trend = df.copy()
     df_trend['roll'] = df_trend['value'].rolling(window=10).mean()
 
     json_futures = {
             "indicatorTitle": "Stromverbrauch",
-            "date": df_landesverbrauch.iloc[-1]['date'],
+            "date": df.iloc[-1]['date'],
             "indicatorSubtitle": "Geschätzter Landesverbrauch",
-            "value": df_landesverbrauch.iloc[-1]['value'],
-            "valueLabel": "%s Euro" % str(df_landesverbrauch.iloc[-1]['value']).replace('.', ','),
+            "value": df.iloc[-1]['value'],
+            "valueLabel": "%s Euro" % str(df.iloc[-1]['value']).replace('.', ','),
             "yAxisStart": 0,
             "yAxisLabels": [0, 100, 200, 300 ],
             "yAxisLabelDecimals": 0,
             "color": "#374e8e",
-            "trend": trend2str(df_landesverbrauch),
+            "trend": trend2str(df),
             "chartType": "area",
-            "chartData": df_landesverbrauch.to_dict('records')
+            "chartData": df.to_dict('records')
     }
     
 

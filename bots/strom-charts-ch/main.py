@@ -1,5 +1,5 @@
 # coding=utf-8 
-# Dieses File ist Entrypoint für folgende Aktualisierungen:
+# Dieses File ist Entrypoint fÃ¼r folgende Aktualisierungen:
 #   Charts im Artikel
 #   Dashboard
 
@@ -38,4 +38,4 @@ df_bfe = bfe.get_bfe()
 """
 
 update_article.run(df_futures, df_spotmarket, df_atomstrom_fr, df_speicherseen, df_bfe)
-update_dashboard.run(df_futures, df_spotmarket, df_speicherseen)
+update_dashboard.run(df_futures, df_spotmarket, df_bfe)
