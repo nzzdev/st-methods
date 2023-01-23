@@ -11,7 +11,7 @@ def trend2str(df):
         return 'gleichbleibend'
 
 #def run(futures, spotmarket, speicherseen):
-def run(landesverbrauch, spotmarket, speicherseen)
+def run(landesverbrauch, spotmarket, speicherseen):
 
     # ---------- Spotmarket
     # Trend: rollender 7-Tage-Schnitt
