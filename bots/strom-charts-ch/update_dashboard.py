@@ -10,7 +10,8 @@ def trend2str(df):
     else:
         return 'gleichbleibend'
 
-def run(futures, spotmarket, speicherseen):
+#def run(futures, spotmarket, speicherseen):
+def run(landesverbrauch, spotmarket, speicherseen)
 
     # ---------- Spotmarket
     # Trend: rollender 7-Tage-Schnitt
@@ -37,31 +38,62 @@ def run(futures, spotmarket, speicherseen):
 
 
     # ---------- Futures
-    df_futures = futures[['Datum', 'Preis']]
-    df_futures.rename(columns={
-        'Preis': 'value',
+    #df_futures = futures[['Datum', 'Preis']]
+    #df_futures.rename(columns={
+     #   'Preis': 'value',
+      #  'Datum': 'date'
+       # }, inplace=True)
+    #df_futures = df_futures.dropna(subset=['value'])
+    #df_futures['date'] = df_futures['date'].dt.date
+
+    #df_trend = df_futures.copy()
+    #df_trend['roll'] = df_trend['value'].rolling(window=7).mean()
+
+    #json_futures = {
+     #       "indicatorTitle": "Terminmarkt",
+      #      "date": df_futures.iloc[-1]['date'],
+       #     "indicatorSubtitle": "Lieferung in 2024 pro MWh",
+        #    "value": df_futures.iloc[-1]['value'],
+         #   "valueLabel": "%s Euro" % str(df_futures.iloc[-1]['value']).replace('.', ','),
+          #  "yAxisStart": 0,
+           # "yAxisLabels": [0, 250, 500, 750, 1000, 1250 ],
+            #"yAxisLabelDecimals": 0,
+            #"color": "#374e8e",
+            #"trend": trend2str(df_trend),
+            #"chartType": "area",
+            #"chartData": df_futures.to_dict('records')
+    #}
+    
+    
+    
+    
+    #----------- Landesverbrauch
+    df_landesverbrauch = landesverbrauch[['Datum', 'Landesverbrauch']]
+    df_landesverbrauch.rename(columns={
+        'Landesverbrauch': 'value',
         'Datum': 'date'
         }, inplace=True)
-    df_futures = df_futures.dropna(subset=['value'])
-    df_futures['date'] = df_futures['date'].dt.date
+    df_landesverbrauch = df_landesverbrauch.dropna(subset=['value'])
+    df_landesverbaruch['date'] = df_landesverbrauch['date'].dt.date
 
-    df_trend = df_futures.copy()
-    df_trend['roll'] = df_trend['value'].rolling(window=7).mean()
+    df_trend = df_landesverbrauch.copy()
+    df_trend['roll'] = df_trend['value'].rolling(window=10).mean()
 
     json_futures = {
-            "indicatorTitle": "Terminmarkt",
-            "date": df_futures.iloc[-1]['date'],
-            "indicatorSubtitle": "Lieferung in 2024 pro MWh",
-            "value": df_futures.iloc[-1]['value'],
-            "valueLabel": "%s Euro" % str(df_futures.iloc[-1]['value']).replace('.', ','),
+            "indicatorTitle": "Stromverbrauch",
+            "date": df_landesverbrauch.iloc[-1]['date'],
+            "indicatorSubtitle": "Geschätzter Landesverbrauch",
+            "value": df_landesverbrauch.iloc[-1]['value'],
+            "valueLabel": "%s Euro" % str(df_landesverbrauch.iloc[-1]['value']).replace('.', ','),
             "yAxisStart": 0,
-            "yAxisLabels": [0, 250, 500, 750, 1000, 1250 ],
+            "yAxisLabels": [0, 100, 200, 300 ],
             "yAxisLabelDecimals": 0,
             "color": "#374e8e",
-            "trend": trend2str(df_trend),
+            "trend": trend2str(df_landesverbrauch),
             "chartType": "area",
-            "chartData": df_futures.to_dict('records')
+            "chartData": df_landesverbrauch.to_dict('records')
     }
+    
 
     # ---------- Speicherseen
     df_speicherseen = speicherseen[speicherseen.Datum >= '2022-01-01']
