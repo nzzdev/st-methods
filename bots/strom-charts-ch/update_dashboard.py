@@ -68,7 +68,7 @@ def run(landesverbrauch, spotmarket, speicherseen):
     
     
     #----------- Landesverbrauch
-    df = df_bfe[['date', 'Landesverbrauch', 'Geschätzter Verbrauch']]
+    df = landesverbrauch[['date', 'Landesverbrauch', 'Geschätzter Verbrauch']]
 
     df.loc[df['Landesverbrauch'].isna(), 'Landesverbrauch'] = df['Geschätzter Verbrauch']
 
