@@ -243,8 +243,10 @@ if __name__ == '__main__':
             # create dataframe with ja! products and calculate price change
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
-            # Fix for juice products before quantity removal
+            # Fix for juice and pet products (Pastete) before quantity removal
             df_ja['Name'] = df_ja['Name'].astype(str).replace(juice)
+            df_ja['Name'] = df_ja['Name'].astype(
+                str).str.replace('Pastete mit', 'Pastete', regex=False)
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(r'\s\d.*', r'', regex=True)
             df_ja['Name'] = df_ja['Name'].astype(
@@ -390,8 +392,10 @@ if __name__ == '__main__':
             # create dataframe with ja! products and calculate price change
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
-            # Fix for juice products before quantity removal
+            # Fix for juice and pet products (Pastete) before quantity removal
             dftop_ja['Name'] = dftop_ja['Name'].astype(str).replace(juice)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace('Pastete mit', 'Pastete', regex=False)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'\s\d.*', r'', regex=True)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
@@ -590,8 +594,10 @@ if __name__ == '__main__':
             # create dataframe with ja! products and calculate price change
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
-            # Fix for juice products before quantity removal
+            # Fix for juice and pet products (Pastete) before quantity removal
             df_ja['Name'] = df_ja['Name'].astype(str).replace(juice)
+            df_ja['Name'] = df_ja['Name'].astype(
+                str).str.replace('Pastete mit', 'Pastete', regex=False)
             df_ja['Name'] = df_ja['Name'].astype(
                 str).str.replace(r'\s\d.*', r'', regex=True)
             df_ja['Name'] = df_ja['Name'].astype(
@@ -698,8 +704,10 @@ if __name__ == '__main__':
         # title fixes
         df_t_y['Name'] = df_t_y['Name'].astype(
             str).str.replace(r'[Jj]a!\s', r'', regex=True)
-        # Fix for juice products before quantity removal
+        # Fix for juice and pet products (Pastete) before quantity removal
         df_t_y['Name'] = df_t_y['Name'].astype(str).replace(juice)
+        df_t_y['Name'] = df_t_y['Name'].astype(
+            str).str.replace('Pastete mit', 'Pastete', regex=False)
         df_t_y['Name'] = df_t_y['Name'].astype(
             str).str.replace(r'\s\d.*', r'', regex=True)
         df_t_y['Name'] = df_t_y['Name'].astype(
@@ -779,8 +787,10 @@ if __name__ == '__main__':
             # create dataframe with ja! products and calculate price change
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'[Jj]a!\s', r'', regex=True)
-            # Fix for juice products before quantity removal
+            # Fix for juice and pet products (Pastete) before quantity removal
             dftop_ja['Name'] = dftop_ja['Name'].astype(str).replace(juice)
+            dftop_ja['Name'] = dftop_ja['Name'].astype(
+                str).str.replace('Pastete mit', 'Pastete', regex=False)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
                 str).str.replace(r'\s\d.*', r'', regex=True)
             dftop_ja['Name'] = dftop_ja['Name'].astype(
