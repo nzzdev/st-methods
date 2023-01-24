@@ -278,9 +278,13 @@ if __name__ == '__main__':
 
             # convert cents to euro and add currency
             df_ja[yesterday] = df_ja[yesterday] / 100.0
+            df_ja[yesterday] = df_ja[yesterday].apply(
+                '{0:.2f}'.format)  # 2 decimal places
             df_ja[yesterday] = df_ja[yesterday].astype(str).str.replace(
                 '.', ',', regex=False)
             df_ja[today] = df_ja[today] / 100.0
+            df_ja[today] = df_ja[today].apply(
+                '{0:.2f}'.format)  # 2 decimal places
             df_ja[today] = df_ja[today].astype(str).str.replace(
                 '.', ',', regex=False)
 
@@ -430,9 +434,13 @@ if __name__ == '__main__':
 
             # convert cents to euro and add currency
             dftop_ja[month_first] = dftop_ja[month_first] / 100.0
+            dftop_ja[month_first] = dftop_ja[month_first].apply(
+                '{0:.2f}'.format)  # 2 decimal places
             dftop_ja[month_first] = dftop_ja[month_first].astype(str).str.replace(
                 '.', ',', regex=False)
             dftop_ja[today] = dftop_ja[today] / 100.0
+            dftop_ja[today] = dftop_ja[today].apply(
+                '{0:.2f}'.format)  # 2 decimal places
             dftop_ja[today] = dftop_ja[today].astype(str).str.replace(
                 '.', ',', regex=False)
 
@@ -629,9 +637,13 @@ if __name__ == '__main__':
 
             # convert cents to euro and add currency
             df_ja[yesterday] = df_ja[yesterday] / 100.0
+            df_ja[yesterday] = df_ja[yesterday].apply(
+                '{0:.2f}'.format)  # 2 decimal places
             df_ja[yesterday] = df_ja[yesterday].astype(str).str.replace(
                 '.', ',', regex=False)
             df_ja[today] = df_ja[today] / 100.0
+            df_ja[today] = df_ja[today].apply(
+                '{0:.2f}'.format)  # 2 decimal places
             df_ja[today] = df_ja[today].astype(str).str.replace(
                 '.', ',', regex=False)
 
@@ -825,9 +837,13 @@ if __name__ == '__main__':
 
             # convert cents to euro and add currency
             dftop_ja[month_first] = dftop_ja[month_first] / 100.0
+            dftop_ja[month_first] = dftop_ja[month_first].apply(
+                '{0:.2f}'.format)  # 2 decimal places
             dftop_ja[month_first] = dftop_ja[month_first].astype(str).str.replace(
                 '.', ',', regex=False)
             dftop_ja[today] = dftop_ja[today] / 100.0
+            dftop_ja[today] = dftop_ja[today].apply(
+                '{0:.2f}'.format)  # 2 decimal places
             dftop_ja[today] = dftop_ja[today].astype(str).str.replace(
                 '.', ',', regex=False)
 
