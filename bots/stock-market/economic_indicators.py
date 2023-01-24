@@ -283,11 +283,23 @@ price_95 = r.html.xpath(
     '//*[@id="blockContentcontentInner"]/div[1]/div/div/div[3]/div/div[1]/table/tbody/tr[1]/td[2]/div/text()')
 price_95 = pd.to_numeric(price_95[0])
 
+price_98 = r.html.xpath(
+    '//*[@id="blockContentcontentInner"]/div[1]/div/div[1]/div[3]/div/div[1]/table/tbody/tr[1]/td[3]/div/text()')
+price_98 = pd.to_numeric(price_98[0])
+
+diesel = r.html.xpath(
+    '//*[@id="blockContentcontentInner"]/div[1]/div/div[1]/div[3]/div/div[1]/table/tbody/tr[1]/td[4]/div/text()')
+diesel = pd.to_numeric(diesel[0])
+
+
 
 fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
+fuel_prices_old = fuel_prices_old[['date', 'bleifrei_95', 'diesel']]
+fuel_prices_old.rename(columns = {'bleifrei_95': 'Benzin', 'diesel': 'Diesel'}, inplace = True)
 
 data = {'date': date.today().strftime('%Y-%m-%d'),
-        'Benzinpreis': price_95
+        'Benzin': price_95,
+        'Diesel': diesel
         }
 
 fuel_prices = pd.DataFrame(data, index=[0])
