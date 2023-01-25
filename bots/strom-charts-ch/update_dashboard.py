@@ -3,9 +3,9 @@ from helpers import *
 from datetime import date
 
 def trend2str(df):
-    if df.iloc[-1]['value'] > df.iloc[-2]['value']:
+    if df.iloc[-1]['value'] > 1.05*df.iloc[-8]['value']:
         return 'steigend'
-    elif df.iloc[-1]['value'] < df.iloc[-2]['value']:
+    elif df.iloc[-1]['value'] < .95*df.iloc[-8]['value']:
         return 'fallend'
     else:
         return 'gleichbleibend'
