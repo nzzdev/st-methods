@@ -266,7 +266,7 @@ benzin['95-E10'] = pd.to_numeric(benzin['95-E10']).round(2)
 benzin.loc[benzin['95'].isna(), '95'] = benzin['95-E10']
 benzin.rename(columns={'95': 'Benzin'}, inplace=True)
 
-benzin_table = benzin[['Reiseziel', 'Benzin', 'Diesel']]
+benzin_table = benzin[['Reiseziel', 'Benzin', 'Diesel']].copy()
 benzin_table.sort_values(by='Benzin', ascending=False, inplace=True)
 benzin_table.rename_axis(None, axis=1, inplace = True)
 
@@ -292,10 +292,9 @@ diesel = r.html.xpath(
 diesel = pd.to_numeric(diesel[0])
 
 
+#fuel_prices_old = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/stock-market/Benzinpreise.csv')
 
 fuel_prices_old = pd.read_csv('./Benzinpreise.csv')
-fuel_prices_old = fuel_prices_old[['date', 'bleifrei_95', 'diesel']]
-fuel_prices_old.rename(columns = {'bleifrei_95': 'Benzin', 'diesel': 'Diesel'}, inplace = True)
 
 data = {'date': date.today().strftime('%Y-%m-%d'),
         'Benzin': price_95,
@@ -316,7 +315,6 @@ update_chart(id='1dda540238574eac80e865faa0d4aaba',
              data = fuel_prices, title = title)
 
 fuel_prices.to_csv(f'./Benzinpreise.csv', index=False)
-# fuel_prices_de.to_csv(f'./Benzinpreise_de.csv')
 
 
 
