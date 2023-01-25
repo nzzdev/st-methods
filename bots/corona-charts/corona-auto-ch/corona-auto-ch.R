@@ -61,7 +61,7 @@ url_xm <- read_html("https://www.bfs.admin.ch//bfs/de/home/statistiken/gesundhei
 link_xm <- paste0("https://www.bfs.admin.ch/bfsstatic/dam/assets/",str_sub(url_xm[1], -13,-6), "/master")
 
 bfs <- read_csv2(link_xm) %>%
-  filter((Jahr == "2020"| Jahr == "2021" | Jahr == "2022"), AnzTF_HR != ".") %>%
+  filter((Jahr >= "2020"), AnzTF_HR != ".") %>%
   select(Alter, endend, untGrenze, obeGrenze, AnzTF_HR, Diff) %>%
   mutate(AnzTF_HR = as.numeric(AnzTF_HR), Diff = as.numeric(Diff), endend = as.Date(endend, "%d.%m.%Y")) %>%
   rename(Datum = endend) %>%
@@ -749,7 +749,7 @@ vacc_ch_age <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPer
 
 vacc_ch_age_date <- read_csv(bag_data$sources$individual$csv$weeklyVacc$byAge$vaccPersons) %>%
   select(date) %>% 
-  filter(date == max(date)) %>% 
+  filter(date == max(date)-1) %>% 
   mutate(date = as.Date(paste0(str_sub(date,1,4), "-", str_sub(date,5,6),"-", 5), "%Y-%W-%u")) %>%
   unique() %>%
   deframe() %>%
