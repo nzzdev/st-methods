@@ -424,7 +424,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-26;7043484;ja!;ja! Salami Sticks Classic 100g;219;100g (1 kg = 21,90 €)
 2023-01-26;7042886;ja!;ja! Salami Sticks Pikant 100g;219;100g (1 kg = 21,90 €)
 2023-01-26;8260720;ja!;ja! Salted Chips 200g;99;200g (1 kg = 4,95 €)
-2023-01-26;6878636;ja!;ja! Salzstangen mit Meersalz 250g;69;250g (1 kg = 2,76 €)
 2023-01-26;7121696;ja!;ja! Sandwich Eis Fürst Pückler Art 8x90ml;169;8x90ml (1 l = 2,35 €)
 2023-01-26;7011318;ja!;ja! Sauerkirschen entsteint & gezuckert 350g;179;350g (1 kg = 5,11 €)
 2023-01-26;4507940;ja!;ja! Saure Sahne 200g;69;200g (1 kg = 3,45 €)
@@ -1250,8 +1249,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-26;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;239;6 Stück
 2023-01-26;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;249;1 Stück
 2023-01-26;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;289;250g (1 kg = 11,56 €)
-2023-01-26;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-01-26;200348;REWE Bio;REWE Bio Emmentaler 150g;219;150g (1 kg = 14,60 €)
+2023-01-26;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-01-26;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2023-01-26;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
 2023-01-26;8381730;REWE Bio;REWE Bio Erbseneintopf 400g;199;400g (1 kg = 4,98 €)
