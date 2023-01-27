@@ -24,7 +24,7 @@ def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe):
     # Speicherseen
     update_chart(id = '69bd37806691fc0c2e6786eb38efea63', 
                 data = speicherseen,
-                notes = q_date)
+                notes = '¹ Minimum/Maximum der letzten 5 Jahre.<br>Stand: ' + (dt.now() - timedelta(days=1)).strftime("%-d. %-m. %Y")) 
     
     # BfE Dashboard
     update_chart(id = "e41fb785ca9af558a19582476dafef33", 
