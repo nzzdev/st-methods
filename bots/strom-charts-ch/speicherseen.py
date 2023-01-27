@@ -28,7 +28,7 @@ def get_speicherseen():
     df_wf.rename(columns = {'fiveYearMin': '', 
                            'fiveYearMax': 'Minimum/Maximum¹',
                            'fiveYearMittelwert': '5-Jahres-Mittelwert',
-                           'landesverbrauch': 'Füllstand'
+                           'speicherstandProzent': 'Füllstand'
                            }, inplace = True)
 
     
