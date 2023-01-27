@@ -23,7 +23,7 @@ def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe):
 
     # Speicherseen
     update_chart(id = '69bd37806691fc0c2e6786eb38efea63', 
-                data = speicherseen.pivot(index=['Jahr_Woche'], columns='Jahr', values='TotalCH_prct').iloc[:,-4:].reset_index(),
+                data = speicherseen,
                 notes = q_date)
     
     # BfE Dashboard

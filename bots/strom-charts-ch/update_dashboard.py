@@ -100,8 +100,8 @@ def run(landesverbrauch, spotmarket, speicherseen):
     
 
     # ---------- Speicherseen
-    df_speicherseen = speicherseen[speicherseen.Datum >= '2022-01-01']
-    df_speicherseen.rename(columns={'Datum': 'date', 'TotalCH_prct': 'value'}, inplace=True)
+    df_speicherseen = speicherseen
+    df_speicherseen.rename(columns={'Datum': 'date', 'Füllstand': 'value'}, inplace=True)
     df_speicherseen = df_speicherseen[['date', 'value']]
     df_speicherseen['date'] = df_speicherseen['date'].dt.date
 
