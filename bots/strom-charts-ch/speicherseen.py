@@ -19,13 +19,13 @@ def get_speicherseen():
     
     df = pd.DataFrame(totalCH['entries'])
     
-    df_w = df[['date', 'fiveYearMin', 'fiveYearMax', 'fiveYearMittelwert', 'speicherstandProzent']]
+    df_wf = df[['date', 'fiveYearMin', 'fiveYearMax', 'fiveYearMittelwert', 'speicherstandProzent']]
 
-    df_w = df_w.dropna()
+    df_wf = df_wf.dropna()
 
-    df_w['date'] = pd.to_datetime(df_w['date'])
+    df_wf['date'] = pd.to_datetime(df_wf['date'])
 
-    df_w.rename(columns = {'fiveYearMin': '', 
+    df_wf.rename(columns = {'fiveYearMin': '', 
                            'fiveYearMax': 'Minimum/Maximum¹',
                            'fiveYearMittelwert': '5-Jahres-Mittelwert',
                            'landesverbrauch': 'Füllstand'
