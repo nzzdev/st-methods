@@ -362,7 +362,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-28;8726700;ja!;ja! Nudeltopf in Rahmsauce 63g;79;63g (1 kg = 12,54 €)
 2023-01-28;166440;ja!;ja! Nuss-Nougat-Creme 400g;189;400g (1 kg = 4,73 €)
 2023-01-28;2317787;ja!;ja! Nussfruchtmischung 200g;189;200g (1 kg = 9,45 €)
-2023-01-28;3151703;ja!;ja! Nusskernmischung naturell ungesalzen & ungeröstet 200g;289;200g (1 kg = 14,45 €)
 2023-01-28;7776207;ja!;ja! Nut Flakes 750g;299;750g (1 kg = 3,99 €)
 2023-01-28;2949713;ja!;ja! Ofenkäse würzig 180g;259;180g (1 kg = 14,39 €)
 2023-01-28;1042253;ja!;ja! Orangeat 100g;55;100g (1 kg = 5,50 €)
@@ -487,7 +486,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-28;7794987;ja!;ja! Stumpenkerze 110mm weiß;179;1 Stück
 2023-01-28;1008597;ja!;ja! Sultaninen 250g;99;250g (1 kg = 3,96 €)
 2023-01-28;7073947;ja!;ja! Super Sweet Gemüsemais 425ml;99;285g (1 kg = 3,47 €)
-2023-01-28;9689079;ja!;ja! Super-Soft Toilettenpapier 4-lagig 10x160 Blatt;449;NaN
 2023-01-28;2290213;ja!;ja! Suppengemüse 1kg;129;1000g
 2023-01-28;7772289;ja!;ja! Süßstoff 300ml;99;300ml (1 l = 3,30 €)
 2023-01-28;9703764;ja!;ja! Süßstoff Tabletten 1200 Stück;119;1200 Stück
@@ -512,7 +510,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-28;8515630;ja!;ja! Tortellini in Sahnesauce 400g;169;400g (1 kg = 4,23 €)
 2023-01-28;688048;ja!;ja! Tortelloni Prosciutto 250g;99;250g (1 kg = 3,96 €)
 2023-01-28;2272449;ja!;ja! Tortelloni Ricotta Spinat 250g;99;250g (1 kg = 3,96 €)
-2023-01-28;3043322;ja!;ja! Tortilla Chips mit Salz 300g;139;300g (1 kg = 4,63 €)
 2023-01-28;1478286;ja!;ja! Trockenbackhefe 6x7g;65;6x7g (1 kg = 15,48 €)
 2023-01-28;8370556;ja!;ja! Vanille Haselnuss Hörnchen 6 Stück;169;6x120ml (1 l = 2,35 €)
 2023-01-28;7122254;ja!;ja! Vanille Milky Sticks mit Alpenvollmilch 12x42ml;179;12x42ml (1 l = 3,55 €)
@@ -1018,8 +1015,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-28;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2023-01-28;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-01-28;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-01-28;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-01-28;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-01-28;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-01-28;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-01-28;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-01-28;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
@@ -1313,7 +1310,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-01-28;8514209;REWE Bio;REWE Bio Hafer-Crunchy 500g;259;500g (1 kg = 5,18 €)
 2023-01-28;7956836;REWE Bio;REWE Bio Hafer-Schoko Riegel 3x35g;179;3x35g (1 kg = 17,05 €)
 2023-01-28;7205443;REWE Bio;REWE Bio Hafercookie 300g;199;300g (1 kg = 6,63 €)
-2023-01-28;7206215;REWE Bio;REWE Bio Hafercookie Vollmilch 300g;239;300g (1 kg = 7,97 €)
 2023-01-28;1267687;REWE Bio;REWE Bio Halbes Hähnchen 850g;1352;1 Stück ca. 850 g (1 kg = 15,90 €)
 2023-01-28;7295583;REWE Bio;REWE Bio Hamburger vom Rind 250g;529;250g (1 kg = 21,16 €)
 2023-01-28;2029541;REWE Bio;REWE Bio Heidelbeeren 300g;319;300g (1 kg = 10,63 €)
