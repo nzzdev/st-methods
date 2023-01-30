@@ -80,15 +80,18 @@ if __name__ == '__main__':
             df = df.groupby(['Datum']).sum()
 
             # create new columns and drop the old ones
+            df['Biomasse'] = df['Biomasse [MWh] Originalauflösungen']
+            df['Sonstige'] = df['Sonstige Konventionelle [MWh] Originalauflösungen']
             df['Kernkraft'] = df['Kernenergie [MWh] Originalauflösungen']
             df['Erdgas'] = df['Erdgas [MWh] Originalauflösungen']
-            df['Sonstige'] = df['Sonstige Konventionelle [MWh] Originalauflösungen']
             df['Pumpspeicher'] = df['Pumpspeicher [MWh] Originalauflösungen']
             df['Kohle'] = df['Braunkohle [MWh] Originalauflösungen'] + \
                 df['Steinkohle [MWh] Originalauflösungen']
-            df['Erneuerbare'] = df['Biomasse [MWh] Originalauflösungen'] + df['Wasserkraft [MWh] Originalauflösungen'] + df['Wind Offshore [MWh] Originalauflösungen'] + df['Wind Onshore [MWh] Originalauflösungen'] + \
-                df['Photovoltaik [MWh] Originalauflösungen'] + \
-                df['Sonstige Erneuerbare [MWh] Originalauflösungen']
+            df['Sonstige EE'] = df['Sonstige Erneuerbare [MWh] Originalauflösungen'] + \
+                df['Wasserkraft [MWh] Originalauflösungen']
+            df['Wind'] = df['Wind Offshore [MWh] Originalauflösungen'] + \
+                df['Wind Onshore [MWh] Originalauflösungen']
+            df['Sonne'] = df['Photovoltaik [MWh] Originalauflösungen']
             df.drop(list(df)[0:12], axis=1, inplace=True)
 
             # convert to week and drop first and last row with partial values
@@ -128,8 +131,10 @@ if __name__ == '__main__':
         df_dash = df_dash[['Fossile Abhängigkeit']]
 
         # combine conventional
-        df['Sonstige'] = df['Sonstige'] + df['Pumpspeicher']
-        df = df.drop('Pumpspeicher', axis=1)
+        df['Sonstige'] = df['Sonstige'] + \
+            df['Pumpspeicher'] + df['Sonstige EE']
+
+        df = df.drop(['Pumpspeicher', 'Sonstige EE'], axis=1)
 
         # drop unused rows and convert to terawatt
         df = df[~(df.index < '2021-07-18 00:00:00')]
@@ -253,12 +258,10 @@ if __name__ == '__main__':
             df_trade = df_trade.resample('W', on='Datum').sum()
             df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            """
             # update first row for prettier x-axis
-            df_trade['Datum'] = df_trade.index
-            df_trade['Datum'].iloc[0] = '2021-01-01'
-            df_trade.set_index('Datum', inplace=True)
-            """
+            #df_trade['Datum'] = df_trade.index
+            #df_trade['Datum'].iloc[0] = '2021-01-01'
+            #df_trade.set_index('Datum', inplace=True)
 
             # update last row for step-after chart (avoid constant commits)
             df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
@@ -286,6 +289,80 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
                      title=title, notes=notes_chart, data=df_trade)
+
+        """
+        ################################
+        # HISTORICAL POWER SINCE 2015  #
+        ################################
+        modules = REALIZED_POWER_GENERATION
+        # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+        df = smard.requestSmardData(
+            modulIDs=modules, timestamp_from_in_milliseconds=1420059600000)  # first week of 2021
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1420059600000)  # first week of 2021
+        if ('Anfang' in df.columns):
+            # fix wrong decimal
+            df = df.replace('-', '', regex=False)
+            df.to_csv('./data/smard_fixed.tsv', sep='\t',
+                      encoding='utf-8', index=False)
+            df = pd.read_csv('./data/smard_fixed.tsv', sep='\t', thousands='.', decimal=',',
+                             index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df.drop('Anfang', axis=1, inplace=True)
+            df.drop('Ende', axis=1, inplace=True)
+            df['Datum'] = pd.to_datetime(df['Datum'], format="%d.%m.%Y")
+
+            # old decimal fix
+            #df.loc[:, df.columns != 'Datum'] = df.loc[:, df.columns != 'Datum'].replace('\,', '.', regex=True).astype(float)
+
+            df = df.groupby(['Datum']).sum()
+
+            # create new columns and drop the old ones
+            df['Kernkraft'] = df['Kernenergie [MWh] Originalauflösungen']
+            df['Fossile'] = df['Erdgas [MWh] Originalauflösungen'] + df['Braunkohle [MWh] Originalauflösungen'] + \
+                df['Steinkohle [MWh] Originalauflösungen'] + \
+                df['Sonstige Konventionelle [MWh] Originalauflösungen']
+            df['Sonstige'] = df['Pumpspeicher [MWh] Originalauflösungen'] + df['Biomasse [MWh] Originalauflösungen'] + \
+                df['Wasserkraft [MWh] Originalauflösungen'] + \
+                df['Sonstige Erneuerbare [MWh] Originalauflösungen']
+            df['Wind'] = df['Wind Offshore [MWh] Originalauflösungen'] + df['Wind Onshore [MWh] Originalauflösungen']
+            df['Sonne'] = df['Photovoltaik [MWh] Originalauflösungen']
+            df.drop(list(df)[0:12], axis=1, inplace=True)
+
+            # convert to week and drop first and last row with partial values
+            df.reset_index(inplace=True)
+            df = df.resample('W', on='Datum').sum()
+            # no drop for step-after chart
+            df.drop(df.tail(1).index, inplace=True)
+            df.drop(df.head(1).index, inplace=True)
+
+            # save tsv
+            df.to_csv('./data/smard_fixed_historical.tsv', sep='\t',
+                      encoding='utf-8', index=True)
+
+        # read tsv (old or new)
+        df = pd.read_csv('./data/smard_fixed_historical.tsv',
+                         sep='\t', index_col='Datum')
+        df.index = pd.to_datetime(df.index)
+
+        # get current date for chart notes
+        time_dt_notes = df.index[-1] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms.<br>Stand: {time_str_notes}'
+
+        # drop unused rows and convert to terawatt
+        df = df[~(df.index < '2021-07-18 00:00:00')]
+        df = df.div(1000000)
+        df.to_clipboard()
+        """
 
     except:
         raise
