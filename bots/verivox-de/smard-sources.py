@@ -86,8 +86,7 @@ if __name__ == '__main__':
             df['Pumpspeicher'] = df['Pumpspeicher [MWh] Originalauflösungen']
             df['Kohle'] = df['Braunkohle [MWh] Originalauflösungen'] + \
                 df['Steinkohle [MWh] Originalauflösungen']
-            df['Erneuerbare'] = df['Biomasse [MWh] Originalauflösungen'] + df['Wasserkraft [MWh] Originalauflösungen'] + df['Wind Offshore [MWh] Originalauflösungen'] + \
-                df['Wind Offshore [MWh] Originalauflösungen'] + df['Wind Onshore [MWh] Originalauflösungen'] + \
+            df['Erneuerbare'] = df['Biomasse [MWh] Originalauflösungen'] + df['Wasserkraft [MWh] Originalauflösungen'] + df['Wind Offshore [MWh] Originalauflösungen'] + df['Wind Onshore [MWh] Originalauflösungen'] + \
                 df['Photovoltaik [MWh] Originalauflösungen'] + \
                 df['Sonstige Erneuerbare [MWh] Originalauflösungen']
             df.drop(list(df)[0:12], axis=1, inplace=True)
