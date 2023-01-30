@@ -127,7 +127,7 @@ df_ = df_['fahrzeuge_pro_ZSID'].rolling(30).mean().reset_index()
 df_ = df_[df_.date >= '2019-01-01']
 
 # 29.2. entfernen
-df_ = df_[(df_.date.dt.day != 29) & (df_.date.dt.month != 2)]
+df_ = df_[df_.date != '2020-02-29']
 
 df = df_.copy()
 
