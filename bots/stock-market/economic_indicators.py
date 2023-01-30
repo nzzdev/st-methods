@@ -57,39 +57,39 @@ os.chdir(os.path.dirname(__file__))
 
 # Zurich traffic
 
-df_raw = pd.concat([
-    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2018.csv'), # 2018, damit der roll. Schnitt im 2019 gleich vom 1. Januar startet
-    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2019.csv'),
-    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2020.csv'),
-    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2021.csv'),
-    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv'),
-])
+#df_raw = pd.concat([
+ #   pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2018.csv'), # 2018, damit der roll. Schnitt im 2019 gleich vom 1. Januar startet
+  #  pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2019.csv'),
+   # pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2020.csv'),
+    #pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2021.csv'),
+    #pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv'),
+#])
 
 
 # Set Date
-df_raw['date'] = pd.to_datetime(df_raw['MessungDatZeit'], errors='coerce').dt.normalize()
+#df_raw['date'] = pd.to_datetime(df_raw['MessungDatZeit'], errors='coerce').dt.normalize()
 
-df_raw = df_raw.loc[df_raw['Richtung'] == 'einwärts']
+#df_raw = df_raw.loc[df_raw['Richtung'] == 'einwärts']
 
-df_raw.dropna(subset = 'AnzFahrzeuge', inplace = True)
+#df_raw.dropna(subset = 'AnzFahrzeuge', inplace = True)
 
 # Anzahl Zählstellen pro Datum
 
-df_raw_zs = df_raw[['date', 'ZSID']]
-df_raw_zs = df_raw_zs.drop_duplicates()
-df_raw_zs = df_raw_zs.groupby(df_raw_zs['date'])['ZSID'].count().reset_index()
+#df_raw_zs = df_raw[['date', 'ZSID']]
+#df_raw_zs = df_raw_zs.drop_duplicates()
+#df_raw_zs = df_raw_zs.groupby(df_raw_zs['date'])['ZSID'].count().reset_index()
 
 # Anzahl Fahrzeuge pro Datum
-df_fahrzeuge = df_raw.groupby(df_raw.date)['AnzFahrzeuge'].sum().reset_index()
+#df_fahrzeuge = df_raw.groupby(df_raw.date)['AnzFahrzeuge'].sum().reset_index()
 
-df_ = df_fahrzeuge.merge(df_raw_zs, on = 'date')
+#df_ = df_fahrzeuge.merge(df_raw_zs, on = 'date')
 
-df_['fahrzeuge_pro_ZSID'] = df_['AnzFahrzeuge'] / df_['ZSID']
+#df_['fahrzeuge_pro_ZSID'] = df_['AnzFahrzeuge'] / df_['ZSID']
 
 
-df_.to_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/stock-market/zurich_traffic.csv', index = False)
+#df_.to_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/stock-market/zurich_traffic.csv', index = False)
 
-df_old = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/stock-market/zurich_traffic.csv')
+df_old = pd.read_csv('./stock-market/zurich_traffic.csv')
 
 df_old['date'] = pd.to_datetime(df_old['date'])
 
