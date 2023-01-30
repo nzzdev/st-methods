@@ -60,27 +60,52 @@ os.chdir(os.path.dirname(__file__))
 df_raw = pd.concat([
     pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2018.csv'), # 2018, damit der roll. Schnitt im 2019 gleich vom 1. Januar startet
     pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2019.csv'),
+    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2020.csv'),
+    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2021.csv'),
     pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv'),
     pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2023.csv'),
 ])
 
 # Set Date
-df_raw['date'] = pd.to_datetime(df_raw['MessungDatZeit']).dt.normalize()
-df_raw.set_index('date', inplace=True)
+df_raw['date'] = pd.to_datetime(df_raw['MessungDatZeit'], errors='coerce').dt.normalize()
+df_raw= df_raw.dropna(axis=0, subset=['date'])
+
+df_raw = df_raw.loc[df_raw['Richtung'] == 'einwärts']
+
+df_raw.dropna(subset = 'AnzFahrzeuge', inplace = True)
+
+# Anzahl Zählstellen pro Datum
+
+df_raw_zs = df_raw[['date', 'ZSID']]
+df_raw_zs = df_raw_zs.drop_duplicates()
+df_raw_zs = df_raw_zs.groupby(df_raw_zs['date'])['ZSID'].count().reset_index()
+
+# Anzahl Fahrzeuge pro Datum
+df_fahrzeuge = df_raw.groupby(df_raw.date)['AnzFahrzeuge'].sum().reset_index()
+
+df_ = df_fahrzeuge.merge(df_raw_zs, on = 'date')
+
+df_['fahrzeuge_pro_ZSID'] = df_['AnzFahrzeuge'] / df_['ZSID']
+
+df_.set_index('date', inplace=True)
 
 # Group
-df_raw = df_raw.groupby(df_raw.index)['AnzFahrzeuge'].sum().rolling(30).mean().reset_index()
+df_ = df_.groupby(df_.index)['fahrzeuge_pro_ZSID'].sum().rolling(30).mean().reset_index()
 
 # 2018 entfernen
-df_raw = df_raw[df_raw.date >= '2019-01-01']
+df_ = df_[df_.date >= '2019-01-01']
 
-df = df_raw.copy()
+# 29.2. entfernen
+df_ = df_[(df_.date.dt.day != 29) & (df_.date.dt.month != 2)]
+
+df = df_.copy()
 
 # Add normalized Date (Year 2022 for every date)
 df['date_normalized'] = df.date.apply(lambda x: date(2022, x.month, x.day))
 
+
 # Pivot
-df = df.pivot_table(index=df.date_normalized, columns=df.date.dt.year, values='AnzFahrzeuge').reset_index()
+df = df.pivot_table(index=df.date_normalized, columns=df.date.dt.year, values='fahrzeuge_pro_ZSID').reset_index()
 
 # Columns to string (for Q)
 df.columns = list(map(str, df.columns))
