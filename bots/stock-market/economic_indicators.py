@@ -89,7 +89,7 @@ os.chdir(os.path.dirname(__file__))
 
 #df_.to_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/stock-market/zurich_traffic.csv', index = False)
 
-df_old = pd.read_csv('./stock-market/zurich_traffic.csv')
+df_old = pd.read_csv('./zurich_traffic.csv')
 
 df_old['date'] = pd.to_datetime(df_old['date'])
 
