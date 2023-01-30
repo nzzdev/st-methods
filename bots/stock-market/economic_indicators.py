@@ -100,7 +100,7 @@ df_raw['date'] = pd.to_datetime(df_raw['MessungDatZeit'], errors='coerce').dt.no
 
 df_raw = df_raw.loc[df_raw['Richtung'] == 'einwärts']
 
-df_raw.dropna(subset = 'AnzFahrzeuge', inplace = True)
+df_raw.dropna(subset = ['AnzFahrzeuge'], inplace = True)
 
 # Anzahl Zählstellen pro Datum
 
