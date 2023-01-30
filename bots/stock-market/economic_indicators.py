@@ -63,12 +63,11 @@ df_raw = pd.concat([
     pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2020.csv'),
     pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2021.csv'),
     pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2022.csv'),
-    pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2023.csv'),
 ])
+
 
 # Set Date
 df_raw['date'] = pd.to_datetime(df_raw['MessungDatZeit'], errors='coerce').dt.normalize()
-df_raw= df_raw.dropna(axis=0, subset=['date'])
 
 df_raw = df_raw.loc[df_raw['Richtung'] == 'einwärts']
 
@@ -87,10 +86,42 @@ df_ = df_fahrzeuge.merge(df_raw_zs, on = 'date')
 
 df_['fahrzeuge_pro_ZSID'] = df_['AnzFahrzeuge'] / df_['ZSID']
 
+
+df_.to_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/stock-market/zurich_traffic.csv', index = False)
+
+df_old = pd.read_csv('/Users/florianseliger/Documents/GitHub/st-methods/bots/stock-market/zurich_traffic.csv')
+
+df_old['date'] = pd.to_datetime(df_old['date'])
+
+df_raw = pd.read_csv('https://data.stadt-zuerich.ch/dataset/sid_dav_verkehrszaehlung_miv_od2031/download/sid_dav_verkehrszaehlung_miv_OD2031_2023.csv')
+
+# Set Date
+df_raw['date'] = pd.to_datetime(df_raw['MessungDatZeit'], errors='coerce').dt.normalize()
+
+df_raw = df_raw.loc[df_raw['Richtung'] == 'einwärts']
+
+df_raw.dropna(subset = 'AnzFahrzeuge', inplace = True)
+
+# Anzahl Zählstellen pro Datum
+
+df_raw_zs = df_raw[['date', 'ZSID']]
+df_raw_zs = df_raw_zs.drop_duplicates()
+df_raw_zs = df_raw_zs.groupby(df_raw_zs['date'])['ZSID'].count().reset_index()
+
+# Anzahl Fahrzeuge pro Datum
+df_fahrzeuge = df_raw.groupby(df_raw.date)['AnzFahrzeuge'].sum().reset_index()
+
+df_ = df_fahrzeuge.merge(df_raw_zs, on = 'date')
+
+df_['fahrzeuge_pro_ZSID'] = df_['AnzFahrzeuge'] / df_['ZSID']
+
+df_ = pd.concat([df_old, df_])
+
 df_.set_index('date', inplace=True)
 
+
 # Group
-df_ = df_.groupby(df_.index)['fahrzeuge_pro_ZSID'].sum().rolling(30).mean().reset_index()
+df_ = df_['fahrzeuge_pro_ZSID'].rolling(30).mean().reset_index()
 
 # 2018 entfernen
 df_ = df_[df_.date >= '2019-01-01']
@@ -110,7 +141,7 @@ df = df.pivot_table(index=df.date_normalized, columns=df.date.dt.year, values='f
 # Columns to string (for Q)
 df.columns = list(map(str, df.columns))
 
-notes = 'Fahrzeuge können mehrfach gezählt werden.'
+notes = 'Es gibt über 30 Messstellen, die stadteinwärts fahrende Fahrzeuge stündlich erfassen.'
 update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=df, notes = notes)
 
 
