@@ -141,6 +141,8 @@ df = df.pivot_table(index=df.date_normalized, columns=df.date.dt.year, values='f
 # Columns to string (for Q)
 df.columns = list(map(str, df.columns))
 
+df = df[['date_normalized', '2019', '2022', '2023']]
+
 notes = 'Es gibt über 30 Messstellen, die stadteinwärts fahrende Fahrzeuge stündlich erfassen.'
 update_chart(id='5b6e24348e8d8ddd990c10892047973d', data=df, notes = notes)
 
