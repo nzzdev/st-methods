@@ -112,7 +112,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-01;6685404;ja!;ja! Delikatess-Fleischsalat 400g;169;400g (1 kg = 4,23 €)
 2023-02-01;5956978;ja!;ja! Delikatess-Geflügelfleischwurst 400g;207;400g (1 kg = 5,18 €)
 2023-02-01;2087491;ja!;ja! Delikatess-Hähnchenbrustfilet 150g;249;150g (1 kg = 16,60 €)
-2023-02-01;1215356;ja!;ja! Delikatess-Hähnchenbrustfilet mit feiner Rauchnote 100g;149;100g (1 kg = 14,90 €)
 2023-02-01;7009798;ja!;ja! Delikatess-Kochschinken 200g;169;200g (1 kg = 8,45 €)
 2023-02-01;946509;ja!;ja! Delikatess-Krustenbraten 100g;159;100g (1 kg = 15,90 €)
 2023-02-01;4724488;ja!;ja! Delikatess-Lachsschinken 100g;153;100g (1 kg = 15,30 €)
@@ -190,6 +189,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-01;990026;ja!;ja! Geflügel-Salami mit Schweinefleisch 200g;179;200g (1 kg = 8,95 €)
 2023-02-01;2070458;ja!;ja! Geflügel-Wiener 300g;224;300g (1 kg = 7,47 €)
 2023-02-01;8503685;ja!;ja! Geflügelsalami geräuchert 130g;199;130g (1 kg = 15,31 €)
+2023-02-01;8793809;ja!;ja! Gefrierbeutel 6l 45 Stück;195;45 Stück
+2023-02-01;677207;ja!;ja! Gefrierbeutel 6l, 45 Stück;195;45 Stück
 2023-02-01;7818026;ja!;ja! Gelbe Erbsen mit Suppengrün 800g;99;530g (1 kg = 1,87 €)
 2023-02-01;8599735;ja!;ja! Gelee Bananen 250g;119;250g (1 kg = 4,76 €)
 2023-02-01;8613805;ja!;ja! Geleefrüchte 250g;119;250g (1 kg = 4,76 €)
@@ -723,6 +724,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-01;8336375;REWE Beste Wahl;REWE Beste Wahl Gouda Holland alt 150g;239;150g (1 kg = 15,93 €)
 2023-02-01;8048590;REWE Beste Wahl;REWE Beste Wahl Gouda Holland jung 210g;239;210g (1 kg = 11,38 €)
 2023-02-01;7280371;REWE Beste Wahl;REWE Beste Wahl Gouda gerieben 150g;189;150g (1 kg = 12,60 €)
+2023-02-01;1076737;REWE Beste Wahl;REWE Beste Wahl Gourmetbrötchen 480g;279;480g (1 kg = 5,81 €)
 2023-02-01;8377443;REWE Beste Wahl;REWE Beste Wahl Granatapfelkerne 300g;219;300g (1 kg = 7,30 €)
 2023-02-01;1302379;REWE Beste Wahl;REWE Beste Wahl Griechische Pfefferonen scharf 125g;99;125g (1 kg = 7,92 €)
 2023-02-01;2109064;REWE Beste Wahl;REWE Beste Wahl Grießpudding Zimt 150g;55;150g (1 kg = 3,67 €)

@@ -467,6 +467,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-01;8307611;ja!;ja! Landschinken luftgetrocknet 150g;194;150g (1 kg = 12,93 €)
 2023-02-01;1062430;ja!;ja! Langkorn-Spitzenreis im Kochbeutel 4x125g;99;4x125g (1 kg = 1,98 €)
 2023-02-01;1007001;ja!;ja! Lasagne Bolognese 1kg;399;1kg
+2023-02-01;2269278;ja!;ja! Lasagne Bolognese 400g;169;400g (1 kg = 4,23 €)
 2023-02-01;2464069;ja!;ja! Latte Cappuccino 250ml;75;250ml (1 l = 3 €)
 2023-02-01;2464033;ja!;ja! Latte Espresso 250ml;75;250ml (1 l = 3 €)
 2023-02-01;2462970;ja!;ja! Latte Macchiato 250ml;75;250ml (1 l = 3 €)
@@ -638,8 +639,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-01;8661897;ja!;ja! Rinder- Hüftsteak ca. 250g;533;1 Stück ca. 250 g (1 kg = 21,31 €)
 2023-02-01;7856511;ja!;ja! Rinder- Rumpsteak ca. 250g;575;1 Stück ca. 250 g (1 kg = 22,99 €)
 2023-02-01;7978794;ja!;ja! Rinder-Hackfleisch 500g;499;500g (1 kg = 9,98 €)
-2023-02-01;8508714;ja!;ja! Rindfleisch 500g;679;500g (1 kg = 13,58 €)
 2023-02-01;8626135;ja!;ja! Rindfleisch 500g;599;500g (1 kg = 11,98 €)
+2023-02-01;8508714;ja!;ja! Rindfleisch 500g;679;500g (1 kg = 13,58 €)
 2023-02-01;2432136;ja!;ja! Rindfleisch-Hamburger 400g;399;400g (1 kg = 9,98 €)
 2023-02-01;5350450;ja!;ja! Roggenvollkornbrot 500g;109;500g (1 kg = 2,18 €)
 2023-02-01;8502432;ja!;ja! Rostbratwürstchen in würziger Sauce mit Kartoffelpüree und Weinsauerkraut 480g;239;480g (1 kg = 4,98 €)
