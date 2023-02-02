@@ -41,7 +41,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-02;8397514;ja!;ja! 6 Kartoffel Knödel halb & halb 200g;99;200g (1 kg = 4,95 €)
 2023-02-02;7236359;ja!;ja! ACE-Vitamin-Getränk 1l;95;1l
 2023-02-02;397387;ja!;ja! Aceto Balsamico di Modena 500ml;169;500ml (1 l = 3,38 €)
-2023-02-02;8440282;ja!;ja! Akku Batterien AAA 900 mAh 4 Stück;499;4 Stück
 2023-02-02;8442236;ja!;ja! Alkaline Batterien AA LR6 8 Stück;155;8 Stück
 2023-02-02;6790127;ja!;ja! Alpenvollmilch Haselnuss Schokolade 100g;49;100g (1 kg = 4,90 €)
 2023-02-02;7938726;ja!;ja! Alpenvollmilch Schokolade Traube Nuss 100g;59;100g (1 kg = 5,90 €)
@@ -635,8 +634,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-02;2432152;ja!;ja! Rinder Minutensteak 320g;579;320g (1 kg = 18,09 €)
 2023-02-02;7856511;ja!;ja! Rinder- Rumpsteak ca. 250g;575;1 Stück ca. 250 g (1 kg = 22,99 €)
 2023-02-02;7978794;ja!;ja! Rinder-Hackfleisch 500g;499;500g (1 kg = 9,98 €)
-2023-02-02;8626135;ja!;ja! Rindfleisch 500g;599;500g (1 kg = 11,98 €)
 2023-02-02;8508714;ja!;ja! Rindfleisch 500g;679;500g (1 kg = 13,58 €)
+2023-02-02;8626135;ja!;ja! Rindfleisch 500g;599;500g (1 kg = 11,98 €)
 2023-02-02;2432136;ja!;ja! Rindfleisch-Hamburger 400g;399;400g (1 kg = 9,98 €)
 2023-02-02;5350450;ja!;ja! Roggenvollkornbrot 500g;109;500g (1 kg = 2,18 €)
 2023-02-02;8502432;ja!;ja! Rostbratwürstchen in würziger Sauce mit Kartoffelpüree und Weinsauerkraut 480g;239;480g (1 kg = 4,98 €)
