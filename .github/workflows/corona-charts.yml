@@ -1,4 +1,4 @@
-name: [zzDeaktiviert] Update Corona Charts
+name: "[zzDeaktiviert] Update Corona Charts"
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
