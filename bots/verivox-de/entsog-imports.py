@@ -154,23 +154,31 @@ if __name__ == '__main__':
             '{.*?xa0 ', '', regex=True)
         df_russia_new['2021'] = df_russia_new['2021'].astype(str).str.replace(
             '{.*?xa0 ', '', regex=True)
+        df_russia_new['2022'] = df_russia_new['2022'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
         df_russia_new['Minimum'] = df_russia_new['Minimum'].str.replace(
             '\'}', '', regex=False)
         df_russia_new['Maximum'] = df_russia_new['Maximum'].str.replace(
             '\'}', '', regex=False)
         df_russia_new['2021'] = df_russia_new['2021'].str.replace(
             '\'}', '', regex=False)
+        df_russia_new['2022'] = df_russia_new['2022'].str.replace(
+            '\'}', '', regex=False)
         df_russia_new['Minimum'] = df_russia_new['Minimum'].str.replace(
             ',', '', regex=False)
         df_russia_new['Maximum'] = df_russia_new['Maximum'].str.replace(
             ',', '', regex=False)
         df_russia_new['2021'] = df_russia_new['2021'].str.replace(
+            ',', '', regex=False)
+        df_russia_new['2022'] = df_russia_new['2022'].str.replace(
             ',', '', regex=False)
         df_russia_new['Minimum'] = df_russia_new['Minimum'].apply(
             pd.to_numeric, errors='coerce').astype(float)
         df_russia_new['Maximum'] = df_russia_new['Maximum'].apply(
             pd.to_numeric, errors='coerce').astype(float)
         df_russia_new['2021'] = df_russia_new['2021'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_russia_new['2022'] = df_russia_new['2022'].apply(
             pd.to_numeric, errors='coerce').astype(float)
         df_russia_new['2023'] = df_russia_new['2023'].apply(
             pd.to_numeric, errors='coerce').astype(str)
@@ -182,7 +190,7 @@ if __name__ == '__main__':
             r'(\d+)').astype(float)
         df_russia_new['KW'] = df_russia_new['KW'].str.extract(
             r'(\d+)').astype(int)
-        df_russia_new = df_russia_new[['KW', '2021', '2023']]
+        df_russia_new = df_russia_new[['KW', '2021', '2022', '2023']]
 
         # fix date
         df_russia_new.iloc[:, 0] = '2023-W' + \
@@ -191,13 +199,12 @@ if __name__ == '__main__':
         # drop last KW row and add mean and EU goal
         df_russia_new = df_russia_new.drop(df_russia_new.tail(1).index)
         #df_russia_new = df_russia_new.assign(mean=mean)
-        df_russia_new = df_russia_new.assign(eugoal=eugoal)
+        #df_russia_new = df_russia_new.assign(eugoal=eugoal)
 
         # rename and rearrange columns
         df_russia_new = df_russia_new[[
-            'KW', '2021', '2023', 'eugoal']]
-        df_russia_new.rename(
-            columns={'KW': 'Datum', 'eugoal': 'EU-Ziel¹'}, inplace=True)
+            'KW', '2021', '2022', '2023']]
+        df_russia_new.rename(columns={'KW': 'Datum'}, inplace=True)
 
         # set week number as index and create date for chart notes
         df_russia_new.set_index('Datum', inplace=True)
@@ -206,9 +213,9 @@ if __name__ == '__main__':
         weekno_dt = datetime.strptime(
             weekno + '-1', '%Y-W%W-%w') + timedelta(days=7)  # get monday from next week
         weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
-        notes_chart_new = '¹ EU-Ziel: Reduktion der Lieferungen um zwei Drittel im Vergleich zu 2021.<br><br>Stand: ' + weekno_str
+        notes_chart_new = 'EU-Ziel: Reduktion der Lieferungen bis Ende 2022 auf ungefähr 1000 Mio. m³.<br>Stand: ' + weekno_str
 
-        print(df_russia_new)
+        df_russia_new.to_clipboard()
 
         # replace NaN with empty strings
         df_russia_new.fillna('', inplace=True)
