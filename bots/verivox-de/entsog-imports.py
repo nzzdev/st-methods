@@ -113,6 +113,8 @@ if __name__ == '__main__':
 
         eugoal = [1118.702, 1040.366, 1073.278, 1067.872, 1073.074, 1081.948, 1082.594, 975.834, 916.13, 1055.394, 1044.718, 1076.95, 1086.096, 1067.294, 1037.17, 1050.226, 1070.014, 1076.678, 1081.302, 1082.9, 1082.662, 1100.954, 1075.658, 1046.01, 1091.332,
                   1003.612, 1054.068, 934.218, 712.64, 829.056, 1041.59, 932.518, 904.026, 924.596, 1018.062, 947.512, 914.362, 979.098, 998.376, 873.732, 886.754, 876.962, 857.888, 855.61, 755.99, 885.326, 940.712, 946.458, 953.462, 961.622, 943.058, 874.616]
+        eugoalmean = [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
+                      1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
 
         df_russia = df_russia.assign(eugoal=eugoal)
 
@@ -181,13 +183,13 @@ if __name__ == '__main__':
         # drop last KW row and add mean and EU goal
         df_russia_new = df_russia_new.drop(df_russia_new.tail(1).index)
         df_russia_new = df_russia_new.assign(mean=mean)
-        df_russia_new = df_russia_new.assign(eugoal=eugoal)
+        df_russia_new = df_russia_new.assign(eugoal=eugoalmean)
 
         # rename and rearrange columns
         df_russia_new = df_russia_new[[
             'KW', 'Minimum', 'Maximum', 'mean', '2023', 'eugoal']]
         df_russia_new.rename(columns={'KW': 'Datum', 'Minimum': '', 'Maximum': 'Höchst-/Tiefststand¹',
-                                      'mean': '5-Jahres-Mittel', 'eugoal': 'EU-Ziel'}, inplace=True)
+                                      'mean': '5-Jahres-Mittel', 'eugoal': 'EU-Ziel²'}, inplace=True)
 
         # set week number as index and create date for chart notes
         df_russia_new.set_index('Datum', inplace=True)
@@ -196,7 +198,7 @@ if __name__ == '__main__':
         weekno_dt = datetime.strptime(
             weekno + '-1', '%Y-W%W-%w') + timedelta(days=7)  # get monday from next week
         weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
-        notes_chart_new = '¹ Maximum/Minimum der Importe 2015–2020.<br>Stand: ' + weekno_str
+        notes_chart_new = '¹ Maximum/Minimum der Importe 2015–2020.<br>² EU-Ziel: Reduktion der Lieferungen um zwei Drittel im Vergleich zu 2021.<br><br>Stand: ' + weekno_str
 
         # replace NaN with empty strings
         df_russia_new.fillna('', inplace=True)
