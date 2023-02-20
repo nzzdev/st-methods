@@ -215,8 +215,6 @@ if __name__ == '__main__':
         weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
         notes_chart_new = 'EU-Ziel: Reduktion der Lieferungen bis Ende 2022 auf ungefähr 1000 Mio. m³.<br>Stand: ' + weekno_str
 
-        df_russia_new.to_clipboard()
-
         # replace NaN with empty strings
         df_russia_new.fillna('', inplace=True)
 
