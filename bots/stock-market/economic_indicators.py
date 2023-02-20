@@ -11,6 +11,7 @@ from html_table_parser.parser import HTMLTableParser
 import requests
 import urllib.request
 import os
+import json
 #import sys
 from fake_useragent import UserAgent
 from deep_translator import GoogleTranslator
@@ -224,6 +225,98 @@ zh.columns = list(map(str, zh.columns))
 zh.drop(columns=['2020', '2021'], inplace=True)
 
 update_chart(id='6aa31459fbbb1211b5ec05508a5413ca', data=zh)
+
+
+url = 'https://docs.google.com/spreadsheets/d/1X7K12z2HgHJ4EFCV7JomRiY_Pn6bDydGJrxrqazOdMk/gviz/tq?usp=sharing&tqx=reqId%3A0'
+
+response = requests.get(url = url)
+
+data = response.content
+
+data = data.decode("utf-8") 
+
+data_json = data.replace('google.visualization.Query.setResponse(', '').split("\n", 1)[1].replace(');', '')
+
+data_json = json.loads(data_json)
+
+data_json = data_json['table']
+
+column_names = []
+for i in range(0, len(data_json['cols'])):
+    column_names.append(data_json['cols'][i]['label'])
+
+
+column_0 = []
+for i in range(0, len(data_json['rows'])):
+    column_0.append(list(data_json['rows'][i]['c'][0].values())[0] )
+
+column_1 = []
+for i in range(0, len(data_json['rows'])):
+    column_1.append(list(data_json['rows'][i]['c'][1].values())[1] )
+
+column_2 = []
+for i in range(0, len(data_json['rows'])):
+    column_2.append(list(data_json['rows'][i]['c'][2].values())[1])
+
+column_3 = []
+for i in range(0, len(data_json['rows'])):
+    column_3.append(list(data_json['rows'][i]['c'][3].values())[1])
+
+column_4 = []
+for i in range(0, len(data_json['rows'])):
+    column_4.append(list(data_json['rows'][i]['c'][4].values())[1])
+
+column_5 = []
+for i in range(0, len(data_json['rows'])):
+    column_5.append(list(data_json['rows'][i]['c'][5].values())[1])
+    
+column_6 = []
+for i in range(0, len(data_json['rows'])):
+    column_6.append(list(data_json['rows'][i]['c'][6].values())[1])    
+    
+column_7 = []
+for i in range(0, len(data_json['rows'])):
+    column_7.append(list(data_json['rows'][i]['c'][7].values())[1])
+    
+column_8 = []
+for i in range(0, len(data_json['rows'])):
+    column_8.append(list(data_json['rows'][i]['c'][8].values())[1])
+    
+column_9 = []
+for i in range(0, len(data_json['rows'])):
+    column_9.append(list(data_json['rows'][i]['c'][9].values())[1])
+    
+column_10 = []
+for i in range(0, len(data_json['rows'])):
+    column_10.append(list(data_json['rows'][i]['c'][10].values())[1])
+    
+    
+df = pd.DataFrame(list(zip(column_0, column_1, column_2, column_3, column_4, column_5, column_6, column_7, column_8, column_9, column_10)) , columns = column_names)
+
+df['Week'] = df['Week'].astype(int)
+df['Day'] = pd.to_datetime(df['Day'])
+df['Flights 2019 (Reference)'] = df['Flights 2019 (Reference)'].astype(int)
+df['Flights'] = df['Flights'].astype(int)
+df['% vs 2019 (Daily)'] = df['% vs 2019 (Daily)'].astype(float)*100
+df['Flights (7-day moving average)'] = df['Flights (7-day moving average)'].astype(float)
+df['% vs 2019 (7-day Moving Average)'] = df['% vs 2019 (7-day Moving Average)'].astype(float)*100
+df['Day 2019'] = pd.to_datetime(df['Day 2019'])
+df['Day Previous Year'] = pd.to_datetime(df['Day Previous Year'])
+df['Flights Previous Year'] =df['Flights Previous Year'].astype(float)
+
+df = df.set_index('Day')
+
+df = df[df['Entity'].isin(['Germany'])]
+
+df_p = df[['% vs 2019 (7-day Moving Average)', 'Entity']].pivot_table(index = df.index, values = '% vs 2019 (7-day Moving Average)', columns = 'Entity').reset_index()
+
+df_p.to_clipboard(index = False)
+
+webbrowser.open('https://q.st.nzz.ch/editor/chart/9d0c7efc6ae77777fffe95657f24d325')
+
+
+
+
 
 
 # Verkehrszahlen
