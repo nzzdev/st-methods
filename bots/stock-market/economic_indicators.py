@@ -310,9 +310,7 @@ df = df[df['Entity'].isin(['Germany'])]
 
 df_p = df[['% vs 2019 (7-day Moving Average)', 'Entity']].pivot_table(index = df.index, values = '% vs 2019 (7-day Moving Average)', columns = 'Entity').reset_index()
 
-df_p.to_clipboard(index = False)
-
-webbrowser.open('https://q.st.nzz.ch/editor/chart/9d0c7efc6ae77777fffe95657f24d325')
+update_chart(id = '9d0c7efc6ae77777fffe95657f24d325', data = df_p)
 
 
 
