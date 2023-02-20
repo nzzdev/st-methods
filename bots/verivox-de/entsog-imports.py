@@ -9,6 +9,7 @@ from datetime import datetime, date, timedelta
 from user_agent import generate_user_agent
 import numpy as np
 
+
 if __name__ == '__main__':
     try:
 
@@ -24,16 +25,22 @@ if __name__ == '__main__':
             'Pragma': 'no-cache'
         }
 
-        url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'
+        url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'  # 2022 data
+        urlnew = 'https://infogram.com/83b2e7a1-a4b0-47eb-acff-5530f94e6247'
         resp = download_data(url, headers=fheaders)
+        respnew = download_data(urlnew, headers=fheaders)
         html = resp.text
+        htmlnew = respnew.text
 
         soup = BeautifulSoup(html, features='html.parser')
+        soupnew = BeautifulSoup(htmlnew, features='html.parser')
 
         s = soup.findAll('script')
+        snew = soupnew.findAll('script')
         full_script = None
+        full_script_new = None
 
-        # get all json data from infogram graph
+        # get all json data from infogram graph for 2022
         for i in range(len(s)):
             if s[i].contents:
                 if 'window.infographicData' in s[i].contents[0]:
@@ -45,7 +52,7 @@ if __name__ == '__main__':
 
         full_data = json.loads(full_script)
 
-        # get charts for each country/type
+        # get charts for each country/type for 2022
         df_list = list()
         for data in full_data['elements'][2]['data']:
             headers = data.pop(0)
@@ -58,6 +65,26 @@ if __name__ == '__main__':
         df_lng = df_list[3]
         df_algeria = df_list[4]
 
+        # get all json data from infogram graph for 2023
+        for i in range(len(snew)):
+            if snew[i].contents:
+                if 'window.infographicData' in snew[i].contents[0]:
+                    full_script_new = snew[i].contents[0]
+                    break
+
+        full_script_new = full_script_new.lstrip('window.infographicData=')
+        full_script_new = full_script_new.rstrip(';')
+
+        full_data_new = json.loads(full_script_new)
+
+        # get charts for each country/type for 2023
+        df_list_new = list()
+        for data in full_data_new['elements'][2]['data']:
+            headers = ['KW', 'Minimum', 'Maximum', '2021', '2022', '2023']
+            del data[0]  # delete headers
+            dfnew = pd.DataFrame(data, columns=headers)
+            df_list_new.append(dfnew)
+
         # format week numbers as date values and drop column '2021'
         df_russia.iloc[:, 0] = '2022-W' + df_russia.iloc[:, 0].astype(str)
         df_lng.iloc[:, 0] = '2022-W' + df_lng.iloc[:, 0].astype(str)
@@ -68,8 +95,8 @@ if __name__ == '__main__':
         cols = ['Minimum', 'Maximum', '2022']
         df_lng[cols] = df_lng[cols].replace(',', '', regex=True)
         df_russia[cols] = df_russia[cols].replace(',', '', regex=True)
-        #df_lng[cols] = df_lng[cols].apply(pd.to_numeric, errors='coerce', axis=1)
-        #df_russia[cols] = df_russia[cols].apply(pd.to_numeric, errors='coerce', axis=1)
+        # df_lng[cols] = df_lng[cols].apply(pd.to_numeric, errors='coerce', axis=1)
+        # df_russia[cols] = df_russia[cols].apply(pd.to_numeric, errors='coerce', axis=1)
         df_lng.drop(df_lng.tail(1).index, inplace=True)
         df_russia.drop(df_russia.tail(1).index, inplace=True)
 
@@ -112,9 +139,71 @@ if __name__ == '__main__':
         df_lng.fillna('', inplace=True)
         df_russia.fillna('', inplace=True)
 
+        ########
+        # 2023 #
+        ########
+        # get values for Russia 2023
+        df_russia_new = df_list_new[1].copy()
+
+        # replace commas, delete strings and replace 'None' with NaN
+        df_russia_new['Minimum'] = df_russia_new['Minimum'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_russia_new['Maximum'] = df_russia_new['Maximum'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_russia_new['Minimum'] = df_russia_new['Minimum'].str.replace(
+            '\'}', '', regex=False)
+        df_russia_new['Maximum'] = df_russia_new['Maximum'].str.replace(
+            '\'}', '', regex=False)
+        df_russia_new['Minimum'] = df_russia_new['Minimum'].str.replace(
+            ',', '', regex=False)
+        df_russia_new['Maximum'] = df_russia_new['Maximum'].str.replace(
+            ',', '', regex=False)
+        df_russia_new['Minimum'] = df_russia_new['Minimum'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_russia_new['Maximum'] = df_russia_new['Maximum'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_russia_new['2023'] = df_russia_new['2023'].apply(
+            pd.to_numeric, errors='coerce').astype(str)
+        df_russia_new['2023'] = df_russia_new['2023'].str.replace(
+            ',', '', regex=False)
+        df_russia_new['KW'] = df_russia_new['KW'].apply(
+            pd.to_numeric, errors='coerce').astype(str)
+        df_russia_new['2023'] = df_russia_new['2023'].str.extract(
+            r'(\d+)').astype(float)
+        df_russia_new['KW'] = df_russia_new['KW'].str.extract(
+            r'(\d+)').astype(int)
+        df_russia_new = df_russia_new[['KW', 'Minimum', 'Maximum', '2023']]
+
+        # fix date
+        df_russia_new.iloc[:, 0] = '2023-W' + \
+            df_russia_new.iloc[:, 0].astype(str)
+
+        # drop last KW row and add mean and EU goal
+        df_russia_new = df_russia_new.drop(df_russia_new.tail(1).index)
+        df_russia_new = df_russia_new.assign(mean=mean)
+        df_russia_new = df_russia_new.assign(eugoal=eugoal)
+
+        # rename and rearrange columns
+        df_russia_new = df_russia_new[[
+            'KW', 'Minimum', 'Maximum', 'mean', '2023', 'eugoal']]
+        df_russia_new.rename(columns={'KW': 'Datum', 'Minimum': '', 'Maximum': 'Höchst-/Tiefststand¹',
+                                      'mean': '5-Jahres-Mittel', 'eugoal': 'EU-Ziel'}, inplace=True)
+
+        # set week number as index and create date for chart notes
+        df_russia_new.set_index('Datum', inplace=True)
+        weekno = df_russia_new['2023'].replace(
+            r'^\s*$', np.nan, regex=True).last_valid_index()  # replace empty strings and check last non NaN value
+        weekno_dt = datetime.strptime(
+            weekno + '-1', '%Y-W%W-%w') + timedelta(days=7)  # get monday from next week
+        weekno_str = weekno_dt.strftime('%-d. %-m. %Y')
+        notes_chart_new = '¹ Maximum/Minimum der Importe 2015–2020.<br>Stand: ' + weekno_str
+
+        # replace NaN with empty strings
+        df_russia_new.fillna('', inplace=True)
+
         # run Q function
         update_chart(id='1203f969609d721f3e48be4f2689fc53',
-                     data=df_russia, notes=notes_chart)
+                     data=df_russia_new, notes=notes_chart_new)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
         #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
@@ -163,9 +252,9 @@ if __name__ == '__main__':
             chart_title = 'Über Nord Stream 1 fliesst kein russisches Gas mehr'
 
         # old
-        #title_twh = df_total[df_total.columns[0]].iloc[-1].round(1).astype(float)
-        #title_twh = title_twh.astype(str).replace('.', ',')
-        #chart_title_total = f'Deutschland importiert derzeit {title_twh} TWh Gas am Tag'
+        # title_twh = df_total[df_total.columns[0]].iloc[-1].round(1).astype(float)
+        # title_twh = title_twh.astype(str).replace('.', ',')
+        # chart_title_total = f'Deutschland importiert derzeit {title_twh} TWh Gas am Tag'
 
         title_twh = (df_total[df_total.columns[1]].iloc[-1] /
                      df_total[df_total.columns[0]].iloc[-1]) * 100
