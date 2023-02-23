@@ -27,18 +27,24 @@ if __name__ == '__main__':
 
         url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'  # 2022 data
         urlnew = 'https://infogram.com/83b2e7a1-a4b0-47eb-acff-5530f94e6247'
+        urllng = 'https://infogram.com/fb29e40e-29d2-4d11-a87c-41f497270031'
         resp = download_data(url, headers=fheaders)
         respnew = download_data(urlnew, headers=fheaders)
+        resplng = download_data(urllng, headers=fheaders)
         html = resp.text
         htmlnew = respnew.text
+        htmllng = resplng.text
 
         soup = BeautifulSoup(html, features='html.parser')
         soupnew = BeautifulSoup(htmlnew, features='html.parser')
+        souplng = BeautifulSoup(htmllng, features='html.parser')
 
         s = soup.findAll('script')
         snew = soupnew.findAll('script')
+        slng = souplng.findAll('script')
         full_script = None
         full_script_new = None
+        full_script_lng = None
 
         # get all json data from infogram graph for 2022
         for i in range(len(s)):
@@ -84,6 +90,28 @@ if __name__ == '__main__':
             del data[0]  # delete headers
             dfnew = pd.DataFrame(data, columns=headers)
             df_list_new.append(dfnew)
+
+        # get all json data from infogram graph for LNG
+        for i in range(len(slng)):
+            if slng[i].contents:
+                if 'window.infographicData' in slng[i].contents[0]:
+                    full_script_lng = slng[i].contents[0]
+                    break
+
+        full_script_lng = full_script_lng.lstrip('window.infographicData=')
+        full_script_lng = full_script_lng.rstrip(';')
+
+        full_data_lng = json.loads(full_script_lng)
+
+        # get charts for each country/type for LNG
+        df_list_lng = list()
+        for data in full_data_lng['elements']['content']['content']['entities']['3a41ab1a-9ccc-40b3-a1d3-225d07a8eeb8bac6ef8b-2f7e-487e-ae9f-69e8a6bd2593']['props']['chartData']['data']:
+            headers = ['KW', 'America', 'Africa',
+                       'Middle East', 'Russia', 'Other']
+            del data[0]  # delete headers
+            del data[0]
+            df_lng_new = pd.DataFrame(data, columns=headers)
+            df_list_lng.append(df_lng_new)
 
         # format week numbers as date values and drop column '2021'
         df_russia.iloc[:, 0] = '2022-W' + df_russia.iloc[:, 0].astype(str)
@@ -184,8 +212,8 @@ if __name__ == '__main__':
 
         # drop last KW row and add mean and EU goal
         df_russia_new = df_russia_new.drop(df_russia_new.tail(1).index)
-        #df_russia_new = df_russia_new.assign(mean=mean)
-        #df_russia_new = df_russia_new.assign(eugoal=eugoal)
+        # df_russia_new = df_russia_new.assign(mean=mean)
+        # df_russia_new = df_russia_new.assign(eugoal=eugoal)
 
         # rename and rearrange columns
         df_russia_new = df_russia_new.assign(num2021=num2021)
@@ -207,12 +235,98 @@ if __name__ == '__main__':
         # replace NaN with empty strings
         df_russia_new.fillna('', inplace=True)
 
+        ########
+        # LNG #
+        ########
+        # clean values
+
+        # replace commas, delete strings and replace 'None' with NaN
+        df_lng_new['America'] = df_lng_new['America'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_lng_new['Africa'] = df_lng_new['Africa'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_lng_new['Russia'] = df_lng_new['Russia'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_lng_new['Other'] = df_lng_new['Other'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+
+        df_lng_new['America'] = df_lng_new['America'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['Africa'] = df_lng_new['Africa'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['Russia'] = df_lng_new['Russia'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['Other'] = df_lng_new['Other'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['America'] = df_lng_new['America'].str.replace(
+            '{\'value\': \'', '', regex=False)
+        df_lng_new['Africa'] = df_lng_new['Africa'].str.replace(
+            '{\'value\': \'', '', regex=False)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].str.replace(
+            '{\'value\': \'', '', regex=False)
+        df_lng_new['Russia'] = df_lng_new['Russia'].str.replace(
+            '{\'value\': \'', '', regex=False)
+        df_lng_new['Other'] = df_lng_new['Other'].str.replace(
+            '{\'value\': \'', '', regex=False)
+
+        df_lng_new['America'] = df_lng_new['America'].str.replace(
+            ',', '', regex=False)
+        df_lng_new['Africa'] = df_lng_new['Africa'].str.replace(
+            ',', '', regex=False)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].str.replace(
+            ',', '', regex=False)
+        df_lng_new['Russia'] = df_lng_new['Russia'].str.replace(
+            ',', '', regex=False)
+        df_lng_new['Other'] = df_lng_new['Other'].str.replace(
+            ',', '', regex=False)
+
+        df_lng_new['America'] = df_lng_new['America'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['Africa'] = df_lng_new['Africa'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['Russia'] = df_lng_new['Russia'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['Other'] = df_lng_new['Other'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['KW'] = df_lng_new['KW'].apply(
+            pd.to_numeric, errors='coerce').astype(str)
+        df_lng_new['KW'] = df_lng_new['KW'].str.extract(
+            r'(\d{2}\/\d{4})')
+        df_lng_new['KW'] = df_lng_new['KW'].astype(str).str.replace(
+            '/', '-', regex=False)
+
+        # rename and rearrange columns
+        df_lng_new.rename(columns={'KW': 'Datum', 'America': 'USA', 'Africa': 'Afrika',
+                          'Middle East': 'Mittlerer Osten', 'Russia': 'Russland', 'Other': 'Sonstige'}, inplace=True)
+        df_lng_new = df_lng_new[['Datum', 'Russland',
+                                 'USA', 'Afrika', 'Mittlerer Osten', 'Sonstige']]
+
+        # add one month to date and create string for chart notes
+        df_lng_new.set_index('Datum', inplace=True)
+        lngdate = df_lng_new['USA'].replace(
+            r'^\s*$', np.nan, regex=True).last_valid_index()  # replace empty strings and check last non NaN value
+        lngdate = pd.to_datetime(
+            lngdate, format='%m-%Y') + pd.DateOffset(months=1)
+        month_str = lngdate.strftime('%-d. %-m. %Y')
+        notes_chart_lng = '¹ USA mit Trinidad und Tobago. Der grösste Exporteur im Mittleren Osten ist Katar; in Afrika exportieren Nigeria und Algerien am meisten.<br>Stand: ' + month_str
+
+        # replace NaN with empty strings
+        df_lng_new.fillna('', inplace=True)
+
         # run Q function
         update_chart(id='1203f969609d721f3e48be4f2689fc53',
                      data=df_russia_new, notes=notes_chart_new)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
-        #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
+        update_chart(id='6c02e1d1daabb23cfaaae686241d6e4e',
+                     data=df_lng_new, notes=notes_chart_lng)
+        # update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
         # Nord stream 1 to DE Bundesnetzagentur
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
