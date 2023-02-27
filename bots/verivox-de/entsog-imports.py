@@ -27,18 +27,24 @@ if __name__ == '__main__':
 
         url = 'https://infogram.com/1pk6j01vz3dzdkc9z0er3rz7kpb3yekm3x0'  # 2022 data
         urlnew = 'https://infogram.com/83b2e7a1-a4b0-47eb-acff-5530f94e6247'
+        urllng = 'https://infogram.com/fb29e40e-29d2-4d11-a87c-41f497270031'
         resp = download_data(url, headers=fheaders)
         respnew = download_data(urlnew, headers=fheaders)
+        resplng = download_data(urllng, headers=fheaders)
         html = resp.text
         htmlnew = respnew.text
+        htmllng = resplng.text
 
         soup = BeautifulSoup(html, features='html.parser')
         soupnew = BeautifulSoup(htmlnew, features='html.parser')
+        souplng = BeautifulSoup(htmllng, features='html.parser')
 
         s = soup.findAll('script')
         snew = soupnew.findAll('script')
+        slng = souplng.findAll('script')
         full_script = None
         full_script_new = None
+        full_script_lng = None
 
         # get all json data from infogram graph for 2022
         for i in range(len(s)):
@@ -85,6 +91,28 @@ if __name__ == '__main__':
             dfnew = pd.DataFrame(data, columns=headers)
             df_list_new.append(dfnew)
 
+        # get all json data from infogram graph for LNG
+        for i in range(len(slng)):
+            if slng[i].contents:
+                if 'window.infographicData' in slng[i].contents[0]:
+                    full_script_lng = slng[i].contents[0]
+                    break
+
+        full_script_lng = full_script_lng.lstrip('window.infographicData=')
+        full_script_lng = full_script_lng.rstrip(';')
+
+        full_data_lng = json.loads(full_script_lng)
+
+        # get charts for each country/type for LNG
+        df_list_lng = list()
+        for data in full_data_lng['elements']['content']['content']['entities']['3a41ab1a-9ccc-40b3-a1d3-225d07a8eeb8bac6ef8b-2f7e-487e-ae9f-69e8a6bd2593']['props']['chartData']['data']:
+            headers = ['KW', 'America', 'Africa',
+                       'Middle East', 'Russia', 'Other']
+            del data[0]  # delete headers
+            del data[0]
+            df_lng_new = pd.DataFrame(data, columns=headers)
+            df_list_lng.append(df_lng_new)
+
         # format week numbers as date values and drop column '2021'
         df_russia.iloc[:, 0] = '2022-W' + df_russia.iloc[:, 0].astype(str)
         df_lng.iloc[:, 0] = '2022-W' + df_lng.iloc[:, 0].astype(str)
@@ -115,7 +143,10 @@ if __name__ == '__main__':
                   1003.612, 1054.068, 934.218, 712.64, 829.056, 1041.59, 932.518, 904.026, 924.596, 1018.062, 947.512, 914.362, 979.098, 998.376, 873.732, 886.754, 876.962, 857.888, 855.61, 755.99, 885.326, 940.712, 946.458, 953.462, 961.622, 943.058, 874.616]
         eugoalmean = [1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000,
                       1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000, 1000]
-
+        num2021 = [3290, 3060, 3157, 3141, 3156, 3182, 3184, 2870, 2694, 3104, 3073, 3168, 3194, 3139, 3051, 3089, 3147, 3167, 3180, 3185, 3184, 3238, 3164, 3077, 3210,
+                   2952, 3100, 2748, 2096, 2438, 3064, 2743, 2659, 2719, 2994, 2787, 2689, 2880, 2936, 2570, 2608, 2579, 2523, 2517, 2224, 2604, 2767, 2784, 2804, 2828, 2774, 2572]
+        num2022 = [1746, 1796, 1757, 1943, 2208, 2024, 1922, 2323, 2621, 2606, 2268, 2411, 2529, 2313, 2083, 1931, 1895, 2262, 1998, 1784, 1664, 1602, 1513,
+                   1110, 851, 1055, 1059, 609, 923, 947, 836, 845, 853, 849, 656, 587, 599, 573, 532, 521, 558, 536, 435, 407, 496, 593, 598, 657, 709, 727, 564, 526]
         df_russia = df_russia.assign(eugoal=eugoal)
 
         # rearrange and rename columns
@@ -146,39 +177,22 @@ if __name__ == '__main__':
         ########
         # get values for Russia 2023
         df_russia_new = df_list_new[1].copy()
-
         # replace commas, delete strings and replace 'None' with NaN
         df_russia_new['Minimum'] = df_russia_new['Minimum'].astype(str).str.replace(
             '{.*?xa0 ', '', regex=True)
         df_russia_new['Maximum'] = df_russia_new['Maximum'].astype(str).str.replace(
             '{.*?xa0 ', '', regex=True)
-        df_russia_new['2021'] = df_russia_new['2021'].astype(str).str.replace(
-            '{.*?xa0 ', '', regex=True)
-        df_russia_new['2022'] = df_russia_new['2022'].astype(str).str.replace(
-            '{.*?xa0 ', '', regex=True)
         df_russia_new['Minimum'] = df_russia_new['Minimum'].str.replace(
             '\'}', '', regex=False)
         df_russia_new['Maximum'] = df_russia_new['Maximum'].str.replace(
             '\'}', '', regex=False)
-        df_russia_new['2021'] = df_russia_new['2021'].str.replace(
-            '\'}', '', regex=False)
-        df_russia_new['2022'] = df_russia_new['2022'].str.replace(
-            '\'}', '', regex=False)
         df_russia_new['Minimum'] = df_russia_new['Minimum'].str.replace(
             ',', '', regex=False)
         df_russia_new['Maximum'] = df_russia_new['Maximum'].str.replace(
-            ',', '', regex=False)
-        df_russia_new['2021'] = df_russia_new['2021'].str.replace(
-            ',', '', regex=False)
-        df_russia_new['2022'] = df_russia_new['2022'].str.replace(
             ',', '', regex=False)
         df_russia_new['Minimum'] = df_russia_new['Minimum'].apply(
             pd.to_numeric, errors='coerce').astype(float)
         df_russia_new['Maximum'] = df_russia_new['Maximum'].apply(
-            pd.to_numeric, errors='coerce').astype(float)
-        df_russia_new['2021'] = df_russia_new['2021'].apply(
-            pd.to_numeric, errors='coerce').astype(float)
-        df_russia_new['2022'] = df_russia_new['2022'].apply(
             pd.to_numeric, errors='coerce').astype(float)
         df_russia_new['2023'] = df_russia_new['2023'].apply(
             pd.to_numeric, errors='coerce').astype(str)
@@ -190,7 +204,7 @@ if __name__ == '__main__':
             r'(\d+)').astype(float)
         df_russia_new['KW'] = df_russia_new['KW'].str.extract(
             r'(\d+)').astype(int)
-        df_russia_new = df_russia_new[['KW', '2021', '2022', '2023']]
+        df_russia_new = df_russia_new[['KW', '2023']]
 
         # fix date
         df_russia_new.iloc[:, 0] = '2023-W' + \
@@ -198,13 +212,16 @@ if __name__ == '__main__':
 
         # drop last KW row and add mean and EU goal
         df_russia_new = df_russia_new.drop(df_russia_new.tail(1).index)
-        #df_russia_new = df_russia_new.assign(mean=mean)
-        #df_russia_new = df_russia_new.assign(eugoal=eugoal)
+        # df_russia_new = df_russia_new.assign(mean=mean)
+        # df_russia_new = df_russia_new.assign(eugoal=eugoal)
 
         # rename and rearrange columns
+        df_russia_new = df_russia_new.assign(num2021=num2021)
+        df_russia_new = df_russia_new.assign(num2022=num2022)
         df_russia_new = df_russia_new[[
-            'KW', '2021', '2022', '2023']]
-        df_russia_new.rename(columns={'KW': 'Datum'}, inplace=True)
+            'KW', 'num2021', 'num2022', '2023']]
+        df_russia_new.rename(
+            columns={'KW': 'Datum', 'num2021': '2021', 'num2022': '2022'}, inplace=True)
 
         # set week number as index and create date for chart notes
         df_russia_new.set_index('Datum', inplace=True)
@@ -218,12 +235,98 @@ if __name__ == '__main__':
         # replace NaN with empty strings
         df_russia_new.fillna('', inplace=True)
 
+        ########
+        # LNG #
+        ########
+        # clean values
+
+        # replace commas, delete strings and replace 'None' with NaN
+        df_lng_new['America'] = df_lng_new['America'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_lng_new['Africa'] = df_lng_new['Africa'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_lng_new['Russia'] = df_lng_new['Russia'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+        df_lng_new['Other'] = df_lng_new['Other'].astype(str).str.replace(
+            '{.*?xa0 ', '', regex=True)
+
+        df_lng_new['America'] = df_lng_new['America'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['Africa'] = df_lng_new['Africa'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['Russia'] = df_lng_new['Russia'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['Other'] = df_lng_new['Other'].str.replace(
+            '\'}', '', regex=False)
+        df_lng_new['America'] = df_lng_new['America'].str.replace(
+            '{\'value\': \'', '', regex=False)
+        df_lng_new['Africa'] = df_lng_new['Africa'].str.replace(
+            '{\'value\': \'', '', regex=False)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].str.replace(
+            '{\'value\': \'', '', regex=False)
+        df_lng_new['Russia'] = df_lng_new['Russia'].str.replace(
+            '{\'value\': \'', '', regex=False)
+        df_lng_new['Other'] = df_lng_new['Other'].str.replace(
+            '{\'value\': \'', '', regex=False)
+
+        df_lng_new['America'] = df_lng_new['America'].str.replace(
+            ',', '', regex=False)
+        df_lng_new['Africa'] = df_lng_new['Africa'].str.replace(
+            ',', '', regex=False)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].str.replace(
+            ',', '', regex=False)
+        df_lng_new['Russia'] = df_lng_new['Russia'].str.replace(
+            ',', '', regex=False)
+        df_lng_new['Other'] = df_lng_new['Other'].str.replace(
+            ',', '', regex=False)
+
+        df_lng_new['America'] = df_lng_new['America'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['Africa'] = df_lng_new['Africa'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['Middle East'] = df_lng_new['Middle East'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['Russia'] = df_lng_new['Russia'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['Other'] = df_lng_new['Other'].apply(
+            pd.to_numeric, errors='coerce').astype(float)
+        df_lng_new['KW'] = df_lng_new['KW'].apply(
+            pd.to_numeric, errors='coerce').astype(str)
+        df_lng_new['KW'] = df_lng_new['KW'].str.extract(
+            r'(\d{2}\/\d{4})')
+        df_lng_new['KW'] = df_lng_new['KW'].astype(str).str.replace(
+            '/', '-', regex=False)
+
+        # rename and rearrange columns
+        df_lng_new.rename(columns={'KW': 'Datum', 'America': 'USA', 'Africa': 'Afrika',
+                          'Middle East': 'Mittlerer Osten', 'Russia': 'Russland', 'Other': 'Sonstige'}, inplace=True)
+        df_lng_new = df_lng_new[['Datum', 'Russland',
+                                 'USA', 'Afrika', 'Mittlerer Osten', 'Sonstige']]
+
+        # add one month to date and create string for chart notes
+        df_lng_new.set_index('Datum', inplace=True)
+        lngdate = df_lng_new['USA'].replace(
+            r'^\s*$', np.nan, regex=True).last_valid_index()  # replace empty strings and check last non NaN value
+        lngdate = pd.to_datetime(
+            lngdate, format='%m-%Y') + pd.DateOffset(months=1)
+        month_str = lngdate.strftime('%-d. %-m. %Y')
+        notes_chart_lng = '¹ USA mit Trinidad und Tobago. Der grösste Exporteur im Mittleren Osten ist Katar; in Afrika exportieren Nigeria und Algerien am meisten.<br>Stand: ' + month_str
+
+        # replace NaN with empty strings
+        df_lng_new.fillna('', inplace=True)
+
         # run Q function
         update_chart(id='1203f969609d721f3e48be4f2689fc53',
                      data=df_russia_new, notes=notes_chart_new)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
-        #update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
+        update_chart(id='6c02e1d1daabb23cfaaae686241d6e4e',
+                     data=df_lng_new, notes=notes_chart_lng)
+        # update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
         # Nord stream 1 to DE Bundesnetzagentur
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'

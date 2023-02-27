@@ -3,7 +3,7 @@ name: Update Corona Charts DE
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "*/45 4-21 * * 1-6"
+    - cron: "*/45 5-21/2 * * 1-6"
   workflow_dispatch:
 
 jobs:
