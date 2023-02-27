@@ -693,7 +693,7 @@ bip = pd.read_excel('https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/
 bip = bip[bip.iloc[:, 0] >= 2019 ]
 bip['KW'] = bip.iloc[:, 0].astype(str) + '-' + bip.iloc[:, 1]
 bip = bip[['KW', 'WWA']]
-update_chart(id='3b8ace57b1457b6ac562a04e73719b0a', data=bip)
+update_chart(id='3b8ace57b1457b6ac562a04e73719b0a', data=bip, notes = 'Skaliert auf die Wachstumsraten des realen, saison-, kalender- und Sportevent-bereinigten BIP gegenüber dem gleichen Quartal des Vorjahres.')
 
 # Bitcoin energy
 
