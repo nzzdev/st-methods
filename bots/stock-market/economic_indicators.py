@@ -682,11 +682,18 @@ update_chart(id = '8676bad64564b4740f74b6d5d04f4bf4', data = list_[['firm', 'sta
 
 # BIP Indikator
 
-bip = pd.read_csv(
-    "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa.csv.download.csv/wwa.csv")
-bip = bip.loc[bip['structure'] == 'seco_wwa_pre_covid'][['date', 'value']]
-update_chart(id='c366afc02f262094669128cd054faf78', data=bip)
+#bip = pd.read_csv(
+ #   "https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa.csv.download.csv/wwa.csv")
+#bip = bip.loc[bip['structure'] == 'seco_wwa_pre_covid'][['date', 'value']]
+#update_chart(id='c366afc02f262094669128cd054faf78', data=bip)
 
+
+bip = pd.read_excel('https://www.seco.admin.ch/dam/seco/de/dokumente/Wirtschaft/Wirtschaftslage/indikatoren/wwa.xlsx.download.xlsx/wwa.xlsx', sheet_name = 'data', skiprows = 4)
+
+bip = bip[bip.iloc[:, 0] >= 2019 ]
+bip['KW'] = bip.iloc[:, 0].astype(str) + '-' + bip.iloc[:, 1]
+bip = bip[['KW', 'WWA']]
+update_chart(id='3b8ace57b1457b6ac562a04e73719b0a', data=bip)
 
 # Bitcoin energy
 
