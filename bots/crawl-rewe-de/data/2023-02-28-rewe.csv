@@ -909,8 +909,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-28;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;449;500ml (1 l = 8,98 €)
 2023-02-28;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-02-28;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-02-28;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-02-28;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-02-28;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-02-28;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;329;250g (1 kg = 13,16 €)
 2023-02-28;764067;REWE Beste Wahl;REWE Beste Wahl Ostern Schichtnougat-Eier 105g;199;105g (1 kg = 18,95 €)
 2023-02-28;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1007,8 +1007,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-28;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2023-02-28;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-02-28;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-02-28;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-02-28;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-02-28;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-02-28;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-02-28;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-02-28;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
@@ -1361,6 +1361,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-02-28;2024967;REWE Bio;REWE Bio Kasseler aus dem Schweinerücken 200g;598;1 Stück ca. 200 g (1 kg = 29,90 €)
 2023-02-28;7055914;REWE Bio;REWE Bio Kichererbsen 220g;115;215g (1 kg = 5,35 €)
 2023-02-28;3235642;REWE Bio;REWE Bio Kichererbsen-Kokos-Eintopf 400ml;229;400ml (1 l = 5,73 €)
+2023-02-28;7986754;REWE Bio;REWE Bio Kidneybohnen 360g;115;240g (1 kg = 4,79 €)
 2023-02-28;7037215;REWE Bio;REWE Bio Kiwi Gold 4 Stück;269;4 Stück
 2023-02-28;8327523;REWE Bio;REWE Bio Knabbersnack Mais Dinos 60g;79;60g (1 kg = 13,17 €)
 2023-02-28;8376955;REWE Bio;REWE Bio Knollensellerie ca. 1kg;279;1 Stück ca. 1000 g (1 kg = 2,79 €)
