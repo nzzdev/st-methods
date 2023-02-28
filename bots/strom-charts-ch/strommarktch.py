@@ -137,7 +137,7 @@ def get_spotmarket():
     #spotmarket_df_day = spotmarket_df_day.round(2)
     #spotmarket_df_day = spotmarket_df_day.dropna()
     
-    spotmarket_df_day = spotmarket_df_day[spotmarket_df_day['date'] >= date.today() - pd.DateOffset(years=1)]
+    spotmarket_df_day = spotmarket_df_day[spotmarket_df_day['date'] >= pd.to_datetime("today") - pd.DateOffset(years=1)]
 
     return spotmarket_df_day
 
