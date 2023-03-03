@@ -254,6 +254,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-03;6387918;ja!;ja! Jagdwurst 200g;129;200g (1 kg = 6,45 €)
 2023-03-03;8350407;ja!;ja! Jasmin Reis 1kg;249;1000g
 2023-03-03;8601073;ja!;ja! Joghurt Dressing 250ml;99;250ml (1 l = 3,96 €)
+2023-03-03;7895349;ja!;ja! Joghurt Dressing 90ml;79;90ml (1 l = 8,78 €)
 2023-03-03;8514626;ja!;ja! Joghurt Griechischer Art Natur 4x150g;149;4x600g (1 kg = 2,48 €)
 2023-03-03;8600575;ja!;ja! Joghurt Light Dressing 250ml;99;250ml (1 l = 3,96 €)
 2023-03-03;754432;ja!;ja! Joghurt mild 0,1% 500g;85;500g (1 kg = 1,70 €)
@@ -322,8 +323,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-03;5883121;ja!;ja! Markenbutter mild gesäuert 250g;149;250g (1 kg = 5,96 €)
 2023-03-03;8155103;ja!;ja! Mascarpone 250g;199;250g (1 kg = 7,96 €)
 2023-03-03;8602560;ja!;ja! Meersalz 110g;109;110g (1 kg = 9,91 €)
-2023-03-03;8696982;ja!;ja! Mehrkorn Toastbrötchen 335g;119;335g (1 kg = 3,55 €)
 2023-03-03;8861007;ja!;ja! Mehrkorn Toastbrötchen 335g;99;335g (1 kg = 2,96 €)
+2023-03-03;8696982;ja!;ja! Mehrkorn Toastbrötchen 335g;119;335g (1 kg = 3,55 €)
 2023-03-03;7914158;ja!;ja! Mehrkornbrötchen 8 Stück 560g;119;560g (1 kg = 2,13 €)
 2023-03-03;8381825;ja!;ja! Mehrweg Frische-Deckel für 500g Becher 2 Stück;99;2 Stück
 2023-03-03;1374472;ja!;ja! Mett-Enden geräuchert 300g;299;300g (1 kg = 9,97 €)
@@ -1025,8 +1026,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-03;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2023-03-03;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-03-03;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-03-03;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-03-03;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-03-03;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-03-03;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-03-03;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-03-03;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
@@ -1167,7 +1168,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-03;8644883;REWE Bio;REWE Bio + vegan Hafer Drink ohne Zucker 1l;95;1l
 2023-03-03;8710249;REWE Bio;REWE Bio + vegan Haferdrink Pulver glutenfrei 300g;499;300g (1 kg = 16,63 €)
 2023-03-03;8774648;REWE Bio;REWE Bio + vegan Hummus Natur 200g;149;200g (1 kg = 7,45 €)
-2023-03-03;7781674;REWE Bio;REWE Bio + vegan Jackfruit natur 400g;179;230g (1 kg = 7,78 €)
 2023-03-03;7963454;REWE Bio;REWE Bio + vegan Kokos Natur 400g;169;400g (1 kg = 4,23 €)
 2023-03-03;8090294;REWE Bio;REWE Bio + vegan Mandel Drink Natur 1l;179;1l
 2023-03-03;8578130;REWE Bio;REWE Bio + vegan Mozzarisella Mozzarella-Ersatz 150g;279;150g (1 kg = 18,60 €)
