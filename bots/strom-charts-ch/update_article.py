@@ -1,7 +1,7 @@
 from datetime import datetime as dt, timedelta
 from helpers import *
 
-def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe):
+def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe, bfe2):
     # set date
     q_date = 'Stand: '+ dt.now().strftime("%-d. %-m. %Y")    
     #q_date_ = 'Preise für die Schweiz erst ab März 2022 verfügbar. <br>Stand: '+ dt.now().strftime("%-d. %-m. %Y") 
