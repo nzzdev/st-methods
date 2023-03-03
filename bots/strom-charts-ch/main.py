@@ -38,5 +38,5 @@ df_bfe2 = bfe.get_bfe2()
   Update q.config
 """
 
-update_article.run(df_futures, df_spotmarket, df_atomstrom_fr, df_speicherseen, df_bfe, d_bfe2)
+update_article.run(df_futures, df_spotmarket, df_atomstrom_fr, df_speicherseen, df_bfe, df_bfe2)
 update_dashboard.run(df_bfe, df_spotmarket, df_speicherseen)
