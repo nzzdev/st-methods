@@ -30,5 +30,8 @@ def run(futures, spotmarket, atomstrom_fr, speicherseen, bfe):
     update_chart(id = "e41fb785ca9af558a19582476dafef33", 
                 data = bfe,
                 notes = '¹ Minimum/Maximum der letzten 5 Jahre.<br>Der Landesverbrauch enthält den gesamten Verbrauch von Haushalten, Gewerbe, Landwirtschaft, Dienstleistungen, Industrie und Verkehr (sogenannter Endverbrauch) zuzüglich Übertragungs- und Verteilverluste (Netzverluste). Zudem ist der Stromverbrauch für den Betrieb von Speicherpump-Kraftwerken enthalten. <br>Stand: ' + (dt.now() - timedelta(days=1)).strftime("%-d. %-m. %Y"))  
+    
+    update_chart(id = "623c6f7dc5f63244c2d6ca37d0273e5c", 
+                data = bfe)  
 
 

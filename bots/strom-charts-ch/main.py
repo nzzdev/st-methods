@@ -30,6 +30,7 @@ df_spotmarket = strommarktch.get_spotmarket()
 df_atomstrom_fr = strommarktch.get_atomstrom_frankreich()
 df_speicherseen = speicherseen.get_speicherseen()
 df_bfe = bfe.get_bfe()
+df_bfe2 = bfe.get_bfe2()
 
 
 
@@ -37,5 +38,5 @@ df_bfe = bfe.get_bfe()
   Update q.config
 """
 
-update_article.run(df_futures, df_spotmarket, df_atomstrom_fr, df_speicherseen, df_bfe)
+update_article.run(df_futures, df_spotmarket, df_atomstrom_fr, df_speicherseen, df_bfe, d_bfe2)
 update_dashboard.run(df_bfe, df_spotmarket, df_speicherseen)

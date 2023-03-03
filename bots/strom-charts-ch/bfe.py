@@ -43,6 +43,8 @@ def get_bfe():
 
     return landesverbrauch
 
+
+def get_bfe2():
     einsparung = pd.read_json('https://energiedashboard.admin.ch/api/v2/strom-sparziel/aktuelle-einsparung')
     einsparung = einsparung.dropna()
     einsparung = einsparung.rename(columns = {'differenzMittelwertProzent': 'Mehr-/Minderverbrauch'})
