@@ -926,8 +926,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-04;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;449;500ml (1 l = 8,98 €)
 2023-03-04;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-03-04;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-03-04;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-03-04;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-03-04;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-03-04;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;329;250g (1 kg = 13,16 €)
 2023-03-04;1206377;REWE Beste Wahl;REWE Beste Wahl Osterhase Vollmilch 70g;79;70g (1 kg = 11,29 €)
 2023-03-04;2015999;REWE Beste Wahl;REWE Beste Wahl Osterhäschen 125g;189;125g (1 kg = 15,12 €)
@@ -1030,8 +1030,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-04;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2023-03-04;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-03-04;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-03-04;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-03-04;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-03-04;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-03-04;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-03-04;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-03-04;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
@@ -1281,8 +1281,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-04;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;239;6 Stück
 2023-03-04;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;279;1 Stück
 2023-03-04;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;289;250g (1 kg = 11,56 €)
-2023-03-04;200348;REWE Bio;REWE Bio Emmentaler 150g;219;150g (1 kg = 14,60 €)
 2023-03-04;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
+2023-03-04;200348;REWE Bio;REWE Bio Emmentaler 150g;219;150g (1 kg = 14,60 €)
 2023-03-04;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2023-03-04;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
 2023-03-04;8381730;REWE Bio;REWE Bio Erbseneintopf 400g;199;400g (1 kg = 4,98 €)
