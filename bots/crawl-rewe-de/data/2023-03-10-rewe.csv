@@ -670,6 +670,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-10;2331793;REWE Beste Wahl;REWE Beste Wahl Duo-Muffins Backmischung 335g;249;380g (1 kg = 6,55 €)
 2023-03-10;8131642;REWE Beste Wahl;REWE Beste Wahl Eco Color Waschmittel 1,5l - 22 WL;349;1,50l (1 l = 2,33 €)
 2023-03-10;7220526;REWE Beste Wahl;REWE Beste Wahl Eco Recycling Taschentücher Box 100 Stück;145;100 Stück
+2023-03-10;8218945;REWE Beste Wahl;REWE Beste Wahl Eco WC-Reiniger Zitrus 750ml;129;750ml (1 l = 1,72 €)
 2023-03-10;8209143;REWE Beste Wahl;REWE Beste Wahl Eier Freilandhaltung 6 Stück;189;6 Stück
 2023-03-10;7194888;REWE Beste Wahl;REWE Beste Wahl Eiernudeln Spiralen 500g;159;500g (1 kg = 3,18 €)
 2023-03-10;7857695;REWE Beste Wahl;REWE Beste Wahl Eis Bourbon Vanille vegan 500ml;299;500ml (1 l = 5,98 €)
@@ -919,8 +920,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-03-10;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;549;500ml (1 l = 10,98 €)
 2023-03-10;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-03-10;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-03-10;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-03-10;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-03-10;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-03-10;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;329;250g (1 kg = 13,16 €)
 2023-03-10;1206377;REWE Beste Wahl;REWE Beste Wahl Osterhase Vollmilch 70g;79;70g (1 kg = 11,29 €)
 2023-03-10;2015999;REWE Beste Wahl;REWE Beste Wahl Osterhäschen 125g;189;125g (1 kg = 15,12 €)
