@@ -29,15 +29,15 @@ if __name__ == '__main__':
             f.write(output)
 
         # read csv
-        df_diesel = pd.read_csv('./data/node_diesel.csv', index_col=18)
-        df_super = pd.read_csv('./data/node_super.csv', index_col=18)
+        df_diesel = pd.read_csv('./data/node_diesel.csv', index_col=1)
+        df_super = pd.read_csv('./data/node_super.csv', index_col=1)
 
         # drop unused columns and duplicate entries for current day
         df_diesel = df_diesel.drop(
-            df_diesel.columns[[0, 1, 2, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19]], axis=1)
+            df_diesel.columns[[0, 1, 2, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19]], axis=1)
         df_diesel = df_diesel[~df_diesel.index.duplicated(keep='last')]
         df_super = df_super.drop(
-            df_super.columns[[0, 1, 2, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 16, 17, 18, 19]], axis=1)
+            df_super.columns[[0, 1, 2, 4, 5, 6, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19]], axis=1)
         df_super = df_super[~df_super.index.duplicated(keep='last')]
 
         # get date for chart notes
@@ -56,9 +56,9 @@ if __name__ == '__main__':
         notes_chart = f'¹ Durchschnitt oberstes und unterstes Dezil von rund 15 000 Tankstellen.<br>Stand: {timestamp_str}'
 
         # rename column headers
-        mapping = {df_diesel.columns[0]: '', df_diesel.columns[1]                   : 'Höchster/niedrigster Preis¹', df_diesel.columns[2]: 'Bundesschnitt'}
+        mapping = {df_diesel.columns[0]: '', df_diesel.columns[1]: 'Höchster/niedrigster Preis¹', df_diesel.columns[2]: 'Bundesschnitt'}
         df_diesel = df_diesel.rename(columns=mapping)
-        mapping = {df_super.columns[0]: '', df_super.columns[1]                   : 'Höchster/niedrigster Preis¹', df_super.columns[2]: 'Bundesschnitt'}
+        mapping = {df_super.columns[0]: '', df_super.columns[1]: 'Höchster/niedrigster Preis¹', df_super.columns[2]: 'Bundesschnitt'}
         df_super = df_super.rename(columns=mapping)
 
         # get current price for chart title
