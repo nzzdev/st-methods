@@ -1,6 +1,0 @@
-pandas==1.2.4
-beautifulsoup4==4.11.1
-requests==2.27.1
-openpyxl==3.0.9
-# requests-ip-rotator==1.0.12
-fake-useragent==1.1.1
