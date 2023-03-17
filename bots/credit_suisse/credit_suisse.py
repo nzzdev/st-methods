@@ -49,7 +49,7 @@ df_2['Schlusskurs am ' + yesterday] = close.Close
 df_2.fillna(method='ffill', inplace=True)
 
 
-notes = 'Die Grafik wird alle 30 Minuten aktualisiert.'
+notes = 'Die Grafik wird wochentags ab 9:00 alle 30 Minuten aktualisiert.'
 
 update_chart(id = '0e4679180159fe79f9fd140fe620b4e3', data = df_2, notes = notes)
 
