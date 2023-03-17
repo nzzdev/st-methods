@@ -36,6 +36,7 @@ df_2 = yf.download(tickers,  period = "1d", interval = "1m")
 df_2 = df_2['Close'].to_frame().dropna().reset_index(level = 0)
 df_2 = df_2.rename(columns = {'Datetime': 'Date'})
 
+yesterday = date_yesterday.strftime('%d.%m.%Y')
 
 df_2['Date'] = df_2['Date'].astype(str)
 
@@ -43,7 +44,7 @@ df_2['Date'] = df_2['Date'].str.slice(start = 0, stop = 19)
 
 df_2 = df_2.rename(columns = {'Close': 'Aktueller Kurs'})
 
-df_2['Schlusskurs vor einem Tag'] = close.Close
+df_2['Schlusskurs am ' + yesterday] = close.Close
 
 df_2.fillna(method='ffill', inplace=True)
 
