@@ -4,7 +4,7 @@ on:
   # Schedule makes this bot run in regular intervals, without any interventions
   # At minute 0 and 30 past every hour from 8 through 19 on every day-of-week from Monday through Friday.
   schedule:
-    - cron: "40,30 8-19 * * 1-5"
+    - cron: "15,30 8-19 * * 1-5"
   workflow_dispatch:
 
 jobs:
