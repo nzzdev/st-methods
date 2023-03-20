@@ -10,6 +10,7 @@ Created on Wed Mar 15 17:52:11 2023
 import yfinance as yf
 from datetime import date, timedelta
 import os
+import pandas as pd
 
 from helpers import *
 
@@ -123,5 +124,3 @@ df_4 = df_4[['Credit Suisse', 'BNP Paribas', 'UBS', 'Deutsche Bank',  'UniCredit
 df_4 = df_4.reset_index()
 
 update_chart(id = '7b974a9aaf4217d71f83fde19d59687a', data = df_4)
-
-
