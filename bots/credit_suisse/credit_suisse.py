@@ -175,7 +175,7 @@ update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
 
 
 #dax = df['Close']['^GDAXI'][df.index >=
-                            '2022-01-01'].to_frame().dropna().reset_index(level=0)
+        #                    '2022-01-01'].to_frame().dropna().reset_index(level=0)
 #dax.index = dax.index.strftime('%Y-%m-%d')
 #update_chart(id='a78c9d9de3230aea314700dc582d873d', data=dax)
 
