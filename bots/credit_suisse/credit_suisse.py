@@ -33,6 +33,14 @@ notes = 'Für den laufenden Tag wird der aktuelle Kurs angezeigt (Intraday).'
 update_chart(id='9039ce8be0b7e1650165751c47d993d4',
                  data=df_1, notes = notes)
 
+
+df_1 = yf.download(tickers,  period = "1mo", interval = "1d")
+df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
+
+update_chart(id='15f38f200afda5632efee1ff19b0d7c2',
+                 data=df_1, notes = notes)
+
+
 date_today = date.today()
 
 #date_yesterday = date.today() - timedelta(1)
@@ -83,10 +91,11 @@ update_chart(id='ed07cc2c8f03f75c601766ce21985353',
               data=df_1, notes = notes)
 
 
+df_1 = yf.download(tickers,  period = "1mo", interval = "1d")
+df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
 
-
-
-
+update_chart(id='ed07cc2c8f03f75c601766ce21a68d20',
+              data=df_1, notes = notes)
 
 
 
