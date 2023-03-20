@@ -75,8 +75,10 @@ tickers = ["UBSG.SW"]  # Subtitute for the tickers you want
 df_1 = yf.download(tickers,  period = "1y", interval = "1d")
 df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
 
+notes = 'Für den laufenden Tag wird der aktuelle Kurs angezeigt (Intraday).'
+
 update_chart(id='ed07cc2c8f03f75c601766ce21985353',
-              data=df_1)
+              data=df_1, notes = notes)
 
 
 
