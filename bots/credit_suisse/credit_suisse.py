@@ -24,12 +24,14 @@ os.chdir(os.path.dirname(__file__))
 
 # Credit Suisse
 
-tickers = ["CSGN.SW"]  # Subtitute for the tickers you want
+tickers = ["CSGN.SW"]  
 df_1 = yf.download(tickers,  period = "1y", interval = "1d")
 df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
 
+notes = 'Für den laufenden Tag wird der aktuelle Kurs angezeigt (Intraday).'
+
 update_chart(id='9039ce8be0b7e1650165751c47d993d4',
-                 data=df_1)
+                 data=df_1, notes = notes)
 
 date_today = date.today()
 
@@ -56,7 +58,7 @@ df_2 = df_2.rename(columns = {'Close': 'Aktueller Kurs'})
 df_2.fillna(method='ffill', inplace=True)
 
 
-notes = 'Die Grafik wird wochentags ab 9:15 alle 30 Minuten aktualisiert.'
+notes = 'Die Grafik wird wochentags ab 9 Uhr 15 alle 30 Minuten aktualisiert.'
 
 update_chart(id = '0e4679180159fe79f9fd140fe620b4e3', data = df_2, notes = notes)
 
@@ -71,7 +73,7 @@ update_chart(id = '0e4679180159fe79f9fd140fe63e3945', data = df_3)
 
 # UBS
 
-tickers = ["UBSG.SW"]  # Subtitute for the tickers you want
+tickers = ["UBSG.SW"]  
 df_1 = yf.download(tickers,  period = "1y", interval = "1d")
 df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
 
