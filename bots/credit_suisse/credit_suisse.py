@@ -112,9 +112,9 @@ for i in tickers:
     df_4[i] = df_4[i]*100/x.values
 
 
-df_4 = df_4.rename(columns = {'CSGN.SW': 'Credit Suisse', 'BNP.PA': 'BNP Paribas', 'UBSG.SW': 'UBS', 'DBK.DE': 'Deutsche Bank', 'GLE.PA': 'Société Générale', 'UCG.MI': 'UniCredit'})
+df_4 = df_4.rename(columns = {'CSGN.SW': 'Credit Suisse', 'BNP.PA': 'BNP Paribas', 'UBSG.SW': 'UBS', 'DBK.DE': 'Deutsche Bank', 'GLE.PA': 'Société Générale', 'UCG.MI': 'Unicredit'})
 
-df_4 = df_4[['Credit Suisse', 'BNP Paribas', 'UBS', 'Deutsche Bank',  'UniCredit']]
+df_4 = df_4[['Credit Suisse', 'BNP Paribas', 'UBS', 'Deutsche Bank',  'Unicredit']]
 
 df_4 = df_4.reset_index()
 
@@ -130,9 +130,9 @@ for i in tickers:
     df_4[i] = df_4[i]*100/x.values
 
 
-df_4 = df_4.rename(columns = {'CSGN.SW': 'Credit Suisse', 'BNP.PA': 'BNP Paribas', 'UBSG.SW': 'UBS', 'DBK.DE': 'Deutsche Bank', 'GLE.PA': 'Société Générale', 'UCG.MI': 'UniCredit'})
+df_4 = df_4.rename(columns = {'CSGN.SW': 'Credit Suisse', 'BNP.PA': 'BNP Paribas', 'UBSG.SW': 'UBS', 'DBK.DE': 'Deutsche Bank', 'GLE.PA': 'Société Générale', 'UCG.MI': 'Unicredit'})
 
-df_4 = df_4[['Credit Suisse', 'BNP Paribas', 'UBS', 'Deutsche Bank',  'UniCredit']]
+df_4 = df_4[['Credit Suisse', 'BNP Paribas', 'UBS', 'Deutsche Bank',  'Unicredit']]
 
 df_4 = df_4.reset_index()
 
