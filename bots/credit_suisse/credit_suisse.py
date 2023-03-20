@@ -12,14 +12,15 @@ from datetime import date, timedelta
 import os
 import pandas as pd
 
+import json
+from urllib.request import urlopen
+
 from helpers import *
 
 # Set Working Directory
 os.chdir(os.path.dirname(__file__))
 
 
-# SIX
-#df = pd.read_json('https://www.six-group.com/fqs/charts.json?select=ValorId&where=ValorId=CH0012138530CHF4&netting=2&fromdate=20230316&todate=20230316')
 
 
 # Credit Suisse
@@ -137,3 +138,47 @@ df_4 = df_4[['Credit Suisse', 'BNP Paribas', 'UBS', 'Deutsche Bank',  'Unicredit
 df_4 = df_4.reset_index()
 
 update_chart(id = '7b974a9aaf4217d71f83fde19d59687a', data = df_4)
+
+
+
+# SMI & DAX
+
+url = 'https://www.six-group.com/fqs/charts.json?select=ValorId&where=ValorId=CH0009980894CHF9&netting=2&fromdate=20230320&todate=20230320'
+
+response = urlopen(url)
+d = json.loads(response.read())
+
+d_dict = d['valors'][0]['data']
+
+df = pd.DataFrame(d_dict)
+
+df['Date'] = pd.to_datetime(df['Date'], format = '%Y%m%d') 
+df = df[['Date', 'Close']].tail(1)
+
+smi = pd.read_csv('https://www.six-group.com/exchanges/downloads/indexdata/hsmi.csv', sep = ';', skiprows = 4)
+smi['DATE'] = pd.to_datetime(smi['DATE'], format = '%d.%m.%Y')
+smi.sort_values(by = 'DATE', ascending = True, inplace = True)
+smi = smi[['DATE', 'Close']]
+smi = smi[smi['DATE'] >= '2022-01-01']
+
+smi.rename(columns={smi.columns[0]: 'Date'}, inplace=True)
+
+smi = pd.concat([smi, df])
+
+update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
+
+
+
+
+
+
+
+
+#dax = df['Close']['^GDAXI'][df.index >=
+                            '2022-01-01'].to_frame().dropna().reset_index(level=0)
+#dax.index = dax.index.strftime('%Y-%m-%d')
+#update_chart(id='a78c9d9de3230aea314700dc582d873d', data=dax)
+
+
+
+
