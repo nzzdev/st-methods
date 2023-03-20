@@ -20,6 +20,9 @@ os.chdir(os.path.dirname(__file__))
 # SIX
 #df = pd.read_json('https://www.six-group.com/fqs/charts.json?select=ValorId&where=ValorId=CH0012138530CHF4&netting=2&fromdate=20230316&todate=20230316')
 
+
+# Credit Suisse
+
 tickers = ["CSGN.SW"]  # Subtitute for the tickers you want
 df_1 = yf.download(tickers,  period = "1y", interval = "1d")
 df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
@@ -27,16 +30,19 @@ df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
 #update_chart(id='9039ce8be0b7e1650165751c47d993d4',
  #                data=df_1)
 
+date_today = date.today()
 
-date_yesterday = date.today() - timedelta(1)
+#date_yesterday = date.today() - timedelta(1)
 
-close = df_1[df_1['Date'] == date_yesterday.strftime('%Y-%m-%d')][['Close']].reset_index()
+close = df_1[(df_1['Date'] != df_1['Date'].max().strftime('%Y-%m-%d'))]
+close = close[(close['Date'] == close['Date'].max().strftime('%Y-%m-%d'))]
 
 df_2 = yf.download(tickers,  period = "1d", interval = "1m")
 df_2 = df_2['Close'].to_frame().dropna().reset_index(level = 0)
 df_2 = df_2.rename(columns = {'Datetime': 'Date'})
 
-yesterday = date_yesterday.strftime('%d.%m.%Y')
+#yesterday = date_yesterday.strftime('%d.%m.%Y')
+last = close['Date'].dt.strftime("%d. %m. %Y")
 
 df_2['Date'] = df_2['Date'].astype(str)
 
@@ -44,12 +50,12 @@ df_2['Date'] = df_2['Date'].str.slice(start = 0, stop = 19)
 
 df_2 = df_2.rename(columns = {'Close': 'Aktueller Kurs'})
 
-df_2['Schlusskurs am ' + yesterday] = close.Close
+#df_2['Schlusskurs am ' + last] = close.Close
 
 df_2.fillna(method='ffill', inplace=True)
 
 
-notes = 'Die Grafik wird wochentags ab 9:00 alle 30 Minuten aktualisiert.'
+notes = 'Die Grafik wird wochentags ab 9:15 alle 30 Minuten aktualisiert.'
 
 update_chart(id = '0e4679180159fe79f9fd140fe620b4e3', data = df_2, notes = notes)
 
@@ -58,6 +64,27 @@ df_3 = yf.download(tickers,  period = "16y", interval = "1d")
 df_3 = df_3['Close'].rolling(7).mean().dropna().reset_index(level = 0)
 
 update_chart(id = '0e4679180159fe79f9fd140fe63e3945', data = df_3)
+
+
+
+
+# UBS
+
+tickers = ["UBSG.SW"]  # Subtitute for the tickers you want
+df_1 = yf.download(tickers,  period = "1y", interval = "1d")
+df_1 = df_1['Close'].to_frame().dropna().reset_index(level = 0)
+
+update_chart(id='ed07cc2c8f03f75c601766ce21985353',
+              data=df_1)
+
+
+
+
+
+
+
+
+
 
 
 # Bankenvergleich
