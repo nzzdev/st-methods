@@ -67,7 +67,7 @@ df_2 = df_2.rename(columns = {'Close': 'Aktueller Kurs'})
 df_2.fillna(method='ffill', inplace=True)
 
 
-notes = 'Die Grafik wird wochentags ab 9.15 Uhr alle 30 Minuten aktualisiert.'
+notes = 'Die Grafik wird wochentags ab 9.30 Uhr alle 30 Minuten aktualisiert.'
 
 update_chart(id = '0e4679180159fe79f9fd140fe620b4e3', data = df_2, notes = notes)
 
@@ -168,8 +168,8 @@ smi = pd.concat([smi, df])
 update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
 
 
-
-
+#first = date_today.replace(day=1)
+#last_month = first - timedelta(days=1)
 
 
 
