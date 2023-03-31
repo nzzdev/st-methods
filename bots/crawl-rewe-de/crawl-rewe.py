@@ -422,9 +422,9 @@ if __name__ == '__main__':
             dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
             dftop_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
 
-            # drop pseudo duplicates (like "Joghurt") and get top 5
+            # drop pseudo duplicates (like "Joghurt") and get top 10
             dftop_ja = dftop_ja.drop_duplicates(subset='Name', keep='first')
-            dftop_ja = dftop_ja.head(5)
+            dftop_ja = dftop_ja.head(10)
 
             # calculate percentage change
             dftop_ja['Prozent'] = dftop_ja['Prozent'].apply(
@@ -452,7 +452,7 @@ if __name__ == '__main__':
             # add Tweet intro
             count = dftop_ja.shape[0]
             intro = [
-                f'Top 5 Preiserhöhungen bei #Rewe und #Aldi im {month_nice}:\n\n']
+                f'Top 10 Preiserhöhungen bei #Rewe und #Aldi im {month_nice}:\n\n']
             dftop_ja = pd.DataFrame([intro], index=['0000000'], columns=[
                                     'Tweet']).append(dftop_ja)
 
@@ -825,9 +825,9 @@ if __name__ == '__main__':
             dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
             dftop_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
 
-            # drop pseudo duplicates (like "Joghurt") and get top 5
+            # drop pseudo duplicates (like "Joghurt") and get top 10
             dftop_ja = dftop_ja.drop_duplicates(subset='Name', keep='first')
-            dftop_ja = dftop_ja.head(5)
+            dftop_ja = dftop_ja.head(10)
 
             # calculate percentage change
             dftop_ja['Prozent'] = dftop_ja['Prozent'].apply(
@@ -855,7 +855,7 @@ if __name__ == '__main__':
             # add Tweet intro
             count = dftop_ja.shape[0]
             intro = [
-                f'Top 5 Preiserhöhungen bei #Rewe und #Aldi im {month_nice}:\n\n']
+                f'Top 10 Preiserhöhungen bei #Rewe und #Aldi im {month_nice}:\n\n']
             dftop_ja = pd.DataFrame([intro], index=['0000000'], columns=[
                                     'Tweet']).append(dftop_ja)
 
