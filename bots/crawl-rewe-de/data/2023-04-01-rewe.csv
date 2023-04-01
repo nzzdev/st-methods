@@ -1012,6 +1012,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-01;8015140;REWE Beste Wahl;REWE Beste Wahl Schoko Tröpchen Zartbitter 100g;129;100g (1 kg = 12,90 €)
 2023-04-01;8385535;REWE Beste Wahl;REWE Beste Wahl Schoko Tröpfchen Vollmilch 100g;99;100g (1 kg = 9,90 €)
 2023-04-01;192964;REWE Beste Wahl;REWE Beste Wahl Schoko Waffelröllchen Vollmilch 125g;119;125g (1 kg = 9,52 €)
+2023-04-01;2532797;REWE Beste Wahl;REWE Beste Wahl Schoko-Ostereier 200g;169;200g (1 kg = 8,45 €)
 2023-04-01;445435;REWE Beste Wahl;REWE Beste Wahl Schoko-Spritzgebäck 250g;125;250g (1 kg = 5 €)
 2023-04-01;7273139;REWE Beste Wahl;REWE Beste Wahl Schokobrötchen 360g;169;360g (1 kg = 4,69 €)
 2023-04-01;126938;REWE Beste Wahl;REWE Beste Wahl Schokokeks Vollmilch 125g;99;125g (1 kg = 7,92 €)
@@ -1295,8 +1296,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-01;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;239;6 Stück
 2023-04-01;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;279;1 Stück
 2023-04-01;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;269;250g (1 kg = 10,76 €)
-2023-04-01;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-04-01;200348;REWE Bio;REWE Bio Emmentaler 150g;219;150g (1 kg = 14,60 €)
+2023-04-01;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-04-01;577900;REWE Bio;REWE Bio Emmentaler gerieben 150g;199;150g (1 kg = 13,27 €)
 2023-04-01;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2023-04-01;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
@@ -1494,7 +1495,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-01;7055254;REWE Bio;REWE Bio Pfeffersalami 70g;189;70g (1 kg = 27 €)
 2023-04-01;7270210;REWE Bio;REWE Bio Polenta 500g;129;500g (1 kg = 2,58 €)
 2023-04-01;198686;REWE Bio;REWE Bio Pommes Frites 750g;229;750g (1 kg = 3,05 €)
-2023-04-01;8468711;REWE Bio;REWE Bio Porridge Beere 500g;299;500g (1 kg = 5,98 €)
 2023-04-01;8471116;REWE Bio;REWE Bio Porridge Kakao 500g;299;500g (1 kg = 5,98 €)
 2023-04-01;1032440;REWE Bio;REWE Bio Pumpernickel 250g;109;250g (1 kg = 4,36 €)
 2023-04-01;1267759;REWE Bio;REWE Bio Puten Paprikasteak ca. 300g;507;1 Stück ca. 300 g (1 kg = 16,90 €)
