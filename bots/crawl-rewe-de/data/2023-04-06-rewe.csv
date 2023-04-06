@@ -513,6 +513,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-06;2063281;ja!;ja! Thunfischfilets in Sonnenblumenöl 195g;149;140g (1 kg = 10,64 €)
 2023-04-06;2063277;ja!;ja! Thunfischfilets in eigenem Saft geschnitten 195g;149;150g (1 kg = 9,93 €)
 2023-04-06;8055493;ja!;ja! Tilsiter in Scheiben 400g;349;400g (1 kg = 8,73 €)
+2023-04-06;5499259;ja!;ja! Tissue-Toilettenpapier 3-lagig 10x200 Blatt;405;10x200 Stück
 2023-04-06;3280994;ja!;ja! Tomate-Basilikum Pasta-Sauce 400g;159;400ml (1 l = 3,98 €)
 2023-04-06;973336;ja!;ja! Tomaten fein gehackt in Tomatensaft 400g;85;400g (1 kg = 2,13 €)
 2023-04-06;5636442;ja!;ja! Tomaten passiert 500g;85;500g (1 kg = 1,70 €)
@@ -932,8 +933,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-06;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;549;500ml (1 l = 10,98 €)
 2023-04-06;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-04-06;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-04-06;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-04-06;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-04-06;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-04-06;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;329;250g (1 kg = 13,16 €)
 2023-04-06;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
 2023-04-06;8005928;REWE Beste Wahl;REWE Beste Wahl Paprika Edelsüß gemahlen 50g;199;50g (1 kg = 39,80 €)
@@ -1036,8 +1037,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-06;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2023-04-06;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-04-06;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-04-06;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-04-06;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-04-06;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-04-06;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-04-06;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-04-06;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
