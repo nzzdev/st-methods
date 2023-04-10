@@ -938,8 +938,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-10;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;549;500ml (1 l = 10,98 €)
 2023-04-10;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-04-10;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-04-10;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-04-10;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-04-10;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-04-10;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2023-04-10;2015999;REWE Beste Wahl;REWE Beste Wahl Osterhäschen 125g;199;125g (1 kg = 15,92 €)
 2023-04-10;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1293,8 +1293,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-10;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;239;6 Stück
 2023-04-10;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;269;1 Stück
 2023-04-10;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;269;250g (1 kg = 10,76 €)
-2023-04-10;200348;REWE Bio;REWE Bio Emmentaler 150g;219;150g (1 kg = 14,60 €)
 2023-04-10;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
+2023-04-10;200348;REWE Bio;REWE Bio Emmentaler 150g;219;150g (1 kg = 14,60 €)
 2023-04-10;577900;REWE Bio;REWE Bio Emmentaler gerieben 150g;199;150g (1 kg = 13,27 €)
 2023-04-10;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2023-04-10;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
