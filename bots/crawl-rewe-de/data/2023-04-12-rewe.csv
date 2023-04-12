@@ -585,8 +585,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-12;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2023-04-12;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-04-12;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2023-04-12;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-04-12;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2023-04-12;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-04-12;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-04-12;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-04-12;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;259;475g (1 kg = 5,45 €)
@@ -874,7 +874,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-12;2316984;REWE Beste Wahl;REWE Beste Wahl Lasagne Bolognese 400g;279;400g (1 kg = 6,98 €)
 2023-04-12;672979;REWE Beste Wahl;REWE Beste Wahl Lasagneplatten 500g;189;500g (1 kg = 3,78 €)
 2023-04-12;8519806;REWE Beste Wahl;REWE Beste Wahl Laugenbrötchen 360g;219;360g (1 kg = 6,08 €)
-2023-04-12;2061726;REWE Beste Wahl;REWE Beste Wahl Laugenstangen 700g;199;718g (1 kg = 2,77 €)
 2023-04-12;8292560;REWE Beste Wahl;REWE Beste Wahl Laugenstangen Käse 110g;249;4x110g (1 kg = 5,66 €)
 2023-04-12;8023121;REWE Beste Wahl;REWE Beste Wahl Lebensmittel Farbpasten in rot, grün, gelb & blau 4x10g;199;4x10g (1 kg = 49,75 €)
 2023-04-12;2631993;REWE Beste Wahl;REWE Beste Wahl Linguine al Bronzo 500g;139;500g (1 kg = 2,78 €)
@@ -1036,8 +1035,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-04-12;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;279;750ml (1 l = 3,72 €)
 2023-04-12;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-04-12;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-04-12;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-04-12;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-04-12;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-04-12;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-04-12;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-04-12;137786;REWE Beste Wahl;REWE Beste Wahl Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
