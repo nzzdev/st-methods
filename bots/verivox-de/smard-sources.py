@@ -114,13 +114,24 @@ if __name__ == '__main__':
         time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
         notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms.<br>Stand: {time_str_notes}'
 
-        # calculate percentage for chart title
+        """
+        # old gas chart title: calculate percentage for chart title
         df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
         perc_gas = (df_perc['Erdgas'].iloc[-1]*100).round(0).astype(int)
         if perc_gas > 1:
             title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
         else:
             title_chart = f'{perc_gas} Prozent des Stroms stammt derzeit aus Erdgas'
+        """
+
+        # calculate percentage for chart title
+        df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
+        perc_fossile = ((df_perc['Erdgas'].iloc[-1] + df_perc['Kohle'].iloc[-1] +
+                        df_perc['Sonstige'].iloc[-1])*100).round(0).astype(int)
+        if perc_fossile > 1:
+            title_chart = f'{perc_fossile} Prozent des Stroms stammen derzeit aus fossilen Brennstoffen'
+        else:
+            title_chart = f'{perc_fossile} Prozent des Stroms stammt aus fossilen Brennstoffen'
 
         # calculate percentage for dashboard
         df_dash = df.div(df.sum(axis=1), axis=0)
