@@ -140,7 +140,7 @@ if __name__ == '__main__':
         df_meta['Trend LNG'] = ((df['LNG'].loc[~df['LNG'].isnull(
         )].iloc[-1] / 10) - (df['LNG'].loc[~df['LNG'].isnull()].iloc[-2] / 10))
         df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull(
-        )].iloc[-2]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous week
+        )].iloc[-2]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
 
         # NS1 df_meta = df_meta[['Trend Speicher', 'Trend Gas', 'Trend NS1', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
         # STORAGE df_meta = df_meta[['Trend Speicher', 'Trend Gas', 'Trend Strom', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
