@@ -112,7 +112,7 @@ if __name__ == '__main__':
         # get current date for chart notes
         time_dt_notes = df.index[-1] + timedelta(days=1)
         time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms.<br>Stand: {time_str_notes}'
+        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Pumpspeicher in der grafischen Darstellung unter «Sonstige».<br>Stand: {time_str_notes}'
 
         """
         # old gas chart title: calculate percentage for chart title
