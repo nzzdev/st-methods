@@ -279,12 +279,21 @@ if __name__ == '__main__':
         time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
         notes_chart = f'Stand: {time_str_notes}'
 
-        # dynamic chart title
+        """
+        # old dynamic chart title with peak comparison
         last_value = df_trade['Saldo'].iloc[-2]
         if last_value > 714.032:
             title = 'Neuer Rekordwert beim Strom-Export nach Frankreich'
         else:
             title = 'Kein neuer Rekordwert beim Strom-Export nach Frankreich'
+        """
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom nach Frankreich als umgekehrt'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom aus Frankreich als umgekehrt'
 
         # run Q function
         update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
