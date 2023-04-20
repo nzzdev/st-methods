@@ -836,9 +836,10 @@ if __name__ == '__main__':
                 1000)
             df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
+            # convert to week and drop first and last row with partial values
             df_trade = df_trade.resample('W', on='Datum').sum()
             df_trade.drop(df_trade.head(1).index, inplace=True)
+            df_trade.drop(df_trade.tail(1).index, inplace=True)
 
             # save tsv
             df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
