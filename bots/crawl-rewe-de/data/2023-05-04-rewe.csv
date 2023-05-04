@@ -591,8 +591,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-05-04;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2023-05-04;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-05-04;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2023-05-04;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2023-05-04;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2023-05-04;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2023-05-04;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-05-04;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-05-04;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;259;475g (1 kg = 5,45 €)
@@ -1319,7 +1319,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-05-04;8623363;REWE Bio;REWE Bio Feta 150g;219;150g (1 kg = 14,60 €)
 2023-05-04;197877;REWE Bio;REWE Bio Fettarme H-Milch 1,5% 1l;125;1l
 2023-05-04;8061857;REWE Bio;REWE Bio Finn Toasties 260g;129;260g (1 kg = 4,96 €)
-2023-05-04;204045;REWE Bio;REWE Bio Fleischkäse 70g;119;70g (1 kg = 17 €)
 2023-05-04;187778;REWE Bio;REWE Bio Forellenfilets geräuchert 125g;459;125g (1 kg = 36,72 €)
 2023-05-04;7755720;REWE Bio;REWE Bio Frischcreme Kräuter vegan 150g;169;150g (1 kg = 11,27 €)
 2023-05-04;8754323;REWE Bio;REWE Bio Frischcreme Paprika vegan 150g;169;150g (1 kg = 11,27 €)
@@ -1537,7 +1536,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-05-04;8047823;REWE Bio;REWE Bio Rohrohrzucker 500g;229;500g (1 kg = 4,58 €)
 2023-05-04;8091575;REWE Bio;REWE Bio Rosenkohl 300g;229;300g (1 kg = 7,63 €)
 2023-05-04;204052;REWE Bio;REWE Bio Rostbratwurst 200g;369;200g (1 kg = 18,45 €)
-2023-05-04;7180293;REWE Bio;REWE Bio Rote Bete gekocht 500g;179;500g (1 kg = 3,58 €)
 2023-05-04;1011521;REWE Bio;REWE Bio Rote Bete-Scheiben 220g;99;220g (1 kg = 4,50 €)
 2023-05-04;1082478;REWE Bio;REWE Bio Rote Linsen 500g;165;500g (1 kg = 3,30 €)
 2023-05-04;999612;REWE Bio;REWE Bio Rote-Bete-Saft 0,5l;89;0,50l (1 l = 1,78 €)
