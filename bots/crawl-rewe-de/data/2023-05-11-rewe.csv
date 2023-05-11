@@ -937,8 +937,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-05-11;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;549;500ml (1 l = 10,98 €)
 2023-05-11;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-05-11;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-05-11;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-05-11;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-05-11;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-05-11;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2023-05-11;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets Praktisch Grätenfrei 475g;469;475g (1 kg = 9,87 €)
 2023-05-11;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1462,6 +1462,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-05-11;1346535;REWE Bio;REWE Bio Nackensteak Kräuter ca. 380g;870;1 Stück ca. 380 g (1 kg = 22,90 €)
 2023-05-11;8465530;REWE Bio;REWE Bio Natives Olivenöl naturtrüb 500ml;729;500ml (1 l = 14,58 €)
 2023-05-11;7816381;REWE Bio;REWE Bio Naturland 5 Korn Müsli 750g;249;750g (1 kg = 3,32 €)
+2023-05-11;8757063;REWE Bio;REWE Bio Naturland Bunter Pfeffer Mühle 40g;259;40g (1 kg = 64,75 €)
 2023-05-11;8766234;REWE Bio;REWE Bio Naturland Crème Fraiche 30% 150g;99;150g (1 kg = 6,60 €)
 2023-05-11;7794483;REWE Bio;REWE Bio Naturland Kokosblütenzucker 250g;395;250g (1 kg = 15,80 €)
 2023-05-11;7794926;REWE Bio;REWE Bio Naturland Koriander Samen gemahlen 30g;199;30g (1 kg = 66,33 €)
@@ -1611,6 +1612,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-05-11;274147;REWE Bio;REWE Bio Vielblütenhonig 500g;409;500g (1 kg = 8,18 €)
 2023-05-11;271876;REWE Bio;REWE Bio Vollkorn-Semmelbrösel 200g;99;200g (1 kg = 4,95 €)
 2023-05-11;209834;REWE Bio;REWE Bio Vollkorn-Spaghetti 500g;95;500g (1 kg = 1,90 €)
+2023-05-11;8758695;REWE Bio;REWE Bio Wacholderbeeren ganz 35g;199;35g (1 kg = 56,86 €)
 2023-05-11;8444009;REWE Bio;REWE Bio Weizen Landbrötchen 280g;119;250g (1 kg = 4,76 €)
 2023-05-11;302161;REWE Bio;REWE Bio Weizenmehl Type 550 1kg;119;1000g
 2023-05-11;199022;REWE Bio;REWE Bio Weizenvollkornbrötchen 410g, 6 Stück;269;410g (1 kg = 6,56 €)
