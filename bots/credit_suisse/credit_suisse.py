@@ -122,28 +122,28 @@ df_4 = df_4.reset_index()
 update_chart(id = '7b974a9aaf4217d71f83fde19d517265', data = df_4)
 
 
-df_4 = yf.download(tickers,  period = "1mo", interval = "1d")
+df_4_ = yf.download(tickers,  period = "1mo", interval = "1d")
 
-df_4 = df_4['Close']
+df_4_ = df_4_['Close']
 
 for i in tickers:
-    x = df_4[i].head(1)
-    df_4[i] = df_4[i]*100/x.values
+    x = df_4_[i].head(1)
+    df_4_[i] = df_4_[i]*100/x.values
 
 
-df_4 = df_4.rename(columns = {'CSGN.SW': 'Credit Suisse', 'BNP.PA': 'BNP Paribas', 'UBSG.SW': 'UBS', 'DBK.DE': 'Deutsche Bank', 'GLE.PA': 'Société Générale', 'UCG.MI': 'Unicredit'})
+df_4_ = df_4_.rename(columns = {'CSGN.SW': 'Credit Suisse', 'BNP.PA': 'BNP Paribas', 'UBSG.SW': 'UBS', 'DBK.DE': 'Deutsche Bank', 'GLE.PA': 'Société Générale', 'UCG.MI': 'Unicredit'})
 
-df_4 = df_4[['Credit Suisse', 'BNP Paribas', 'UBS', 'Deutsche Bank',  'Unicredit']]
+df_4_ = df_4_[['Credit Suisse', 'BNP Paribas', 'UBS', 'Deutsche Bank',  'Unicredit']]
 
-df_4 = df_4.reset_index()
+df_4_ = df_4_.reset_index()
 
-update_chart(id = '7b974a9aaf4217d71f83fde19d59687a', data = df_4)
+update_chart(id = '7b974a9aaf4217d71f83fde19d59687a', data = df_4_)
 
 
 
 # SMI & DAX
 
-url = 'https://www.six-group.com/fqs/charts.json?select=ValorId&where=ValorId=CH0009980894CHF9&netting=2&fromdate=20230320&todate=20230320'
+url = 'https://www.six-group.com/fqs/charts.json?select=ValorId&where=ValorId=CH0009980894CHF9&netting=2&fromdate=' + date_today.strftime('%Y%m%d') + '&todate=' + date_today.strftime('%Y%m%d') 
 
 response = urlopen(url)
 d = json.loads(response.read())
