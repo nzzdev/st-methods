@@ -53,7 +53,7 @@ jobs:
           # python epex-spot-ac.py
           python smard-sources.py
           python bkarta-sprit.py
-          python bnetza-verbrauch.py
+          #python bnetza-verbrauch.py
           python verivox-daily-new.py
           python gas-dashboard.py
         env:

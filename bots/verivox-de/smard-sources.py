@@ -33,7 +33,23 @@ if __name__ == '__main__':
                                31000138, 31000567, 31000146, 31000575, 31000144, 31000573, 31000142, 31000571, 31000143, 31000572, 31000141]
 
         # commercial trade Germany/France
-        COMMERCIAL_TRADE_FRANCE = [22004546, 22004404]
+        COMMERCIAL_TRADE_FR = [22004546, 22004404]  # first import
+        # commercial trade Germany/Netherlands
+        COMMERCIAL_TRADE_NL = [22004548, 22004406]
+        # commercial trade Germany/Belgium
+        COMMERCIAL_TRADE_BE = [22004712, 22004998]
+        # commercial trade Germany/Czechia
+        COMMERCIAL_TRADE_CZ = [22004553, 22004412]
+        # commercial trade Germany/Switzerland
+        COMMERCIAL_TRADE_CH = [22004552, 22004410]
+        # commercial trade Germany/Poland
+        COMMERCIAL_TRADE_PL = [22004550, 22004408]
+        # commercial trade Germany/Norway
+        COMMERCIAL_TRADE_NO = [22004724, 22004722]
+        # commercial trade Germany/Denmark
+        COMMERCIAL_TRADE_DK = [22004545, 22004403]
+        # commercial trade all countries
+        COMMERCIAL_TRADE_ALL = [22004629]
 
         # spot market
         SPOT_MARKET = [8004169]
@@ -112,15 +128,26 @@ if __name__ == '__main__':
         # get current date for chart notes
         time_dt_notes = df.index[-1] + timedelta(days=1)
         time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms.<br>Stand: {time_str_notes}'
+        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Öl, Pumpspeicher sowie andere Erneuerbare in der grafischen Darstellung unter «Sonstige».<br>Stand: {time_str_notes}'
 
-        # calculate percentage for chart title
+        """
+        # old gas chart title: calculate percentage for chart title
         df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
         perc_gas = (df_perc['Erdgas'].iloc[-1]*100).round(0).astype(int)
         if perc_gas > 1:
             title_chart = f'{perc_gas} Prozent des Stroms stammen derzeit aus Erdgas'
         else:
             title_chart = f'{perc_gas} Prozent des Stroms stammt derzeit aus Erdgas'
+        """
+
+        # calculate percentage for chart title
+        df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
+        perc_fossile = ((df_perc['Erdgas'].iloc[-1] + df_perc['Kohle'].iloc[-1] +
+                        df_perc['Sonstige'].iloc[-1])*100).round(0).astype(int)
+        if perc_fossile > 1:
+            title_chart = f'{perc_fossile} Prozent des Stroms stammen derzeit aus fossilen Brennstoffen'
+        else:
+            title_chart = f'{perc_fossile} Prozent des Stroms stammt aus fossilen Brennstoffen'
 
         # calculate percentage for dashboard
         df_dash = df.div(df.sum(axis=1), axis=0)
@@ -220,7 +247,7 @@ if __name__ == '__main__':
         # TRADE FRANCE #
         ################
 
-        modules = COMMERCIAL_TRADE_FRANCE
+        modules = COMMERCIAL_TRADE_FR
         df_trade = smard.requestSmardData(
             modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
@@ -235,9 +262,9 @@ if __name__ == '__main__':
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed.tsv',
+            df_trade.to_csv('./data/smard_trade_fixed_fr.tsv',
                             sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed.tsv', sep='\t', thousands='.',
+            df_trade = pd.read_csv('./data/smard_trade_fixed_fr.tsv', sep='\t', thousands='.',
                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
             # drop time and convert dates
@@ -267,11 +294,88 @@ if __name__ == '__main__':
             df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
             # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed.tsv',
+            df_trade.to_csv('./data/smard_trade_fixed_fr.tsv',
                             sep='\t', encoding='utf-8', index=True)
 
         df_trade = pd.read_csv(
-            './data/smard_trade_fixed.tsv', sep='\t', index_col='Datum')
+            './data/smard_trade_fixed_fr.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        """
+        # old dynamic chart title with peak comparison
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value > 714.032:
+            title = 'Neuer Rekordwert beim Strom-Export nach Frankreich'
+        else:
+            title = 'Kein neuer Rekordwert beim Strom-Export nach Frankreich'
+        """
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom nach Frankreich als umgekehrt'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom aus Frankreich als umgekehrt'
+
+        # run Q function
+        update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
+                     title=title, notes=notes_chart, data=df_trade)
+
+        #################
+        # TRADE BELGIUM #
+        #################
+
+        modules = COMMERCIAL_TRADE_BE
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        if ('Anfang' in df_trade.columns):
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed_be.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed_be.tsv', sep='\t', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # calculate net electricity exports
+            df_trade['Saldo'] = df_trade['Belgien (Export) [MWh] Originalauflösungen'] - \
+                abs(df_trade['Belgien (Import) [MWh] Originalauflösungen'])
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed_be.tsv',
+                            sep='\t', encoding='utf-8', index=True)
+
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed_be.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
 
         # get current date for chart notes
@@ -281,13 +385,484 @@ if __name__ == '__main__':
 
         # dynamic chart title
         last_value = df_trade['Saldo'].iloc[-2]
-        if last_value > 714.032:
-            title = 'Neuer Rekordwert beim Strom-Export nach Frankreich'
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom nach Belgien als umgekehrt'
         else:
-            title = 'Kein neuer Rekordwert beim Strom-Export nach Frankreich'
+            title = 'Deutschland importiert derzeit mehr Strom aus Belgien als umgekehrt'
 
         # run Q function
-        update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
+        update_chart(id='12496a04992590f16cb3aaa749aea0a4',
+                     title=title, notes=notes_chart, data=df_trade)
+
+        #####################
+        # TRADE NETHERLANDS #
+        #####################
+
+        modules = COMMERCIAL_TRADE_NL
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        if ('Anfang' in df_trade.columns):
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed_nl.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed_nl.tsv', sep='\t', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # calculate net electricity exports
+            df_trade['Saldo'] = df_trade['Niederlande (Export) [MWh] Originalauflösungen'] - \
+                abs(df_trade['Niederlande (Import) [MWh] Originalauflösungen'])
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed_nl.tsv',
+                            sep='\t', encoding='utf-8', index=True)
+
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed_nl.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom in die Niederlande als umgekehrt'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom aus der Niederlande als umgekehrt'
+
+        # run Q function
+        update_chart(id='5135d71baf12ad518000453bad2d0416',
+                     title=title, notes=notes_chart, data=df_trade)
+
+        #################
+        # TRADE CZECHIA #
+        #################
+
+        modules = COMMERCIAL_TRADE_CZ
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        if ('Anfang' in df_trade.columns):
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed_cz.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed_cz.tsv', sep='\t', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # calculate net electricity exports
+            df_trade['Saldo'] = df_trade['Tschechien (Export) [MWh] Originalauflösungen'] - \
+                abs(df_trade['Tschechien (Import) [MWh] Originalauflösungen'])
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed_cz.tsv',
+                            sep='\t', encoding='utf-8', index=True)
+
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed_cz.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom nach Tschechien als umgekehrt'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom aus Tschechien als umgekehrt'
+
+        # run Q function
+        update_chart(id='12496a04992590f16cb3aaa749aea20c',
+                     title=title, notes=notes_chart, data=df_trade)
+
+        ################
+        # TRADE NORWAY #
+        ################
+
+        modules = COMMERCIAL_TRADE_NO
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        if ('Anfang' in df_trade.columns):
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed_no.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed_no.tsv', sep='\t', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # calculate net electricity exports
+            df_trade['Saldo'] = df_trade['Norwegen (Export) [MWh] Originalauflösungen'] - \
+                abs(df_trade['Norwegen (Import) [MWh] Originalauflösungen'])
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed_no.tsv',
+                            sep='\t', encoding='utf-8', index=True)
+
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed_no.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom nach Norwegen als umgekehrt'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom aus Norwegen als umgekehrt'
+
+        # run Q function
+        update_chart(id='12496a04992590f16cb3aaa749b045bb',
+                     title=title, notes=notes_chart, data=df_trade)
+
+        ###############
+        # TRADE SWISS #
+        ###############
+
+        modules = COMMERCIAL_TRADE_CH
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        if ('Anfang' in df_trade.columns):
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed_ch.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed_ch.tsv', sep='\t', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # calculate net electricity exports
+            df_trade['Saldo'] = df_trade['Schweiz (Export) [MWh] Originalauflösungen'] - \
+                abs(df_trade['Schweiz (Import) [MWh] Originalauflösungen'])
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed_ch.tsv',
+                            sep='\t', encoding='utf-8', index=True)
+
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed_ch.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom in die Schweiz als umgekehrt'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom aus der Schweiz als umgekehrt'
+
+        # run Q function
+        update_chart(id='5135d71baf12ad518000453bad2ea7af',
+                     title=title, notes=notes_chart, data=df_trade)
+
+        ################
+        # TRADE POLAND #
+        ################
+
+        modules = COMMERCIAL_TRADE_PL
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        if ('Anfang' in df_trade.columns):
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed_pl.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed_pl.tsv', sep='\t', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # calculate net electricity exports
+            df_trade['Saldo'] = df_trade['Polen (Export) [MWh] Originalauflösungen'] - \
+                abs(df_trade['Polen (Import) [MWh] Originalauflösungen'])
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed_pl.tsv',
+                            sep='\t', encoding='utf-8', index=True)
+
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed_pl.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom nach Polen als umgekehrt'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom aus Polen als umgekehrt'
+
+        # run Q function
+        update_chart(id='5135d71baf12ad518000453bad2ea91b',
+                     title=title, notes=notes_chart, data=df_trade)
+
+        #################
+        # TRADE DENMARK #
+        #################
+
+        modules = COMMERCIAL_TRADE_DK
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        if ('Anfang' in df_trade.columns):
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed_dk.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed_dk.tsv', sep='\t', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # calculate net electricity exports
+            df_trade['Saldo'] = df_trade['Dänemark (Export) [MWh] Originalauflösungen'] - \
+                abs(df_trade['Dänemark (Import) [MWh] Originalauflösungen'])
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed_dk.tsv',
+                            sep='\t', encoding='utf-8', index=True)
+
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed_dk.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom nach Dänemark als umgekehrt'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom aus Dänemark als umgekehrt'
+
+        # run Q function
+        update_chart(id='12496a04992590f16cb3aaa749b04fb0',
+                     title=title, notes=notes_chart, data=df_trade)
+
+        #############
+        # TRADE ALL #
+        #############
+
+        modules = COMMERCIAL_TRADE_ALL
+        df_trade = smard.requestSmardData(
+            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+
+        # check if data is corrupted
+        errors = 0
+        while ('Anfang' not in df.columns) and (errors < 5):
+            sleep(2)
+            errors += 1
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+        if ('Anfang' in df_trade.columns):
+            # fix wrong decimal
+            df_trade = df_trade.replace('-', '', regex=False)
+            df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
+                            sep='\t', encoding='utf-8', index=False)
+            df_trade = pd.read_csv('./data/smard_trade_fixed_all.tsv', sep='\t', thousands='.',
+                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+            # drop time and convert dates
+            df_trade.drop('Anfang', axis=1, inplace=True)
+            df_trade.drop('Ende', axis=1, inplace=True)
+            df_trade['Datum'] = pd.to_datetime(
+                df_trade['Datum'], format="%d.%m.%Y")
+
+            # convert to gigawatt
+            df_trade['Saldo'] = df_trade['Nettoexport [MWh] Originalauflösungen'].div(
+                1000)
+            df_trade = df_trade[['Datum', 'Saldo']]
+
+            # convert to week and drop first and last row with partial values
+            df_trade = df_trade.resample('W', on='Datum').sum()
+            df_trade.drop(df_trade.head(1).index, inplace=True)
+            df_trade.drop(df_trade.tail(1).index, inplace=True)
+
+            # save tsv
+            df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
+                            sep='\t', encoding='utf-8', index=True)
+
+        df_trade = pd.read_csv(
+            './data/smard_trade_fixed_all.tsv', sep='\t', index_col='Datum')
+        df_trade.index = pd.to_datetime(df_trade.index)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-1] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-1]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom als es importiert'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom als es exportiert'
+
+        # run Q function
+        update_chart(id='12496a04992590f16cb3aaa749b3b7b4',
                      title=title, notes=notes_chart, data=df_trade)
 
         """
