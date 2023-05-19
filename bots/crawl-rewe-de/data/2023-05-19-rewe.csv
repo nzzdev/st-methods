@@ -579,8 +579,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-05-19;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;119;1l
 2023-05-19;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-05-19;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;99;450g (1 kg = 2,20 €)
-2023-05-19;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2023-05-19;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2023-05-19;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2023-05-19;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-05-19;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-05-19;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;259;475g (1 kg = 5,45 €)
@@ -1303,6 +1303,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-05-19;7755720;REWE Bio;REWE Bio Frischcreme Kräuter vegan 150g;169;150g (1 kg = 11,27 €)
 2023-05-19;8754323;REWE Bio;REWE Bio Frischcreme Paprika vegan 150g;169;150g (1 kg = 11,27 €)
 2023-05-19;3064105;REWE Bio;REWE Bio Frische Backhefe 42g;59;42g (1 kg = 14,05 €)
+2023-05-19;1912315;REWE Bio;REWE Bio Frische Buttermilch 500g;89;500g (1 kg = 1,78 €)
 2023-05-19;197872;REWE Bio;REWE Bio Frische Weidemilch 3,8% 1l;135;1l
 2023-05-19;200397;REWE Bio;REWE Bio Frischkäse Doppelrahmstufe 175g;129;175g (1 kg = 7,37 €)
 2023-05-19;8674448;REWE Bio;REWE Bio Frischkäse mit Kräutern 175g;129;175g (1 kg = 7,37 €)
