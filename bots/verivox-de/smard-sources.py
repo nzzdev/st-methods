@@ -257,12 +257,12 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
@@ -340,11 +340,11 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
@@ -408,11 +408,11 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
@@ -476,11 +476,11 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
@@ -544,11 +544,11 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
@@ -612,11 +612,11 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
@@ -680,11 +680,11 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
@@ -748,11 +748,11 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
@@ -816,11 +816,11 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df_trade.columns) and (errors < 5):
             sleep(2)
             errors += 1
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
         if ('Anfang' in df_trade.columns):
             # fix wrong decimal
             df_trade = df_trade.replace('-', '', regex=False)
