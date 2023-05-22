@@ -268,13 +268,22 @@ if __name__ == '__main__':
 
             # calculate percentage change
             df_ja['Marke'] = (
-                ((df_ja[today] - df_ja[yesterday])/df_ja[yesterday])*100).round(0).astype(int)
+                ((df_ja[today] - df_ja[yesterday])/df_ja[yesterday])*100).round(1)
+
+            # use decimal if > 0.4 / < -0.4
+            df_ja['Marke'] = df_ja['Marke'].apply(
+                lambda x: round(x, 0) if x > 0.4 else x)
+            df_ja['Marke'] = df_ja['Marke'].apply(
+                lambda x: round(x, 0) if x < -0.4 else x)
+
             df_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
             df_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
             df_ja['Prozent'] = df_ja['Prozent'].apply(
                 lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
             df_ja['Prozent'] = df_ja['Prozent'].str.replace(
                 '-', '', regex=False)
+            df_ja['Prozent'] = df_ja['Prozent'].str.replace(
+                '.', ',', regex=False)
 
             # convert cents to euro and add currency
             df_ja[yesterday] = df_ja[yesterday] / 100.0
@@ -418,7 +427,14 @@ if __name__ == '__main__':
 
             # calculate percentage change
             dftop_ja['Marke'] = (
-                ((dftop_ja[today] - dftop_ja[month_first])/dftop_ja[month_first])*100).round(0).astype(int)
+                ((dftop_ja[today] - dftop_ja[month_first])/dftop_ja[month_first])*100).round(1)
+
+            # use decimal if > 0.4 / < -0.4
+            dftop_ja['Marke'] = dftop_ja['Marke'].apply(
+                lambda x: round(x, 0) if x > 0.4 else x)
+            dftop_ja['Marke'] = dftop_ja['Marke'].apply(
+                lambda x: round(x, 0) if x < -0.4 else x)
+
             dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
             dftop_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
 
@@ -431,6 +447,8 @@ if __name__ == '__main__':
                 lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
             dftop_ja['Prozent'] = dftop_ja['Prozent'].str.replace(
                 '-', '', regex=False)
+            dftop_ja['Prozent'] = dftop_ja['Prozent'].str.replace(
+                '.', ',', regex=False)
 
             # convert cents to euro and add currency
             dftop_ja[month_first] = dftop_ja[month_first] / 100.0
@@ -627,13 +645,22 @@ if __name__ == '__main__':
 
             # calculate percentage change
             df_ja['Marke'] = (
-                ((df_ja[today] - df_ja[yesterday])/df_ja[yesterday])*100).round(0).astype(int)
+                ((df_ja[today] - df_ja[yesterday])/df_ja[yesterday])*100).round(1)
+
+            # use decimal if > 0.4 / < -0.4
+            df_ja['Marke'] = df_ja['Marke'].apply(
+                lambda x: round(x, 0) if x > 0.4 else x)
+            df_ja['Marke'] = df_ja['Marke'].apply(
+                lambda x: round(x, 0) if x < -0.4 else x)
+
             df_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
             df_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
             df_ja['Prozent'] = df_ja['Prozent'].apply(
                 lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
             df_ja['Prozent'] = df_ja['Prozent'].str.replace(
                 '-', '', regex=False)
+            df_ja['Prozent'] = df_ja['Prozent'].str.replace(
+                '.', ',', regex=False)
 
             # convert cents to euro and add currency
             df_ja[yesterday] = df_ja[yesterday] / 100.0
@@ -693,7 +720,13 @@ if __name__ == '__main__':
         df_t_y = df_t_y[~df_t_y['ID'].isin(homeappliance)]
 
         df_t_y['Differenz'] = (((df_t_y['Neuer Preis'] - df_t_y['Alter Preis']) /
-                               df_t_y['Alter Preis'])*100).round(0).astype(int)
+                               df_t_y['Alter Preis'])*100).round(1)
+        # use decimal if > 0.4 / < -0.4
+        df_t_y['Differenz'] = df_t_y['Differenz'].apply(
+            lambda x: round(x, 0) if x > 0.4 else x)
+        df_t_y['Differenz'] = df_t_y['Differenz'].apply(
+            lambda x: round(x, 0) if x < -0.4 else x)
+
         df_t_y['Differenz'] = df_t_y['Differenz']
         df_t_y = df_t_y[df_t_y['Differenz'] != 0]
         df_t_y.sort_values(by=['Differenz'], inplace=True, ascending=False)
@@ -821,7 +854,14 @@ if __name__ == '__main__':
 
             # calculate percentage change
             dftop_ja['Marke'] = (
-                ((dftop_ja[today] - dftop_ja[month_first])/dftop_ja[month_first])*100).round(0).astype(int)
+                ((dftop_ja[today] - dftop_ja[month_first])/dftop_ja[month_first])*100).round(1)
+
+            # use decimal if > 0.4 / < -0.4
+            dftop_ja['Marke'] = dftop_ja['Marke'].apply(
+                lambda x: round(x, 0) if x > 0.4 else x)
+            dftop_ja['Marke'] = dftop_ja['Marke'].apply(
+                lambda x: round(x, 0) if x < -0.4 else x)
+
             dftop_ja.rename(columns={'Marke': 'Prozent'}, inplace=True)
             dftop_ja.sort_values(by=['Prozent'], ascending=False, inplace=True)
 
@@ -834,6 +874,8 @@ if __name__ == '__main__':
                 lambda x: f'⬆️{x}%' if x >= 0 else f'⬇️{x}%')
             dftop_ja['Prozent'] = dftop_ja['Prozent'].str.replace(
                 '-', '', regex=False)
+            dftop_ja['Prozent'] = dftop_ja['Prozent'].str.replace(
+                '.', ',', regex=False)
 
             # convert cents to euro and add currency
             dftop_ja[month_first] = dftop_ja[month_first] / 100.0
