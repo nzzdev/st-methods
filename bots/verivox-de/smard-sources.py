@@ -117,6 +117,10 @@ if __name__ == '__main__':
             df.drop(df.tail(1).index, inplace=True)
             df.drop(df.head(1).index, inplace=True)
 
+            # drop last row if faulty data
+            if df['Biomasse'][-1] < 200000.00:
+                df.drop(df.tail(1).index, inplace=True)
+
             # save tsv
             df.to_csv('./data/smard_fixed.tsv', sep='\t',
                       encoding='utf-8', index=True)
