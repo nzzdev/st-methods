@@ -17,124 +17,7 @@
             "environments": [
                 {
                     "name": "production",
-                    "id": "90005812afc9964bbfe4f952f51d6a57"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "03a56b0c1c7af72413d8325ae84d7c81"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "12496a04992590f16cb3aaa749aea20c"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "5135d71baf12ad518000453bad2d0416"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "12496a04992590f16cb3aaa749aea0a4"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
                     "id": "12496a04992590f16cb3aaa749b045bb"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "5135d71baf12ad518000453bad2ea7af"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "5135d71baf12ad518000453bad2ea91b"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "12496a04992590f16cb3aaa749b04fb0"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "12496a04992590f16cb3aaa749b3b7b4"
                 }
             ],
             "item": {
@@ -174,19 +57,6 @@
                 {
                     "name": "production",
                     "id": "cc9eff02ba0867d71af4fbc25304797b"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "e468de3ac9c422bcd0924e26b60a2af8"
                 }
             ],
             "item": {
