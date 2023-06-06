@@ -840,10 +840,13 @@ if __name__ == '__main__':
                 1000)
             df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first and last row with partial values
+            # convert to week and drop first row with partial values
             df_trade = df_trade.resample('W', on='Datum').sum()
             df_trade.drop(df_trade.head(1).index, inplace=True)
-            df_trade.drop(df_trade.tail(1).index, inplace=True)
+            #df_trade.drop(df_trade.tail(1).index, inplace=True)
+
+            # update last row for step-after chart (avoid constant commits)
+            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
             # save tsv
             df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
@@ -854,12 +857,12 @@ if __name__ == '__main__':
         df_trade.index = pd.to_datetime(df_trade.index)
 
         # get current date for chart notes
-        time_dt_notes = df_trade.index[-1] + timedelta(days=1)
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
         time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
         notes_chart = f'Stand: {time_str_notes}'
 
         # dynamic chart title
-        last_value = df_trade['Saldo'].iloc[-1]
+        last_value = df_trade['Saldo'].iloc[-2]
         if last_value >= 0:
             title = 'Deutschland exportiert derzeit mehr Strom als es importiert'
         else:
