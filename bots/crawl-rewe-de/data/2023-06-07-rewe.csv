@@ -302,7 +302,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-06-07;8291601;ja!;ja! Käsesnack Gouda Maasdamer 220g;279;220g (1 kg = 12,68 €)
 2023-06-07;2045420;ja!;ja! Königsberger Klopse 450g;169;450g (1 kg = 3,76 €)
 2023-06-07;7030814;ja!;ja! Körniger Frischkäse Halbfettstufe 200g;99;200g (1 kg = 4,95 €)
-2023-06-07;7862977;ja!;ja! Küchentücher 4x128 Blatt;285;4x128 Stück
 2023-06-07;8639885;ja!;ja! LED Kerze E14 470 Lumen 40 Watt 2 Stück;499;2 Stück
 2023-06-07;8643461;ja!;ja! LED Leuchtmittel E27 1055 Lumen 75 Watt 2 Stück;599;2 Stück
 2023-06-07;7249172;ja!;ja! Lachsforelle 100g;299;100g (1 kg = 29,90 €)
@@ -499,6 +498,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-06-07;7772289;ja!;ja! Süßstoff 300ml;89;300ml (1 l = 2,97 €)
 2023-06-07;9703764;ja!;ja! Süßstoff Tabletten 1200 Stück;95;1200 Stück
 2023-06-07;8043572;ja!;ja! Tafelsalz 500g;25;500g (1 kg = 0,50 €)
+2023-06-07;7203709;ja!;ja! Taschentücher super-soft 4-lagig 15x10 Stück;165;15x10 Stück
 2023-06-07;7894188;ja!;ja! Tee Fruchtiger Apfel 75g;119;75g (1 kg = 15,87 €)
 2023-06-07;8884938;ja!;ja! Teegetränk Waldfrucht 400g;199;400g (1 kg = 4,98 €)
 2023-06-07;8881363;ja!;ja! Teegtränk Pfirsich 400g;199;400g (1 kg = 4,98 €)
