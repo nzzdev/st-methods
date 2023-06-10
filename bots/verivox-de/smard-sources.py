@@ -66,65 +66,68 @@ if __name__ == '__main__':
         ################################
         modules = REALIZED_POWER_GENERATION
         # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
-        df = smard.requestSmardData(
-            modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
-
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+        try:
             df = smard.requestSmardData(
                 modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
-        if ('Anfang' in df.columns):
-            # fix wrong decimal
-            df = df.replace('-', '', regex=False)
-            df.to_csv('./data/smard_fixed.tsv', sep='\t',
-                      encoding='utf-8', index=False)
-            df = pd.read_csv('./data/smard_fixed.tsv', sep='\t', thousands='.', decimal=',',
-                             index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df.drop('Anfang', axis=1, inplace=True)
-            df.drop('Ende', axis=1, inplace=True)
-            df['Datum'] = pd.to_datetime(df['Datum'], format="%d.%m.%Y")
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+            if ('Anfang' in df.columns):
+                # fix wrong decimal
+                df = df.replace('-', '', regex=False)
+                df.to_csv('./data/smard_fixed.tsv', sep='\t',
+                        encoding='utf-8', index=False)
+                df = pd.read_csv('./data/smard_fixed.tsv', sep='\t', thousands='.', decimal=',',
+                                index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # old decimal fix
-            #df.loc[:, df.columns != 'Datum'] = df.loc[:, df.columns != 'Datum'].replace('\,', '.', regex=True).astype(float)
+                # drop time and convert dates
+                df.drop('Anfang', axis=1, inplace=True)
+                df.drop('Ende', axis=1, inplace=True)
+                df['Datum'] = pd.to_datetime(df['Datum'], format="%d.%m.%Y")
 
-            df = df.groupby(['Datum']).sum()
+                # old decimal fix
+                #df.loc[:, df.columns != 'Datum'] = df.loc[:, df.columns != 'Datum'].replace('\,', '.', regex=True).astype(float)
 
-            # create new columns and drop the old ones
-            df['Biomasse'] = df['Biomasse [MWh] Originalauflösungen']
-            df['Kernkraft'] = df['Kernenergie [MWh] Originalauflösungen']
-            df['Erdgas'] = df['Erdgas [MWh] Originalauflösungen']
-            df['Pumpspeicher'] = df['Pumpspeicher [MWh] Originalauflösungen']
-            df['Sonstige'] = df['Sonstige Konventionelle [MWh] Originalauflösungen']
-            df['Kohle'] = df['Braunkohle [MWh] Originalauflösungen'] + \
-                df['Steinkohle [MWh] Originalauflösungen']
-            df['Sonstige EE'] = df['Sonstige Erneuerbare [MWh] Originalauflösungen'] + \
-                df['Wasserkraft [MWh] Originalauflösungen']
-            df['Wind'] = df['Wind Offshore [MWh] Originalauflösungen'] + \
-                df['Wind Onshore [MWh] Originalauflösungen']
-            df['Sonne'] = df['Photovoltaik [MWh] Originalauflösungen']
-            df.drop(list(df)[0:12], axis=1, inplace=True)
+                df = df.groupby(['Datum']).sum()
 
-            # convert to week and drop first and last row with partial values
-            df.reset_index(inplace=True)
-            df = df.resample('W', on='Datum').sum()
-            # no drop for step-after chart
-            df.drop(df.tail(1).index, inplace=True)
-            df.drop(df.head(1).index, inplace=True)
+                # create new columns and drop the old ones
+                df['Biomasse'] = df['Biomasse [MWh] Originalauflösungen']
+                df['Kernkraft'] = df['Kernenergie [MWh] Originalauflösungen']
+                df['Erdgas'] = df['Erdgas [MWh] Originalauflösungen']
+                df['Pumpspeicher'] = df['Pumpspeicher [MWh] Originalauflösungen']
+                df['Sonstige'] = df['Sonstige Konventionelle [MWh] Originalauflösungen']
+                df['Kohle'] = df['Braunkohle [MWh] Originalauflösungen'] + \
+                    df['Steinkohle [MWh] Originalauflösungen']
+                df['Sonstige EE'] = df['Sonstige Erneuerbare [MWh] Originalauflösungen'] + \
+                    df['Wasserkraft [MWh] Originalauflösungen']
+                df['Wind'] = df['Wind Offshore [MWh] Originalauflösungen'] + \
+                    df['Wind Onshore [MWh] Originalauflösungen']
+                df['Sonne'] = df['Photovoltaik [MWh] Originalauflösungen']
+                df.drop(list(df)[0:12], axis=1, inplace=True)
 
-            # drop last row if faulty data
-            if df['Biomasse'][-1] < 200000.00:
+                # convert to week and drop first and last row with partial values
+                df.reset_index(inplace=True)
+                df = df.resample('W', on='Datum').sum()
+                # no drop for step-after chart
                 df.drop(df.tail(1).index, inplace=True)
+                df.drop(df.head(1).index, inplace=True)
 
-            # save tsv
-            df.to_csv('./data/smard_fixed.tsv', sep='\t',
-                      encoding='utf-8', index=True)
+                # drop last row if faulty data
+                if df['Biomasse'][-1] < 200000.00:
+                    df.drop(df.tail(1).index, inplace=True)
 
+                # save tsv
+                df.to_csv('./data/smard_fixed.tsv', sep='\t',
+                        encoding='utf-8', index=True)
+
+        except:
+            pass
         # read tsv (old or new)
         df = pd.read_csv('./data/smard_fixed.tsv', sep='\t', index_col='Datum')
         df.index = pd.to_datetime(df.index)
@@ -184,44 +187,46 @@ if __name__ == '__main__':
         # API request spot market #
         ###########################
         modules = SPOT_MARKET
-        df_spot = smard.requestSmardData(
-            modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=1608764400000)  # 2021/1/1: 1609455600000
-
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_spot.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
+        try:
             df_spot = smard.requestSmardData(
                 modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=1608764400000)  # 2021/1/1: 1609455600000
-        if ('Anfang' in df_spot.columns):
-            # fix wrong decimal
-            df_spot = df_spot.replace('-', '', regex=False)
-            df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
-                           encoding='utf-8', index=False)
-            df_spot = pd.read_csv('./data/smard_spot.tsv', sep='\t', thousands='.', decimal=',',
-                                  index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates to DatetimeIndex
-            df_spot.drop('Anfang', axis=1, inplace=True)
-            df_spot.drop('Ende', axis=1, inplace=True)
-            df_spot['Datum'] = pd.to_datetime(
-                df_spot['Datum'], format="%d.%m.%Y")
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_spot.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df_spot = smard.requestSmardData(
+                    modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=1608764400000)  # 2021/1/1: 1609455600000
+            if ('Anfang' in df_spot.columns):
+                # fix wrong decimal
+                df_spot = df_spot.replace('-', '', regex=False)
+                df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
+                            encoding='utf-8', index=False)
+                df_spot = pd.read_csv('./data/smard_spot.tsv', sep='\t', thousands='.', decimal=',',
+                                    index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # calculate daily mean and 7-day moving average
-            df_spot = df_spot.resample('D', on='Datum').mean()
-            df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].rolling(
-                window=7).mean().dropna()
-            df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot[
-                'Deutschland/Luxemburg [€/MWh] Originalauflösungen'].round(0)
+                # drop time and convert dates to DatetimeIndex
+                df_spot.drop('Anfang', axis=1, inplace=True)
+                df_spot.drop('Ende', axis=1, inplace=True)
+                df_spot['Datum'] = pd.to_datetime(
+                    df_spot['Datum'], format="%d.%m.%Y")
 
-            # drop last row with current date to avoid constant commits
-            df_spot = df_spot.drop(df_spot.tail(1).index)
+                # calculate daily mean and 7-day moving average
+                df_spot = df_spot.resample('D', on='Datum').mean()
+                df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].rolling(
+                    window=7).mean().dropna()
+                df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot[
+                    'Deutschland/Luxemburg [€/MWh] Originalauflösungen'].round(0)
 
-            # save tsv
-            df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
-                           encoding='utf-8', index=True)
+                # drop last row with current date to avoid constant commits
+                df_spot = df_spot.drop(df_spot.tail(1).index)
 
+                # save tsv
+                df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
+                            encoding='utf-8', index=True)
+        except:
+            pass
         # read tsv (old or new)
         df_spot = pd.read_csv('./data/smard_spot.tsv',
                               sep='\t', index_col='Datum')
@@ -252,55 +257,57 @@ if __name__ == '__main__':
         ################
 
         modules = COMMERCIAL_TRADE_FR
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_fr.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_fr.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_fr.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_fr.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # calculate net electricity exports
-            df_trade['Saldo'] = df_trade['Frankreich (Export) [MWh] Originalauflösungen'] - \
-                abs(df_trade['Frankreich (Import) [MWh] Originalauflösungen'])
+                # calculate net electricity exports
+                df_trade['Saldo'] = df_trade['Frankreich (Export) [MWh] Originalauflösungen'] - \
+                    abs(df_trade['Frankreich (Import) [MWh] Originalauflösungen'])
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            # update first row for prettier x-axis
-            #df_trade['Datum'] = df_trade.index
-            #df_trade['Datum'].iloc[0] = '2021-01-01'
-            #df_trade.set_index('Datum', inplace=True)
+                # update first row for prettier x-axis
+                #df_trade['Datum'] = df_trade.index
+                #df_trade['Datum'].iloc[0] = '2021-01-01'
+                #df_trade.set_index('Datum', inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_fr.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_fr.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_fr.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
@@ -335,49 +342,51 @@ if __name__ == '__main__':
         #################
 
         modules = COMMERCIAL_TRADE_BE
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_be.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_be.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_be.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_be.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # calculate net electricity exports
-            df_trade['Saldo'] = df_trade['Belgien (Export) [MWh] Originalauflösungen'] - \
-                abs(df_trade['Belgien (Import) [MWh] Originalauflösungen'])
+                # calculate net electricity exports
+                df_trade['Saldo'] = df_trade['Belgien (Export) [MWh] Originalauflösungen'] - \
+                    abs(df_trade['Belgien (Import) [MWh] Originalauflösungen'])
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_be.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_be.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_be.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
@@ -403,49 +412,51 @@ if __name__ == '__main__':
         #####################
 
         modules = COMMERCIAL_TRADE_NL
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_nl.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_nl.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_nl.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_nl.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # calculate net electricity exports
-            df_trade['Saldo'] = df_trade['Niederlande (Export) [MWh] Originalauflösungen'] - \
-                abs(df_trade['Niederlande (Import) [MWh] Originalauflösungen'])
+                # calculate net electricity exports
+                df_trade['Saldo'] = df_trade['Niederlande (Export) [MWh] Originalauflösungen'] - \
+                    abs(df_trade['Niederlande (Import) [MWh] Originalauflösungen'])
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_nl.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_nl.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_nl.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
@@ -471,49 +482,51 @@ if __name__ == '__main__':
         #################
 
         modules = COMMERCIAL_TRADE_CZ
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_cz.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_cz.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_cz.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_cz.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # calculate net electricity exports
-            df_trade['Saldo'] = df_trade['Tschechien (Export) [MWh] Originalauflösungen'] - \
-                abs(df_trade['Tschechien (Import) [MWh] Originalauflösungen'])
+                # calculate net electricity exports
+                df_trade['Saldo'] = df_trade['Tschechien (Export) [MWh] Originalauflösungen'] - \
+                    abs(df_trade['Tschechien (Import) [MWh] Originalauflösungen'])
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_cz.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_cz.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_cz.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
@@ -539,49 +552,51 @@ if __name__ == '__main__':
         ################
 
         modules = COMMERCIAL_TRADE_NO
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_no.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_no.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_no.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_no.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # calculate net electricity exports
-            df_trade['Saldo'] = df_trade['Norwegen (Export) [MWh] Originalauflösungen'] - \
-                abs(df_trade['Norwegen (Import) [MWh] Originalauflösungen'])
+                # calculate net electricity exports
+                df_trade['Saldo'] = df_trade['Norwegen (Export) [MWh] Originalauflösungen'] - \
+                    abs(df_trade['Norwegen (Import) [MWh] Originalauflösungen'])
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_no.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_no.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_no.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
@@ -607,49 +622,51 @@ if __name__ == '__main__':
         ###############
 
         modules = COMMERCIAL_TRADE_CH
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_ch.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_ch.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_ch.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_ch.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # calculate net electricity exports
-            df_trade['Saldo'] = df_trade['Schweiz (Export) [MWh] Originalauflösungen'] - \
-                abs(df_trade['Schweiz (Import) [MWh] Originalauflösungen'])
+                # calculate net electricity exports
+                df_trade['Saldo'] = df_trade['Schweiz (Export) [MWh] Originalauflösungen'] - \
+                    abs(df_trade['Schweiz (Import) [MWh] Originalauflösungen'])
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_ch.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_ch.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_ch.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
@@ -675,49 +692,51 @@ if __name__ == '__main__':
         ################
 
         modules = COMMERCIAL_TRADE_PL
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_pl.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_pl.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_pl.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_pl.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # calculate net electricity exports
-            df_trade['Saldo'] = df_trade['Polen (Export) [MWh] Originalauflösungen'] - \
-                abs(df_trade['Polen (Import) [MWh] Originalauflösungen'])
+                # calculate net electricity exports
+                df_trade['Saldo'] = df_trade['Polen (Export) [MWh] Originalauflösungen'] - \
+                    abs(df_trade['Polen (Import) [MWh] Originalauflösungen'])
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_pl.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_pl.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_pl.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
@@ -743,49 +762,51 @@ if __name__ == '__main__':
         #################
 
         modules = COMMERCIAL_TRADE_DK
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_dk.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_dk.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_dk.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_dk.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # calculate net electricity exports
-            df_trade['Saldo'] = df_trade['Dänemark (Export) [MWh] Originalauflösungen'] - \
-                abs(df_trade['Dänemark (Import) [MWh] Originalauflösungen'])
+                # calculate net electricity exports
+                df_trade['Saldo'] = df_trade['Dänemark (Export) [MWh] Originalauflösungen'] - \
+                    abs(df_trade['Dänemark (Import) [MWh] Originalauflösungen'])
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Saldo'].div(1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Saldo'].div(1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_dk.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_dk.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_dk.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
@@ -811,47 +832,49 @@ if __name__ == '__main__':
         #############
 
         modules = COMMERCIAL_TRADE_ALL
-        df_trade = smard.requestSmardData(
-            modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+        try:
+            df_trade = smard.requestSmardData(
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
 
-        # check if data is corrupted
-        errors = 0
-        while ('Anfang' not in df_trade.columns) and (errors < 5):
-            sleep(2)
-            errors += 1
-            df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
-        if ('Anfang' in df_trade.columns):
-            # fix wrong decimal
-            df_trade = df_trade.replace('-', '', regex=False)
-            df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
-                            sep='\t', encoding='utf-8', index=False)
-            df_trade = pd.read_csv('./data/smard_trade_fixed_all.tsv', sep='\t', thousands='.',
-                                   decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df_trade.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+            if ('Anfang' in df_trade.columns):
+                # fix wrong decimal
+                df_trade = df_trade.replace('-', '', regex=False)
+                df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
+                                sep='\t', encoding='utf-8', index=False)
+                df_trade = pd.read_csv('./data/smard_trade_fixed_all.tsv', sep='\t', thousands='.',
+                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
-            # drop time and convert dates
-            df_trade.drop('Anfang', axis=1, inplace=True)
-            df_trade.drop('Ende', axis=1, inplace=True)
-            df_trade['Datum'] = pd.to_datetime(
-                df_trade['Datum'], format="%d.%m.%Y")
+                # drop time and convert dates
+                df_trade.drop('Anfang', axis=1, inplace=True)
+                df_trade.drop('Ende', axis=1, inplace=True)
+                df_trade['Datum'] = pd.to_datetime(
+                    df_trade['Datum'], format="%d.%m.%Y")
 
-            # convert to gigawatt
-            df_trade['Saldo'] = df_trade['Nettoexport [MWh] Originalauflösungen'].div(
-                1000)
-            df_trade = df_trade[['Datum', 'Saldo']]
+                # convert to gigawatt
+                df_trade['Saldo'] = df_trade['Nettoexport [MWh] Originalauflösungen'].div(
+                    1000)
+                df_trade = df_trade[['Datum', 'Saldo']]
 
-            # convert to week and drop first row with partial values
-            df_trade = df_trade.resample('W', on='Datum').sum()
-            df_trade.drop(df_trade.head(1).index, inplace=True)
-            #df_trade.drop(df_trade.tail(1).index, inplace=True)
+                # convert to week and drop first row with partial values
+                df_trade = df_trade.resample('W', on='Datum').sum()
+                df_trade.drop(df_trade.head(1).index, inplace=True)
+                #df_trade.drop(df_trade.tail(1).index, inplace=True)
 
-            # update last row for step-after chart (avoid constant commits)
-            df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+                # update last row for step-after chart (avoid constant commits)
+                df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
 
-            # save tsv
-            df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
-                            sep='\t', encoding='utf-8', index=True)
-
+                # save tsv
+                df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
+                                sep='\t', encoding='utf-8', index=True)
+        except:
+            pass
         df_trade = pd.read_csv(
             './data/smard_trade_fixed_all.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
