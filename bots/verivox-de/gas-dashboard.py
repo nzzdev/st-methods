@@ -26,8 +26,7 @@ if __name__ == '__main__':
                              encoding='utf-8', usecols=['date', 'Gas'], index_col='date')
         df_strom = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
                                encoding='utf-8', usecols=['date', 'Strom'], index_col='date')
-        df_ns = pd.read_csv('./data/pipelines_ns.tsv',
-                            sep='\t', encoding='utf-8', index_col='periodFrom')
+        #df_ns = pd.read_csv('./data/pipelines_ns.csv', encoding='utf-8', index_col='periodFrom')
         df_fossile = pd.read_csv(
             './data/smard_percentage.csv', encoding='utf-8', index_col='Datum')
         #df_usage = pd.read_csv('./data/gasverbrauch.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Normaler Verbrauch¹', 'Aktuell'])
@@ -43,7 +42,7 @@ if __name__ == '__main__':
         df_storage_trend = df_storage_trend.sort_index()
         df_gas.index = pd.to_datetime(df_gas.index)
         df_strom.index = pd.to_datetime(df_strom.index)
-        df_ns.index = pd.to_datetime(df_ns.index)
+        #df_ns.index = pd.to_datetime(df_ns.index)
         df_super.index = pd.to_datetime(df_super.index)
         df_super = df_super.round(2)
         df_gas_mean = df_gas.rolling(window=7).mean().dropna()
@@ -75,8 +74,8 @@ if __name__ == '__main__':
         df_gas_mean = df_gas_mean.rename(columns={'Gas': 'Gaspreis'})
         df_strom = df_strom.rename(columns={'Strom': 'Strompreis'})
         df_strom_mean = df_strom_mean.rename(columns={'Strom': 'Strompreis'})
-        df_ns.index = df_ns.index.rename('date')
-        df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
+        #df_ns.index = df_ns.index.rename('date')
+        #df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
         df_fossile.index = df_fossile.index.rename('date')
         #df_usage.index = df_usage.index.rename('date')
         #df_usage = df_usage.rename(columns={'Normaler Verbrauch¹': 'Vorjahr', 'Aktuell': 'Gasverbrauch'})
