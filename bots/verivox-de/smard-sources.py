@@ -909,6 +909,7 @@ if __name__ == '__main__':
         dw = os.environ['DATAWRAPPER_API']
         dw_id = 'G2Vtz'
 
+        """
         # update Datawrapper chart
         dw_chart = dw.add_data(chart_id=dw_id, data=df_trade)
         dw.update_chart(chart_id=dw_id, title=title)
@@ -916,6 +917,7 @@ if __name__ == '__main__':
             'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id, properties=date)
         dw.publish_chart(chart_id=dw_id, display=False)
+        """
 
         """
         ################################
