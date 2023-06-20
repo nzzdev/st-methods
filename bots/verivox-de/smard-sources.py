@@ -907,6 +907,7 @@ if __name__ == '__main__':
         dw_id = 'G2Vtz'
 
         # update Datawrapper chart
+        df_trade.reset_index(inplace=True)
         dw_chart = dw.add_data(chart_id=dw_id, data=df_trade)
         dw.update_chart(chart_id=dw_id, title=title)
         date = {'annotate': {
