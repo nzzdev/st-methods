@@ -3,6 +3,7 @@ import pandas as pd
 import os
 from datetime import datetime, timedelta
 from time import sleep
+from datawrapper import Datawrapper
 
 if __name__ == '__main__':
     try:
@@ -11,6 +12,10 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
         from helpers import *
         import helpers_smard as smard
+
+        # Datawrapper API key
+        dw = os.environ['DATAWRAPPER_API']
+        dw_id = 'G2Vtz'
 
         # power generation
         REALIZED_POWER_GENERATION = [1001224, 1004066, 1004067, 1004068,
@@ -82,9 +87,9 @@ if __name__ == '__main__':
                 # fix wrong decimal
                 df = df.replace('-', '', regex=False)
                 df.to_csv('./data/smard_fixed.tsv', sep='\t',
-                        encoding='utf-8', index=False)
+                          encoding='utf-8', index=False)
                 df = pd.read_csv('./data/smard_fixed.tsv', sep='\t', thousands='.', decimal=',',
-                                index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                 index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df.drop('Anfang', axis=1, inplace=True)
@@ -124,7 +129,7 @@ if __name__ == '__main__':
 
                 # save tsv
                 df.to_csv('./data/smard_fixed.tsv', sep='\t',
-                        encoding='utf-8', index=True)
+                          encoding='utf-8', index=True)
 
         except:
             pass
@@ -202,9 +207,9 @@ if __name__ == '__main__':
                 # fix wrong decimal
                 df_spot = df_spot.replace('-', '', regex=False)
                 df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
-                            encoding='utf-8', index=False)
+                               encoding='utf-8', index=False)
                 df_spot = pd.read_csv('./data/smard_spot.tsv', sep='\t', thousands='.', decimal=',',
-                                    index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                      index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates to DatetimeIndex
                 df_spot.drop('Anfang', axis=1, inplace=True)
@@ -224,7 +229,7 @@ if __name__ == '__main__':
 
                 # save tsv
                 df_spot.to_csv('./data/smard_spot.tsv', sep='\t',
-                            encoding='utf-8', index=True)
+                               encoding='utf-8', index=True)
         except:
             pass
         # read tsv (old or new)
@@ -275,7 +280,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_fr.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_fr.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -359,7 +364,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_be.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_be.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -429,7 +434,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_nl.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_nl.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -499,7 +504,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_cz.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_cz.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -569,7 +574,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_no.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_no.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -639,7 +644,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_ch.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_ch.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -709,7 +714,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_pl.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_pl.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -779,7 +784,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_dk.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_dk.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -849,7 +854,7 @@ if __name__ == '__main__':
                 df_trade.to_csv('./data/smard_trade_fixed_all.tsv',
                                 sep='\t', encoding='utf-8', index=False)
                 df_trade = pd.read_csv('./data/smard_trade_fixed_all.tsv', sep='\t', thousands='.',
-                                    decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+                                       decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
                 # drop time and convert dates
                 df_trade.drop('Anfang', axis=1, inplace=True)
@@ -894,6 +899,17 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='12496a04992590f16cb3aaa749b3b7b4',
                      title=title, notes=notes_chart, data=df_trade)
+
+        # temp fix for last row (delete row if new data is available)
+        df_trade.at[df_trade.index[-1], 'Saldo'] = -898.0
+
+        # update Datawrapper chart
+        dw_chart = dw.add_data(chart_id=dw_id, data=df_trade)
+        dw.update_chart(chart_id=dw_id, title=title)
+        date = {'annotate': {
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br>Stand: {time_str_notes}'}}
+        dw.update_metadata(chart_id=dw_id, properties=date)
+        dw.publish_chart(chart_id=dw_id, display=False)
 
         """
         ################################

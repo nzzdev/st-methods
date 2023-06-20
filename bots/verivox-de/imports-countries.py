@@ -16,7 +16,7 @@ if __name__ == '__main__':
         # set working directory, change if necessary
         os.chdir(os.path.dirname(__file__))
 
-        # API key
+        # Datawrapper API key
         dw = os.environ['DATAWRAPPER_API']
         dw_id = 'R05oB'
 
