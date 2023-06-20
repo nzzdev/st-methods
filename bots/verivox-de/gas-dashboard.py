@@ -282,7 +282,7 @@ if __name__ == '__main__':
         diff_storage_str = diff_storage.astype(str).replace('.', ',')
         diff_gas_str = diff_gas.astype(str).replace('.', ',')
         diff_strom_str = diff_strom.astype(str).replace('.', ',')
-        diff_ns_str = diff_ns.astype(str).replace('.', ',')
+        #diff_ns_str = diff_ns.astype(str).replace('.', ',')
         diff_fossile_str = diff_fossile.astype(str).replace('.', ',')
         diff_fossile = diff_fossile.astype(float)
         #diff_usage_str = u_diff_str.astype(str).replace('.', ',')
