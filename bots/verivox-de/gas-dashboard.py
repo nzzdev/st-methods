@@ -190,7 +190,7 @@ if __name__ == '__main__':
         diff_storage = df_meta['Gasspeicher']
         diff_gas = df_gas['Gaspreis'].iloc[-1]
         diff_strom = df_strom['Strompreis'].iloc[-1]
-        diff_ns = df_ns['Nord Stream 1'].iloc[-1].round(2)
+        #diff_ns = df_ns['Nord Stream 1'].iloc[-1].round(2)
         diff_fossile = df_fossile['Fossile Abhängigkeit'].iloc[-1]
         #diff_usage = u_diff_str
         diff_lng = df_meta['LNG'].round(1)
@@ -202,7 +202,7 @@ if __name__ == '__main__':
         df_storage = df_storage.reset_index()
         df_gas = df_gas.reset_index()
         df_strom = df_strom.reset_index()
-        df_ns = df_ns.reset_index()
+        #df_ns = df_ns.reset_index()
         df_fossile = df_fossile.reset_index()
         #df_usage = df_usage.reset_index()
         df_lng = df_lng.reset_index()
@@ -215,8 +215,7 @@ if __name__ == '__main__':
             df_gas['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_strom['date'] = pd.to_datetime(
             df_strom['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
-        df_ns['date'] = pd.to_datetime(
-            df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d %H:%M:%S')
+        #df_ns['date'] = pd.to_datetime(df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d %H:%M:%S')
         df_fossile['date'] = pd.to_datetime(
             df_fossile['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         #df_usage['date'] = pd.to_datetime( df_usage['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
@@ -257,9 +256,8 @@ if __name__ == '__main__':
         dict_fossile = df_fossile.rename(
             columns={df_fossile.columns[1]: 'value'}).to_dict(orient='records')
         #dict_usage = df_usage.rename(columns={df_usage.columns[2]: 'value'}).to_dict(orient='records')
-        df_ns['Nord Stream 1'] = df_ns['Nord Stream 1'].round(2).astype(float)
-        dict_ns = df_ns.rename(
-            columns={'Nord Stream 1': 'value'}).dropna().to_dict(orient='records')
+        #df_ns['Nord Stream 1'] = df_ns['Nord Stream 1'].round(2).astype(float)
+        #dict_ns = df_ns.rename(columns={'Nord Stream 1': 'value'}).dropna().to_dict(orient='records')
         dict_lng = df_lng.rename(
             columns={df_lng.columns[1]: 'value'}).to_dict(orient='records')
 
