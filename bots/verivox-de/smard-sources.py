@@ -13,10 +13,6 @@ if __name__ == '__main__':
         from helpers import *
         import helpers_smard as smard
 
-        # Datawrapper API key
-        dw = os.environ['DATAWRAPPER_API']
-        dw_id = 'G2Vtz'
-
         # power generation
         REALIZED_POWER_GENERATION = [1001224, 1004066, 1004067, 1004068,
                                      1001223, 1004069, 1004071, 1004070, 1001226, 1001228, 1001227, 1001225]
@@ -902,6 +898,13 @@ if __name__ == '__main__':
 
         # temp fix for last row (delete row if new data is available)
         df_trade.at[df_trade.index[-1], 'Saldo'] = -898.0
+        d = datetime.today()
+        time_str_notes = d - timedelta(days=d.weekday())  # last monday
+        time_str_notes = time_str_notes.strftime('%-d. %-m. %Y')
+
+        # Datawrapper API key
+        dw = os.environ['DATAWRAPPER_API']
+        dw_id = 'G2Vtz'
 
         # update Datawrapper chart
         dw_chart = dw.add_data(chart_id=dw_id, data=df_trade)
