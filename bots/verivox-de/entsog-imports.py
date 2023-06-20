@@ -83,6 +83,7 @@ if __name__ == '__main__':
 
         full_data_new = json.loads(full_script_new)
 
+        """
         # get charts for each country/type for 2023
         df_list_new = list()
         for data in full_data_new['elements'][2]['data']:
@@ -90,6 +91,7 @@ if __name__ == '__main__':
             del data[0]  # delete headers
             dfnew = pd.DataFrame(data, columns=headers)
             df_list_new.append(dfnew)
+        """
 
         # get all json data from infogram graph for LNG
         for i in range(len(slng)):
@@ -172,6 +174,7 @@ if __name__ == '__main__':
         df_lng.fillna('', inplace=True)
         df_russia.fillna('', inplace=True)
 
+        """
         ########
         # 2023 #
         ########
@@ -234,6 +237,7 @@ if __name__ == '__main__':
 
         # replace NaN with empty strings
         df_russia_new.fillna('', inplace=True)
+        """
 
         ########
         # LNG #
@@ -320,14 +324,14 @@ if __name__ == '__main__':
         df_lng_new.fillna('', inplace=True)
 
         # run Q function
-        update_chart(id='1203f969609d721f3e48be4f2689fc53',
-                     data=df_russia_new, notes=notes_chart_new)
+        #update_chart(id='1203f969609d721f3e48be4f2689fc53', data=df_russia_new, notes=notes_chart_new)
         update_chart(id='4acf1a0fd4dd89aef4abaeefd04f9c8c',
                      data=df_lng, notes=notes_chart)
         update_chart(id='6c02e1d1daabb23cfaaae686241d6e4e',
                      data=df_lng_new, notes=notes_chart_lng)
-        # update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
+        ### update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
+        """
         # Nord stream 1 to DE Bundesnetzagentur
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
         resp = download_data(url, headers=fheaders)
@@ -404,7 +408,7 @@ if __name__ == '__main__':
                      data=df_ns, notes=notes_chart_ns, title=chart_title)
         update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5', data=df_total,
                      notes=notes_chart_total, title=chart_title_total)
-
+        """
         """
         # OLD
         # create dates for Russian gas flows in Germany

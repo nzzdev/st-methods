@@ -199,18 +199,6 @@
             "environments": [
                 {
                     "name": "production",
-                    "id": "1203f969609d721f3e48be4f2689fc53"
-                }
-            ],
-            "item": {
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
                     "id": "4acf1a0fd4dd89aef4abaeefd04f9c8c"
                 }
             ],
@@ -227,32 +215,6 @@
                 }
             ],
             "item": {
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "78215f05ea0a73af28c0bb1c2c89f896"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "data": []
-            }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "85c9e635bfeae3a127d9c9db90dfb2c5"
-                }
-            ],
-            "item": {
-                "title": "",
                 "notes": "",
                 "data": []
             }
