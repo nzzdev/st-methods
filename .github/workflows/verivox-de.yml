@@ -55,7 +55,7 @@ jobs:
           python bkarta-sprit.py
           # python bnetza-verbrauch.py
           python verivox-daily-new.py
-          python import-countries.py
+          python imports-countries.py
           python gas-dashboard.py
         env:
           DATAWRAPPER_API: ${{ secrets.DATAWRAPPER_API }}
