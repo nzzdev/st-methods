@@ -48,7 +48,7 @@ jobs:
         run: |
           python agsi-gas-storage.py
           python entsog-imports.py
-          python bnetza-exporte.py
+          # python bnetza-exporte.py
           python ttf-gas-stock.py
           # python epex-spot-ac.py
           python smard-sources.py
