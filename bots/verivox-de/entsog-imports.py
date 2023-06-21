@@ -400,7 +400,7 @@ if __name__ == '__main__':
         df_dash['LNG'] = (df_dash[df_dash.columns[1]] /
                           df_dash[df_dash.columns[0]]) * 100
         df_dash = df_dash[['LNG']]
-        df_dash.to_csv('./data/german-imports.csv')
+        df_dash.to_csv('./data/german-imports.tsv', sep='\t', encoding='utf-8')
 
         # run Q function
         update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',
