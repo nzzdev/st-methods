@@ -13,6 +13,12 @@ if __name__ == '__main__':
         from helpers import *
         import helpers_smard as smard
 
+        # Datawrapper API key
+        dw_key = os.environ['DATAWRAPPER_API']
+        dw = Datawrapper(access_token=dw_key)
+        dw_id = 'G2Vtz'  # Importe gesamt
+        dw_id_fr = 'XJFzP'  # Importe Frankreich
+
         # power generation
         REALIZED_POWER_GENERATION = [1001224, 1004066, 1004067, 1004068,
                                      1001223, 1004069, 1004071, 1004070, 1001226, 1001228, 1001227, 1001225]
@@ -337,6 +343,16 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
                      title=title, notes=notes_chart, data=df_trade)
+
+        # update Datawrapper chart
+        df_trade.drop(df_trade.tail(1).index, inplace=True)
+        df_trade.reset_index(inplace=True)
+        dw_chart = dw.add_data(chart_id=dw_id_fr, data=df_trade)
+        dw.update_chart(chart_id=dw_id_fr, title=title)
+        date = {'annotate': {
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br>Stand: {time_str_notes}'}}
+        dw.update_metadata(chart_id=dw_id_fr, properties=date)
+        dw.publish_chart(chart_id=dw_id_fr, display=False)
 
         #################
         # TRADE BELGIUM #
@@ -901,11 +917,6 @@ if __name__ == '__main__':
         d = datetime.today()
         time_str_notes = d - timedelta(days=d.weekday())  # last monday
         time_str_notes = time_str_notes.strftime('%-d. %-m. %Y')
-
-        # Datawrapper API key
-        dw_key = os.environ['DATAWRAPPER_API']
-        dw = Datawrapper(access_token=dw_key)
-        dw_id = 'G2Vtz'
 
         # update Datawrapper chart
         df_trade.reset_index(inplace=True)
