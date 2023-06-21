@@ -921,6 +921,7 @@ if __name__ == '__main__':
         """
 
         # update Datawrapper chart
+        df_trade.drop(df.tail(1).index, inplace=True)
         df_trade.reset_index(inplace=True)
         dw_chart = dw.add_data(chart_id=dw_id, data=df_trade)
         dw.update_chart(chart_id=dw_id, title=title)
