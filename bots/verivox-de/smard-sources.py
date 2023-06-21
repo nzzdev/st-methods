@@ -912,11 +912,13 @@ if __name__ == '__main__':
         update_chart(id='12496a04992590f16cb3aaa749b3b7b4',
                      title=title, notes=notes_chart, data=df_trade)
 
-        # temp fix for last row (delete row if new data is available)
+        """
+        # temp fix for last row (if energy-charts has newer data)
         df_trade.at[df_trade.index[-1], 'Saldo'] = -898.0
         d = datetime.today()
         time_str_notes = d - timedelta(days=d.weekday())  # last monday
         time_str_notes = time_str_notes.strftime('%-d. %-m. %Y')
+        """
 
         # update Datawrapper chart
         df_trade.reset_index(inplace=True)
