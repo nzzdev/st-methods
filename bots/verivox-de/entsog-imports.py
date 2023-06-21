@@ -321,7 +321,7 @@ if __name__ == '__main__':
         notes_chart_lng = '¹ USA mit Trinidad und Tobago. Der grösste Exporteur im Mittleren Osten ist Katar; in Afrika exportieren Nigeria und Algerien am meisten.<br>Stand: ' + month_str
 
         # replace NaN with empty strings
-        df_lng_new.fillna('', inplace=True)
+        df_lng_new = df_lng_new.fillna('')
 
         # run Q function
         #update_chart(id='1203f969609d721f3e48be4f2689fc53', data=df_russia_new, notes=notes_chart_new)
@@ -331,7 +331,6 @@ if __name__ == '__main__':
                      data=df_lng_new, notes=notes_chart_lng)
         ### update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
-        """
         # Nord stream 1 to DE Bundesnetzagentur
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
         resp = download_data(url, headers=fheaders)
@@ -408,7 +407,7 @@ if __name__ == '__main__':
                      data=df_ns, notes=notes_chart_ns, title=chart_title)
         update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5', data=df_total,
                      notes=notes_chart_total, title=chart_title_total)
-        """
+
         """
         # OLD
         # create dates for Russian gas flows in Germany
