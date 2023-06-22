@@ -350,7 +350,7 @@ if __name__ == '__main__':
         dw_chart = dw.add_data(chart_id=dw_id_fr, data=df_trade)
         dw.update_chart(chart_id=dw_id_fr, title=title)
         date = {'annotate': {
-            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br>Stand: {time_str_notes}'}}
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id_fr, properties=date)
         dw.publish_chart(chart_id=dw_id_fr, display=False)
 
@@ -926,7 +926,7 @@ if __name__ == '__main__':
         dw_chart = dw.add_data(chart_id=dw_id, data=df_trade)
         dw.update_chart(chart_id=dw_id, title=title)
         date = {'annotate': {
-            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br>Stand: {time_str_notes}'}}
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id, properties=date)
         dw.publish_chart(chart_id=dw_id, display=False)
 
