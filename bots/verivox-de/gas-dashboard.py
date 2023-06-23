@@ -327,7 +327,7 @@ if __name__ == '__main__':
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': todaystr, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
-        meta_imports = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Export-Import-Saldo in der {timestamp_str_imports}',
+        meta_imports = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Import-Export-Saldo in der {timestamp_str_imports}',
                         'value': float(diff_imports), 'valueLabel': f'{diff_imports} GWh', 'yAxisStart': imports_y, 'yAxisLabels': imports_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_imports, 'chartType': 'line'}
         # meta_usage = {'indicatorTitle': 'Eingespartes Gas', 'date': todaystr, 'indicatorSubtitle': f'im Vorjahres-Vergleich; Ziel: >25 %', 'value': u_diff, 'valueLabel': f'{diff_usage_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_usage, 'chartType': 'line'}
         meta_lng = {'indicatorTitle': 'Direkt-Importe LNG', 'date': todaystr, 'indicatorSubtitle': f'Anteil an den Gas-Importen insgesamt',

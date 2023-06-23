@@ -17,6 +17,7 @@ if __name__ == '__main__':
 
         # Datawrapper API key
         dw_key = os.environ['DATAWRAPPER_API']
+        dw = Datawrapper(access_token=dw_key)
         dw_id = 'R05oB'
 
         # retry if error
