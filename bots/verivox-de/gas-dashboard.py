@@ -34,6 +34,8 @@ if __name__ == '__main__':
             './data/german-imports.tsv', sep='\t', encoding='utf-8', index_col='.')
         df_super = pd.read_csv('./data/node_super.csv', encoding='utf-8',
                                usecols=['meldedatum', 'Mittlerer Preis'], index_col='meldedatum')
+        df_imports = pd.read_csv(
+            './data/imports-countries-dash.csv', encoding='utf-8')
 
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
         df_storage.index = pd.to_datetime(df_storage.index)
@@ -109,6 +111,19 @@ if __name__ == '__main__':
             df_temp.iloc[:, 5] = df_temp.iloc[:, 5].shift(1)  # Benzin
         # RUS GAS while pd.isna(df_temp.iloc[-1:, 1].item()) == True:
            # df_temp.iloc[:, 1] = df_temp.iloc[:, 1].shift(1)
+
+        # calculate imports diff
+        df_imports_meta = df_imports.copy().tail(1)
+        df_imports_meta = df_imports_meta.rename(
+            {'value': 'Trend Importe'}, axis='columns')
+        i_diff = abs(df_imports['value'].iloc[-1]
+                     ) - abs(df_imports['value'].iloc[-2])
+        if i_diff >= 2:
+            df_imports['Trend Importe'] = 'steigend'
+        elif i_diff <= -2:
+            df_imports['Trend Importe'] = 'fallend'
+        else:
+            df_imports['Trend Importe'] = 'gleichbleibend'
 
         # calculate gas savings
         """
@@ -187,6 +202,7 @@ if __name__ == '__main__':
         # NS1 trend_ns = df_meta['Trend NS1']
         # RUS GAS trend_rus = df_meta['Trend Importe']
         trend_super = df_meta['Trend Benzin']
+        trend_imports = df_imports['Trend Importe'].iloc[-1]
         diff_storage = df_meta['Gasspeicher']
         diff_gas = df_gas['Gaspreis'].iloc[-1]
         diff_strom = df_strom['Strompreis'].iloc[-1]
@@ -196,6 +212,7 @@ if __name__ == '__main__':
         diff_lng = df_meta['LNG'].round(1)
         # RUS GAS diff_rus = df_meta['Russisches Gas']
         diff_super = df_meta['Benzinpreis']
+        diff_imports = df_imports['value'].iloc[-1].round(0).astype(int)
 
         # get current date for chart notes and reset index
         df = df.reset_index()
@@ -237,6 +254,7 @@ if __name__ == '__main__':
         timestamp_str_lng = df_lng['date'].tail(1).item()
         timestamp_str_lng = pd.to_datetime(
             timestamp_str_lng).strftime('%-d. %-m.')
+        timestamp_str_imports = df_imports['date'].tail(1).item()
 
         # OLD replace NaN with empty string for old storage data
         # df['Gasspeicher'] = df['Gasspeicher'].fillna(0).astype(int).astype(str)
@@ -260,6 +278,13 @@ if __name__ == '__main__':
         #dict_ns = df_ns.rename(columns={'Nord Stream 1': 'value'}).dropna().to_dict(orient='records')
         dict_lng = df_lng.rename(
             columns={df_lng.columns[1]: 'value'}).to_dict(orient='records')
+        # replace 'KW' with real dates
+        df_imports.at[df_imports.index[-1],
+                      'date'] = str(df_fossile['date'].iloc[-1])
+        df_imports.at[df_imports.index[-2],
+                      'date'] = str(df_fossile['date'].iloc[-2])
+        dict_imports = df_imports.drop(df_imports.columns[[0, 3]], axis=1).rename(
+            columns={df.columns[2]: 'value'}).to_dict(orient='records')
 
         # additional data for JSON file
         # y-axis start and ticks
@@ -268,6 +293,7 @@ if __name__ == '__main__':
         strom_y = 0
         ns_y = 0
         fossile_y = 20
+        imports_y = -2000
         # RUS GAS rus_y = 0
         super_y = 1.6
         storage_ytick = [0, 25, 50, 75, 100]
@@ -277,6 +303,7 @@ if __name__ == '__main__':
         fossile_ytick = [20, 35, 50, 65]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
         super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
+        imports_ytick = [-2000, -1000, 0, 1000, 2000]
 
         # change decimal seperator
         diff_storage_str = diff_storage.astype(str).replace('.', ',')
@@ -298,6 +325,8 @@ if __name__ == '__main__':
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': todaystr, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
+        meta_imports = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Import-Export-Saldo in der {timestamp_str_imports}',
+                        'value': float(diff_imports), 'valueLabel': f'{diff_imports} GWh', 'yAxisStart': imports_y, 'yAxisLabels': imports_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_imports, 'chartType': 'line'}
         # meta_usage = {'indicatorTitle': 'Eingespartes Gas', 'date': todaystr, 'indicatorSubtitle': f'im Vorjahres-Vergleich; Ziel: >25 %', 'value': u_diff, 'valueLabel': f'{diff_usage_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_usage, 'chartType': 'line'}
         meta_lng = {'indicatorTitle': 'Direkt-Importe LNG', 'date': todaystr, 'indicatorSubtitle': f'Anteil an den Gas-Importen insgesamt',
                     'value': diff_lng, 'valueLabel': f'{diff_lng_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_lng, 'chartType': 'line'}
@@ -312,6 +341,7 @@ if __name__ == '__main__':
         meta_gas['chartData'] = dict_gas
         meta_strom['chartData'] = []
         meta_fossile['chartData'] = []
+        meta_imports['chartData'] = []
         #meta_usage['chartData'] = []
         meta_storage['chartData'] = []
         meta_lng['chartData'] = []
@@ -327,6 +357,7 @@ if __name__ == '__main__':
         dicts.append(meta_lng)
         dicts.append(meta_strom)
         dicts.append(meta_fossile)
+        dicts.append(meta_imports)
         # NS1 dicts.append(meta_ns)
         dicts.append(meta_super)
         with open('./data/dashboard_de.json', 'w') as fp:
@@ -342,6 +373,7 @@ if __name__ == '__main__':
         # today_str = today.strftime('%-d. %-m. %Y')
         # notes_chart = f'Stand: {today_str}. Pfeile: Veränderung zum Vortag, beim Sprit zur Vorwoche. Quellen: Agsi, Verivox, Bundeskartellamt'
 
+        """
         # run Q function
         update_chart(id='38c6dc628d74a268a1d09ed8065f7803', files=file)
         # delete all csv and geojson files
@@ -351,6 +383,7 @@ if __name__ == '__main__':
             if item.endswith('.csv') or item.endswith('.geojson'):
                 os.remove(os.path.join(dir, item))
         # os.remove(os.path.join(dir, 'dashboard_de.json'))
+        """
 
     except:
         raise

@@ -9,7 +9,6 @@ import logging
 import numpy as np
 from datawrapper import Datawrapper
 
-
 if __name__ == '__main__':
     try:
 
@@ -17,8 +16,9 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # Datawrapper API key
-        dw_key = os.environ['DATAWRAPPER_API']
-        dw = Datawrapper(access_token=dw_key)
+        #dw_key = os.environ['DATAWRAPPER_API']
+        dw = Datawrapper(
+            access_token="1j29gFGX3zaRoha7XnL0kKJWMZGTUkqb5V4xMDRorKN5EdWUOk1WegtFvQjI40yQ")
         dw_id = 'R05oB'
 
         # retry if error
@@ -33,12 +33,15 @@ if __name__ == '__main__':
 
         # generate year and week number for url
         d = datetime.today()
+        dold = datetime.today() - timedelta(7)
         dweek = (d.isocalendar().week) - 1
+        dweek_old = (dold.isocalendar().week) - 1
         dyear = (d.isocalendar().year)
+        dyear_old = (dold.isocalendar().year)
         dnotes = d - timedelta(days=d.weekday())  # last monday
         dnotes = dnotes.strftime('%-d. %-m. %Y')
 
-        # data source
+        # data source for current data
         url = f'https://www.energy-charts.info/charts/import_export_map/data/tcs_week_{dyear}_{dweek}.json'
 
         # download JSON and convert to dataframe
@@ -74,6 +77,7 @@ if __name__ == '__main__':
         df = df.reset_index(drop=True)
         df = df.sort_values('ID')
 
+        """
         # update chart
         dw_chart = dw.add_data(chart_id=dw_id, data=df)
         #dw.update_chart(chart_id=dw_id, title="Diese Länder importieren derzeit mehr Strom als sie exportieren")
@@ -83,6 +87,49 @@ if __name__ == '__main__':
         dw.update_metadata(chart_id=dw_id, properties=date)
         dw.update_metadata(chart_id=dw_id, properties=labels)
         dw.publish_chart(chart_id=dw_id, display=False)
+        """
+
+        # create dataframe for dashboard
+        df_de_new = df[df['ID'].str.contains(r'^Germany')].copy()
+        df_de_new['ID'] = f'KW {dweek}'
+
+        # data source for old data
+        url = f'https://www.energy-charts.info/charts/import_export_map/data/tcs_week_{dyear_old}_{dweek_old}.json'
+
+        # download JSON and convert to dataframe
+        r = s.get(url, headers={'user-agent': headers,
+                  'Cache-Control': 'no-cache', 'Pragma': 'no-cache'})
+        data = r.json()
+        df = pd.json_normalize(data)
+        df.columns = df.iloc[0]
+
+        # drop first row with meta data and keep only first column with values
+        df = df.iloc[1:]
+        df = df.reset_index(drop=True)
+
+        # clean-up
+        renamec = {df.columns[0]: 'ID', df.columns[1]: 'Wert'}
+        df = df.rename(columns=renamec)
+        df = df.filter(['ID', 'Wert'])
+
+        # replace ALPHA-2 codes with country names
+        df['ID'] = df['ID'].map(iso)
+
+        # drop empty rows and with less than 4 characters
+        df = df[df['ID'].notna()]
+        df = df[df['ID'].str.len() >= 3]
+
+        # drop everything except Germany
+        df = df[df['ID'] == 'Germany']
+        df['ID'] = f'KW {dweek_old}'
+
+        # concat old data to new
+        df = pd.concat([df, df_de_new])
+        df = df.rename({'Wert': 'value', 'ID': 'date'}, axis='columns')
+        df = df.reset_index(drop=True)
+
+        # save as csv for dashboard
+        df.to_csv('./data/imports-countries-dash.csv')
 
         # clean-up for Q
         """
