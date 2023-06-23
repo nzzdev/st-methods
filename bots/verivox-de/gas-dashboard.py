@@ -373,7 +373,6 @@ if __name__ == '__main__':
         # today_str = today.strftime('%-d. %-m. %Y')
         # notes_chart = f'Stand: {today_str}. Pfeile: Veränderung zum Vortag, beim Sprit zur Vorwoche. Quellen: Agsi, Verivox, Bundeskartellamt'
 
-        """
         # run Q function
         update_chart(id='38c6dc628d74a268a1d09ed8065f7803', files=file)
         # delete all csv and geojson files
@@ -383,7 +382,6 @@ if __name__ == '__main__':
             if item.endswith('.csv') or item.endswith('.geojson'):
                 os.remove(os.path.join(dir, item))
         # os.remove(os.path.join(dir, 'dashboard_de.json'))
-        """
 
     except:
         raise
