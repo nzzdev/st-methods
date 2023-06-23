@@ -16,9 +16,7 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # Datawrapper API key
-        #dw_key = os.environ['DATAWRAPPER_API']
-        dw = Datawrapper(
-            access_token="1j29gFGX3zaRoha7XnL0kKJWMZGTUkqb5V4xMDRorKN5EdWUOk1WegtFvQjI40yQ")
+        dw_key = os.environ['DATAWRAPPER_API']
         dw_id = 'R05oB'
 
         # retry if error
@@ -77,7 +75,6 @@ if __name__ == '__main__':
         df = df.reset_index(drop=True)
         df = df.sort_values('ID')
 
-        """
         # update chart
         dw_chart = dw.add_data(chart_id=dw_id, data=df)
         #dw.update_chart(chart_id=dw_id, title="Diese Länder importieren derzeit mehr Strom als sie exportieren")
@@ -87,7 +84,6 @@ if __name__ == '__main__':
         dw.update_metadata(chart_id=dw_id, properties=date)
         dw.update_metadata(chart_id=dw_id, properties=labels)
         dw.publish_chart(chart_id=dw_id, display=False)
-        """
 
         # create dataframe for dashboard
         df_de_new = df[df['ID'].str.contains(r'^Germany')].copy()
