@@ -182,7 +182,7 @@ if __name__ == '__main__':
             # dfavg = dfavg.rolling(window=7).mean().dropna()  # 7-day mvg average
             title_gas = dfavg['Gas'].iloc[-1].round(-1)
             title_ac = dfavg['Strom'].iloc[-1].round(-1)
-            title_chart = f'20 MWh Gas kostet {int(title_gas)} Euro im Jahr, 4 MWh Strom {int(title_ac)} Euro'
+            title_chart = f'20 MWh Gas kosten {int(title_gas)} Euro im Jahr, 4 MWh Strom {int(title_ac)} Euro'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             # update chart with averages
@@ -198,7 +198,7 @@ if __name__ == '__main__':
             # dfavg = dfavg.rolling(window=7).mean().dropna()  # 7-day mvg average
             title_gas = dfavg['Gas'].iloc[-1].round(-1)
             title_ac = dfavg['Strom'].iloc[-1].round(-1)
-            title_chart = f'20 MWh Gas kostet {int(title_gas)} Euro im Jahr, 4 MWh Strom {int(title_ac)} Euro'
+            title_chart = f'20 MWh Gas kosten {int(title_gas)} Euro im Jahr, 4 MWh Strom {int(title_ac)} Euro'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
