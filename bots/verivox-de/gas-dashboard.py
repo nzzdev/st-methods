@@ -283,6 +283,8 @@ if __name__ == '__main__':
                       'date'] = str(df_fossile['date'].iloc[-1])
         df_imports.at[df_imports.index[-2],
                       'date'] = str(df_fossile['date'].iloc[-2])
+        # convert to opposite sign for imports
+        df_imports['value'] = -df_imports['value']
         dict_imports = df_imports.drop(df_imports.columns[[0, 3]], axis=1).rename(
             columns={df.columns[2]: 'value'}).to_dict(orient='records')
 
