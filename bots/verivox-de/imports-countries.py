@@ -42,6 +42,7 @@ if __name__ == '__main__':
 
         # data source for current data
         url = f'https://www.energy-charts.info/charts/import_export_map/data/tcs_week_{dyear}_{dweek}.json'
+        url_source = f'https://www.energy-charts.info/charts/import_export_map/chart.htm?l=de&c=DE&week={dweek}'
 
         # download JSON and convert to dataframe
         r = s.get(url, headers={'user-agent': headers,
@@ -84,6 +85,8 @@ if __name__ == '__main__':
         labels = {'visualize': {'value-label-row': 'Wert'}}
         dw.update_metadata(chart_id=dw_id, properties=date)
         dw.update_metadata(chart_id=dw_id, properties=labels)
+        dw.update_description(chart_id=dw_id, source_url=url_source,
+                              source_name='energy-charts.info/Entso-E')
         dw.publish_chart(chart_id=dw_id, display=False)
 
         # create dataframe for dashboard
