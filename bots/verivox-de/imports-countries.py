@@ -90,7 +90,7 @@ if __name__ == '__main__':
         dw.update_metadata(chart_id=dw_id, properties=date)
         dw.update_metadata(chart_id=dw_id, properties=labels)
         dw.update_description(chart_id=dw_id, source_url=url_source,
-                              source_name='energy-charts.info/Entso-E')
+                              source_name='energy-charts.info/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel (Export-Import-Saldo), in GWh')
         dw.publish_chart(chart_id=dw_id, display=False)
 
         # create dataframe for dashboard
