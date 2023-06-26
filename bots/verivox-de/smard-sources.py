@@ -355,7 +355,7 @@ if __name__ == '__main__':
             'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id_fr, properties=date)
         dw.update_description(
-            chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E')
+            chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel Deutschlands mit Frankreich (Export-Import-Saldo), in GWh')
         dw.publish_chart(chart_id=dw_id_fr, display=False)
 
         #################
@@ -933,7 +933,7 @@ if __name__ == '__main__':
             'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id, properties=date)
         dw.update_description(
-            chart_id=dw_id, source_url=dw_source_all, source_name='Bundesnetzagentur/Entso-E')
+            chart_id=dw_id, source_url=dw_source_all, source_name='Bundesnetzagentur/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel Deutschlands (Export-Import-Saldo), in GWh')
         dw.publish_chart(chart_id=dw_id, display=False)
 
         """
