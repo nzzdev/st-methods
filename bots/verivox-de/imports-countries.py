@@ -83,7 +83,7 @@ if __name__ == '__main__':
 
         # update chart
         dw_chart = dw.add_data(chart_id=dw_id, data=dfr)
-        #dw.update_chart(chart_id=dw_id, title="Diese Länder importieren derzeit mehr Strom als sie exportieren")
+        #dw.update_chart(chart_id=dw_id, title="Diese Länder importieren derzeit mehr Strom, als sie exportieren")
         date = {'annotate': {
             'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {dnotes}'}}
         labels = {'visualize': {'value-label-row': 'Wert'}}

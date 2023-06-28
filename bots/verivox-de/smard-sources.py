@@ -908,9 +908,9 @@ if __name__ == '__main__':
         # dynamic chart title
         last_value = df_trade['Saldo'].iloc[-2]
         if last_value >= 0:
-            title = 'Deutschland exportiert derzeit mehr Strom als es importiert'
+            title = 'Deutschland exportiert derzeit mehr Strom, als es importiert'
         else:
-            title = 'Deutschland importiert derzeit mehr Strom als es exportiert'
+            title = 'Deutschland importiert derzeit mehr Strom, als es exportiert'
 
         # run Q function
         update_chart(id='12496a04992590f16cb3aaa749b3b7b4',
