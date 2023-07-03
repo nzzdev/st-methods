@@ -916,6 +916,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-03;8640590;REWE Beste Wahl;REWE Beste Wahl Milder Multi 1l;139;1l
 2023-07-03;336931;REWE Beste Wahl;REWE Beste Wahl Mildes Weinsauerkraut 770g;129;770g (1 kg = 1,68 €)
 2023-07-03;2181429;REWE Beste Wahl;REWE Beste Wahl Mineralwasser Classic 6x0,5l;174;6x0,50l (1 l = 0,58 €)
+2023-07-03;2181377;REWE Beste Wahl;REWE Beste Wahl Mineralwasser Classic 6x1l;234;6x1l (1 l = 0,39 €)
 2023-07-03;2181443;REWE Beste Wahl;REWE Beste Wahl Mineralwasser Medium 6x0,5l;174;6x0,50l (1 l = 0,58 €)
 2023-07-03;2181389;REWE Beste Wahl;REWE Beste Wahl Mineralwasser Medium 6x1l;234;6x1l (1 l = 0,39 €)
 2023-07-03;2181515;REWE Beste Wahl;REWE Beste Wahl Mineralwasser still 6x0,5l;174;6x0,50l (1 l = 0,58 €)
@@ -1046,8 +1047,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-03;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;219;750ml (1 l = 2,92 €)
 2023-07-03;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-07-03;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-07-03;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-07-03;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
+2023-07-03;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-07-03;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-07-03;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-07-03;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;199;110g (1 kg = 18,09 €)
