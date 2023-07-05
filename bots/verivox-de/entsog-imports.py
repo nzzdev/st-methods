@@ -331,7 +331,6 @@ if __name__ == '__main__':
                      data=df_lng_new, notes=notes_chart_lng)
         ### update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
-        """
         # Nord stream 1 to DE Bundesnetzagentur
         url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
         resp = download_data(url, headers=fheaders)
@@ -408,7 +407,6 @@ if __name__ == '__main__':
                      data=df_ns, notes=notes_chart_ns, title=chart_title)
         update_chart(id='85c9e635bfeae3a127d9c9db90dfb2c5', data=df_total,
                      notes=notes_chart_total, title=chart_title_total)
-        """
 
         """
         # OLD
