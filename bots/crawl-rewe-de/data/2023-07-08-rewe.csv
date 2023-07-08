@@ -1298,8 +1298,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-08;1006852;REWE Bio;REWE Bio Edelvollmilch-Schokolade 100g;129;100g (1 kg = 12,90 €)
 2023-07-08;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;249;6 Stück
 2023-07-08;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;269;250g (1 kg = 10,76 €)
-2023-07-08;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-07-08;200348;REWE Bio;REWE Bio Emmentaler 150g;219;150g (1 kg = 14,60 €)
+2023-07-08;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-07-08;577900;REWE Bio;REWE Bio Emmentaler gerieben 150g;179;150g (1 kg = 11,93 €)
 2023-07-08;7887089;REWE Bio;REWE Bio Erbsen & Möhren 340g;139;220g (1 kg = 6,32 €)
 2023-07-08;7891436;REWE Bio;REWE Bio Erbsen 350g;139;230g (1 kg = 6,04 €)
@@ -1460,7 +1460,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-08;1424821;REWE Bio;REWE Bio Muskatnuss 12,5g;349;12,50g (1 kg = 279,20 €)
 2023-07-08;8777278;REWE Bio;REWE Bio Möhrchen 330g;139;330g (1 kg = 4,21 €)
 2023-07-08;1346535;REWE Bio;REWE Bio Nackensteak Kräuter ca. 380g;870;1 Stück ca. 380 g (1 kg = 22,90 €)
-2023-07-08;8427501;REWE Bio;REWE Bio Natives Olivenöl 750ml;699;750ml (1 l = 9,32 €)
 2023-07-08;7816381;REWE Bio;REWE Bio Naturland 5 Korn Müsli 750g;249;750g (1 kg = 3,32 €)
 2023-07-08;7811188;REWE Bio;REWE Bio Naturland Blütenhonig 500g;479;500g (1 kg = 9,58 €)
 2023-07-08;8757063;REWE Bio;REWE Bio Naturland Bunter Pfeffer Mühle 40g;259;40g (1 kg = 64,75 €)
