@@ -62,7 +62,7 @@ if __name__ == '__main__':
 
         # clean-up for Datawrapper
         # replace ALPHA-2 codes with country names
-        iso = {'AD': 'Andorra', 'AL': 'Albania', 'AT': 'Austria', 'AL': 'Albania', 'BA': 'Bosnia and Herz.', 'BE': 'Belgium', 'BG': 'Bulgaria', 'CH': 'Switzerland', 'CY': 'Cyprus', 'CZ': 'Czech Rep.', 'DE': 'Germany', 'DE_LU': 'XX', 'DK': 'Denmark', 'EE': 'Estonia', 'ES': 'Spain', 'FI': 'Finland', 'FR': 'France', 'GR': 'Greece', 'HR': 'Croatia', 'HU': 'Hungary', 'IE': 'Ireland', 'IT': 'Italy', 'IS': 'Iceland',
+        iso = {'AD': 'Andorra', 'AL': 'Albania', 'AT': 'Austria', 'AL': 'Albania', 'BA': 'Bosnia and Herz.', 'BE': 'Belgium', 'BG': 'Bulgaria', 'CH': 'Switzerland', 'CZ': 'Czech Rep.', 'DE': 'Germany', 'DE_LU': 'XX', 'DK': 'Denmark', 'EE': 'Estonia', 'ES': 'Spain', 'FI': 'Finland', 'FR': 'France', 'GR': 'Greece', 'HR': 'Croatia', 'HU': 'Hungary', 'IE': 'Ireland', 'IT': 'Italy', 'IS': 'Iceland',
                'LT': 'Lithuania', 'LU': 'Luxembourg', 'LV': 'Latvia', 'MD': 'Moldova', 'ME': 'Montenegro', 'MK': 'North Macedonia', 'MT': 'Malta', 'NIE': 'YY', 'NL': 'Netherlands', 'NO': 'Norway', 'PL': 'Poland', 'PT': 'Portugal', 'RO': 'Romania', 'RS': 'Serbia', 'RU': 'RU', 'SE': 'Sweden', 'SI': 'Slovenia', 'SK': 'Slovakia', 'TR': 'Turkey', 'UA': 'Ukraine', 'UA_W': 'ZZ', 'UK': 'United Kingdom', 'XK': 'Kosovo'}
         df['ID'] = df['ID'].map(iso)
 
@@ -138,7 +138,7 @@ if __name__ == '__main__':
         # clean-up for Q
         """
         # replace ALPHA-2 codes with country names
-        iso = {'AD': 'Andorra', 'AL': 'Albania', 'AT': 'Austria', 'AL': 'Albania', 'BA': 'Bosnia and Herzegovina', 'BE': 'Belgium', 'BG': 'Bulgaria', 'CH': 'Switzerland', 'CY': 'Cyprus', 'CZ': 'Czech Republic', 'DE': 'Germany', 'DE_LU': 'XX', 'DK': 'Denmark', 'EE': 'Estonia', 'ES': 'Spain', 'FI': 'Finland', 'FR': 'France', 'GR': 'Greece', 'HR': 'Croatia', 'HU': 'Hungary', 'IE': 'Ireland', 'IT': 'Italy', 'IS': 'Iceland',
+        iso = {'AD': 'Andorra', 'AL': 'Albania', 'AT': 'Austria', 'AL': 'Albania', 'BA': 'Bosnia and Herzegovina', 'BE': 'Belgium', 'BG': 'Bulgaria', 'CH': 'Switzerland', 'CZ': 'Czech Republic', 'DE': 'Germany', 'DE_LU': 'XX', 'DK': 'Denmark', 'EE': 'Estonia', 'ES': 'Spain', 'FI': 'Finland', 'FR': 'France', 'GR': 'Greece', 'HR': 'Croatia', 'HU': 'Hungary', 'IE': 'Ireland', 'IT': 'Italy', 'IS': 'Iceland',
                'LT': 'Lithuania', 'LU': 'Luxembourg', 'LV': 'Latvia', 'MD': 'Moldova', 'ME': 'Montenegro', 'MK': 'North Macedonia', 'MT': 'Malta', 'NIE': 'YY', 'NL': 'Netherlands', 'NO': 'Norway', 'PL': 'Poland', 'PT': 'Portugal', 'RO': 'Romania', 'RS': 'Serbia', 'RU': 'Russia', 'SE': 'Sweden', 'SI': 'Slovenia', 'SK': 'Slovakia', 'TR': 'Turkey', 'UA': 'Ukraine', 'UA_W': 'ZZ', 'UK': 'United Kingdom', 'XK': 'Kosovo'}
         df['ID'] = df['ID'].map(iso)
 
