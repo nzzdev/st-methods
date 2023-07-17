@@ -268,7 +268,7 @@ if __name__ == '__main__':
         modules = COMMERCIAL_TRADE_FR
         try:
             df_trade = smard.requestSmardData(
-                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1609628400000)  # 2021/01/03
 
             # check if data is corrupted
             errors = 0
@@ -277,7 +277,7 @@ if __name__ == '__main__':
                 errors += 1
                 # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
                 df = smard.requestSmardData(
-                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+                    modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # 2021/01/03
             if ('Anfang' in df_trade.columns):
                 # fix wrong decimal
                 df_trade = df_trade.replace('-', '', regex=False)
@@ -855,7 +855,7 @@ if __name__ == '__main__':
         modules = COMMERCIAL_TRADE_ALL
         try:
             df_trade = smard.requestSmardData(
-                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+                modulIDs=modules, region="DE", timestamp_from_in_milliseconds=1609628400000)  # 2021/01/03
 
             # check if data is corrupted
             errors = 0
@@ -863,7 +863,7 @@ if __name__ == '__main__':
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
-                    modulIDs=modules, timestamp_from_in_milliseconds=1606604400000)  # 2020/11/29
+                    modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # 2021/01/03
             if ('Anfang' in df_trade.columns):
                 # fix wrong decimal
                 df_trade = df_trade.replace('-', '', regex=False)
