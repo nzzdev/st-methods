@@ -8,7 +8,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-24;8002548;ja!;Ja! Macadamia geröstet & gesalzen 125g;349;125g (1 kg = 27,92 €)
 2023-07-24;3167734;ja!;Ja! Mignon Waffeln 400g;199;400g (1 kg = 4,98 €)
 2023-07-24;8268091;ja!;Ja! Pesto alla Calabrese 190g;129;190g (1 kg = 6,79 €)
-2023-07-24;8288407;ja!;Ja! Pizza Salami 3x350g;369;3x350g (1 kg = 3,51 €)
 2023-07-24;7097534;ja!;Ja! Prinzessbohnen 1000g;199;1000g
 2023-07-24;8271521;ja!;Ja! Sahnejoghurt nach griechischer Art 1kg;199;1g
 2023-07-24;3155797;ja!;Ja! Semmelknödel 6er 200g;99;200g (1 kg = 4,95 €)
@@ -686,6 +685,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-24;8188779;REWE Beste Wahl;REWE Beste Wahl Erdbeer-Rhabarber-Streusel-Kuchen 550g;349;550g (1 kg = 6,35 €)
 2023-07-24;8512950;REWE Beste Wahl;REWE Beste Wahl Erdbeere Fruchtaufstrich 200g;129;250g (1 kg = 5,16 €)
 2023-07-24;2184085;REWE Beste Wahl;REWE Beste Wahl Erdbeere Konfitüre extra 340g;169;340g (1 kg = 4,97 €)
+2023-07-24;7144888;REWE Beste Wahl;REWE Beste Wahl Erdbeeren 500g;279;500g (1 kg = 5,58 €)
 2023-07-24;8354256;REWE Beste Wahl;REWE Beste Wahl Erdbeeren gezuckert 245g;279;245g (1 kg = 11,39 €)
 2023-07-24;7772897;REWE Beste Wahl;REWE Beste Wahl Erdnuss Mix Asia Style 120g;169;120g (1 kg = 14,08 €)
 2023-07-24;8381866;REWE Beste Wahl;REWE Beste Wahl Erdnüsse grosse Kerne geröstet 200g;109;200g (1 kg = 5,45 €)
@@ -1281,6 +1281,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-24;3009709;REWE Bio;REWE Bio Edel-Bitter-Schokolade 85% 100g;129;100g (1 kg = 12,90 €)
 2023-07-24;1006863;REWE Bio;REWE Bio Edelbitter-Schokolade 60% Cacao 100g;129;100g (1 kg = 12,90 €)
 2023-07-24;1006852;REWE Bio;REWE Bio Edelvollmilch-Schokolade 100g;129;100g (1 kg = 12,90 €)
+2023-07-24;7078288;REWE Bio;REWE Bio Eier Spitz und Bube 6 Stück;249;6 Stück
 2023-07-24;7063885;REWE Bio;REWE Bio Eisbergsalat 1 Stück;249;1 Stück
 2023-07-24;7788256;REWE Bio;REWE Bio Eiweißbrot mit Erbsen 250g;269;250g (1 kg = 10,76 €)
 2023-07-24;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
