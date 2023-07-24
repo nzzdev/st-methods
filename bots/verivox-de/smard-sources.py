@@ -358,6 +358,7 @@ if __name__ == '__main__':
             chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel Deutschlands mit Frankreich (Export-Import-Saldo), in GWh')
         dw.publish_chart(chart_id=dw_id_fr, display=False)
 
+        """
         #################
         # TRADE BELGIUM #
         #################
@@ -847,6 +848,7 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='12496a04992590f16cb3aaa749b04fb0',
                      title=title, notes=notes_chart, data=df_trade)
+        """
 
         #############
         # TRADE ALL #
