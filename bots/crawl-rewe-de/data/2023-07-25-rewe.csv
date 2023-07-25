@@ -918,8 +918,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-25;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;599;500ml (1 l = 11,98 €)
 2023-07-25;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-07-25;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-07-25;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-07-25;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-07-25;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-07-25;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2023-07-25;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;469;475g (1 kg = 9,87 €)
 2023-07-25;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1237,7 +1237,9 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-25;8611706;REWE Bio;REWE Bio Brechbohnen 185g;109;185g (1 kg = 5,89 €)
 2023-07-25;742294;REWE Bio;REWE Bio Brechbohnen 450g;179;450g (1 kg = 3,98 €)
 2023-07-25;2245231;REWE Bio;REWE Bio Broccoli 1 Stück;279;1 Stück
+2023-07-25;273709;REWE Bio;REWE Bio Broccoli tiefgefroren 300g;159;300g (1 kg = 5,30 €)
 2023-07-25;7794507;REWE Bio;REWE Bio Bunter Pfeffer ganz 60g;299;60g (1 kg = 49,83 €)
+2023-07-25;1136740;REWE Bio;REWE Bio Buttergemüse 300g;169;300g (1 kg = 5,63 €)
 2023-07-25;7705122;REWE Bio;REWE Bio Butterkäse 150g;189;150g (1 kg = 12,60 €)
 2023-07-25;1323529;REWE Bio;REWE Bio Caffe Latte 250ml;95;250ml (1 l = 3,80 €)
 2023-07-25;2557918;REWE Bio;REWE Bio Caffè Crema ganze Bohne 1kg;1099;1000g
