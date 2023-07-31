@@ -337,7 +337,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-31;7928306;ja!;ja! Mini Pizza Salami 360g;249;360g (1 kg = 6,92 €)
 2023-07-31;8401219;ja!;ja! Mini Schokoriegel Mix 500g;319;500g (1 kg = 6,38 €)
 2023-07-31;2407834;ja!;ja! Mini Wiener Würstchen 2x160g;279;2x160g (1 kg = 8,72 €)
-2023-07-31;7240281;ja!;ja! Mini-Berliner 9 Stück 324g;299;324g (1 kg = 9,23 €)
 2023-07-31;8267887;ja!;ja! Mini-Cabanossi 250g;279;250g (1 kg = 11,16 €)
 2023-07-31;2318701;ja!;ja! Mini-Geflügelfrikadellen 500g;349;500g (1 kg = 6,98 €)
 2023-07-31;2146675;ja!;ja! Mini-Windbeutel 250g;129;250g (1 kg = 5,16 €)
@@ -546,6 +545,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-31;2655152;ja!;ja! Wiener Würstchen 400g;319;8x50g (1 kg = 7,98 €)
 2023-07-31;901819;ja!;ja! Wildlachsfilet tiefgefroren 2x125g;449;250g (1 kg = 17,96 €)
 2023-07-31;6353606;ja!;ja! Würfelzucker 1kg;169;1kg
+2023-07-31;8740875;ja!;ja! Würziger Cheddar in Scheiben 150g;189;150g (1 kg = 12,60 €)
 2023-07-31;8100302;ja!;ja! Zahnstocher 450 Stück;179;450 Stück
 2023-07-31;6261175;ja!;ja! Zartbitter-Schokolade 100g;75;100g (1 kg = 7,50 €)
 2023-07-31;6343171;ja!;ja! Zarte Haferflocken 500g;79;500g (1 kg = 1,58 €)
@@ -623,7 +623,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-31;7076144;REWE Beste Wahl;REWE Beste Wahl Butter Croissants 200g;199;200g (1 kg = 9,95 €)
 2023-07-31;7293036;REWE Beste Wahl;REWE Beste Wahl Buttercroissants 360g;369;360g (1 kg = 10,25 €)
 2023-07-31;945673;REWE Beste Wahl;REWE Beste Wahl Butterspritzgebäck 400g;249;400g (1 kg = 6,23 €)
-2023-07-31;138469;REWE Beste Wahl;REWE Beste Wahl Bäcker-Brötchen 360g;129;360g (1 kg = 3,58 €)
 2023-07-31;8698487;REWE Beste Wahl;REWE Beste Wahl Cannelloni 250g;169;250g (1 kg = 6,76 €)
 2023-07-31;3015611;REWE Beste Wahl;REWE Beste Wahl Cannelloni Bolognese 400g;199;400g (1 kg = 4,98 €)
 2023-07-31;8412884;REWE Beste Wahl;REWE Beste Wahl Cayennepfeffer gemahlen 39g;199;39g (1 kg = 51,03 €)
@@ -919,8 +918,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-31;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;599;500ml (1 l = 11,98 €)
 2023-07-31;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-07-31;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-07-31;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-07-31;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-07-31;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-07-31;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2023-07-31;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;469;475g (1 kg = 9,87 €)
 2023-07-31;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -959,7 +958,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-31;2241405;REWE Beste Wahl;REWE Beste Wahl Raspelschokolade Vollmilch 100g;129;100g (1 kg = 12,90 €)
 2023-07-31;2241414;REWE Beste Wahl;REWE Beste Wahl Raspelschokolade edelherb 100g;129;100g (1 kg = 12,90 €)
 2023-07-31;8247853;REWE Beste Wahl;REWE Beste Wahl Regenbogen-Forellen 2 Stück, 500g;499;500g (1 kg = 9,98 €)
-2023-07-31;3029456;REWE Beste Wahl;REWE Beste Wahl Reis-Wildlachs-Pfanne 750g;369;750g (1 kg = 4,92 €)
 2023-07-31;8470640;REWE Beste Wahl;REWE Beste Wahl Respeggt Eier Freilandhaltung 10 Stück;259;10 Stück
 2023-07-31;2455271;REWE Beste Wahl;REWE Beste Wahl Rindergulasch 400g;479;400g (1 kg = 11,98 €)
 2023-07-31;1421084;REWE Beste Wahl;REWE Beste Wahl Risotto-Reis 500g;199;500g (1 kg = 3,98 €)
@@ -1023,8 +1021,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-31;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;219;750ml (1 l = 2,92 €)
 2023-07-31;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-07-31;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-07-31;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-07-31;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-07-31;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-07-31;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-07-31;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-07-31;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;199;110g (1 kg = 18,09 €)
@@ -1315,7 +1313,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-07-31;1396702;REWE Bio;REWE Bio Geflügelsalami mit Palmfett 70g;179;70g (1 kg = 25,57 €)
 2023-07-31;8360458;REWE Bio;REWE Bio Gemüsebrühe 140g;119;140g (1 kg = 8,50 €)
 2023-07-31;8589069;REWE Bio;REWE Bio Gemüsefond 400ml;219;400ml (1 l = 5,48 €)
-2023-07-31;7321580;REWE Bio;REWE Bio Gemüsepfanne mediterrane Art 450g;199;450g (1 kg = 4,42 €)
 2023-07-31;7841276;REWE Bio;REWE Bio Gemüsepfanne nach Französischer Art 450g;199;450g (1 kg = 4,42 €)
 2023-07-31;304588;REWE Bio;REWE Bio Gemüsesaft 1l;179;1l
 2023-07-31;7729484;REWE Bio;REWE Bio Getrocknete Tomaten 80g;199;80g (1 kg = 24,88 €)
