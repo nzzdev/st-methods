@@ -3,7 +3,7 @@ name: Update Verivox Data DE
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "15 8,9,10,11,12,13,14,15,16,17,18,19,20 * * *"
+    - cron: "15 7,8,9,10,11,12,13,14,15,16,17,18,19,20 * * *"
   workflow_dispatch:
 
 jobs:
