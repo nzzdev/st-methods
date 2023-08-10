@@ -173,12 +173,26 @@ if __name__ == '__main__':
         df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
         df_dash = df_dash[['Fossile Abhängigkeit']]
 
+        # NEW fossile without gas
+        # combine fossile
+        df_nogas = df.copy()
+        df_nogas['Erdgas'] = df_nogas['Erdgas'] + \
+            df_nogas['Kohle'] + df_nogas['Sonstige']  # fossile
+        df_nogas['Sonstige EE'] = df_nogas['Sonstige EE'] + \
+            df_nogas['Pumpspeicher']  # other EE + pumped hydro
+        df_nogas = df_nogas.drop(['Pumpspeicher', 'Sonstige', 'Kohle'], axis=1)
+        df_nogas = df_nogas.rename(columns={'Erdgas': 'Fossile',
+                                            'Sonstige EE': 'Sonstige'})
+        # drop unused rows and convert to terawatt
+        df_nogas = df_nogas[~(df_nogas.index < '2021-07-18 00:00:00')]
+        df_nogas = df_nogas.div(1000000)
+
+        # OLD fossile with gas
         # combine conventional
         df['Sonstige'] = df['Sonstige'] + \
             df['Pumpspeicher'] + df['Sonstige EE']
 
         df = df.drop(['Pumpspeicher', 'Sonstige EE'], axis=1)
-
         # drop unused rows and convert to terawatt
         df = df[~(df.index < '2021-07-18 00:00:00')]
         df = df.div(1000000)
@@ -191,6 +205,8 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
                      data=df, notes=notes_chart, title=title_chart)
+        update_chart(id='377d6a0926cf5246344267f1b9db9dc3',
+                     data=df_nogas, notes=notes_chart, title=title_chart)
 
         ###########################
         # API request spot market #
