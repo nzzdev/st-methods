@@ -145,6 +145,7 @@ if __name__ == '__main__':
         time_dt_notes = df.index[-1] + timedelta(days=1)
         time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
         notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Öl, Pumpspeicher sowie andere Erneuerbare in der grafischen Darstellung unter «Sonstige».<br>Stand: {time_str_notes}'
+        notes_chart_nogas = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Pumpspeicher sowie andere Erneuerbare unter «Sonstige».<br>Stand: {time_str_notes}'
 
         """
         # old gas chart title: calculate percentage for chart title
@@ -206,7 +207,7 @@ if __name__ == '__main__':
         update_chart(id='e468de3ac9c422bcd0924e26b60a2af8',
                      data=df, notes=notes_chart, title=title_chart)
         update_chart(id='377d6a0926cf5246344267f1b9db9dc3',
-                     data=df_nogas, notes=notes_chart, title=title_chart)
+                     data=df_nogas, notes=notes_chart_nogas, title=title_chart)
 
         ###########################
         # API request spot market #
