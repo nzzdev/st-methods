@@ -185,6 +185,10 @@ if __name__ == '__main__':
             1).astype(str).replace('.', ',')
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
+        # export as tsv
+        df.to_csv('./data/gas-strom-bundesschnitt-new.tsv',
+                  sep='\t', encoding='utf-8')
+
         # run function
         update_chart(id='cc9eff02ba0867d71af4fbc25304797b',
                      data=df, title=title, notes=notes_chart)
