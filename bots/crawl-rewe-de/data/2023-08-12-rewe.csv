@@ -945,8 +945,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-08-12;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;599;500ml (1 l = 11,98 €)
 2023-08-12;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-08-12;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-08-12;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-08-12;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-08-12;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-08-12;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2023-08-12;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;469;475g (1 kg = 9,87 €)
 2023-08-12;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1048,8 +1048,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-08-12;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;219;750ml (1 l = 2,92 €)
 2023-08-12;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-08-12;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-08-12;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-08-12;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-08-12;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-08-12;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-08-12;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-08-12;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;199;110g (1 kg = 18,09 €)
@@ -1285,7 +1285,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-08-12;8705015;REWE Bio;REWE Bio Chili sin Carne vegan 400g;229;400g (1 kg = 5,73 €)
 2023-08-12;1202493;REWE Bio;REWE Bio Cornichons 190g;199;190g (1 kg = 10,47 €)
 2023-08-12;294337;REWE Bio;REWE Bio Couscous 500g;119;500g (1 kg = 2,38 €)
-2023-08-12;946608;REWE Bio;REWE Bio Creamy Erdnussbutter 250g;199;250g (1 kg = 7,96 €)
 2023-08-12;8098823;REWE Bio;REWE Bio Crema mit Aceto Balsamico 250ml;299;250ml (1 l = 11,96 €)
 2023-08-12;577458;REWE Bio;REWE Bio Currypulver 50g;269;50g (1 kg = 53,80 €)
 2023-08-12;1438494;REWE Bio;REWE Bio Dill 50g;99;50g (1 kg = 19,80 €)
