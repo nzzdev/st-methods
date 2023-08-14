@@ -26,10 +26,10 @@ if __name__ == '__main__':
                              encoding='utf-8', usecols=['date', 'Gas'], index_col='date')
         df_strom = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
                                encoding='utf-8', usecols=['date', 'Strom'], index_col='date')
-        #df_ns = pd.read_csv('./data/pipelines_ns.csv', encoding='utf-8', index_col='periodFrom')
+        # df_ns = pd.read_csv('./data/pipelines_ns.csv', encoding='utf-8', index_col='periodFrom')
         df_fossile = pd.read_csv(
             './data/smard_percentage.csv', encoding='utf-8', index_col='Datum')
-        #df_usage = pd.read_csv('./data/gasverbrauch.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Normaler Verbrauch¹', 'Aktuell'])
+        # df_usage = pd.read_csv('./data/gasverbrauch.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Normaler Verbrauch¹', 'Aktuell'])
         df_lng = pd.read_csv(
             './data/german-imports.tsv', sep='\t', encoding='utf-8', index_col='.')
         df_super = pd.read_csv('./data/node_super.csv', encoding='utf-8',
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         df_storage_trend = df_storage_trend.sort_index()
         df_gas.index = pd.to_datetime(df_gas.index)
         df_strom.index = pd.to_datetime(df_strom.index)
-        #df_ns.index = pd.to_datetime(df_ns.index)
+        # df_ns.index = pd.to_datetime(df_ns.index)
         df_super.index = pd.to_datetime(df_super.index)
         df_super = df_super.round(2)
         df_gas_mean = df_gas.rolling(window=7).mean().dropna()
@@ -53,8 +53,8 @@ if __name__ == '__main__':
         df_strom_mean.index = pd.to_datetime(df_strom_mean.index)
         df_fossile.index = pd.to_datetime(df_fossile.index)
         df_fossile = df_fossile.sort_index().round(1)
-        #df_usage.index = pd.to_datetime(df_usage.index)
-        #df_usage = df_usage.sort_index()
+        # df_usage.index = pd.to_datetime(df_usage.index)
+        # df_usage = df_usage.sort_index()
         df_lng.index = pd.to_datetime(df_lng.index)
         df_lng = df_lng.sort_index()
 
@@ -76,11 +76,11 @@ if __name__ == '__main__':
         df_gas_mean = df_gas_mean.rename(columns={'Gas': 'Gaspreis'})
         df_strom = df_strom.rename(columns={'Strom': 'Strompreis'})
         df_strom_mean = df_strom_mean.rename(columns={'Strom': 'Strompreis'})
-        #df_ns.index = df_ns.index.rename('date')
-        #df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
+        # df_ns.index = df_ns.index.rename('date')
+        # df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
         df_fossile.index = df_fossile.index.rename('date')
-        #df_usage.index = df_usage.index.rename('date')
-        #df_usage = df_usage.rename(columns={'Normaler Verbrauch¹': 'Vorjahr', 'Aktuell': 'Gasverbrauch'})
+        # df_usage.index = df_usage.index.rename('date')
+        # df_usage = df_usage.rename(columns={'Normaler Verbrauch¹': 'Vorjahr', 'Aktuell': 'Gasverbrauch'})
         df_lng.index = df_lng.index.rename('date')
 
         # convert 20 MWh to 20000 kWh and euro to cent / 4 MWh to 4000 kWh
@@ -143,14 +143,24 @@ if __name__ == '__main__':
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df_temp.copy().tail(1)
-        df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull(
-        )].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100  # diff previous day
-        df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull(
-        )].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) * 100  # diff previous day
+
+        # on Mondays there's no new gas and electricity price data; use last friday for comparison instead
+        if today().weekday() == 0:
+            df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull(
+            )].iloc[-4]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-4]) * 100  # diff friday
+            df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull(
+            )].iloc[-4]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-4]) * 100  # diff friday
+        else:
+            df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull(
+            )].iloc[-2]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-2]) * 100  # diff previous day
+            df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull(
+            )].iloc[-2]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) * 100  # diff previous day
+
+        # other trends not affected by this
         df_meta['Trend Fossile'] = ((df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull(
         )].iloc[-1] - df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull()].iloc[-2]) / df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull()].iloc[-2]) * 100
         df_meta['Trend Speicher'] = df_storage_trend['Trend'].iloc[-1] * 10
-        #df_meta['Trend Verbrauch'] = u_diff_diffy
+        # df_meta['Trend Verbrauch'] = u_diff_diffy
         df_meta['Trend LNG'] = ((df['LNG'].loc[~df['LNG'].isnull(
         )].iloc[-1] / 10) - (df['LNG'].loc[~df['LNG'].isnull()].iloc[-2] / 10))
         df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull(
@@ -197,7 +207,7 @@ if __name__ == '__main__':
         trend_gas = df_meta['Trend Gas']
         trend_strom = df_meta['Trend Strom']
         trend_fossile = df_meta['Trend Fossile']
-        #trend_usage = df_meta['Trend Verbrauch']
+        # trend_usage = df_meta['Trend Verbrauch']
         trend_lng = df_meta['Trend LNG']
         # NS1 trend_ns = df_meta['Trend NS1']
         # RUS GAS trend_rus = df_meta['Trend Importe']
@@ -206,9 +216,9 @@ if __name__ == '__main__':
         diff_storage = df_meta['Gasspeicher']
         diff_gas = df_gas['Gaspreis'].iloc[-1]
         diff_strom = df_strom['Strompreis'].iloc[-1]
-        #diff_ns = df_ns['Nord Stream 1'].iloc[-1].round(2)
+        # diff_ns = df_ns['Nord Stream 1'].iloc[-1].round(2)
         diff_fossile = df_fossile['Fossile Abhängigkeit'].iloc[-1]
-        #diff_usage = u_diff_str
+        # diff_usage = u_diff_str
         diff_lng = df_meta['LNG'].round(1)
         # RUS GAS diff_rus = df_meta['Russisches Gas']
         diff_super = df_meta['Benzinpreis']
@@ -221,9 +231,9 @@ if __name__ == '__main__':
         df_storage = df_storage.reset_index()
         df_gas = df_gas.reset_index()
         df_strom = df_strom.reset_index()
-        #df_ns = df_ns.reset_index()
+        # df_ns = df_ns.reset_index()
         df_fossile = df_fossile.reset_index()
-        #df_usage = df_usage.reset_index()
+        # df_usage = df_usage.reset_index()
         df_lng = df_lng.reset_index()
         df_super = df_super.reset_index()
         df['date'] = pd.to_datetime(
@@ -234,10 +244,10 @@ if __name__ == '__main__':
             df_gas['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_strom['date'] = pd.to_datetime(
             df_strom['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
-        #df_ns['date'] = pd.to_datetime(df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d %H:%M:%S')
+        # df_ns['date'] = pd.to_datetime(df_ns['date'], dayfirst=True).dt.strftime('%Y-%m-%d %H:%M:%S')
         df_fossile['date'] = pd.to_datetime(
             df_fossile['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
-        #df_usage['date'] = pd.to_datetime( df_usage['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
+        # df_usage['date'] = pd.to_datetime( df_usage['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_lng['date'] = pd.to_datetime(
             df_lng['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_super['date'] = pd.to_datetime(
@@ -246,8 +256,8 @@ if __name__ == '__main__':
         timestamp_str_price = df_gas['date'].tail(1).item()
         timestamp_str_price = pd.to_datetime(
             timestamp_str_price).strftime('%-d. %-m.')
-        #timestamp_str_usage = df_usage['date'].tail(1).item()
-        #timestamp_str_usage = pd.to_datetime( timestamp_str_usage).strftime('%-d. %-m.')
+        # timestamp_str_usage = df_usage['date'].tail(1).item()
+        # timestamp_str_usage = pd.to_datetime( timestamp_str_usage).strftime('%-d. %-m.')
         timestamp_str_storage = df_storage['date'].tail(1).item()
         timestamp_str_storage = pd.to_datetime(
             timestamp_str_storage).strftime('%-d. %-m.')
@@ -268,16 +278,16 @@ if __name__ == '__main__':
             columns={df.columns[3]: 'value'}).to_dict(orient='records')
         dict_storage = df_storage.rename(
             columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
-        #dict_gas = df.drop(df.columns[[2, 3]], axis=1).rename(columns={df.columns[1]: 'value'}).dropna().to_dict(orient='records')
+        # dict_gas = df.drop(df.columns[[2, 3]], axis=1).rename(columns={df.columns[1]: 'value'}).dropna().to_dict(orient='records')
         dict_gas = df_gas.rename(
             columns={df_gas.columns[1]: 'value'}).to_dict(orient='records')
         dict_strom = df.drop(df.columns[[1, 3]], axis=1).rename(
             columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')
         dict_fossile = df_fossile.rename(
             columns={df_fossile.columns[1]: 'value'}).to_dict(orient='records')
-        #dict_usage = df_usage.rename(columns={df_usage.columns[2]: 'value'}).to_dict(orient='records')
-        #df_ns['Nord Stream 1'] = df_ns['Nord Stream 1'].round(2).astype(float)
-        #dict_ns = df_ns.rename(columns={'Nord Stream 1': 'value'}).dropna().to_dict(orient='records')
+        # dict_usage = df_usage.rename(columns={df_usage.columns[2]: 'value'}).to_dict(orient='records')
+        # df_ns['Nord Stream 1'] = df_ns['Nord Stream 1'].round(2).astype(float)
+        # dict_ns = df_ns.rename(columns={'Nord Stream 1': 'value'}).dropna().to_dict(orient='records')
         dict_lng = df_lng.rename(
             columns={df_lng.columns[1]: 'value'}).to_dict(orient='records')
         # replace 'KW' with real dates
@@ -311,10 +321,10 @@ if __name__ == '__main__':
         diff_storage_str = diff_storage.astype(str).replace('.', ',')
         diff_gas_str = diff_gas.astype(str).replace('.', ',')
         diff_strom_str = diff_strom.astype(str).replace('.', ',')
-        #diff_ns_str = diff_ns.astype(str).replace('.', ',')
+        # diff_ns_str = diff_ns.astype(str).replace('.', ',')
         diff_fossile_str = diff_fossile.astype(str).replace('.', ',')
         diff_fossile = diff_fossile.astype(float)
-        #diff_usage_str = u_diff_str.astype(str).replace('.', ',')
+        # diff_usage_str = u_diff_str.astype(str).replace('.', ',')
         diff_lng_str = diff_lng.astype(str).replace('.', ',')
         # RUS GAS diff_rus_str = diff_rus.round(0).astype(int)
         diff_super_str = diff_super.astype(str).replace('.', ',')
@@ -344,7 +354,7 @@ if __name__ == '__main__':
         meta_strom['chartData'] = []
         meta_fossile['chartData'] = []
         meta_imports['chartData'] = []
-        #meta_usage['chartData'] = []
+        # meta_usage['chartData'] = []
         meta_storage['chartData'] = []
         meta_lng['chartData'] = []
         # NS1 meta_ns['chartData'] = dict_ns
