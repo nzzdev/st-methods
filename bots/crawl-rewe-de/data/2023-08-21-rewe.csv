@@ -1052,8 +1052,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-08-21;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;219;750ml (1 l = 2,92 €)
 2023-08-21;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-08-21;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-08-21;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-08-21;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-08-21;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-08-21;8351072;REWE Beste Wahl;REWE Beste Wahl Spaghetti Bolognese 400g;269;400g (1 kg = 6,73 €)
 2023-08-21;8369370;REWE Beste Wahl;REWE Beste Wahl Spaghetti Carbonara 400g;269;400g (1 kg = 6,73 €)
 2023-08-21;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;199;110g (1 kg = 18,09 €)
@@ -1196,7 +1196,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-08-21;7963454;REWE Bio;REWE Bio + vegan Kokos Natur 400g;169;400g (1 kg = 4,23 €)
 2023-08-21;8090294;REWE Bio;REWE Bio + vegan Mandel Drink Natur 1l;179;1l
 2023-08-21;8879026;REWE Bio;REWE Bio + vegan No Muhh Haferdrink vegan 1l;145;1l
-2023-08-21;2587749;REWE Bio;REWE Bio + vegan Reis Drink Natur 1l;149;1l
 2023-08-21;7981357;REWE Bio;REWE Bio + vegan Remoulade 250g;199;250ml (1 l = 7,96 €)
 2023-08-21;8583362;REWE Bio;REWE Bio + vegan Räucher-Tofu 2x175g;219;2x175g (1 kg = 6,26 €)
 2023-08-21;2717529;REWE Bio;REWE Bio + vegan Salat-Mayo 250ml;199;250ml (1 l = 7,96 €)
@@ -1237,6 +1236,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-08-21;7292476;REWE Bio;REWE Bio Apfelschorle naturtrüb 0,75l;119;0,75l (1 l = 1,59 €)
 2023-08-21;940052;REWE Bio;REWE Bio Aprikose Fruchtaufstrich 250g;199;250g (1 kg = 7,96 €)
 2023-08-21;2745102;REWE Bio;REWE Bio Aufstrich Mango-Papaya-Curry 180g;135;180g (1 kg = 7,50 €)
+2023-08-21;2333554;REWE Bio;REWE Bio Avocado 1 Stück;179;1 Stück
 2023-08-21;8231031;REWE Bio;REWE Bio Baby Mais Hirse Flips 30g;79;30g (1 kg = 26,33 €)
 2023-08-21;7823085;REWE Bio;REWE Bio Backpulver vegan 4x16g;79;4x16g (1 kg = 12,34 €)
 2023-08-21;3140940;REWE Bio;REWE Bio Bacon 70g;139;70g (1 kg = 19,86 €)
