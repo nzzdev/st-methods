@@ -180,7 +180,7 @@ update_chart(id='1dda540238574eac80e865faa0dc2348', data=smi)
 #update_chart(id='a78c9d9de3230aea314700dc582d873d', data=dax)
 
 
-# Countrx Garden
+# Country Garden
 
 tickers = ["2007.HK"]  
 df_5 = yf.download(tickers,  period = "1mo", interval = "1d")
@@ -189,5 +189,5 @@ df_5 = df_5['Close'].to_frame().dropna().reset_index(level = 0)
 notes = 'Für den laufenden Tag wird der aktuelle Kurs angezeigt (Intraday).'
 
 update_chart(id='bc8cbef1bec81fe4197d1ebeb4d25691',
-                 data=df_1, notes = notes)
+                 data=df_5, notes = notes)
 
