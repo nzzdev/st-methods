@@ -25,7 +25,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-01;8626092;ja!;ja! Back-Camembert 300g;229;300g (1 kg = 7,63 €)
 2023-09-01;8543757;ja!;ja! Backcamembert mit Wild-Preiselbeerdip 350g;299;350g (1 kg = 8,54 €)
 2023-09-01;2236174;ja!;ja! Backfertiger Pizzateig mit Sauce 600g;229;600g (1 kg = 3,82 €)
-2023-09-01;8633310;ja!;ja! Backfisch Stäbchen 405g;279;405g (1 kg = 6,89 €)
 2023-09-01;1317360;ja!;ja! Backpapierzuschnitte 30 Stück;115;30 Stück
 2023-09-01;7955686;ja!;ja! Bacon in Streifen 250g;299;250g (1 kg = 11,96 €)
 2023-09-01;8556568;ja!;ja! Bagels mit Sesam 340g;169;340g (1 kg = 4,97 €)
@@ -932,8 +931,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-01;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;599;500ml (1 l = 11,98 €)
 2023-09-01;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-09-01;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-09-01;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-09-01;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-09-01;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-09-01;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2023-09-01;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;469;475g (1 kg = 9,87 €)
 2023-09-01;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1163,7 +1162,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-01;8655182;REWE Bio;REWE Bio + vegan Hafer Drink glutenfrei 1l;149;1l
 2023-09-01;2587736;REWE Bio;REWE Bio + vegan Hafer Drink ohne Zuckerzusatz 1l;95;1l
 2023-09-01;8710249;REWE Bio;REWE Bio + vegan Haferdrink Pulver glutenfrei 300g;499;300g (1 kg = 16,63 €)
-2023-09-01;8774648;REWE Bio;REWE Bio + vegan Hummus Natur 200g;149;200g (1 kg = 7,45 €)
 2023-09-01;7781674;REWE Bio;REWE Bio + vegan Jackfruit natur 230g;179;230g (1 kg = 7,78 €)
 2023-09-01;7963454;REWE Bio;REWE Bio + vegan Kokos Natur 400g;169;400g (1 kg = 4,23 €)
 2023-09-01;8879026;REWE Bio;REWE Bio + vegan No Muhh Haferdrink vegan 1l;145;1l
@@ -1291,8 +1289,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-01;187778;REWE Bio;REWE Bio Forellenfilets geräuchert 125g;459;125g (1 kg = 36,72 €)
 2023-09-01;3064105;REWE Bio;REWE Bio Frische Backhefe 42g;59;42g (1 kg = 14,05 €)
 2023-09-01;1912315;REWE Bio;REWE Bio Frische Buttermilch 500g;89;500g (1 kg = 1,78 €)
-2023-09-01;197862;REWE Bio;REWE Bio Frische Weidemilch 1,5% 1l;115;1l
-2023-09-01;197872;REWE Bio;REWE Bio Frische Weidemilch 3,8% 1l;125;1l
 2023-09-01;200397;REWE Bio;REWE Bio Frischkäse Doppelrahmstufe 175g;129;175g (1 kg = 7,37 €)
 2023-09-01;8674448;REWE Bio;REWE Bio Frischkäse mit Kräutern 175g;129;175g (1 kg = 7,37 €)
 2023-09-01;940043;REWE Bio;REWE Bio Fruchtaufstrich Erdbeere 250g;199;250g (1 kg = 7,96 €)
@@ -1343,7 +1339,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-01;8643029;REWE Bio;REWE Bio Holzofenpizza Vegetariana 410g;299;410g (1 kg = 7,29 €)
 2023-09-01;7272521;REWE Bio;REWE Bio Honig-Dinkel gepufft 200g;199;200g (1 kg = 9,95 €)
 2023-09-01;8757565;REWE Bio;REWE Bio Hummus Gewürz 30g;269;30g (1 kg = 89,67 €)
-2023-09-01;7741450;REWE Bio;REWE Bio Hummus pikant vegan 200g;149;200g (1 kg = 7,45 €)
 2023-09-01;7033383;REWE Bio;REWE Bio Hähnchen Brustfilet Joghurt Knoblauch 320g;1117;1 Stück ca. 320 g (1 kg = 34,90 €)
 2023-09-01;7034166;REWE Bio;REWE Bio Hähnchen Brustfilet Joghurt Paprika 320g;1117;1 Stück ca. 320 g (1 kg = 34,90 €)
 2023-09-01;1267674;REWE Bio;REWE Bio Hähnchen ca. 1,3kg;1677;1 Stück ca. 1300 g (1 kg = 12,90 €)
