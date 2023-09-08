@@ -70,7 +70,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-08;7993638;ja!;ja! Batterien C Baby 2 Stück;99;2 Stück
 2023-09-08;8255692;ja!;ja! Bauchspeck geräuchert 2 Scheiben 300g;329;300g (1 kg = 10,97 €)
 2023-09-08;5350522;ja!;ja! Bauernbrot Schnitten 500g;99;500g (1 kg = 1,98 €)
-2023-09-08;7009615;ja!;ja! Bayerischer Leberkäse 400g;379;400g (1 kg = 9,48 €)
 2023-09-08;2317794;ja!;ja! Beeren-Mischung 750g;299;750g (1 kg = 3,99 €)
 2023-09-08;1042260;ja!;ja! Belegkirschen 100g;139;100g (1 kg = 13,90 €)
 2023-09-08;8403753;ja!;ja! Biokompostbeutel 10l 20 Stück;165;20 Stück
@@ -94,6 +93,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-08;7156260;ja!;ja! Brie 200g;199;200g (1 kg = 9,95 €)
 2023-09-08;8088095;ja!;ja! Briefumschläge mit Fenster DIN lang 50 Stück;239;50 Stück
 2023-09-08;8400076;ja!;ja! Brillen-Putztücher 54 Stück;89;54 Stück
+2023-09-08;7073900;ja!;ja! Broccoli Röschen tiefgefroren 1kg;219;1000g
 2023-09-08;8291795;ja!;ja! Brot-Backmischung Roggenmischbrot 1kg;139;1kg
 2023-09-08;8292793;ja!;ja! Brot-Backmischung Sonnenblumen-Brot 1kg;139;1kg
 2023-09-08;8693284;ja!;ja! Budapester Salat 200g;179;200g (1 kg = 8,95 €)
@@ -429,6 +429,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-08;2097580;ja!;ja! Kräftige Brocken mit frischem Geflügel 3kg;449;3kg (1 kg = 1,50 €)
 2023-09-08;2598834;ja!;ja! Kräftige Kaffee Pads 144g, 20 Pads;219;144g (1 kg = 15,21 €)
 2023-09-08;7137268;ja!;ja! Kräuterbutter 120g;99;6x20g (1 kg = 8,25 €)
+2023-09-08;6714161;ja!;ja! Kräuterbutter-Baguette 175g;99;175g (1 kg = 5,66 €)
 2023-09-08;8444273;ja!;ja! Kräuterquark 200g;65;200g (1 kg = 3,25 €)
 2023-09-08;7994929;ja!;ja! Kräuterquark leicht 200g;65;200g (1 kg = 3,25 €)
 2023-09-08;2030321;ja!;ja! Käse-Gebäckstangen 150g;149;150g (1 kg = 9,93 €)
@@ -651,6 +652,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-08;3004038;ja!;ja! Schoko Müsli 750g;249;750g (1 kg = 3,32 €)
 2023-09-08;8187916;ja!;ja! Schoko-Drink 0,5l;79;0,50l (1 l = 1,58 €)
 2023-09-08;1063147;ja!;ja! Schokodessert mit Sahne 200g;39;200g (1 kg = 1,95 €)
+2023-09-08;2661883;ja!;ja! Schokoküsse 12 Stück, 300g;179;300g (1 kg = 5,97 €)
 2023-09-08;2724101;ja!;ja! Schokolade Ganze Nuss 100g;89;100g (1 kg = 8,90 €)
 2023-09-08;7091553;ja!;ja! Schokorosinen 200g;119;200g (1 kg = 5,95 €)
 2023-09-08;201418;ja!;ja! Schokotatzen mit Zartbitterschokolade 250g;149;250g (1 kg = 5,96 €)
