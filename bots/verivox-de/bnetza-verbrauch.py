@@ -88,7 +88,8 @@ if __name__ == '__main__':
         #############
 
         # download data
-        url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1090950'
+        #url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1090950'
+        url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=591610' #new
         resp = download_data(url, headers=fheaders)
         csv_file = resp.text
 
