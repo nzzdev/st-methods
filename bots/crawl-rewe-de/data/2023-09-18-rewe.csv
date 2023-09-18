@@ -198,6 +198,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-18;8540960;ja!;ja! Hähnchen Flügel ohne Spitze 480g;243;1 Stück ca. 480 g (1 kg = 5,07 €)
 2023-09-18;8361755;ja!;ja! Hähnchen Mini Schnitzel 500g;399;500g (1 kg = 7,98 €)
 2023-09-18;8611852;ja!;ja! Hähnchen Schnitzel XXL 500g;429;500g (1 kg = 8,58 €)
+2023-09-18;2424441;ja!;ja! Hähnchen süß-sauer mit Langkornreis 400g;249;400g (1 kg = 6,23 €)
 2023-09-18;8468236;ja!;ja! Hähnchen-Brustfilet 600g;599;600g (1 kg = 9,98 €)
 2023-09-18;7980552;ja!;ja! Hähnchen-Innenbrustfilet 400g;499;400g (1 kg = 12,48 €)
 2023-09-18;3252334;ja!;ja! Hähnchenbrustfilet Paprika 150g;249;150g (1 kg = 16,60 €)
@@ -871,7 +872,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-18;8350350;REWE Beste Wahl;REWE Beste Wahl Soja-Joghurtalternative ohne Zucker vegan 500g;139;500g (1 kg = 2,78 €)
 2023-09-18;1447517;REWE Beste Wahl;REWE Beste Wahl Sojasauce 250ml;199;250ml (1 l = 7,96 €)
 2023-09-18;8514171;REWE Beste Wahl;REWE Beste Wahl Sommeredition 150g;149;150g (1 kg = 9,93 €)
-2023-09-18;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;219;750ml (1 l = 2,92 €)
 2023-09-18;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
 2023-09-18;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-09-18;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
@@ -891,7 +891,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-18;2964773;REWE Beste Wahl;REWE Beste Wahl Tampons Normal 80 Stück;275;80 Stück
 2023-09-18;2964777;REWE Beste Wahl;REWE Beste Wahl Tampons Super 56 Stück;275;56 Stück
 2023-09-18;2953543;REWE Beste Wahl;REWE Beste Wahl Tampons mini comfort 64 Stück;275;64 Stück
-2023-09-18;1953777;REWE Beste Wahl;REWE Beste Wahl Taschentücher-Box 100 Stück;125;100 Stück
 2023-09-18;7172253;REWE Beste Wahl;REWE Beste Wahl Teefilter halterlos 100 Stück;179;100 Stück
 2023-09-18;8660868;REWE Beste Wahl;REWE Beste Wahl Tempura Garnelen 200g;379;200g (1 kg = 18,95 €)
 2023-09-18;7841480;REWE Beste Wahl;REWE Beste Wahl Thunfisch Filets 2x56g;199;2x112g (1 kg = 17,77 €)
@@ -960,9 +959,11 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-18;8677209;REWE Beste Wahl;REWE Beste Wahl grüne Pfefferonen in Öl 270g;269;270g (1 kg = 9,96 €)
 2023-09-18;7075825;REWE Beste Wahl;REWE Beste Wahl italienisches Pfannengemüse 500g;199;500g (1 kg = 3,98 €)
 2023-09-18;8512725;REWE Beste Wahl;REWE Beste Wahl milde Pinienkerne 100g;499;100g (1 kg = 49,90 €)
+2023-09-18;7211940;REWE Beste Wahl;REWE Beste Wahl stückige Tomaten 400g;99;400g (1 kg = 2,48 €)
 2023-09-18;7191832;REWE Beste Wahl;REWE Beste Wahl-Express Reis Mediterran 250g;129;250g (1 kg = 5,16 €)
 2023-09-18;8793157;REWE Beste Wahl;REWE Kartoffeltopf mit Chorizo-Salami und Bauchspeck 400g;169;400g (1 kg = 4,23 €)
 2023-09-18;8283301;REWE Beste Wahl;REWE beste Wahl Mini Laugen-Mix 10er;269;518g (1 kg = 5,19 €)
+2023-09-18;8022362;REWE Beste Wahl;Rewe Beste Wahl Feuchtes Toilettenpapier Kamille 50 Stück;129;50 Stück
 2023-09-18;8598425;REWE Beste Wahl;Rewe Beste Wahl Grill & Kamin Anzünder Öko 32 Stück;299;32 Stück
 2023-09-18;8415305;REWE Beste Wahl;Rewe Beste Wahl Ingwer gemahlen 28g;199;28g (1 kg = 71,07 €)
 2023-09-18;8294079;REWE Beste Wahl;Rewe Beste Wahl Mango 500g;329;500g (1 kg = 6,58 €)
@@ -1016,7 +1017,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-18;8467434;REWE Bio;REWE Bio Apfelchips 70g;249;70g (1 kg = 35,57 €)
 2023-09-18;8107568;REWE Bio;REWE Bio Apfelessig 5% Säure naturtrüb 0,75l;149;750l (1 l = 1,99 €)
 2023-09-18;2186674;REWE Bio;REWE Bio Apfelrotkohl tafelfertig 385g;129;385g (1 kg = 3,35 €)
-2023-09-18;254615;REWE Bio;REWE Bio Apfelsaft naturtrüb 1l;169;1l
 2023-09-18;7292476;REWE Bio;REWE Bio Apfelschorle naturtrüb 0,75l;119;0,75l (1 l = 1,59 €)
 2023-09-18;940052;REWE Bio;REWE Bio Aprikose Fruchtaufstrich 250g;199;250g (1 kg = 7,96 €)
 2023-09-18;2745102;REWE Bio;REWE Bio Aufstrich Mango-Papaya-Curry 180g;135;180g (1 kg = 7,50 €)
@@ -1092,14 +1092,13 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-18;8753645;REWE Bio;REWE Bio Erdnüsse gesalzen 150g;149;150g (1 kg = 9,93 €)
 2023-09-18;8764704;REWE Bio;REWE Bio Espresso ganze Bohnen 1000g;1199;1000g
 2023-09-18;8255376;REWE Bio;REWE Bio Fenchel-Anis-Kümmel Tee 40g;129;40g (1 kg = 32,25 €)
-2023-09-18;197877;REWE Bio;REWE Bio Fettarme H-Milch 1,5% 1l;105;1l
 2023-09-18;8061857;REWE Bio;REWE Bio Finn Toasties 260g;109;260g (1 kg = 4,19 €)
 2023-09-18;204045;REWE Bio;REWE Bio Fleischkäse 70g;119;70g (1 kg = 17 €)
 2023-09-18;187778;REWE Bio;REWE Bio Forellenfilets geräuchert 125g;459;125g (1 kg = 36,72 €)
 2023-09-18;3064105;REWE Bio;REWE Bio Frische Backhefe 42g;59;42g (1 kg = 14,05 €)
+2023-09-18;197872;REWE Bio;REWE Bio Frische Weidemilch 3,8% 1l;125;1l
 2023-09-18;200397;REWE Bio;REWE Bio Frischkäse Doppelrahmstufe 175g;129;175g (1 kg = 7,37 €)
 2023-09-18;8674448;REWE Bio;REWE Bio Frischkäse mit Kräutern 175g;129;175g (1 kg = 7,37 €)
-2023-09-18;940043;REWE Bio;REWE Bio Fruchtaufstrich Erdbeere 250g;199;250g (1 kg = 7,96 €)
 2023-09-18;2893817;REWE Bio;REWE Bio Fusilli Grüne Erbsen 250g;159;250g (1 kg = 6,36 €)
 2023-09-18;7078518;REWE Bio;REWE Bio Fusilli Kichererbsen 250g;159;250g (1 kg = 6,36 €)
 2023-09-18;7050770;REWE Bio;REWE Bio Fusilli Vollkorn Dinkel 500g;155;500g (1 kg = 3,10 €)
