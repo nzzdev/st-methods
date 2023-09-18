@@ -145,7 +145,7 @@ if __name__ == '__main__':
         df_meta = df_temp.copy().tail(1)
 
         # on Mondays there's no new gas and electricity price data; use last friday for comparison instead
-        if datetime.today().weekday() == 1:
+        if datetime.today().weekday() == 0:
             df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull(
             )].iloc[-4]) / df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-4]) * 100  # diff friday
             df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull(
