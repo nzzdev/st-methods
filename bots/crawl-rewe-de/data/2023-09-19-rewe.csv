@@ -139,7 +139,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-19;2421597;ja!;ja! Frischkäse Natur Doppelrahmstufe 300g;139;300g (1 kg = 4,63 €)
 2023-09-19;7964577;ja!;ja! Frittieröl 2l;449;2l (1 l = 2,25 €)
 2023-09-19;1203693;ja!;ja! Fruchtcocktail 4x70g;199;280g (1 kg = 7,11 €)
-2023-09-19;476189;ja!;ja! Früchte-Müsli 1kg;229;1000g
 2023-09-19;7777815;ja!;ja! Frühlingsrollen mit Gemüse 100g;279;4x400g (1 kg = 6,98 €)
 2023-09-19;7779581;ja!;ja! Frühlingsrollen mit Hähnchen 100g;279;4x400g (1 kg = 6,98 €)
 2023-09-19;2565946;ja!;ja! Garnelen á la Provence 250g;359;250g (1 kg = 14,36 €)
@@ -264,7 +263,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-19;2598831;ja!;ja! Milde Kaffee-Pads 144g, 20 Pads;219;144g (1 kg = 15,21 €)
 2023-09-19;2407834;ja!;ja! Mini Wiener Würstchen 2x160g;279;2x160g (1 kg = 8,72 €)
 2023-09-19;8267887;ja!;ja! Mini-Cabanossi 250g;299;250g (1 kg = 11,96 €)
-2023-09-19;2318701;ja!;ja! Mini-Geflügelfrikadellen 500g;349;500g (1 kg = 6,98 €)
 2023-09-19;2146675;ja!;ja! Mini-Windbeutel 250g;129;250g (1 kg = 5,16 €)
 2023-09-19;891930;ja!;ja! Mini-Zimtos 750g;299;750g (1 kg = 3,99 €)
 2023-09-19;7877799;ja!;ja! Mischsalat Rohkost Mix 200g;89;200g (1 kg = 4,45 €)
@@ -747,7 +745,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-19;1186905;REWE Beste Wahl;REWE Beste Wahl Oliven geschwärzt ohne Stein 135g;179;135g (1 kg = 13,26 €)
 2023-09-19;7924590;REWE Beste Wahl;REWE Beste Wahl Olivenmix in würziger Kräutermarinade 150g;219;150g (1 kg = 14,60 €)
 2023-09-19;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;599;500ml (1 l = 11,98 €)
-2023-09-19;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
 2023-09-19;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-09-19;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-09-19;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
@@ -1145,7 +1142,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-19;8257989;REWE Bio;REWE Bio Leinsamen geschrotet 400g;199;400g (1 kg = 4,98 €)
 2023-09-19;1919708;REWE Bio;REWE Bio Leinöl nativ 250ml;299;250ml (1 l = 11,96 €)
 2023-09-19;7729583;REWE Bio;REWE Bio Linsenbolognese vegan 400g;229;400g (1 kg = 5,73 €)
-2023-09-19;8362231;REWE Bio;REWE Bio Linseneintopf 400g;149;400g (1 kg = 3,73 €)
 2023-09-19;1424811;REWE Bio;REWE Bio Lorbeerblätter ganz 5g;249;5g
 2023-09-19;7186627;REWE Bio;REWE Bio Mandelmus braun 250g;649;250g (1 kg = 25,96 €)
 2023-09-19;2823001;REWE Bio;REWE Bio Mandelmus weiß 250g;699;250g (1 kg = 27,96 €)
