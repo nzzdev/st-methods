@@ -24,7 +24,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;2236174;ja!;ja! Backfertiger Pizzateig mit Sauce 600g;229;600g (1 kg = 3,82 €)
 2023-09-21;1317360;ja!;ja! Backpapierzuschnitte 30 Stück;115;30 Stück
 2023-09-21;7955686;ja!;ja! Bacon in Streifen 250g;299;250g (1 kg = 11,96 €)
-2023-09-21;8556568;ja!;ja! Bagels mit Sesam 340g;169;340g (1 kg = 4,97 €)
 2023-09-21;8087346;ja!;ja! Baguette Schinken 250g;99;250g (1 kg = 3,96 €)
 2023-09-21;8452565;ja!;ja! Bami Goreng 750g;339;750g (1 kg = 4,52 €)
 2023-09-21;7770353;ja!;ja! Batterien AA 8 Stück;155;8 Stück
@@ -241,6 +240,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;8187738;ja!;ja! Kaffeesahne 20x10g;85;200g (1 kg = 4,25 €)
 2023-09-21;8187754;ja!;ja! Kaffeeweißer 250g;149;250g (1 kg = 5,96 €)
 2023-09-21;2290204;ja!;ja! Kaisergemüse 1kg;219;1000g
+2023-09-21;7257866;ja!;ja! Kakaopulver Instant 800g;329;800g (1 kg = 4,11 €)
 2023-09-21;3182684;ja!;ja! Kalifornische Pistazien geröstet & gesalzen 250g;379;250g (1 kg = 15,16 €)
 2023-09-21;546026;ja!;ja! Kamillentee 37,5g, 25 Beutel;79;37,50g (1 kg = 21,07 €)
 2023-09-21;8553081;ja!;ja! Kartoffel Wedges 750g;199;750g (1 kg = 2,65 €)
@@ -325,6 +325,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;7701010;ja!;ja! Nougat Crusher Eis 6 Stück 68ml;239;6x68ml (1 l = 5,86 €)
 2023-09-21;891928;ja!;ja! Nougat-Bits 750g;299;750g (1 kg = 3,99 €)
 2023-09-21;8726700;ja!;ja! Nudeltopf in Rahmsauce 63g;89;63g (1 kg = 14,13 €)
+2023-09-21;166440;ja!;ja! Nuss-Nougat-Creme 400g;199;400g (1 kg = 4,98 €)
 2023-09-21;2317787;ja!;ja! Nussfruchtmischung 200g;189;200g (1 kg = 9,45 €)
 2023-09-21;3151703;ja!;ja! Nusskernmischung naturell ungesalzen & ungeröstet 200g;289;200g (1 kg = 14,45 €)
 2023-09-21;7709655;ja!;ja! Nussmix geröstet und gesalzen 150g;149;150g (1 kg = 9,93 €)
@@ -341,6 +342,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;8370263;ja!;ja! Paprika Kartoffel-Sticks 125g;89;125g (1 kg = 7,12 €)
 2023-09-21;8430452;ja!;ja! Paranusskerne naturell 200g;259;200g (1 kg = 12,95 €)
 2023-09-21;7227868;ja!;ja! Parboiled Spitzenreis Langkornreis 1kg;149;1000g
+2023-09-21;7224493;ja!;ja! Party-Nüsse Paprika 200g;119;200g (1 kg = 5,95 €)
 2023-09-21;7857524;ja!;ja! Penne Gorgonzola mit feinem Blattspinat 750g;269;750g (1 kg = 3,59 €)
 2023-09-21;688014;ja!;ja! Penne Rigate 500g;79;500g (1 kg = 1,58 €)
 2023-09-21;8100989;ja!;ja! Pesto Rosso 190g;129;190g (1 kg = 6,79 €)
@@ -620,6 +622,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;2773455;REWE Beste Wahl;REWE Beste Wahl Duft-Müllbeutel 5l 85 Stück;95;85 Stück
 2023-09-21;7243834;REWE Beste Wahl;REWE Beste Wahl Duftmüllbeutel 20l Zugbeutel 25 Stück;179;25 Stück
 2023-09-21;7180092;REWE Beste Wahl;REWE Beste Wahl Duftmüllbeutel 50l 20 Stück;179;20 Stück
+2023-09-21;1413012;REWE Beste Wahl;REWE Beste Wahl Duo Schoko-Creme 400g;219;400g (1 kg = 5,48 €)
 2023-09-21;8209143;REWE Beste Wahl;REWE Beste Wahl Eier Freilandhaltung 6 Stück;189;6 Stück
 2023-09-21;7194888;REWE Beste Wahl;REWE Beste Wahl Eiernudeln Spiralen 500g;159;500g (1 kg = 3,18 €)
 2023-09-21;8838806;REWE Beste Wahl;REWE Beste Wahl Eis Caramel Core 500ml;299;500ml (1 l = 5,98 €)
@@ -635,6 +638,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;116911;REWE Beste Wahl;REWE Beste Wahl Erbsen sehr fein mit Pariser Karotten klein 420g;169;420g (1 kg = 4,02 €)
 2023-09-21;8188779;REWE Beste Wahl;REWE Beste Wahl Erdbeer-Rhabarber-Streusel-Kuchen 550g;359;550g (1 kg = 6,53 €)
 2023-09-21;8512950;REWE Beste Wahl;REWE Beste Wahl Erdbeere Fruchtaufstrich 200g;129;250g (1 kg = 5,16 €)
+2023-09-21;2184085;REWE Beste Wahl;REWE Beste Wahl Erdbeere Konfitüre extra 340g;169;340g (1 kg = 4,97 €)
 2023-09-21;7144888;REWE Beste Wahl;REWE Beste Wahl Erdbeeren 500g;279;500g (1 kg = 5,58 €)
 2023-09-21;8354256;REWE Beste Wahl;REWE Beste Wahl Erdbeeren gezuckert 245g;279;245g (1 kg = 11,39 €)
 2023-09-21;7772897;REWE Beste Wahl;REWE Beste Wahl Erdnuss Mix Asia Style 120g;169;120g (1 kg = 14,08 €)
@@ -952,6 +956,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;470737;REWE Beste Wahl;REWE Beste Wahl Schokokeks Zartbitter 125g;99;125g (1 kg = 7,92 €)
 2023-09-21;3261314;REWE Beste Wahl;REWE Beste Wahl Schokolade Edel Bitter 72% 100g;109;100g (1 kg = 10,90 €)
 2023-09-21;920085;REWE Beste Wahl;REWE Beste Wahl Schwarze Bohnen in Chilisauce 400g;129;400g (1 kg = 3,23 €)
+2023-09-21;135299;REWE Beste Wahl;REWE Beste Wahl Schwarzer Johannisbeer-Nektar 1l;149;1l
 2023-09-21;2184092;REWE Beste Wahl;REWE Beste Wahl Schwarzkirsch-Konfitüre 340g;169;340g (1 kg = 4,97 €)
 2023-09-21;8564269;REWE Beste Wahl;REWE Beste Wahl Schwarzkirschen gezuckert 360g;259;360g (1 kg = 7,19 €)
 2023-09-21;117509;REWE Beste Wahl;REWE Beste Wahl Schwarzwurzeln 290g;179;290g (1 kg = 6,17 €)
@@ -996,6 +1001,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;1061806;REWE Beste Wahl;REWE Beste Wahl Tomaten Fruchtfleisch in Stücken 500g;99;500g (1 kg = 1,98 €)
 2023-09-21;1290607;REWE Beste Wahl;REWE Beste Wahl Tomaten-Cremesuppe 400ml;159;400ml (1 l = 3,98 €)
 2023-09-21;7262335;REWE Beste Wahl;REWE Beste Wahl Tomatenketchup 300ml;89;300ml (1 l = 2,97 €)
+2023-09-21;135872;REWE Beste Wahl;REWE Beste Wahl Tomatensaft 1l;129;1l
 2023-09-21;128314;REWE Beste Wahl;REWE Beste Wahl Tomatensauce Basilikum 380ml;129;380ml (1 l = 3,39 €)
 2023-09-21;2424787;REWE Beste Wahl;REWE Beste Wahl Tonic Water 6x1l;534;6x1l (1 l = 0,89 €)
 2023-09-21;2027362;REWE Beste Wahl;REWE Beste Wahl Tortellini bunt 250g;139;250g (1 kg = 5,56 €)
@@ -1164,6 +1170,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;578901;REWE Bio;REWE Bio Camembert 150g;199;150g (1 kg = 13,27 €)
 2023-09-21;278145;REWE Bio;REWE Bio Cappelletti Spinat-Ricotta 250g;219;250g (1 kg = 8,76 €)
 2023-09-21;8340314;REWE Bio;REWE Bio Cappelletti Zitrone 250g;219;250g (1 kg = 8,76 €)
+2023-09-21;3212382;REWE Bio;REWE Bio Cashew Cranberry Mix 250g;359;250g (1 kg = 14,36 €)
 2023-09-21;39464;REWE Bio;REWE Bio Cashewkerne 250g;385;250g (1 kg = 15,40 €)
 2023-09-21;8764037;REWE Bio;REWE Bio Cashewkerne Salz & Pfeffer geröstet 125g;269;125g (1 kg = 21,52 €)
 2023-09-21;1947712;REWE Bio;REWE Bio Cassis Sirup 0,5l;299;0,50l (1 l = 5,98 €)
@@ -1318,6 +1325,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-21;8178294;REWE Bio;REWE Bio Leberwurst mit Kalbfleisch, fein 125g;199;125g (1 kg = 15,92 €)
 2023-09-21;8257989;REWE Bio;REWE Bio Leinsamen geschrotet 400g;199;400g (1 kg = 4,98 €)
 2023-09-21;1919708;REWE Bio;REWE Bio Leinöl nativ 250ml;299;250ml (1 l = 11,96 €)
+2023-09-21;7237532;REWE Bio;REWE Bio Limettensaft 250ml;189;250ml (1 l = 7,56 €)
 2023-09-21;7729583;REWE Bio;REWE Bio Linsenbolognese vegan 400g;229;400g (1 kg = 5,73 €)
 2023-09-21;8362231;REWE Bio;REWE Bio Linseneintopf 400g;149;400g (1 kg = 3,73 €)
 2023-09-21;1424811;REWE Bio;REWE Bio Lorbeerblätter ganz 5g;249;5g
