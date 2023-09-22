@@ -13,6 +13,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-22;8271521;ja!;Ja! Sahnejoghurt nach griechischer Art 1kg;199;1g
 2023-09-22;3155797;ja!;Ja! Semmelknödel 6er 200g;99;200g (1 kg = 4,95 €)
 2023-09-22;8397514;ja!;ja! 6 Kartoffel Knödel halb & halb 200g;99;200g (1 kg = 4,95 €)
+2023-09-22;6790143;ja!;ja! Alpenvollmilch-Schokolade 100g;59;100g (1 kg = 5,90 €)
 2023-09-22;2105247;ja!;ja! Alufolie 50m;358;50m (1 m = 0,07 €)
 2023-09-22;8597281;ja!;ja! American Dressing 250ml;99;250ml (1 l = 3,96 €)
 2023-09-22;5351065;ja!;ja! American Sandwich 750g;129;750g (1 kg = 1,72 €)
@@ -1130,12 +1131,12 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-22;8022362;REWE Beste Wahl;Rewe Beste Wahl Feuchtes Toilettenpapier Kamille 50 Stück;129;50 Stück
 2023-09-22;8598425;REWE Beste Wahl;Rewe Beste Wahl Grill & Kamin Anzünder Öko 32 Stück;299;32 Stück
 2023-09-22;8415305;REWE Beste Wahl;Rewe Beste Wahl Ingwer gemahlen 28g;199;28g (1 kg = 71,07 €)
+2023-09-22;8425181;REWE Beste Wahl;Rewe Beste Wahl Italienisches Natives Olivenöl 500ml;699;500ml (1 l = 13,98 €)
 2023-09-22;8294079;REWE Beste Wahl;Rewe Beste Wahl Mango 500g;329;500g (1 kg = 6,58 €)
 2023-09-22;8424727;REWE Beste Wahl;Rewe Beste Wahl Oregano gerebelt 20g;199;20g (1 kg = 99,50 €)
 2023-09-22;7014151;REWE Beste Wahl;Rewe Beste Wahl Sanft & Fruchtig Aprikose 270g;159;270g (1 kg = 5,89 €)
 2023-09-22;7014092;REWE Beste Wahl;Rewe Beste Wahl Sanft & Fruchtig Himbeere 60% 270g;159;270g (1 kg = 5,89 €)
 2023-09-22;7949136;REWE Beste Wahl;Rewe Beste Wahl Vegane Lyoner 80g;109;80g (1 kg = 13,63 €)
-2023-09-22;8517041;REWE Beste Wahl;Rewe Beste Wahl Veganer Paprika-Lyoner Aufschnitt 80g;109;80g (1 kg = 13,63 €)
 2023-09-22;1033906;REWE;Cherry Romatomaten 250g;139;250g (1 kg = 5,56 €)
 2023-09-22;1045889;REWE;Krause Petersilie im Topf;169;1 Stück
 2023-09-22;7871419;REWE;REWE Brotzeit-Eier aus Bodenhaltung 6 Stück;189;6 Stück
@@ -1472,6 +1473,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-22;184650;REWE Bio;REWE Bio Petersilie 50g;99;50g (1 kg = 19,80 €)
 2023-09-22;2810050;REWE Bio;REWE Bio Petersilie im Topf;179;1 Stück
 2023-09-22;577536;REWE Bio;REWE Bio Pfeffer schwarz ganz 45g;399;45g (1 kg = 88,67 €)
+2023-09-22;1007026;REWE Bio;REWE Bio Pfefferminztee 30g, 20 Beutel;129;30g (1 kg = 43 €)
 2023-09-22;7690775;REWE Bio;REWE Bio Pfeffernüsse glasiert und schokoliert vegan 125g;349;150g (1 kg = 23,27 €)
 2023-09-22;7055254;REWE Bio;REWE Bio Pfeffersalami 70g;189;70g (1 kg = 27 €)
 2023-09-22;7270210;REWE Bio;REWE Bio Polenta 500g;129;500g (1 kg = 2,58 €)
@@ -1521,6 +1523,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-22;7710425;REWE Bio;REWE Bio Sahnejoghurt nach griechischer Art 500g;139;500g (1 kg = 2,78 €)
 2023-09-22;206057;REWE Bio;REWE Bio Salami 70g;189;70g (1 kg = 27 €)
 2023-09-22;7778921;REWE Bio;REWE Bio Salamisticks classic 60g;239;60g (1 kg = 39,83 €)
+2023-09-22;2054423;REWE Bio;REWE Bio Salbeitee 30g, 20 Beutel;149;30g (1 kg = 49,67 €)
 2023-09-22;8442869;REWE Bio;REWE Bio Sauerkirschen 195g;179;195g (1 kg = 9,18 €)
 2023-09-22;763140;REWE Bio;REWE Bio Sauerkraut 385g;99;385g (1 kg = 2,57 €)
 2023-09-22;7185307;REWE Bio;REWE Bio Sauerkrautsaft mit Meersalz 0,5l;99;0,50l (1 l = 1,98 €)
