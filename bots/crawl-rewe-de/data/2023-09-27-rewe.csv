@@ -233,7 +233,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-27;6621155;ja!;ja! Kondensmilch 7,5% 340g;89;340g (1 kg = 2,62 €)
 2023-09-27;1956646;ja!;ja! Kosmetikeimer-Beutel 75 Stück;85;75 Stück
 2023-09-27;2421604;ja!;ja! Kräuter-Frischkäse 300g;139;300g (1 kg = 4,63 €)
-2023-09-27;6714161;ja!;ja! Kräuterbutter-Baguette 175g;99;175g (1 kg = 5,66 €)
 2023-09-27;2030321;ja!;ja! Käse-Gebäckstangen 150g;149;150g (1 kg = 9,93 €)
 2023-09-27;2045420;ja!;ja! Königsberger Klopse 450g;199;450g (1 kg = 4,42 €)
 2023-09-27;7030814;ja!;ja! Körniger Frischkäse Halbfettstufe 200g;99;200g (1 kg = 4,95 €)
@@ -417,7 +416,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-27;8622326;ja!;ja! Thunfisch Sandwich 185g;199;185g (1 kg = 10,76 €)
 2023-09-27;8496746;ja!;ja! Thunfisch mit Gemüse in Dressing 150g;129;150g (1 kg = 8,60 €)
 2023-09-27;2063281;ja!;ja! Thunfischfilets in Sonnenblumenöl 140g;149;140g (1 kg = 10,64 €)
-2023-09-27;5499259;ja!;ja! Tissue-Toilettenpapier 3-lagig 10x200 Blatt;359;10x200 Stück
 2023-09-27;3280994;ja!;ja! Tomate-Basilikum Pasta-Sauce 400g;159;400ml (1 l = 3,98 €)
 2023-09-27;973336;ja!;ja! Tomaten fein gehackt in Tomatensaft 400g;85;400g (1 kg = 2,13 €)
 2023-09-27;5636442;ja!;ja! Tomaten passiert 500g;85;500g (1 kg = 1,70 €)
@@ -616,7 +614,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-27;8085169;REWE Beste Wahl;REWE Beste Wahl Glaserkeramikreiniger 300ml;99;300ml (1 l = 3,30 €)
 2023-09-27;941231;REWE Beste Wahl;REWE Beste Wahl Gnocchi 1kg;369;1000g
 2023-09-27;8334681;REWE Beste Wahl;REWE Beste Wahl Gouda Holland 51% Fett i. Tr. 175g;219;175g (1 kg = 12,51 €)
-2023-09-27;8048590;REWE Beste Wahl;REWE Beste Wahl Gouda Holland jung 210g;219;210g (1 kg = 10,43 €)
 2023-09-27;1076737;REWE Beste Wahl;REWE Beste Wahl Gourmetbrötchen 480g;279;480g (1 kg = 5,81 €)
 2023-09-27;8377443;REWE Beste Wahl;REWE Beste Wahl Granatapfelkerne 300g;219;300g (1 kg = 7,30 €)
 2023-09-27;1302379;REWE Beste Wahl;REWE Beste Wahl Griechische Pfefferonen scharf 125g;109;125g (1 kg = 8,72 €)
@@ -1103,7 +1100,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-09-27;1912630;REWE Bio;REWE Bio Emmentaler 150g;259;150g (1 kg = 17,27 €)
 2023-09-27;8753645;REWE Bio;REWE Bio Erdnüsse gesalzen 150g;149;150g (1 kg = 9,93 €)
 2023-09-27;8764704;REWE Bio;REWE Bio Espresso ganze Bohnen 1000g;1199;1000g
-2023-09-27;197877;REWE Bio;REWE Bio Fettarme H-Milch 1,5% 1l;105;1l
 2023-09-27;8061857;REWE Bio;REWE Bio Finn Toasties 260g;109;260g (1 kg = 4,19 €)
 2023-09-27;204045;REWE Bio;REWE Bio Fleischkäse 70g;99;70g (1 kg = 14,14 €)
 2023-09-27;187778;REWE Bio;REWE Bio Forellenfilets geräuchert 125g;459;125g (1 kg = 36,72 €)
