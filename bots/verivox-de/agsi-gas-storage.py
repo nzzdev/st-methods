@@ -119,6 +119,7 @@ if __name__ == '__main__':
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
+        """
         # temporary fix for wrong storage data
         dfnew.set_index('Datum', inplace=True)
         dfnew.at['2023-09-29', 'Trend'] = 0.33
@@ -133,6 +134,7 @@ if __name__ == '__main__':
         dftrend.at['2023-09-30', 'Trend'] = -0.30
         dftrend = dftrend.reset_index()
         dftrend.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8')
+        """
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
