@@ -20,6 +20,7 @@ if __name__ == '__main__':
         dw_id_fr = 'XJFzP'  # Importe Frankreich
         dw_id_ch = 'BjzEn'  # Importe Schweiz
         dw_id_nl = 'mOf7y'  # Importe Niederlande
+        dw_id_emix = 'Mzofi'  # Strommix
         dw_source_all = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004629%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
         dw_source_france = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004546,22004404%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
         dw_source_ch = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004552,22004410%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
@@ -166,9 +167,9 @@ if __name__ == '__main__':
         perc_fossile = ((df_perc['Erdgas'].iloc[-1] + df_perc['Kohle'].iloc[-1] +
                         df_perc['Sonstige'].iloc[-1])*100).round(0).astype(int)
         if perc_fossile > 1:
-            title_chart = f'{perc_fossile} Prozent des Stroms stammen derzeit aus fossilen Brennstoffen'
+            title_chart = f'{perc_fossile} Prozent des Stroms stammten vergangene Woche aus fossilen Quellen'
         else:
-            title_chart = f'{perc_fossile} Prozent des Stroms stammt aus fossilen Brennstoffen'
+            title_chart = f'{perc_fossile} Prozent des Stroms stammte vergangene Woche aus fossilen Quellen'
 
         # calculate percentage for dashboard
         df_dash = df.div(df.sum(axis=1), axis=0)
@@ -212,6 +213,17 @@ if __name__ == '__main__':
                      data=df, notes=notes_chart, title=title_chart)
         update_chart(id='377d6a0926cf5246344267f1b9db9dc3',
                      data=df_nogas, notes=notes_chart_nogas, title=title_chart)
+
+        # update Datawrapper chart
+        df_nogas.reset_index(inplace=True)
+        dw_chart = dw.add_data(chart_id=dw_id_emix, data=df_nogas)
+        dw.update_chart(chart_id=dw_id_emix, title=title_chart)
+        date = {'annotate': {
+            'notes': f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Pumpspeicher sowie andere Erneuerbare unter «Sonstige».<br>Stand: {time_str_notes}'}}
+        dw.update_metadata(chart_id=dw_id_emix, properties=date)
+        dw.update_description(
+            chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E', intro='Stromerzeugung in Deutschland, in TWh<br><br><a target="_self" href="https://datawrapper.dwcdn.net/Mzofi/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Wöchentlich</b></a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/rcnPY/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Monatlich</a>')
+        dw.publish_chart(chart_id=dw_id_emix, display=False)
 
         ###########################
         # API request spot market #
