@@ -18,10 +18,12 @@ if __name__ == '__main__':
         dw = Datawrapper(access_token=dw_key)
         dw_id = 'G2Vtz'  # Importe gesamt
         dw_id_fr = 'XJFzP'  # Importe Frankreich
-        dw_id_ch = 'BjzEn'  # Importe Frankreich
+        dw_id_ch = 'BjzEn'  # Importe Schweiz
+        dw_id_nl = 'mOf7y'  # Importe Niederlande
         dw_source_all = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004629%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
         dw_source_france = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004546,22004404%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
         dw_source_ch = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004552,22004410%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
+        dw_source_nl = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004406,22004548%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
 
         # power generation
         REALIZED_POWER_GENERATION = [1001224, 1004066, 1004067, 1004068,
@@ -362,8 +364,7 @@ if __name__ == '__main__':
             title = 'Deutschland importiert derzeit mehr Strom aus Frankreich als umgekehrt'
 
         # run Q function
-        update_chart(id='03a56b0c1c7af72413d8325ae84d7c81',
-                     title=title, notes=notes_chart, data=df_trade)
+        #update_chart(id='03a56b0c1c7af72413d8325ae84d7c81', title=title, notes=notes_chart, data=df_trade)
 
         # update Datawrapper chart
         df_trade.drop(df_trade.tail(1).index, inplace=True)
@@ -448,6 +449,7 @@ if __name__ == '__main__':
         update_chart(id='12496a04992590f16cb3aaa749aea0a4',
                      title=title, notes=notes_chart, data=df_trade)
 
+        """
         #####################
         # TRADE NETHERLANDS #
         #####################
@@ -515,9 +517,21 @@ if __name__ == '__main__':
             title = 'Deutschland importiert derzeit mehr Strom aus der Niederlande als umgekehrt'
 
         # run Q function
-        update_chart(id='5135d71baf12ad518000453bad2d0416',
-                     title=title, notes=notes_chart, data=df_trade)
+        #update_chart(id='5135d71baf12ad518000453bad2d0416', title=title, notes=notes_chart, data=df_trade)
 
+        # update Datawrapper chart
+        df_trade.drop(df_trade.tail(1).index, inplace=True)
+        df_trade.reset_index(inplace=True)
+        dw_chart = dw.add_data(chart_id=dw_id_nl, data=df_trade)
+        dw.update_chart(chart_id=dw_id_nl, title=title)
+        date = {'annotate': {
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
+        dw.update_metadata(chart_id=dw_id_nl, properties=date)
+        dw.update_description(
+            chart_id=dw_id_nl, source_url=dw_source_nl, source_name='Bundesnetzagentur/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel Deutschlands (Export-Import-Saldo), in GWh<br><br><a target="_self" href="https://datawrapper.dwcdn.net/G2Vtz/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px" rel="nofollow noopener noreferrer"><b>Alle Länder</b></a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/XJFzP/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px" rel="nofollow noopener noreferrer">Frankreich</a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/BjzEn/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px" rel="nofollow noopener noreferrer">Schweiz</a>')
+        dw.publish_chart(chart_id=dw_id, display=False)
+
+        """
         #################
         # TRADE CZECHIA #
         #################
@@ -725,8 +739,7 @@ if __name__ == '__main__':
             title = 'Deutschland importiert derzeit mehr Strom aus der Schweiz als umgekehrt'
 
         # run Q function
-        update_chart(id='5135d71baf12ad518000453bad2ea7af',
-                     title=title, notes=notes_chart, data=df_trade)
+        #update_chart(id='5135d71baf12ad518000453bad2ea7af', title=title, notes=notes_chart, data=df_trade)
 
         # update Datawrapper chart
         df_trade.drop(df_trade.tail(1).index, inplace=True)
@@ -947,8 +960,7 @@ if __name__ == '__main__':
             title = 'Deutschland importiert derzeit mehr Strom, als es exportiert'
 
         # run Q function
-        update_chart(id='12496a04992590f16cb3aaa749b3b7b4',
-                     title=title, notes=notes_chart, data=df_trade)
+        #update_chart(id='12496a04992590f16cb3aaa749b3b7b4', title=title, notes=notes_chart, data=df_trade)
 
         """
         # temp fix for last row (if energy-charts has newer data)
