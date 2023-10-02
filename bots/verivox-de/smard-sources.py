@@ -18,8 +18,10 @@ if __name__ == '__main__':
         dw = Datawrapper(access_token=dw_key)
         dw_id = 'G2Vtz'  # Importe gesamt
         dw_id_fr = 'XJFzP'  # Importe Frankreich
+        dw_id_ch = 'BjzEn'  # Importe Frankreich
         dw_source_all = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004629%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
         dw_source_france = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004546,22004404%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
+        dw_source_ch = 'https://www.smard.de/home/marktdaten?marketDataAttributes=%7B%22resolution%22:%22week%22,%22moduleIds%22:%5B22004552,22004410%5D,%22selectedCategory%22:null,%22activeChart%22:true,%22style%22:%22color%22,%22categoriesModuleOrder%22:%7B%7D,%22region%22:%22DE%22%7D'
 
         # power generation
         REALIZED_POWER_GENERATION = [1001224, 1004066, 1004067, 1004068,
@@ -655,7 +657,7 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='12496a04992590f16cb3aaa749b045bb',
                      title=title, notes=notes_chart, data=df_trade)
-
+        """
         ###############
         # TRADE SWISS #
         ###############
@@ -726,6 +728,19 @@ if __name__ == '__main__':
         update_chart(id='5135d71baf12ad518000453bad2ea7af',
                      title=title, notes=notes_chart, data=df_trade)
 
+        # update Datawrapper chart
+        df_trade.drop(df_trade.tail(1).index, inplace=True)
+        df_trade.reset_index(inplace=True)
+        dw_chart = dw.add_data(chart_id=dw_id_ch, data=df_trade)
+        dw.update_chart(chart_id=dw_id_ch, title=title)
+        date = {'annotate': {
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
+        dw.update_metadata(chart_id=dw_id_fr, properties=date)
+        dw.update_description(
+            chart_id=dw_id, source_url=dw_source_ch, source_name='Bundesnetzagentur/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel Deutschlands (Export-Import-Saldo), in GWh')
+        dw.publish_chart(chart_id=dw_id_ch, display=False)
+
+        """
         ################
         # TRADE POLAND #
         ################
