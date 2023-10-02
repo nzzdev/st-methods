@@ -514,7 +514,7 @@ if __name__ == '__main__':
         if last_value >= 0:
             title = 'Deutschland exportiert derzeit mehr Strom in die Niederlande als umgekehrt'
         else:
-            title = 'Deutschland importiert derzeit mehr Strom aus der Niederlande als umgekehrt'
+            title = 'Deutschland importiert derzeit mehr Strom aus den Niederlanden als umgekehrt'
 
         # run Q function
         #update_chart(id='5135d71baf12ad518000453bad2d0416', title=title, notes=notes_chart, data=df_trade)
