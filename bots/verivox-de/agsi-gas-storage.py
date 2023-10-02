@@ -121,15 +121,15 @@ if __name__ == '__main__':
 
         # temporary fix for wrong storage data
         dfnew.set_index('Datum', inplace=True)
-        dfnew.at['2023-09-29', 'Trend'] = 0.03
-        dfnew.at['2023-09-30', 'Trend'] = -0.03
+        dfnew.at['2023-09-29', 'Trend'] = 0.33
+        dfnew.at['2023-09-30', 'Trend'] = -0.30
         dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
 
         # temporary fix for wrong trend data
-        dftrend.at['2023-09-29', 'Trend'] = 0.03
-        dftrend.at['2023-09-30', 'Trend'] = -0.03
+        dftrend.at['2023-09-29', 'Trend'] = 0.33
+        dftrend.at['2023-09-30', 'Trend'] = -0.30
         dftrend.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8')
 
         # convert date column to datetime
