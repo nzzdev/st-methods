@@ -129,7 +129,8 @@ if __name__ == '__main__':
         """
 
         # temporary fix for wrong trend data
-        dftrend.at['2023-09-29', 'Trend'] = 0.01
+        dftrend.at['2023-09-29', 'Trend'] = -0.30
+        dftrend.at['2023-09-30', 'Trend'] = 0.33
         dftrend.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8')
 
         # convert date column to datetime
