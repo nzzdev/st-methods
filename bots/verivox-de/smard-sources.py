@@ -82,7 +82,7 @@ if __name__ == '__main__':
         # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
         try:
             df = smard.requestSmardData(
-                modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                modulIDs=modules, timestamp_from_in_milliseconds=1609095600000)  # last week of 2020
 
             # check if data is corrupted
             errors = 0
@@ -91,7 +91,7 @@ if __name__ == '__main__':
                 errors += 1
                 # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
                 df = smard.requestSmardData(
-                    modulIDs=modules, timestamp_from_in_milliseconds=1609628400000)  # first week of 2021
+                    modulIDs=modules, timestamp_from_in_milliseconds=1609095600000)  # last week of 2020
             if ('Anfang' in df.columns):
                 # fix wrong decimal
                 df = df.replace('-', '', regex=False)
@@ -174,7 +174,7 @@ if __name__ == '__main__':
         # calculate percentage for dashboard
         df_dash = df.div(df.sum(axis=1), axis=0)
         df_dash = (df_dash * 100).round(1)
-        df_dash = df_dash[~(df_dash.index < '2021-01-04 00:00:00')]
+        df_dash = df_dash[~(df_dash.index < '2020-12-27 00:00:00')]
         column_sum = ['Erdgas', 'Sonstige', 'Kohle']
         df_dash['Fossile Abhängigkeit'] = df_dash[column_sum].sum(axis=1)
         df_dash = df_dash[['Fossile Abhängigkeit']]
@@ -190,7 +190,7 @@ if __name__ == '__main__':
         df_nogas = df_nogas.rename(columns={'Erdgas': 'Fossile',
                                             'Sonstige EE': 'Sonstige'})
         # drop unused rows and convert to terawatt
-        df_nogas = df_nogas[~(df_nogas.index < '2021-07-18 00:00:00')]
+        df_nogas = df_nogas[~(df_nogas.index < '2021-12-12 00:00:00')]
         df_nogas = df_nogas.div(1000000)
 
         # OLD fossile with gas
@@ -200,7 +200,7 @@ if __name__ == '__main__':
 
         df = df.drop(['Pumpspeicher', 'Sonstige EE'], axis=1)
         # drop unused rows and convert to terawatt
-        df = df[~(df.index < '2021-07-18 00:00:00')]
+        df = df[~(df.index < '2021-12-12 00:00:00')]
         df = df.div(1000000)
 
         df_dash.to_csv('./data/smard_percentage.csv')
