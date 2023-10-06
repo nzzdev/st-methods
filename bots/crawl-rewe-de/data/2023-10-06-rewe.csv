@@ -768,7 +768,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-06;2241841;REWE Beste Wahl;REWE Beste Wahl Hygieneeinlagen plus 10 Stück;215;10 Stück
 2023-10-06;8079152;REWE Beste Wahl;REWE Beste Wahl Hygienereiniger 1,5l;179;1,50l (1 l = 1,19 €)
 2023-10-06;2832074;REWE Beste Wahl;REWE Beste Wahl Hygienespray 250ml;179;250ml (1 l = 7,16 €)
-2023-10-06;8089929;REWE Beste Wahl;REWE Beste Wahl Hygienespüler 1,5l;165;1500ml (1 l = 1,10 €)
 2023-10-06;7259597;REWE Beste Wahl;REWE Beste Wahl Hygienetücher 15 Stück;149;15 Stück
 2023-10-06;3029454;REWE Beste Wahl;REWE Beste Wahl Hähnchenpfanne Farfalle 750g;369;750g (1 kg = 4,92 €)
 2023-10-06;7125949;REWE Beste Wahl;REWE Beste Wahl Hänhnchen-Salami 80g;169;80g (1 kg = 21,13 €)
@@ -1004,8 +1003,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-06;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;219;750ml (1 l = 2,92 €)
 2023-10-06;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-10-06;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-10-06;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-10-06;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-10-06;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-10-06;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;199;110g (1 kg = 18,09 €)
 2023-10-06;137788;REWE Beste Wahl;REWE Beste Wahl Spargelstangen kurz 170g;249;170g (1 kg = 14,65 €)
 2023-10-06;7090266;REWE Beste Wahl;REWE Beste Wahl Spitz & Bube Eier Bodenhaltung 6 Stück;159;6 Stück
