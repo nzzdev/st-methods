@@ -1020,8 +1020,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-08;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;219;750ml (1 l = 2,92 €)
 2023-10-08;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-10-08;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-10-08;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-10-08;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
+2023-10-08;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
 2023-10-08;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;199;110g (1 kg = 18,09 €)
 2023-10-08;137788;REWE Beste Wahl;REWE Beste Wahl Spargelstangen kurz 170g;249;170g (1 kg = 14,65 €)
 2023-10-08;7090266;REWE Beste Wahl;REWE Beste Wahl Spitz & Bube Eier Bodenhaltung 6 Stück;159;6 Stück
@@ -1157,7 +1157,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-08;8774648;REWE Bio;REWE Bio + vegan Hummus Natur 200g;149;200g (1 kg = 7,45 €)
 2023-10-08;7781674;REWE Bio;REWE Bio + vegan Jackfruit natur 230g;179;230g (1 kg = 7,78 €)
 2023-10-08;7963454;REWE Bio;REWE Bio + vegan Kokos Natur 400g;169;400g (1 kg = 4,23 €)
-2023-10-08;8090294;REWE Bio;REWE Bio + vegan Mandel Drink Natur 1l;179;1l
 2023-10-08;8578130;REWE Bio;REWE Bio + vegan Mozzarisella Mozzarella-Ersatz 150g;279;150g (1 kg = 18,60 €)
 2023-10-08;8879026;REWE Bio;REWE Bio + vegan No Muhh Haferdrink vegan 1l;145;1l
 2023-10-08;2587749;REWE Bio;REWE Bio + vegan Reis Drink Natur 1l;149;1l
