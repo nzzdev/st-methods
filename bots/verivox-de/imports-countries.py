@@ -41,7 +41,7 @@ if __name__ == '__main__':
         dnotes = dnotes.strftime('%-d. %-m. %Y')
 
         # on Mondays wait for proper weekly data from Bundesnetzagentur (imports in smard-sources.py)
-        if not (d.today().weekday() == 0 and d.hour < 0):
+        if not (d.today().weekday() == 0 and d.hour < 6):
             # data source for current data
             url = f'https://www.energy-charts.info/charts/import_export_map/data/tcs_week_{dyear}_{dweek}.json'
             url_source = f'https://www.energy-charts.info/charts/import_export_map/chart.htm?l=de&c=DE&week={dweek}'
