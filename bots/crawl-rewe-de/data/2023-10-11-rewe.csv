@@ -1165,6 +1165,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-11;1045916;REWE Bio;REWE Bio Basilikum im Topf;179;NaN
 2023-10-11;276692;REWE Bio;REWE Bio Basmatireis 500g;199;500g (1 kg = 3,98 €)
 2023-10-11;8277708;REWE Bio;REWE Bio Beeren Crunchy 500g;319;500g (1 kg = 6,38 €)
+2023-10-11;8341949;REWE Bio;REWE Bio Beerenmix tiefgefroren 300g;319;300g (1 kg = 10,63 €)
 2023-10-11;974656;REWE Bio;REWE Bio Beerenmüsli 500g;299;500g (1 kg = 5,98 €)
 2023-10-11;505322;REWE Bio;REWE Bio Bergkäse 150g;219;150g (1 kg = 14,60 €)
 2023-10-11;7168777;REWE Bio;REWE Bio Berglinsen 500g;165;500g (1 kg = 3,30 €)
@@ -1378,6 +1379,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-11;8867073;REWE Bio;REWE Bio Mozzarella light 125g;129;125g (1 kg = 10,32 €)
 2023-10-11;1424821;REWE Bio;REWE Bio Muskatnuss 12,5g;349;12,50g (1 kg = 279,20 €)
 2023-10-11;8777278;REWE Bio;REWE Bio Möhrchen 330g;139;330g (1 kg = 4,21 €)
+2023-10-11;8427501;REWE Bio;REWE Bio Natives Olivenöl 750ml;799;750ml (1 l = 10,65 €)
 2023-10-11;7816381;REWE Bio;REWE Bio Naturland 5 Korn Müsli 750g;249;750g (1 kg = 3,32 €)
 2023-10-11;7811188;REWE Bio;REWE Bio Naturland Blütenhonig 500g;479;500g (1 kg = 9,58 €)
 2023-10-11;8757063;REWE Bio;REWE Bio Naturland Bunter Pfeffer Mühle 40g;259;40g (1 kg = 64,75 €)
