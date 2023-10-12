@@ -102,6 +102,14 @@ if __name__ == '__main__':
         df_strom = (df_strom / 40).round(2)
         df_strom_mean = (df_strom_mean / 40).round(2)
 
+        # get time for stock prices
+        acstock_time = df_acstock.index[-1]
+        gasstock_time = df_gasstock.index[-1]
+        acstock_time = acstock_time.strftime('%H Uhr')
+        gasstock_time = gasstock_time + \
+            timedelta(minutes=1) + timedelta(hours=2)  # GMT+2
+        gasstock_time = gasstock_time.strftime('%H Uhr')
+
         # merge dataframes
         df = pd.concat([df_gas, df_strom, df_fossile,
                        df_storage, df_lng['LNG'], df_super, df_gasstock, df_acstock], axis=1)
@@ -362,11 +370,11 @@ if __name__ == '__main__':
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_gasstock = {'indicatorTitle': 'Börsen-Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Terminmarkt', 'value': diff_gasstock, 'valueLabel': f'{diff_gasstock_str} Cent',
+        meta_gasstock = {'indicatorTitle': 'Börsen-Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Terminmarkt um {gasstock_time}', 'value': diff_gasstock, 'valueLabel': f'{diff_gasstock_str} Cent',
                          'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gasstock, 'chartType': 'line'}
         meta_strom = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
-        meta_stromstock = {'indicatorTitle': 'Börsen-Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Spotmarkt', 'value': diff_acstock, 'valueLabel': f'{diff_acstock_str} Cent',
+        meta_stromstock = {'indicatorTitle': 'Börsen-Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Spotmarkt um {acstock_time}', 'value': diff_acstock, 'valueLabel': f'{diff_acstock_str} Cent',
                            'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstock, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': todaystr, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
@@ -423,6 +431,7 @@ if __name__ == '__main__':
 
         # run Q function
         update_chart(id='38c6dc628d74a268a1d09ed8065f7803', files=file)
+
         # delete all csv and geojson files
         dir = 'data/'
         extracted = os.listdir(dir)
