@@ -225,8 +225,8 @@ if __name__ == '__main__':
         # get last values of df_meta as objects
         df_meta = df_meta.iloc[0]
         trend_storage = df_meta['Trend Speicher']
-        trend_gas = df_meta['Trend Gas'].round(1)
-        trend_strom = df_meta['Trend Strom'].round(1)
+        trend_gas = df_meta['Trend Gas']
+        trend_strom = df_meta['Trend Strom']
         trend_fossile = df_meta['Trend Fossile']
         # trend_usage = df_meta['Trend Verbrauch']
         trend_lng = df_meta['Trend LNG']
@@ -237,8 +237,8 @@ if __name__ == '__main__':
         trend_gasstock = df_meta['Trend Gasbörse']
         trend_acstock = df_meta['Trend Strombörse']
         diff_storage = df_meta['Gasspeicher']
-        diff_gas = df_gas['Gaspreis'].iloc[-1]
-        diff_strom = df_strom['Strompreis'].iloc[-1]
+        diff_gas = df_gas['Gaspreis'].iloc[-1].round(1)
+        diff_strom = df_strom['Strompreis'].iloc[-1].round(1)
         # diff_ns = df_ns['Nord Stream 1'].iloc[-1].round(2)
         diff_fossile = df_fossile['Fossile Abhängigkeit'].iloc[-1]
         # diff_usage = u_diff_str
