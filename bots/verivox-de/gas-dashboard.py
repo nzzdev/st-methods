@@ -36,6 +36,10 @@ if __name__ == '__main__':
                                usecols=['meldedatum', 'Mittlerer Preis'], index_col='meldedatum')
         df_imports = pd.read_csv(
             './data/imports-countries-dash.csv', encoding='utf-8')
+        df_gasstock = pd.read_csv(
+            './data/ttf-gas-stock-dash.csv', encoding='utf-8', index_col='Datum')
+        df_acstock = pd.read_csv(
+            './data/epex-ac-stock-dash.csv', encoding='utf-8', index_col='Datum')
 
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
         df_storage.index = pd.to_datetime(df_storage.index)
@@ -47,6 +51,11 @@ if __name__ == '__main__':
         # df_ns.index = pd.to_datetime(df_ns.index)
         df_super.index = pd.to_datetime(df_super.index)
         df_super = df_super.round(2)
+        df_gasstock.index = pd.to_datetime(df_gasstock.index)
+        df_acstock.index = pd.to_datetime(df_acstock.index)
+        df_acstock.iloc[:, 0] = df_acstock.iloc[:, 0].mask(
+            df_acstock.iloc[:, 0] == -0.0, 0)  # remove negative sign from zeros
+
         df_gas_mean = df_gas.rolling(window=7).mean().dropna()
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
         df_strom_mean = df_strom.rolling(window=7).mean().dropna()
@@ -57,6 +66,8 @@ if __name__ == '__main__':
         # df_usage = df_usage.sort_index()
         df_lng.index = pd.to_datetime(df_lng.index)
         df_lng = df_lng.sort_index()
+        df_gasstock.index = pd.to_datetime(df_gasstock.index)
+        df_acstock.index = pd.to_datetime(df_acstock.index)
 
         # rename columns and remove dates before 2022-01-01
         df_gas_mean = df_gas_mean[(
@@ -82,6 +93,8 @@ if __name__ == '__main__':
         # df_usage.index = df_usage.index.rename('date')
         # df_usage = df_usage.rename(columns={'Normaler Verbrauch¹': 'Vorjahr', 'Aktuell': 'Gasverbrauch'})
         df_lng.index = df_lng.index.rename('date')
+        df_gasstock.index = df_gasstock.index.rename('date')
+        df_acstock.index = df_acstock.index.rename('date')
 
         # convert 20 MWh to 20000 kWh and euro to cent / 4 MWh to 4000 kWh
         df_gas = (df_gas / 200).round(2)
@@ -91,7 +104,7 @@ if __name__ == '__main__':
 
         # merge dataframes
         df = pd.concat([df_gas, df_strom, df_fossile,
-                       df_storage, df_lng['LNG'], df_super], axis=1)
+                       df_storage, df_lng['LNG'], df_super, df_gasstock, df_acstock], axis=1)
 
         # STORAGE df = pd.concat([df_storage, df_gas, df_strom], axis=1)
         # BENZIN df = pd.concat([df_storage, df_gas, df_super], axis=1)
@@ -109,6 +122,10 @@ if __name__ == '__main__':
             df_temp.iloc[:, 4] = df_temp.iloc[:, 4].shift(1)  # LNG
         while pd.isna(df_temp.iloc[-1:, 5].item()) == True:
             df_temp.iloc[:, 5] = df_temp.iloc[:, 5].shift(1)  # Benzin
+        while pd.isna(df_temp.iloc[-1:, 6].item()) == True:
+            df_temp.iloc[:, 6] = df_temp.iloc[:, 6].shift(1)  # Gas stock
+        while pd.isna(df_temp.iloc[-1:, 7].item()) == True:
+            df_temp.iloc[:, 7] = df_temp.iloc[:, 7].shift(1)  # AC stock
         # RUS GAS while pd.isna(df_temp.iloc[-1:, 1].item()) == True:
            # df_temp.iloc[:, 1] = df_temp.iloc[:, 1].shift(1)
 
@@ -165,11 +182,15 @@ if __name__ == '__main__':
         )].iloc[-1] / 10) - (df['LNG'].loc[~df['LNG'].isnull()].iloc[-2] / 10))
         df_meta['Trend Benzin'] = round(((df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-1] - df['Benzinpreis'].loc[~df['Benzinpreis'].isnull(
         )].iloc[-2]) / df['Benzinpreis'].loc[~df['Benzinpreis'].isnull()].iloc[-2]) * 100, 0)  # diff previous day
+        df_meta['Trend Gasbörse'] = round(((df['Gas-Börsenpreis'].loc[~df['Gas-Börsenpreis'].isnull()].iloc[-1] - df['Gas-Börsenpreis'].loc[~df['Gas-Börsenpreis'].isnull(
+        )].iloc[0]) / df['Gas-Börsenpreis'].loc[~df['Gas-Börsenpreis'].isnull()].iloc[0]) * 100, 0)  # diff first value
+        df_meta['Trend Strombörse'] = round(((df['Strom-Börsenpreis'].loc[~df['Strom-Börsenpreis'].isnull()].iloc[-1] - df['Strom-Börsenpreis'].loc[~df['Strom-Börsenpreis'].isnull(
+        )].iloc[0]) / df['Strom-Börsenpreis'].loc[~df['Strom-Börsenpreis'].isnull()].iloc[0]) * 100, 0)  # diff first value
 
         # NS1 df_meta = df_meta[['Trend Speicher', 'Trend Gas', 'Trend NS1', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
         # STORAGE df_meta = df_meta[['Trend Speicher', 'Trend Gas', 'Trend Strom', 'Gasspeicher', 'Gaspreis', 'Strompreis']]
         df_meta = df_meta[['Trend Gas', 'Trend Strom', 'Trend Fossile', 'Trend Speicher',
-                           'Trend LNG', 'Trend Benzin', 'Gaspreis', 'Strompreis', 'Fossile Abhängigkeit', 'Gasspeicher', 'LNG', 'Benzinpreis']]
+                           'Trend LNG', 'Trend Benzin', 'Trend Gasbörse', 'Trend Strombörse', 'Gaspreis', 'Strompreis', 'Fossile Abhängigkeit', 'Gasspeicher', 'LNG', 'Benzinpreis', 'Gas-Börsenpreis', 'Strom-Börsenpreis']]
 
         # STROM/NS1: change cols1/cols7
         # replace percentages with strings
@@ -177,7 +198,7 @@ if __name__ == '__main__':
         # NS1 cols7 = ['Trend NS1']
         # STORAGE cols1 = ['Trend Speicher', 'Trend Gas', 'Trend Strom']
         cols1 = ['Trend Gas', 'Trend Strom',
-                 'Trend Fossile', 'Trend Speicher', 'Trend LNG', 'Trend Benzin']
+                 'Trend Fossile', 'Trend Speicher', 'Trend LNG', 'Trend Benzin', 'Trend Gasbörse', 'Trend Strombörse']
 
         # function for string trends (storage and gas=previous day, petrol=previous week)
         def replace_vals(df_meta):
@@ -213,6 +234,8 @@ if __name__ == '__main__':
         # RUS GAS trend_rus = df_meta['Trend Importe']
         trend_super = df_meta['Trend Benzin']
         trend_imports = df_imports['Trend Importe'].iloc[-1]
+        trend_gasstock = df_meta['Trend Gasbörse']
+        trend_acstock = df_meta['Trend Strombörse']
         diff_storage = df_meta['Gasspeicher']
         diff_gas = df_gas['Gaspreis'].iloc[-1]
         diff_strom = df_strom['Strompreis'].iloc[-1]
@@ -225,6 +248,10 @@ if __name__ == '__main__':
         # convert to opposite sign for imports
         df_imports['value'] = -df_imports['value']
         diff_imports = df_imports['value'].iloc[-1].round(0).astype(int)
+        diff_gasstock = (df_meta['Gas-Börsenpreis'] /
+                         10).round(1)  # calc price per kWh
+        diff_acstock = (df_meta['Strom-Börsenpreis'] /
+                        10).round(1)  # calc price per kWh
 
         # get current date for chart notes and reset index
         df = df.reset_index()
@@ -328,21 +355,26 @@ if __name__ == '__main__':
         diff_lng_str = diff_lng.astype(str).replace('.', ',')
         # RUS GAS diff_rus_str = diff_rus.round(0).astype(int)
         diff_super_str = diff_super.astype(str).replace('.', ',')
+        diff_gasstock_str = diff_gasstock.astype(str).replace('.', ',')
+        diff_acstock_str = diff_acstock.astype(str).replace('.', ',')
 
         meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': todaystr, 'indicatorSubtitle': f'Füllstand; Ziel: min. 85 % am 1. 10.', 'value': diff_storage, 'valueLabel': f'{diff_storage_str} %',
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
-        meta_gas = {'indicatorTitle': 'Gaspreis für Neukunden', 'date': todaystr, 'indicatorSubtitle': f'je kWh in einem Modell-Haushalt', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
+        meta_gas = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_strom = {'indicatorTitle': 'Strompreis für Neukunden', 'date': todaystr, 'indicatorSubtitle': f'je kWh in einem Modell-Haushalt', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
+        meta_gasstock = {'indicatorTitle': 'Börsen-Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Terminmarkt', 'value': diff_gasstock, 'valueLabel': f'{diff_gasstock_str} Cent',
+                         'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gasstock, 'chartType': 'line'}
+        meta_strom = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
+        meta_stromstock = {'indicatorTitle': 'Börsen-Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Spotmarkt', 'value': diff_acstock, 'valueLabel': f'{diff_acstock_str} Cent',
+                           'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstock, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': todaystr, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
         meta_imports = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Import-Export-Saldo in der {timestamp_str_imports}',
-                        'value': float(diff_imports), 'valueLabel': f'{diff_imports} GWh', 'yAxisStart': imports_y, 'yAxisLabels': imports_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_imports, 'chartType': 'line'}
+                        'value': float(diff_imports), 'valueLabel': f'{diff_imports} GWh', 'yAxisStart': imports_y, 'yAxisLabels': imports_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_imports, 'chartType': 'line'}
         # meta_usage = {'indicatorTitle': 'Eingespartes Gas', 'date': todaystr, 'indicatorSubtitle': f'im Vorjahres-Vergleich; Ziel: >25 %', 'value': u_diff, 'valueLabel': f'{diff_usage_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_usage, 'chartType': 'line'}
         meta_lng = {'indicatorTitle': 'Direkt-Importe LNG', 'date': todaystr, 'indicatorSubtitle': f'Anteil an den Gas-Importen insgesamt',
                     'value': diff_lng, 'valueLabel': f'{diff_lng_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_lng, 'chartType': 'line'}
-
         # NS 1 meta_ns = {'indicatorTitle': 'Nord Stream 1', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse pro Stunde', 'value': diff_ns, 'valueLabel': f'{diff_ns_str} Mio. m³', 'yAxisStart': strom_y, 'yAxisLabels': ns_ytick, 'yAxisLabelDecimals': 1, 'color': '#ce4631', 'trend': trend_ns, 'chartType': 'line'}
         # RUS GAS meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse nach Deutschland', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} Mio. m³', 'yAxisStart': rus_y, 'yAxisLabels': rus_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_rus, 'chartType': 'line'}
         meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Super E5', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro',
@@ -360,14 +392,18 @@ if __name__ == '__main__':
         # NS1 meta_ns['chartData'] = dict_ns
         # RUS GAS meta_rus['chartData'] = dict_rus
         meta_super['chartData'] = []
+        meta_gasstock['chartData'] = []
+        meta_stromstock['chartData'] = []
         dicts = []
         # STORAGE dicts.append(meta_storage)
         # RUS GAS dicts.append(meta_rus)
         dicts.append(meta_gas)
+        dicts.append(meta_gasstock)
         dicts.append(meta_storage)
         # dicts.append(meta_usage)
         dicts.append(meta_lng)
         dicts.append(meta_strom)
+        dicts.append(meta_stromstock)
         dicts.append(meta_fossile)
         dicts.append(meta_imports)
         # NS1 dicts.append(meta_ns)
@@ -388,12 +424,14 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='38c6dc628d74a268a1d09ed8065f7803', files=file)
         # delete all csv and geojson files
+        """
         dir = 'data/'
         extracted = os.listdir(dir)
         for item in extracted:
             if item.endswith('.csv') or item.endswith('.geojson'):
                 os.remove(os.path.join(dir, item))
         # os.remove(os.path.join(dir, 'dashboard_de.json'))
+        """
 
     except:
         raise

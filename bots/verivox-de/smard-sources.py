@@ -248,6 +248,33 @@ if __name__ == '__main__':
                 df_spot = pd.read_csv('./data/smard_spot.tsv', sep='\t', thousands='.', decimal=',',
                                       index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
 
+                # save current price as csv for dashboard
+                df_spot_today = df_spot.copy()
+                df_spot_today['Datum'] = pd.to_datetime(
+                    df_spot_today['Datum'], format='%d.%m.%Y', dayfirst=True)
+                # combine the date column and hour column to create a new datetime column
+                df_spot_today['Datum'] = df_spot_today['Datum'].dt.strftime(
+                    '%Y-%m-%d')
+                df_spot_today['Datum'] = pd.to_datetime(
+                    df_spot_today['Datum'] + ' ' + df_spot_today['Anfang'])
+                # drop unused columns
+                df_spot_today.drop('Anfang', axis=1, inplace=True)
+                df_spot_today.drop('Ende', axis=1, inplace=True)
+                df_spot_today = df_spot_today.rename(
+                    columns={df_spot_today.columns[1]: 'Strom-Börsenpreis'})
+                df_spot_today.reset_index(drop=True, inplace=True)
+                # find the most current time
+                most_current_time = df_spot_today['Datum'].max()
+                # find the corresponding time from yesterday
+                yesterday_time = most_current_time - pd.DateOffset(days=1)
+                # create a boolean mask to filter rows
+                mask = (df_spot_today['Datum'] == most_current_time) | (
+                    df_spot_today['Datum'] == yesterday_time)
+                # use the mask to filter the DataFrame
+                df_spot_today = df_spot_today[mask]
+                df_spot_today.set_index('Datum', inplace=True)
+                df_spot_today.to_csv('./data/epex-ac-stock-dash.csv')
+
                 # drop time and convert dates to DatetimeIndex
                 df_spot.drop('Anfang', axis=1, inplace=True)
                 df_spot.drop('Ende', axis=1, inplace=True)
