@@ -358,7 +358,7 @@ if __name__ == '__main__':
         diff_gasstock_str = diff_gasstock.astype(str).replace('.', ',')
         diff_acstock_str = diff_acstock.astype(str).replace('.', ',')
 
-        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': todaystr, 'indicatorSubtitle': f'Füllstand; Ziel: min. 85 % am 1. 10.', 'value': diff_storage, 'valueLabel': f'{diff_storage_str} %',
+        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': todaystr, 'indicatorSubtitle': f'Füllstand; Ziel: min. 95 % am 1. 11.', 'value': diff_storage, 'valueLabel': f'{diff_storage_str} %',
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
