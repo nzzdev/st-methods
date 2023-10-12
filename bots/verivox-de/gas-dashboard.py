@@ -225,8 +225,8 @@ if __name__ == '__main__':
         # get last values of df_meta as objects
         df_meta = df_meta.iloc[0]
         trend_storage = df_meta['Trend Speicher']
-        trend_gas = df_meta['Trend Gas']
-        trend_strom = df_meta['Trend Strom']
+        trend_gas = df_meta['Trend Gas'].round(1)
+        trend_strom = df_meta['Trend Strom'].round(1)
         trend_fossile = df_meta['Trend Fossile']
         # trend_usage = df_meta['Trend Verbrauch']
         trend_lng = df_meta['Trend LNG']

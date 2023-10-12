@@ -315,7 +315,7 @@ if __name__ == '__main__':
 
         # dynamic chart title
         title_mwh = df_spot[df_spot.columns[0]].iloc[-1]
-        title = f'Strom kostet an der Börse {title_mwh} Euro je MWh'
+        title = f'Strom kostet an der Börse im Schnitt {title_mwh} Euro je MWh'
 
         # run Q function
         update_chart(id='90005812afc9964bbfe4f952f51d6a57',
