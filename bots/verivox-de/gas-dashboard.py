@@ -105,10 +105,10 @@ if __name__ == '__main__':
         # get time for stock prices
         acstock_time = df_acstock.index[-1]
         gasstock_time = df_gasstock.index[-1]
-        acstock_time = acstock_time.strftime('%H Uhr')
+        acstock_time = acstock_time.strftime('%k Uhr')
         gasstock_time = gasstock_time + \
             timedelta(minutes=1) + timedelta(hours=2)  # GMT+2
-        gasstock_time = gasstock_time.strftime('%H Uhr')
+        gasstock_time = gasstock_time.strftime('%k Uhr')
 
         # merge dataframes
         df = pd.concat([df_gas, df_strom, df_fossile,
