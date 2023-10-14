@@ -53,8 +53,8 @@ if __name__ == '__main__':
         df_super = df_super.round(2)
         df_gasstock.index = pd.to_datetime(df_gasstock.index)
         df_acstock.index = pd.to_datetime(df_acstock.index)
-        df_acstock.iloc[:, 0] = df_acstock.iloc[:, 0].mask(
-            df_acstock.iloc[:, 0] == -0.0, 0)  # remove negative sign from zeros
+        df_acstock.iloc[:, -1] = df_acstock.iloc[:, -1].mask(
+            df_acstock.iloc[:, -1] == -0.0, 0)  # remove negative sign from zeros
 
         df_gas_mean = df_gas.rolling(window=7).mean().dropna()
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
