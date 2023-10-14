@@ -53,8 +53,6 @@ if __name__ == '__main__':
         df_super = df_super.round(2)
         df_gasstock.index = pd.to_datetime(df_gasstock.index)
         df_acstock.index = pd.to_datetime(df_acstock.index)
-        df_acstock.iloc[:, -1] = df_acstock.iloc[:, -1].mask(
-            df_acstock.iloc[:, -1] == -0.0, 0)  # remove negative sign from zeros
 
         df_gas_mean = df_gas.rolling(window=7).mean().dropna()
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
@@ -260,6 +258,7 @@ if __name__ == '__main__':
                          10).round(1)  # calc price per kWh
         diff_acstock = (df_meta['Strom-Börsenpreis'] /
                         10).round(1)  # calc price per kWh
+        diff_acstock = df_acstock.mask(diff_acstock == -0.0, 0.0)  # remove negative sign
 
         # get current date for chart notes and reset index
         df = df.reset_index()
