@@ -258,7 +258,7 @@ if __name__ == '__main__':
                          10).round(1)  # calc price per kWh
         diff_acstock = (df_meta['Strom-Börsenpreis'] /
                         10).round(1)  # calc price per kWh
-        diff_acstock = df_acstock.mask(diff_acstock == -0.0, 0.0)  # remove negative sign
+        diff_acstock.iloc[:, 0] = df_acstock.iloc[:, 0].mask(diff_acstock.iloc[:, 0] == -0.0, 0.0) # remove negative sign
 
         # get current date for chart notes and reset index
         df = df.reset_index()
