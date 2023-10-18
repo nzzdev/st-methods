@@ -3,7 +3,7 @@ name: Update Verivox Data DE
 on:
   # Schedule makes this bot run in regular intervals, without any interventions (GMT timezone)
   schedule:
-    - cron: "5 6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 * * *"
+    - cron: "15 6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21 * * *"
   workflow_dispatch:
 
 jobs:
