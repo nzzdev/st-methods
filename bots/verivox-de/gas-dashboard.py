@@ -67,15 +67,15 @@ if __name__ == '__main__':
         df_gasstock.index = pd.to_datetime(df_gasstock.index)
         df_acstock.index = pd.to_datetime(df_acstock.index)
 
-        # rename columns and remove dates before 2023-01-01
+        # rename columns and remove dates before 2022-01-01
         df_gas_mean = df_gas_mean[(
-            df_gas_mean.index.get_level_values(0) >= '2023-01-01')]
-        df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2023-01-01')]
+            df_gas_mean.index.get_level_values(0) >= '2022-01-01')]
+        df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2022-01-01')]
         # df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2021-01-01')]
         df_strom_mean = df_strom_mean[(
-            df_strom_mean.index.get_level_values(0) >= '2023-01-01')]
+            df_strom_mean.index.get_level_values(0) >= '2022-01-01')]
         df_strom = df_strom[(
-            df_strom.index.get_level_values(0) >= '2023-01-01')]
+            df_strom.index.get_level_values(0) >= '2022-01-01')]
         # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2021-01-01')]
         df_storage.index = df_storage.index.rename('date')
         df_storage = df_storage.rename(columns={'2023': 'Gasspeicher'})
@@ -351,8 +351,7 @@ if __name__ == '__main__':
         # RUS GAS rus_y = 0
         super_y = 1.6
         storage_ytick = [0, 25, 50, 75, 100]
-        # gas_ytick = [0, 15, 30, 45]
-        gas_ytick = [0, 5, 10, 15, 20]
+        gas_ytick = [0, 15, 30, 45]
         strom_ytick = [0, 20, 40, 60]
         ns_ytick = [0, 0.5, 1, 1.5]
         fossile_ytick = [20, 35, 50, 65]
