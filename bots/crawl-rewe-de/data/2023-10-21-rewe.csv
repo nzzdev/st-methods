@@ -1063,8 +1063,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-21;7897999;REWE Beste Wahl;REWE Beste Wahl Sonnenblumenöl 750ml;219;750ml (1 l = 2,92 €)
 2023-10-21;7252558;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 140g;79;140g (1 kg = 5,64 €)
 2023-10-21;7254451;REWE Beste Wahl;REWE Beste Wahl Sonnenmais Supersweet 285g;119;285g (1 kg = 4,18 €)
-2023-10-21;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-10-21;2632428;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;139;500g (1 kg = 2,78 €)
+2023-10-21;8282037;REWE Beste Wahl;REWE Beste Wahl Spaghetti 500g;159;500g (1 kg = 3,18 €)
 2023-10-21;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;199;110g (1 kg = 18,09 €)
 2023-10-21;137788;REWE Beste Wahl;REWE Beste Wahl Spargelstangen kurz 170g;249;170g (1 kg = 14,65 €)
 2023-10-21;7090266;REWE Beste Wahl;REWE Beste Wahl Spitz & Bube Eier Bodenhaltung 6 Stück;159;6 Stück
@@ -1406,7 +1406,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-21;1144899;REWE Bio;REWE Bio Joghurt mild 500g;115;500g (1 kg = 2,30 €)
 2023-10-21;784612;REWE Bio;REWE Bio Joghurt mild Erdbeer-Himbeer 150g;55;150g (1 kg = 3,67 €)
 2023-10-21;784809;REWE Bio;REWE Bio Joghurt mild Heidelbeere 150g;55;150g (1 kg = 3,67 €)
-2023-10-21;8896727;REWE Bio;REWE Bio Joghurt mild Pfirsich-Passionsfrucht 150g;55;150g (1 kg = 3,67 €)
 2023-10-21;784792;REWE Bio;REWE Bio Joghurt mild Stracciatella 150g;55;150g (1 kg = 3,67 €)
 2023-10-21;784616;REWE Bio;REWE Bio Joghurt mild Vanille 150g;55;150g (1 kg = 3,67 €)
 2023-10-21;784808;REWE Bio;REWE Bio Joghurt mild Zitrone 150g;55;150g (1 kg = 3,67 €)
