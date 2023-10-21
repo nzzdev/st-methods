@@ -67,16 +67,13 @@ if __name__ == '__main__':
         df_gasstock.index = pd.to_datetime(df_gasstock.index)
         df_acstock.index = pd.to_datetime(df_acstock.index)
 
-        # rename columns and remove dates before 2022-01-01
+        # rename columns and remove dates before 2023-01-01
         df_gas_mean = df_gas_mean[(
-            df_gas_mean.index.get_level_values(0) >= '2022-01-01')]
-        df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2022-01-01')]
-        # df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2021-01-01')]
+            df_gas_mean.index.get_level_values(0) >= '2023-01-01')]
+        # df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2022-01-01')]
         df_strom_mean = df_strom_mean[(
-            df_strom_mean.index.get_level_values(0) >= '2022-01-01')]
-        df_strom = df_strom[(
-            df_strom.index.get_level_values(0) >= '2022-01-01')]
-        # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2021-01-01')]
+            df_strom_mean.index.get_level_values(0) >= '2023-01-01')]
+        # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2022-01-01')]
         df_storage.index = df_storage.index.rename('date')
         df_storage = df_storage.rename(columns={'2023': 'Gasspeicher'})
         df_storage_trend.index = df_storage_trend.index.rename('date')
