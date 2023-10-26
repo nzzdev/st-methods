@@ -418,8 +418,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-26;7856511;ja!;ja! Rinder- Rumpsteak ca. 250g;500;1 Stück ca. 250 g (1 kg = 19,99 €)
 2023-10-26;7978794;ja!;ja! Rinder-Hackfleisch 500g;479;500g (1 kg = 9,58 €)
 2023-10-26;8965768;ja!;ja! Rinderrouladen 500g;699;500g (1 kg = 13,98 €)
-2023-10-26;8626135;ja!;ja! Rindfleisch 500g;579;500g (1 kg = 11,58 €)
 2023-10-26;8508714;ja!;ja! Rindfleisch 500g;649;500g (1 kg = 12,98 €)
+2023-10-26;8626135;ja!;ja! Rindfleisch 500g;579;500g (1 kg = 11,58 €)
 2023-10-26;2432136;ja!;ja! Rindfleisch-Hamburger 400g;399;400g (1 kg = 9,98 €)
 2023-10-26;5350450;ja!;ja! Roggenvollkornbrot 500g;119;500g (1 kg = 2,38 €)
 2023-10-26;7125770;ja!;ja! Rosenkohl tiefgefroren 1kg;219;1000g
@@ -1009,7 +1009,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-26;1423303;REWE Beste Wahl;REWE Beste Wahl Rote Curry-Paste würzig-scharf 110g;139;110g (1 kg = 12,64 €)
 2023-10-26;117311;REWE Beste Wahl;REWE Beste Wahl Rote Paprika eingelegt 300g;159;300g (1 kg = 5,30 €)
 2023-10-26;8674102;REWE Beste Wahl;REWE Beste Wahl Rote Pfefferonen 270g;269;270g (1 kg = 9,96 €)
-2023-10-26;8087752;REWE Beste Wahl;REWE Beste Wahl Räucher-Lachs 2x50g;359;2x50g (1 kg = 35,90 €)
 2023-10-26;8857163;REWE Beste Wahl;REWE Beste Wahl Räucherlaxxs vegan 100g;249;100g (1 kg = 24,90 €)
 2023-10-26;1209186;REWE Beste Wahl;REWE Beste Wahl Röstzwiebeln 150g;129;150g (1 kg = 8,60 €)
 2023-10-26;8686876;REWE Beste Wahl;REWE Beste Wahl Sahne Toffees 400g;229;400g (1 kg = 5,73 €)
