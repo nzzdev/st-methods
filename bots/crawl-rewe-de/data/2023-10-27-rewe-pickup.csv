@@ -287,7 +287,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-27;7009739;ja!;ja! Fleischwurst 650g;379;650g (1 kg = 5,83 €)
 2023-10-27;6980295;ja!;ja! Französischer Weichkäse 200g;189;200g (1 kg = 9,45 €)
 2023-10-27;8599178;ja!;ja! French Dressing 250ml;99;250ml (1 l = 3,96 €)
-2023-10-27;4509650;ja!;ja! Frikadellenbällchen 500g;349;500g (1 kg = 6,98 €)
 2023-10-27;7937888;ja!;ja! Frische Eier aus Bodenhaltung 10 Stück;199;10 Stück
 2023-10-27;2411378;ja!;ja! Frische Eierspätzle 500g;159;500g (1 kg = 3,18 €)
 2023-10-27;139976;ja!;ja! Frische Hähnchenschenkel ca. 1130g;503;1 Stück ca. 1130 g (1 kg = 4,45 €)
@@ -319,6 +318,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-27;2565946;ja!;ja! Garnelen á la Provence 250g;359;250g (1 kg = 14,36 €)
 2023-10-27;8587952;ja!;ja! Geflügel Fond 400ml;149;400ml (1 l = 3,73 €)
 2023-10-27;8890957;ja!;ja! Geflügel Wiener 400g;299;400g (1 kg = 7,48 €)
+2023-10-27;942067;ja!;ja! Geflügel-Mortadella 200g;129;200g (1 kg = 6,45 €)
 2023-10-27;990026;ja!;ja! Geflügel-Salami mit Schweinefleisch 200g;179;200g (1 kg = 8,95 €)
 2023-10-27;7715557;ja!;ja! Geflügelfleischwurst 500g;259;500g (1 kg = 5,18 €)
 2023-10-27;7957293;ja!;ja! Geflügellyoner mit Paprika 200g;129;200g (1 kg = 6,45 €)
@@ -392,6 +392,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-27;8487975;ja!;ja! Hot Dog Würstchen 300g, 6 Stück;279;300g (1 kg = 9,30 €)
 2023-10-27;8552840;ja!;ja! Hot Salsa Dip 300ml;99;300ml (1 l = 3,30 €)
 2023-10-27;8859653;ja!;ja! Hummus natur vegan 200g;99;200g (1 kg = 4,95 €)
+2023-10-27;7728461;ja!;ja! Hummus pikant vegan 200g;99;200g (1 kg = 4,95 €)
 2023-10-27;2025506;ja!;ja! Hundesticks Geflügel 8x11g;95;8x11g (1 kg = 10,80 €)
 2023-10-27;2025522;ja!;ja! Hundesticks Rind 8x11g;95;8x11g (1 kg = 10,80 €)
 2023-10-27;2025529;ja!;ja! Hundesticks mit Wild 8x11g;95;8x11g (1 kg = 10,80 €)
@@ -584,7 +585,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-27;7878691;ja!;ja! Mini-Gugelhupf Marmor 250g;159;250g (1 kg = 6,36 €)
 2023-10-27;2146675;ja!;ja! Mini-Windbeutel 250g;129;250g (1 kg = 5,16 €)
 2023-10-27;891930;ja!;ja! Mini-Zimtos 750g;299;750g (1 kg = 3,99 €)
-2023-10-27;7877799;ja!;ja! Mischsalat Rohkost Mix 200g;89;200g (1 kg = 4,45 €)
 2023-10-27;8329329;ja!;ja! Motiv-Servietten Floral 40 Stück;129;40 Stück
 2023-10-27;8013504;ja!;ja! Motiv-Servietten X-Mas 40 Stück;99;40 Stück
 2023-10-27;8434947;ja!;ja! Mozzarella 125g;89;125g (1 kg = 7,12 €)
@@ -744,7 +744,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-10-27;873322;ja!;ja! Schlemmermahlzeit mit Herz und Geflügel 400g;79;400g (1 kg = 1,98 €)
 2023-10-27;874949;ja!;ja! Schlemmermahlzeit mit fünf leckeren Sorten 400g;79;400g (1 kg = 1,98 €)
 2023-10-27;8187819;ja!;ja! Schmand 200g;89;200g (1 kg = 4,45 €)
-2023-10-27;43593;ja!;ja! Schmelzkäse sahnig 200g;169;200g (1 kg = 8,45 €)
+2023-10-27;43593;ja!;ja! Schmelzkäse sahnig 200g;159;200g (1 kg = 7,95 €)
 2023-10-27;8130752;ja!;ja! Schmelzkäsescheiben Allgäuer Art 250g;169;250g (1 kg = 6,76 €)
 2023-10-27;8231192;ja!;ja! Schmelzkäsescheiben Toast 250g;169;250g (1 kg = 6,76 €)
 2023-10-27;8135665;ja!;ja! Schmelzkäsescheiben mit Chester 250g;169;250g (1 kg = 6,76 €)
