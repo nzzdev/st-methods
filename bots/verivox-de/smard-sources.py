@@ -36,7 +36,8 @@ if __name__ == '__main__':
 
         # power consumption
         FORECASTED_POWER_CONSUMPTION = [6000411, 6004362]
-        REALIZED_POWER_CONSUMPTION = [5000410, 5004359]
+        REALIZED_POWER_CONSUMPTION = [5000410]
+        REALIZED_POWER_CONSUMPTION_RESIDUAL = [5004359]
 
         # market
         WHOLESALE_PRICES = [8004169, 8004170, 8000252, 8000253, 8000251, 8000254,
@@ -224,6 +225,50 @@ if __name__ == '__main__':
         dw.update_description(
             chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E', intro='Stromerzeugung in Deutschland, in TWh<br><span style="line-height:40px"><a target="_self" href="https://datawrapper.dwcdn.net/Mzofi/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Wöchentlich</b></a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/rcnPY/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Monatlich</a></span>')
         dw.publish_chart(chart_id=dw_id_emix, display=False)
+
+        #################################
+        # API request power consumption #
+        #################################
+        modules = REALIZED_POWER_CONSUMPTION
+        try:
+            df = smard.requestSmardData(
+                modulIDs=modules, timestamp_from_in_milliseconds=1672520400000)  # last day of 2022
+
+            # check if data is corrupted
+            errors = 0
+            while ('Anfang' not in df.columns) and (errors < 5):
+                sleep(2)
+                errors += 1
+            if ('Anfang' in df.columns):
+                df = smard.requestSmardData(
+                    modulIDs=modules, timestamp_from_in_milliseconds=1672520400000)  # last day of 2022
+                # fix wrong decimal
+                df = df.replace('-', '', regex=False)
+                df.to_csv('./data/power_consumption.tsv',
+                          sep='\t', encoding='utf-8', index=False)
+                df = pd.read_csv('./data/power_consumption.tsv', sep='\t', thousands='.',
+                                 decimal=',', index_col=None, dtype={'Datum': 'string', 'Anfang': 'string'})
+
+                # drop time and convert dates
+                df.drop('Anfang', axis=1, inplace=True)
+                df.drop('Ende', axis=1, inplace=True)
+                df['Datum'] = pd.to_datetime(df['Datum'], format="%d.%m.%Y")
+
+                df = df.groupby(['Datum']).sum()
+
+                # convert to week and drop first and last row with partial values
+                df.reset_index(inplace=True)
+                df = df.resample('W', on='Datum').sum()
+                # no drop for step-after chart
+                df.drop(df.tail(1).index, inplace=True)
+                df.drop(df.head(1).index, inplace=True)
+
+                # save tsv
+                df.to_csv('./data/power_consumption.tsv', sep='\t',
+                          encoding='utf-8', index=True)
+
+        except:
+            pass
 
         ###########################
         # API request spot market #

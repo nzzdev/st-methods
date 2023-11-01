@@ -40,6 +40,8 @@ if __name__ == '__main__':
             './data/ttf-gas-stock-dash.csv', encoding='utf-8', index_col='Datum')
         df_acstock = pd.read_csv(
             './data/epex-ac-stock-dash.csv', encoding='utf-8', index_col='Datum')
+        df_acconsumption = pd.read_csv(
+            './data/power_consumption.tsv', sep='\t', encoding='utf-8', index_col='Datum')
 
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
         df_storage.index = pd.to_datetime(df_storage.index)
@@ -53,7 +55,6 @@ if __name__ == '__main__':
         df_super = df_super.round(2)
         df_gasstock.index = pd.to_datetime(df_gasstock.index)
         df_acstock.index = pd.to_datetime(df_acstock.index)
-
         df_gas_mean = df_gas.rolling(window=7).mean().dropna()
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
         df_strom_mean = df_strom.rolling(window=7).mean().dropna()
@@ -64,8 +65,7 @@ if __name__ == '__main__':
         # df_usage = df_usage.sort_index()
         df_lng.index = pd.to_datetime(df_lng.index)
         df_lng = df_lng.sort_index()
-        df_gasstock.index = pd.to_datetime(df_gasstock.index)
-        df_acstock.index = pd.to_datetime(df_acstock.index)
+        df_acconsumption.index = pd.to_datetime(df_acconsumption.index)
 
         # rename columns and remove dates before 2023-01-01
         df_gas_mean = df_gas_mean[(
@@ -93,12 +93,27 @@ if __name__ == '__main__':
         df_lng.index = df_lng.index.rename('date')
         df_gasstock.index = df_gasstock.index.rename('date')
         df_acstock.index = df_acstock.index.rename('date')
+        df_acconsumption.index = df_acconsumption.index.rename('date')
 
         # convert 20 MWh to 20000 kWh and euro to cent / 4 MWh to 4000 kWh
         df_gas = (df_gas / 200).round(2)
         df_gas_mean = (df_gas_mean / 200).round(2)
         df_strom = (df_strom / 40).round(2)
         df_strom_mean = (df_strom_mean / 40).round(2)
+
+        # convert KWh to GWh and calculate share of imports of power consumption
+        df_acconsumption = (df_acconsumption / 1000)
+        df_importsshare = df_acconsumption.copy().tail(2)
+        share = [df_imports['value'].iloc[-2], (df_imports['value'].iloc[-1])]
+        df_importsshare['Import-Anteil'] = share
+        # Import-Export-Saldo -> Export-Import-Saldo
+        df_importsshare['Import-Anteil'] = -df_importsshare['Import-Anteil']
+        df_importsshare['Import-Anteil'] = round(
+            (df_importsshare.iloc[:, 1] / df_importsshare.iloc[:, 0]) * 100, 1)
+        # replace negative values with zeros
+        df_importsshare.loc[df_importsshare['Import-Anteil']
+                            <= 0, 'Import-Anteil'] = 0
+        df_importsshare = df_importsshare[['Import-Anteil']]
 
         # get time for stock prices
         acstock_time = df_acstock.index[-1]
@@ -147,6 +162,19 @@ if __name__ == '__main__':
             df_imports['Trend Importe'] = 'fallend'
         else:
             df_imports['Trend Importe'] = 'gleichbleibend'
+
+        # calculate imports share diff
+        df_importsshare_meta = df_importsshare.copy().tail(1)
+        df_importsshare_meta = df_importsshare_meta.rename(
+            {'value': 'Trend Importe'}, axis='columns')
+        i_diff = abs(df_importsshare['Import-Anteil'].iloc[-1]
+                     ) - abs(df_importsshare['Import-Anteil'].iloc[-2])
+        if i_diff >= 1:
+            df_importsshare['Trend Import-Anteil'] = 'steigend'
+        elif i_diff <= -1:
+            df_importsshare['Trend Import-Anteil'] = 'fallend'
+        else:
+            df_importsshare['Trend Import-Anteil'] = 'gleichbleibend'
 
         # calculate gas savings
         """
@@ -240,6 +268,7 @@ if __name__ == '__main__':
         # RUS GAS trend_rus = df_meta['Trend Importe']
         trend_super = df_meta['Trend Benzin']
         trend_imports = df_imports['Trend Importe'].iloc[-1]
+        trend_importsshare = df_importsshare['Trend Import-Anteil'].iloc[-1]
         trend_gasstock = df_meta['Trend Gasbörse']
         trend_acstock = df_meta['Trend Strombörse']
         diff_storage = df_meta['Gasspeicher']
@@ -254,6 +283,7 @@ if __name__ == '__main__':
         # convert to opposite sign for imports
         df_imports['value'] = -df_imports['value']
         diff_imports = df_imports['value'].iloc[-1].round(0).astype(int)
+        diff_importsshare = df_importsshare['Import-Anteil'].iloc[-1]
 
         # convert to kWh and remove negative sign from zeros
         diff_gasstock = df_meta['Gas-Börsenpreis'] / 10
@@ -335,7 +365,9 @@ if __name__ == '__main__':
         df_imports.at[df_imports.index[-2],
                       'date'] = str(df_fossile['date'].iloc[-2])
         dict_imports = df_imports.drop(df_imports.columns[[0, 3]], axis=1).rename(
-            columns={df.columns[2]: 'value'}).to_dict(orient='records')
+            columns={df_imports.columns[2]: 'value'}).to_dict(orient='records')
+        dict_importsshare = df_importsshare.rename(
+            columns={df_importsshare.columns[1]: 'value'}).to_dict(orient='records')
 
         # additional data for JSON file
         # y-axis start and ticks
@@ -345,6 +377,7 @@ if __name__ == '__main__':
         ns_y = 0
         fossile_y = 20
         imports_y = -2000
+        importsshare_y = 0
         # RUS GAS rus_y = 0
         super_y = 1.6
         storage_ytick = [0, 25, 50, 75, 100]
@@ -355,6 +388,7 @@ if __name__ == '__main__':
         # RUS GAS rus_ytick = [0, 100, 200, 300]
         super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
         imports_ytick = [-2000, -1000, 0, 1000, 2000]
+        importsshare_ytick = [0, 5, 10, 15, 20]
 
         # change decimal seperator
         diff_storage_str = diff_storage.astype(str).replace('.', ',')
@@ -369,6 +403,7 @@ if __name__ == '__main__':
         diff_super_str = diff_super.astype(str).replace('.', ',')
         diff_gasstock_str = diff_gasstock.astype(str).replace('.', ',')
         diff_acstock_str = diff_acstock.astype(str).replace('.', ',')
+        diff_importsshare_str = diff_importsshare.astype(str).replace('.', ',')
 
         meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': todaystr, 'indicatorSubtitle': f'Füllstand; Ziel: min. 95 % am 1. 11.', 'value': diff_storage, 'valueLabel': f'{diff_storage_str} %',
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
@@ -382,8 +417,9 @@ if __name__ == '__main__':
                            'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstock, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': todaystr, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
-        meta_imports = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Import-Export-Saldo in der {timestamp_str_imports}',
-                        'value': float(diff_imports), 'valueLabel': f'{diff_imports} GWh', 'yAxisStart': imports_y, 'yAxisLabels': imports_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_imports, 'chartType': 'line'}
+        # meta_imports = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Import-Export-Saldo in der {timestamp_str_imports}', 'value': float(diff_imports), 'valueLabel': f'{diff_imports} GWh', 'yAxisStart': imports_y, 'yAxisLabels': imports_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_imports, 'chartType': 'line'}
+        meta_importsshare = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Anteil am Stromverbrauch in der {timestamp_str_imports}',
+                             'value': diff_importsshare, 'valueLabel': f'{diff_importsshare_str} %', 'yAxisStart': imports_y, 'yAxisLabels': importsshare_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_importsshare, 'chartType': 'line'}
         # meta_usage = {'indicatorTitle': 'Eingespartes Gas', 'date': todaystr, 'indicatorSubtitle': f'im Vorjahres-Vergleich; Ziel: >25 %', 'value': u_diff, 'valueLabel': f'{diff_usage_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_usage, 'chartType': 'line'}
         meta_lng = {'indicatorTitle': 'Direkt-Importe LNG', 'date': todaystr, 'indicatorSubtitle': f'Anteil an den Gas-Importen insgesamt',
                     'value': diff_lng, 'valueLabel': f'{diff_lng_str} %', 'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_lng, 'chartType': 'line'}
@@ -397,7 +433,8 @@ if __name__ == '__main__':
         meta_gas['chartData'] = dict_gas
         meta_strom['chartData'] = []
         meta_fossile['chartData'] = []
-        meta_imports['chartData'] = []
+        #meta_imports['chartData'] = []
+        meta_importsshare['chartData'] = []
         # meta_usage['chartData'] = []
         meta_storage['chartData'] = []
         meta_lng['chartData'] = []
@@ -405,6 +442,7 @@ if __name__ == '__main__':
         # RUS GAS meta_rus['chartData'] = dict_rus
         meta_super['chartData'] = []
         meta_gasstock['chartData'] = []
+        meta_stromstock['chartData'] = []
         meta_stromstock['chartData'] = []
         dicts = []
         # STORAGE dicts.append(meta_storage)
@@ -417,7 +455,8 @@ if __name__ == '__main__':
         dicts.append(meta_strom)
         dicts.append(meta_stromstock)
         dicts.append(meta_fossile)
-        dicts.append(meta_imports)
+        # dicts.append(meta_imports)
+        dicts.append(meta_importsshare)
         # NS1 dicts.append(meta_ns)
         dicts.append(meta_super)
         with open('./data/dashboard_de.json', 'w') as fp:
