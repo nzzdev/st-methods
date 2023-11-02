@@ -80,7 +80,7 @@ if __name__ == '__main__':
         # create date for chart notes
         timecode = df_full.index[-1]
         timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat; aktueller Tag: durchschnittlicher Intraday-Preis.<br>Stand: ' + timecode_str
+        notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat; aktueller Tag: Tagesdurchschnitt.<br>Stand: ' + timecode_str
 
         # convert DatetimeIndex
         #df_full.index = df_full.index.strftime('%Y-%m-%d')
