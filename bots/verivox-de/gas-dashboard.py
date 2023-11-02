@@ -39,7 +39,7 @@ if __name__ == '__main__':
         df_gasstock = pd.read_csv(
             './data/ttf-gas-stock-dash.csv', encoding='utf-8', index_col='Datum')
         df_acstock = pd.read_csv(
-            './data/epex-ac-stock-dash.csv', encoding='utf-8', index_col='Datum')
+            './data/smard_spot_current.tsv', sep='\t', encoding='utf-8', index_col='Datum')
         df_acconsumption = pd.read_csv(
             './data/power_consumption.tsv', sep='\t', encoding='utf-8', index_col='Datum')
 

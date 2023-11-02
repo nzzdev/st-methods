@@ -318,7 +318,8 @@ if __name__ == '__main__':
                 # use the mask to filter the DataFrame
                 df_spot_today = df_spot_today[mask]
                 df_spot_today.set_index('Datum', inplace=True)
-                df_spot_today.to_csv('./data/epex-ac-stock-dash.csv')
+                df_spot_today.to_csv(
+                    './data/smard_spot_current.tsv', sep='\t', encoding='utf-8')
 
                 # drop time and convert dates to DatetimeIndex
                 df_spot.drop('Anfang', axis=1, inplace=True)
