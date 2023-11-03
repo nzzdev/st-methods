@@ -38,10 +38,9 @@ if __name__ == '__main__':
             './data/imports-countries-dash.csv', encoding='utf-8')
         df_gasstock = pd.read_csv(
             './data/ttf-gas-stock-dash.csv', encoding='utf-8', index_col='Datum')
-        # df_acstock = pd.read_csv('./data/smard_spot_current.tsv', sep='\t', encoding='utf-8', index_col='Datum')
-        # fallback (daily data) if hourly data above is corrupted
         df_acstock = pd.read_csv(
-            './data/smard_spot.tsv', sep='\t', encoding='utf-8', index_col='Datum')
+            './data/smard_spot_current.tsv', sep='\t', encoding='utf-8', index_col='Datum')
+        # df_acstock = pd.read_csv('./data/smard_spot.tsv', sep='\t', encoding='utf-8', index_col='Datum')  # fallback (daily data) if hourly data above is corrupted
         df_acconsumption = pd.read_csv(
             './data/power_consumption.tsv', sep='\t', encoding='utf-8', index_col='Datum')
 
@@ -417,7 +416,7 @@ if __name__ == '__main__':
                          'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gasstock, 'chartType': 'line'}
         meta_strom = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
-        meta_stromstock = {'indicatorTitle': 'Börsen-Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Spotmarkt, 3. .11.', 'value': diff_acstock, 'valueLabel': f'{diff_acstock_str} Cent',
+        meta_stromstock = {'indicatorTitle': 'Börsen-Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Spotmarkt, {acstock_time}', 'value': diff_acstock, 'valueLabel': f'{diff_acstock_str} Cent',
                            'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstock, 'chartType': 'line'}
         meta_fossile = {'indicatorTitle': 'Fossile Abhängigkeit', 'date': todaystr, 'indicatorSubtitle': f'bei der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
