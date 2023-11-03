@@ -38,9 +38,13 @@ if __name__ == '__main__':
             './data/imports-countries-dash.csv', encoding='utf-8')
         df_gasstock = pd.read_csv(
             './data/ttf-gas-stock-dash.csv', encoding='utf-8', index_col='Datum')
-        df_acstock = pd.read_csv(
-            './data/smard_spot_current.tsv', sep='\t', encoding='utf-8', index_col='Datum')
-        # df_acstock = pd.read_csv('./data/smard_spot.tsv', sep='\t', encoding='utf-8', index_col='Datum')  # fallback (daily data) if hourly data above is corrupted
+        # fallback with daily data if hourly data above is not available
+        if os.path.isfile('./data/smard_spot_current.csv'):
+            df_acstock = pd.read_csv(
+                './data/smard_spot_current.csv', encoding='utf-8', index_col='Datum')
+        else:
+            df_acstock = pd.read_csv(
+                './data/smard_spot.tsv', sep='\t', encoding='utf-8', index_col='Datum')
         df_acconsumption = pd.read_csv(
             './data/power_consumption.tsv', sep='\t', encoding='utf-8', index_col='Datum')
 
@@ -119,9 +123,14 @@ if __name__ == '__main__':
         df_importsshare = df_importsshare[['Import-Anteil']]
 
         # get time for stock prices
-        acstock_time = df_acstock.index[-1]
+        # fallback with daily data if hourly data above is not available
+        if os.path.isfile('./data/smard_spot_current.csv'):
+            acstock_time = df_acstock.index[-1]
+            acstock_time = acstock_time.strftime('%-d. %-m., %k Uhr')
+        else:
+            acstock_time = df_acstock.index[-1]
+            acstock_time = acstock_time.strftime('%-d. %-m.')
         gasstock_time = df_gasstock.index[-1]
-        acstock_time = acstock_time.strftime('%-d. %-m., %k Uhr')
         gasstock_time = gasstock_time + \
             timedelta(minutes=1) + timedelta(hours=1)  # GMT+1
         gasstock_time = gasstock_time.strftime('%-d. %-m., %k Uhr')
