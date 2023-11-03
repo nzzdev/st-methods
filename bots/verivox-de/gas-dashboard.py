@@ -87,7 +87,8 @@ if __name__ == '__main__':
         df_gas_mean = df_gas_mean.rename(columns={'Gas': 'Gaspreis'})
         df_strom = df_strom.rename(columns={'Strom': 'Strompreis'})
         df_strom_mean = df_strom_mean.rename(columns={'Strom': 'Strompreis'})
-        df_acstock.rename(columns={df_acstock.columns[1]:'Strom-Börsenpreis'}, inplace=True)
+        df_acstock.rename(
+            columns={df_acstock.columns[0]: 'Strom-Börsenpreis'}, inplace=True)
         # df_ns.index = df_ns.index.rename('date')
         # df_ns = df_ns.rename(columns={'Russland': 'Nord Stream 1'})
         df_fossile.index = df_fossile.index.rename('date')
