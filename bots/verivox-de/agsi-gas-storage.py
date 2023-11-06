@@ -137,7 +137,7 @@ if __name__ == '__main__':
         """
 
         # fix for seemingly wrong >100% data
-        dfnew.loc[dfnew['2023'] > 100, '2023'] = 100
+        #dfnew.loc[dfnew['2023'] > 100, '2023'] = 100
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
@@ -162,7 +162,7 @@ if __name__ == '__main__':
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2011-2021.<br>Stand: ' + timecodestr
+        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2011-2021. Unter optimalen Bedingungen können Speicher auch Füllstande von mehr als 100 Prozent erreichen.<br>Stand: ' + timecodestr
         notes_chart_trend = 'Stand: ' + timecodestr
 
         # merge dataframes
