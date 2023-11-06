@@ -136,6 +136,9 @@ if __name__ == '__main__':
         dftrend.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8')
         """
 
+        # fix for seemingly wrong >100% data
+        dfnew.loc[dfnew['2023'] > 100, '2023'] = 100
+
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
         dfnew['Datum'] = pd.to_datetime(dfnew['Datum'])
