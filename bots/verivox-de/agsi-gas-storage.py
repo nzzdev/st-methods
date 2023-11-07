@@ -82,7 +82,7 @@ if __name__ == '__main__':
         s.mount('https://', HTTPAdapter(max_retries=retries))
 
         # create header and get data from 2023
-        header = (f"Datum,2023,Trend"+'\n')
+        header = (f"Datum,2023²,Trend"+'\n')
         with open(f'./data/{todaystr}-gasspeicher.csv', 'w') as file:
             file.write(header)
             for n in range(1, pages):
@@ -137,7 +137,7 @@ if __name__ == '__main__':
         """
 
         # fix for seemingly wrong >100% data
-        #dfnew.loc[dfnew['2023'] > 100, '2023'] = 100
+        #dfnew.loc[dfnew['2023²'] > 100, '2023²'] = 100
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
@@ -162,13 +162,13 @@ if __name__ == '__main__':
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2011-2021. Unter optimalen Bedingungen können Speicher auch Füllstände von mehr als 100 Prozent erreichen.<br>Stand: ' + timecodestr
+        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2011-2021. ² Unter optimalen Bedingungen können Speicher auch Füllstände von mehr als 100 Prozent erreichen.<br>Stand: ' + timecodestr
         notes_chart_trend = 'Stand: ' + timecodestr
 
         # merge dataframes
         df = dfold.merge(dfnew, on='Datum', how='left')
         df.rename(columns={'Min': ''}, inplace=True)
-        df['2023'].fillna('', inplace=True)
+        df['2023²'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
         dftrend.set_index('Datum', inplace=True)
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
@@ -191,7 +191,7 @@ if __name__ == '__main__':
         dftrend = dftrend[(dftrend.index.get_level_values(0) >= '2022-05-01')]
 
         # banker's rounding
-        title_perc = dfnew['2023'].iloc[-1].round(
+        title_perc = dfnew['2023²'].iloc[-1].round(
             1).astype(str).replace('.', ',')
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
