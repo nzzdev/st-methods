@@ -162,7 +162,7 @@ if __name__ == '__main__':
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2011-2021. ² Unter optimalen Bedingungen können Speicher auch Füllstände von mehr als 100 Prozent erreichen.<br>Stand: ' + timecodestr
+        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2011-2021. ² Die Prozent-Angabe bezieht sich auf die gesicherte Kapazität, unter optimalen Bedingungen kann diese die Marke von 100 Prozent überschreiten.<br>Stand: ' + timecodestr
         notes_chart_trend = 'Stand: ' + timecodestr
 
         # merge dataframes
