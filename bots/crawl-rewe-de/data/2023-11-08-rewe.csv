@@ -426,8 +426,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-08;8661897;ja!;ja! Rinder- Hüftsteak ca. 250g;500;1 Stück ca. 250 g (1 kg = 19,98 €)
 2023-11-08;7978794;ja!;ja! Rinder-Hackfleisch 500g;479;500g (1 kg = 9,58 €)
 2023-11-08;8965768;ja!;ja! Rinderrouladen 500g;699;500g (1 kg = 13,98 €)
-2023-11-08;8508714;ja!;ja! Rindfleisch 500g;649;500g (1 kg = 12,98 €)
 2023-11-08;8626135;ja!;ja! Rindfleisch 500g;579;500g (1 kg = 11,58 €)
+2023-11-08;8508714;ja!;ja! Rindfleisch 500g;649;500g (1 kg = 12,98 €)
 2023-11-08;2432136;ja!;ja! Rindfleisch-Hamburger 400g;399;400g (1 kg = 9,98 €)
 2023-11-08;5350450;ja!;ja! Roggenvollkornbrot 500g;119;500g (1 kg = 2,38 €)
 2023-11-08;7125770;ja!;ja! Rosenkohl tiefgefroren 1kg;219;1000g
@@ -612,8 +612,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-08;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2023-11-08;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-11-08;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;129;450g (1 kg = 2,87 €)
-2023-11-08;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-11-08;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2023-11-08;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-11-08;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-11-08;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-11-08;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1639,7 +1639,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-08;274147;REWE Bio;REWE Bio Vielblütenhonig 500g;479;500g (1 kg = 9,58 €)
 2023-11-08;7710745;REWE Bio;REWE Bio Vitalgebäck Cranberrys 200g;279;200g (1 kg = 13,95 €)
 2023-11-08;8891488;REWE Bio;REWE Bio Vitalgebäck mit Sonnenblumenkernen 200g;279;200g (1 kg = 13,95 €)
-2023-11-08;271876;REWE Bio;REWE Bio Vollkorn-Semmelbrösel 200g;99;200g (1 kg = 4,95 €)
 2023-11-08;209834;REWE Bio;REWE Bio Vollkorn-Spaghetti 500g;85;500g (1 kg = 1,70 €)
 2023-11-08;8758695;REWE Bio;REWE Bio Wacholderbeeren ganz 35g;199;35g (1 kg = 56,86 €)
 2023-11-08;8584453;REWE Bio;REWE Bio Weihnachts-Lebkuchen-Herzen vegan 240g;469;240g (1 kg = 19,54 €)
