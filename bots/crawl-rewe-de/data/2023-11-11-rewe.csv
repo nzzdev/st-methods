@@ -590,8 +590,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-11;8782154;REWE Beste Wahl;REWE Beste Wahl Apfel Himbeer Hibiskus Saft 1l;239;1l
 2023-11-11;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2023-11-11;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2023-11-11;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-11-11;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2023-11-11;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-11-11;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-11-11;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-11-11;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -750,7 +750,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-11;8377443;REWE Beste Wahl;REWE Beste Wahl Granatapfelkerne 300g;219;300g (1 kg = 7,30 €)
 2023-11-11;1302379;REWE Beste Wahl;REWE Beste Wahl Griechische Pfefferonen scharf 125g;109;125g (1 kg = 8,72 €)
 2023-11-11;2109064;REWE Beste Wahl;REWE Beste Wahl Grießpudding Zimt 150g;55;150g (1 kg = 3,67 €)
-2023-11-11;2109063;REWE Beste Wahl;REWE Beste Wahl Grießpudding pur 150g;55;150g (1 kg = 3,67 €)
 2023-11-11;371368;REWE Beste Wahl;REWE Beste Wahl Grüne Bohnen 280g;159;280g (1 kg = 5,68 €)
 2023-11-11;1423305;REWE Beste Wahl;REWE Beste Wahl Grüne Currypaste würzig-scharf 110g;99;110g (1 kg = 9 €)
 2023-11-11;1134690;REWE Beste Wahl;REWE Beste Wahl Grüne Oliven gefüllt mit Mandeln 160g;229;160g (1 kg = 14,31 €)
@@ -1301,7 +1300,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-11;7050770;REWE Bio;REWE Bio Fusilli Vollkorn Dinkel 500g;155;500g (1 kg = 3,10 €)
 2023-11-11;8822460;REWE Bio;REWE Bio Garam Masala gemahlen 30g;259;30g (1 kg = 86,33 €)
 2023-11-11;8659989;REWE Bio;REWE Bio Garnelen mediterrane Art 250g;799;250g (1 kg = 31,96 €)
-2023-11-11;7829813;REWE Bio;REWE Bio Geflügel Wiener 200g;339;200g (1 kg = 16,95 €)
 2023-11-11;1267821;REWE Bio;REWE Bio Geflügel-Nuggets 200g;499;200g (1 kg = 24,95 €)
 2023-11-11;7183743;REWE Bio;REWE Bio Geflügelbratwurst 160g;349;160g (1 kg = 21,81 €)
 2023-11-11;1267875;REWE Bio;REWE Bio Geflügelhackbällchen 300g;499;300g (1 kg = 16,63 €)
