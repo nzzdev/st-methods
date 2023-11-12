@@ -155,7 +155,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-12;1206387;ja!;ja! Festtags-Suppe mit Fleischklößchen & Eierstich 400ml;139;400ml (1 l = 3,48 €)
 2023-11-12;588221;ja!;ja! Feuchte Allzwecktücher Limonen-Frische 80 Stück;199;80 Stück
 2023-11-12;8379864;ja!;ja! Feuchtes Toilettenpapier Kamille 2x70 Stück;125;2x70 Stück
-2023-11-12;6540147;ja!;ja! Fischstäbchen 450g, 15 Stück;279;450g (1 kg = 6,20 €)
 2023-11-12;2270571;ja!;ja! Fleischbällchen-Topf mit Tomaten & Nudeln 800g;299;800g (1 kg = 3,74 €)
 2023-11-12;7009739;ja!;ja! Fleischwurst 650g;359;650g (1 kg = 5,52 €)
 2023-11-12;8111262;ja!;ja! Forellenfilet natur 125g;279;125g (1 kg = 22,32 €)
@@ -500,7 +499,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-12;2063281;ja!;ja! Thunfischfilets in Sonnenblumenöl 140g;149;140g (1 kg = 10,64 €)
 2023-11-12;2063277;ja!;ja! Thunfischfilets in eigenem Saft geschnitten 150g;149;150g (1 kg = 9,93 €)
 2023-11-12;8055493;ja!;ja! Tilsiter in Scheiben 400g;279;400g (1 kg = 6,98 €)
-2023-11-12;5499259;ja!;ja! Tissue-Toilettenpapier 3-lagig 10x200 Blatt;359;10x200 Stück
 2023-11-12;3280994;ja!;ja! Tomate-Basilikum Pasta-Sauce 400g;159;400ml (1 l = 3,98 €)
 2023-11-12;973336;ja!;ja! Tomaten fein gehackt in Tomatensaft 400g;79;400g (1 kg = 1,98 €)
 2023-11-12;5636442;ja!;ja! Tomaten passiert 500g;79;500g (1 kg = 1,58 €)
@@ -570,8 +568,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-12;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;159;1l
 2023-11-12;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2023-11-12;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2023-11-12;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-11-12;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2023-11-12;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-11-12;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-11-12;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-11-12;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -908,8 +906,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-12;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;599;500ml (1 l = 11,98 €)
 2023-11-12;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2023-11-12;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;199;1l
-2023-11-12;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-11-12;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2023-11-12;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-11-12;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2023-11-12;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;469;475g (1 kg = 9,87 €)
 2023-11-12;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1221,7 +1219,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-12;8338209;REWE Bio;REWE Bio Cappelletti Kürbis 250g;219;250g (1 kg = 8,76 €)
 2023-11-12;278145;REWE Bio;REWE Bio Cappelletti Spinat-Ricotta 250g;219;250g (1 kg = 8,76 €)
 2023-11-12;3212382;REWE Bio;REWE Bio Cashew Cranberry Mix 250g;359;250g (1 kg = 14,36 €)
-2023-11-12;39464;REWE Bio;REWE Bio Cashewkerne 250g;385;250g (1 kg = 15,40 €)
 2023-11-12;8764037;REWE Bio;REWE Bio Cashewkerne Salz & Pfeffer geröstet 125g;269;125g (1 kg = 21,52 €)
 2023-11-12;1947712;REWE Bio;REWE Bio Cassis Sirup 0,5l;299;0,50l (1 l = 5,98 €)
 2023-11-12;8312738;REWE Bio;REWE Bio Champignons braun 250g;249;250g (1 kg = 9,96 €)
@@ -1534,7 +1531,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-12;1287122;REWE Bio;REWE Bio Schweinefilet 260g;777;1 Stück ca. 260 g (1 kg = 29,90 €)
 2023-11-12;1409704;REWE Bio;REWE Bio Selleriesalat 190g;99;190g (1 kg = 5,21 €)
 2023-11-12;7923194;REWE Bio;REWE Bio Sesamöl Nativ 250ml;399;250ml (1 l = 15,96 €)
-2023-11-12;8354670;REWE Bio;REWE Bio Skyr Natur 400g;139;400g (1 kg = 3,48 €)
 2023-11-12;8341536;REWE Bio;REWE Bio Soja-Sauce;299;250ml (1 l = 11,96 €)
 2023-11-12;8420409;REWE Bio;REWE Bio Sonnenblumenkerne 500g;199;500g (1 kg = 3,98 €)
 2023-11-12;201433;REWE Bio;REWE Bio Sonnenblumenöl nativ 500ml;169;500ml (1 l = 3,38 €)
