@@ -160,11 +160,15 @@ if __name__ == '__main__':
                                  'USA', 'Afrika', 'Mittlerer Osten', 'Sonstige']]
 
         # add one month to date and create string for chart notes
+        # old date fix
+        # df_lng_new.set_index('Datum', inplace=True)
+        # lngdate = df_lng_new['USA'].replace(r'^\s*$', np.nan, regex=True).last_valid_index()  # replace empty strings and check last non NaN value
+        # lngdate = pd.to_datetime(lngdate, format='%m-%Y') + pd.DateOffset(months=1)
+        df_lng_new['Datum'] = pd.to_datetime(
+            df_lng_new['Datum'], errors='coerce')
+        lngdate = df_lng_new['Datum'].max() + pd.DateOffset(months=1)
+        df_lng_new['Datum'].replace({None: lngdate}, inplace=True)
         df_lng_new.set_index('Datum', inplace=True)
-        lngdate = df_lng_new['USA'].replace(
-            r'^\s*$', np.nan, regex=True).last_valid_index()  # replace empty strings and check last non NaN value
-        lngdate = pd.to_datetime(
-            lngdate, format='%m-%Y') + pd.DateOffset(months=1)
         month_str = lngdate.strftime('%-d. %-m. %Y')
         notes_chart_lng = '¹ USA mit Trinidad und Tobago. Der grösste Exporteur im Mittleren Osten ist Katar; in Afrika exportieren Nigeria und Algerien am meisten.<br>Stand: ' + month_str
 
