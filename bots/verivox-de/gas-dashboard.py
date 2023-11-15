@@ -31,7 +31,7 @@ if __name__ == '__main__':
             './data/smard_percentage.csv', encoding='utf-8', index_col='Datum')
         # df_usage = pd.read_csv('./data/gasverbrauch.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Normaler Verbrauch¹', 'Aktuell'])
         df_lng = pd.read_csv(
-            './data/german-imports.tsv', sep='\t', encoding='utf-8', index_col='.')
+            './data/german-imports.tsv', sep='\t', encoding='utf-8', index_col='Datum')
         df_super = pd.read_csv('./data/node_super.csv', encoding='utf-8',
                                usecols=['meldedatum', 'Mittlerer Preis'], index_col='meldedatum')
         df_imports = pd.read_csv(
