@@ -408,8 +408,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-15;7856511;ja!;ja! Rinder- Rumpsteak ca. 250g;500;1 Stück ca. 250 g (1 kg = 19,99 €)
 2023-11-15;7978794;ja!;ja! Rinder-Hackfleisch 500g;479;500g (1 kg = 9,58 €)
 2023-11-15;8965768;ja!;ja! Rinderrouladen 500g;699;500g (1 kg = 13,98 €)
-2023-11-15;8626135;ja!;ja! Rindfleisch 500g;579;500g (1 kg = 11,58 €)
 2023-11-15;8508714;ja!;ja! Rindfleisch 500g;649;500g (1 kg = 12,98 €)
+2023-11-15;8626135;ja!;ja! Rindfleisch 500g;579;500g (1 kg = 11,58 €)
 2023-11-15;2432136;ja!;ja! Rindfleisch-Hamburger 400g;399;400g (1 kg = 9,98 €)
 2023-11-15;5350450;ja!;ja! Roggenvollkornbrot 500g;119;500g (1 kg = 2,38 €)
 2023-11-15;7125770;ja!;ja! Rosenkohl tiefgefroren 1kg;219;1000g
@@ -855,6 +855,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-15;8836416;REWE Beste Wahl;REWE Beste Wahl Kokos Tafel vegan 80g;149;80g (1 kg = 18,63 €)
 2023-11-15;3013023;REWE Beste Wahl;REWE Beste Wahl Kokosblumenerde 10l;229;0,60kg (1 kg = 3,82 €)
 2023-11-15;792132;REWE Beste Wahl;REWE Beste Wahl Kokosmilch cremig 400ml;149;400ml (1 l = 3,73 €)
+2023-11-15;7018956;REWE Beste Wahl;REWE Beste Wahl Kokosmilch fettreduziert 400ml;149;400ml (1 l = 3,73 €)
 2023-11-15;8413767;REWE Beste Wahl;REWE Beste Wahl Koriander gemahlen 32g;199;32g (1 kg = 62,19 €)
 2023-11-15;994604;REWE Beste Wahl;REWE Beste Wahl Korinthen 250g;159;250g (1 kg = 6,36 €)
 2023-11-15;277678;REWE Beste Wahl;REWE Beste Wahl Krautsalat mit Paprika 400g;169;400g (1 kg = 4,23 €)
