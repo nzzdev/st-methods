@@ -179,7 +179,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-21;7937888;ja!;ja! Frische Eier aus Bodenhaltung 10 Stück;199;10 Stück
 2023-11-21;2411378;ja!;ja! Frische Eierspätzle 500g;159;500g (1 kg = 3,18 €)
 2023-11-21;139976;ja!;ja! Frische Hähnchenschenkel ca. 1130g;503;1 Stück ca. 1130 g (1 kg = 4,45 €)
-2023-11-21;5711606;ja!;ja! Frische Putenbrust ca. 800g;719;1 Stück ca. 800 g (1 kg = 8,99 €)
 2023-11-21;2865690;ja!;ja! Frische Vollmilch 3,5% 1l;99;1l
 2023-11-21;2865662;ja!;ja! Frische fettarme Milch 1,5% 1l;95;1l
 2023-11-21;8656774;ja!;ja! Frischeiwaffeln 250g;139;250g (1 kg = 5,56 €)
@@ -516,7 +515,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-21;7794987;ja!;ja! Stumpenkerze 110mm weiß;179;1 Stück
 2023-11-21;1008597;ja!;ja! Sultaninen 250g;99;250g (1 kg = 3,96 €)
 2023-11-21;7073947;ja!;ja! Super Sweet Gemüsemais 285g;99;285g (1 kg = 3,47 €)
-2023-11-21;9689079;ja!;ja! Super-Soft Toilettenpapier 4-lagig 10x160 Blatt;395;NaN
 2023-11-21;2290213;ja!;ja! Suppengemüse 1kg;159;1000g
 2023-11-21;7772289;ja!;ja! Süßstoff 300ml;89;300ml (1 l = 2,97 €)
 2023-11-21;9703764;ja!;ja! Süßstoff Tabletten 1200 Stück;119;1200 Stück
@@ -919,6 +917,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-21;8593925;REWE Beste Wahl;REWE Beste Wahl Milder Multi 0,33l;65;0,33l (1 l = 1,97 €)
 2023-11-21;8640590;REWE Beste Wahl;REWE Beste Wahl Milder Multi 1l;139;1l
 2023-11-21;336931;REWE Beste Wahl;REWE Beste Wahl Mildes Weinsauerkraut 770g;129;770g (1 kg = 1,68 €)
+2023-11-21;2181429;REWE Beste Wahl;REWE Beste Wahl Mineralwasser Classic 6x0,5l;174;6x0,50l (1 l = 0,58 €)
 2023-11-21;2181377;REWE Beste Wahl;REWE Beste Wahl Mineralwasser Classic 6x1l;234;6x1l (1 l = 0,39 €)
 2023-11-21;2181443;REWE Beste Wahl;REWE Beste Wahl Mineralwasser Medium 6x0,5l;174;6x0,50l (1 l = 0,58 €)
 2023-11-21;2181389;REWE Beste Wahl;REWE Beste Wahl Mineralwasser Medium 6x1l;234;6x1l (1 l = 0,39 €)
