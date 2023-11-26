@@ -53,7 +53,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-26;8540029;ja!;ja! Bratkarotffeln mit Speck und Zwiebeln 400g;149;400g (1 kg = 3,73 €)
 2023-11-26;7933793;ja!;ja! Bratkartoffeln mit Zwiebel 400g;149;400g (1 kg = 3,73 €)
 2023-11-26;8601123;ja!;ja! Brenn-Spiritus 1l;299;1l
-2023-11-26;7156260;ja!;ja! Brie 200g;199;200g (1 kg = 9,95 €)
 2023-11-26;8290217;ja!;ja! Briefumschläge DIN C6 100 Stück Ohne Fenster;399;100 Stück
 2023-11-26;8289473;ja!;ja! Briefumschläge DIN lang selbstklebend ohne Fenster 50 Stück;239;50 Stück
 2023-11-26;8088095;ja!;ja! Briefumschläge mit Fenster DIN lang 50 Stück;239;50 Stück
@@ -243,7 +242,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-26;8371596;ja!;ja! Hähnchen Filetstreifen 250g;249;250g (1 kg = 9,96 €)
 2023-11-26;8540960;ja!;ja! Hähnchen Flügel ohne Spitze 480g;243;1 Stück ca. 480 g (1 kg = 5,07 €)
 2023-11-26;8361755;ja!;ja! Hähnchen Mini Schnitzel 500g;379;500g (1 kg = 7,58 €)
-2023-11-26;8611852;ja!;ja! Hähnchen Schnitzel XXL 500g;429;500g (1 kg = 8,58 €)
 2023-11-26;2424441;ja!;ja! Hähnchen süß-sauer mit Langkornreis 400g;249;400g (1 kg = 6,23 €)
 2023-11-26;8468236;ja!;ja! Hähnchen-Brustfilet 600g;599;600g (1 kg = 9,98 €)
 2023-11-26;7980552;ja!;ja! Hähnchen-Innenbrustfilet 400g;489;400g (1 kg = 12,23 €)
@@ -310,7 +308,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-26;1007001;ja!;ja! Lasagne Bolognese 1kg;429;1kg
 2023-11-26;2269278;ja!;ja! Lasagne Bolognese 400g;189;400g (1 kg = 4,73 €)
 2023-11-26;8484122;ja!;ja! Lasagne Gemüse 400g;189;400g (1 kg = 4,73 €)
-2023-11-26;2464033;ja!;ja! Latte Espresso 250ml;69;250ml (1 l = 2,76 €)
 2023-11-26;2462970;ja!;ja! Latte Macchiato 250ml;69;250ml (1 l = 2,76 €)
 2023-11-26;7722035;ja!;ja! Latte Macchiato weniger süß 250ml;69;250ml (1 l = 2,76 €)
 2023-11-26;2888923;ja!;ja! Leberwurst fein 175g;139;175g (1 kg = 7,94 €)
@@ -596,8 +593,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-26;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2023-11-26;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2023-11-26;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;129;450g (1 kg = 2,87 €)
-2023-11-26;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-11-26;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2023-11-26;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2023-11-26;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2023-11-26;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2023-11-26;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
