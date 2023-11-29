@@ -77,6 +77,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-29;8926272;ja!;ja! Cheddar in Scheiben 175g;219;175g (1 kg = 12,51 €)
 2023-11-29;8848649;ja!;ja! Cheeseburger Schwein 2 Stück 320g;229;320g (1 kg = 7,16 €)
 2023-11-29;8614834;ja!;ja! Chicken Burger 400g;329;400g (1 kg = 8,23 €)
+2023-11-29;8370536;ja!;ja! Chicken Nuggets 1000g;699;1000g
 2023-11-29;8374622;ja!;ja! Chicken Nuggets 300g;229;300g (1 kg = 7,63 €)
 2023-11-29;8521365;ja!;ja! Chicken Wings Hot Style 750g;379;750g (1 kg = 5,05 €)
 2023-11-29;2270557;ja!;ja! Chili con Carne mit Schweinefleisch 800g;249;800g (1 kg = 3,11 €)
@@ -158,6 +159,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-29;754434;ja!;ja! Fettarmer Joghurt mild 1,5% Fett 500g;75;500g (1 kg = 1,50 €)
 2023-11-29;588221;ja!;ja! Feuchte Allzwecktücher Limonen-Frische 80 Stück;199;80 Stück
 2023-11-29;8379864;ja!;ja! Feuchtes Toilettenpapier Kamille 2x70 Stück;125;2x70 Stück
+2023-11-29;6540147;ja!;ja! Fischstäbchen 450g, 15 Stück;279;450g (1 kg = 6,20 €)
 2023-11-29;2270571;ja!;ja! Fleischbällchen-Topf mit Tomaten & Nudeln 800g;299;800g (1 kg = 3,74 €)
 2023-11-29;7009739;ja!;ja! Fleischwurst 650g;359;650g (1 kg = 5,52 €)
 2023-11-29;8111262;ja!;ja! Forellenfilet natur 125g;279;125g (1 kg = 22,32 €)
@@ -933,6 +935,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-11-29;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2023-11-29;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2023-11-29;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
+2023-11-29;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;469;475g (1 kg = 9,87 €)
 2023-11-29;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
 2023-11-29;8005928;REWE Beste Wahl;REWE Beste Wahl Paprika Edelsüß gemahlen 50g;199;50g (1 kg = 39,80 €)
 2023-11-29;8560198;REWE Beste Wahl;REWE Beste Wahl Paprika edelsüß gemahlen 39g;199;39g (1 kg = 51,03 €)
