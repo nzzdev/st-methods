@@ -84,10 +84,10 @@ if (date >= pd.to_datetime('2023-10-01')) & (date <= pd.to_datetime('2023-10-31'
 
 # https://www.theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5667240
 
-if (date >= pd.to_datetime('2023-11-01')) & (date <= pd.to_datetime('2023-11-30')):
+if (date >= pd.to_datetime('2023-11-01')) & (date <= pd.to_datetime('2023-11-29')):
     market_id = "5667240"
 
-if (date >= pd.to_datetime('2023-12-01')) & (date <= pd.to_datetime('2023-12-31')):
+if (date >= pd.to_datetime('2023-11-30')) & (date <= pd.to_datetime('2023-12-31')):
     market_id = "5696271"
 
 
