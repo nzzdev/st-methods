@@ -697,7 +697,7 @@ if __name__ == '__main__':
         # Preismonitor #
         ################
 
-        past = today - timedelta(days=182)
+        past = today - timedelta(days=365)
         df_t = pd.read_csv('./data/' + today.strftime('%Y-%m-%d') +
                            '-rewe-pickup.csv', sep=';', on_bad_lines='skip')
         df_t = df_t[df_t['Marke'] == 'ja!']
