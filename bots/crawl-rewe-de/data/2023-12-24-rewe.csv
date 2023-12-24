@@ -437,8 +437,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-12-24;7856511;ja!;ja! Rinder- Rumpsteak ca. 250g;500;1 Stück ca. 250 g (1 kg = 19,99 €)
 2023-12-24;7978794;ja!;ja! Rinder-Hackfleisch 500g;479;500g (1 kg = 9,58 €)
 2023-12-24;8965768;ja!;ja! Rinderrouladen 500g;699;500g (1 kg = 13,98 €)
-2023-12-24;8626135;ja!;ja! Rindfleisch 500g;579;500g (1 kg = 11,58 €)
 2023-12-24;8508714;ja!;ja! Rindfleisch 500g;649;500g (1 kg = 12,98 €)
+2023-12-24;8626135;ja!;ja! Rindfleisch 500g;579;500g (1 kg = 11,58 €)
 2023-12-24;2432136;ja!;ja! Rindfleisch-Hamburger 400g;379;400g (1 kg = 9,48 €)
 2023-12-24;5350450;ja!;ja! Roggenvollkornbrot 500g;119;500g (1 kg = 2,38 €)
 2023-12-24;7125770;ja!;ja! Rosenkohl tiefgefroren 1kg;219;1000g
@@ -520,7 +520,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2023-12-24;8300853;ja!;ja! Spülbürste rund 1 Stück;79;1 Stück
 2023-12-24;8060267;ja!;ja! Spülmittel Acai Blaubeere 500ml;95;500ml (1 l = 1,90 €)
 2023-12-24;8336275;ja!;ja! Spülmittel Sweet Orange 500ml;95;500ml (1 l = 1,90 €)
-2023-12-24;7916381;ja!;ja! Steinofen Baguette 250g;119;250g (1 kg = 4,76 €)
 2023-12-24;8378374;ja!;ja! Steinofen Pizza 4 Formaggi 2X340g;359;2x340g (1 kg = 5,28 €)
 2023-12-24;8089206;ja!;ja! Steinofen Pizza Margherita 3x300g;299;3x300g (1 kg = 3,32 €)
 2023-12-24;8021080;ja!;ja! Steinofen Pizza Thunfisch 2x355g;359;2x355g (1 kg = 5,06 €)
