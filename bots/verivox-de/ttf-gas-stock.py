@@ -56,12 +56,12 @@ if __name__ == '__main__':
         df_intra.set_index('Datum', inplace=True)
 
         # save current price as csv for dashboard
-        df_intra_today = df.copy()
+        df_intra_today = df_intra.copy()
         #df_intra_today.index = pd.to_datetime(df_intra_today.index).strftime('%Y-%m-%d')
         df_intra_today = df_intra_today.rename(
             columns={df_intra_today.columns[0]: 'Gas-Börsenpreis'})
         df_intra_today = pd.concat(
-            [df_intra_today.tail(2)])
+            [df_intra_today.head(1), df_intra_today.tail(1)])
         df_intra_today.to_csv('./data/ttf-gas-stock-dash.csv')
 
         # calculate intraday mean and drop everything except last row
