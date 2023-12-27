@@ -18,3 +18,4 @@ bots/verivox-de/data/backup_2022/gasverbrauch-unbereinigt.csv
 bots/verivox-de/data/gas-strom-bundesschnitt-old.tsv
 bots/verivox-de/data/strom-strom-bundesschnitt-2022-orig.csv
 bots/verivox-de/data/gas-strom-bundesschnitt-2022-orig.csv
+bots/verivox-de/imports-countries-test.py
