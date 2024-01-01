@@ -35,6 +35,12 @@ if __name__ == '__main__':
         dold = datetime.today() - timedelta(7)
         dweek = (d.isocalendar().week) - 1
         dweek_old = (dold.isocalendar().week) - 1
+        # temp fix for 2024
+        if dweek == 0:
+            dweek = (d.isocalendar().week)
+            dweek_old = (dold.isocalendar().week)
+        dweek = '{:02d}'.format(dweek)
+        dweek_old = '{:02d}'.format(dweek_old)
         dyear = (d.isocalendar().year)
         dyear_old = (dold.isocalendar().year)
         dnotes = d - timedelta(days=d.weekday())  # last monday

@@ -43,7 +43,7 @@ if __name__ == '__main__':
         full_script_new = None
         full_script_lng = None
 
-        # get all json data from infogram graph for 2023
+        # get all json data from infogram graph for 2024
         for i in range(len(snew)):
             if snew[i].contents:
                 if 'window.infographicData' in snew[i].contents[0]:
@@ -56,10 +56,10 @@ if __name__ == '__main__':
         full_data_new = json.loads(full_script_new)
 
         """
-        # get charts for each country/type for 2023
+        # get charts for each country/type for 2024
         df_list_new = list()
         for data in full_data_new['elements'][2]['data']:
-            headers = ['KW', 'Minimum', 'Maximum', '2021', '2022', '2023']
+            headers = ['KW', 'Minimum', 'Maximum', '2022', '2023', '2024']
             del data[0]  # delete headers
             dfnew = pd.DataFrame(data, columns=headers)
             df_list_new.append(dfnew)
