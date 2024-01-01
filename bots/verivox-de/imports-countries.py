@@ -16,8 +16,7 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # Datawrapper API key
-        #dw_key = os.environ['DATAWRAPPER_API']
-        dw_key = '345344334'
+        dw_key = os.environ['DATAWRAPPER_API']
         dw = Datawrapper(access_token=dw_key)
         dw_id = 'R05oB'
 
