@@ -16,8 +16,7 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         # Datawrapper API key
-        #dw_key = os.environ['DATAWRAPPER_API']
-        dw_key = 'ewrwrwe'
+        dw_key = os.environ['DATAWRAPPER_API']
         dw = Datawrapper(access_token=dw_key)
         dw_id = 'R05oB'
 
@@ -42,8 +41,6 @@ if __name__ == '__main__':
         dweek_old = '{:02d}'.format(dweek_old)
         dnotes = d - timedelta(days=d.weekday())  # last monday
         dnotes = dnotes.strftime('%-d. %-m. %Y')
-        print(dweek)
-        print(dweek_old)
 
         # on Mondays wait for proper weekly data from Bundesnetzagentur till 8 GMT (imports in smard-sources.py)
         if not (d.today().weekday() == 0 and d.hour < 7):
