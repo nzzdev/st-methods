@@ -266,7 +266,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-08;6387918;ja!;ja! Jagdwurst 200g;135;200g (1 kg = 6,75 €)
 2024-01-08;8350407;ja!;ja! Jasmin Reis 1kg;269;1000g
 2024-01-08;8601073;ja!;ja! Joghurt Dressing 250ml;99;250ml (1 l = 3,96 €)
-2024-01-08;754432;ja!;ja! Joghurt mild 0,1% 500g;79;500g (1 kg = 1,58 €)
 2024-01-08;8324448;ja!;ja! Joghurt mild 3,5 % Fett 500g;89;500g (1 kg = 1,78 €)
 2024-01-08;7683149;ja!;ja! Joghurt-Erzeugnis griechischer Art 2% 1kg;199;1kg
 2024-01-08;7083761;ja!;ja! Junge Erbsen 1kg;219;1000g
@@ -765,6 +764,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-08;1076737;REWE Beste Wahl;REWE Beste Wahl Gourmetbrötchen 480g;279;480g (1 kg = 5,81 €)
 2024-01-08;8377443;REWE Beste Wahl;REWE Beste Wahl Granatapfelkerne 300g;219;300g (1 kg = 7,30 €)
 2024-01-08;1302379;REWE Beste Wahl;REWE Beste Wahl Griechische Pfefferonen scharf 125g;109;125g (1 kg = 8,72 €)
+2024-01-08;2109064;REWE Beste Wahl;REWE Beste Wahl Grießpudding Zimt 150g;55;150g (1 kg = 3,67 €)
+2024-01-08;2109063;REWE Beste Wahl;REWE Beste Wahl Grießpudding pur 150g;55;150g (1 kg = 3,67 €)
 2024-01-08;371368;REWE Beste Wahl;REWE Beste Wahl Grüne Bohnen 280g;159;280g (1 kg = 5,68 €)
 2024-01-08;1134690;REWE Beste Wahl;REWE Beste Wahl Grüne Oliven gefüllt mit Mandeln 160g;229;160g (1 kg = 14,31 €)
 2024-01-08;1302314;REWE Beste Wahl;REWE Beste Wahl Grüne Oliven ohne Stein 135g;179;135g (1 kg = 13,26 €)
@@ -1234,7 +1235,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-08;8760129;REWE Bio;REWE Bio Bohnenkraut gerebelt 25g;199;25g (1 kg = 79,60 €)
 2024-01-08;8739580;REWE Bio;REWE Bio Bonbons Ingwer & Honig 75g;119;75g (1 kg = 15,87 €)
 2024-01-08;7840879;REWE Bio;REWE Bio Bonbons Orange & Kurkuma 75g;119;75g (1 kg = 15,87 €)
-2024-01-08;8046482;REWE Bio;REWE Bio Bourbon Vanille Zucker 8g;349;4x8g (1 kg = 109,06 €)
 2024-01-08;8885824;REWE Bio;REWE Bio Brat- und Grilltaler Natur 240g;299;240g (1 kg = 12,46 €)
 2024-01-08;1287110;REWE Bio;REWE Bio Bratwurst grob 300g;599;300g (1 kg = 19,97 €)
 2024-01-08;8615186;REWE Bio;REWE Bio Braune Linsen 260g;139;260g (1 kg = 5,35 €)
