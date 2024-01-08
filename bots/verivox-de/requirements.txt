@@ -19,6 +19,7 @@ urllib3==1.26.7
 user-agent==0.1.10
 virtualenv==20.4.3
 virtualenv-clone==0.5.4
+yfinance>=0.2.35
 
 # requirements for snowflake-connector-python
 asn1crypto<2.0.0,>0.24.0

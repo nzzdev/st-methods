@@ -2,6 +2,7 @@ import json
 import pandas as pd
 import os
 from user_agent import generate_user_agent
+import yfinance as yf
 
 if __name__ == '__main__':
     try:
@@ -11,23 +12,22 @@ if __name__ == '__main__':
         from helpers import *
         from market_ids import *
 
-        """
-        # download stock market data
-        tickers = ["TTF=F"]
-        df = yf.download(tickers,  start="2019-01-01", end=date.today())
-
-        df = df['Close']['TTF=F'][df.index >=
-                                      '2021-03-01'].to_frame().dropna()
-        df.rename(columns={'TTF=F': 'Kosten'}, inplace=True)
-        df = df[['Kosten']]
-        """
-
-        # get data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
+        # headers for ICE data
         fheaders = {
             'user-agent': generate_user_agent(),
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache'
         }
+
+        # download historical data from Yahoo
+        df = yf.download('TTF=F', period='6y')
+        df = df['Close'][df.index >= '2020-12-31'].to_frame().dropna()
+        df.rename(columns={'Close': 'Kosten'}, inplace=True)
+        df.index.rename('Datum', inplace=True)
+        df['Kosten'] = df['Kosten'].round(0).astype(int)
+
+        # old historical ICE data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
+        """
         url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + \
             market_id + '&historicalSpan=3'
         resp = download_data(url, headers=fheaders)
@@ -42,6 +42,7 @@ if __name__ == '__main__':
 
         # round numbers
         df['Kosten'] = df['Kosten'].round(0).astype(int)
+        """
 
         # get latest intraday data
         url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=' + market_id
@@ -85,6 +86,8 @@ if __name__ == '__main__':
         df_intra['Kosten'] = df_intra['Kosten'].round(0).astype(int)
 
         # create final dataframe with historical and intraday data
+        # drop last pseudo historical value from Yahoo and replace with intraday data
+        df.drop(df.tail(1).index, inplace=True)
         df_full = pd.concat([df, df_intra])
 
         # dynamic chart title
