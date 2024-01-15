@@ -343,7 +343,7 @@ if __name__ == '__main__':
         timestamp_str_storage = pd.to_datetime(
             timestamp_str_storage).strftime('%-d. %-m.')
         timestamp_str_fossile = (pd.to_datetime(
-            df_fossile['date'].tail(2).item()) - timedelta(days=1)).strftime('KW %U')  # tail(2)=last week
+            df_fossile['date'].tail(1).item())).strftime('KW %U')
         timestamp_str_lng = df_lng['date'].tail(1).item()
         timestamp_str_lng = pd.to_datetime(
             timestamp_str_lng).strftime('%-d. %-m.')
@@ -447,7 +447,7 @@ if __name__ == '__main__':
         meta_gas['chartData'] = dict_gas
         meta_strom['chartData'] = []
         meta_fossile['chartData'] = []
-        #meta_imports['chartData'] = []
+        # meta_imports['chartData'] = []
         meta_importsshare['chartData'] = []
         # meta_usage['chartData'] = []
         meta_storage['chartData'] = []
