@@ -343,7 +343,7 @@ if __name__ == '__main__':
         timestamp_str_storage = pd.to_datetime(
             timestamp_str_storage).strftime('%-d. %-m.')
         timestamp_str_fossile = (pd.to_datetime(
-            df_fossile['date'].tail(1).item()) - timedelta(days=1)).strftime('KW %U')  # tail(2)=last week
+            df_fossile['date'].tail(2).item()) - timedelta(days=1)).strftime('KW %U')  # tail(2)=last week
         timestamp_str_lng = df_lng['date'].tail(1).item()
         timestamp_str_lng = pd.to_datetime(
             timestamp_str_lng).strftime('%-d. %-m.')
@@ -429,7 +429,7 @@ if __name__ == '__main__':
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_stromstock = {'indicatorTitle': 'Börsen-Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh am Spotmarkt, {acstock_time}', 'value': diff_acstock, 'valueLabel': f'{diff_acstock_str} Cent',
                            'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstock, 'chartType': 'line'}
-        meta_fossile = {'indicatorTitle': 'Fossiler Anteil', 'date': todaystr, 'indicatorSubtitle': f'an der Stromerzeugung in der {timestamp_str_imports}',
+        meta_fossile = {'indicatorTitle': 'Fossiler Anteil', 'date': todaystr, 'indicatorSubtitle': f'an der Stromerzeugung in der {timestamp_str_fossile}',
                         'value': diff_fossile, 'valueLabel': f'{diff_fossile_str} %', 'yAxisStart': fossile_y, 'yAxisLabels': fossile_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_fossile, 'chartType': 'area'}
         # meta_imports = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Import-Export-Saldo in der {timestamp_str_imports}', 'value': float(diff_imports), 'valueLabel': f'{diff_imports} GWh', 'yAxisStart': imports_y, 'yAxisLabels': imports_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_imports, 'chartType': 'line'}
         meta_importsshare = {'indicatorTitle': 'Strom-Importe', 'date': todaystr, 'indicatorSubtitle': f'Anteil am Stromverbrauch in der {timestamp_str_imports}',
