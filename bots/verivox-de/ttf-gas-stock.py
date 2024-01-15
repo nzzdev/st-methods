@@ -96,7 +96,7 @@ if __name__ == '__main__':
         # dynamic chart title
         title_mwh = df[df.columns[0]
                        ].iloc[-1].round(0).astype(int)  # old: df_full
-        title = f'Gas kostet an der Börse im Schnitt {title_mwh} Euro je MWh'
+        title = f'Gas kostet an der Börse {title_mwh} Euro je MWh'
 
         # create date for chart notes
         timecode = df.index[-1]  # old: df_full
