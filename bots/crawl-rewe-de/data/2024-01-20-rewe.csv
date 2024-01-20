@@ -430,7 +430,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-20;1312921;ja!;ja! Remoulade 500ml;179;500ml (1 l = 3,58 €)
 2024-01-20;2432152;ja!;ja! Rinder Minutensteak 320g;499;320g (1 kg = 15,59 €)
 2024-01-20;8661897;ja!;ja! Rinder- Hüftsteak ca. 250g;500;1 Stück ca. 250 g (1 kg = 19,98 €)
-2024-01-20;7856511;ja!;ja! Rinder- Rumpsteak ca. 250g;500;1 Stück ca. 250 g (1 kg = 19,99 €)
 2024-01-20;9030474;ja!;ja! Rindergulasch aus der Keule 500g;699;500g (1 kg = 13,98 €)
 2024-01-20;8965768;ja!;ja! Rinderrouladen 500g;699;500g (1 kg = 13,98 €)
 2024-01-20;8626135;ja!;ja! Rindfleisch 500g;649;500g (1 kg = 12,98 €)
@@ -952,8 +951,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-20;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;599;500ml (1 l = 11,98 €)
 2024-01-20;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2024-01-20;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-01-20;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2024-01-20;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
+2024-01-20;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2024-01-20;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2024-01-20;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-01-20;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
