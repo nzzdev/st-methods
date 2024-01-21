@@ -3,6 +3,7 @@ import pandas as pd
 import os
 from user_agent import generate_user_agent
 import yfinance as yf
+import numpy as np
 
 if __name__ == '__main__':
     try:
@@ -24,7 +25,32 @@ if __name__ == '__main__':
         df = df['Close'][df.index >= '2020-12-31'].to_frame().dropna()
         df.rename(columns={'Close': 'Kosten'}, inplace=True)
         df.index.rename('Datum', inplace=True)
+        df['Kosten'] = df['Kosten'].round(2).astype(float)
+
+        # create chart with comparison
+        dfold = pd.read_csv(
+            './data/ttf-gas-stock-historical.tsv', sep='\t', index_col=None)
+        dfold['Datum'] = pd.to_datetime(dfold['Datum'])
+        dfnew = dfold.merge(df, on='Datum', how='left')
+        dfnew = dfnew[['Datum', 'Kosten', '2023', '2022', 'Vorkrisenniveau²']]
+        dfnew = dfnew.rename(columns={'Kosten': '2024'})
+        dfnew.set_index('Datum', inplace=True)
+        dfnew['2024'] = dfnew['2024'].replace(
+            r'^\s*$', np.nan, regex=True)  # replace empty string with NaN
+        dfnew['2024'] = dfnew['2024'].interpolate(
+            method='linear', limit_direction='backward')  # for wrong dates
+
+        # round values further for normal line chart
         df['Kosten'] = df['Kosten'].round(0).astype(int)
+
+        # get weekdays for current year from Dutch stock market
+        """
+        #import pandas_market_calendars as mcal
+        xams = mcal.get_calendar('LSE')  # ICE US
+        early = xams.schedule(start_date='2024-01-01', end_date='2024-12-31')
+        df_tradingdays = pd.DataFrame(pd.DatetimeIndex(
+            mcal.date_range(early, frequency='1D')))
+        """
 
         """
         # START historical ICE data from theice.com/products/27996665/Dutch-TTF-Gas-Futures/data?marketId=5396828
@@ -65,7 +91,6 @@ if __name__ == '__main__':
         df_intra_today = pd.concat(
             [df_intra_today.tail(2)])
         df_intra_today.to_csv('./data/ttf-gas-stock-dash.csv')
-        print(df_intra_today)
 
         """
         # START hourly prices (not reliable)
@@ -102,6 +127,7 @@ if __name__ == '__main__':
         timecode = df.index[-1]  # old: df_full
         timecode_str = timecode.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat.<br>Stand: ' + timecode_str
+        notes_chart_new = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
         # convert DatetimeIndex
         #df_full.index = df_full.index.strftime('%Y-%m-%d')
@@ -109,6 +135,7 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd',
                      title=title, notes=notes_chart, data=df)  # old: df_full
-
+        update_chart(id='74063b3ff77f45a56472a5cc70bb2a93',
+                     notes=notes_chart_new, data=dfnew)
     except:
         raise
