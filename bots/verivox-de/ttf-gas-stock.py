@@ -39,6 +39,7 @@ if __name__ == '__main__':
             r'^\s*$', np.nan, regex=True)  # replace empty string with NaN
         dfnew['2024'] = dfnew['2024'].interpolate(
             method='linear', limit_direction='backward')  # for wrong dates
+        dfnew = dfnew.drop('2023', axis=1)
 
         # round values further for normal line chart
         df['Kosten'] = df['Kosten'].round(0).astype(int)
