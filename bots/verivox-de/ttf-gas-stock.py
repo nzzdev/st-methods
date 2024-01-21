@@ -136,6 +136,6 @@ if __name__ == '__main__':
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd',
                      title=title, notes=notes_chart, data=df)  # old: df_full
         update_chart(id='74063b3ff77f45a56472a5cc70bb2a93',
-                     notes=notes_chart_new, data=dfnew)
+                     title=title, notes=notes_chart_new, data=dfnew)
     except:
         raise
