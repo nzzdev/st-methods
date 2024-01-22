@@ -27,6 +27,24 @@ if __name__ == '__main__':
         df.index.rename('Datum', inplace=True)
         df['Kosten'] = df['Kosten'].round(2).astype(float)
 
+        # get latest intraday data from ICE (avoid errors with Yahoo Finance)
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=' + market_id
+        resp = download_data(url, headers=fheaders)
+        json_file = resp.text
+        full_data = json.loads(json_file)
+        df_intra_ice = pd.DataFrame(full_data['bars'], columns=[
+            'Datum', 'Intraday'])
+        df_intra_ice = df_intra_ice.tail(1)
+        df_intra_ice['Datum'] = pd.to_datetime(df_intra_ice['Datum'])
+        df_intra_ice['Datum'] = df_intra_ice['Datum'].dt.strftime('%Y-%m-%d')
+        df_intra_ice['Datum'] = pd.to_datetime(df_intra_ice['Datum'])
+        df_intra_ice.set_index('Datum', inplace=True)
+        df_intra_ice['Intraday'] = df_intra_ice['Intraday'].round(
+            2).astype(float)
+        df_intra_ice = df_intra_ice.rename(columns={'Intraday': 'Kosten'})
+        df = pd.concat([df, df_intra_ice], axis=0)  # add value from ICE
+        df = df[~df.index.duplicated(keep='last')]  # drop value from Yahoo
+
         # create chart with comparison
         dfold = pd.read_csv(
             './data/ttf-gas-stock-historical.tsv', sep='\t', index_col=None)
@@ -44,9 +62,9 @@ if __name__ == '__main__':
         # round values further for normal line chart
         df['Kosten'] = df['Kosten'].round(0).astype(int)
 
-        # get weekdays for current year from Dutch stock market
         """
-        #import pandas_market_calendars as mcal
+        # get weekdays for current year from Dutch stock market
+        # import pandas_market_calendars as mcal
         xams = mcal.get_calendar('LSE')  # ICE US
         early = xams.schedule(start_date='2024-01-01', end_date='2024-12-31')
         df_tradingdays = pd.DataFrame(pd.DatetimeIndex(
@@ -70,18 +88,6 @@ if __name__ == '__main__':
         # round numbers
         df['Kosten'] = df['Kosten'].round(0).astype(int)
         # END  old historical ICE data
-
-        # get latest intraday data
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=' + market_id
-        resp = download_data(url, headers=fheaders)
-        json_file = resp.text
-        full_data = json.loads(json_file)
-
-        # create dataframe and format date column
-        df_intra = pd.DataFrame(full_data['bars'], columns=[
-                                'Datum', 'Intraday'])
-        df_intra['Datum'] = pd.to_datetime(df_intra['Datum'])
-        df_intra.set_index('Datum', inplace=True)
         """
 
         # save current price as csv for dashboard
@@ -129,9 +135,6 @@ if __name__ == '__main__':
         timecode_str = timecode.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat.<br>Stand: ' + timecode_str
         notes_chart_new = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
-
-        print(title_mwh)
-        print(df_intra_today)
 
         # convert DatetimeIndex
         #df_full.index = df_full.index.strftime('%Y-%m-%d')
