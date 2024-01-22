@@ -21,7 +21,7 @@ if __name__ == '__main__':
         }
 
         # download historical data from Yahoo
-        df = yf.download('TTF=F', period='6y')
+        df = yf.download('TTF=F', period='5y')
         df = df['Close'][df.index >= '2020-12-31'].to_frame().dropna()
         df.rename(columns={'Close': 'Kosten'}, inplace=True)
         df.index.rename('Datum', inplace=True)
