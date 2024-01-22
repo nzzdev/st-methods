@@ -39,7 +39,8 @@ if __name__ == '__main__':
         dyear_old = (dold.isocalendar().year)
         dweek = '{:02d}'.format(dweek)
         dweek_old = '{:02d}'.format(dweek_old)
-        dnotes = d - timedelta(days=d.weekday())  # last monday
+        dnotes = d + timedelta(days=d.weekday() +
+                               timedelta(weeks=1))  # last monday
         dnotes = dnotes.strftime('%-d. %-m. %Y')
 
         # on Mondays wait for proper weekly data from Bundesnetzagentur till 8 GMT (imports in smard-sources.py)
