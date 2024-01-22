@@ -1289,7 +1289,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-22;1438494;REWE Bio;REWE Bio Dill 50g;99;50g (1 kg = 19,80 €)
 2024-01-22;8060098;REWE Bio;REWE Bio Dinkel Doppelkeks 330g;195;330g (1 kg = 5,91 €)
 2024-01-22;7249413;REWE Bio;REWE Bio Dinkel Frischeiwaffel 165g;159;165g (1 kg = 9,64 €)
-2024-01-22;2846041;REWE Bio;REWE Bio Dinkel-Flakes 300g;239;300g (1 kg = 7,97 €)
 2024-01-22;3100603;REWE Bio;REWE Bio Dinkel-Vollkornmehl 1kg;159;1000g
 2024-01-22;7888159;REWE Bio;REWE Bio Dinkelbrot 400g;269;400g (1 kg = 6,73 €)
 2024-01-22;8860585;REWE Bio;REWE Bio Dinkelbrötchen 6 Stück 420g;249;420g (1 kg = 5,93 €)
@@ -1467,6 +1466,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-22;8890687;REWE Bio;REWE Bio Naturland Bergkäse 50% 200g;299;200g (1 kg = 14,95 €)
 2024-01-22;7811188;REWE Bio;REWE Bio Naturland Blütenhonig 500g;479;500g (1 kg = 9,58 €)
 2024-01-22;8757063;REWE Bio;REWE Bio Naturland Bunter Pfeffer Mühle 40g;259;40g (1 kg = 64,75 €)
+2024-01-22;7659374;REWE Bio;REWE Bio Naturland Cashewmus 250g;599;250g (1 kg = 23,96 €)
 2024-01-22;8766234;REWE Bio;REWE Bio Naturland Crème Fraîche 30% Fett 150g;99;150g (1 kg = 6,60 €)
 2024-01-22;8922978;REWE Bio;REWE Bio Naturland Dinkel Crunchy 500g;259;500g (1 kg = 5,18 €)
 2024-01-22;7682555;REWE Bio;REWE Bio Naturland Dinkel Früchte Müsli 500g;319;500g (1 kg = 6,38 €)
@@ -1591,6 +1591,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-22;1346548;REWE Bio;REWE Bio Schweine-Bauchscheiben;378;1 Stück ca. 200 g (1 kg = 18,90 €)
 2024-01-22;1287122;REWE Bio;REWE Bio Schweinefilet 260g;777;1 Stück ca. 260 g (1 kg = 29,90 €)
 2024-01-22;1409704;REWE Bio;REWE Bio Selleriesalat 190g;99;190g (1 kg = 5,21 €)
+2024-01-22;7996293;REWE Bio;REWE Bio Sesam ungeschält 500g;229;500g (1 kg = 4,58 €)
 2024-01-22;7923194;REWE Bio;REWE Bio Sesamöl Nativ 250ml;399;250ml (1 l = 15,96 €)
 2024-01-22;8354670;REWE Bio;REWE Bio Skyr Natur 400g;139;400g (1 kg = 3,48 €)
 2024-01-22;8341536;REWE Bio;REWE Bio Soja-Sauce;299;250ml (1 l = 11,96 €)
