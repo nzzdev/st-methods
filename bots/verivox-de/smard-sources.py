@@ -351,6 +351,8 @@ if __name__ == '__main__':
         q_date = df_spot.last_valid_index()
         notes_chart = '¹ Marktgebiet Deutschland/Luxemburg; gewichteter Day-Ahead-Preis des vortägigen Stromhandels.<br>Stand: ' + \
             q_date.strftime("%-d. %-m. %Y")
+        notes_chart_compare = '¹ Marktgebiet Deutschland/Luxemburg; gewichteter Day-Ahead-Preis des vortägigen Stromhandels.<br>² Durchschnitt 2018-2020.<br>Stand: ' + \
+            q_date.strftime("%-d. %-m. %Y")
 
         # drop unused dates
         #df_spot = df_spot[df_spot.any(1)]
@@ -359,6 +361,21 @@ if __name__ == '__main__':
         df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].astype(
             int)
 
+        # create dataframe for chart with crisis and pre-crisis level
+        df_spot_old = pd.read_csv(
+            './data/smard_spot_historical.tsv', sep='\t', index_col=None)
+        df_spot_old['Datum'] = pd.to_datetime(df_spot_old['Datum'])
+        year = datetime.now().year
+        df_spot_new = df_spot.copy()[df_spot.index >= f'{year}-01-01']
+        df_spot_new = df_spot_new.rename(
+            columns={f'Deutschland/Luxemburg [€/MWh] Originalauflösungen': f'{year}'})
+        df_spot_new = df_spot_new.reset_index()
+        df_spot_compare = df_spot_old.merge(
+            df_spot_new, on='Datum', how='left')  # int will be float due to NaN
+        df_spot_compare = df_spot_compare[[
+            'Datum', '2024', '2022', 'Vorkrisenniveau²']]
+        df_spot_compare.set_index('Datum', inplace=True)
+
         # dynamic chart title
         title_mwh = df_spot[df_spot.columns[0]].iloc[-1]
         title = f'Strom kostet an der Börse im Schnitt {title_mwh} Euro je MWh'
@@ -366,6 +383,9 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='90005812afc9964bbfe4f952f51d6a57',
                      title=title, notes=notes_chart, data=df_spot)
+        # run Q function
+        update_chart(id='cc0c892a4433991f1c77c35df8beaff3',
+                     title=title, notes=notes_chart_compare, data=df_spot_compare)
 
         ################
         # TRADE FRANCE #
