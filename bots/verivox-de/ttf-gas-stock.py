@@ -4,6 +4,7 @@ import os
 from user_agent import generate_user_agent
 import yfinance as yf
 import numpy as np
+from datetime import datetime
 
 if __name__ == '__main__':
     try:
@@ -26,6 +27,10 @@ if __name__ == '__main__':
         df.rename(columns={'Close': 'Kosten'}, inplace=True)
         df.index.rename('Datum', inplace=True)
         df['Kosten'] = df['Kosten'].round(2).astype(float)
+        # drop last buggy value from Yahoo if current day
+        today = datetime.today().strftime('%Y-%m-%d')
+        if today == df.index[-1].strftime('%Y-%m-%d'):
+            df.drop(df.tail(1).index, inplace=True)
 
         # get latest data from ICE (avoid errors with Yahoo Finance)
         url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + \
@@ -49,16 +54,18 @@ if __name__ == '__main__':
         # create chart with comparison
         dfold = pd.read_csv(
             './data/ttf-gas-stock-historical.tsv', sep='\t', index_col=None)
+        year = datetime.now().year
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
         dfnew = dfold.merge(df, on='Datum', how='left')
         dfnew = dfnew[['Datum', 'Kosten', '2023', '2022', 'Vorkrisenniveau²']]
-        dfnew = dfnew.rename(columns={'Kosten': '2024'})
+        dfnew = dfnew.rename(columns={'Kosten': f'{year}'})
         dfnew.set_index('Datum', inplace=True)
-        dfnew['2024'] = dfnew['2024'].replace(
+        dfnew[f'{year}'] = dfnew[f'{year}'].replace(
             r'^\s*$', np.nan, regex=True)  # replace empty string with NaN
-        dfnew['2024'] = dfnew['2024'].interpolate(
+        dfnew[f'{year}'] = dfnew[f'{year}'].interpolate(
             method='linear', limit_direction='backward')  # for wrong dates
         dfnew = dfnew.drop('2023', axis=1)
+        dfnew[f'{year}'] = dfnew[f'{year}'].fillna('')
 
         # round values further for normal line chart
         df['Kosten'] = df['Kosten'].round(0).astype(int)

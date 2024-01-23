@@ -373,8 +373,9 @@ if __name__ == '__main__':
         df_spot_compare = df_spot_old.merge(
             df_spot_new, on='Datum', how='left')  # int will be float due to NaN
         df_spot_compare = df_spot_compare[[
-            'Datum', '2024', '2022', 'Vorkrisenniveau²']]
+            'Datum', f'{year}', '2022', 'Vorkrisenniveau²']]
         df_spot_compare.set_index('Datum', inplace=True)
+        df_spot_compare[f'{year}'] = df_spot_compare[f'{year}'].fillna('')
 
         # dynamic chart title
         title_mwh = df_spot[df_spot.columns[0]].iloc[-1]
