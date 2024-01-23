@@ -44,6 +44,7 @@ if __name__ == '__main__':
             2).astype(float)
         df = pd.concat([df, df_ice], axis=0)  # add value from ICE
         df = df[~df.index.duplicated(keep='last')]  # drop value from Yahoo
+        df = df.sort_index()  # sort if older value is inserted due to wrong market ID
 
         # create chart with comparison
         dfold = pd.read_csv(
