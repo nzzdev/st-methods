@@ -27,7 +27,7 @@ if __name__ == '__main__':
         df.index.rename('Datum', inplace=True)
         df['Kosten'] = df['Kosten'].round(2).astype(float)
 
-        # get latest intraday data from ICE (avoid errors with Yahoo Finance)
+        # get latest data from ICE (avoid errors with Yahoo Finance)
         url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + \
             market_id + '&historicalSpan=1'
         resp = download_data(url, headers=fheaders)
