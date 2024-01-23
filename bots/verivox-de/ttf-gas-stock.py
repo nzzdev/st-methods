@@ -28,21 +28,21 @@ if __name__ == '__main__':
         df['Kosten'] = df['Kosten'].round(2).astype(float)
 
         # get latest intraday data from ICE (avoid errors with Yahoo Finance)
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=' + market_id
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + \
+            market_id + '&historicalSpan=1'
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
-        df_intra_ice = pd.DataFrame(full_data['bars'], columns=[
-            'Datum', 'Intraday'])
-        df_intra_ice = df_intra_ice.tail(1)
-        df_intra_ice['Datum'] = pd.to_datetime(df_intra_ice['Datum'])
-        df_intra_ice['Datum'] = df_intra_ice['Datum'].dt.strftime('%Y-%m-%d')
-        df_intra_ice['Datum'] = pd.to_datetime(df_intra_ice['Datum'])
-        df_intra_ice.set_index('Datum', inplace=True)
-        df_intra_ice['Intraday'] = df_intra_ice['Intraday'].round(
+        df_ice = pd.DataFrame(full_data['bars'], columns=[
+            'Datum', 'Kosten'])
+        df_ice = df_ice.tail(1)
+        df_ice['Datum'] = pd.to_datetime(df_ice['Datum'])
+        df_ice['Datum'] = df_ice['Datum'].dt.strftime('%Y-%m-%d')
+        df_ice['Datum'] = pd.to_datetime(df_ice['Datum'])
+        df_ice.set_index('Datum', inplace=True)
+        df_ice['Kosten'] = df_ice['Kosten'].round(
             2).astype(float)
-        df_intra_ice = df_intra_ice.rename(columns={'Intraday': 'Kosten'})
-        df = pd.concat([df, df_intra_ice], axis=0)  # add value from ICE
+        df = pd.concat([df, df_ice], axis=0)  # add value from ICE
         df = df[~df.index.duplicated(keep='last')]  # drop value from Yahoo
 
         # create chart with comparison
@@ -102,6 +102,17 @@ if __name__ == '__main__':
         """
         # START hourly prices (not reliable)
         # save current price as csv for dashboard
+        # get latest intraday data from ICE (avoid errors with Yahoo Finance)
+        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getIntradayChartDataAsJson=&marketId=' + market_id
+        resp = download_data(url, headers=fheaders)
+        json_file = resp.text
+        full_data = json.loads(json_file)
+        df_intra = pd.DataFrame(full_data['bars'], columns=[
+            'Datum', 'Intraday'])
+        df_intra = df_intra.tail(1)
+        df_intra['Datum'] = pd.to_datetime(df_intra['Datum'])
+        df_intra.set_index('Datum', inplace=True)
+
         df_intra_today = df_intra.copy()
         df_intra_today = df.copy()
         #df_intra_today.index = pd.to_datetime(df_intra_today.index).strftime('%Y-%m-%d')
