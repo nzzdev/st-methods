@@ -106,7 +106,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-25;8311334;ja!;ja! Criss Cross Pommes pikant gewürzt 600g;199;600g (1 kg = 3,32 €)
 2024-01-25;8444108;ja!;ja! Crème Fraîche Classic 30% Fett 200g;99;200g (1 kg = 4,95 €)
 2024-01-25;8645285;ja!;ja! Cuorino 225g;199;225g (1 kg = 8,84 €)
-2024-01-25;8074238;ja!;ja! Curly Fries pikant gewürzt 600g;199;600g (1 kg = 3,32 €)
 2024-01-25;8243243;ja!;ja! Delikatess Edelsalami mild geräuchert 150g;169;150g (1 kg = 11,27 €)
 2024-01-25;8327635;ja!;ja! Delikatess Heringssalat mit Roter Bete, Gurke und Apfel 250g;129;250g (1 kg = 5,16 €)
 2024-01-25;8049651;ja!;ja! Delikatess Mini Wiener Geflügel Würstchen 2x160g;269;2x160g (1 kg = 8,41 €)
@@ -613,8 +612,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-25;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2024-01-25;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2024-01-25;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;169;450g (1 kg = 3,76 €)
-2024-01-25;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-01-25;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2024-01-25;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-01-25;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-01-25;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2024-01-25;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1238,7 +1237,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-25;7294456;REWE Bio;REWE Bio Blattspinat 100g;189;100g (1 kg = 18,90 €)
 2024-01-25;871215;REWE Bio;REWE Bio Blattspinat 600g;239;600g (1 kg = 3,98 €)
 2024-01-25;7152588;REWE Bio;REWE Bio Blumenkohl 1 Stück;399;1 Stück
-2024-01-25;7226966;REWE Bio;REWE Bio Blütenhonig 350g;289;350g (1 kg = 8,26 €)
 2024-01-25;8760129;REWE Bio;REWE Bio Bohnenkraut gerebelt 25g;199;25g (1 kg = 79,60 €)
 2024-01-25;8739580;REWE Bio;REWE Bio Bonbons Ingwer & Honig 75g;119;75g (1 kg = 15,87 €)
 2024-01-25;7840879;REWE Bio;REWE Bio Bonbons Orange & Kurkuma 75g;119;75g (1 kg = 15,87 €)
@@ -1633,7 +1631,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-01-25;8962703;REWE Bio;REWE Bio Vollkornbaguette 300g;229;300g (1 kg = 7,63 €)
 2024-01-25;8758695;REWE Bio;REWE Bio Wacholderbeeren ganz 35g;199;35g (1 kg = 56,86 €)
 2024-01-25;7682644;REWE Bio;REWE Bio Wachsbrechbohnen 185g;99;185g (1 kg = 5,35 €)
-2024-01-25;8011859;REWE Bio;REWE Bio Walnusskerne 200g;299;200g (1 kg = 14,95 €)
 2024-01-25;8444009;REWE Bio;REWE Bio Weizen Landbrötchen 280g;119;250g (1 kg = 4,76 €)
 2024-01-25;3100598;REWE Bio;REWE Bio Weizen-Vollkornmehl 1kg;99;1000g
 2024-01-25;7621838;REWE Bio;REWE Bio Weizenmehl Type 1050 1kg;99;1000g
