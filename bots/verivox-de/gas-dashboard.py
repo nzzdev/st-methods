@@ -75,7 +75,7 @@ if __name__ == '__main__':
         # rename columns and remove dates before 2023-01-01
         df_gas_mean = df_gas_mean[(
             df_gas_mean.index.get_level_values(0) >= '2023-01-01')]
-        # df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2022-01-01')]
+        df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2023-01-01')]
         df_strom_mean = df_strom_mean[(
             df_strom_mean.index.get_level_values(0) >= '2023-01-01')]
         # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2022-01-01')]
