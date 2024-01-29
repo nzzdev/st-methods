@@ -179,10 +179,12 @@ if __name__ == '__main__':
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
-            # dfavg = dfavg.rolling(window=7).mean().dropna()  # 7-day mvg average
+            dfavg = dfavg.rolling(window=7).mean(
+            ).dropna()  # 7-day mvg average
             title_gas = dfavg['Gas'].iloc[-1].round(-1)
             title_ac = dfavg['Strom'].iloc[-1].round(-1)
-            title_chart = f'20 MWh Gas kosten {int(title_gas)} Euro im Jahr, 4 MWh Strom {int(title_ac)} Euro'
+            # title_chart = f'20 MWh Gas kosten {int(title_gas)} Euro im Jahr, 4 MWh Strom {int(title_ac)} Euro'
+            title_chart = f'Neukunden zahlen immer noch für Gas und Strom'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             # update chart with averages
@@ -195,10 +197,12 @@ if __name__ == '__main__':
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
             notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
                 str(time_str_notes)
-            # dfavg = dfavg.rolling(window=7).mean().dropna()  # 7-day mvg average
+            dfavg = dfavg.rolling(window=7).mean(
+            ).dropna()  # 7-day mvg average
             title_gas = dfavg['Gas'].iloc[-1].round(-1)
             title_ac = dfavg['Strom'].iloc[-1].round(-1)
-            title_chart = f'20 MWh Gas kosten {int(title_gas)} Euro im Jahr, 4 MWh Strom {int(title_ac)} Euro'
+            # title_chart = f'20 MWh Gas kosten {int(title_gas)} Euro im Jahr, 4 MWh Strom {int(title_ac)} Euro'
+            title_chart = f'Neukunden zahlen immer noch für Gas und Strom'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
