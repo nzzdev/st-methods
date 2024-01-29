@@ -75,7 +75,10 @@ if __name__ == '__main__':
         # rename columns and remove dates before 2023-01-01
         df_gas_mean = df_gas_mean[(
             df_gas_mean.index.get_level_values(0) >= '2023-01-01')]
-        df_gas = df_gas[(df_gas.index.get_level_values(0) >= '2023-01-01')]
+        # get last year and adjust time range
+        lasty = today - timedelta(days=365)
+        lasty = lasty.strftime('%Y-%m-%d')
+        df_gas = df_gas[(df_gas.index.get_level_values(0) >= f'{lasty}')]
         df_strom_mean = df_strom_mean[(
             df_strom_mean.index.get_level_values(0) >= '2023-01-01')]
         # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2022-01-01')]
@@ -393,7 +396,8 @@ if __name__ == '__main__':
         # RUS GAS rus_y = 0
         super_y = 1.6
         storage_ytick = [0, 25, 50, 75, 100]
-        gas_ytick = [0, 15, 30, 45]
+        # gas_ytick = [0, 15, 30, 45] # from January 2021
+        gas_ytick = [0, 5, 10, 15]  # from January 2021
         strom_ytick = [0, 20, 40, 60]
         ns_ytick = [0, 0.5, 1, 1.5]
         fossile_ytick = [20, 35, 50, 65]
