@@ -276,7 +276,7 @@ if __name__ == '__main__':
         modules = SPOT_MARKET
         try:
             df_spot = smard.requestSmardData(
-                modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=160815600000)  # 1608764400000 for 7-day avg
+                modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=1608764400000)  # 160815600000 for 14-day avg
 
             # check if data is corrupted
             errors = 0
@@ -284,7 +284,7 @@ if __name__ == '__main__':
                 sleep(2)
                 errors += 1
                 df_spot = smard.requestSmardData(
-                    modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=160815600000)  # 1608764400000 for 7-day avg
+                    modulIDs=modules, region="DE-LU", timestamp_from_in_milliseconds=1608764400000)  # 160815600000 for 14-day avg
             if ('Anfang' in df_spot.columns):
                 # fix wrong decimal
                 df_spot = df_spot.replace('-', '', regex=False)
@@ -330,7 +330,7 @@ if __name__ == '__main__':
                 # calculate daily mean and 7-day moving average
                 df_spot = df_spot.resample('D', on='Datum').mean()
                 df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'].rolling(
-                    window=14).mean().dropna()
+                    window=7).mean().dropna()
                 df_spot['Deutschland/Luxemburg [€/MWh] Originalauflösungen'] = df_spot[
                     'Deutschland/Luxemburg [€/MWh] Originalauflösungen'].round(0)
 
