@@ -13,20 +13,20 @@ jobs:
       run:
         working-directory: bots/crawl-rewe-de/
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install system dependencies
         run: |
           sudo apt-get update -y
           sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev language-pack-de
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "16"
       - name: Install node packages
         run: |
           npm install -g @nzz/q-cli
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10.x"
       - name: Get pip cache dir
@@ -34,7 +34,7 @@ jobs:
         run: |
           echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
       - name: Cache python packages
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
           key: ${{ runner.os }}-pip-${{ hashFiles('./bots/corona-charts-de/requirements.txt') }}
@@ -50,7 +50,7 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
-      - uses: stefanzweifel/git-auto-commit-action@v4
+      - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: '*.csv *-ja-*.json'
           commit_message: Upload csv with food prices
