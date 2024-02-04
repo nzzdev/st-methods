@@ -351,7 +351,7 @@ if __name__ == '__main__':
         q_date = df_spot.last_valid_index()
         notes_chart = '¹ Marktgebiet Deutschland/Luxemburg; gewichteter Day-Ahead-Preis des vortägigen Stromhandels.<br>Stand: ' + \
             q_date.strftime("%-d. %-m. %Y")
-        notes_chart_compare = '¹ Marktgebiet Deutschland/Luxemburg; gewichteter Day-Ahead-Preis des vortägigen Stromhandels.<br>² Durchschnitt 2018-2020.<br>Stand: ' + \
+        notes_chart_compare = '¹ Marktgebiet Deutschland/Luxemburg; gewichteter Day-Ahead-Preis des vortägigen Stromhandels.<br>² Durchschnitt 2019-2020.<br>Stand: ' + \
             q_date.strftime("%-d. %-m. %Y")
 
         # drop unused dates
