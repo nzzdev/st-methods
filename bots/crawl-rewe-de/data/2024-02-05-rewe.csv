@@ -344,6 +344,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-02-05;7011210;ja!;ja! Mandarin-Orangen 175g;109;175g (1 kg = 6,23 €)
 2024-02-05;2099961;ja!;ja! Mandel-Eis am Stiel 6x120ml;279;6x120ml (1 l = 3,88 €)
 2024-02-05;1008576;ja!;ja! Mandeln ganze Kerne 200g;229;200g (1 kg = 11,45 €)
+2024-02-05;1008584;ja!;ja! Mandeln gehackt 100g;99;100g (1 kg = 9,90 €)
 2024-02-05;1008588;ja!;ja! Mandeln gemahlen 200g;199;200g (1 kg = 9,95 €)
 2024-02-05;7799478;ja!;ja! Margherita Mini Pizza 360g;249;360g (1 kg = 6,92 €)
 2024-02-05;5883121;ja!;ja! Markenbutter mild gesäuert 250g;169;250g (1 kg = 6,76 €)
@@ -957,6 +958,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-02-05;133375;REWE Beste Wahl;REWE Beste Wahl Mirabellen mit Stein 385g;189;385g (1 kg = 4,91 €)
 2024-02-05;1032766;REWE Beste Wahl;REWE Beste Wahl Mixed Pickles 190g;139;190g (1 kg = 7,32 €)
 2024-02-05;8058516;REWE Beste Wahl;REWE Beste Wahl Mohn Fix Backfertige Mohnfüllung 250g;199;250g (1 kg = 7,96 €)
+2024-02-05;7807278;REWE Beste Wahl;REWE Beste Wahl Mohn gemahlen 250g;249;250g (1 kg = 9,96 €)
 2024-02-05;112226;REWE Beste Wahl;REWE Beste Wahl Mousse au Chocolat 75g;45;75g (1 kg = 6 €)
 2024-02-05;8412827;REWE Beste Wahl;REWE Beste Wahl Mozzarella 125g;119;125g (1 kg = 9,52 €)
 2024-02-05;678931;REWE Beste Wahl;REWE Beste Wahl Mungobohnenkeimlinge 175g;139;175g (1 kg = 7,94 €)
@@ -970,8 +972,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-02-05;7924590;REWE Beste Wahl;REWE Beste Wahl Olivenmix in würziger Kräutermarinade 150g;219;150g (1 kg = 14,60 €)
 2024-02-05;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2024-02-05;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-02-05;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2024-02-05;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
+2024-02-05;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
 2024-02-05;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2024-02-05;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-02-05;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
