@@ -187,6 +187,7 @@ if __name__ == '__main__':
                 (gas_new + ac_new) - (gas_old + ac_old), -1)
             dfavg = dfavg.rolling(window=7).mean(
             ).dropna()  # 7-day mvg average
+            dfavg = dfavg[~(dfavg.index < '2021-01-01')]
             # title_chart = f'20 MWh Gas kosten {int(gas_new.round(-1))} Euro im Jahr, 4 MWh Strom {int(ac_new.round(-1))} Euro'
             title_chart = f'Energie kostet eine vierköpfige Familie {int(title_costs_diff)} Euro mehr als im Januar 2021'
             dfavg = dfavg.applymap(str).reset_index(
@@ -209,6 +210,7 @@ if __name__ == '__main__':
                 (gas_new + ac_new) - (gas_old + ac_old), -1)
             dfavg = dfavg.rolling(window=7).mean(
             ).dropna()  # 7-day mvg average
+            dfavg = dfavg[~(dfavg.index < '2021-01-01')]
             # title_chart = f'20 MWh Gas kosten {int(gas_new.round(-1))} Euro im Jahr, 4 MWh Strom {int(ac_new.round(-1))} Euro'
             title_chart = f'Energie kostet eine vierköpfige Familie {int(title_costs_diff)} Euro mehr als im Januar 2021'
             dfavg = dfavg.applymap(str).reset_index(
