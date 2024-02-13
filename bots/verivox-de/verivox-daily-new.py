@@ -176,20 +176,23 @@ if __name__ == '__main__':
                 dfavg = dfavg.round(0).astype(int)
 
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
+            notes_chart = '¹ Im Vergleich zum Durchschnitt 2018-2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             gas_new = dfavg['Gas'].iloc[-1]
             ac_new = dfavg['Strom'].iloc[-1]
-            gas_old = dfavg['Gas'].iloc[0]
-            ac_old = dfavg['Strom'].iloc[0]
+            gas_old = 875  # average 2018-2020
+            ac_old = 957  # average 2018-2020
             title_costs_diff = round(
                 (gas_new + ac_new) - (gas_old + ac_old), -1)
             dfavg = dfavg.rolling(window=7).mean(
             ).dropna()  # 7-day mvg average
             dfavg = dfavg[~(dfavg.index < '2021-01-01')]
             # title_chart = f'20 MWh Gas kosten {int(gas_new.round(-1))} Euro im Jahr, 4 MWh Strom {int(ac_new.round(-1))} Euro'
-            title_chart = f'Energie kostet eine vierköpfige Familie {int(title_costs_diff)} Euro mehr als im Januar 2021'
+            if title_costs_diff >= 0:
+                title_chart = f'Energie kostet eine vierköpfige Familie {int(title_costs_diff)} Euro mehr als vor der Krise¹'
+            else:
+                title_chart = f'Energie kostet eine vierköpfige Familie {int(title_costs_diff)} Euro weniger als vor der Krise¹'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             # update chart with averages
@@ -200,19 +203,22 @@ if __name__ == '__main__':
             time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
+            notes_chart = '¹ Im Vergleich zum Durchschnitt 2018-2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
                 str(time_str_notes)
             gas_new = dfavg['Gas'].iloc[-1]
             ac_new = dfavg['Strom'].iloc[-1]
-            gas_old = dfavg['Gas'].iloc[0]
-            ac_old = dfavg['Strom'].iloc[0]
+            gas_old = 875  # average 2018-2020
+            ac_old = 957  # average 2018-2020
             title_costs_diff = round(
                 (gas_new + ac_new) - (gas_old + ac_old), -1)
             dfavg = dfavg.rolling(window=7).mean(
             ).dropna()  # 7-day mvg average
             dfavg = dfavg[~(dfavg.index < '2021-01-01')]
             # title_chart = f'20 MWh Gas kosten {int(gas_new.round(-1))} Euro im Jahr, 4 MWh Strom {int(ac_new.round(-1))} Euro'
-            title_chart = f'Energie kostet eine vierköpfige Familie {int(title_costs_diff)} Euro mehr als im Januar 2021'
+            if title_costs_diff >= 0:
+                title_chart = f'Energie kostet eine vierköpfige Familie {int(title_costs_diff)} Euro mehr als vor der Krise¹'
+            else:
+                title_chart = f'Energie kostet eine vierköpfige Familie {int(title_costs_diff)} Euro weniger als vor der Krise¹'
             dfavg = dfavg.applymap(str).reset_index(
                 drop=False).T.reset_index().T.apply(list, axis=1).to_list()
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
