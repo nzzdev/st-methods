@@ -176,13 +176,13 @@ if __name__ == '__main__':
                 dfavg = dfavg.round(0).astype(int)
 
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Im Vergleich zum Durchschnitt 2018-2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
+            notes_chart = '¹ Im Vergleich zum durchschnittlichen Preis im Jahr 2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             gas_new = dfavg['Gas'].iloc[-1]
             ac_new = dfavg['Strom'].iloc[-1]
-            gas_old = 875  # average 2018-2020
-            ac_old = 957  # average 2018-2020
+            gas_old = 842  # average 2020 (2018-2020: 875)
+            ac_old = 947  # average 2020 (2018-2020: 957)
             title_costs_diff = round(
                 (gas_new + ac_new) - (gas_old + ac_old), -1)
             dfavg = dfavg.rolling(window=7).mean(
@@ -203,12 +203,12 @@ if __name__ == '__main__':
             time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Im Vergleich zum Durchschnitt 2018-2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
+            notes_chart = '¹ Im Vergleich zum durchschnittlichen Preis im Jahr 2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
                 str(time_str_notes)
             gas_new = dfavg['Gas'].iloc[-1]
             ac_new = dfavg['Strom'].iloc[-1]
-            gas_old = 875  # average 2018-2020
-            ac_old = 957  # average 2018-2020
+            gas_old = 842  # average 2020 (2018-2020: 875)
+            ac_old = 947  # average 2020 (2018-2020: 957)
             title_costs_diff = round(
                 (gas_new + ac_new) - (gas_old + ac_old), -1)
             dfavg = dfavg.rolling(window=7).mean(
