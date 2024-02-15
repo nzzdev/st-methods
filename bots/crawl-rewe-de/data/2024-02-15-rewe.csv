@@ -632,8 +632,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-02-15;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2024-02-15;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2024-02-15;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;169;450g (1 kg = 3,76 €)
-2024-02-15;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-02-15;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2024-02-15;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-02-15;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-02-15;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2024-02-15;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -980,8 +980,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-02-15;1186905;REWE Beste Wahl;REWE Beste Wahl Oliven geschwärzt ohne Stein 135g;179;135g (1 kg = 13,26 €)
 2024-02-15;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;199;1l
 2024-02-15;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-02-15;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-02-15;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;199;1l
+2024-02-15;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-02-15;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2024-02-15;8048646;REWE Beste Wahl;REWE Beste Wahl Ostern Blätterkrokanteier 150g;149;150g (1 kg = 9,93 €)
 2024-02-15;764067;REWE Beste Wahl;REWE Beste Wahl Ostern Schichtnougat-Eier 105g;199;105g (1 kg = 18,95 €)
@@ -1314,7 +1314,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-02-15;7678937;REWE Bio;REWE Bio Das Pure 300g;199;300g (1 kg = 6,63 €)
 2024-02-15;1438494;REWE Bio;REWE Bio Dill 50g;99;50g (1 kg = 19,80 €)
 2024-02-15;8060098;REWE Bio;REWE Bio Dinkel Doppelkeks 330g;195;330g (1 kg = 5,91 €)
-2024-02-15;7249413;REWE Bio;REWE Bio Dinkel Frischeiwaffel 165g;159;165g (1 kg = 9,64 €)
 2024-02-15;2846041;REWE Bio;REWE Bio Dinkel-Flakes 300g;239;300g (1 kg = 7,97 €)
 2024-02-15;3100603;REWE Bio;REWE Bio Dinkel-Vollkornmehl 1kg;159;1000g
 2024-02-15;7888159;REWE Bio;REWE Bio Dinkelbrot 400g;269;400g (1 kg = 6,73 €)
