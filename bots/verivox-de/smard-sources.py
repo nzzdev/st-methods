@@ -375,15 +375,28 @@ if __name__ == '__main__':
         df_spot_compare = df_spot_compare[[
             'Datum', f'{year}', '2022', 'Vorkrisenniveau²']]
         df_spot_compare.set_index('Datum', inplace=True)
+        # get pre-crisis value
+        mwh_new = df_spot_compare[f'{year}'].loc[df_spot_compare[f'{year}'].last_valid_index(
+        )]
+        mwh_new_pos = df_spot_compare[f'{year}'].index.get_loc(
+            df_spot_compare[f'{year}'].last_valid_index())
+        mwh_old = df_spot_compare.iloc[mwh_new_pos]['Vorkrisenniveau²']
+        title_mwh_diff = round((mwh_new - mwh_old), 0).astype(int)
+        title_mwh = round(mwh_new, 0).astype(int)
         df_spot_compare[f'{year}'] = df_spot_compare[f'{year}'].fillna('')
 
         # dynamic chart title
-        title_mwh = df_spot[df_spot.columns[0]].iloc[-1]
-        title = f'Strom kostet an der Börse im Schnitt {title_mwh} Euro je MWh'
+        title_old = f'Strom kostet an der Börse im Schnitt {title_mwh} Euro je MWh'
+        if title_mwh_diff > 0:
+            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh ‐ {title_mwh_diff} Euro mehr als vor der Krise'
+        elif title_mwh_diff == 0:
+            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh ‐ so viel wie vor der Krise'
+        else:
+            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh ‐ {abs(title_mwh_diff)} Euro weniger als vor der Krise'
 
         # run Q function
         update_chart(id='90005812afc9964bbfe4f952f51d6a57',
-                     title=title, notes=notes_chart, data=df_spot)
+                     title=title_old, notes=notes_chart, data=df_spot)
         # run Q function
         update_chart(id='cc0c892a4433991f1c77c35df8beaff3',
                      title=title, notes=notes_chart_compare, data=df_spot_compare)

@@ -66,9 +66,9 @@ if __name__ == '__main__':
             method='linear', limit_direction='backward')  # for wrong dates
         dfnew = dfnew.drop('2023', axis=1)
         # get pre-crisis value
-        mwh_new = dfnew['2024'].loc[dfnew['2024'].last_valid_index()]
-        mwh_new_pos = dfnew['2024'].index.get_loc(
-            dfnew['2024'].last_valid_index())
+        mwh_new = dfnew[f'{year}'].loc[dfnew[f'{year}'].last_valid_index()]
+        mwh_new_pos = dfnew[f'{year}'].index.get_loc(
+            dfnew[f'{year}'].last_valid_index())
         mwh_old = dfnew.iloc[mwh_new_pos]['Vorkrisenniveau²']
         title_mwh_diff = round((mwh_new - mwh_old), 0).astype(int)
         title_mwh = round(mwh_new, 0).astype(int)
