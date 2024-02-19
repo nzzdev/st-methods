@@ -65,8 +65,14 @@ if __name__ == '__main__':
         dfnew[f'{year}'] = dfnew[f'{year}'].interpolate(
             method='linear', limit_direction='backward')  # for wrong dates
         dfnew = dfnew.drop('2023', axis=1)
+        # get pre-crisis value
+        mwh_new = dfnew['2024'].loc[dfnew['2024'].last_valid_index()]
+        mwh_new_pos = dfnew['2024'].index.get_loc(
+            dfnew['2024'].last_valid_index())
+        mwh_old = dfnew.iloc[mwh_new_pos]['Vorkrisenniveau²']
+        title_mwh_diff = round((mwh_new - mwh_old), 0).astype(int)
+        title_mwh = round(mwh_new, 0).astype(int)
         dfnew[f'{year}'] = dfnew[f'{year}'].fillna('')
-
         # round values further for normal line chart
         df['Kosten'] = df['Kosten'].round(0).astype(int)
 
@@ -145,9 +151,13 @@ if __name__ == '__main__':
         """
 
         # dynamic chart title
-        title_mwh = df[df.columns[0]
-                       ].iloc[-1].round(0).astype(int)  # old: df_full
-        title = f'Gas kostet an der Börse {title_mwh} Euro je MWh'
+        title_old = f'Gas kostet an der Börse {title_mwh} Euro je MWh'
+        if title_mwh_diff > 0:
+            title = f'Gas kostet an der Börse {title_mwh} Euro je MWh ‐ {title_mwh_diff} Euro mehr als vor der Krise'
+        elif title_mwh_diff == 0:
+            title = f'Gas kostet an der Börse {title_mwh} Euro je MWh ‐ so viel wie vor der Krise'
+        else:
+            title = f'Gas kostet an der Börse {title_mwh} Euro je MWh ‐ {abs(title_mwh_diff)} Euro weniger als vor der Krise'
 
         # create date for chart notes
         timecode = df.index[-1]  # old: df_full
@@ -160,7 +170,7 @@ if __name__ == '__main__':
 
         # run Q function
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd',
-                     title=title, notes=notes_chart, data=df)  # old: df_full
+                     title=title_old, notes=notes_chart, data=df)  # old: df_full
         update_chart(id='74063b3ff77f45a56472a5cc70bb2a93',
                      title=title, notes=notes_chart_new, data=dfnew)
     except:
