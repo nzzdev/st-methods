@@ -388,11 +388,11 @@ if __name__ == '__main__':
         # dynamic chart title
         title_old = f'Strom kostet an der Börse im Schnitt {title_mwh} Euro je MWh'
         if title_mwh_diff > 0:
-            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh ‐ {title_mwh_diff} Euro mehr als vor der Krise'
+            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh – {title_mwh_diff} Euro mehr als vor der Krise'
         elif title_mwh_diff == 0:
-            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh ‐ so viel wie vor der Krise'
+            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh – so viel wie vor der Krise'
         else:
-            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh ‐ {abs(title_mwh_diff)} Euro weniger als vor der Krise'
+            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh – {abs(title_mwh_diff)} Euro weniger als vor der Krise'
 
         # run Q function
         update_chart(id='90005812afc9964bbfe4f952f51d6a57',
