@@ -73,7 +73,7 @@ jobs:
           commit_message: Update Verivox data
       - name: Log failure to slack
         if: always()
-        uses: ravsamhq/notify-slack-action@2.4.0
+        uses: ravsamhq/notify-slack-action@2.5.0
         with:
           status: ${{ job.status }}
           notify_when: "failure"
