@@ -131,7 +131,7 @@ if (date >= pd.to_datetime('2024-12-01')) & (date <= pd.to_datetime('2024-12-31'
 if (date >= pd.to_datetime('2025-01-01')) & (date <= pd.to_datetime('2025-01-31')):
     market_id = "5815810"
 
-if (date >= pd.to_datetime('2025-02-01')) & (date <= pd.to_datetime('2025-02-29')):
+if (date >= pd.to_datetime('2025-02-01')) & (date <= pd.to_datetime('2025-02-28')):
     market_id = "5844634"
 
 if (date >= pd.to_datetime('2025-03-01')) & (date <= pd.to_datetime('2025-03-31')):
