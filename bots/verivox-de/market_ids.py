@@ -94,7 +94,7 @@ if (date >= pd.to_datetime('2023-11-30')) & (date <= pd.to_datetime('2023-12-31'
 if (date >= pd.to_datetime('2024-01-01')) & (date <= pd.to_datetime('2024-01-31')):
     market_id = "5714606"
 
-if (date >= pd.to_datetime('2024-02-01')) & (date <= pd.to_datetime('2024-02-28')):
+if (date >= pd.to_datetime('2024-02-01')) & (date <= pd.to_datetime('2024-02-29')):
     market_id = "5733529"
 
 if (date >= pd.to_datetime('2024-03-01')) & (date <= pd.to_datetime('2024-03-31')):
@@ -131,7 +131,7 @@ if (date >= pd.to_datetime('2024-12-01')) & (date <= pd.to_datetime('2024-12-31'
 if (date >= pd.to_datetime('2025-01-01')) & (date <= pd.to_datetime('2025-01-31')):
     market_id = "5815810"
 
-if (date >= pd.to_datetime('2025-02-01')) & (date <= pd.to_datetime('2025-02-28')):
+if (date >= pd.to_datetime('2025-02-01')) & (date <= pd.to_datetime('2025-02-29')):
     market_id = "5844634"
 
 if (date >= pd.to_datetime('2025-03-01')) & (date <= pd.to_datetime('2025-03-31')):
