@@ -397,7 +397,7 @@ if __name__ == '__main__':
         super_y = 1.6
         storage_ytick = [0, 25, 50, 75, 100]
         # gas_ytick = [0, 15, 30, 45] # from January 2021
-        gas_ytick = [6, 8, 10, 12]
+        gas_ytick = [4, 8, 12]
         strom_ytick = [0, 20, 40, 60]
         ns_ytick = [0, 0.5, 1, 1.5]
         fossile_ytick = [20, 35, 50, 65]
