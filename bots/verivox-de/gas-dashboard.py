@@ -76,8 +76,8 @@ if __name__ == '__main__':
         df_gas_mean = df_gas_mean[(
             df_gas_mean.index.get_level_values(0) >= '2023-01-01')]
         # get last year and adjust time range
-        #lasty = today - timedelta(days=365)
-        #lasty = lasty.strftime('%Y-%m-%d')
+        lasty = today - timedelta(days=365)
+        lasty = lasty.strftime('%Y-%m-%d')
         df_gas = df_gas[(df_gas.index.get_level_values(0) >= f'2023-03-01')]
         df_strom_mean = df_strom_mean[(
             df_strom_mean.index.get_level_values(0) >= '2023-01-01')]
