@@ -31,16 +31,16 @@ if __name__ == '__main__':
         headers = generate_user_agent()
 
         # generate year and week number for url
-        d = datetime.today() - timedelta(weeks=1)
-        dold = datetime.today() - timedelta(weeks=2)
+        d = datetime.today() - timedelta(weeks=1) - timedelta(hours=1)
+        dold = datetime.today() - timedelta(weeks=2) - timedelta(hours=1)
         dweek = (d.isocalendar().week)
         dweek_old = (dold.isocalendar().week)
         dyear = (d.isocalendar().year)
         dyear_old = (dold.isocalendar().year)
         dweek = '{:02d}'.format(dweek)
         dweek_old = '{:02d}'.format(dweek_old)
-        dnotes = d + timedelta(weeks=1) + \
-            timedelta(days=d.weekday())  # last monday
+        dnotes = (d + timedelta(weeks=1) + timedelta(days=d.weekday())) - \
+            timedelta(hours=1)  # last monday / fix for server timezone
         dnotes = dnotes.strftime('%-d. %-m. %Y')
 
         # on Mondays wait for proper weekly data from Bundesnetzagentur till 8 GMT (imports in smard-sources.py)
