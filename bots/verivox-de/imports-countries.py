@@ -31,8 +31,8 @@ if __name__ == '__main__':
         headers = generate_user_agent()
 
         # generate year and week number for url
-        d = datetime.today() - timedelta(weeks=1) - timedelta(hours=2)
-        dold = datetime.today() - timedelta(weeks=2) - timedelta(hours=2)
+        d = datetime.today() - timedelta(weeks=1) - timedelta(hours=1)
+        dold = datetime.today() - timedelta(weeks=2) - timedelta(hours=1)
         dweek = (d.isocalendar().week)
         dweek_old = (dold.isocalendar().week)
         dyear = (d.isocalendar().year)
