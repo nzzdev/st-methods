@@ -674,9 +674,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-03-05;8654479;REWE Beste Wahl;REWE Beste Wahl Burger Patties vegan 227g;209;227g (1 kg = 9,21 €)
 2024-03-05;7679345;REWE Beste Wahl;REWE Beste Wahl Burgergurken würzig-süß 170g;99;170g (1 kg = 5,82 €)
 2024-03-05;2535656;REWE Beste Wahl;REWE Beste Wahl Butter Chicken Sauce 350g;179;350g (1 kg = 5,11 €)
-2024-03-05;7076144;REWE Beste Wahl;REWE Beste Wahl Butter Croissants 200g;159;200g (1 kg = 7,95 €)
 2024-03-05;9038950;REWE Beste Wahl;REWE Beste Wahl Butter Vanille Aroma 8g;79;8g
-2024-03-05;7293036;REWE Beste Wahl;REWE Beste Wahl Buttercroissants 360g;279;360g (1 kg = 7,75 €)
 2024-03-05;945673;REWE Beste Wahl;REWE Beste Wahl Butterspritzgebäck 400g;249;400g (1 kg = 6,23 €)
 2024-03-05;138469;REWE Beste Wahl;REWE Beste Wahl Bäcker-Brötchen 360g;99;360g (1 kg = 2,75 €)
 2024-03-05;8698487;REWE Beste Wahl;REWE Beste Wahl Cannelloni 250g;169;250g (1 kg = 6,76 €)
@@ -991,6 +989,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-03-05;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
 2024-03-05;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2024-03-05;1206377;REWE Beste Wahl;REWE Beste Wahl Osterhase Vollmilch 70g;79;70g (1 kg = 11,29 €)
+2024-03-05;2015999;REWE Beste Wahl;REWE Beste Wahl Osterhäschen 125g;229;125g (1 kg = 18,32 €)
 2024-03-05;8048646;REWE Beste Wahl;REWE Beste Wahl Ostern Blätterkrokanteier 150g;149;150g (1 kg = 9,93 €)
 2024-03-05;764067;REWE Beste Wahl;REWE Beste Wahl Ostern Schichtnougat-Eier 105g;199;105g (1 kg = 18,95 €)
 2024-03-05;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
@@ -1152,6 +1151,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-03-05;754891;REWE Beste Wahl;REWE Beste Wahl Vollmilch-Kuvertüre 200g;149;200g (1 kg = 7,45 €)
 2024-03-05;7789916;REWE Beste Wahl;REWE Beste Wahl WC Duftsteine Lemon 96g;125;96g (1 kg = 13,02 €)
 2024-03-05;2299850;REWE Beste Wahl;REWE Beste Wahl WC-Blauspüler 40g;99;40g (1 kg = 24,75 €)
+2024-03-05;8999347;REWE Beste Wahl;REWE Beste Wahl Waffle Bites ChoViva 125g;169;125g (1 kg = 13,52 €)
 2024-03-05;185596;REWE Beste Wahl;REWE Beste Wahl Waldheidelbeeren 125g;169;125g (1 kg = 13,52 €)
 2024-03-05;2775275;REWE Beste Wahl;REWE Beste Wahl Wasabi Erdnüsse 150g;179;150g (1 kg = 11,93 €)
 2024-03-05;8045202;REWE Beste Wahl;REWE Beste Wahl Weide Vollmilch 3,5% 1l;125;1l
@@ -1313,7 +1313,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-03-05;1438494;REWE Bio;REWE Bio Dill 50g;99;50g (1 kg = 19,80 €)
 2024-03-05;8060098;REWE Bio;REWE Bio Dinkel Doppelkeks 330g;195;330g (1 kg = 5,91 €)
 2024-03-05;7249413;REWE Bio;REWE Bio Dinkel Frischeiwaffel 165g;159;165g (1 kg = 9,64 €)
-2024-03-05;2846041;REWE Bio;REWE Bio Dinkel-Flakes 300g;239;300g (1 kg = 7,97 €)
 2024-03-05;3100603;REWE Bio;REWE Bio Dinkel-Vollkornmehl 1kg;159;1000g
 2024-03-05;7888159;REWE Bio;REWE Bio Dinkelbrot 400g;269;400g (1 kg = 6,73 €)
 2024-03-05;8860585;REWE Bio;REWE Bio Dinkelbrötchen 6 Stück 420g;249;420g (1 kg = 5,93 €)
