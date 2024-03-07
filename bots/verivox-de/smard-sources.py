@@ -125,6 +125,7 @@ if __name__ == '__main__':
                     df['Wind Onshore [MWh] Originalauflösungen']
                 df['Sonne'] = df['Photovoltaik [MWh] Originalauflösungen']
                 df.drop(list(df)[0:12], axis=1, inplace=True)
+                df = df.drop(['Pumpspeicher'], axis=1)
 
                 # convert to week and drop first and last row with partial values
                 df.reset_index(inplace=True)
@@ -150,8 +151,8 @@ if __name__ == '__main__':
         # get current date for chart notes
         time_dt_notes = df.index[-1] + timedelta(days=1)
         time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Öl, Pumpspeicher sowie andere Erneuerbare in der grafischen Darstellung unter «Sonstige».<br>Stand: {time_str_notes}'
-        notes_chart_nogas = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Pumpspeicher sowie andere Erneuerbare unter «Sonstige».<br>Stand: {time_str_notes}'
+        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Öl sowie andere Erneuerbare in der grafischen Darstellung unter «Sonstige», ohne Pumpspeicher.<br>Stand: {time_str_notes}'
+        notes_chart_nogas = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Erzeugung ohne Pumpspeicher.<br>Stand: {time_str_notes}'
 
         """
         # old gas chart title: calculate percentage for chart title
@@ -185,9 +186,7 @@ if __name__ == '__main__':
         df_nogas = df.copy()
         df_nogas['Erdgas'] = df_nogas['Erdgas'] + \
             df_nogas['Kohle'] + df_nogas['Sonstige']  # fossile
-        df_nogas['Sonstige EE'] = df_nogas['Sonstige EE'] + \
-            df_nogas['Pumpspeicher']  # other EE + pumped hydro
-        df_nogas = df_nogas.drop(['Pumpspeicher', 'Sonstige', 'Kohle'], axis=1)
+        df_nogas = df_nogas.drop(['Sonstige', 'Kohle'], axis=1)
         df_nogas = df_nogas.rename(columns={'Erdgas': 'Fossile',
                                             'Sonstige EE': 'Sonstige'})
         # drop unused rows and convert to terawatt
@@ -196,10 +195,8 @@ if __name__ == '__main__':
 
         # OLD fossile with gas
         # combine conventional
-        df['Sonstige'] = df['Sonstige'] + \
-            df['Pumpspeicher'] + df['Sonstige EE']
-
-        df = df.drop(['Pumpspeicher', 'Sonstige EE'], axis=1)
+        df['Sonstige'] = df['Sonstige'] + df['Sonstige EE']
+        df = df.drop(['Sonstige EE'], axis=1)
         # drop unused rows and convert to terawatt
         df = df[~(df.index < '2021-12-12 00:00:00')]
         df = df.div(1000000)
@@ -220,7 +217,7 @@ if __name__ == '__main__':
         dw_chart = dw.add_data(chart_id=dw_id_emix, data=df_nogas)
         dw.update_chart(chart_id=dw_id_emix, title=title_chart)
         date = {'annotate': {
-            'notes': f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Pumpspeicher sowie andere Erneuerbare unter «Sonstige».<br>Stand: {time_str_notes}'}}
+            'notes': f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Erzeugung ohne Pumpspeicher.<br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id_emix, properties=date)
         dw.update_description(
             chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E', intro='Stromerzeugung in Deutschland, in TWh<br><span style="line-height:40px"><span style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Wöchentlich</b></span> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/rcnPY/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Monatlich</a></span>')
