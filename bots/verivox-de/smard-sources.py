@@ -218,7 +218,7 @@ if __name__ == '__main__':
         dw.update_chart(chart_id=dw_id_emix, title=title_chart)
         date = {'annotate': {
             'notes': f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Erzeugung ohne Pumpspeicher.<br>Stand: {time_str_notes}'}}
-        dw.update_metadata(chart_id=dw_id_emix, properties=date)
+        # dw.update_metadata(chart_id=dw_id_emix, properties=date)
         dw.update_description(
             chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E', intro='Stromerzeugung in Deutschland, in TWh<br><span style="line-height:40px"><span style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Wöchentlich</b></span> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/rcnPY/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Monatlich</a></span>')
         dw.publish_chart(chart_id=dw_id_emix, display=False)
