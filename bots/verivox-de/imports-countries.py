@@ -92,8 +92,8 @@ if __name__ == '__main__':
             date = {'annotate': {
                 'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {dnotes}'}}
             labels = {'visualize': {'value-label-row': 'Wert'}}
-            #dw.update_metadata(chart_id=dw_id, properties=date)
-            #dw.update_metadata(chart_id=dw_id, properties=labels)
+            dw.update_metadata(chart_id=dw_id, metadata=date)
+            dw.update_metadata(chart_id=dw_id, metadata=labels)
             dw.update_description(chart_id=dw_id, source_url=url_source,
                                   source_name='energy-charts.info/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel (Export-Import-Saldo), in GWh')
             dw.publish_chart(chart_id=dw_id, display=False)
