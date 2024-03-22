@@ -78,7 +78,7 @@ if __name__ == '__main__':
                            'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (brutto) in EUR pro Jahr', 'Datum'], dtype={'Postleitzahl': 'string'})
         dfgas = pd.read_csv('./data/newest_gas_data.csv', index_col=None, usecols=[
                             'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (brutto) in EUR pro Jahr', 'Datum'], dtype={'Postleitzahl': 'string'})
-        df21 = pd.read_csv('./data/gas-strom-0921.tsv',
+        df21 = pd.read_csv('./data/gas-strom-1120.tsv',
                            sep='\t', index_col=None, dtype={'id': 'string'})
         dfavg = pd.read_csv(
             './data/gas-strom-bundesschnitt.tsv', sep='\t', index_col=None)
