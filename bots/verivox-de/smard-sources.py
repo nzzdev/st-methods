@@ -151,8 +151,8 @@ if __name__ == '__main__':
         # get current date for chart notes
         time_dt_notes = df.index[-1] + timedelta(days=1)
         time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Öl sowie andere Erneuerbare in der grafischen Darstellung unter «Sonstige», ohne Pumpspeicher.<br>Stand: {time_str_notes}'
-        notes_chart_nogas = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Erzeugung ohne Pumpspeicher.<br>Stand: {time_str_notes}'
+        notes_chart = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Öl sowie andere Erneuerbare in der grafischen Darstellung unter «Sonstige», ohne Pumpspeicher. Nachmeldungen möglich.<br>Stand: {time_str_notes}'
+        notes_chart_nogas = f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Ohne Pumpspeicher. Nachmeldungen möglich.<br>Stand: {time_str_notes}'
 
         """
         # old gas chart title: calculate percentage for chart title
@@ -217,7 +217,7 @@ if __name__ == '__main__':
         dw_chart = dw.add_data(chart_id=dw_id_emix, data=df_nogas)
         dw.update_chart(chart_id=dw_id_emix, title=title_chart)
         date = {'annotate': {
-            'notes': f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Erzeugung ohne Pumpspeicher.<br>Stand: {time_str_notes}'}}
+            'notes': f'Auf der Y-Achse: Stromerzeugung in absoluten Zahlen (TWh) gemäss EU-Transparenzverordnung; diese entsprachen im Jahr 2020 93 Prozent des insgesamt erzeugten Stroms. Ohne Pumpspeicher. Nachmeldungen möglich.<br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id_emix, metadata=date)
         dw.update_description(
             chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E', intro='Stromerzeugung in Deutschland, in TWh<br><span style="line-height:40px"><span style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Wöchentlich</b></span> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/rcnPY/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; padding:1px 6px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Monatlich</a></span>')
@@ -488,7 +488,7 @@ if __name__ == '__main__':
         dw_chart = dw.add_data(chart_id=dw_id_fr, data=df_trade)
         dw.update_chart(chart_id=dw_id_fr, title=title)
         date = {'annotate': {
-            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte. Nachmeldungen möglich.<br><br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id_fr, metadata=date)
         dw.update_description(
             chart_id=dw_id, source_url=dw_source_france, source_name='Bundesnetzagentur/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel Deutschlands (Export-Import-Saldo), in GWh<br><span style="line-height:40px"><a target="_self" href="https://datawrapper.dwcdn.net/G2Vtz/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Gesamt</a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/XJFzP/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Frankreich</b></a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/BjzEn/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Schweiz</a></span>')
@@ -641,7 +641,7 @@ if __name__ == '__main__':
         dw_chart = dw.add_data(chart_id=dw_id_nl, data=df_trade)
         dw.update_chart(chart_id=dw_id_nl, title=title)
         date = {'annotate': {
-            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte. Nachmeldungen möglich.<br><br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id_nl, metadata=date)
         dw.update_description(
             chart_id=dw_id_nl, source_url=dw_source_nl, source_name='Bundesnetzagentur/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel Deutschlands (Export-Import-Saldo), in GWh<br><span style="line-height:40px"><a target="_self" href="https://datawrapper.dwcdn.net/G2Vtz/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Gesamt</a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/XJFzP/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Frankreich</a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/BjzEn/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Schweiz</a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/mOf7y/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Niederlande</b></a></span>')
@@ -863,7 +863,7 @@ if __name__ == '__main__':
         dw_chart = dw.add_data(chart_id=dw_id_ch, data=df_trade)
         dw.update_chart(chart_id=dw_id_ch, title=title)
         date = {'annotate': {
-            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte. Nachmeldungen möglich.<br><br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id_fr, metadata=date)
         dw.update_description(
             chart_id=dw_id, source_url=dw_source_ch, source_name='Bundesnetzagentur/Entso-E', intro='Wöchentlicher grenzüberschreitender Stromhandel Deutschlands (Export-Import-Saldo), in GWh<br><span style="line-height:40px"><a target="_self" href="https://datawrapper.dwcdn.net/G2Vtz/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Gesamt</a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/XJFzP/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Frankreich</a> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/BjzEn/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Schweiz</b></a></span>')
@@ -1092,7 +1092,7 @@ if __name__ == '__main__':
         dw_chart = dw.add_data(chart_id=dw_id, data=df_trade)
         dw.update_chart(chart_id=dw_id, title=title)
         date = {'annotate': {
-            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte.<br><br>Stand: {time_str_notes}'}}
+            'notes': f'Negative Werte in Rot bedeuten Importe, positive Werte in Blau Exporte. Nachmeldungen möglich.<br><br>Stand: {time_str_notes}'}}
         dw.update_metadata(chart_id=dw_id, metadata=date)
         dw.update_description(
             chart_id=dw_id, source_url=dw_source_all, source_name='Bundesnetzagentur/Entso-E', intro='Grenzüberschreitender Stromhandel Deutschlands (Export-Import-Saldo), in GWh<br><span style="line-height:40px"><span style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; outline: none;opacity: 1; text-decoration: none;padding:1px 6px"><b>Wöchentlich</b></span> &nbsp;<a target="_self" href="https://datawrapper.dwcdn.net/UbT7x/" style="background:#fff; color: #000; border: 1px solid #d4d6dd;box-shadow: 0 1px 3px 0 rgba(0,0,0,.05); border-radius: 0px; font-weight:400; cursor:pointer; outline: none;opacity: 1; text-decoration: none;padding:1px 6px">Monatlich</a></span>')
