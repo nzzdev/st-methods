@@ -160,7 +160,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-04-04;8245234;ja!;ja! Feine Speisestärke reine Maisstärke 400g;99;400g (1 kg = 2,48 €)
 2024-04-04;2166155;ja!;ja! Feiner Brotaufstrich Eiersalat 150g;129;150g (1 kg = 8,60 €)
 2024-04-04;2166159;ja!;ja! Feiner Brotaufstrich Geflügelsalat 150g;129;150g (1 kg = 8,60 €)
-2024-04-04;1125029;ja!;ja! Feinstrumpfhose 20Den matt Make Up 38-40 2Paar;249;2 Stück
+2024-04-04;1125029;ja!;ja! Feinstrumpfhose 20Den matt Make Up 38-40 2Stück;249;2 Stück
 2024-04-04;1125035;ja!;ja! Feinstrumpfhose 20Den matt Make Up 42-44 2Stück;249;2 Stück
 2024-04-04;7877179;ja!;ja! Feldsalat Mix 100g;89;100g (1 kg = 8,90 €)
 2024-04-04;8606032;ja!;ja! Fenchel Anis Kümmel Tee 50g, 25 Beutel;119;50g (1 kg = 23,80 €)
@@ -629,8 +629,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-04-04;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2024-04-04;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2024-04-04;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2024-04-04;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-04-04;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2024-04-04;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-04-04;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-04-04;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
 2024-04-04;704320;REWE Beste Wahl;REWE Beste Wahl Artischocken ganze Herzen 165g;219;165g (1 kg = 13,27 €)
@@ -825,6 +825,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-04-04;7580090;REWE Beste Wahl;REWE Beste Wahl Hummus getrocknete Tomate vegan 200g;169;200g (1 kg = 8,45 €)
 2024-04-04;2255636;REWE Beste Wahl;REWE Beste Wahl Hygiene Pants Medium Diskret 10 Stück;599;10 Stück
 2024-04-04;8247965;REWE Beste Wahl;REWE Beste Wahl Hygiene Reinigungstücher 40 Stück;199;40 Stück
+2024-04-04;2241816;REWE Beste Wahl;REWE Beste Wahl Hygieneeinlagen Extra 12 Stück;199;12 Stück
+2024-04-04;2241841;REWE Beste Wahl;REWE Beste Wahl Hygieneeinlagen plus 10 Stück;199;10 Stück
 2024-04-04;8079152;REWE Beste Wahl;REWE Beste Wahl Hygienereiniger 1,5l;179;1,50l (1 l = 1,19 €)
 2024-04-04;8089929;REWE Beste Wahl;REWE Beste Wahl Hygienespüler 1,5l;165;1500ml (1 l = 1,10 €)
 2024-04-04;7259597;REWE Beste Wahl;REWE Beste Wahl Hygienetücher 15 Stück;149;15 Stück
