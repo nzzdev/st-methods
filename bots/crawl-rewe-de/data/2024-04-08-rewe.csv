@@ -630,8 +630,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-04-08;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2024-04-08;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2024-04-08;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2024-04-08;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-04-08;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2024-04-08;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-04-08;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-04-08;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2024-04-08;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -977,8 +977,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-04-08;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2024-04-08;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;249;1l
 2024-04-08;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-04-08;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
 2024-04-08;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
+2024-04-08;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
 2024-04-08;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2024-04-08;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-04-08;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1623,6 +1623,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-04-08;8365010;REWE Bio;REWE Bio Spaghetti Dinkel 500g;155;500g (1 kg = 3,10 €)
 2024-04-08;2550532;REWE Bio;REWE Bio Speisekartoffeln Drillinge 650g;259;650g (1 kg = 3,98 €)
 2024-04-08;8385056;REWE Bio;REWE Bio Speisequark 40% Fett i.Tr. 250g;109;250g (1 kg = 4,36 €)
+2024-04-08;3068788;REWE Bio;REWE Bio Speisequark Magerstufe 250g;99;250g (1 kg = 3,96 €)
 2024-04-08;194183;REWE Bio;REWE Bio Speisequarkzubereitung Halbfettstufe 250g;115;250g (1 kg = 4,60 €)
 2024-04-08;194184;REWE Bio;REWE Bio Speisequarkzubereitung Magerstufe 250g;105;250g (1 kg = 4,20 €)
 2024-04-08;7167047;REWE Bio;REWE Bio Sprossen Trio 100g;149;100g (1 kg = 14,90 €)
