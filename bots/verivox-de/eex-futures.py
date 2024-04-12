@@ -39,7 +39,7 @@ if __name__ == '__main__':
 
         # drop everything except "close" and date
         df = df.head(1).filter(['close', 'tradedatetimegmt'])
-        print(df)
+
         # convert do datetimeindex
         df['tradedatetimegmt'] = pd.to_datetime(df['tradedatetimegmt'])
         year = df['tradedatetimegmt'].dt.strftime(
@@ -92,7 +92,6 @@ if __name__ == '__main__':
         timecode_str = timecode.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Preise für die Grundlastlieferung Strom im jeweils nächsten Kalenderjahr («Frontjahr») im deutschen Marktgebiet.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
-        print(dfnew)
         # run Q function
         update_chart(id='addc121537e4d1aed887b57de0582f99',
                      title=title, notes=notes_chart, data=dfnew)

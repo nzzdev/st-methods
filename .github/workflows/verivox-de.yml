@@ -56,6 +56,7 @@ jobs:
           # python bnetza-verbrauch.py
           python verivox-daily-new.py
           python imports-countries.py
+          python eex-futures.py
           python gas-dashboard.py
         env:
           DATAWRAPPER_API: ${{ secrets.DATAWRAPPER_API }}
