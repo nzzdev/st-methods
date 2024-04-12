@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
+from user_agent import generate_user_agent
 
 if __name__ == '__main__':
     try:
@@ -20,12 +21,12 @@ if __name__ == '__main__':
         ydayurl = ydayurl.replace('/', '%2F')
 
         headers = {
+            'user-agent': generate_user_agent(),
+            'Cache-Control': 'no-cache',
+            'Pragma': 'no-cache',
             'Referer': 'https://www.eex.com/',
             'Origin': 'https://www.eex.com',
-            'Accept-Encoding': 'gzip, deflate, br, zstd',
-            'Accept-Language': 'de,en-US;q=0.9,en;q=0.8,en-GB;q=0.7',
-            'Sec-Fetch-Site': 'cross-site',
-            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Mobile Safari/537.36'
+            'Host': 'webservice-eex.gvsi.com'
         }
 
         url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
