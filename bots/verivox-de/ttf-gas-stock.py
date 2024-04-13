@@ -162,8 +162,8 @@ if __name__ == '__main__':
         # create date for chart notes
         timecode = df.index[-1]  # old: df_full
         timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat.<br>Stand: ' + timecode_str
-        notes_chart_new = '¹ Preise für Terminkontrakte mit Lieferung im nächsten Monat.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
+        notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im jeweils nächsten Monat.<br>Stand: ' + timecode_str
+        notes_chart_new = '¹ Preise für Terminkontrakte mit Lieferung im jeweils nächsten Monat.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
         # convert DatetimeIndex
         #df_full.index = df_full.index.strftime('%Y-%m-%d')
