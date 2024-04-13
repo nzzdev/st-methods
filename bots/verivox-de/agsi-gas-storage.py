@@ -127,14 +127,14 @@ if __name__ == '__main__':
         dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
+        """
 
         # temporary fix for wrong trend data
         dftrend.set_index('Datum', inplace=True)
-        dftrend.at['2023-09-29', 'Trend'] = 0.33
-        dftrend.at['2023-09-30', 'Trend'] = -0.30
+        dftrend.at['2024-03-31', 'Trend'] = 0.0  # do not show April update
+        dftrend.at['2024-04-01', 'Trend'] = -0.0  # do not show April update
         dftrend = dftrend.reset_index()
         dftrend.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8')
-        """
 
         # fix for seemingly wrong >100% data
         #dfnew.loc[dfnew['2024²'] > 100, '2024²'] = 100
