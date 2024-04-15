@@ -13,8 +13,8 @@ if __name__ == '__main__':
         from helpers import *
 
         # generate dates for url
-        tday = datetime.today() - timedelta(days=2)
-        yday = datetime.today() - timedelta(days=3)
+        tday = datetime.today() - timedelta(days=3)
+        yday = datetime.today() - timedelta(days=4)
         tdayurl = tday.strftime('%Y/%m/%d')
         tdayurl = tdayurl.replace('/', '%2F')
         ydayurl = yday.strftime('%Y/%m/%d')
