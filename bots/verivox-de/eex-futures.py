@@ -150,7 +150,8 @@ if __name__ == '__main__':
         notes_chart = '¹ Preise für die Grundlastlieferung Strom im jeweils nächsten Kalenderjahr («Frontjahr») im deutschen Marktgebiet.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
         # run Q function
-        #update_chart(id='addc121537e4d1aed887b57de0582f99', title=title, notes=notes_chart, data=dfnew)
+        update_chart(id='addc121537e4d1aed887b57de0582f99',
+                     title=title, notes=notes_chart, data=dfnew)
 
     except:
         raise
