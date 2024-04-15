@@ -13,8 +13,8 @@ if __name__ == '__main__':
         from helpers import *
 
         # generate dates for url
-        tday = datetime.today() - timedelta(days=3)
-        yday = datetime.today() - timedelta(days=4)
+        tday = datetime.today() - timedelta(days=1)
+        yday = datetime.today() - timedelta(days=2)
         tdayurl = tday.strftime('%Y/%m/%d')
         tdayurl = tdayurl.replace('/', '%2F')
         ydayurl = yday.strftime('%Y/%m/%d')
@@ -36,6 +36,50 @@ if __name__ == '__main__':
         dictr = r.json()
         recs = dictr['results']['items']
         df = pd.json_normalize(recs)  # first line is next year ("/E.DEBYF2x")
+
+        # temp check if there was a bank holiday (create loop later)
+        if df.empty:
+            # generate dates for url
+            tday = datetime.today() - timedelta(days=2)
+            yday = datetime.today() - timedelta(days=3)
+            tdayurl = tday.strftime('%Y/%m/%d')
+            tdayurl = tdayurl.replace('/', '%2F')
+            ydayurl = yday.strftime('%Y/%m/%d')
+            ydayurl = ydayurl.replace('/', '%2F')
+            url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
+            r = requests.get(url, headers=headers)
+            dictr = r.json()
+            recs = dictr['results']['items']
+            # first line is next year ("/E.DEBYF2x")
+            df = pd.json_normalize(recs)
+            if df.empty:
+                # generate dates for url
+                tday = datetime.today() - timedelta(days=3)
+                yday = datetime.today() - timedelta(days=4)
+                tdayurl = tday.strftime('%Y/%m/%d')
+                tdayurl = tdayurl.replace('/', '%2F')
+                ydayurl = yday.strftime('%Y/%m/%d')
+                ydayurl = ydayurl.replace('/', '%2F')
+                url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
+                r = requests.get(url, headers=headers)
+                dictr = r.json()
+                recs = dictr['results']['items']
+                # first line is next year ("/E.DEBYF2x")
+                df = pd.json_normalize(recs)
+                if df.empty:
+                    # generate dates for url
+                    tday = datetime.today() - timedelta(days=4)
+                    yday = datetime.today() - timedelta(days=5)
+                    tdayurl = tday.strftime('%Y/%m/%d')
+                    tdayurl = tdayurl.replace('/', '%2F')
+                    ydayurl = yday.strftime('%Y/%m/%d')
+                    ydayurl = ydayurl.replace('/', '%2F')
+                    url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
+                    r = requests.get(url, headers=headers)
+                    dictr = r.json()
+                    recs = dictr['results']['items']
+                    # first line is next year ("/E.DEBYF2x")
+                    df = pd.json_normalize(recs)
 
         # drop everything except "close" and date
         df = df.head(1).filter(['close', 'tradedatetimegmt'])
@@ -77,6 +121,19 @@ if __name__ == '__main__':
         mwh_old = dfnew.iloc[mwh_new_pos]['Vorkrisenniveau²']
         title_mwh_diff = round((mwh_new - mwh_old), 0).astype(int)
         title_mwh = round(mwh_new, 0).astype(int)
+
+        # generate csv for dashboard
+        df_dash = dfnew.copy()
+        df_dash = df_dash[[f'{year}']]
+        df_dash.replace(r'^\s*$', np.nan, regex=True)
+        df_dash = df_dash[df_dash[f'{year}'].notna()]
+        df_dash = df_dash.rename(
+            columns={df_dash.columns[0]: 'Strom-Terminmarkt'})
+        df_dash = pd.concat([df_dash.tail(2)])
+        print(df_dash)
+        df_dash.to_csv('./data/eex-ac-stock-dash.csv')
+
+        # replace NaN for Q
         dfnew[f'{year}'] = dfnew[f'{year}'].fillna('')
 
         # dynamic chart title
@@ -93,8 +150,7 @@ if __name__ == '__main__':
         notes_chart = '¹ Preise für die Grundlastlieferung Strom im jeweils nächsten Kalenderjahr («Frontjahr») im deutschen Marktgebiet.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
         # run Q function
-        update_chart(id='addc121537e4d1aed887b57de0582f99',
-                     title=title, notes=notes_chart, data=dfnew)
+        #update_chart(id='addc121537e4d1aed887b57de0582f99', title=title, notes=notes_chart, data=dfnew)
 
     except:
         raise
