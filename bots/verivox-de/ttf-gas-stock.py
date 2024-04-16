@@ -5,6 +5,7 @@ from user_agent import generate_user_agent
 import yfinance as yf
 import numpy as np
 from datetime import datetime
+from datawrapper import Datawrapper
 
 if __name__ == '__main__':
     try:
@@ -13,6 +14,11 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
         from helpers import *
         from market_ids import *
+
+        # Datawrapper API key
+        dw_key = os.environ['DATAWRAPPER_API']
+        dw = Datawrapper(access_token=dw_key)
+        dw_id = 'C3pJx'
 
         # headers for ICE data
         fheaders = {
@@ -65,14 +71,7 @@ if __name__ == '__main__':
         dfnew[f'{year}'] = dfnew[f'{year}'].interpolate(
             method='linear', limit_direction='backward')  # for wrong dates
         dfnew = dfnew.drop('2023', axis=1)
-        # get pre-crisis value
-        mwh_new = dfnew[f'{year}'].loc[dfnew[f'{year}'].last_valid_index()]
-        mwh_new_pos = dfnew[f'{year}'].index.get_loc(
-            dfnew[f'{year}'].last_valid_index())
-        mwh_old = dfnew.iloc[mwh_new_pos]['Vorkrisenniveau²']
-        title_mwh_diff = round((mwh_new - mwh_old), 0).astype(int)
-        title_mwh = round(mwh_new, 0).astype(int)
-        dfnew[f'{year}'] = dfnew[f'{year}'].fillna('')
+
         # round values further for normal line chart
         df['Kosten'] = df['Kosten'].round(0).astype(int)
 
@@ -150,14 +149,29 @@ if __name__ == '__main__':
         df_full = pd.concat([df, df_intra])
         """
 
+        # convert Euro / MWh to Cent / kWh
+        dfnew[f'{year}'] = dfnew[f'{year}'].replace(
+            r'^\s*$', np.nan, regex=True)
+        dfnew = dfnew.divide(10).round(3)
+        df = df.divide(10)
+
+        # get pre-crisis value
+        kwh_new = dfnew[f'{year}'].loc[dfnew[f'{year}'].last_valid_index()]
+        kwh_new_pos = dfnew[f'{year}'].index.get_loc(
+            dfnew[f'{year}'].last_valid_index())
+        kwh_old = dfnew.iloc[kwh_new_pos]['Vorkrisenniveau²']
+        title_kwh_diff = round((kwh_new - kwh_old), 1)
+        title_kwh = round(kwh_new, 1)
+        dfnew[f'{year}'] = dfnew[f'{year}'].fillna('')  # replace NaN for Q
+
         # dynamic chart title
-        title_old = f'Gas kostet an der Börse {title_mwh} Euro je MWh'
-        if title_mwh_diff > 0:
-            title = f'Gas kostet an der Börse {title_mwh} Euro je MWh – {title_mwh_diff} Euro mehr als vor der Krise'
-        elif title_mwh_diff == 0:
-            title = f'Gas kostet an der Börse {title_mwh} Euro je MWh – so viel wie vor der Krise'
+        title_old = f'Gas kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent'
+        if title_kwh_diff > 0:
+            title = f'Gas kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {title_kwh_diff.astype(str).replace(".", ",")} Cent mehr als vor der Krise'
+        elif title_kwh_diff == 0:
+            title = f'Gas kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – so viel wie vor der Krise'
         else:
-            title = f'Gas kostet an der Börse {title_mwh} Euro je MWh – {abs(title_mwh_diff)} Euro weniger als vor der Krise'
+            title = f'Gas kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {abs(title_kwh_diff).astype(str).replace(".", ",")} Cent weniger als vor der Krise'
 
         # create date for chart notes
         timecode = df.index[-1]  # old: df_full
@@ -173,5 +187,18 @@ if __name__ == '__main__':
                      title=title_old, notes=notes_chart, data=df)  # old: df_full
         update_chart(id='74063b3ff77f45a56472a5cc70bb2a93',
                      title=title, notes=notes_chart_new, data=dfnew)
+
+        # Rename column for Datawrapper
+        dfnew = dfnew.rename(
+            columns={'Vorkrisenniveau²': 'Vorkrisen-Niveau²'})
+
+        # update Datawrapper chart
+        dfnew.reset_index(inplace=True)
+        dw_chart = dw.add_data(chart_id=dw_id, data=dfnew)
+        dw.update_chart(chart_id=dw_id, title=title)
+        date = {'annotate': {'notes': f' {notes_chart_new}'}}
+        dw.update_metadata(chart_id=dw_id, metadata=date)
+        dw.publish_chart(chart_id=dw_id, display=False)
+
     except:
         raise

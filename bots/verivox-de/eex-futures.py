@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 from user_agent import generate_user_agent
+from datawrapper import Datawrapper
 
 if __name__ == '__main__':
     try:
@@ -12,6 +13,11 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
         from helpers import *
 
+        # Datawrapper API key
+        dw_key = os.environ['DATAWRAPPER_API']
+        dw = Datawrapper(access_token=dw_key)
+
+        dw_id = 'QhtLB'
         # generate dates for url
         tday = datetime.today() - timedelta(days=1)
         yday = datetime.today() - timedelta(days=2)
@@ -114,14 +120,6 @@ if __name__ == '__main__':
         dfnew[f'{year}'] = dfnew[f'{year}'].interpolate(
             method='linear', limit_direction='backward')  # for wrong dates
 
-        # get pre-crisis value
-        mwh_new = dfnew[f'{year}'].loc[dfnew[f'{year}'].last_valid_index()]
-        mwh_new_pos = dfnew[f'{year}'].index.get_loc(
-            dfnew[f'{year}'].last_valid_index())
-        mwh_old = dfnew.iloc[mwh_new_pos]['Vorkrisenniveau²']
-        title_mwh_diff = round((mwh_new - mwh_old), 0).astype(int)
-        title_mwh = round(mwh_new, 0).astype(int)
-
         # generate csv for dashboard
         df_dash = dfnew.copy()
         df_dash = df_dash[[f'{year}']]
@@ -132,16 +130,29 @@ if __name__ == '__main__':
         df_dash = pd.concat([df_dash.tail(2)])
         df_dash.to_csv('./data/eex-ac-stock-dash.csv')
 
+        # convert Euro / MWh to Cent / kWh
+        dfnew[f'{year}'] = dfnew[f'{year}'].replace(
+            r'^\s*$', np.nan, regex=True)
+        dfnew = dfnew.divide(10).round(3)
+
+        # get pre-crisis value
+        kwh_new = dfnew[f'{year}'].loc[dfnew[f'{year}'].last_valid_index()]
+        kwh_new_pos = dfnew[f'{year}'].index.get_loc(
+            dfnew[f'{year}'].last_valid_index())
+        kwh_old = dfnew.iloc[kwh_new_pos]['Vorkrisenniveau²']
+        title_kwh_diff = round((kwh_new - kwh_old), 1)
+        title_kwh = round(kwh_new, 1)
+
         # replace NaN for Q
         dfnew[f'{year}'] = dfnew[f'{year}'].fillna('')
 
         # dynamic chart title
-        if title_mwh_diff > 0:
-            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh – {title_mwh_diff} Euro mehr als vor der Krise'
-        elif title_mwh_diff == 0:
-            title = f'Strom kostet an der Börse {title_mwh} Euro je MWh – so viel wie vor der Krise'
+        if title_kwh_diff > 0:
+            title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {title_kwh_diff.astype(str).replace(".", ",")} Cent mehr als vor der Krise'
+        elif title_kwh_diff == 0:
+            title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – so viel wie vor der Krise'
         else:
-            title = f'Strom kostet an der Börse{title_mwh} Euro je MWh – {abs(title_mwh_diff)} Euro weniger als vor der Krise'
+            title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {abs(title_kwh_diff).astype(str).replace(".", ",")} Cent weniger als vor der Krise'
 
         # create date for chart notes
         timecode = df.index[-1]
@@ -152,5 +163,15 @@ if __name__ == '__main__':
         update_chart(id='addc121537e4d1aed887b57de0582f99',
                      title=title, notes=notes_chart, data=dfnew)
 
+        # Rename column for Datawrapper
+        dfnew = dfnew.rename(columns={'Vorkrisenniveau²': 'Vorkrisen-Niveau²'})
+
+        # update Datawrapper chart
+        dfnew.reset_index(inplace=True)
+        dw_chart = dw.add_data(chart_id=dw_id, data=dfnew)
+        dw.update_chart(chart_id=dw_id, title=title)
+        date = {'annotate': {'notes': f'{notes_chart}'}}
+        dw.update_metadata(chart_id=dw_id, metadata=date)
+        dw.publish_chart(chart_id=dw_id, display=False)
     except:
         raise
