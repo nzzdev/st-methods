@@ -130,7 +130,6 @@ if __name__ == '__main__':
         df_dash = df_dash.rename(
             columns={df_dash.columns[0]: 'Strom-Terminmarkt'})
         df_dash = pd.concat([df_dash.tail(2)])
-        print(df_dash)
         df_dash.to_csv('./data/eex-ac-stock-dash.csv')
 
         # replace NaN for Q
