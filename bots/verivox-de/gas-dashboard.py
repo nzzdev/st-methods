@@ -477,7 +477,7 @@ if __name__ == '__main__':
         meta_super['chartData'] = []
         meta_gasstock['chartData'] = []
         meta_stromstockeex['chartData'] = []
-        meta_stromstock['chartData'] = []
+        #meta_stromstock['chartData'] = []
         dicts = []
         # STORAGE dicts.append(meta_storage)
         # RUS GAS dicts.append(meta_rus)
@@ -488,7 +488,7 @@ if __name__ == '__main__':
         dicts.append(meta_lng)
         dicts.append(meta_strom)
         dicts.append(meta_stromstockeex)
-        dicts.append(meta_stromstock)
+        # dicts.append(meta_stromstock)
         dicts.append(meta_fossile)
         # dicts.append(meta_imports)
         dicts.append(meta_importsshare)
