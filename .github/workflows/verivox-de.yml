@@ -57,6 +57,7 @@ jobs:
           python verivox-daily-new.py
           python imports-countries.py
           python eex-futures.py
+          python verivox-daily-diff.py
           python gas-dashboard.py
         env:
           DATAWRAPPER_API: ${{ secrets.DATAWRAPPER_API }}

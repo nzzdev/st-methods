@@ -16,8 +16,8 @@ if __name__ == '__main__':
         # Datawrapper API key
         dw_key = os.environ['DATAWRAPPER_API']
         dw = Datawrapper(access_token=dw_key)
-
         dw_id = 'QhtLB'
+        
         # generate dates for url
         tday = datetime.today() - timedelta(days=1)
         yday = datetime.today() - timedelta(days=2)
