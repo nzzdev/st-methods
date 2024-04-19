@@ -87,7 +87,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df.columns) and (errors < 5):
+            while ('Anfang' not in df.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
@@ -233,7 +233,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df.columns) and (errors < 5):
+            while ('Anfang' not in df.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
             if ('Anfang' in df.columns):
@@ -277,7 +277,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_spot.columns) and (errors < 5):
+            while ('Anfang' not in df_spot.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df_spot = smard.requestSmardData(
@@ -409,7 +409,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
@@ -506,7 +506,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
@@ -577,7 +577,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
@@ -659,7 +659,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
@@ -729,7 +729,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
@@ -799,7 +799,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
@@ -881,7 +881,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
@@ -951,7 +951,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
@@ -1022,7 +1022,7 @@ if __name__ == '__main__':
 
             # check if data is corrupted
             errors = 0
-            while ('Anfang' not in df_trade.columns) and (errors < 5):
+            while ('Anfang' not in df_trade.columns) and (errors < 3):
                 sleep(2)
                 errors += 1
                 df = smard.requestSmardData(
@@ -1109,7 +1109,7 @@ if __name__ == '__main__':
 
         # check if data is corrupted
         errors = 0
-        while ('Anfang' not in df.columns) and (errors < 5):
+        while ('Anfang' not in df.columns) and (errors < 3):
             sleep(2)
             errors += 1
             # df = smard.requestSmardData(modulIDs=modules, timestamp_from_in_milliseconds=1625954400000)  # int(time.time()) * 1000) - (24*3600)*373000  = 1 year + last week
