@@ -17,7 +17,7 @@ if __name__ == '__main__':
         dw_key = os.environ['DATAWRAPPER_API']
         dw = Datawrapper(access_token=dw_key)
         dw_id = 'QhtLB'
-        
+
         # generate dates for url
         tday = datetime.today() - timedelta(days=1)
         yday = datetime.today() - timedelta(days=2)
@@ -141,6 +141,8 @@ if __name__ == '__main__':
             dfnew[f'{year}'].last_valid_index())
         kwh_old = dfnew.iloc[kwh_new_pos]['Vorkrisenniveau²']
         title_kwh_diff = round((kwh_new - kwh_old), 1)
+        title_kwh_diff_perc = round(
+            100 * (kwh_new - kwh_old) / kwh_old, 0).astype(int)
         title_kwh = round(kwh_new, 1)
 
         # replace NaN for Q
@@ -148,11 +150,19 @@ if __name__ == '__main__':
 
         # dynamic chart title
         if title_kwh_diff > 0:
+            title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {title_kwh_diff_perc} Prozent mehr als vor der Krise'
+        elif title_kwh_diff == 0:
+            title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – so viel wie vor der Krise'
+        else:
+            title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {abs(title_kwh_diff_perc)} Prozent weniger als vor der Krise'
+        """
+        if title_kwh_diff > 0:
             title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {title_kwh_diff.astype(str).replace(".", ",")} Cent mehr als vor der Krise'
         elif title_kwh_diff == 0:
             title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – so viel wie vor der Krise'
         else:
             title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {abs(title_kwh_diff).astype(str).replace(".", ",")} Cent weniger als vor der Krise'
+        """
 
         # create date for chart notes
         timecode = df.index[-1]
