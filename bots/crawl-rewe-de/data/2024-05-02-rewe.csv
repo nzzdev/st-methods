@@ -639,8 +639,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-02;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;129;1l
 2024-05-02;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2024-05-02;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2024-05-02;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-05-02;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2024-05-02;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-05-02;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-05-02;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
 2024-05-02;704320;REWE Beste Wahl;REWE Beste Wahl Artischocken ganze Herzen 165g;219;165g (1 kg = 13,27 €)
@@ -712,7 +712,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-02;134745;REWE Beste Wahl;REWE Beste Wahl Delikatess-Lachsschinken 80g;229;80g (1 kg = 28,63 €)
 2024-05-02;141114;REWE Beste Wahl;REWE Beste Wahl Delikatess-Metzgerschinken 150g;299;150g (1 kg = 19,93 €)
 2024-05-02;1046968;REWE Beste Wahl;REWE Beste Wahl Delikatess-Rotkohl 650g;139;650g (1 kg = 2,14 €)
-2024-05-02;8737758;REWE Beste Wahl;REWE Beste Wahl Delizioso Mini Cherry Rispentomaten 200g;249;200g (1 kg = 12,45 €)
 2024-05-02;1387339;REWE Beste Wahl;REWE Beste Wahl Deluxe-Toilettenpapier 5-lagig 6x129 Blatt;379;NaN
 2024-05-02;376979;REWE Beste Wahl;REWE Beste Wahl Deutsches Corned Beef 100g;199;100g (1 kg = 19,90 €)
 2024-05-02;8290264;REWE Beste Wahl;REWE Beste Wahl Dijon Senf pikant-würzig 185ml;149;185ml (1 l = 8,05 €)
