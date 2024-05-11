@@ -1369,6 +1369,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-11;9015821;REWE Bio;REWE Bio Gegrillte Artischocken 125g;269;125g (1 kg = 21,52 €)
 2024-05-11;8360458;REWE Bio;REWE Bio Gemüsebrühe 140g;119;140g (1 kg = 8,50 €)
 2024-05-11;8589069;REWE Bio;REWE Bio Gemüsefond 400ml;219;400ml (1 l = 5,48 €)
+2024-05-11;8607334;REWE Bio;REWE Bio Gemüsemais 230g;85;230g (1 kg = 3,70 €)
 2024-05-11;7321580;REWE Bio;REWE Bio Gemüsepfanne mediterrane Art 450g;199;450g (1 kg = 4,42 €)
 2024-05-11;7633625;REWE Bio;REWE Bio Getrocknete Tomaten 125g;269;125g
 2024-05-11;351098;REWE Bio;REWE Bio Gewürzgurken 360g;249;360g (1 kg = 6,92 €)
@@ -1630,6 +1631,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-11;8341536;REWE Bio;REWE Bio Soja-Sauce;299;250ml (1 l = 11,96 €)
 2024-05-11;8420409;REWE Bio;REWE Bio Sonnenblumenkerne 500g;199;500g (1 kg = 3,98 €)
 2024-05-11;371375;REWE Bio;REWE Bio Sonnenmais 140g;89;140g (1 kg = 6,36 €)
+2024-05-11;8144832;REWE Bio;REWE Bio Sonnenmais supersweet 285g;105;285g (1 kg = 3,68 €)
 2024-05-11;8365010;REWE Bio;REWE Bio Spaghetti Dinkel 500g;155;500g (1 kg = 3,10 €)
 2024-05-11;2550532;REWE Bio;REWE Bio Speisekartoffeln Drillinge 650g;259;650g (1 kg = 3,98 €)
 2024-05-11;8385056;REWE Bio;REWE Bio Speisequark 40% Fett i.Tr. 250g;109;250g (1 kg = 4,36 €)
