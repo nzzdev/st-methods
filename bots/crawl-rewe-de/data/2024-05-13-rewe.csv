@@ -246,7 +246,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-13;8754081;ja!;ja! Haushaltskerzen weiß 10 Stück;249;10 Stück
 2024-05-13;8537447;ja!;ja! Haushaltsschwamm 9 Stück;99;9 Stück
 2024-05-13;120585;ja!;ja! Heringsfilets geteilt in Tomatensauce 200g;119;200g (1 kg = 5,95 €)
-2024-05-13;3156246;ja!;ja! Herzhaftes Ragout mit Rind & Nudeln 300g;75;300g (1 kg = 2,50 €)
 2024-05-13;2886776;ja!;ja! Hirtenkäse 250g;189;250g (1 kg = 7,56 €)
 2024-05-13;891929;ja!;ja! Honey Wheats 750g;279;750g (1 kg = 3,72 €)
 2024-05-13;8859653;ja!;ja! Hummus natur vegan 200g;99;200g (1 kg = 4,95 €)
@@ -1308,6 +1307,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-13;8705015;REWE Bio;REWE Bio Chili sin Carne vegan 400g;229;400g (1 kg = 5,73 €)
 2024-05-13;8084861;REWE Bio;REWE Bio Condimento Bianco 500ml;249;500ml (1 l = 4,98 €)
 2024-05-13;1202493;REWE Bio;REWE Bio Cornichons 190g;199;190g (1 kg = 10,47 €)
+2024-05-13;8891722;REWE Bio;REWE Bio Cranberries 175g;279;175g (1 kg = 15,94 €)
 2024-05-13;946608;REWE Bio;REWE Bio Creamy Erdnussbutter 250g;199;250g (1 kg = 7,96 €)
 2024-05-13;8098823;REWE Bio;REWE Bio Crema mit Aceto Balsamico 250ml;299;250ml (1 l = 11,96 €)
 2024-05-13;577458;REWE Bio;REWE Bio Currypulver 50g;269;50g (1 kg = 53,80 €)
