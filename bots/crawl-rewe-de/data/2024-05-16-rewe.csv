@@ -59,7 +59,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-16;8289473;ja!;ja! Briefumschläge DIN lang selbstklebend ohne Fenster 50 Stück;239;50 Stück
 2024-05-16;8088095;ja!;ja! Briefumschläge mit Fenster DIN lang 50 Stück;239;50 Stück
 2024-05-16;7073900;ja!;ja! Broccoli Röschen tiefgefroren 1kg;219;1000g
-2024-05-16;8291795;ja!;ja! Brot-Backmischung Roggenmischbrot 1kg;129;1kg
 2024-05-16;5349664;ja!;ja! Butter-Toastbrot 500g;99;500g (1 kg = 1,98 €)
 2024-05-16;8633128;ja!;ja! Butterbrot Tüten 100 Stück;145;100 Stück
 2024-05-16;5960010;ja!;ja! Buttergemüse mit feiner Butter-Kräuter-Sauce 300g;89;300g (1 kg = 2,97 €)
@@ -195,7 +194,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-16;8353087;ja!;ja! Frutti di Mare 270g;399;270g (1 kg = 14,78 €)
 2024-05-16;476189;ja!;ja! Früchte-Müsli 1kg;229;1000g
 2024-05-16;7777815;ja!;ja! Frühlingsrollen mit Gemüse 400g;279;400g (1 kg = 6,98 €)
-2024-05-16;7779581;ja!;ja! Frühlingsrollen mit Hähnchen 400g;279;400g (1 kg = 6,98 €)
 2024-05-16;7913504;ja!;ja! Frühstücksbeutel 120 Stück;55;120 Stück
 2024-05-16;2565946;ja!;ja! Garnelen á la Provence 250g;359;250g (1 kg = 14,36 €)
 2024-05-16;7600959;ja!;ja! Geflügel Bratwurst 400g;379;400g (1 kg = 9,48 €)
@@ -522,6 +520,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-16;2696946;ja!;ja! Spaghetti mit Tomatensauce 400g;159;400g (1 kg = 3,98 €)
 2024-05-16;8779675;ja!;ja! Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
 2024-05-16;7845627;ja!;ja! Speiseeis nach Fürst Pückler Art 2500ml;379;2500ml (1 l = 1,52 €)
+2024-05-16;7845627;ja!;ja! Speiseeis nach Fürst Pückler Art 2500ml;379;2500ml (1 l = 1,52 €)
 2024-05-16;9393935;ja!;ja! Speisequark 20% Fett i. Tr. 250g;85;250g (1 kg = 3,40 €)
 2024-05-16;9393595;ja!;ja! Speisequark Magerstufe 500g;135;500g (1 kg = 2,70 €)
 2024-05-16;8187959;ja!;ja! Sprühsahne 250ml;199;250ml (1 l = 7,96 €)
@@ -673,7 +672,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-16;9038950;REWE Beste Wahl;REWE Beste Wahl Butter Vanille Aroma 8g;79;8g
 2024-05-16;7293036;REWE Beste Wahl;REWE Beste Wahl Buttercroissants 360g;369;360g (1 kg = 10,25 €)
 2024-05-16;138469;REWE Beste Wahl;REWE Beste Wahl Bäcker-Brötchen 360g;99;360g (1 kg = 2,75 €)
-2024-05-16;8698487;REWE Beste Wahl;REWE Beste Wahl Cannelloni 250g;169;250g (1 kg = 6,76 €)
 2024-05-16;3015611;REWE Beste Wahl;REWE Beste Wahl Cannelloni Bolognese 400g;199;400g (1 kg = 4,98 €)
 2024-05-16;8412884;REWE Beste Wahl;REWE Beste Wahl Cayennepfeffer gemahlen 39g;199;39g (1 kg = 51,03 €)
 2024-05-16;1198763;REWE Beste Wahl;REWE Beste Wahl Champignons 315g;349;315g (1 kg = 11,08 €)
@@ -979,8 +977,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-16;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2024-05-16;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;249;1l
 2024-05-16;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-05-16;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-05-16;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
+2024-05-16;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-05-16;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2024-05-16;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-05-16;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
