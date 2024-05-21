@@ -298,7 +298,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-21;1395504;ja!;ja! Kaustreifen mit Rind 20 Stück;59;200g (1 kg = 2,95 €)
 2024-05-21;1913987;ja!;ja! Kernige Haferflocken 500g;79;500g (1 kg = 1,58 €)
 2024-05-21;8867056;ja!;ja! Kichererbsen 390g;169;390g (1 kg = 4,33 €)
-2024-05-21;914670;ja!;ja! Kidney-Bohnen rot 255g;69;255g (1 kg = 2,71 €)
 2024-05-21;2565945;ja!;ja! King Prawns Garnelen 225g;359;225g (1 kg = 15,96 €)
 2024-05-21;8725350;ja!;ja! Kirsch Grütze 500g;199;500g (1 kg = 3,98 €)
 2024-05-21;8059677;ja!;ja! Klarspüler 1l;95;1l
@@ -633,8 +632,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-21;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;159;1l
 2024-05-21;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2024-05-21;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2024-05-21;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2024-05-21;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2024-05-21;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2024-05-21;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-05-21;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2024-05-21;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -983,8 +982,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-21;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2024-05-21;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;249;1l
 2024-05-21;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-05-21;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-05-21;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
+2024-05-21;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-05-21;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2024-05-21;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-05-21;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1532,7 +1531,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-21;7850536;REWE Bio;REWE Bio Naturland White Tiger Garnelen 256g;779;256g (1 kg = 30,43 €)
 2024-05-21;2029541;REWE Bio;REWE Bio Naturland Wild-Heidelbeeren 300g;269;300g (1 kg = 8,97 €)
 2024-05-21;7794367;REWE Bio;REWE Bio Naturland Zimt gemahlen 30g;269;30g (1 kg = 89,67 €)
-2024-05-21;7812629;REWE Bio;REWE Bio Naturland Zitronen Erfrischungsgetränk 0,75l;119;0,75l (1 l = 1,59 €)
 2024-05-21;7718265;REWE Bio;REWE Bio Naturland Zitronenschale gerieben 5g;99;2x5g (1 kg = 99 €)
 2024-05-21;7660983;REWE Bio;REWE Bio Naturland weißes Mandelmus vegan 250g;699;250g (1 kg = 27,96 €)
 2024-05-21;8032052;REWE Bio;REWE Bio Naturreis Spitzen-Langkorn 1kg;259;1kg
