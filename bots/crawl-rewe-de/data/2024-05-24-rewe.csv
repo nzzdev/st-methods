@@ -628,8 +628,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-24;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;159;1l
 2024-05-24;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2024-05-24;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2024-05-24;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2024-05-24;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2024-05-24;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2024-05-24;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-05-24;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
 2024-05-24;704320;REWE Beste Wahl;REWE Beste Wahl Artischocken ganze Herzen 165g;219;165g (1 kg = 13,27 €)
@@ -1210,6 +1210,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-05-24;7868590;REWE Bio;REWE Bio + vegan Schokolade Ganze Haselnuss 100g;179;100g (1 kg = 17,90 €)
 2024-05-24;8595387;REWE Bio;REWE Bio + vegan Schweizer Nougat & Crisp 100g;179;100g (1 kg = 17,90 €)
 2024-05-24;585223;REWE Bio;REWE Bio + vegan Soja Drink 1l;99;1l
+2024-05-24;7147843;REWE Bio;REWE Bio + vegan Soja Natur 500g;139;500g (1 kg = 2,78 €)
 2024-05-24;7794856;REWE Bio;REWE Bio + vegan Soja Schnetzel 150g;185;150g (1 kg = 12,33 €)
 2024-05-24;8041184;REWE Bio;REWE Bio + vegan Sojacreme Cuisine 200ml;99;200ml (1 l = 4,95 €)
 2024-05-24;8215577;REWE Bio;REWE Bio + vegan Streichcreme Paprika, Kichererbse & Chili 180g;135;180g (1 kg = 7,50 €)
