@@ -204,7 +204,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-02;8890957;ja!;ja! Geflügel Wiener 400g;289;400g (1 kg = 7,23 €)
 2024-06-02;942067;ja!;ja! Geflügel-Mortadella 200g;119;200g (1 kg = 5,95 €)
 2024-06-02;990026;ja!;ja! Geflügel-Salami mit Schweinefleisch 200g;185;200g (1 kg = 9,25 €)
-2024-06-02;8503685;ja!;ja! Geflügelsalami geräuchert 130g;189;130g (1 kg = 14,54 €)
 2024-06-02;7834991;ja!;ja! Geflügelsalat 200g;169;200g (1 kg = 8,45 €)
 2024-06-02;7644737;ja!;ja! Gefrierbeutel 6l 41 Stück;145;41 Stück
 2024-06-02;8599735;ja!;ja! Gelee Bananen 250g;149;250g (1 kg = 5,96 €)
@@ -484,7 +483,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-02;4507940;ja!;ja! Saure Sahne 200g;65;200g (1 kg = 3,25 €)
 2024-06-02;8100477;ja!;ja! Schaschlikspieße 20cm 125 Stück;149;125 Stück
 2024-06-02;8895117;ja!;ja! Schinkenbockwurst 500g;379;500g (1 kg = 7,58 €)
-2024-06-02;6387934;ja!;ja! Schinkenwurst 200g;99;200g (1 kg = 4,95 €)
 2024-06-02;6320406;ja!;ja! Schinkenwürfel 2x125g;259;2x125g (1 kg = 10,36 €)
 2024-06-02;64840;ja!;ja! Schlagsahne 200g;99;200g (1 kg = 4,95 €)
 2024-06-02;8187819;ja!;ja! Schmand 200g;89;200g (1 kg = 4,45 €)
@@ -964,7 +962,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-02;7291462;REWE Beste Wahl;REWE Beste Wahl Mikrowellenpommes 140g;129;140g (1 kg = 9,21 €)
 2024-06-02;7966574;REWE Beste Wahl;REWE Beste Wahl Milchbrötchen 480g;219;480g (1 kg = 4,56 €)
 2024-06-02;2243391;REWE Beste Wahl;REWE Beste Wahl Milchschoko-Streusel 200g;149;200g (1 kg = 7,45 €)
-2024-06-02;9009074;REWE Beste Wahl;REWE Beste Wahl Milde Guacamole vegan 200g;229;200g (1 kg = 11,45 €)
 2024-06-02;7902625;REWE Beste Wahl;REWE Beste Wahl Milder Apfel 0,33l;65;0,33l (1 l = 1,97 €)
 2024-06-02;7896504;REWE Beste Wahl;REWE Beste Wahl Milder Apfel 1l;149;1l
 2024-06-02;8593925;REWE Beste Wahl;REWE Beste Wahl Milder Multi 0,33l;65;0,33l (1 l = 1,97 €)
@@ -1148,7 +1145,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-02;135301;REWE Beste Wahl;REWE Beste Wahl Traubensaft 1l;149;1l
 2024-06-02;7628240;REWE Beste Wahl;REWE Beste Wahl Triple Chocolate Cookies 200g;169;200g (1 kg = 8,45 €)
 2024-06-02;8649184;REWE Beste Wahl;REWE Beste Wahl Universal Flüssigdünger 0,5l;249;500ml (1 l = 4,98 €)
-2024-06-02;8958526;REWE Beste Wahl;REWE Beste Wahl Vegane Bratwurst 260g;259;260g (1 kg = 9,96 €)
 2024-06-02;8645362;REWE Beste Wahl;REWE Beste Wahl Vegane Burger Patties 230g;199;230g (1 kg = 8,65 €)
 2024-06-02;7912270;REWE Beste Wahl;REWE Beste Wahl Vegane Fleischwurst 175g;109;175g (1 kg = 6,23 €)
 2024-06-02;7886889;REWE Beste Wahl;REWE Beste Wahl Vegane Genuss Scheiben mild 150g;129;150g (1 kg = 8,60 €)
@@ -1711,7 +1707,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-02;2937503;REWE Bio;REWE Bio Wiener Würstchen 250g;419;250g (1 kg = 16,76 €)
 2024-06-02;9024701;REWE Bio;REWE Bio Wurst Paprika Lyoner 100g;149;100g (1 kg = 14,90 €)
 2024-06-02;2561874;REWE Bio;REWE Bio Ziegenfrischkäse 150g;239;150g (1 kg = 15,93 €)
-2024-06-02;7010182;REWE Bio;REWE Bio Ziegenfrischkäse in Kräutermarinade mit rosa Pfeffer 100g;169;100g (1 kg = 16,90 €)
 2024-06-02;8222704;REWE Bio;REWE Bio Ziegenkäse mild 120g;299;120g (1 kg = 24,92 €)
 2024-06-02;43657;REWE Bio;REWE Bio Zitrone 1 Stück;99;1 Stück
 2024-06-02;7589883;REWE Bio;REWE Bio Zitrone 500g im Netz;129;500g (1 kg = 2,58 €)
