@@ -81,6 +81,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-05;8339719;ja!;ja! Cevapcici für Pfanne und Grill 1kg;999;1000g
 2024-06-05;6697100;ja!;ja! Cevapcici mit Gemüse und Reis 300g;199;300g (1 kg = 6,63 €)
 2024-06-05;923266;ja!;ja! Champignons 1. Wahl in Scheiben 170g;99;170g (1 kg = 5,82 €)
+2024-06-05;8926272;ja!;ja! Cheddar in Scheiben 175g;229;175g (1 kg = 13,09 €)
 2024-06-05;8848649;ja!;ja! Cheeseburger Schwein 2 Stück 320g;229;320g (1 kg = 7,16 €)
 2024-06-05;8614834;ja!;ja! Chicken Burger 400g;329;400g (1 kg = 8,23 €)
 2024-06-05;8370536;ja!;ja! Chicken Nuggets 1000g;699;1000g
@@ -204,7 +205,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-05;8613805;ja!;ja! Geleefrüchte 250g;139;250g (1 kg = 5,56 €)
 2024-06-05;7146084;ja!;ja! Genießer-Menü Multipack Fleisch 15x100g;319;15x100g (1 kg = 2,13 €)
 2024-06-05;7144685;ja!;ja! Genießer-Menü Multipack Jelly 15x100g;319;15x100g (1 kg = 2,13 €)
-2024-06-05;8426184;ja!;ja! Geriebener Gouda 48% Fett 250g;199;250g (1 kg = 7,96 €)
 2024-06-05;8426697;ja!;ja! Geriebener Gratin- und Pizzakäse 250g;199;250g (1 kg = 7,96 €)
 2024-06-05;8075412;ja!;ja! Geschirr-Reiniger 40 Tabs All-in-1 840g;395;840g (1 kg = 4,70 €)
 2024-06-05;7896538;ja!;ja! Geschirr-Reiniger Classic 60 Tabs 780g;299;780g (1 kg = 3,83 €)
@@ -956,8 +956,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-05;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2024-06-05;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;249;1l
 2024-06-05;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-06-05;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-06-05;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
+2024-06-05;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-06-05;136885;REWE Beste Wahl;REWE Beste Wahl Original Frankfurter Würstchen 250g, 5 Stück;349;250g (1 kg = 13,96 €)
 2024-06-05;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-06-05;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
