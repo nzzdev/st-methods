@@ -6,7 +6,7 @@ datawrapper>=0.5.3
 distlib==0.3.1
 filelock==3.0.12
 geopandas==0.10.2
-numpy>=1.24.0
+numpy==1.24.0
 oauthlib==3.1.1
 pandas==1.4.2
 pipenv==2020.11.15
