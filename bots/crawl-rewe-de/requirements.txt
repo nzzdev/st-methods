@@ -6,6 +6,7 @@ certifi==2020.12.5
 distlib==0.3.1
 filelock==3.0.12
 idna==3.3
+numpy==1.26.4
 oauthlib==3.1.1
 pandas==1.4.2
 pipenv==2020.11.15
