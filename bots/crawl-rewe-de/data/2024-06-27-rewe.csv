@@ -107,6 +107,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-27;8693856;ja!;ja! Cornichons mit Kräutern 190g;99;190g (1 kg = 5,21 €)
 2024-06-27;342931;ja!;ja! Cornichons süß-sauer 370g;159;370g (1 kg = 4,30 €)
 2024-06-27;2325016;ja!;ja! Cranberries 200g;199;200g (1 kg = 9,95 €)
+2024-06-27;8311334;ja!;ja! Criss Cross Pommes pikant gewürzt 600g;199;600g (1 kg = 3,32 €)
 2024-06-27;8444108;ja!;ja! Crème Fraîche Classic 30% Fett 200g;99;200g (1 kg = 4,95 €)
 2024-06-27;8645285;ja!;ja! Cuorino 225g;199;225g (1 kg = 8,84 €)
 2024-06-27;8074238;ja!;ja! Curly Fries pikant gewürzt 600g;199;600g (1 kg = 3,32 €)
@@ -1006,8 +1007,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-27;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2024-06-27;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;249;1l
 2024-06-27;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-06-27;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-06-27;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
+2024-06-27;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-06-27;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-06-27;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
 2024-06-27;8560198;REWE Beste Wahl;REWE Beste Wahl Paprika edelsüß gemahlen 39g;199;39g (1 kg = 51,03 €)
@@ -1171,7 +1172,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-06-27;8999347;REWE Beste Wahl;REWE Beste Wahl Waffle Bites ChoViva 125g;169;125g (1 kg = 13,52 €)
 2024-06-27;185596;REWE Beste Wahl;REWE Beste Wahl Waldheidelbeeren 125g;159;125g (1 kg = 12,72 €)
 2024-06-27;708265;REWE Beste Wahl;REWE Beste Wahl Waldmeister-Getränkesirup 0,5l;179;0,50l (1 l = 3,58 €)
-2024-06-27;2775275;REWE Beste Wahl;REWE Beste Wahl Wasabi Erdnüsse 150g;179;150g (1 kg = 11,93 €)
 2024-06-27;7066219;REWE Beste Wahl;REWE Beste Wahl Wassereis Polar Sticks 10x40ml;139;400ml (1 l = 3,48 €)
 2024-06-27;8045202;REWE Beste Wahl;REWE Beste Wahl Weide Vollmilch 3,5% 1l;125;1l
 2024-06-27;7077819;REWE Beste Wahl;REWE Beste Wahl Weidebutter Süßrahm 250g;239;250g (1 kg = 9,56 €)
