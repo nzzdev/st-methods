@@ -414,7 +414,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-07-05;8726700;ja!;ja! Nudeltopf in Rahmsauce 63g;89;63g (1 kg = 14,13 €)
 2024-07-05;166440;ja!;ja! Nuss-Nougat-Creme 400g;199;400g (1 kg = 4,98 €)
 2024-07-05;2317787;ja!;ja! Nussfruchtmischung 200g;169;200g (1 kg = 8,45 €)
-2024-07-05;3151703;ja!;ja! Nusskernmischung naturell ungesalzen & ungeröstet 200g;279;200g (1 kg = 13,95 €)
 2024-07-05;7709655;ja!;ja! Nussmix geröstet und gesalzen 150g;139;150g (1 kg = 9,27 €)
 2024-07-05;7776207;ja!;ja! Nut Flakes 750g;279;750g (1 kg = 3,72 €)
 2024-07-05;2949713;ja!;ja! Ofenkäse würzig 180g;219;180g (1 kg = 12,17 €)
@@ -784,6 +783,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-07-05;7863984;REWE Beste Wahl;REWE Beste Wahl Fettuccine Lachs 360g;229;360g (1 kg = 6,36 €)
 2024-07-05;8366928;REWE Beste Wahl;REWE Beste Wahl Feuerdrache Hot & Spicy 125g;139;125g (1 kg = 11,12 €)
 2024-07-05;8069624;REWE Beste Wahl;REWE Beste Wahl Fischburger Alaska-Seelachs 4x62,5g, 250g;149;250g (1 kg = 5,96 €)
+2024-07-05;8568062;REWE Beste Wahl;REWE Beste Wahl Fladenbrot 500g;179;500g (1 kg = 3,58 €)
 2024-07-05;7854275;REWE Beste Wahl;REWE Beste Wahl Frikadelle mit Möhrengemüse 400g;349;400g (1 kg = 8,73 €)
 2024-07-05;8961537;REWE Beste Wahl;REWE Beste Wahl Fruchtaufstrich Aprikose 300g;149;300g (1 kg = 4,97 €)
 2024-07-05;8961374;REWE Beste Wahl;REWE Beste Wahl Fruchtaufstrich Erdbeere 300g;149;300g (1 kg = 4,97 €)
@@ -1498,6 +1498,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-07-05;8178294;REWE Bio;REWE Bio Leberwurst mit Kalbfleisch, fein 125g;199;125g (1 kg = 15,92 €)
 2024-07-05;8257989;REWE Bio;REWE Bio Leinsamen geschrotet 400g;199;400g (1 kg = 4,98 €)
 2024-07-05;1919708;REWE Bio;REWE Bio Leinöl nativ 250ml;299;250ml (1 l = 11,96 €)
+2024-07-05;7237532;REWE Bio;REWE Bio Limettensaft 250ml;189;250ml (1 l = 7,56 €)
 2024-07-05;7729583;REWE Bio;REWE Bio Linsenbolognese vegan 400g;229;400g (1 kg = 5,73 €)
 2024-07-05;1424811;REWE Bio;REWE Bio Lorbeerblätter ganz 5g;249;5g
 2024-07-05;8016170;REWE Bio;REWE Bio Maiswaffeln mit Meersalz 120g;79;120g (1 kg = 6,58 €)
