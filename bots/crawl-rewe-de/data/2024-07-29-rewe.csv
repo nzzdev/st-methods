@@ -549,6 +549,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-07-29;8779675;ja!;ja! Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
 2024-07-29;7845627;ja!;ja! Speiseeis nach Fürst Pückler Art 2500ml;379;2500ml (1 l = 1,52 €)
 2024-07-29;9393935;ja!;ja! Speisequark 20% Fett i. Tr. 250g;95;250g (1 kg = 3,80 €)
+2024-07-29;9394010;ja!;ja! Speisequark 250g;105;250g (1 kg = 4,20 €)
 2024-07-29;7915060;ja!;ja! Speisequark Magerstufe 250g;79;250g (1 kg = 3,16 €)
 2024-07-29;9393595;ja!;ja! Speisequark Magerstufe 500g;145;500g (1 kg = 2,90 €)
 2024-07-29;8187959;ja!;ja! Sprühsahne 250ml;199;250ml (1 l = 7,96 €)
@@ -1018,8 +1019,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-07-29;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2024-07-29;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;249;1l
 2024-07-29;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-07-29;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-07-29;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
+2024-07-29;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-07-29;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-07-29;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
 2024-07-29;8560198;REWE Beste Wahl;REWE Beste Wahl Paprika edelsüß gemahlen 39g;199;39g (1 kg = 51,03 €)
@@ -1693,6 +1694,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-07-29;371375;REWE Bio;REWE Bio Sonnenmais 140g;89;140g (1 kg = 6,36 €)
 2024-07-29;8144832;REWE Bio;REWE Bio Sonnenmais supersweet 285g;119;285g (1 kg = 4,18 €)
 2024-07-29;8365010;REWE Bio;REWE Bio Spaghetti Dinkel 500g;155;500g (1 kg = 3,10 €)
+2024-07-29;8385056;REWE Bio;REWE Bio Speisequark 40% Fett i.Tr. 250g;119;250g (1 kg = 4,76 €)
 2024-07-29;3068788;REWE Bio;REWE Bio Speisequark Magerstufe 250g;109;250g (1 kg = 4,36 €)
 2024-07-29;194183;REWE Bio;REWE Bio Speisequarkzubereitung Halbfettstufe 250g;125;250g (1 kg = 5 €)
 2024-07-29;194184;REWE Bio;REWE Bio Speisequarkzubereitung Magerstufe 250g;115;250g (1 kg = 4,60 €)
@@ -1744,6 +1746,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-07-29;8222704;REWE Bio;REWE Bio Ziegenkäse mild 120g;299;120g (1 kg = 24,92 €)
 2024-07-29;43657;REWE Bio;REWE Bio Zitrone 1 Stück;99;1 Stück
 2024-07-29;7589883;REWE Bio;REWE Bio Zitrone 500g im Netz;159;500g (1 kg = 3,18 €)
+2024-07-29;535509;REWE Bio;REWE Bio Zitronen Sorbet 500ml;249;500ml (1 l = 4,98 €)
 2024-07-29;8488920;REWE Bio;REWE Bio Zitronensaft Direktsaft 250ml;169;250ml (1 l = 6,76 €)
 2024-07-29;8878368;REWE Bio;REWE Bio Zitronenwürze 200ml;69;200ml (1 l = 3,45 €)
 2024-07-29;2577507;REWE Bio;REWE Bio Zucchini 500g;219;500g (1 kg = 4,38 €)
