@@ -41,12 +41,16 @@ if __name__ == '__main__':
         df_acstockeex = pd.read_csv(
             './data/eex-ac-stock-dash.csv', encoding='utf-8', index_col='Datum')
         # fallback with daily data if hourly data above is not available
-        if os.path.isfile('./data/smard_spot_current.csv'):
+        # DELETE UNRELIABLE CURRENT STOCK smard_spot_current.csv
+        """
+        if os.path.isfile('./data/smard_spot_current.csv'): 
             df_acstock = pd.read_csv(
                 './data/smard_spot_current.csv', encoding='utf-8', index_col='Datum')
         else:
             df_acstock = pd.read_csv(
                 './data/smard_spot.tsv', sep='\t', encoding='utf-8', index_col='Datum')
+        """
+        df_acstock = pd.read_csv('./data/smard_spot.tsv', sep='\t', encoding='utf-8', index_col='Datum')
         df_acconsumption = pd.read_csv(
             './data/power_consumption.tsv', sep='\t', encoding='utf-8', index_col='Datum')
 
