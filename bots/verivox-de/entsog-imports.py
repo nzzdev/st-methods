@@ -200,10 +200,11 @@ if __name__ == '__main__':
             df_ns.columns[[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12]], axis=1)
 
         # convert date string to datetime
-        df_total[df_total.columns[0]] = pd.to_datetime(
-            df_total[df_total.columns[0]], format='%d.%m.%Y')
-        df_ns[df_ns.columns[0]] = pd.to_datetime(
-            df_ns[df_ns.columns[0]], format='%d.%m.%Y')
+        # old date format
+        #df_total[df_total.columns[0]] = pd.to_datetime(df_total[df_total.columns[0]], format='%d.%m.%Y')
+        #df_ns[df_ns.columns[0]] = pd.to_datetime(df_ns[df_ns.columns[0]], format='%d.%m.%Y')
+        df_total[df_total.columns[0]] = pd.to_datetime(df_total[df_total.columns[0]])
+        df_ns[df_ns.columns[0]] = pd.to_datetime(df_ns[df_ns.columns[0]])
 
         # set date as index
         df_total = df_total.set_index(df_total.columns[0])
