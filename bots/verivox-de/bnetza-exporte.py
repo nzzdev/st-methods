@@ -28,9 +28,8 @@ if __name__ == '__main__':
         df = df.drop(df.columns[[1, 2, 3, 4, 5, 6, 7, 8]], axis=1)
 
         # convert date string to datetime
-        df[df.columns[0]] = pd.to_datetime(df[df.columns[0]])
-        # old date format
-        #df[df.columns[0]] = pd.to_datetime(df[df.columns[0]], format='%d.%m.%Y')
+        df[df.columns[0]] = pd.to_datetime(
+            df[df.columns[0]], format='%d.%m.%Y')
 
         # set date as index
         df = df.set_index(df.columns[0])
