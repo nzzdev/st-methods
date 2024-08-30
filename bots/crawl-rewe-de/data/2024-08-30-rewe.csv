@@ -654,8 +654,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-08-30;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;159;1l
 2024-08-30;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;149;1l
 2024-08-30;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2024-08-30;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2024-08-30;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2024-08-30;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2024-08-30;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-08-30;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2024-08-30;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1144,6 +1144,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-08-30;7262335;REWE Beste Wahl;REWE Beste Wahl Tomatenketchup 300ml;129;300ml (1 l = 4,30 €)
 2024-08-30;135872;REWE Beste Wahl;REWE Beste Wahl Tomatensaft 1l;129;1l
 2024-08-30;128314;REWE Beste Wahl;REWE Beste Wahl Tomatensauce Basilikum 380ml;139;380ml (1 l = 3,66 €)
+2024-08-30;2424787;REWE Beste Wahl;REWE Beste Wahl Tonic Water 6x1l;534;6x1l (1 l = 0,89 €)
 2024-08-30;2027362;REWE Beste Wahl;REWE Beste Wahl Tortellini bunt 250g;139;250g (1 kg = 5,56 €)
 2024-08-30;8286643;REWE Beste Wahl;REWE Beste Wahl Tortellini mit herzhafter Käsefüllung 250g;139;250g (1 kg = 5,56 €)
 2024-08-30;118020;REWE Beste Wahl;REWE Beste Wahl Tortelloni 4-Käse 500g;349;500g (1 kg = 6,98 €)
