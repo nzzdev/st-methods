@@ -767,7 +767,7 @@ if __name__ == '__main__':
         notes_chart = '¹ Die Preise der Rewe-Eigenmarke entsprechen in der Regel den Aldi-Preisen.<br>Stand: ' + todaynicey
 
         # run Q function
-        #update_chart(id='83caf1c1cfcfaf76da2c577a9efa0cfa', data=df_t_y, notes=notes_chart)
+        update_chart(id='83caf1c1cfcfaf76da2c577a9efa0cfa', data=df_t_y, notes=notes_chart)
 
         ##########################
         # monthly summary PICKUP #
