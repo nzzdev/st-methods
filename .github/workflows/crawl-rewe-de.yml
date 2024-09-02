@@ -45,11 +45,6 @@ jobs:
       - name: Run python scripts
         run: |
           python crawl-rewe.py
-      - name: Run Q cli
-        run: Q update-item
-        env:
-          Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
-          Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: '*.csv *-ja-*.json'
