@@ -648,8 +648,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-09-03;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;159;1l
 2024-09-03;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;149;1l
 2024-09-03;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2024-09-03;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2024-09-03;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2024-09-03;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2024-09-03;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-09-03;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2024-09-03;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1168,7 +1168,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-09-03;708265;REWE Beste Wahl;REWE Beste Wahl Waldmeister-Getränkesirup 0,5l;179;0,50l (1 l = 3,58 €)
 2024-09-03;2775275;REWE Beste Wahl;REWE Beste Wahl Wasabi Erdnüsse 150g;179;150g (1 kg = 11,93 €)
 2024-09-03;7066219;REWE Beste Wahl;REWE Beste Wahl Wassereis Polar Sticks 10x40ml;139;400ml (1 l = 3,48 €)
-2024-09-03;8045202;REWE Beste Wahl;REWE Beste Wahl Weide Vollmilch 3,5% 1l;129;1l
 2024-09-03;7077819;REWE Beste Wahl;REWE Beste Wahl Weidebutter Süßrahm 250g;259;250g (1 kg = 10,36 €)
 2024-09-03;9022742;REWE Beste Wahl;REWE Beste Wahl Weizen Tortillas mit Leinsamen 372g;129;372g (1 kg = 3,47 €)
 2024-09-03;1211124;REWE Beste Wahl;REWE Beste Wahl Weizenmehl Type 405 1kg;129;1000kg
