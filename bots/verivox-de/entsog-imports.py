@@ -183,14 +183,28 @@ if __name__ == '__main__':
         ### update_chart(id='78215f05ea0a73af28c0bb1c2c89f896',data=df_de, notes=notes_chart_de)
 
         # Nord stream 1 to DE Bundesnetzagentur
-        url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
-        # url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=591576'  # new
-        resp = download_data(url, headers=fheaders)
-        csv_file = resp.text
-
-        # read csv
-        df_ns = pd.read_csv(io.StringIO(csv_file), encoding='utf-8',
-                            sep=';', decimal=',', index_col=None)
+        try:
+            url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=1081248'
+            # url = 'https://www.bundesnetzagentur.de/_tools/SVG/js2/_functions/csv_export.html?view=renderCSV&id=591576'  # new
+            resp = download_data(url, headers=fheaders)
+            csv_file = resp.text
+            # read csv
+            df_ns = pd.read_csv(io.StringIO(csv_file), encoding='utf-8', sep=';', decimal=',', index_col=None)
+            # check if data is corrupted
+            errors = 0
+            while (len(df_ns) < 730) and (errors < 3):
+                sleep(2)
+                errors += 1
+                resp = download_data(url, headers=fheaders)
+                csv_file = resp.text
+                df_ns = pd.read_csv(io.StringIO(csv_file), encoding='utf-8', sep=';', decimal=',', index_col=None)
+            if (len(df_ns) >= 730):
+                # save tsv
+                df_ns.to_csv('./data/lng_imports.tsv', sep='\t', encoding='utf-8', index=False)
+        except:
+            pass
+        # read old tsv
+        df_ns = pd.read_csv('./data/lng_imports.tsv', sep='\t', index_col=None)
 
         # clean dataframe for NS1 and total imports
         df_total = df_ns.copy()
