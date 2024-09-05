@@ -86,7 +86,7 @@ if __name__ == '__main__':
                             sep='\t', index_col=None, dtype={'plz': 'string'})
 
         # GeoJSON with postal codes
-        gdf = gpd.read_file('./data/plz_vereinfacht_1.5.json')
+        gdf = gpd.read_file('./data/plz_vereinfacht_1.5-min.json')
 
         # current date
         dfac['Datum'] = pd.to_datetime(dfac['Datum'])
