@@ -14,7 +14,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-09-19;8600224;ja!;ja! Anzündwürfel 64 Stück;149;64 Stück
 2024-09-19;2394739;ja!;ja! Apfel Holunder Schorle 6x0,5l;234;6x0,50l (1 l = 0,78 €)
 2024-09-19;2394743;ja!;ja! Apfel Rhabarber Schorle 6x0,5l;234;6x0,50l (1 l = 0,78 €)
-2024-09-19;7892514;ja!;ja! Apfelnektar 6x1,5l;774;6x1,50l (1 l = 0,86 €)
 2024-09-19;7898682;ja!;ja! Apfelsaft 6x1l;654;6x1l (1 l = 1,09 €)
 2024-09-19;520330;ja!;ja! Apfelschorle 6x1,5l;654;6x1,50l (1 l = 0,73 €)
 2024-09-19;7951836;ja!;ja! Arrabiata Sauce 400ml;159;400ml (1 l = 3,98 €)
@@ -644,8 +643,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-09-19;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;159;1l
 2024-09-19;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;149;1l
 2024-09-19;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2024-09-19;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-09-19;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2024-09-19;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
 2024-09-19;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;354;6x0,50l (1 l = 1,18 €)
 2024-09-19;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;534;6x1l (1 l = 0,89 €)
 2024-09-19;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -997,8 +996,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-09-19;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2024-09-19;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;249;1l
 2024-09-19;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;229;1l
-2024-09-19;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-09-19;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;249;1l
+2024-09-19;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;229;1l
 2024-09-19;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2024-09-19;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
 2024-09-19;8005928;REWE Beste Wahl;REWE Beste Wahl Paprika Edelsüß gemahlen 50g;199;50g (1 kg = 39,80 €)
