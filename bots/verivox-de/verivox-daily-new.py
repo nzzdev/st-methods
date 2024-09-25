@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
         user_env = os.environ['VERIVOX_SNOWFLAKE_USER']
         pass_env = os.environ['VERIVOX_SNOWFLAKE_PASS']
-        acc_env = os.environ['VERIVOX_SNOWFLAKE_ACC']
+        acc_env = os.environ['VERIVOX_SNOWFLAKE_ACC'] # xy.eu-central-1
 
         con = snowflake.connector.connect(
             user=user_env,
