@@ -176,7 +176,7 @@ if __name__ == '__main__':
                 dfavg = dfavg.round(0).astype(int)
 
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Im Vergleich zu den durchschnittlichen Kosten im Jahr 2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
+            notes_chart = '¹ Im Vergleich zu den durchschnittlichen Kosten im Jahr 2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Bonus).<br>Stand: ' + \
                 str(time_str_notes)
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             gas_new = dfavg['Gas'].iloc[-1]
@@ -203,7 +203,7 @@ if __name__ == '__main__':
             time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
-            notes_chart = '¹ Im Vergleich zu den durchschnittlichen Kosten im Jahr 2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + \
+            notes_chart = '¹ Im Vergleich zu den durchschnittlichen Kosten im Jahr 2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Bonus).<br>Stand: ' + \
                 str(time_str_notes)
             gas_new = dfavg['Gas'].iloc[-1]
             ac_new = dfavg['Strom'].iloc[-1]
@@ -255,7 +255,7 @@ if __name__ == '__main__':
             }
         }]
 
-        notes_chart = 'Die Zahlen beruhen auf dem jeweils günstigsten Neukunden-Tarif (Preisgarantie mindestens 12 Monate) für eine vierköpfige Familie in einem Einfamilienhaus mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
+        notes_chart = 'Die Zahlen beruhen auf dem jeweils günstigsten Neukunden-Tarif (Preisgarantie mindestens 12 Monate, ohne Bonus) für eine vierköpfige Familie in einem Einfamilienhaus mit einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom.<br>Stand: ' + \
             str(time_str_notes)
 
         # run function
