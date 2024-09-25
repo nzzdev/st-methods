@@ -75,9 +75,9 @@ if __name__ == '__main__':
 
         # read csv files and geojson as dataframe
         dfac = pd.read_csv('./data/newest_electricity_data.csv', index_col=None, usecols=[
-                           'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (brutto) in EUR pro Jahr', 'Datum'], dtype={'Postleitzahl': 'string'})
+                           'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (brutto) in EUR pro Jahr (ohne Boni)', 'Datum'], dtype={'Postleitzahl': 'string'})
         dfgas = pd.read_csv('./data/newest_gas_data.csv', index_col=None, usecols=[
-                            'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (brutto) in EUR pro Jahr', 'Datum'], dtype={'Postleitzahl': 'string'})
+                            'Postleitzahl', 'Anzahl Haushalte', 'Gesamtkosten (brutto) in EUR pro Jahr (ohne Boni)', 'Datum'], dtype={'Postleitzahl': 'string'})
         df21 = pd.read_csv('./data/gas-strom-1120.tsv',
                            sep='\t', index_col=None, dtype={'id': 'string'})
         dfavg = pd.read_csv(
@@ -97,9 +97,9 @@ if __name__ == '__main__':
 
         # rename column headers
         dfac.rename(columns={'Postleitzahl': 'id', 'Anzahl Haushalte': 'hh',
-                             'Gesamtkosten (brutto) in EUR pro Jahr': 'strom', 'Datum': 'datum'}, inplace=True)
+                             'Gesamtkosten (brutto) in EUR pro Jahr (ohne Boni)': 'strom', 'Datum': 'datum'}, inplace=True)
         dfgas.rename(columns={'Postleitzahl': 'id', 'Anzahl Haushalte': 'hh',
-                              'Gesamtkosten (brutto) in EUR pro Jahr': 'gas', 'Datum': 'datum'}, inplace=True)
+                              'Gesamtkosten (brutto) in EUR pro Jahr (ohne Boni)': 'gas', 'Datum': 'datum'}, inplace=True)
 
         # get household estimates for postal codes with missing data
         # electricity
