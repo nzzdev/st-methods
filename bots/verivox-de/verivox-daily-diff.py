@@ -17,8 +17,8 @@ if __name__ == '__main__':
         dw_id = 'sgFfi'
 
         # pre-crisis average 2018-2020
-        gasavg = 874.7527372
-        acavg = 956.5565693
+        gasavg = 969.63 # with bonus: 874.75
+        acavg = 1081.66 # with bonus: 956.56
 
         # create indexed time series
         df = pd.read_csv(
@@ -57,7 +57,7 @@ if __name__ == '__main__':
         # create notes
         timecode = df.index[-1]
         timecode_str = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Bei einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom. Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Grundversorgung).<br>Stand: ' + timecode_str
+        notes_chart = '¹ Bei einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom. Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Boni).<br>Stand: ' + timecode_str
 
         # update Datawrapper chart
         df.reset_index(inplace=True)
