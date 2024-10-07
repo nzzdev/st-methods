@@ -274,6 +274,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-10-07;754432;ja!;ja! Joghurt mild 0,1% 500g;85;500g (1 kg = 1,70 €)
 2024-10-07;8324448;ja!;ja! Joghurt mild 3,5 % Fett 500g;95;500g (1 kg = 1,90 €)
 2024-10-07;9045552;ja!;ja! Jumbo Fries 1kg;189;1000g
+2024-10-07;7083761;ja!;ja! Junge Erbsen 1kg;239;1000g
 2024-10-07;7691883;ja!;ja! Kaffe Klassik 40 Pads, 280g;399;280g (1 kg = 14,25 €)
 2024-10-07;7691945;ja!;ja! Kaffee Pads 280g, 40 Pads;399;280g (1 kg = 14,25 €)
 2024-10-07;2755729;ja!;ja! Kaffee-Filter Größe 4, 100 Stück;79;NaN
@@ -1468,7 +1469,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-10-07;7816381;REWE Bio;REWE Bio Naturland 5 Korn Müsli 750g;179;750g (1 kg = 2,39 €)
 2024-10-07;8890687;REWE Bio;REWE Bio Naturland Bergkäse 50% 200g;299;200g (1 kg = 14,95 €)
 2024-10-07;8670061;REWE Bio;REWE Bio Naturland Black Tiger Garnelen 256g;779;256g (1 kg = 30,43 €)
-2024-10-07;7618383;REWE Bio;REWE Bio Naturland Blütenhonig Cremig 500g;389;500g (1 kg = 7,78 €)
 2024-10-07;8757063;REWE Bio;REWE Bio Naturland Bunter Pfeffer Mühle 40g;259;40g (1 kg = 64,75 €)
 2024-10-07;7659374;REWE Bio;REWE Bio Naturland Cashewmus 250g;599;250g (1 kg = 23,96 €)
 2024-10-07;8922978;REWE Bio;REWE Bio Naturland Dinkel Crunchy 500g;259;500g (1 kg = 5,18 €)
