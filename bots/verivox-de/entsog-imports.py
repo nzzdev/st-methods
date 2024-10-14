@@ -200,6 +200,8 @@ if __name__ == '__main__':
                 df_ns = pd.read_csv(io.StringIO(csv_file), encoding='utf-8', sep=';', decimal=',', index_col=None)
             if (len(df_ns) >= 730) and (not pd.isna(df_ns.iloc[-1, -2])) and df_ns.iloc[-1, -1] > 100: # check for errors (no value in LNG, value to little in "Gesamt" etc)
                 # save tsv
+                # drop last row that is almost always incomplete
+                df_ns.drop(df.tail(1).index,inplace=True)
                 df_ns.to_csv('./data/lng_imports.tsv', sep='\t', encoding='utf-8', index=False)
         except:
             pass
