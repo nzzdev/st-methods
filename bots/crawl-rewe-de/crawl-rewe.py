@@ -783,7 +783,7 @@ if __name__ == '__main__':
         month_nice = month_first.strftime('%B')  # Oktober etc.
         month_file = month_first.strftime('%Y-%m')  # 2022-10 etc.
 
-        if today == month_last1:
+        if today == month_last:
 
             # create JSON for monthly price changes
             o1 = pd.read_csv(f'./data/{month_first}-rewe-pickup.csv',
