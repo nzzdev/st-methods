@@ -1,0 +1,175 @@
+{
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "A choropleth map the USA election results 2020.",
+    "width": 350,
+    "height": 250,
+    "autosize": "none",
+    "projections": [
+        {
+            "name": "projection",
+            "type": "albersUsa",
+            "scale": 470,
+            "translate": [180, 120]
+        }
+    ],
+    "scales": [
+        {
+            "name": "color",
+            "type": "ordinal",
+            "domain": ["Uncounted", "Republicans", "Democrats"],
+            "range": ["#d7d7d7", "#ff7a64", "#81a8db"]
+        },
+        {
+            "name": "size",
+            "type": "linear",
+            "domain": {
+                "data": "counties",
+                "field": "properties.population"
+            },
+            "range": [2, 500]
+        },
+        {
+            "name": "party",
+            "type": "ordinal",
+            "domain": ["Republicans", "Democrats", null],
+            "range": ["#85130F", "#12416C", "#6e6e7e"]
+        }
+    ],
+    "legends": [
+        {
+            "size": "size",
+            "title": "Population",
+            "symbolStrokeColor": "#6e6e7e",
+            "symbolStrokeWidth": 0.4,
+            "symbolType": "circle",
+            "values": [10000, 100000, 1000000]
+        }
+    ],
+    "marks": [
+        {
+            "type": "shape",
+            "from": {
+                "data": "counties"
+            },
+            "encode": {
+                "enter": {
+                    "stroke": {
+                        "value": "#cdcdd1"
+                    },
+                    "strokeWidth": {
+                        "value": 0.2
+                    },
+                    "tooltip": {
+                        "field": "properties.share_cat"
+                    }
+                }
+            },
+            "transform": [
+                {
+                    "type": "geoshape",
+                    "projection": "projection"
+                }
+            ]
+        },
+        {
+            "type": "shape",
+            "from": {
+                "data": "states"
+            },
+            "encode": {
+                "enter": {
+                    "stroke": {
+                        "value": "#6e6e7e"
+                    },
+                    "strokeWidth": {
+                        "value": 0.4
+                    },
+                    "tooltip": {
+                        "field": "properties.winner"
+                    }
+                }
+            },
+            "transform": [
+                {
+                    "type": "geoshape",
+                    "projection": "projection"
+                }
+            ]
+        },
+
+        {
+            "type": "group",
+            "from": {
+                "facet": {
+                    "data": "counties",
+                    "groupby": "properties.fips",
+                    "name": "county"
+                }
+            },
+            "marks": [
+                {
+                    "type": "symbol",
+                    "from": {
+                        "data": "county"
+                    },
+                    "encode": {
+                        "enter": {
+                            "fill": {
+                                "scale": "color",
+                                "field": "properties.winner"
+                            },
+                            "x": {
+                                "field": "centroid[0]"
+                            },
+                            "y": {
+                                "field": "centroid[1]"
+                            },
+                            "opacity": {
+                                "signal": "if(datum.properties.winner == 'Uncounted', 0, 0.7)"
+                            },
+                            "size": {
+                                "scale": "size",
+                                "field": "properties.population"
+                            },
+                            "stroke": {
+                                "scale": "party",
+                                "field": "properties.winner"
+                            },
+                            "strokeWidth": {
+                                "value": 0.5
+                            },
+                            "strokeOpacity": {
+                                "signal": "if(datum.properties.winner == 'Uncounted', 0, 0.7)"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "data": [
+        {
+            "name": "states",
+            "url": "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json",
+            "format": {
+                "type": "topojson",
+                "feature": "states"
+            }
+        },
+        {
+            "name": "counties",
+            "format": {
+                "type": "topojson",
+                "feature": "windofchange"
+            },
+            "transform": [
+                {
+                    "type": "formula",
+                    "as": "centroid",
+                    "expr": "geoCentroid('projection', datum.geometry)"
+                }
+            ],
+            "values": {}
+        }
+    ]
+}
