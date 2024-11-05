@@ -60,7 +60,7 @@
                         "value": 0.2
                     },
                     "tooltip": {
-                        "field": "properties.share_cat"
+                        "field": "properties.fips"
                     }
                 }
             },
