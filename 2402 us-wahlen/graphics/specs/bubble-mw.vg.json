@@ -16,7 +16,7 @@
         {
             "name": "color",
             "type": "ordinal",
-            "domain": ["Uncounted", "Republicans", "Democrats"],
+            "domain": [null, "Trump", "Harris"],
             "range": ["#d7d7d7", "#ff7a64", "#81a8db"]
         },
         {
@@ -31,7 +31,7 @@
         {
             "name": "party",
             "type": "ordinal",
-            "domain": ["Republicans", "Democrats", null],
+            "domain": ["Trump", "Harris", null],
             "range": ["#85130F", "#12416C", "#6e6e7e"]
         }
     ],
