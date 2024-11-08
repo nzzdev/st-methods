@@ -61,15 +61,16 @@ if __name__ == '__main__':
 
         # execute a statement that will generate a result set
         cur.execute("USE ROLE PRESS_ROLE")
-        cur.execute(
-            "SELECT * FROM ELECTRICITY_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS WHERE \"Datum\" = (SELECT MAX(\"Datum\") FROM ELECTRICITY_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS) ORDER BY \"Postleitzahl\", \"Ort\", \"Ortsteil\" ")
+        cur.execute("SELECT * FROM ELECTRICITY_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS WHERE \"Datum\" = (SELECT MAX(\"Datum\") FROM ELECTRICITY_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS) ORDER BY \"Postleitzahl\", \"Ort\", \"Ortsteil\" ") # current data
+        #cur.execute("SELECT * FROM ELECTRICITY_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS WHERE \"Datum\" = (SELECT DATEADD(DAY, -7, MAX(\"Datum\")) FROM ELECTRICITY_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS) ORDER BY \"Postleitzahl\", \"Ort\", \"Ortsteil\" ") # old data
+
 
         # fetch the result set from the cursor and deliver as pandas dataframe
         df = cur.fetch_pandas_all()
         df.to_csv('./data/newest_electricity_data.csv')
 
-        cur.execute(
-            "SELECT * FROM GAS_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS WHERE \"Datum\" = (SELECT MAX(\"Datum\") FROM GAS_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS) ORDER BY \"Postleitzahl\", \"Ort\", \"Ortsteil\" ")
+        cur.execute("SELECT * FROM GAS_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS WHERE \"Datum\" = (SELECT MAX(\"Datum\") FROM GAS_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS) ORDER BY \"Postleitzahl\", \"Ort\", \"Ortsteil\" ") # current data
+        #cur.execute("SELECT * FROM GAS_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS WHERE \"Datum\" = (SELECT DATEADD(DAY, -7, MAX(\"Datum\")) FROM GAS_PRICE_GUARANTEE_12_MONTHS_WITHOUT_BONUS) ORDER BY \"Postleitzahl\", \"Ort\", \"Ortsteil\" ") # old data
         df = cur.fetch_pandas_all()
         df.to_csv('./data/newest_gas_data.csv')
 
