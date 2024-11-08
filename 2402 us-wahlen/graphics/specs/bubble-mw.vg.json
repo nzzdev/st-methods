@@ -33,6 +33,18 @@
             "type": "ordinal",
             "domain": ["Trump", "Harris", null],
             "range": ["#85130F", "#12416C", "#6e6e7e"]
+        },
+        {
+            "name": "status",
+            "type": "ordinal",
+            "domain": ["uncertain", "certain"],
+            "range": ["#f0f0f0", "#ffffff"]
+        },
+        {
+            "name": "visibility",
+            "type": "ordinal",
+            "domain": ["hidden", "visible"],
+            "range": [0, 1]
         }
     ],
     "legends": [
@@ -61,6 +73,10 @@
                     },
                     "tooltip": {
                         "field": "properties.fips"
+                    },
+                    "fill": {
+                        "field": "properties.status",
+                        "scale": "status"
                     }
                 }
             },
@@ -109,23 +125,18 @@
             "marks": [
                 {
                     "type": "symbol",
-                    "from": {
-                        "data": "county"
-                    },
+                    "from": { "data": "county" },
                     "encode": {
                         "enter": {
                             "fill": {
                                 "scale": "color",
                                 "field": "properties.winner"
                             },
-                            "x": {
-                                "field": "centroid[0]"
-                            },
-                            "y": {
-                                "field": "centroid[1]"
-                            },
+                            "x": { "field": "centroid[0]" },
+                            "y": { "field": "centroid[1]" },
                             "opacity": {
-                                "signal": "if(datum.properties.winner == 'Uncounted', 0, 0.7)"
+                                "field": "properties.visibility",
+                                "scale": "visibility"
                             },
                             "size": {
                                 "scale": "size",
@@ -135,11 +146,10 @@
                                 "scale": "party",
                                 "field": "properties.winner"
                             },
-                            "strokeWidth": {
-                                "value": 0.5
-                            },
+                            "strokeWidth": { "value": 0.5 },
                             "strokeOpacity": {
-                                "signal": "if(datum.properties.winner == 'Uncounted', 0, 0.7)"
+                                "field": "properties.visibility",
+                                "scale": "visibility"
                             }
                         }
                     }

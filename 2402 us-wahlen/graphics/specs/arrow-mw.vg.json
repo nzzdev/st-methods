@@ -30,7 +30,7 @@
         {
             "name": "color",
             "type": "quantize",
-            "domain": [-56, 56],
+            "domain": [-16, 16],
             "reverse": true,
             "range": [
                 "#ce6661",
@@ -44,13 +44,13 @@
         {
             "name": "opacity",
             "type": "linear",
-            "domain": [0, 5.570860980419826, 11.141721960839652, 56],
-            "range": [0, 0.666666, 1, 1]
+            "domain": [0, 16],
+            "range": [0.6, 1]
         },
         {
             "name": "size",
             "type": "linear",
-            "domain": [0, 55],
+            "domain": [0, 16],
             "range": [
                 10,
                 {
@@ -66,6 +66,12 @@
                 "field": "properties.population"
             },
             "range": [10, 500]
+        },
+        {
+            "name": "status",
+            "type": "ordinal",
+            "domain": ["uncertain", "certain"],
+            "range": ["#f0f0f0", "#ffffff"]
         }
     ],
     "marks": [
@@ -81,6 +87,10 @@
                     },
                     "strokeWidth": {
                         "signal": "county_borders"
+                    },
+                    "fill": {
+                        "field": "properties.status",
+                        "scale": "status"
                     }
                 }
             },
@@ -169,7 +179,7 @@
                                 "value": "triangle"
                             },
                             "size": {
-                                "signal": "20*len_factor"
+                                "signal": "10*len_factor"
                             },
                             "angle": {
                                 "signal": "if(datum.properties.shifted>0, 45, -45)"
@@ -189,7 +199,8 @@
                                 "signal": "abs(datum.properties.shifted)"
                             },
                             "tooltip": {
-                                "signal": "{'name': datum.properties.county, 'shifted': datum.properties.shifted}"
+                                "scale": "color",
+                                "field": "properties.shifted"
                             }
                         }
                     }
@@ -208,7 +219,6 @@
         },
         {
             "name": "counties",
-            "url": "windofchange.topo.json",
             "format": {
                 "type": "topojson",
                 "feature": "windofchange"
