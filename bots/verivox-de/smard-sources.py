@@ -1071,18 +1071,6 @@ if __name__ == '__main__':
             './data/smard_trade_fixed_all.tsv', sep='\t', index_col='Datum')
         df_trade.index = pd.to_datetime(df_trade.index)
 
-        # get current date for chart notes
-        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
-        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
-        notes_chart = f'Stand: {time_str_notes}'
-
-        # dynamic chart title
-        last_value = df_trade['Saldo'].iloc[-2]
-        if last_value >= 0:
-            title = 'Deutschland exportiert derzeit mehr Strom, als es importiert'
-        else:
-            title = 'Deutschland importiert derzeit mehr Strom, als es exportiert'
-
         # run Q function
         #update_chart(id='12496a04992590f16cb3aaa749b3b7b4', title=title, notes=notes_chart, data=df_trade)
 
@@ -1121,6 +1109,18 @@ if __name__ == '__main__':
         # update last row for step-after chart (avoid constant commits)
         df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
         df_trade.to_csv('./data/smard_trade_fixed_all.tsv', sep='\t', encoding='utf-8', index=True)
+
+        # get current date for chart notes
+        time_dt_notes = df_trade.index[-2] + timedelta(days=1)
+        time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
+        notes_chart = f'Stand: {time_str_notes}'
+
+        # dynamic chart title
+        last_value = df_trade['Saldo'].iloc[-2]
+        if last_value >= 0:
+            title = 'Deutschland exportiert derzeit mehr Strom, als es importiert'
+        else:
+            title = 'Deutschland importiert derzeit mehr Strom, als es exportiert'
 
         # Remove latest week
         df_trade.drop(df_trade.tail(1).index, inplace=True)
