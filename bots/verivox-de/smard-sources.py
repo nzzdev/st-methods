@@ -1094,9 +1094,39 @@ if __name__ == '__main__':
         time_str_notes = time_str_notes.strftime('%-d. %-m. %Y')
         """
 
-        # update Datawrapper chart
+        # Read the imports-countries-dash.csv file
+        df_imports = pd.read_csv('./data/imports-countries-dash.csv', sep=',', index_col=None)
+
+        # Ensure that the 'date' column in df_imports is consistent
+        # The 'date' format is assumed to be like 'KW 45' where 'KW' stands for 'Kalenderwoche' (calendar week)
+        # Extract the week number from the 'date' column
+        df_imports['KW'] = df_imports['date'].str.extract(r'KW\s?(\d+)', expand=False).astype(int)
+
+        # Get the last entry from df_imports
+        last_import_week = df_imports['KW'].iloc[-1]
+        last_import_value = df_imports['value'].iloc[-1]
+
+        # Get the last date from df_trade and extract the calendar week number
+        last_trade_date = df_trade.index[-2]
+        last_trade_week = last_trade_date.isocalendar()[1]
+
+        # Check if the weeks match
+        if last_trade_week == last_import_week:
+            # Replace the 'Saldo' value in df_trade with the 'value' from df_imports
+            df_trade.at[df_trade.index[-2], 'Saldo'] = last_import_value
+            print(f"Replaced last 'Saldo' value in df_trade with {last_import_value} from imports-countries-dash.csv")
+        else:
+            print("The last week in df_trade and imports-countries-dash.csv do not match. No replacement made.")
+
+        # update last row for step-after chart (avoid constant commits)
+        df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
+        df_trade.to_csv('./data/smard_trade_fixed_all.tsv', sep='\t', encoding='utf-8', index=True)
+
+        # Remove latest week
         df_trade.drop(df_trade.tail(1).index, inplace=True)
         df_trade.reset_index(inplace=True)
+
+        # update Datawrapper chart
         dw_chart = dw.add_data(chart_id=dw_id, data=df_trade)
         dw.update_chart(chart_id=dw_id, title=title)
         date = {'annotate': {
