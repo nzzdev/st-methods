@@ -35,60 +35,32 @@ if __name__ == '__main__':
             'Host': 'webservice-eex.gvsi.com'
         }
 
-        url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
+        # attempt to load data for multiple days backward in case of bank holidays or missing data
+        df = pd.DataFrame()  # initialize an empty DataFrame
+        days_back = 1  # start checking from one day before today
+        max_attempts = 5  # maximum number of days to go back
 
-        # get JSON
-        r = requests.get(url, headers=headers)
-        dictr = r.json()
-        recs = dictr['results']['items']
-        df = pd.json_normalize(recs)  # first line is next year ("/E.DEBYF2x")
-
-        # temp check if there was a bank holiday (create loop later)
-        if df.empty:
-            # generate dates for url
-            tday = datetime.today() - timedelta(days=2)
-            yday = datetime.today() - timedelta(days=3)
-            tdayurl = tday.strftime('%Y/%m/%d')
-            tdayurl = tdayurl.replace('/', '%2F')
-            ydayurl = yday.strftime('%Y/%m/%d')
-            ydayurl = ydayurl.replace('/', '%2F')
+        while df.empty and days_back <= max_attempts:
+            # generate URLs for the current attempt day
+            tday = datetime.today() - timedelta(days=days_back)
+            yday = datetime.today() - timedelta(days=days_back + 1)
+            tdayurl = tday.strftime('%Y/%m/%d').replace('/', '%2F')
+            ydayurl = yday.strftime('%Y/%m/%d').replace('/', '%2F')
+            
             url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
+            
+            # send request to the API
             r = requests.get(url, headers=headers)
             dictr = r.json()
-            recs = dictr['results']['items']
-            # first line is next year ("/E.DEBYF2x")
+            recs = dictr.get('results', {}).get('items', [])
             df = pd.json_normalize(recs)
-            if df.empty:
-                # generate dates for url
-                tday = datetime.today() - timedelta(days=3)
-                yday = datetime.today() - timedelta(days=4)
-                tdayurl = tday.strftime('%Y/%m/%d')
-                tdayurl = tdayurl.replace('/', '%2F')
-                ydayurl = yday.strftime('%Y/%m/%d')
-                ydayurl = ydayurl.replace('/', '%2F')
-                url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
-                r = requests.get(url, headers=headers)
-                dictr = r.json()
-                recs = dictr['results']['items']
-                # first line is next year ("/E.DEBYF2x")
-                df = pd.json_normalize(recs)
-                if df.empty:
-                    # generate dates for url
-                    tday = datetime.today() - timedelta(days=4)
-                    yday = datetime.today() - timedelta(days=5)
-                    tdayurl = tday.strftime('%Y/%m/%d')
-                    tdayurl = tdayurl.replace('/', '%2F')
-                    ydayurl = yday.strftime('%Y/%m/%d')
-                    ydayurl = ydayurl.replace('/', '%2F')
-                    url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
-                    r = requests.get(url, headers=headers)
-                    dictr = r.json()
-                    recs = dictr['results']['items']
-                    # first line is next year ("/E.DEBYF2x")
-                    df = pd.json_normalize(recs)
+            
+            # increment days_back to check the next previous day if df is still empty
+            days_back += 1
 
-        # drop everything except "close" and date
-        df = df.head(1).filter(['close', 'tradedatetimegmt'])
+        # filter columns if data is found
+        if not df.empty:
+            df = df.head(1).filter(['close', 'tradedatetimegmt'])
 
         # convert do datetimeindex
         df['tradedatetimegmt'] = pd.to_datetime(df['tradedatetimegmt'])
