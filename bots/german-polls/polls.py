@@ -534,44 +534,37 @@ party_metadata = {
     "BSW": {"id": "0d50b45e538faa45f768d3204450d0e7-1732637074764-908994801", "colorCode": "#da467d"}
 }
 
-# Add parties with less than 5% and assign 0 seats
-all_parties = pd.DataFrame(list(party_metadata.keys()), columns=["Partei"])
-coalition_data = latest_rolling_averages[latest_rolling_averages['Partei'] != 'Übrige'][['Partei', 'average']].copy()
+# Use the latest rolling averages for coalition calculations
+coalition_data = latest_rolling_averages[(latest_rolling_averages['Partei'] != 'Übrige') & 
+                                         (latest_rolling_averages['average'] >= 5)].copy()
 
-# Merge all parties to ensure none are missing
-coalition_data = all_parties.merge(coalition_data, on='Partei', how='left').fillna(0)
-
-# Compute value_5pct only for parties >= 5%
-eligible_parties = coalition_data[coalition_data['average'] > 0].copy()
-eligible_parties.loc[eligible_parties['average'] < 5, 'seats'] = 0
-value_sum = eligible_parties['average'].sum()
-eligible_parties['value_5pct'] = 100 * eligible_parties['average'] / value_sum
+# Compute value_5pct
+value_sum = coalition_data['average'].sum()
+coalition_data['value_5pct'] = 100 * coalition_data['average'] / value_sum
 
 # Compute seats projected to 630 seats
 total_seats = 630  # Maximum allowed seats
-eligible_parties['seats'] = (eligible_parties['value_5pct'] * total_seats / 100).round(0).astype(int)
+coalition_data['seats'] = (coalition_data['value_5pct'] * total_seats / 100).round(0).astype(int)
 
 # Adjust the seats to ensure the total matches total_seats
-seats_difference = total_seats - eligible_parties['seats'].sum()
+seats_difference = total_seats - coalition_data['seats'].sum()
 if seats_difference != 0:
     # Sort by fractional part of seat allocation to decide which party to adjust
-    eligible_parties['fraction'] = eligible_parties['value_5pct'] * total_seats / 100 - eligible_parties['seats']
-    eligible_parties = eligible_parties.sort_values(by='fraction', ascending=(seats_difference < 0))
+    coalition_data['fraction'] = coalition_data['value_5pct'] * total_seats / 100 - coalition_data['seats']
+    coalition_data = coalition_data.sort_values(by='fraction', ascending=(seats_difference < 0))
     
     # Adjust seats one by one
     for i in range(abs(seats_difference)):
-        idx = eligible_parties.index[i % len(eligible_parties)]
-        eligible_parties.at[idx, 'seats'] += int(np.sign(seats_difference))
+        idx = coalition_data.index[i % len(coalition_data)]
+        coalition_data.at[idx, 'seats'] += int(np.sign(seats_difference))
     
     # Drop the 'fraction' column after adjustment
-    eligible_parties = eligible_parties.drop(columns=['fraction'])
-
-# Add back parties with less than 5% and assign them 0 seats
-coalition_data = coalition_data.merge(eligible_parties[['Partei', 'seats']], on='Partei', how='left')
-coalition_data['seats'] = coalition_data['seats'].fillna(0).astype(int)
+    coalition_data = coalition_data.drop(columns=['fraction'])
 
 # Generate the coalitionSeats as a list of dictionaries
 coalitionSeats = []
+
+# Add parties with >= 5% and their calculated seats
 for _, row in coalition_data.iterrows():
     party_name = row['Partei']
     if party_name in party_metadata:
@@ -580,6 +573,16 @@ for _, row in coalition_data.iterrows():
             "color": {"colorCode": party_metadata[party_name]["colorCode"]},
             "name": party_name,
             "seats": int(row['seats'])
+        })
+
+# Add parties with <5% and assign 0 seats
+for party_name, metadata in party_metadata.items():
+    if party_name not in coalition_data['Partei'].values:
+        coalitionSeats.append({
+            "id": metadata["id"],
+            "color": {"colorCode": metadata["colorCode"]},
+            "name": party_name,
+            "seats": 0
         })
 
 # Check for the presence of FDP and BSW in the coalition_data
@@ -778,6 +781,7 @@ timecode_line = full_line_chart_data["date"].iloc[-1]
 timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
 notes_chart = "Stand: " + timecode_str
+
 
 # update Kanzlerfragen chart
 dw_chart = dw.add_data(chart_id=dw_id, data=kanzlerkandidat_data)
