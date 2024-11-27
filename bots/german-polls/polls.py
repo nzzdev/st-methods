@@ -349,7 +349,6 @@ for party in party_colors.keys():
 
 # Rename columns with formatted party headers
 wide_polls_table.rename(columns={"Institut": "Institut", **formatted_columns}, inplace=True)
-wide_polls_table = wide_polls_table.set_index("Institut")
 
 # --- Compute data_pivot and average_data for individual institutes ---
 
@@ -764,19 +763,12 @@ assets = [
         ]
 
 # create dates for chart notes
-kanzlerkandidat_data = kanzlerkandidat_data.set_index("Datum")
-timecode = kanzlerkandidat_data.index[-1]
+timecode = kanzlerkandidat_data["Datum"].iloc[-1]
 full_line_chart_data["date"] = pd.to_datetime(full_line_chart_data["date"])
 timecode_line = full_line_chart_data["date"].iloc[-1]
 timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
 notes_chart = "Stand: " + timecode_str
-
-# run Q function for main custom code chart
-update_chart(id="ef14d4bef9f51a1c17bc9cb6e2f8a8d0",assetGroups=assets)
-
-# run Q function for coalition chart
-update_chart(id="0d50b45e538faa45f768d3204450d0e7",parties=coalitionSeats, possibleCoalitions=coalition_set, notes=notes_chart)
 
 # update Kanzlerfragen chart
 dw_chart = dw.add_data(chart_id=dw_id, data=kanzlerkandidat_data)
@@ -790,3 +782,9 @@ dw.publish_chart(chart_id=dw_id, display=False)
 dw_table = dw.add_data(chart_id=dw_id_table, data=wide_polls_table)
 dw.update_description(chart_id=dw_id_table, source_name="Wahlrecht.de", intro="So würden die Befragten wählen, wenn am Sonntag Bundestagswahl wäre")
 dw.publish_chart(chart_id=dw_id_table, display=False)
+
+# run Q function for main custom code chart
+update_chart(id="ef14d4bef9f51a1c17bc9cb6e2f8a8d0",assetGroups=assets)
+
+# run Q function for coalition chart
+update_chart(id="0d50b45e538faa45f768d3204450d0e7",parties=coalitionSeats, possibleCoalitions=coalition_set, notes=notes_chart)
