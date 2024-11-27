@@ -97,7 +97,7 @@ def fetch_html_table(url, max_retries=5, pause=1):
             else:
                 print(f"Failed to fetch HTML table from {url} after {max_retries} attempts. Aborting script.")
                 exit(1)  # Exit the script with error status
-
+                
 # Datawrapper API key
 dw_key = os.environ["DATAWRAPPER_API"]
 dw = Datawrapper(access_token=dw_key)
@@ -525,7 +525,7 @@ print("JSON file 'projectionChart.json' has been created successfully.")
 
 # Map party names to color codes and Q IDs
 party_metadata = {
-    "Union": {"id": "50d50b45e538faa45f768d3204450d0e7-1732636909830-658639605", "colorCode": "#0a0a0a"},
+    "Union": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909830-658639605", "colorCode": "#0a0a0a"},
     "SPD": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909830-820461104", "colorCode": "#c31906"},
     "Grüne": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909830-681841949", "colorCode": "#66a622"},
     "FDP": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909831-568178765", "colorCode": "#d1cc00"},
