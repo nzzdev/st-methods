@@ -19,9 +19,9 @@
                 }
             ],
             "item": {
-                "title": "",
                 "notes": "",
-                "parties": []
+                "parties": [],
+                "possibleCoalitions": ""
             }
         }
     ]
