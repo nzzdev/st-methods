@@ -788,3 +788,16 @@ update_chart(id="ef14d4bef9f51a1c17bc9cb6e2f8a8d0",assetGroups=assets)
 
 # run Q function for coalition chart
 # update_chart(id="0d50b45e538faa45f768d3204450d0e7",parties=coalitionSeats, possibleCoalitions=coalition_set, notes=notes_chart)
+
+# Define the folder and files to delete
+data_folder = "./data"
+files_to_delete = ["lineChart.json", "projectionChart.json"]
+
+# Delete the specified files
+for file_name in files_to_delete:
+    file_path = os.path.join(data_folder, file_name)
+    if os.path.exists(file_path):
+        os.remove(file_path)
+        print(f"Deleted: {file_path}")
+    else:
+        print(f"File not found, skipping: {file_path}")
