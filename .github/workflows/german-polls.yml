@@ -52,10 +52,6 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
-      - name: Delete Chart JSON Files
-        run: |
-          rm -f ./data/lineChart.json
-          rm -f ./data/projectionChart.json
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: :!*.json
