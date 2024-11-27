@@ -788,7 +788,7 @@ dw_chart = dw.add_data(chart_id=dw_id, data=kanzlerkandidat_data)
 date = {"annotate": {
     "notes": f"Stand: {timecode_str}"}}
 dw.update_metadata(chart_id=dw_id, metadata=date)
-dw.update_description(chart_id=dw_id, source_name="@Wahlen_DE, eigene Berechnungen", intro="Präferenz der Befragten für die Kanzlerkandidaten (in Prozent), einzelne Umfragen und Trendlinie")
+dw.update_description(chart_id=dw_id, source_name="@Wahlen_DE, eigene Berechnungen", intro="So würden die Befragten bei einer Direktwahl des Kanzlers abstimmen")
 dw.publish_chart(chart_id=dw_id, display=False)
 
 # update table
