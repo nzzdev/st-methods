@@ -474,6 +474,9 @@ last_n_data = filtered_data_nonan.groupby('Partei', group_keys=False).apply(get_
 mean_ci_per_party = last_n_data.groupby('Partei')['ci'].mean().reset_index()
 mean_ci_per_party.rename(columns={'ci': 'mean_ci'}, inplace=True)
 
+# moe formula derived from https://goodcalculators.com/margin-of-error-calculator/
+# population size (german eligible voters) derived from https://www.bundeswahlleiter.de/info/presse/mitteilungen/bundestagswahl-2021/01_21_wahlberechtigte-geschaetzt.html
+
 # === Projection Chart ===
 
 # Use the latest rolling averages for the projection chart
