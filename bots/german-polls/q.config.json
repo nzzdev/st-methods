@@ -10,19 +10,6 @@
             "item": {
                 "assetGroups": ""
             }
-        },
-        {
-            "environments": [
-                {
-                    "name": "production",
-                    "id": "0d50b45e538faa45f768d3204450d0e7"
-                }
-            ],
-            "item": {
-                "title": "",
-                "notes": "",
-                "possibleCoalitions": ""
-            }
         }
     ]
 }
