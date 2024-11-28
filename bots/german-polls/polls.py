@@ -319,7 +319,7 @@ wide_polls_table["Befragte"] = wide_polls_table["Befragte"].apply(
 wide_polls_table.sort_values(by="Datum", ascending=False, inplace=True)
 
 # Keep only the 300 most recent polls
-wide_polls_table = wide_polls_table.head(75)
+wide_polls_table = wide_polls_table.head(150)
 
 # Create the formatted "Institut" column
 wide_polls_table["Institut"] = (
