@@ -330,7 +330,7 @@ wide_polls_table = wide_polls_table.head(150)
 
 # Create the formatted "Institut" column
 wide_polls_table["Institut"] = (
-    "<b>" + wide_polls_table["Institut"] + "</b><br>" +
+    wide_polls_table["Institut"] + "<br>" +
     '<span style="font-size: x-small; color: #69696c">' +
     wide_polls_table["Zeitraum"].fillna("") + "<br>" +
     wide_polls_table["Befragte"] + "</span>"
