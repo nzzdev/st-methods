@@ -64,8 +64,15 @@ def update_chart(id, title="", subtitle="", notes="", data="", parties="", possi
                     item.get("item").update({"subtitle": subtitle})
                 if notes != "":
                     item.get("item").update({"notes": notes})
-                if len(data) > 0:
-                    item["item"]["data"] = data
+                if data.size > 0:
+                    # reset_index() and T (for transpose) are used to bring column names into the first row
+                    transformed_data = data.applymap(str).reset_index(
+                        drop=False).T.reset_index().T.apply(list, axis=1).to_list()
+                    if 'table' in item.get('item').get('data'):
+                        item.get('item').get('data').update(
+                            {'table': transformed_data})
+                    else:
+                        item.get('item').update({'data': transformed_data})
                 if len(parties) > 0:
                     item["item"]["parties"] = parties
                 if len(possibleCoalitions) > 0:
@@ -97,7 +104,7 @@ def fetch_html_table(url, max_retries=5, pause=1):
             else:
                 print(f"Failed to fetch HTML table from {url} after {max_retries} attempts. Aborting script.")
                 exit(1)  # Exit the script with error status
-                
+         
 # Datawrapper API key
 dw_key = os.environ["DATAWRAPPER_API"]
 dw = Datawrapper(access_token=dw_key)
@@ -310,9 +317,9 @@ wide_polls_table = filtered_data.pivot_table(
     aggfunc="last"
 ).reset_index()
 
-# Convert "Befragte" to string with the thin white space character and add " Befragte"
+# Convert "Befragte" to string with the thin white space character and add "Teiln."
 wide_polls_table["Befragte"] = wide_polls_table["Befragte"].apply(
-    lambda x: f'{int(x):,}'.replace(",", " ") + " Befragte" if pd.notna(x) else ""
+    lambda x: f'{int(x):,}'.replace(",", " ") + " Teiln." if pd.notna(x) else ""
 )
 
 # Sort by publication date (Datum) descending
@@ -332,7 +339,8 @@ wide_polls_table["Institut"] = (
 # Keep only relevant columns (formatted parties + Institut)
 wide_polls_table = wide_polls_table[["Institut"] + list(party_colors.keys())]
 
-# Format percentages with thin spaces for integers and commas for floats, and wrap in HTML tags
+"""
+# OLD DATAWRAPPER TABLE Format percentages with thin spaces for integers and commas for floats, and wrap in HTML tags
 for party in party_colors.keys():
     if party in wide_polls_table.columns:
         wide_polls_table[party] = wide_polls_table[party].apply(
@@ -346,6 +354,24 @@ for party in party_colors.keys():
         )
     else:
         wide_polls_table[party] = ""  # Ensure missing parties have empty columns
+"""
+# Format percentages with thin spaces for integers and commas for floats, and colorize according to party colors
+for party, color in party_colors.items():
+    if party in wide_polls_table.columns:
+        wide_polls_table[party] = wide_polls_table[party].apply(
+            lambda x: (
+                f'<span style="color:{color}">{int(x):,}'.replace(",", " ") + "%</span>"
+                if pd.notna(x) and x != 0 and x.is_integer()
+                else f'<span style="color:{color}">{x:.1f}'.replace(".", ",") + "%</span>"
+                if pd.notna(x) and x != 0
+                else ""
+            )
+        )
+    else:
+        wide_polls_table[party] = ""  # Ensure missing parties have empty columns
+
+# Rename columns with formatted party headers
+wide_polls_table.rename(columns={"Institut": "Institut", **formatted_columns}, inplace=True)
 
 # Rename columns with formatted party headers
 wide_polls_table.rename(columns={"Institut": "Institut", **formatted_columns}, inplace=True)
@@ -794,10 +820,16 @@ dw.update_metadata(chart_id=dw_id, metadata=date)
 dw.update_description(chart_id=dw_id, source_name="@Wahlen_DE, eigene Berechnungen", intro="So würden die Befragten bei einer Direktwahl des Kanzlers abstimmen")
 dw.publish_chart(chart_id=dw_id, display=False)
 
-# update table
+"""
+# OLD update table
 dw_table = dw.add_data(chart_id=dw_id_table, data=wide_polls_table)
 dw.update_description(chart_id=dw_id_table, source_name="Wahlrecht.de", intro="So würden die Befragten wählen, wenn am Sonntag Bundestagswahl wäre")
 dw.publish_chart(chart_id=dw_id_table, display=False)
+"""
+
+# run Q function for poll table
+wide_polls_table.set_index("Institut", inplace=True)
+update_chart(id="94c15a6eadd659eb977086455eb67467",data=wide_polls_table)
 
 # run Q function for main custom code chart
 update_chart(id="ef14d4bef9f51a1c17bc9cb6e2f8a8d0",assetGroups=assets)
