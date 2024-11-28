@@ -326,7 +326,7 @@ wide_polls_table["Befragte"] = wide_polls_table["Befragte"].apply(
 wide_polls_table.sort_values(by="Datum", ascending=False, inplace=True)
 
 # Keep only the 300 most recent polls
-wide_polls_table = wide_polls_table.head(150)
+wide_polls_table = wide_polls_table.head(75)
 
 # Create the formatted "Institut" column
 wide_polls_table["Institut"] = (
@@ -388,10 +388,10 @@ data_pivot = filtered_data.pivot_table(
 # Map institute names to desired abbreviations
 institute_mapping = {
     'Insa': 'insa',
-    'FG Wahlen': 'fgw',
+    'FG Wahl.': 'fgw',
     'Forsa': 'forsa',
     'Verian': 'emnid',
-    'Allensbach': 'allensbach',
+    'Allensb.': 'allensbach',
     #'GMS': 'gms',
     'Infratest': 'infratest',
     'YouGov': 'yougov',
