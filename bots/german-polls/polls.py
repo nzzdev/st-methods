@@ -64,7 +64,7 @@ def update_chart(id, title="", subtitle="", notes="", data="", parties="", possi
                     item.get("item").update({"subtitle": subtitle})
                 if notes != "":
                     item.get("item").update({"notes": notes})
-                if data.size > 0:
+                if len(data) > 0:
                     # reset_index() and T (for transpose) are used to bring column names into the first row
                     transformed_data = data.applymap(str).reset_index(
                         drop=False).T.reset_index().T.apply(list, axis=1).to_list()
