@@ -12,12 +12,15 @@ import time
 
 # === Helper Functions ===
 
-def convert_percentage_to_float(str):
-    p_strings = re.findall(r"\d+,\d", str)
+def convert_percentage_to_float(value):
+    if pd.isna(value):
+        return np.nan
+    value_str = str(value)  # Ensure the input is a string
+    p_strings = re.findall(r"\d+,\d", value_str)
     if len(p_strings) == 0:
-        p_strings = re.findall(r"\d+", str)
+        p_strings = re.findall(r"\d+", value_str)
     p_floats = [float(s.replace(",", ".")) for s in p_strings]
-    return sum(p_floats) if not "-" in str else sum(p_floats)/2
+    return sum(p_floats) if "-" not in value_str else sum(p_floats) / 2
 
 def convert_befragte(str):
     if str == "Bundestagswahl" or "?" in str:
@@ -153,7 +156,18 @@ for row in urls:
         inplace=True
     )
 
-    # Extract party names
+    # Extract "BSW" percentage from "Sonstige" for "GMS" polls
+    if institut == "GMS" and "Sonstige" in data.columns:
+        def extract_bsw(sonstige):
+            match = re.search(r"BSW (\d+)(,(\d+))?", str(sonstige))
+            if match:
+                return float(match.group(1) + "." + (match.group(3) if match.group(3) else "0"))
+            return np.nan
+
+        data["BSW"] = data["Sonstige"].apply(extract_bsw)
+        data["Sonstige"] = data["Sonstige"].apply(lambda x: re.sub(r"BSW \d+(,\d+)? %?", "", str(x)).strip())
+
+    # Extract party names and variable columns
     parteinamen = [x for x in data.columns if x not in ["Datum", "Befragte", "Zeitraum"]]
     variablen = [x for x in data.columns if x not in parteinamen]
 
@@ -810,7 +824,6 @@ timecode_line = full_line_chart_data["date"].iloc[-1]
 timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
 notes_chart = "Stand: " + timecode_str
-
 
 # update Kanzlerfragen chart
 dw_chart = dw.add_data(chart_id=dw_id, data=kanzlerkandidat_data)
