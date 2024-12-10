@@ -843,7 +843,7 @@ dw.publish_chart(chart_id=dw_id_table, display=False)
 
 # run Q function for poll table
 wide_polls_table.set_index("Institut", inplace=True)
-update_chart(id="94c15a6eadd659eb977086455eb67467",data=wide_polls_table)
+update_chart(id="94c15a6eadd659eb977086455eb67467",data=wide_polls_table, notes=notes_chart_line)
 
 # run Q function for main custom code chart
 update_chart(id="ef14d4bef9f51a1c17bc9cb6e2f8a8d0",assetGroups=assets)
