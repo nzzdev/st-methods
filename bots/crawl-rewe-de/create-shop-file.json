@@ -1,0 +1,7530 @@
+{
+    "3139867": {
+        "cat": "drugstore",
+        "value": 7
+    },
+    "8397514": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8440282": {
+        "cat": "drugstore",
+        "value": 27
+    },
+    "8442236": {
+        "cat": "drugstore",
+        "value": 27
+    },
+    "6790143": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "2105247": {
+        "cat": "drugstore",
+        "value": 14
+    },
+    "8597281": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "5351065": {
+        "cat": "bread",
+        "value": 1
+    },
+    "8600224": {
+        "cat": "drugstore",
+        "value": 27
+    },
+    "2394739": {
+        "cat": "drinks",
+        "value": 25
+    },
+    "2394743": {
+        "cat": "drinks",
+        "value": 25
+    },
+    "7892514": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "7898682": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "520330": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "7396317": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8361527": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8626092": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8543757": {
+        "cat": "fresh",
+        "value": 27
+    },
+    "2236174": {
+        "cat": "cooking",
+        "value": 14
+    },
+    "8633310": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "1317360": {
+        "cat": "drugstore",
+        "value": 14
+    },
+    "8301059": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "130082": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "7955686": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8556568": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8073250": {
+        "cat": "frozen",
+        "value": 10
+    },
+    "8087346": {
+        "cat": "frozen",
+        "value": 10
+    },
+    "8081647": {
+        "cat": "frozen",
+        "value": 10
+    },
+    "8452565": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7087342": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8255692": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "5350522": {
+        "cat": "bread",
+        "value": 1
+    },
+    "7009615": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "2317794": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1042260": {
+        "cat": "cooking",
+        "value": 17
+    },
+    "8053256": {
+        "cat": "fresh",
+        "value": 34
+    },
+    "518611": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "7067903": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7845762": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8676858": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7845005": {
+        "cat": "bread",
+        "value": 2
+    },
+    "843202": {
+        "cat": "canned",
+        "value": 2
+    },
+    "6195873": {
+        "cat": "canned",
+        "value": 2
+    },
+    "6539912": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "5910480": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8540029": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7933793": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7084985": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7156260": {
+        "cat": "fresh",
+        "value": 21
+    },
+    "8290217": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8088095": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "7073900": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8291795": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8633128": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "5960010": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "79949": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2057494": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8277481": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2464563": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "2464558": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "2591295": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "6780172": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "7076962": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "2311667": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7225094": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2169511": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3150583": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8339719": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "923266": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8614834": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "2198265": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8370536": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8521365": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8560300": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8204572": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8656068": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2270557": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7895170": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "891922": {
+        "cat": "bread",
+        "value": 18
+    },
+    "1042250": {
+        "cat": "cooking",
+        "value": 17
+    },
+    "7896538": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "7122765": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "518727": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "905749": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "975903": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "8182885": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "8493667": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2134122": {
+        "cat": "bread",
+        "value": 18
+    },
+    "342931": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2325016": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8445118": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7213371": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8311334": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8444108": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8443313": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8645285": {
+        "cat": "snacks",
+        "value": 7
+    },
+    "8074238": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8243243": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7018624": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8257029": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "2888667": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "961733": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7009771": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "6387896": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "6445640": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "6685404": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "5956978": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "2087491": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1215356": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7009798": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "946509": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "4724488": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1326612": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1162962": {
+        "cat": "fresh",
+        "value": 2
+    },
+    "2120334": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "7009810": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "6445667": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "4832060": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "7961361": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8224543": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8372201": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "2859404": {
+        "cat": "frozen",
+        "value": 18
+    },
+    "5879736": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "8647656": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "2725612": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "298424": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "2135703": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7937888": {
+        "cat": "fresh",
+        "value": 33
+    },
+    "8642283": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "3072954": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "2564412": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8132504": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8490914": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "1037883": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "7862416": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "1037880": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "3016679": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "3025313": {
+        "cat": "fresh",
+        "value": 34
+    },
+    "8277959": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8322056": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8335038": {
+        "cat": "canned",
+        "value": 4
+    },
+    "570608": {
+        "cat": "canned",
+        "value": 4
+    },
+    "570610": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7396228": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7067036": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "7892381": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "7224493": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2310347": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7004010": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8278182": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "7900645": {
+        "cat": "drugstore",
+        "value": 11
+    },
+    "6243827": {
+        "cat": "drinks",
+        "value": 2
+    },
+    "1110889": {
+        "cat": "drinks",
+        "value": 18
+    },
+    "3279207": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "210205": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "210260": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "8245234": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "2166155": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2166159": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8606032": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "1206387": {
+        "cat": "canned",
+        "value": 4
+    },
+    "754434": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "588221": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "4509099": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8379864": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "6540147": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "2270571": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7009739": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "8111262": {
+        "cat": "fresh",
+        "value": 35
+    },
+    "6980295": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8599178": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8164649": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "4509650": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2411378": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "139976": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2865690": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "2865662": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "2105216": {
+        "cat": "drugstore",
+        "value": 14
+    },
+    "7963344": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "2421597": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "1203693": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8475869": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8354622": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "476189": {
+        "cat": "bread",
+        "value": 3
+    },
+    "7106784": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8587952": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "942067": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "990026": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "2070458": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "677207": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8599735": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8613805": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7901857": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "7146084": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "8428056": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8426184": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8426697": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8439178": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8075412": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "8595918": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "592755": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "3151583": {
+        "cat": "drinks",
+        "value": 2
+    },
+    "6243711": {
+        "cat": "drinks",
+        "value": 2
+    },
+    "2597847": {
+        "cat": "fresh",
+        "value": 34
+    },
+    "6337279": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "6337252": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8389973": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1205219": {
+        "cat": "canned",
+        "value": 4
+    },
+    "3070776": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "3072549": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "6509355": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "5900174": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7857273": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "8341415": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8552864": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "2737743": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "7924797": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "7003736": {
+        "cat": "fresh",
+        "value": 34
+    },
+    "1008581": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "7957031": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7942901": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8537447": {
+        "cat": "drugstore",
+        "value": 7
+    },
+    "3156246": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "2886776": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "891929": {
+        "cat": "bread",
+        "value": 18
+    },
+    "8603546": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "2025506": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "2025522": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "2025529": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "2198857": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8371596": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8361755": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8611852": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "3252334": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "2202616": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8573928": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7196141": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "570612": {
+        "cat": "canned",
+        "value": 4
+    },
+    "6387918": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8350407": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8601073": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8514626": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8600575": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "754432": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8324448": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7083761": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2755729": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "8187738": {
+        "cat": "fresh",
+        "value": 27
+    },
+    "8187754": {
+        "cat": "fresh",
+        "value": 2
+    },
+    "2290204": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7257866": {
+        "cat": "drinks",
+        "value": 18
+    },
+    "3182684": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "546026": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8553081": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7923861": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7089413": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7951547": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2270576": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8059113": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "1395504": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "1913987": {
+        "cat": "bread",
+        "value": 3
+    },
+    "914670": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2565945": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8059677": {
+        "cat": "drugstore",
+        "value": 11
+    },
+    "8277378": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "7951974": {
+        "cat": "fresh",
+        "value": 10
+    },
+    "2360956": {
+        "cat": "fresh",
+        "value": 10
+    },
+    "8024719": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8395317": {
+        "cat": "bread",
+        "value": 3
+    },
+    "7891291": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "1008594": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "6621155": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "1956646": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "6322379": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2598834": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "2421604": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "6714161": {
+        "cat": "fresh",
+        "value": 10
+    },
+    "8444273": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7994929": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8236638": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "2030321": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7149379": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "2296035": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8291601": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "2045420": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7030814": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7862977": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "6343066": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "7249172": {
+        "cat": "fresh",
+        "value": 35
+    },
+    "8307611": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1007001": {
+        "cat": "fresh",
+        "value": 5
+    },
+    "2269278": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "8484122": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "2464033": {
+        "cat": "drinks",
+        "value": 13
+    },
+    "2462970": {
+        "cat": "drinks",
+        "value": 13
+    },
+    "2888923": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "570611": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8006766": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "2223785": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8327635": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "6337295": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8002548": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7197142": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8483301": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "2099961": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "1008576": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "1008588": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "5883121": {
+        "cat": "fresh",
+        "value": 36
+    },
+    "8155103": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8602560": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8696982": {
+        "cat": "bread",
+        "value": 1
+    },
+    "7914158": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8381825": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "1374472": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "3167734": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2107010": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "7164812": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "3257781": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2598831": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8125487": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "8038378": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7122458": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8066826": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7928306": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "8401219": {
+        "cat": "snacks",
+        "value": 7
+    },
+    "2407834": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "7240281": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "165932": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8267887": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "2318701": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "2146675": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "891930": {
+        "cat": "bread",
+        "value": 18
+    },
+    "8434947": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "2575176": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8667375": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7145081": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "8595091": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "8066996": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2773176": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "119149": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "1947887": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "1098419": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "2825703": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "8083764": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "8303970": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "8051487": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2968099": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "891928": {
+        "cat": "bread",
+        "value": 18
+    },
+    "8726700": {
+        "cat": "canned",
+        "value": 4
+    },
+    "166440": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2317787": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3151703": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2949713": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "2239595": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "1042253": {
+        "cat": "cooking",
+        "value": 17
+    },
+    "518913": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "7226202": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "8582624": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "8596615": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "8309744": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "8455387": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "5905605": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "6953115": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "8430452": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7227868": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8100989": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8101877": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8268091": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8669345": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "7920165": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "546040": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "7163656": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7396155": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2325000": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8288407": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "6322298": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2123526": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8023655": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7097534": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8457317": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8130280": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "6353371": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "7877621": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "5966590": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7942517": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "2424540": {
+        "cat": "canned",
+        "value": 5
+    },
+    "5249473": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8006862": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8427484": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "207470": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1246476": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2362556": {
+        "cat": "canned",
+        "value": 4
+    },
+    "5724546": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "6801447": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "1312921": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8592341": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "2432152": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2432136": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "5350450": {
+        "cat": "bread",
+        "value": 1
+    },
+    "7125770": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8502432": {
+        "cat": "canned",
+        "value": 5
+    },
+    "7105464": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8671841": {
+        "cat": "fresh",
+        "value": 2
+    },
+    "8043011": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "2594349": {
+        "cat": "fresh",
+        "value": 35
+    },
+    "7948844": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "3156228": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "3156235": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "7938679": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8529987": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "43593": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7204582": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8271521": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8295809": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "7043484": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7042886": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8260720": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "6878636": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7121696": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "7011318": {
+        "cat": "canned",
+        "value": 2
+    },
+    "4507940": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8100477": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "6387934": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "6320406": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "64840": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "873322": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "874949": {
+        "cat": "drugstore",
+        "value": 17
+    },
+    "8187819": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8130752": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8135665": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8231192": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "7971810": {
+        "cat": "drugstore",
+        "value": 7
+    },
+    "3004038": {
+        "cat": "bread",
+        "value": 3
+    },
+    "2661883": {
+        "cat": "snacks",
+        "value": 18
+    },
+    "2724101": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "7091553": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2411380": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "7009593": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8038162": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8501490": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8615856": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "1437254": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "2080731": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2234973": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2080727": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2314012": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7702698": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8457562": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8669105": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "3155797": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8280234": {
+        "cat": "cooking",
+        "value": 16
+    },
+    "7895784": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "8521348": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8245760": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8294464": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "8196129": {
+        "cat": "snacks",
+        "value": 7
+    },
+    "3151968": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3151969": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3151967": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8437263": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3151944": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2696946": {
+        "cat": "canned",
+        "value": 6
+    },
+    "2309834": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "9394010": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "9393935": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7915060": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "9393595": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "5819130": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8187959": {
+        "cat": "cooking",
+        "value": 20
+    },
+    "8531592": {
+        "cat": "cooking",
+        "value": 20
+    },
+    "6564984": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "8060267": {
+        "cat": "drugstore",
+        "value": 11
+    },
+    "8336275": {
+        "cat": "drugstore",
+        "value": 11
+    },
+    "6475973": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "7916381": {
+        "cat": "cooking",
+        "value": 10
+    },
+    "8089206": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "8021080": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "2662089": {
+        "cat": "fresh",
+        "value": 36
+    },
+    "2662082": {
+        "cat": "fresh",
+        "value": 36
+    },
+    "8431040": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "1008597": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "7073947": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8994273": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "2290213": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7772289": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "8043572": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7894188": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8192570": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "1979570": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8496746": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2063281": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2063277": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8055493": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "7642029": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "8571047": {
+        "cat": "bread",
+        "value": 9
+    },
+    "7913116": {
+        "cat": "bread",
+        "value": 9
+    },
+    "3280994": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "973336": {
+        "cat": "canned",
+        "value": 4
+    },
+    "5636442": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1206383": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7291190": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "5944481": {
+        "cat": "cooking",
+        "value": 16
+    },
+    "8515630": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "688048": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "2272449": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "2502892": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "3043322": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "1478286": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "8369554": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8370556": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "7122254": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "5880459": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8152779": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "2345761": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8421295": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "201434": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8605199": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8475648": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "1008842": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8623170": {
+        "cat": "bread",
+        "value": 10
+    },
+    "6729550": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "547663": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "8560963": {
+        "cat": "bread",
+        "value": 1
+    },
+    "2655152": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "901819": {
+        "cat": "fresh",
+        "value": 35
+    },
+    "6353606": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8100302": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "6261175": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "6343171": {
+        "cat": "bread",
+        "value": 3
+    },
+    "2815942": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "875402": {
+        "cat": "drugstore",
+        "value": 7
+    },
+    "6966314": {
+        "cat": "drugstore",
+        "value": 7
+    },
+    "8078567": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "518816": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "7226874": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "713079": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8125186": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "8019360": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "118021": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "8496253": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8314442": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8654134": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "128390": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "1475705": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2961509": {
+        "cat": "canned",
+        "value": 7
+    },
+    "167162": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "167132": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "139591": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "119194": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "945950": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1172975": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8034829": {
+        "cat": "canned",
+        "value": 4
+    },
+    "689156": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8340533": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "710568": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1186852": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8098471": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8273879": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "1209672": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8331440": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "130632": {
+        "cat": "canned",
+        "value": 2
+    },
+    "135202": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2181717": {
+        "cat": "drinks",
+        "value": 25
+    },
+    "2181725": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "137830": {
+        "cat": "canned",
+        "value": 4
+    },
+    "3184669": {
+        "cat": "drinks",
+        "value": 4
+    },
+    "7124189": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "704320": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2107316": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7076526": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2752289": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "7283951": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "7054479": {
+        "cat": "fresh",
+        "value": 10
+    },
+    "1929696": {
+        "cat": "canned",
+        "value": 4
+    },
+    "678949": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1028378": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "135306": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7193879": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7073649": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7073877": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8414675": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8424019": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "853522": {
+        "cat": "bread",
+        "value": 9
+    },
+    "7054405": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "1290608": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8549597": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "7874632": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "8632184": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "8458258": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7986657": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "8114415": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8275402": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "1051497": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "877173": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "8625852": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8014781": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8425218": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7123786": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8633987": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2591297": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8356060": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7231840": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8372258": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7871419": {
+        "cat": "fresh",
+        "value": 33
+    },
+    "252460": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8544640": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "8710547": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8654479": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2535656": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7076144": {
+        "cat": "bread",
+        "value": 1
+    },
+    "7293036": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "945673": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "445190": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "138469": {
+        "cat": "bread",
+        "value": 9
+    },
+    "3015611": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "8412884": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1198763": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1198757": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7136380": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1033906": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "2815866": {
+        "cat": "bread",
+        "value": 9
+    },
+    "7900610": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8614613": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1185231": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2261993": {
+        "cat": "canned",
+        "value": 4
+    },
+    "734579": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8333001": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8549084": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8088158": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8196115": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "2281045": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7863692": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "1076627": {
+        "cat": "bread",
+        "value": 9
+    },
+    "1079129": {
+        "cat": "frozen",
+        "value": 9
+    },
+    "7216797": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "8287679": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2060201": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7874183": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "1021780": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "3095785": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "2060203": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2060209": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2060210": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8767550": {
+        "cat": "fresh",
+        "value": 2
+    },
+    "888363": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "8559892": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "2546931": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "7163013": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "7160863": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "314470": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "314472": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "117026": {
+        "cat": "canned",
+        "value": 2
+    },
+    "135750": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "135754": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "134745": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "141114": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "146433": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "1046968": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1387339": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "8290264": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8414302": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8060891": {
+        "cat": "bread",
+        "value": 10
+    },
+    "8112128": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8597186": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8596499": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8498107": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "7875014": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "7243834": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "7180092": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "1413012": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2331793": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7220526": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "8218945": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "450444": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8209143": {
+        "cat": "fresh",
+        "value": 33
+    },
+    "7194888": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8111550": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "1977824": {
+        "cat": "canned",
+        "value": 4
+    },
+    "116900": {
+        "cat": "canned",
+        "value": 4
+    },
+    "116911": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8188779": {
+        "cat": "frozen",
+        "value": 18
+    },
+    "8512950": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2184085": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7144888": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8354256": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8381866": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "115378": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7873673": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "7191832": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "7853986": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8248075": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "3199422": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "116870": {
+        "cat": "canned",
+        "value": 2
+    },
+    "681566": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "8096999": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "8277004": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "8276403": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "7097929": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2136522": {
+        "cat": "canned",
+        "value": 5
+    },
+    "8082671": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7863984": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "8022362": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "8069624": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8646472": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8568062": {
+        "cat": "bread",
+        "value": 1
+    },
+    "2260748": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7854275": {
+        "cat": "canned",
+        "value": 5
+    },
+    "7254410": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8485820": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "2357277": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112277": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112307": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8388532": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2160045": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "2631972": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8330193": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "318536": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "136841": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7218351": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "8532089": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "7936104": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "8364343": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2798485": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2781139": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7083020": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7075722": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "3251199": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "1044599": {
+        "cat": "canned",
+        "value": 4
+    },
+    "710524": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2149329": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "941231": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "118000": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "8334681": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8336375": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8048590": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1410066": {
+        "cat": "fresh",
+        "value": 34
+    },
+    "7280371": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1076737": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8377443": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1302379": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2109064": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "2109063": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8598425": {
+        "cat": "drugstore",
+        "value": 27
+    },
+    "371368": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1134694": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1134690": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1134677": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1302314": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2928214": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2348240": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7115374": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "197010": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2386391": {
+        "cat": "canned",
+        "value": 4
+    },
+    "119678": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8351000": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "2821417": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8613284": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8659391": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8709460": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7859559": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8655106": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8658718": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "445189": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "994524": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8330642": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "2184091": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7144527": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8427595": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8333175": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7856904": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8475285": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8475664": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8665134": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7862433": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8518472": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8519217": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8410940": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8029347": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "708264": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "7158180": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7091046": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "185597": {
+        "cat": "canned",
+        "value": 2
+    },
+    "505265": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "975749": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "1229039": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "2327948": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8549587": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8273841": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8109064": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "2255636": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "7898935": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "2241816": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "2241851": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "2241841": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "8079152": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "2832074": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "8089929": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "7259597": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "2842541": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "374167": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "3029454": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7125949": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1236141": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2348293": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1411213": {
+        "cat": "canned",
+        "value": 4
+    },
+    "267429": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8415305": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7129834": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "8566008": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8692120": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8061778": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8425181": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "2286314": {
+        "cat": "canned",
+        "value": 2
+    },
+    "614817": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "2357273": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8301065": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "298657": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112278": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112289": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112287": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112355": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "2357274": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112352": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112350": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "112309": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "2824641": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "157912": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "116973": {
+        "cat": "canned",
+        "value": 2
+    },
+    "157118": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8436956": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "7985572": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "8335418": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8088224": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "994559": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "994582": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "994552": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "710582": {
+        "cat": "canned",
+        "value": 2
+    },
+    "710583": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8412459": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1045111": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "1981279": {
+        "cat": "canned",
+        "value": 4
+    },
+    "875438": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "117168": {
+        "cat": "canned",
+        "value": 2
+    },
+    "116760": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2594391": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "2594386": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7293452": {
+        "cat": "canned",
+        "value": 4
+    },
+    "885018": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "885035": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "2893903": {
+        "cat": "canned",
+        "value": 4
+    },
+    "277688": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7254398": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7293408": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7254096": {
+        "cat": "canned",
+        "value": 4
+    },
+    "135083": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2061877": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "2953026": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8575942": {
+        "cat": "canned",
+        "value": 2
+    },
+    "3011754": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8066294": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8069400": {
+        "cat": "bread",
+        "value": 3
+    },
+    "3011756": {
+        "cat": "bread",
+        "value": 3
+    },
+    "7883267": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "7001723": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "360529": {
+        "cat": "canned",
+        "value": 4
+    },
+    "3013023": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "792132": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7018956": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8130266": {
+        "cat": "canned",
+        "value": 4
+    },
+    "112916": {
+        "cat": "fresh",
+        "value": 12
+    },
+    "8413767": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "994604": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "1045889": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "277678": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8413269": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1079126": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8063148": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1302332": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2003452": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "1061320": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "1061315": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "8011973": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8058904": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1939015": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8614161": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "2348066": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7169771": {
+        "cat": "canned",
+        "value": 5
+    },
+    "7989320": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8014171": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "3230251": {
+        "cat": "drinks",
+        "value": 4
+    },
+    "8085934": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8255174": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "1421087": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "2316984": {
+        "cat": "canned",
+        "value": 5
+    },
+    "444702": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8519806": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8519288": {
+        "cat": "bread",
+        "value": 9
+    },
+    "2061726": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8292560": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8023121": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "296889": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "3184670": {
+        "cat": "drinks",
+        "value": 4
+    },
+    "2631993": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8320249": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "2798489": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2348312": {
+        "cat": "canned",
+        "value": 4
+    },
+    "137874": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8414775": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7933167": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2097513": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "994589": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8294079": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2198167": {
+        "cat": "bread",
+        "value": 2
+    },
+    "593715": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "137829": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2325024": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2796518": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7196860": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3019481": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "710560": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8695087": {
+        "cat": "fresh",
+        "value": 10
+    },
+    "8504685": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "7291462": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7966574": {
+        "cat": "bread",
+        "value": 9
+    },
+    "2243391": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7904097": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "7901727": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7902625": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "7896504": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8593925": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "8640590": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "336931": {
+        "cat": "canned",
+        "value": 7
+    },
+    "2181429": {
+        "cat": "drinks",
+        "value": 25
+    },
+    "2181377": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2181443": {
+        "cat": "drinks",
+        "value": 25
+    },
+    "2181389": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2181515": {
+        "cat": "drinks",
+        "value": 25
+    },
+    "2181399": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2146674": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8365568": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "8283301": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8119866": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2137786": {
+        "cat": "canned",
+        "value": 2
+    },
+    "333472": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "133375": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1032766": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8058516": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "112226": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8412827": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8338446": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8414679": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "687486": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2773455": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "415263": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "8155405": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "8314067": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "2893907": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2893937": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8215911": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2097509": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "1186905": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2327942": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7924590": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7288865": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "1389554": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7877254": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "989114": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8626551": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8424727": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "136885": {
+        "cat": "canned",
+        "value": 2
+    },
+    "672979": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "2016011": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2015999": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3064278": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "2666357": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "1040657": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8412984": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8013588": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1902921": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "1060727": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7267358": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "2361886": {
+        "cat": "fresh",
+        "value": 22
+    },
+    "8292239": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8502342": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8196391": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "2632409": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "3015634": {
+        "cat": "frozen",
+        "value": 5
+    },
+    "710573": {
+        "cat": "canned",
+        "value": 2
+    },
+    "117199": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8320569": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8069706": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8012289": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8012498": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "2028724": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2316542": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7124036": {
+        "cat": "canned",
+        "value": 4
+    },
+    "133293": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1072181": {
+        "cat": "snacks",
+        "value": 18
+    },
+    "877333": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "477541": {
+        "cat": "canned",
+        "value": 4
+    },
+    "3288679": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8435547": {
+        "cat": "bread",
+        "value": 1
+    },
+    "8287769": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "8196324": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "7952243": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8587177": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7165511": {
+        "cat": "canned",
+        "value": 5
+    },
+    "2241405": {
+        "cat": "cooking",
+        "value": 23
+    },
+    "2241414": {
+        "cat": "cooking",
+        "value": 23
+    },
+    "7143216": {
+        "cat": "drugstore",
+        "value": 2
+    },
+    "8101441": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "7178737": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "8247853": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "3029456": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8470640": {
+        "cat": "fresh",
+        "value": 33
+    },
+    "8191030": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7166365": {
+        "cat": "canned",
+        "value": 5
+    },
+    "2455271": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1421084": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "1041191": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7194361": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8031611": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "1043421": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8414592": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "725425": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1473846": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2927835": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8087752": {
+        "cat": "fresh",
+        "value": 35
+    },
+    "1209186": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8276801": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "7294951": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7260480": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8109896": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "117152": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7178978": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "7014151": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7014366": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7014092": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7014153": {
+        "cat": "bread",
+        "value": 2
+    },
+    "177494": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "875433": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "133324": {
+        "cat": "canned",
+        "value": 2
+    },
+    "555425": {
+        "cat": "fresh",
+        "value": 12
+    },
+    "112068": {
+        "cat": "fresh",
+        "value": 11
+    },
+    "117166": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1045891": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8015140": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "8385535": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "192964": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2532797": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "445435": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7273139": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8323001": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "126938": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "470737": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "3261314": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "1220979": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "920085": {
+        "cat": "canned",
+        "value": 4
+    },
+    "135299": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2184092": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8564269": {
+        "cat": "canned",
+        "value": 2
+    },
+    "117509": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2455263": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7210157": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "7874577": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "8422035": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "117297": {
+        "cat": "canned",
+        "value": 2
+    },
+    "3007887": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "3007929": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "8428270": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "8049593": {
+        "cat": "canned",
+        "value": 7
+    },
+    "8353795": {
+        "cat": "canned",
+        "value": 7
+    },
+    "7972467": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8191124": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "2916073": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "8332654": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8062743": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8062858": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8350350": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "1447517": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8514171": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7897999": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "7252558": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7254451": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2632428": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "8351072": {
+        "cat": "canned",
+        "value": 5
+    },
+    "2893921": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8369370": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8282037": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "137786": {
+        "cat": "canned",
+        "value": 2
+    },
+    "137791": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7090266": {
+        "cat": "fresh",
+        "value": 33
+    },
+    "2788389": {
+        "cat": "fresh",
+        "value": 33
+    },
+    "112237": {
+        "cat": "cooking",
+        "value": 20
+    },
+    "133405": {
+        "cat": "canned",
+        "value": 2
+    },
+    "137794": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7902451": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8655712": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8421836": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1278734": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8257071": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "3158600": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2719109": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "2622112": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7057887": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "2184149": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "2632448": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "2964773": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "2964777": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "2953543": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "8331142": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1953777": {
+        "cat": "drugstore",
+        "value": 27
+    },
+    "8366332": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "7172253": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8660868": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "7853153": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8359596": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "1438234": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1438238": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8414795": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8007739": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "2535687": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8063749": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8661242": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "1061806": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1290607": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7262335": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "117311": {
+        "cat": "canned",
+        "value": 2
+    },
+    "117330": {
+        "cat": "canned",
+        "value": 2
+    },
+    "128314": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "2424787": {
+        "cat": "drinks",
+        "value": 24
+    },
+    "2027722": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "2027362": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "8286643": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "118020": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "117992": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "2265232": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "118045": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "561994": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "137873": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2632461": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "1035549": {
+        "cat": "bread",
+        "value": 1
+    },
+    "135301": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "384433": {
+        "cat": "canned",
+        "value": 4
+    },
+    "3007883": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "3009590": {
+        "cat": "drugstore",
+        "value": 3
+    },
+    "7841380": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "8645362": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "7912270": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "7886889": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7949136": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8649858": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8516144": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8651189": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "8517041": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7291313": {
+        "cat": "canned",
+        "value": 4
+    },
+    "2023473": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8254242": {
+        "cat": "bread",
+        "value": 1
+    },
+    "1097166": {
+        "cat": "bread",
+        "value": 1
+    },
+    "754891": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "2914659": {
+        "cat": "drugstore",
+        "value": 27
+    },
+    "2299850": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "116788": {
+        "cat": "canned",
+        "value": 4
+    },
+    "185596": {
+        "cat": "canned",
+        "value": 2
+    },
+    "708265": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "8468740": {
+        "cat": "snacks",
+        "value": 3
+    },
+    "2775275": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7066219": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8045202": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "7077819": {
+        "cat": "fresh",
+        "value": 36
+    },
+    "8044698": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "1035566": {
+        "cat": "bread",
+        "value": 1
+    },
+    "1211124": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "2798488": {
+        "cat": "canned",
+        "value": 2
+    },
+    "734574": {
+        "cat": "canned",
+        "value": 2
+    },
+    "754925": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8654038": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8352159": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "7884977": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8050011": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "138674": {
+        "cat": "canned",
+        "value": 2
+    },
+    "185599": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7944516": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "137801": {
+        "cat": "canned",
+        "value": 2
+    },
+    "157178": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7165365": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "1400294": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "754918": {
+        "cat": "cooking",
+        "value": 23
+    },
+    "8012996": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8324624": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "877331": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "114109": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "1293391": {
+        "cat": "frozen",
+        "value": 18
+    },
+    "8308124": {
+        "cat": "bread",
+        "value": 10
+    },
+    "7191657": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3158316": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7986860": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "3158369": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7075825": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7211940": {
+        "cat": "canned",
+        "value": 2
+    },
+    "296776": {
+        "cat": "bread",
+        "value": 3
+    },
+    "184647": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "585224": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "7867885": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "7250357": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8324188": {
+        "cat": "fresh",
+        "value": 27
+    },
+    "8495279": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8493239": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7968792": {
+        "cat": "fresh",
+        "value": 27
+    },
+    "2587736": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "8655182": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "7963454": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "8090294": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "8578130": {
+        "cat": "fresh",
+        "value": 22
+    },
+    "2587749": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "7981357": {
+        "cat": "fresh",
+        "value": 12
+    },
+    "8583362": {
+        "cat": "fresh",
+        "value": 27
+    },
+    "8648238": {
+        "cat": "fresh",
+        "value": 12
+    },
+    "2717529": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7868590": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "8595387": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "585223": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "7147843": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "8041184": {
+        "cat": "fresh",
+        "value": 12
+    },
+    "8144700": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7905813": {
+        "cat": "fresh",
+        "value": 18
+    },
+    "201396": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "940075": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "360671": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7290602": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8639622": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7999359": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8441023": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "1907545": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "136053": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "7956825": {
+        "cat": "canned",
+        "value": 2
+    },
+    "208864": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7956127": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8015081": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "208863": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7958526": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8107568": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "7955323": {
+        "cat": "canned",
+        "value": 2
+    },
+    "208859": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2186674": {
+        "cat": "canned",
+        "value": 7
+    },
+    "254615": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7292476": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "940052": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2745102": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2333554": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8231031": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "3140940": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8254461": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1930502": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "3018245": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "1045916": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "276692": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8277708": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8341949": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "974656": {
+        "cat": "bread",
+        "value": 3
+    },
+    "7170158": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "505322": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1912670": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "204047": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8288250": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8347631": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "2467008": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7294456": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "871215": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7226966": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8046482": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "1287110": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "742294": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8611706": {
+        "cat": "canned",
+        "value": 4
+    },
+    "273709": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "2245231": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7171655": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "1136740": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7103535": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1323529": {
+        "cat": "drinks",
+        "value": 13
+    },
+    "901435": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "578901": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8338209": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "278145": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "8340314": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "3212382": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "39464": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7290423": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "1947712": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "8108756": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8312738": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8551498": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8084861": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "1202493": {
+        "cat": "canned",
+        "value": 2
+    },
+    "294337": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "946608": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8098823": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "577458": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1438494": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8060098": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "7249413": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "300377": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8335725": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "2846041": {
+        "cat": "bread",
+        "value": 3
+    },
+    "3100603": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "7888159": {
+        "cat": "bread",
+        "value": 1
+    },
+    "8363050": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8007642": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "1006863": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "1006852": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "7078288": {
+        "cat": "fresh",
+        "value": 33
+    },
+    "200348": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1912630": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "577900": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "7887089": {
+        "cat": "canned",
+        "value": 4
+    },
+    "371371": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8381730": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1098769": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "8255376": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8623363": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "197877": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "8061857": {
+        "cat": "bread",
+        "value": 1
+    },
+    "204045": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "187778": {
+        "cat": "fresh",
+        "value": 35
+    },
+    "3064105": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "1912315": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "200397": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8674448": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8362169": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "940043": {
+        "cat": "bread",
+        "value": 2
+    },
+    "940049": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8283640": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7050770": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "2893817": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7078518": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7831009": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "2439530": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "1267821": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7183743": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1267875": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1396702": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8360458": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "7032815": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8589069": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "7321580": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "304588": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "1027200": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "201116": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "200347": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1346550": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8295555": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8109437": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "7359497": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "197889": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "1287065": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7205443": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "7206215": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "1267687": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7295583": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2029541": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "741455": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1429367": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "2188055": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1947997": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "7272521": {
+        "cat": "bread",
+        "value": 3
+    },
+    "1267674": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7033383": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7034166": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1268079": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8397625": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1267719": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7848294": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1268116": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1267731": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1267753": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7967770": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "8341640": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "2849977": {
+        "cat": "drinks",
+        "value": 2
+    },
+    "8502671": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1994616": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7173674": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7210751": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7208641": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8078338": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "194192": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "1144899": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8304439": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "784614": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "784612": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "784809": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "784792": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "784616": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "194194": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8055541": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8337727": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "2277758": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1255627": {
+        "cat": "fresh",
+        "value": 12
+    },
+    "7283403": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8296586": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8109025": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "7186203": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "8393848": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7972072": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8016418": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7055914": {
+        "cat": "canned",
+        "value": 4
+    },
+    "3235642": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7986754": {
+        "cat": "canned",
+        "value": 4
+    },
+    "206073": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "3274843": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8321941": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8255537": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8264177": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8109111": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8065338": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1906432": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8255664": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "198343": {
+        "cat": "bread",
+        "value": 1
+    },
+    "39501": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8066943": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8178294": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8257989": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "7237532": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8362231": {
+        "cat": "canned",
+        "value": 4
+    },
+    "1424811": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "8376976": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "8327523": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8016170": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "1055324": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "7186627": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2823001": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7988732": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7244322": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "2520600": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "1026287": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "187645": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "877992": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7996075": {
+        "cat": "bread",
+        "value": 9
+    },
+    "198410": {
+        "cat": "bread",
+        "value": 9
+    },
+    "7186200": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8289217": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8277549": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "8215798": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8498663": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "1272042": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "200385": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1424821": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1346535": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8465530": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "8032052": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "1004052": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8436974": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8017548": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "1279059": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8255354": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "333139": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "577374": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8015318": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "204051": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "294936": {
+        "cat": "canned",
+        "value": 4
+    },
+    "3230258": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "3136131": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "3136147": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "2893839": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8488972": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8486583": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "184650": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "577380": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "577536": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1007026": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "7055254": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8643029": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "7270210": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8468711": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8471116": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8634332": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "1032440": {
+        "cat": "bread",
+        "value": 1
+    },
+    "1267759": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1267772": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1268095": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1268110": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1267901": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1267789": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7997796": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "3269394": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "871212": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8538170": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8303178": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "7903295": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8630170": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8589618": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7046681": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7046872": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7046256": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7293092": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "1287075": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8588468": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "1287126": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8179779": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2067249": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1987678": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1287072": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2067251": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1041181": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8614187": {
+        "cat": "bread",
+        "value": 9
+    },
+    "321145": {
+        "cat": "frozen",
+        "value": 9
+    },
+    "8029790": {
+        "cat": "bread",
+        "value": 1
+    },
+    "8047823": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8091575": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "204052": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "7180293": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "1011521": {
+        "cat": "canned",
+        "value": 2
+    },
+    "1082478": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "999612": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "2179945": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7116137": {
+        "cat": "fresh",
+        "value": 27
+    },
+    "187784": {
+        "cat": "fresh",
+        "value": 35
+    },
+    "2557918": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "297368": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "1346542": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "206057": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "2054423": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "8442869": {
+        "cat": "canned",
+        "value": 2
+    },
+    "763140": {
+        "cat": "canned",
+        "value": 7
+    },
+    "7185307": {
+        "cat": "drinks",
+        "value": 12
+    },
+    "194191": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7232641": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8130039": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "204050": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "194185": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "850243": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "184645": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7952948": {
+        "cat": "bread",
+        "value": 3
+    },
+    "974662": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8108322": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7082861": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1475953": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1287057": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1287061": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1287067": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1287106": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1346532": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1346540": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1287122": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1409704": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7996293": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8354670": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8341536": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8042389": {
+        "cat": "bread",
+        "value": 1
+    },
+    "8420409": {
+        "cat": "snacks",
+        "value": 3
+    },
+    "371375": {
+        "cat": "canned",
+        "value": 2
+    },
+    "3362140": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "2550532": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "2588140": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8385056": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "3068788": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "194183": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "194184": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8306453": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7167047": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8435701": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "8215577": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2745086": {
+        "cat": "bread",
+        "value": 2
+    },
+    "2746694": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8446878": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8448295": {
+        "cat": "bread",
+        "value": 2
+    },
+    "4905385": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "2005357": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "577767": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8502969": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "559003": {
+        "cat": "fresh",
+        "value": 36
+    },
+    "728127": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8109557": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1912675": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "810934": {
+        "cat": "canned",
+        "value": 4
+    },
+    "201400": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "7129194": {
+        "cat": "cooking",
+        "value": 16
+    },
+    "304587": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "187641": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "877993": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "196985": {
+        "cat": "drinks",
+        "value": 18
+    },
+    "8041125": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "3136177": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "274147": {
+        "cat": "bread",
+        "value": 2
+    },
+    "271876": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8283357": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8011859": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "199016": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "8444009": {
+        "cat": "bread",
+        "value": 9
+    },
+    "199022": {
+        "cat": "bread",
+        "value": 9
+    },
+    "204042": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "2937503": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2561874": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7010182": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8222704": {
+        "cat": "fresh",
+        "value": 34
+    },
+    "7589883": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "43657": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "7292187": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "535509": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "8488920": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "2577507": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "197872": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "3011204": {
+        "cat": "bread",
+        "value": 3
+    },
+    "7964577": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "7879677": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7011210": {
+        "cat": "canned",
+        "value": 4
+    },
+    "420386": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "7856511": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "5490332": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "5805210": {
+        "cat": "fresh",
+        "value": 36
+    },
+    "1201873": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7857695": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "1383228": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "436948": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7823848": {
+        "cat": "cooking",
+        "value": 27
+    },
+    "8005928": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "7918809": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "117210": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8674102": {
+        "cat": "canned",
+        "value": 2
+    },
+    "116774": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2285239": {
+        "cat": "bread",
+        "value": 9
+    },
+    "7865230": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "8644883": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "351098": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7866921": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "1267989": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "3402061": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "7850536": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "7923194": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "7829122": {
+        "cat": "fresh",
+        "value": 35
+    },
+    "7840603": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8766834": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8601123": {
+        "cat": "drugstore",
+        "value": 11
+    },
+    "7787649": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8049651": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "5711606": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8656774": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7785244": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7794958": {
+        "cat": "bread",
+        "value": 18
+    },
+    "7777815": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7779581": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "7913504": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "2565946": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "8503685": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8754081": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "8540960": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8468236": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "2198745": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "1062430": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "7818635": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7835907": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "8836740": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7801213": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7776207": {
+        "cat": "bread",
+        "value": 18
+    },
+    "8721437": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7857524": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "688014": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "7049625": {
+        "cat": "fresh",
+        "value": 36
+    },
+    "7978794": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8626135": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8489310": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "7774209": {
+        "cat": "bread",
+        "value": 18
+    },
+    "7845627": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "9703764": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8692206": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "7834305": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "8622326": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "7848384": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "7817127": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8036008": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "8789204": {
+        "cat": "bread",
+        "value": 18
+    },
+    "8798062": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "710527": {
+        "cat": "canned",
+        "value": 2
+    },
+    "157075": {
+        "cat": "frozen",
+        "value": 18
+    },
+    "7741450": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7271714": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8698487": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "1928831": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7802929": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "376979": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8267730": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "8843150": {
+        "cat": "cooking",
+        "value": 20
+    },
+    "8086301": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "8195225": {
+        "cat": "drugstore",
+        "value": 12
+    },
+    "8085169": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "8767175": {
+        "cat": "frozen",
+        "value": 18
+    },
+    "277689": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8733873": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "2953035": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8003683": {
+        "cat": "snacks",
+        "value": 7
+    },
+    "117180": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8626953": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8744663": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "678931": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8560198": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8008348": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "1051481": {
+        "cat": "frozen",
+        "value": 27
+    },
+    "3207891": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "8025058": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7858152": {
+        "cat": "canned",
+        "value": 5
+    },
+    "1423303": {
+        "cat": "cooking",
+        "value": 2
+    },
+    "8686876": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7778311": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "137788": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8737758": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "135872": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8649184": {
+        "cat": "drugstore",
+        "value": 12
+    },
+    "1939224": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8736168": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "8677209": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7782048": {
+        "cat": "fresh",
+        "value": 12
+    },
+    "8512725": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8729533": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8467434": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7823085": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "8739580": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7840879": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8764037": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8613784": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "2885813": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "2224358": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "8294575": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "3009709": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "7788256": {
+        "cat": "bread",
+        "value": 1
+    },
+    "7891436": {
+        "cat": "canned",
+        "value": 2
+    },
+    "197862": {
+        "cat": "fresh",
+        "value": 19
+    },
+    "274045": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8659989": {
+        "cat": "cooking",
+        "value": 7
+    },
+    "7829813": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "1267801": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7841276": {
+        "cat": "frozen",
+        "value": 18
+    },
+    "8699735": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7743850": {
+        "cat": "fresh",
+        "value": 34
+    },
+    "7814263": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "1287116": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8514209": {
+        "cat": "bread",
+        "value": 3
+    },
+    "7956836": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "7827840": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8774648": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "8714247": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8563309": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "784813": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8602114": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2024967": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8376955": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8778407": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "1919708": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "2024958": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8427501": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "7816381": {
+        "cat": "bread",
+        "value": 3
+    },
+    "8766234": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7794483": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "8750795": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8749162": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8757512": {
+        "cat": "cooking",
+        "value": 15
+    },
+    "7812629": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "294099": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "8683343": {
+        "cat": "fresh",
+        "value": 34
+    },
+    "198686": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "201435": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "1287118": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1287098": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "1287083": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "7778921": {
+        "cat": "fresh",
+        "value": 22
+    },
+    "7822905": {
+        "cat": "drinks",
+        "value": 27
+    },
+    "7794856": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "8365010": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "8716193": {
+        "cat": "fresh",
+        "value": 7
+    },
+    "7171851": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8704079": {
+        "cat": "canned",
+        "value": 2
+    },
+    "7814428": {
+        "cat": "cooking",
+        "value": 27
+    },
+    "7831134": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8584453": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "7903056": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "8470738": {
+        "cat": "canned",
+        "value": 2
+    },
+    "8359468": {
+        "cat": "fresh",
+        "value": 36
+    },
+    "8630878": {
+        "cat": "drugstore",
+        "value": 29
+    },
+    "7168777": {
+        "cat": "cooking",
+        "value": 3
+    },
+    "7063885": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8071708": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8316703": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "7257960": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7218643": {
+        "cat": "drugstore",
+        "value": 14
+    },
+    "7857175": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8403948": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "7818026": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8431556": {
+        "cat": "drugstore",
+        "value": 27
+    },
+    "8622771": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "2424441": {
+        "cat": "canned",
+        "value": 5
+    },
+    "7895349": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "2223199": {
+        "cat": "fresh",
+        "value": 12
+    },
+    "7794987": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "7814109": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8428651": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8454168": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "7987083": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "8013504": {
+        "cat": "drugstore",
+        "value": 7
+    },
+    "8661897": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "8510384": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "687999": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "7794486": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "8819490": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "702781": {
+        "cat": "drugstore",
+        "value": 7
+    },
+    "8696994": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8571733": {
+        "cat": "bread",
+        "value": 1
+    },
+    "8740875": {
+        "cat": "fresh",
+        "value": 31
+    },
+    "4961269": {
+        "cat": "drugstore",
+        "value": 4
+    },
+    "8782154": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8722098": {
+        "cat": "snacks",
+        "value": 23
+    },
+    "8278617": {
+        "cat": "canned",
+        "value": 5
+    },
+    "7839953": {
+        "cat": "frozen",
+        "value": 18
+    },
+    "8775448": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "8131642": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "8217836": {
+        "cat": "drugstore",
+        "value": 20
+    },
+    "1423305": {
+        "cat": "cooking",
+        "value": 22
+    },
+    "8763146": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7816084": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7801228": {
+        "cat": "snacks",
+        "value": 40
+    },
+    "8265642": {
+        "cat": "drugstore",
+        "value": 28
+    },
+    "7781943": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8741983": {
+        "cat": "frozen",
+        "value": 21
+    },
+    "7841480": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8634693": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7887196": {
+        "cat": "frozen",
+        "value": 35
+    },
+    "8760820": {
+        "cat": "frozen",
+        "value": 37
+    },
+    "7888865": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "1168688": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "8710249": {
+        "cat": "drinks",
+        "value": 11
+    },
+    "8615186": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2903350": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7755720": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8754323": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "8607334": {
+        "cat": "canned",
+        "value": 2
+    },
+    "2024973": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "7037215": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "8255259": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8705549": {
+        "cat": "bread",
+        "value": 2
+    },
+    "8672859": {
+        "cat": "fresh",
+        "value": 32
+    },
+    "8728752": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7811188": {
+        "cat": "bread",
+        "value": 2
+    },
+    "7805886": {
+        "cat": "bread",
+        "value": 2
+    },
+    "201433": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "8558622": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "8668642": {
+        "cat": "canned",
+        "value": 4
+    },
+    "209834": {
+        "cat": "cooking",
+        "value": 6
+    },
+    "8418126": {
+        "cat": "fresh",
+        "value": 2
+    },
+    "120585": {
+        "cat": "canned",
+        "value": 4
+    },
+    "7152588": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "2810050": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7144685": {
+        "cat": "drugstore",
+        "value": 18
+    },
+    "3271431": {
+        "cat": "snacks",
+        "value": 22
+    },
+    "7789748": {
+        "cat": "snacks",
+        "value": 18
+    },
+    "7831414": {
+        "cat": "frozen",
+        "value": 8
+    },
+    "7873520": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "8587275": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "1999229": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "7803175": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "1999261": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "1999285": {
+        "cat": "snacks",
+        "value": 27
+    },
+    "1076664": {
+        "cat": "bread",
+        "value": 9
+    },
+    "8459324": {
+        "cat": "drinks",
+        "value": 26
+    },
+    "7207835": {
+        "cat": "cooking",
+        "value": 18
+    },
+    "8428957": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "791168": {
+        "cat": "canned",
+        "value": 4
+    },
+    "8017669": {
+        "cat": "bread",
+        "value": 17
+    },
+    "7076224": {
+        "cat": "frozen",
+        "value": 7
+    },
+    "1098643": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "1041188": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7175281": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "784808": {
+        "cat": "fresh",
+        "value": 13
+    },
+    "7985950": {
+        "cat": "drugstore",
+        "value": 22
+    },
+    "8292061": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "8581038": {
+        "cat": "cooking",
+        "value": 12
+    },
+    "8546764": {
+        "cat": "cooking",
+        "value": 11
+    },
+    "7015307": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "1260439": {
+        "cat": "fresh",
+        "value": 17
+    },
+    "7033625": {
+        "cat": "fresh",
+        "value": 30
+    },
+    "1930499": {
+        "cat": "fruit",
+        "value": 38
+    },
+    "2493357": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "1267979": {
+        "cat": "fresh",
+        "value": 8
+    },
+    "5067812": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "7568160": {
+        "cat": "fruit",
+        "value": 39
+    },
+    "8919738": {
+        "cat": "fruit",
+        "value": 39
+    }
+}

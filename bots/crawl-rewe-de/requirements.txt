@@ -1,5 +1,6 @@
 appdirs==1.4.4
 autopep8==1.5.6
+beautifulsoup4==4.12.3
 cachetools==4.2.4
 certifi==2020.12.5
 #charset-normalizer==2.0.9
@@ -21,5 +22,6 @@ rsa==4.8
 six==1.15.0
 toml==0.10.2
 urllib3==1.26.7
+user-agent==0.1.10
 virtualenv==20.4.3
 virtualenv-clone==0.5.4

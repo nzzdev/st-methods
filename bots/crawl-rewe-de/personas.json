@@ -1,0 +1,731 @@
+[
+    {
+        "id": "general",
+        "title": "Durchschnitts-Haushalt",
+        "alt_title": "durchschnittlichen Deutschen",
+        "text_intro": "Nicht alle Lebensmittel sind gleichermassen von der Inflation betroffen. Das verdeutlichen die folgenden Beispiel-Einkäufe mit tagesaktuellen Preisen der Eigenmarken grosser Handelsketten wie Aldi oder Rewe. Tiefkühlware und Fertiggerichte zum Beispiel sind deutlich stärker im Preis gestiegen als frisches Gemüse, das allerdings auch saisonalen Preisschwankungen unterliegt.",
+        "text_outro": "Der Kassenzettel entspricht in etwa dem <a href='https://www.destatis.de/DE/Themen/Wirtschaft/Preise/Glossar/waegungsschema.html' target='_blank'>repräsentativen Warenkorb</a>, mit dem das Statistische Bundesamt die Lebensmittel-Inflation berechnet – mit dem Unterschied, dass die NZZ den Warenkorb nicht mit abstrakten Durchschnittspreisen, sondern mit selbst erhobenen Preisen einzelner Produkte aus dem Discounter-Sortiment befüllt. In diesem Billig-Segment gibt meist Aldi den Preis vor, andere Handelsketten ziehen später nach. Preisänderungen bei Aldi schlagen sich also eins zu eins in den Preisen anderer Eigenmarken wie «ja!» von Rewe oder «Gut & Günstig» von Edeka nieder.<p style='margin-top: 1rem;'>Ausgerechnet im Krisenjahr 2022 haben die Discounter die Preise ihrer Billigmarken deutlich stärker angehoben als viele Markenhersteller – das zeigt eine <a href='https://www.nzz.ch/visuals/billigmarken-ploetzlich-teuer-wie-aldi-rewe-und-co-von-der-krise-profitieren-ld.1712543' target='_blank'>NZZ-Recherche</a>. Verbraucher mit kleinerem Budget, die häufiger zu Eigenmarken greifen und einen höheren Anteil ihres Einkommens für Lebensmittel ausgeben, sind demnach besonders von den gestiegenen Preisen betroffen.</p><p style='margin-top: 1rem;'>Das liegt <a href='https://www.sciencedirect.com/science/article/pii/S0304393224000977' target='_blank'>laut einer Studie</a> zum einen daran, dass in der Krise die Nachfrage nach günstigen Eigenmarken gestiegen ist. Hinzu kommt deren knapp kalkulierte Gewinnmarge. Markenprodukte hingegen bieten höhere Margen, wodurch Hersteller gestiegene Produktionskosten nicht sofort an die Kunden weitergeben müssen.</p>",
+        "icon": "general",
+        "show_in_story": true,
+        "products": [
+            {
+                "id": "136053",
+                "quantity": 3
+            },
+            {
+                "id": "5350522",
+                "quantity": 2
+            },
+            {
+                "id": "8324448",
+                "quantity": 2
+            },
+            {
+                "id": "1033906",
+                "quantity": 2
+            },
+            {
+                "id": "2865690",
+                "quantity": 2
+            },
+            {
+                "id": "8468236",
+                "quantity": 1
+            },
+            {
+                "id": "1028378",
+                "quantity": 1
+            },
+            {
+                "id": "6337279",
+                "quantity": 1
+            },
+            {
+                "id": "8401219",
+                "quantity": 1
+            },
+            {
+                "id": "6445667",
+                "quantity": 1
+            },
+            {
+                "id": "942067",
+                "quantity": 1
+            },
+            {
+                "id": "8434947",
+                "quantity": 1
+            },
+            {
+                "id": "5883121",
+                "quantity": 1
+            },
+            {
+                "id": "9393595",
+                "quantity": 1
+            },
+            {
+                "id": "2432152",
+                "quantity": 1
+            },
+            {
+                "id": "7009798",
+                "quantity": 1
+            },
+            {
+                "id": "3016679",
+                "quantity": 1
+            },
+            {
+                "id": "8125186",
+                "quantity": 1
+            },
+            {
+                "id": "2181377",
+                "quantity": 1
+            },
+            {
+                "id": "518727",
+                "quantity": 1
+            },
+            {
+                "id": "7937888",
+                "quantity": 1
+            },
+            {
+                "id": "6790143",
+                "quantity": 1
+            },
+            {
+                "id": "7122458",
+                "quantity": 1
+            },
+            {
+                "id": "64840",
+                "quantity": 1
+            },
+            {
+                "id": "4507940",
+                "quantity": 1
+            },
+            {
+                "id": "8059113",
+                "quantity": 1
+            },
+            {
+                "id": "6878636",
+                "quantity": 1
+            },
+            {
+                "id": "8288407",
+                "quantity": 1
+            },
+            {
+                "id": "2310347",
+                "quantity": 1
+            },
+            {
+                "id": "1902921",
+                "quantity": 1
+            },
+            {
+                "id": "7196141",
+                "quantity": 1
+            },
+            {
+                "id": "2134122",
+                "quantity": 1
+            },
+            {
+                "id": "5636442",
+                "quantity": 1
+            },
+            {
+                "id": "7073947",
+                "quantity": 1
+            },
+            {
+                "id": "5900174",
+                "quantity": 1
+            },
+            {
+                "id": "8596615",
+                "quantity": 1
+            },
+            {
+                "id": "570608",
+                "quantity": 1
+            },
+            {
+                "id": "7359497",
+                "quantity": 1
+            },
+            {
+                "id": "8017548",
+                "quantity": 1
+            },
+            {
+                "id": "43657",
+                "quantity": 1
+            },
+            {
+                "id": "5351065",
+                "quantity": 1
+            },
+            {
+                "id": "5879736",
+                "quantity": 1
+            },
+            {
+                "id": "2421604",
+                "quantity": 1
+            },
+            {
+                "id": "6953115",
+                "quantity": 1
+            },
+            {
+                "id": "546040",
+                "quantity": 1
+            },
+            {
+                "id": "1043421",
+                "quantity": 1
+            },
+            {
+                "id": "7938679",
+                "quantity": 1
+            },
+            {
+                "id": "7291190",
+                "quantity": 1
+            },
+            {
+                "id": "1045111",
+                "quantity": 1
+            },
+            {
+                "id": "8676858",
+                "quantity": 1
+            },
+            {
+                "id": "2290204",
+                "quantity": 1
+            },
+            {
+                "id": "420386",
+                "quantity": 1
+            },
+            {
+                "id": "3280994",
+                "quantity": 1
+            },
+            {
+                "id": "7702698",
+                "quantity": 1
+            },
+            {
+                "id": "8601073",
+                "quantity": 1
+            },
+            {
+                "id": "1928831",
+                "quantity": 1
+            },
+            {
+                "id": "6540147",
+                "quantity": 1
+            },
+            {
+                "id": "166440",
+                "quantity": 1
+            },
+            {
+                "id": "6195873",
+                "quantity": 1
+            },
+            {
+                "id": "2123526",
+                "quantity": 1
+            },
+            {
+                "id": "7227868",
+                "quantity": 1
+            },
+            {
+                "id": "342931",
+                "quantity": 1
+            },
+            {
+                "id": "7923861",
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": "bio",
+        "title": "Bio-Haushalt",
+        "alt_title": "Bio-Haushalts",
+        "text_intro": "Füllt man den Warenkorb des Durchschnittsdeutschen ausschliesslich mit Bio-Produkten, kostet der Einkauf entsprechend mehr, allerdings fällt die Preissteigerung auch geringer aus.",
+        "text_outro": "Bio-Lebensmittel sind weiterhin eine Nische: Nur rund 3 Prozent der Deutschen kaufen <a href='https://www.iwkoeln.de/studien/adriana-neligan-armin-mertens-inflationsdaempfer-bio-lebensmittel.html' target='_blank'>laut einer Umfrage</a> ausschliesslich Bio-Produkte, darunter vor allem Menschen mit hohem Einkommen. Bio-Produkte sind zwar deutlich teurer als konventionelle, dafür aber in der Regel weniger stark von der Teuerung betroffen.<p style='margin-top: 1rem;'>Das liegt daran, dass viele Bio-Betriebe bei der Produktion ihre eigenen Ressourcen vor Ort nutzen und so von stark schwankenden Weltmarktpreisen weniger abhängig sind. Auch die kürzeren Transportwegen tragen zur Preisstabilität bei.</p>",
+        "icon": "bio",
+        "show_in_story": true,
+        "products": [
+            {
+                "id": "136053",
+                "quantity": 3
+            },
+            {
+                "id": "8029790",
+                "quantity": 2
+            },
+            {
+                "id": "1144899",
+                "quantity": 2
+            },
+            {
+                "id": "1041181",
+                "quantity": 1
+            },
+            {
+                "id": "197872",
+                "quantity": 2
+            },
+            {
+                "id": "1267719",
+                "quantity": 2
+            },
+            {
+                "id": "1930502",
+                "quantity": 1
+            },
+            {
+                "id": "200347",
+                "quantity": 3
+            },
+            {
+                "id": "7956836",
+                "quantity": 1
+            },
+            {
+                "id": "206057",
+                "quantity": 3
+            },
+            {
+                "id": "1994616",
+                "quantity": 3
+            },
+            {
+                "id": "200385",
+                "quantity": 1
+            },
+            {
+                "id": "559003",
+                "quantity": 1
+            },
+            {
+                "id": "3068788",
+                "quantity": 2
+            },
+            {
+                "id": "8179779",
+                "quantity": 1
+            },
+            {
+                "id": "204047",
+                "quantity": 3
+            },
+            {
+                "id": "200348",
+                "quantity": 2
+            },
+            {
+                "id": "297368",
+                "quantity": 1
+            },
+            {
+                "id": "2181377",
+                "quantity": 1
+            },
+            {
+                "id": "8729533",
+                "quantity": 12
+            },
+            {
+                "id": "7078288",
+                "quantity": 2
+            },
+            {
+                "id": "1006852",
+                "quantity": 1
+            },
+            {
+                "id": "535509",
+                "quantity": 1
+            },
+            {
+                "id": "194185",
+                "quantity": 1
+            },
+            {
+                "id": "194191",
+                "quantity": 1
+            },
+            {
+                "id": "8739580",
+                "quantity": 1
+            },
+            {
+                "id": "8066943",
+                "quantity": 2
+            },
+            {
+                "id": "8643029",
+                "quantity": 3
+            },
+            {
+                "id": "7840603",
+                "quantity": 1
+            },
+            {
+                "id": "1902921",
+                "quantity": 1
+            },
+            {
+                "id": "8365010",
+                "quantity": 1
+            },
+            {
+                "id": "8288250",
+                "quantity": 1
+            },
+            {
+                "id": "294936",
+                "quantity": 1
+            },
+            {
+                "id": "371375",
+                "quantity": 1
+            },
+            {
+                "id": "1287065",
+                "quantity": 1
+            },
+            {
+                "id": "1279059",
+                "quantity": 6
+            },
+            {
+                "id": "8381730",
+                "quantity": 1
+            },
+            {
+                "id": "7359497",
+                "quantity": 1
+            },
+            {
+                "id": "8017548",
+                "quantity": 1
+            },
+            {
+                "id": "43657",
+                "quantity": 1
+            },
+            {
+                "id": "8061857",
+                "quantity": 1
+            },
+            {
+                "id": "8060098",
+                "quantity": 1
+            },
+            {
+                "id": "8674448",
+                "quantity": 1
+            },
+            {
+                "id": "7046872",
+                "quantity": 1
+            },
+            {
+                "id": "1007026",
+                "quantity": 1
+            },
+            {
+                "id": "7063885",
+                "quantity": 1
+            },
+            {
+                "id": "8041125",
+                "quantity": 1
+            },
+            {
+                "id": "201400",
+                "quantity": 1
+            },
+            {
+                "id": "2588140",
+                "quantity": 1
+            },
+            {
+                "id": "7226966",
+                "quantity": 1
+            },
+            {
+                "id": "7283403",
+                "quantity": 1
+            },
+            {
+                "id": "8427501",
+                "quantity": 1
+            },
+            {
+                "id": "8488972",
+                "quantity": 1
+            },
+            {
+                "id": "1287122",
+                "quantity": 2
+            },
+            {
+                "id": "2717529",
+                "quantity": 1
+            },
+            {
+                "id": "8312738",
+                "quantity": 1
+            },
+            {
+                "id": "8634332",
+                "quantity": 2
+            },
+            {
+                "id": "1004052",
+                "quantity": 1
+            },
+            {
+                "id": "2937503",
+                "quantity": 1
+            },
+            {
+                "id": "198686",
+                "quantity": 1
+            },
+            {
+                "id": "8032052",
+                "quantity": 1
+            },
+            {
+                "id": "1202493",
+                "quantity": 1
+            },
+            {
+                "id": "8393848",
+                "quantity": 1
+            }
+        ]
+    },
+    {
+        "id": "bachelor",
+        "title": "Single-Haushalt",
+        "alt_title": "Single-Haushalts",
+        "text_intro": "Im Krisenjahr 2022 sind viele industriell verarbeitete Lebensmittel teurer geworden, weil die Kosten für Energie und Logistik infolge des Ukraine-Kriegs gestiegen sind. Dementsprechend hoch fiel die Teuerung für Haushalte aus, die ausschliesslich auf Fertiggerichte setzen.",
+        "text_outro": "Die Gründe für die Preiserhöhungen sind vielfältig. Oft spielen Ernteausfälle in wichtigen Anbaugebieten eine Rolle, zum Beispiel bei <a href='https://www.nzz.ch/wirtschaft/teurer-orangensaft-orangen-knappheit-laesst-preis-fuer-konzentrat-explodieren-ld.1850098' target='_blank'>Orangensaft</a> und <a href='https://www.nzz.ch/wirtschaft/olivenoel-warum-das-gruene-gold-immer-teurer-wird-ld.1831021' target='_blank'>Olivenöl</a>. Mitunter verfolgen die Händler aber auch eine eigene, obskure Preispolitik. Für ausgewählte Lebensmittel hat die NZZ überprüft, ob die Händler <a href='https://www.nzz.ch/visuals/inflation-in-deutschland-5-lebensmittel-die-das-ausmass-zeigen-ld.1732639' target='_blank'>auch positive Entwicklungen bei den Erzeugerpreisen</a> an ihre Kunden weitergeben.",
+        "icon": "bachelor",
+        "show_in_story": true,
+        "products": [
+            {
+                "id": "1028378",
+                "quantity": 3
+            },
+            {
+                "id": "2865690",
+                "quantity": 2
+            },
+            {
+                "id": "6790143",
+                "quantity": 2
+            },
+            {
+                "id": "6878636",
+                "quantity": 2
+            },
+            {
+                "id": "5351065",
+                "quantity": 2
+            },
+            {
+                "id": "7877621",
+                "quantity": 2
+            },
+            {
+                "id": "6337279",
+                "quantity": 1
+            },
+            {
+                "id": "8401219",
+                "quantity": 1
+            },
+            {
+                "id": "5883121",
+                "quantity": 1
+            },
+            {
+                "id": "7009798",
+                "quantity": 1
+            },
+            {
+                "id": "6243827",
+                "quantity": 1
+            },
+            {
+                "id": "518727",
+                "quantity": 1
+            },
+            {
+                "id": "7122458",
+                "quantity": 1
+            },
+            {
+                "id": "8059113",
+                "quantity": 1
+            },
+            {
+                "id": "8288407",
+                "quantity": 1
+            },
+            {
+                "id": "2310347",
+                "quantity": 1
+            },
+            {
+                "id": "891922",
+                "quantity": 1
+            },
+            {
+                "id": "5879736",
+                "quantity": 1
+            },
+            {
+                "id": "6475973",
+                "quantity": 1
+            },
+            {
+                "id": "7938679",
+                "quantity": 1
+            },
+            {
+                "id": "7291190",
+                "quantity": 1
+            },
+            {
+                "id": "6540147",
+                "quantity": 1
+            },
+            {
+                "id": "166440",
+                "quantity": 1
+            },
+            {
+                "id": "2123526",
+                "quantity": 1
+            },
+            {
+                "id": "6714161",
+                "quantity": 1
+            },
+            {
+                "id": "1007001",
+                "quantity": 1
+            },
+            {
+                "id": "2424540",
+                "quantity": 1
+            },
+            {
+                "id": "8560300",
+                "quantity": 1
+            },
+            {
+                "id": "8489310",
+                "quantity": 1
+            },
+            {
+                "id": "8553081",
+                "quantity": 1
+            },
+            {
+                "id": "8540029",
+                "quantity": 1
+            },
+            {
+                "id": "6801447",
+                "quantity": 1
+            },
+            {
+                "id": "8626092",
+                "quantity": 1
+            },
+            {
+                "id": "8493667",
+                "quantity": 1
+            },
+            {
+                "id": "1037883",
+                "quantity": 1
+            },
+            {
+                "id": "7892381",
+                "quantity": 1
+            },
+            {
+                "id": "7091553",
+                "quantity": 1
+            },
+            {
+                "id": "8187959",
+                "quantity": 1
+            },
+            {
+                "id": "2063281",
+                "quantity": 1
+            },
+            {
+                "id": "7955686",
+                "quantity": 1
+            },
+            {
+                "id": "8667375",
+                "quantity": 1
+            },
+            {
+                "id": "8671841",
+                "quantity": 1
+            },
+            {
+                "id": "8529987",
+                "quantity": 1
+            },
+            {
+                "id": "7043484",
+                "quantity": 1
+            },
+            {
+                "id": "1203693",
+                "quantity": 1
+            },
+            {
+                "id": "2502892",
+                "quantity": 1
+            },
+            {
+                "id": "7937888",
+                "quantity": 1
+            },
+            {
+                "id": "8596615",
+                "quantity": 1
+            }
+        ]
+    }
+]
