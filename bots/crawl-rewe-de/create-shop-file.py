@@ -699,6 +699,3 @@ for brand, brand_name in [(1, 'JA!'), (2, 'BESTE WAHL'), (3, 'BIO')]:
     # Print the top 10 highest and lowest price increases for the current brand
     print_top_products(brand_df, 'percent_increase', 'largest', "with the highest price increase", brand_name)
     print_top_products(brand_df, 'percent_increase', 'smallest', "that became cheaper", brand_name)
-
-# delete csv
-os.remove("./data/products.csv")
