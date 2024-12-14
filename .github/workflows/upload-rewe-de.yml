@@ -3,7 +3,7 @@ name: Update Shop Prices DE
 on:
   # Schedule makes this bot run in regular intervals, without any interventions
   schedule:
-    - cron: "0,9 20 * * *"
+    - cron: "15 9 * * *"
   workflow_dispatch:
 
 jobs:
