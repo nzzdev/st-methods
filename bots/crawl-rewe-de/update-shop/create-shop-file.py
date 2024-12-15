@@ -395,7 +395,7 @@ else:
     print("One or more prices from Aldi failed to scrape. Default prices were used for those entries.")
 
 ##########################################
-# Look for missing prices in -pickup.csv #
+# Overwrite all prices from -pickup.csv #
 ##########################################
 # **Add the sorting by 'brand' and 'name'**
 merged_result = merged_result.sort_values(by=['brand', 'name'])
@@ -410,7 +410,7 @@ def get_most_recent_pickup_file():
             return pickup_csv_path, date_str
     return None, None  # Return None if no recent file is found
 
-# Before saving products.csv, handle missing 'last_price' values
+# Get the most recent '-pickup' file
 most_recent_pickup_file, pickup_date = get_most_recent_pickup_file()
 
 if most_recent_pickup_file:
@@ -419,30 +419,53 @@ if most_recent_pickup_file:
     # Load the backup results from the most recent '-pickup' file
     backup_results = pd.read_csv(most_recent_pickup_file, sep=';')
     
-    # Ensure 'ID' in both dataframes is treated consistently
+    # Ensure IDs are treated consistently as strings
     backup_results['ID'] = backup_results['ID'].astype(str)
     merged_result['id'] = merged_result['id'].astype(str)
     
-    # Find rows in 'merged_result' where 'last_price' is NaN
-    missing_last_price_ids = merged_result[merged_result['last_price'].isna()]['id']
+    # Rename 'Preis' in the backup to 'last_price' for alignment
+    backup_results = backup_results.rename(columns={'Preis': 'last_price'})
     
-    # Track IDs where a backup price is found
-    backup_prices_found = []
+    # Save old prices before merging
+    merged_result['old_last_price'] = merged_result['last_price'].copy()
     
-    # Retrieve 'Preis' and update 'last_price' and 'last_seen' for the missing IDs
-    for id_val in missing_last_price_ids:
-        if id_val in backup_results['ID'].values:
-            price = backup_results.loc[backup_results['ID'] == id_val, 'Preis'].iloc[0]
-            merged_result.loc[merged_result['id'] == id_val, 'last_price'] = price
-            merged_result.loc[merged_result['id'] == id_val, 'last_seen'] = pickup_date
-            backup_prices_found.append(id_val)
+    # Merge `merged_result` with `backup_results` to overwrite prices
+    merged_result = merged_result.merge(
+        backup_results[['ID', 'last_price']],  # Select only relevant columns
+        left_on='id', right_on='ID', how='left', suffixes=('', '_backup')
+    )
     
-    # Print the number of backup prices found and the corresponding IDs
-    print(f"Backup prices found: {len(backup_prices_found)}")
-    print(f"IDs with backup prices: {', '.join(backup_prices_found)}")
+    # If a backup price exists, overwrite the `last_price` and `last_seen`
+    merged_result['last_price'] = merged_result['last_price_backup'].combine_first(merged_result['last_price'])
+    merged_result['last_seen'] = merged_result['last_seen'].combine_first(
+        pd.Series([pickup_date] * len(merged_result), index=merged_result.index)
+    )
+    
+    # Drop unnecessary columns
+    merged_result = merged_result.drop(columns=['ID', 'last_price_backup'])
+    
+    # Identify which rows had their prices updated
+    updated_prices_mask = merged_result['old_last_price'] != merged_result['last_price']
+
+    # Filter out rows where the price remained unchanged or was NaN
+    updated_ids = merged_result.loc[updated_prices_mask & merged_result['last_price'].notna(), 'id']
+
+    # Identify rows where `last_price` was filled from the backup
+    filled_prices_mask = merged_result['old_last_price'].isna() & merged_result['last_price'].notna()
+
+    # Print the list of IDs that had their prices updated
+    print("IDs with overwritten prices from the -pickup.csv:")
+    print(updated_ids.tolist())
+
+    # Log IDs where prices were filled
+    filled_ids = merged_result.loc[filled_prices_mask, 'id']
+    print("IDs with prices filled from the -pickup.csv (previously missing):")
+    print(filled_ids.tolist())
+
+    print("Prices updated from the most recent '-pickup.csv' file.")
 
 else:
-    print("No recent '-pickup' file found. No backup prices applied.")
+    print("No recent '-pickup' file found. No prices updated.")
 
 ##################################################
 # Get old prices manually for important products #
