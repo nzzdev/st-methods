@@ -12,7 +12,7 @@
      {
       "loadSyncBeforeInit": false,
       "file": {
-       "path": "./data/products.csv"
+       "path": "../data/products.csv"
       }
      },
      {
