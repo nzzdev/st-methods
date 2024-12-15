@@ -316,6 +316,7 @@ merged_result['icon'] = merged_result['id'].apply(
 # Add products manually #
 #########################
 # Source: https://web.archive.org/web/20220129021400/https://www.aldi-nord.de/sortiment/getraenke/bier.html
+# Source 2: https://web.archive.org/web/20220322123345/https://www.aldi-nord.de/sortiment/babyprodukte.html
 # Setup dates
 date = datetime.today() - timedelta(days=7) # fake date
 first_seen_date = pd.to_datetime("2022-01-29")
@@ -324,11 +325,13 @@ last_seen_date = pd.to_datetime(date.strftime('%Y-%m-%d'))  # Ensure correct for
 # URLs for the product pages
 product_urls = [
     "https://www.aldi-nord.de/produkt/pilsener-0313-1-1.article.html",
-    "https://www.aldi-nord.de/produkt/premium-pilsener-0312-0-0.article.html"
+    "https://www.aldi-nord.de/produkt/premium-pilsener-0312-0-0.article.html",
+    "https://www.aldi-nord.de/produkt/premium-windeln-groesse-3-midi-1003349-0-0.article.html",
+    "https://www.aldi-nord.de/produkt/baby-pflegetu_cher-1016069-0-0.article.html"
 ]
 
 # Default fallback prices
-default_prices = [45, 269]
+default_prices = [45, 269, 555, 275]
 
 # Function to generate headers for the request
 def generate_headers():
@@ -370,16 +373,16 @@ final_prices = [
 
 # Create a DataFrame for the new products with final prices
 new_products = pd.DataFrame({
-    'id': ['999999', '999990'],
-    'brand': [1, 1],
-    'name': ['Bier (Discounter-Pils)', 'Bier (Discounter-Pils)'],
-    'weight': ['0,5l', '6x0,5l'],
-    'first_price': [36, 179],
+    'id': ['999999', '999990', '999991', '999992'],
+    'brand': [1, 1, 1, 1],
+    'name': ['Bier (Discounter-Pils)', 'Bier (Discounter-Pils)', 'Baby Windeln, verschiedene Grössen (Aldi)', 'Baby Feuchttücher (Aldi)'],
+    'weight': ['0,5l', '6x0,5l', '32 bis 46', '3x80'],
+    'first_price': [36, 179, 525, 248],
     'last_price': final_prices,  # Use final prices here
-    'first_seen': [first_seen_date, first_seen_date],  # Ensure datetime format
-    'last_seen': [last_seen_date, last_seen_date],    # Ensure datetime format
-    'cat': ['drinks', 'drinks'],
-    'icon': [11, 24]
+    'first_seen': [first_seen_date, first_seen_date, first_seen_date, first_seen_date], # Ensure datetime format
+    'last_seen': [last_seen_date, last_seen_date, last_seen_date, last_seen_date], # Ensure datetime format
+    'cat': ['drinks', 'drinks', 'drugstore', 'drugstore'],
+    'icon': [11, 24, 18, 18]
 })
 
 # Append the new products to the merged_result DataFrame
@@ -387,9 +390,9 @@ merged_result = pd.concat([merged_result, new_products], ignore_index=True)
 
 # Print a summary of the scraping process
 if all(price is not None for price in scraped_prices):
-    print("Beer prices scraped and updated successfully.")
+    print("Aldi prices scraped and updated successfully.")
 else:
-    print("One or more beer prices failed to scrape. Default prices were used for those entries.")
+    print("One or more prices from Aldi failed to scrape. Default prices were used for those entries.")
 
 ##########################################
 # Look for missing prices in -pickup.csv #
@@ -508,7 +511,8 @@ for persona in personas:
 # Step 2: Load the personas-alternatives.csv file and ensure all values are strings or None
 alternatives_df = pd.read_csv(alternatives_csv_path, dtype=str).fillna("")
 alternatives_df.columns = ["id", "alt1", "alt2"]  # Ensure correct column names
-alternatives_df = alternatives_df.applymap(lambda x: str(int(x)) if x.isdigit() else None)  # Convert to strings or None
+#alternatives_df = alternatives_df.applymap(lambda x: str(int(x)) if x.isdigit() else None)  # Convert to strings or None
+alternatives_df = alternatives_df.apply(lambda col: col.map(lambda x: str(int(x)) if x.isdigit() else None))
 
 # Step 3: Load the products.csv file
 products_df = pd.read_csv(products_csv_path, sep=';', dtype=str)
