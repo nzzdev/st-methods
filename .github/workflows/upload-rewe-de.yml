@@ -37,11 +37,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/crawl-rewe-de/update-shop/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/crawl-rewe-de/requirements.txt') }}
       - name: Install python packages
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install -r ../requirements.txt
       - name: Run python scripts
         run: |
           python create-shop-file.py
