@@ -376,7 +376,7 @@ new_products = pd.DataFrame({
     'id': ['999999', '999990', '999991', '999992'],
     'brand': [1, 1, 1, 1],
     'name': ['Bier (Discounter-Pils)', 'Bier (Discounter-Pils)', 'Baby Windeln, verschiedene Grössen (Aldi)', 'Baby Feuchttücher (Aldi)'],
-    'weight': ['0,5l', '6x0,5l', '32 bis 46', '3x80'],
+    'weight': ['0,5l', '6x0,5l', '32 bis 46 Stück', '3x80'],
     'first_price': [36, 179, 525, 248],
     'last_price': final_prices,  # Use final prices here
     'first_seen': [first_seen_date, first_seen_date, first_seen_date, first_seen_date], # Ensure datetime format
