@@ -45,9 +45,6 @@ jobs:
       - name: Run python scripts
         run: |
           python crawl-rewe.py
-      - name: Delete products.csv
-        run: |
-          rm -f data/products.csv
       - name: Run Q cli
         run: Q update-item
         env:

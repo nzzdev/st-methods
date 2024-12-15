@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: bots/crawl-rewe-de/
+        working-directory: bots/crawl-rewe-de/update-shop/
     steps:
       - uses: actions/checkout@v4
       - name: Install system dependencies
@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ steps.pip-cache.outputs.dir }}
-          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/crawl-rewe-de/requirements.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/crawl-rewe-de/update-shop/requirements.txt') }}
       - name: Install python packages
         run: |
           python -m pip install --upgrade pip
@@ -52,7 +52,7 @@ jobs:
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
       - name: Delete products.csv
         run: |
-          rm -f data/products.csv
+          rm -f ../data/products.csv
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: '*.txt *.json'

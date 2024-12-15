@@ -43,7 +43,7 @@ os.chdir(os.path.dirname(__file__))
 
 # Generate the list of CSV file names for the date range 2022-04-13 to 2022-12-31
 csv_files = [
-    f'./data/2022-{month:02d}-{day:02d}-rewe.csv'
+    f'../data/2022-{month:02d}-{day:02d}-rewe.csv'
     for month in range(4, 13)
     for day in range(1, monthrange(2022, month)[1] + 1)
     if not (month == 4 and day < 13)  # Exclude days before April 13
@@ -52,7 +52,7 @@ csv_files = [
 # Function to read CSV files and include the date from the filename
 def read_csv_with_date(file_path):
     df = pd.read_csv(file_path, sep=';')
-    # Extract date from filename, assuming filename format is '.data/YYYY-MM-DD-rewe.csv'
+    # Extract date from filename, assuming filename format is '../data/YYYY-MM-DD-rewe.csv'
     date_str = re.search(r'\d{4}-\d{2}-\d{2}', file_path).group()
     df['Date'] = date_str
     return df
@@ -242,7 +242,7 @@ def get_recent_csv_files(n=30):
     for days_ago in range(0, n + 50):  # Check for 50 days to get at least 30 files
         date = datetime.today() - timedelta(days=days_ago)
         date_str = date.strftime('%Y-%m-%d')
-        csv_path = f'./data/{date_str}-rewe.csv'
+        csv_path = f'../data/{date_str}-rewe.csv'
         if os.path.exists(csv_path):
             recent_files.append(csv_path)
         if len(recent_files) == n:
@@ -402,7 +402,7 @@ def get_most_recent_pickup_file():
     for days_ago in range(0, 10):  # Check the last 10 days
         date = datetime.today() - timedelta(days=days_ago)
         date_str = date.strftime('%Y-%m-%d')
-        pickup_csv_path = f'./data/{date_str}-rewe-pickup.csv'
+        pickup_csv_path = f'../data/{date_str}-rewe-pickup.csv'
         if os.path.exists(pickup_csv_path):
             return pickup_csv_path, date_str
     return None, None  # Return None if no recent file is found
@@ -486,7 +486,7 @@ if "brand" in merged_result.columns and "name" in merged_result.columns:
     ].apply(append_note)
 
 # Save the final sorted and cleaned dataframe to a new CSV file
-merged_result.to_csv('./data/products.csv', sep=';', index=False)
+merged_result.to_csv('../data/products.csv', sep=';', index=False)
 
 #################################
 # LOOK FOR ALT IDs FOR PERSONAS #
@@ -494,7 +494,7 @@ merged_result.to_csv('./data/products.csv', sep=';', index=False)
 # File paths
 json_path = "./personas.json"
 alternatives_csv_path = "./personas-alternatives.csv"
-products_csv_path = "./data/products.csv"
+products_csv_path = "../data/products.csv"
 error_log_path = "./error_log.txt"
 
 # Step 1: Load the JSON file and convert product IDs to strings
@@ -572,7 +572,7 @@ with open(json_path, 'w') as f:
 file = [{
     "loadSyncBeforeInit": False,
     "file": {
-        "path": "./data/products.csv"
+        "path": "../data/products.csv"
     }
     },
 {
@@ -595,7 +595,7 @@ update_chart(id='9c34f843abc41325f7ff6d735fa0a49f', files=file)
 # CALCULATE PERCENTAGE CHANGE #
 ###############################
 # Read the CSV file into a DataFrame
-df = pd.read_csv('./data/products.csv', sep=';')
+df = pd.read_csv('../data/products.csv', sep=';')
 
 # General calculations for all brands
 df['percent_increase'] = ((df['last_price'] - df['first_price']) / df['first_price']) * 100
