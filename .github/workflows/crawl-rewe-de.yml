@@ -55,7 +55,7 @@ jobs:
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          file_pattern: '*.csv *-ja-*.json'
+          file_pattern: '*-rewe-pickup.csv *-rewe.csv *-ja-*.json'
           commit_message: Upload csv with food prices
       - name: Log failure to slack
         if: always()
