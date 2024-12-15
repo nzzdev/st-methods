@@ -486,11 +486,19 @@ updates = {
     "5883121": {"first_price": 165, "first_seen": "2022-01-29"},
     "559003": {"first_price": 229, "first_seen": "2022-01-29"},
     "8919738": {"first_price": 129, "first_seen": "2022-01-29"},
+    "6878636": {"first_price": 39, "first_seen": "2022-01-29"},
+    "6953115": {"first_price": 79, "first_seen": "2022-01-29"},
+    "8260720": {"first_price": 79, "first_seen": "2022-01-29"},
+    "165932": {"first_price": 49, "first_seen": "2022-01-29"},
+    "2737743": {"first_price": 99, "first_seen": "2022-01-29"},
+    "8023655": {"first_price": 89, "first_seen": "2022-01-29"},
+    "2030321": {"first_price": 119, "first_seen": "2022-01-29"},
     "8359468": {"first_price": 189, "first_seen": "2022-01-29"}}
 # Source noodles: https://web.archive.org/web/20220129132817/https://www.aldi-nord.de/sortiment/nahrungsmittel/nudeln-reis.html
 # Source toilet paper: https://web.archive.org/web/20220126073117/https://www.aldi-nord.de/sortiment/haushalt/papierprodukte.html
 # Source coffee: https://web.archive.org/web/20220118013242/https://www.aldi-nord.de/sortiment/kaffee-tee-kakao/kaffee/kaffee-gold-3307-3-0.article.html
 # Source butter: https://web.archive.org/web/20220128003010/https://www.aldi-nord.de/sortiment/kuehlung-tiefkuehlung/kaese-milch-milchprodukte/butter-sahne-sauerrahm.html
+# Source snacks: https://web.archive.org/web/20220125111927/https://www.aldi-nord.de/sortiment/aldi-eigenmarken/sunsnacks.html
 
 # Apply the updates to the 'first_price' and 'first_seen' columns
 for id_val, values in updates.items():
