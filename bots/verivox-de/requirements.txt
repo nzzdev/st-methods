@@ -38,7 +38,7 @@ pytz
 pyjwt<3.0.0
 setuptools>34.0.0
 six>=1.5
-snowflake-connector-python==2.7.11
+snowflake-connector-python>=3.12.4
 typing-extensions<5,>=4.3
 requests<3.0.0
 requests-oauthlib<1.5.0
