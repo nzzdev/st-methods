@@ -22,23 +22,23 @@ virtualenv-clone==0.5.4
 yfinance==0.2.44 # 0.2.45 buggy
 
 # requirements for snowflake-connector-python
-asn1crypto<2.0.0,>0.24.0
-certifi==2020.12.5
+asn1crypto>=1.5.0,<2.0.0
+certifi>=2021.5.30
 charset-normalizer<3,>=2
-cffi==1.17.1 # snowflake
-cryptography==44.0.0 # snowflake
-idna==3.3
-oscrypto==1.3.0 # snowflake
-pyarrow<8.1.0,>=8.0.0
+cffi>=1.15.0,<2.0
+cryptography>=38.0.0,<45.0.0
+idna>=3.3,<4
+oscrypto>=1.3.0
+pyarrow>=8.0.0,<8.1.0
 pycparser
-pycryptodomex!=3.5.0,<4.0.0,>=3.2
-pyOpenSSL<23.0.0,>=16.2.0
+pycryptodomex>=3.6.0,<4.0.0
+pyOpenSSL>=21.0.0,<23.0.0
 python-dateutil>=2.8.1
-pytz
-pyjwt<3.0.0
-setuptools>34.0.0
-six>=1.5
-snowflake-connector-python==3.12.4 # snowflake
-typing-extensions<5,>=4.3
-requests<3.0.0
+pytz>=2021.1
+pyjwt>=2.4.0,<3.0.0
+setuptools>=40.0.0
+six>=1.16.0
+snowflake-connector-python>=3.12.0,<3.13.0
+typing-extensions>=4.3.0,<5.0
+requests>=2.26.0,<3.0.0
 requests-oauthlib<1.5.0
