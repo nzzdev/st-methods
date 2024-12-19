@@ -406,7 +406,7 @@ institute_mapping = {
     'Forsa': 'forsa',
     'Verian': 'emnid',
     'Allensb.': 'allensbach',
-    #'GMS': 'gms',
+    'GMS': 'gms',
     'Infratest': 'infratest',
     'YouGov': 'yougov',
     'average': 'average'
