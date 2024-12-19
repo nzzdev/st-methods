@@ -29,8 +29,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8487700;ja!;ja! Aktenhüllen für DIN A4 25 Stück;259;25 Stück
 2024-12-19;8868318;ja!;ja! Aktiv Drink Multifrucht 8x100g;199;8x100g (1 kg = 2,49 €)
 2024-12-19;7723314;ja!;ja! Aktivdrink Erdbeere 8x100g;199;8x100g (1 kg = 2,49 €)
-2024-12-19;8593786;ja!;ja! Allzweckreiniger Lemon 1l;95;1l
-2024-12-19;7898831;ja!;ja! Allzweckreiniger Ocean 1l;95;1l
 2024-12-19;6790127;ja!;ja! Alpenvollmilch Haselnuss Schokolade 100g;79;100g (1 kg = 7,90 €)
 2024-12-19;7938726;ja!;ja! Alpenvollmilch Schokolade Traube Nuss 100g;79;100g (1 kg = 7,90 €)
 2024-12-19;6790143;ja!;ja! Alpenvollmilch-Schokolade 100g;69;100g (1 kg = 6,90 €)
@@ -65,7 +63,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;1478263;ja!;ja! Backpulver 10x15g;59;10x15g (1 kg = 3,93 €)
 2024-12-19;130082;ja!;ja! Bacon Mais-Reis-Snack Schinkengeschmack 125g;99;125g (1 kg = 7,92 €)
 2024-12-19;7878218;ja!;ja! Bacon-Ei Sandwich 160g;199;160g (1 kg = 12,44 €)
-2024-12-19;8591851;ja!;ja! Badreiniger Lemon 1l;95;1l
 2024-12-19;8556568;ja!;ja! Bagels mit Sesam 340g;189;340g (1 kg = 5,56 €)
 2024-12-19;9024550;ja!;ja! Baguette Schinken 125g;299;6x125g (1 kg = 3,99 €)
 2024-12-19;8940948;ja!;ja! Baguette Tomate Mozzarella 6x125g;299;6x125g (1 kg = 3,99 €)
@@ -113,7 +110,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8290217;ja!;ja! Briefumschläge DIN C6 100 Stück Ohne Fenster;399;100 Stück
 2024-12-19;8289473;ja!;ja! Briefumschläge DIN lang selbstklebend ohne Fenster 50 Stück;239;50 Stück
 2024-12-19;8088095;ja!;ja! Briefumschläge mit Fenster DIN lang 50 Stück;239;50 Stück
-2024-12-19;8400076;ja!;ja! Brillen-Putztücher 54 Stück;85;54 Stück
 2024-12-19;7073900;ja!;ja! Broccoli Röschen tiefgefroren 1kg;239;1000g
 2024-12-19;7610950;ja!;ja! Brokkoli-Gratin 400g;249;400g (1 kg = 6,23 €)
 2024-12-19;8291795;ja!;ja! Brot-Backmischung Roggenmischbrot 1kg;129;1kg
@@ -181,8 +177,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;975919;ja!;ja! Cola-Mix 0% Zucker 1,5l;65;1,50l (1 l = 0,43 €)
 2024-12-19;975927;ja!;ja! Cola-Mix 0% Zucker 6x1,5l;390;6x1,50l (1 l = 0,43 €)
 2024-12-19;975903;ja!;ja! Cola-Mix 6x1,5l;390;6x1,50l (1 l = 0,43 €)
-2024-12-19;7175263;ja!;ja! Colorwaschmittel 2,02kg, 30WL;489;2025kg (1 kg = 2,42 €)
-2024-12-19;8182885;ja!;ja! Colorwaschmittel flüssig 1,1l 20WL;325;1,10l (1 l = 2,95 €)
 2024-12-19;2857422;ja!;ja! Condimento Bianco 500ml;169;500ml (1 l = 3,38 €)
 2024-12-19;8493667;ja!;ja! Cookies American Style Chocolate Chip 225g;139;225g (1 kg = 6,18 €)
 2024-12-19;7939890;ja!;ja! Cookies American Style Double Chocolate 225g;139;225g (1 kg = 6,18 €)
@@ -296,7 +290,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;7004010;ja!;ja! Erdnüsse pikant gewürzt 150g;99;150g (1 kg = 6,60 €)
 2024-12-19;2394742;ja!;ja! Erfrischungsgetränk Apfel-Rhabarber 0,5l;39;0,50l (1 l = 0,78 €)
 2024-12-19;9998530;ja!;ja! Erythrit 500g;395;500g
-2024-12-19;7900645;ja!;ja! Essigreiniger 1l;85;1l
 2024-12-19;7585069;ja!;ja! Euka Menthol Bonbons 300g;99;300g
 2024-12-19;7632588;ja!;ja! Exotischer Fruchtcocktail 4x113g;179;4x70g
 2024-12-19;6243827;ja!;ja! Extra löslicher Kaffee 200g;529;200g (1 kg = 26,45 €)
@@ -326,9 +319,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;1125037;ja!;ja! Feinstrumpfhosen 20 DEN Gr. 42-44 schwarz matt 2 Stück;249;2 Stück
 2024-12-19;1125040;ja!;ja! Feinstrumpfhosen 20 DEN Gr. 46-48 Make Up matt 2 Stück;249;2 Stück
 2024-12-19;1125042;ja!;ja! Feinstrumpfhosen 20 DEN Gr. 46-48 schwarz matt 2 Stück;249;2 Stück
-2024-12-19;7897614;ja!;ja! Feinwaschmittel Black Flüssig 1,5l, 37WL;199;1,50l (1 l = 1,33 €)
-2024-12-19;8640400;ja!;ja! Feinwaschmittel Flüssig 1,5l, 30WL;265;1,50l (1 l = 1,77 €)
-2024-12-19;8631710;ja!;ja! Feinwaschmittel Sensitiv 1,5l 37WL;199;1,50l
 2024-12-19;7877179;ja!;ja! Feldsalat Mix 100g;99;100g (1 kg = 9,90 €)
 2024-12-19;8606032;ja!;ja! Fenchel Anis Kümmel Tee 50g, 25 Beutel;119;50g (1 kg = 23,80 €)
 2024-12-19;702420;ja!;ja! Fenstertuch;99;1 Stück
@@ -425,11 +415,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8426184;ja!;ja! Geriebener Gouda 48% Fett 250g;199;250g (1 kg = 7,96 €)
 2024-12-19;8426697;ja!;ja! Geriebener Gratin- und Pizzakäse 250g;199;250g (1 kg = 7,96 €)
 2024-12-19;7618946;ja!;ja! Geriffelte Chips gesalzen 200g;149;200g (1 kg = 7,45 €)
-2024-12-19;8075412;ja!;ja! Geschirr-Reiniger 40 Tabs All-in-1 840g;395;840g (1 kg = 4,70 €)
-2024-12-19;7896538;ja!;ja! Geschirr-Reiniger Classic 60 Tabs 780g;299;780g (1 kg = 3,83 €)
 2024-12-19;8977328;ja!;ja! Geschirrreiniger 6 Stück;75;6 Stück
-2024-12-19;2346106;ja!;ja! Geschirrspülmittel Classic 1l;95;1l
-2024-12-19;8335264;ja!;ja! Geschirrspülmittel Zitrone 1l;95;1l
 2024-12-19;8669735;ja!;ja! Getränkesirup mit Orangen-Geschmack 0,5l;149;0,50l (1 l = 2,98 €)
 2024-12-19;8672028;ja!;ja! Getränkesirup mit Zitronen-Limettengeschmack 0,5l;149;0,50l (1 l = 2,98 €)
 2024-12-19;8595918;ja!;ja! Glasreiniger Ocean 1l;95;1l
@@ -554,7 +540,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8187738;ja!;ja! Kaffeesahne 20x10g;95;200g (1 kg = 4,75 €)
 2024-12-19;8187754;ja!;ja! Kaffeeweißer 250g;149;250g (1 kg = 5,96 €)
 2024-12-19;2290204;ja!;ja! Kaisergemüse 1kg;239;1000g
-2024-12-19;7832815;ja!;ja! Kalk Stopp Tabs 51 Stück;275;612g (1 kg = 4,49 €)
 2024-12-19;546026;ja!;ja! Kamillentee 37,5g, 25 Beutel;89;37,50g (1 kg = 23,73 €)
 2024-12-19;7825847;ja!;ja! Karottensalat fein geraspelt 190g;79;190g (1 kg = 4,16 €)
 2024-12-19;7999173;ja!;ja! Karteikarten DIN A6 100 Stück;249;100 Stück
@@ -587,7 +572,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8725350;ja!;ja! Kirsch Grütze 500g;199;500g (1 kg = 3,98 €)
 2024-12-19;7033086;ja!;ja! Klare Gemüsebrühe 140g;99;140g (1 kg = 7,07 €)
 2024-12-19;7033243;ja!;ja! Klare Rinderbrühe im Glas 140g;99;140g (1 kg = 7,07 €)
-2024-12-19;8059677;ja!;ja! Klarspüler 1l;95;1l
 2024-12-19;2906340;ja!;ja! Klumpstreu 10kg;315;10kg (1 kg = 0,32 €)
 2024-12-19;2737743;ja!;ja! Knabberbox 300g;169;300g (1 kg = 5,63 €)
 2024-12-19;1125073;ja!;ja! Kniestrümpfe 20Den matt Schwarz 2 Paar;199;2 Stück
@@ -830,7 +814,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;9035193;ja!;ja! Pommes Frites Feinschnitt 1kg;179;1000g
 2024-12-19;2123526;ja!;ja! Pommes Frites Wellenschnitt 1kg;179;1000g
 2024-12-19;8023655;ja!;ja! Popcorn karamellisiert 200g;129;200g (1 kg = 6,45 €)
-2024-12-19;7649671;ja!;ja! Power Reiniger Kalk & Schmutz 750ml;145;750ml
 2024-12-19;726886;ja!;ja! Prinzessbohnen fein 220g;119;220g (1 kg = 5,41 €)
 2024-12-19;8457317;ja!;ja! Prospekthüllen DINA4 matt 30 Stück;119;30 Stück
 2024-12-19;8130280;ja!;ja! Präge-Servietten weiß 100 Stück;99;100 Stück
@@ -919,7 +902,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;7011318;ja!;ja! Sauerkirschen entsteint & gezuckert 350g;199;350g (1 kg = 5,69 €)
 2024-12-19;4507940;ja!;ja! Saure Sahne 200g;75;200g (1 kg = 3,75 €)
 2024-12-19;8100477;ja!;ja! Schaschlikspieße 20cm 125 Stück;149;125 Stück
-2024-12-19;1311131;ja!;ja! Scheuermilch mit Zitrusfrische 750ml;85;750ml (1 l = 1,13 €)
 2024-12-19;8895117;ja!;ja! Schinkenbockwurst 500g;379;500g (1 kg = 7,58 €)
 2024-12-19;6387934;ja!;ja! Schinkenwurst 200g;99;200g (1 kg = 4,95 €)
 2024-12-19;6320406;ja!;ja! Schinkenwürfel 2x125g;249;2x125g (1 kg = 9,96 €)
@@ -1021,9 +1003,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;702528;ja!;ja! Spül- & Haushaltstuch 6 Stück;95;6 Stück
 2024-12-19;8008505;ja!;ja! Spülbürste oval;89;1 Stück
 2024-12-19;8300853;ja!;ja! Spülbürste rund 1 Stück;79;1 Stück
-2024-12-19;8060267;ja!;ja! Spülmittel Acai Blaubeere 500ml;95;500ml (1 l = 1,90 €)
-2024-12-19;8336275;ja!;ja! Spülmittel Sweet Orange 500ml;95;500ml (1 l = 1,90 €)
-2024-12-19;7990169;ja!;ja! Spülmittelkonzentrat Ultra Power 5-in-1 500ml;135;500ml
 2024-12-19;8659316;ja!;ja! Stabfeuerzeug nachfüllbar 1 Stück;155;1 Stück
 2024-12-19;585106;ja!;ja! Stangenspargel 205g;179;205g (1 kg = 8,73 €)
 2024-12-19;6475973;ja!;ja! Stapelchips Paprika 175g;169;175g (1 kg = 9,66 €)
@@ -1124,15 +1103,9 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8912235;ja!;ja! Vollmilch Schokokeks 125g;159;125g (1 kg = 12,72 €)
 2024-12-19;8909742;ja!;ja! Vollmilch Schokowaffeln 175g;289;175g (1 kg = 16,51 €)
 2024-12-19;5880459;ja!;ja! Vollmilch-Joghurt 4x150g;99;4x150g (1 kg = 1,65 €)
-2024-12-19;8152779;ja!;ja! Vollwaschmittel 1,1l 20WL;325;1,10l (1 l = 2,95 €)
-2024-12-19;7997199;ja!;ja! Vollwaschmittel Pulver 5,2kg 80WL;1095;5,20kg (1 kg = 2,11 €)
-2024-12-19;7176034;ja!;ja! Vollwaschmittel Super-Kompakt 2,02kg, 30WL;489;2025kg (1 kg = 2,42 €)
 2024-12-19;8497195;ja!;ja! WC-Bürste weiß;79;1 Stück
-2024-12-19;2345760;ja!;ja! WC-Duftstein Limonenfrische 3x55ml;95;3x55ml (1 l = 5,76 €)
-2024-12-19;2345761;ja!;ja! WC-Duftstein Meeresfrische 3x55ml;95;3x55ml (1 l = 5,76 €)
 2024-12-19;8594286;ja!;ja! WC-Reiniger Lemon 1l;95;1l
 2024-12-19;8592998;ja!;ja! WC-Reiniger Ocean 1l;95;1l
-2024-12-19;8421295;ja!;ja! WC-Reiniger Tabs 400g;179;400g (1 kg = 4,48 €)
 2024-12-19;7264842;ja!;ja! Wachsbrechbohnen mittelfein 360g;99;360g (1 kg = 2,75 €)
 2024-12-19;9045128;ja!;ja! Waffelmischung 400g;269;400g (1 kg = 6,73 €)
 2024-12-19;7856940;ja!;ja! Waffelriegel 5x34,5g;229;5x34,50g (1 kg = 13,28 €)

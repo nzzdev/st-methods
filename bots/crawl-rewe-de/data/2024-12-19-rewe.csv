@@ -95,7 +95,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;518727;ja!;ja! Cola 6x1,5l;390;6x1,50l (1 l = 0,43 €)
 2024-12-19;905749;ja!;ja! Cola ohne Zucker 6x1,5l;390;6x1,50l (1 l = 0,43 €)
 2024-12-19;975903;ja!;ja! Cola-Mix 6x1,5l;390;6x1,50l (1 l = 0,43 €)
-2024-12-19;8182885;ja!;ja! Colorwaschmittel flüssig 1,1l 20WL;325;1,10l (1 l = 2,95 €)
 2024-12-19;8493667;ja!;ja! Cookies American Style Chocolate Chip 225g;139;225g (1 kg = 6,18 €)
 2024-12-19;2134122;ja!;ja! Cornflakes 500g;169;500g (1 kg = 3,38 €)
 2024-12-19;7800570;ja!;ja! Cornichons mit Chili 190g;99;190g (1 kg = 5,21 €)
@@ -156,7 +155,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;2310347;ja!;ja! Erdnüsse geröstet & gesalzen 200g;109;200g (1 kg = 5,45 €)
 2024-12-19;7677614;ja!;ja! Erdnüsse in der Schale 400g;229;400g (1 kg = 5,73 €)
 2024-12-19;7004010;ja!;ja! Erdnüsse pikant gewürzt 150g;89;150g (1 kg = 5,93 €)
-2024-12-19;7900645;ja!;ja! Essigreiniger 1l;85;1l
 2024-12-19;6243827;ja!;ja! Extra löslicher Kaffee 200g;529;200g (1 kg = 26,45 €)
 2024-12-19;1110889;ja!;ja! Family Cappuccino 500g;299;500g (1 kg = 5,98 €)
 2024-12-19;3279207;ja!;ja! Feine Hundesticks mit Kalb 8x11g;95;8x11g (1 kg = 10,80 €)
@@ -218,8 +216,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8426184;ja!;ja! Geriebener Gouda 48% Fett 250g;199;250g (1 kg = 7,96 €)
 2024-12-19;8426697;ja!;ja! Geriebener Gratin- und Pizzakäse 250g;199;250g (1 kg = 7,96 €)
 2024-12-19;8439178;ja!;ja! Geriebener Mozzarella 250g;199;250g (1 kg = 7,96 €)
-2024-12-19;8075412;ja!;ja! Geschirr-Reiniger 40 Tabs All-in-1 840g;395;840g (1 kg = 4,70 €)
-2024-12-19;7896538;ja!;ja! Geschirr-Reiniger Classic 60 Tabs 780g;299;780g (1 kg = 3,83 €)
 2024-12-19;8595918;ja!;ja! Glasreiniger Ocean 1l;95;1l
 2024-12-19;592755;ja!;ja! Gnocchi di Patate 500g;99;500g (1 kg = 1,98 €)
 2024-12-19;3151583;ja!;ja! Gold entkoffeiniert 100g;379;100g (1 kg = 37,90 €)
@@ -306,7 +302,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;914670;ja!;ja! Kidney-Bohnen rot 255g;69;255g (1 kg = 2,71 €)
 2024-12-19;2565945;ja!;ja! King Prawns Garnelen 225g;329;225g (1 kg = 14,62 €)
 2024-12-19;8725350;ja!;ja! Kirsch Grütze 500g;199;500g (1 kg = 3,98 €)
-2024-12-19;8059677;ja!;ja! Klarspüler 1l;95;1l
 2024-12-19;2737743;ja!;ja! Knabberbox 300g;169;300g (1 kg = 5,63 €)
 2024-12-19;7643816;ja!;ja! Knisterspass Fruchteis 11x46ml;269;11x46ml (1 l = 5,32 €)
 2024-12-19;2360956;ja!;ja! Knoblauchbutter-Baguette 175g;99;175g (1 kg = 5,66 €)
@@ -540,8 +535,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8187959;ja!;ja! Sprühsahne 250ml;199;250ml (1 l = 7,96 €)
 2024-12-19;6564984;ja!;ja! Spätzle Frischei Nudeln 500g;149;500g (1 kg = 2,98 €)
 2024-12-19;8300853;ja!;ja! Spülbürste rund 1 Stück;79;1 Stück
-2024-12-19;8060267;ja!;ja! Spülmittel Acai Blaubeere 500ml;95;500ml (1 l = 1,90 €)
-2024-12-19;8336275;ja!;ja! Spülmittel Sweet Orange 500ml;95;500ml (1 l = 1,90 €)
 2024-12-19;6475973;ja!;ja! Stapelchips Paprika 175g;169;175g (1 kg = 9,66 €)
 2024-12-19;1091822;ja!;ja! Stapelchips Sour Cream & Onion 175g;169;175g (1 kg = 9,66 €)
 2024-12-19;8378374;ja!;ja! Steinofen Pizza 4 Formaggi 2X340g;359;2x340g (1 kg = 5,28 €)
@@ -597,9 +590,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8912235;ja!;ja! Vollmilch Schokokeks 125g;159;125g (1 kg = 12,72 €)
 2024-12-19;8909742;ja!;ja! Vollmilch Schokowaffeln 175g;289;175g (1 kg = 16,51 €)
 2024-12-19;5880459;ja!;ja! Vollmilch-Joghurt 4x150g;99;4x150g (1 kg = 1,65 €)
-2024-12-19;8152779;ja!;ja! Vollwaschmittel 1,1l 20WL;325;1,10l (1 l = 2,95 €)
-2024-12-19;2345761;ja!;ja! WC-Duftstein Meeresfrische 3x55ml;95;3x55ml (1 l = 5,76 €)
-2024-12-19;8421295;ja!;ja! WC-Reiniger Tabs 400g;179;400g (1 kg = 4,48 €)
 2024-12-19;201434;ja!;ja! Waffelröllchen 200g;139;200g (1 kg = 6,95 €)
 2024-12-19;8605199;ja!;ja! Waldbeere Tee 62,5g, 25 Beutel;139;62,50g (1 kg = 22,24 €)
 2024-12-19;1008842;ja!;ja! Walnüsse ganze Kerne 200g;249;200g (1 kg = 12,45 €)
@@ -749,7 +739,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8998854;REWE Beste Wahl;REWE Beste Wahl Eiscreme Choco Fudge Brownie 500ml;249;500ml (1 l = 4,98 €)
 2024-12-19;9113538;REWE Beste Wahl;REWE Beste Wahl Eisrolle Fürst Pückler Art 1000ml;249;1000ml
 2024-12-19;7947113;REWE Beste Wahl;REWE Beste Wahl Eistee Zitrone-Limette 6x0,5l;330;6x0,50l (1 l = 1,10 €)
-2024-12-19;8267730;REWE Beste Wahl;REWE Beste Wahl Entkalker für Haushaltsgeräte 250ml;99;250ml (1 l = 3,96 €)
 2024-12-19;1977824;REWE Beste Wahl;REWE Beste Wahl Erbsen extra fein 455g;159;455g (1 kg = 3,49 €)
 2024-12-19;8983596;REWE Beste Wahl;REWE Beste Wahl Erbsen mit Möhrchen gefroren 1kg;299;1000g
 2024-12-19;116911;REWE Beste Wahl;REWE Beste Wahl Erbsen sehr fein mit Pariser Karotten klein 420g;199;420g (1 kg = 4,74 €)
@@ -783,7 +772,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8071708;REWE Beste Wahl;REWE Beste Wahl Früchte Punsch 1l;159;1l
 2024-12-19;2631972;REWE Beste Wahl;REWE Beste Wahl Fusilli N°22 500g;139;500g (1 kg = 2,78 €)
 2024-12-19;8086301;REWE Beste Wahl;REWE Beste Wahl Fusilli Tricolore N°22 500g;139;500g (1 kg = 2,78 €)
-2024-12-19;8195225;REWE Beste Wahl;REWE Beste Wahl Gallseife 250ml;149;250ml (1 l = 5,96 €)
 2024-12-19;8330193;REWE Beste Wahl;REWE Beste Wahl Garam Masala Gewürzmischung 33g;159;33g (1 kg = 48,18 €)
 2024-12-19;318536;REWE Beste Wahl;REWE Beste Wahl Garnelensalat in Cocktailsauce 150g;239;150g (1 kg = 15,93 €)
 2024-12-19;8944986;REWE Beste Wahl;REWE Beste Wahl Garnelensalat in Knoblauchsauce 150g;239;150g (1 kg = 15,93 €)
@@ -797,7 +785,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;1044599;REWE Beste Wahl;REWE Beste Wahl Geschälte Tomaten 240g;119;240g (1 kg = 4,96 €)
 2024-12-19;710524;REWE Beste Wahl;REWE Beste Wahl Getrocknete Tomaten 280g;199;280g (1 kg = 7,11 €)
 2024-12-19;2149329;REWE Beste Wahl;REWE Beste Wahl Ginger Ale 6x1l;534;6x1l (1 l = 0,89 €)
-2024-12-19;8085169;REWE Beste Wahl;REWE Beste Wahl Glaskeramikreiniger 300ml;99;300ml (1 l = 3,30 €)
 2024-12-19;9058653;REWE Beste Wahl;REWE Beste Wahl Glasnudeln 100g;89;100g (1 kg = 8,90 €)
 2024-12-19;941231;REWE Beste Wahl;REWE Beste Wahl Gnocchi 1kg;369;1000g
 2024-12-19;118000;REWE Beste Wahl;REWE Beste Wahl Gnocchi 400g;189;400g (1 kg = 4,73 €)
@@ -849,7 +836,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;8247965;REWE Beste Wahl;REWE Beste Wahl Hygiene Reinigungstücher 40 Stück;199;40 Stück
 2024-12-19;8079152;REWE Beste Wahl;REWE Beste Wahl Hygienereiniger 1,5l;165;1,50l (1 l = 1,10 €)
 2024-12-19;2832074;REWE Beste Wahl;REWE Beste Wahl Hygienespray 250ml;179;250ml (1 l = 7,16 €)
-2024-12-19;8089929;REWE Beste Wahl;REWE Beste Wahl Hygienespüler 1,5l;165;1500ml (1 l = 1,10 €)
 2024-12-19;7259597;REWE Beste Wahl;REWE Beste Wahl Hygienetücher 15 Stück;149;15 Stück
 2024-12-19;7125949;REWE Beste Wahl;REWE Beste Wahl Hähnchen-Salami 80g;169;80g (1 kg = 21,13 €)
 2024-12-19;1236141;REWE Beste Wahl;REWE Beste Wahl Hühner-Nudeltopf 400g;169;400g (1 kg = 4,23 €)
@@ -1034,7 +1020,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;2455271;REWE Beste Wahl;REWE Beste Wahl Rindergulasch 400g;479;400g (1 kg = 11,98 €)
 2024-12-19;1421084;REWE Beste Wahl;REWE Beste Wahl Risotto-Reis 500g;199;500g (1 kg = 3,98 €)
 2024-12-19;7194361;REWE Beste Wahl;REWE Beste Wahl Roggenbrötchen 560g - 8 Stück;159;560g (1 kg = 2,84 €)
-2024-12-19;3207891;REWE Beste Wahl;REWE Beste Wahl Rohrreiniger Gel 1l;125;1l
 2024-12-19;1043421;REWE Beste Wahl;REWE Beste Wahl Romana Salatherzen 3 Stück;199;3 Stück
 2024-12-19;7858152;REWE Beste Wahl;REWE Beste Wahl Rostbratwürste mit Sauerkraut 400g;349;400g (1 kg = 8,73 €)
 2024-12-19;9067242;REWE Beste Wahl;REWE Beste Wahl Rotbarschfilets MSC 475g;699;475g (1 kg = 14,72 €)
@@ -1091,7 +1076,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;137791;REWE Beste Wahl;REWE Beste Wahl Spargelköpfe 110g;229;110g (1 kg = 20,82 €)
 2024-12-19;137788;REWE Beste Wahl;REWE Beste Wahl Spargelstangen kurz 170g;249;170g (1 kg = 14,65 €)
 2024-12-19;2788389;REWE Beste Wahl;REWE Beste Wahl Spitz & Bube Freilandhaltung 6 Stück;199;6 Stück
-2024-12-19;8948223;REWE Beste Wahl;REWE Beste Wahl Spülmaschinenpfleger 250ml;99;250ml (1 l = 3,96 €)
 2024-12-19;133405;REWE Beste Wahl;REWE Beste Wahl Stachelbeeren gezuckert 390g;239;390g (1 kg = 6,13 €)
 2024-12-19;137794;REWE Beste Wahl;REWE Beste Wahl Stangenspargel 320g;399;320g (1 kg = 12,47 €)
 2024-12-19;7902451;REWE Beste Wahl;REWE Beste Wahl Steakhouse Frites 750g;159;750g (1 kg = 2,12 €)
@@ -1139,8 +1123,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;7291313;REWE Beste Wahl;REWE Beste Wahl Vegetarische Linsensuppe 400ml;169;400ml (1 l = 4,23 €)
 2024-12-19;7726939;REWE Beste Wahl;REWE Beste Wahl Vollkorn Brötchen 510g;269;510g (1 kg = 5,27 €)
 2024-12-19;754891;REWE Beste Wahl;REWE Beste Wahl Vollmilch-Kuvertüre 200g;149;200g (1 kg = 7,45 €)
-2024-12-19;7789916;REWE Beste Wahl;REWE Beste Wahl WC Duftsteine Lemon 96g;125;96g (1 kg = 13,02 €)
-2024-12-19;2299850;REWE Beste Wahl;REWE Beste Wahl WC-Blauspüler 40g;99;40g (1 kg = 24,75 €)
 2024-12-19;8999347;REWE Beste Wahl;REWE Beste Wahl Waffle Bites ChoViva 125g;169;125g (1 kg = 13,52 €)
 2024-12-19;185596;REWE Beste Wahl;REWE Beste Wahl Waldheidelbeeren 125g;159;125g (1 kg = 12,72 €)
 2024-12-19;708265;REWE Beste Wahl;REWE Beste Wahl Waldmeister-Getränkesirup 0,5l;179;0,50l (1 l = 3,58 €)
@@ -1183,7 +1165,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2024-12-19;7933167;REWE Beste Wahl;REWE Mandarinen Orangen im eigenen Saft 175g;159;175g (1 kg = 9,09 €)
 2024-12-19;7904821;REWE Beste Wahl;REWE Stuffed Crust Pizza Salami 472g;379;472g (1 kg = 8,03 €)
 2024-12-19;7629527;REWE Beste Wahl;REWE Water+ Himbeer-Grapefruit 0.5l;99;0,50l (1 l = 1,98 €)
-2024-12-19;8022362;REWE Beste Wahl;Rewe Beste Wahl Feuchtes Toilettenpapier Kamille 50 Stück;129;50 Stück
 2024-12-19;8415305;REWE Beste Wahl;Rewe Beste Wahl Ingwer gemahlen 28g;199;28g (1 kg = 71,07 €)
 2024-12-19;8294079;REWE Beste Wahl;Rewe Beste Wahl Mango in Würfeln 500g;329;500g (1 kg = 6,58 €)
 2024-12-19;8424727;REWE Beste Wahl;Rewe Beste Wahl Oregano gerebelt 20g;199;20g (1 kg = 99,50 €)
