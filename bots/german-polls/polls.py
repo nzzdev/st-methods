@@ -108,12 +108,13 @@ def fetch_html_table(url, max_retries=5, pause=1):
                 print(f"Failed to fetch HTML table from {url} after {max_retries} attempts. Aborting script.")
                 exit(1)  # Exit the script with error status
          
+"""
 # Datawrapper API key
 dw_key = os.environ["DATAWRAPPER_API"]
 dw = Datawrapper(access_token=dw_key)
 dw_id = "IWzhE"
 dw_id_table = "G0FzZ"
-
+"""
 # Set the working directory
 os.chdir(os.path.dirname(__file__))
 
@@ -173,7 +174,7 @@ for row in urls:
 
     # Fill empty results with "-"
     for partei in parteinamen:
-        data[partei].fillna("-", inplace=True)
+        data[partei] = data[partei].fillna("-")
 
     # Melt the table
     data = pd.melt(
@@ -185,7 +186,7 @@ for row in urls:
     )
 
     # Remove entries without a clear date
-    data.Datum.fillna("..", inplace=True)
+    data["Datum"] = data["Datum"].fillna("..")
     data.Datum = data.Datum.apply(
         lambda x: ".." if "?" in x else x.strip("*")
     )
@@ -224,7 +225,7 @@ for row in urls:
     )
     # Convert Befragte numbers to ints
     data.Befragte = data.Befragte.astype("string")
-    data.Befragte.fillna("?", inplace=True)
+    data["Befragte"] = data["Befragte"].fillna("?")
     data.Befragte = data.Befragte.apply(convert_befragte)
 
     # Add Zeitraum column if it doesn't exist
@@ -248,12 +249,12 @@ for row in urls:
     )
 
     # Backfill missing years
-    data.Jahr.bfill(inplace=True)
+    data["Jahr"] = data["Jahr"].bfill()
 
     # Fill available days and months from Zeitraum
     if not data.Zeitraum.isnull().all():
-        data.Tag.fillna(pd.to_numeric(data.Zeitraum.str[-6:-4], errors="coerce"), inplace=True)
-        data.Monat.fillna(pd.to_numeric(data.Zeitraum.str[-3:-1], errors="coerce"), inplace=True)
+        data["Tag"] = data["Tag"].fillna(pd.to_numeric(data["Zeitraum"].str[-6:-4], errors="coerce"))
+        data["Monat"] = data["Monat"].fillna(pd.to_numeric(data["Zeitraum"].str[-3:-1], errors="coerce"))
 
     # Convert day, month, and year to integers
     data.Tag = data.Tag.astype("int")
@@ -471,6 +472,8 @@ full_line_chart_data.sort_values(by=['date', 'institute'], inplace=True)
 # Replace NaN values with 0.0
 full_line_chart_data.fillna(0.0, inplace=True)
 
+full_line_chart_data.to_clipboard()
+
 # Convert the DataFrame to a list of dictionaries for JSON output
 json_data = full_line_chart_data.to_dict(orient='records')
 
@@ -503,16 +506,32 @@ se = np.sqrt(p * (1 - p) / n) * np.sqrt((N - n) / (N - 1))
 # Calculate 95% confidence interval
 filtered_data_nonan['ci'] = 1.96 * se * 100
 
+# This won't work with Pandas 3
+"""
 # For each party, take the last 30 entries (sorted by 'Datum')
 def get_last_n_entries(group, n=30):
     group = group.sort_values('Datum', ascending=True).tail(n)
     return group
 
-last_n_data = filtered_data_nonan.groupby('Partei', group_keys=False).apply(get_last_n_entries, n=30)
+last_n_data = (
+    filtered_data_nonan.groupby("Partei", group_keys=False)
+    .apply(get_last_n_entries, n=30)
+    .reset_index(drop=True)
+)
 
 # For each party, compute mean 'ci'
 mean_ci_per_party = last_n_data.groupby('Partei')['ci'].mean().reset_index()
 mean_ci_per_party.rename(columns={'ci': 'mean_ci'}, inplace=True)
+"""
+
+# For each party, take the last 30 entries (sorted by 'Datum')
+last_n_data = filtered_data_nonan.sort_values("Datum").groupby("Partei").tail(30)
+
+# For each party, compute mean 'ci'
+mean_ci_per_party = (
+    last_n_data.groupby("Partei", as_index=False)["ci"].mean()
+    .rename(columns={"ci": "mean_ci"})
+)
 
 # moe formula derived from https://goodcalculators.com/margin-of-error-calculator/
 # population size (german eligible voters) derived from https://www.bundeswahlleiter.de/info/presse/mitteilungen/bundestagswahl-2021/01_21_wahlberechtigte-geschaetzt.html
@@ -700,9 +719,9 @@ def fetch_kanzlerkandidat_data(candidate_names):
             raise ValueError("The 'Institut' column is missing and could not be identified.")
 
     # Forward-fill missing dates and institute names
-    df["Datum"] = df["Datum"].fillna(method="ffill")
+    df["Datum"] = df["Datum"].ffill()
     df["Datum"] = pd.to_datetime(df["Datum"], format="%d.%m.%Y", errors="coerce")
-    df["Institut"] = df["Institut"].fillna(method="ffill")
+    df["Institut"] = df["Institut"].ffill()
 
     # Drop everything below the date "19.07.2022" (new header appears afterwards with other candidates)
     cutoff_date = pd.to_datetime("19.07.2022", format="%d.%m.%Y")
