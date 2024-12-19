@@ -107,14 +107,13 @@ def fetch_html_table(url, max_retries=5, pause=1):
             else:
                 print(f"Failed to fetch HTML table from {url} after {max_retries} attempts. Aborting script.")
                 exit(1)  # Exit the script with error status
-         
-"""
+
 # Datawrapper API key
 dw_key = os.environ["DATAWRAPPER_API"]
 dw = Datawrapper(access_token=dw_key)
 dw_id = "IWzhE"
 dw_id_table = "G0FzZ"
-"""
+
 # Set the working directory
 os.chdir(os.path.dirname(__file__))
 
