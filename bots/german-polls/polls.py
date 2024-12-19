@@ -472,8 +472,6 @@ full_line_chart_data.sort_values(by=['date', 'institute'], inplace=True)
 # Replace NaN values with 0.0
 full_line_chart_data.fillna(0.0, inplace=True)
 
-full_line_chart_data.to_clipboard()
-
 # Convert the DataFrame to a list of dictionaries for JSON output
 json_data = full_line_chart_data.to_dict(orient='records')
 
