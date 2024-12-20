@@ -299,8 +299,8 @@ print("Available parties after mapping:", filtered_data['Partei'].unique())
 # Keep only desired parties
 filtered_data = filtered_data[filtered_data['Partei'].isin(desired_parties)].copy()
 
-# Filter data after 15.09.2021
-cutoff_date = pd.to_datetime("2017-01-01")
+# Filter data
+cutoff_date = pd.to_datetime("2019-01-01")
 filtered_data = filtered_data[filtered_data["Datum"] > cutoff_date]
 
 # Convert 'Ergebnis' and 'Befragte' to numeric
