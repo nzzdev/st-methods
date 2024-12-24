@@ -112,6 +112,7 @@ def fetch_html_table(url, max_retries=5, pause=1):
 dw_key = os.environ["DATAWRAPPER_API"]
 dw = Datawrapper(access_token=dw_key)
 dw_id = "IWzhE"
+dw_id_weidel = "hDqW6"
 dw_id_table = "G0FzZ"
 
 # Set the working directory
@@ -664,6 +665,21 @@ with open(coalition_file, 'r', encoding='utf-8') as f:
 
 print(f"Loaded coalition file: {coalition_file}")
 
+def convert_befragtenzahl(value):
+    """
+    Convert 'Befragtenzahl\nNo. of respondents' values to numeric,
+    handling cases like '791+545' by performing addition.
+    """
+    if pd.isna(value):
+        return np.nan
+    value = str(value).strip()
+    if "+" in value:
+        parts = re.findall(r"\d+", value)
+        return sum(map(int, parts))
+    elif value.isdigit():
+        return int(value)
+    return np.nan
+
 def fetch_kanzlerkandidat_data(candidate_names):
     # Define the URL for the Google Sheet
     sheet_url = "https://docs.google.com/spreadsheets/d/1aT2f8yc8p9-XjOqFCTQ1nDeP5GEORu9QZDOtUwF8smI/export?format=csv&gid=1579897364"
@@ -676,9 +692,7 @@ def fetch_kanzlerkandidat_data(candidate_names):
             response = requests.get(sheet_url)
             response.raise_for_status()  # Raise an error for HTTP issues
             csv_data = response.content.decode("utf-8")
-            
-            # Successfully fetched data, break out of the retry loop
-            break
+            break  # Successfully fetched data, break out of the retry loop
         except requests.RequestException as e:
             print(f"Attempt {attempt + 1} of {max_retries} failed: {e}")
             if attempt < max_retries - 1:
@@ -714,6 +728,12 @@ def fetch_kanzlerkandidat_data(candidate_names):
             df = df.rename(columns={potential_institut_column: "Institut"})
         else:
             raise ValueError("The 'Institut' column is missing and could not be identified.")
+
+    # Handle 'Befragtenzahl\nNo. of respondents' column
+    if "Befragtenzahl\nNo. of respondents" in df.columns:
+        df["Befragtenzahl"] = df["Befragtenzahl\nNo. of respondents"].apply(convert_befragtenzahl)
+    else:
+        df["Befragtenzahl"] = np.nan
 
     # Forward-fill missing dates and institute names
     df["Datum"] = df["Datum"].ffill()
@@ -760,6 +780,9 @@ def fetch_kanzlerkandidat_data(candidate_names):
     output = pd.DataFrame()
     output["Datum"] = df["Datum"]
 
+    # Add 'Befragtenzahl' column to output
+    output["Befragtenzahl"] = df["Befragtenzahl"]
+
     # Process each candidate's data
     for candidate, column in candidate_columns.items():
         # Convert to numeric and ignore invalid rows
@@ -776,11 +799,35 @@ candidate_names = ["Merz", "Habeck", "Scholz"]
 # Fetch and process the data
 kanzlerkandidat_data = fetch_kanzlerkandidat_data(candidate_names)
 
-# Ensure there are no duplicate dates by calculating averages first
-kanzlerkandidat_data = (
-    kanzlerkandidat_data.groupby("Datum", as_index=False)
-    .mean(numeric_only=True)  # Compute the mean for numeric columns
-)
+# Calculate weighted averages by "Befragtenzahl" for each candidate
+weighted_data = []
+for candidate in candidate_names:
+    # Filter for non-NaN values in the candidate's column
+    valid_data = kanzlerkandidat_data.loc[kanzlerkandidat_data[candidate].notna()]
+
+    # Replace NaN values in 'Befragtenzahl' with a default value (2500)
+    valid_data["Befragtenzahl"] = valid_data["Befragtenzahl"].fillna(2500)
+
+    # Group by 'Datum' and compute the weighted average
+    weighted_avg = (
+        valid_data
+        .groupby("Datum", as_index=False)[[candidate, "Befragtenzahl"]]
+        .apply(lambda g: pd.Series({
+            candidate: np.sum(g[candidate] * g["Befragtenzahl"]) / np.sum(g["Befragtenzahl"])
+        }))
+    )
+    
+    # Preserve real poll data
+    weighted_avg[f"{candidate}_real"] = valid_data.groupby("Datum")[candidate].first().reset_index(drop=True)
+    weighted_data.append(weighted_avg)
+
+# Merge weighted averages for all candidates
+weighted_kanzlerkandidat_data = pd.DataFrame({"Datum": kanzlerkandidat_data["Datum"].unique()})
+for weighted_avg in weighted_data:
+    weighted_kanzlerkandidat_data = weighted_kanzlerkandidat_data.merge(weighted_avg, on="Datum", how="left")
+
+# Replace the main DataFrame with weighted results
+kanzlerkandidat_data = weighted_kanzlerkandidat_data
 
 # Generate a complete range of dates from the minimum to the maximum
 date_range = pd.date_range(
@@ -796,15 +843,12 @@ kanzlerkandidat_data = kanzlerkandidat_data.set_index("Datum").reindex(date_rang
 kanzlerkandidat_data = kanzlerkandidat_data.reset_index().rename(columns={"index": "Datum"})
 
 # Interpolate missing values linearly for candidate columns
-kanzlerkandidat_data[candidate_names] = kanzlerkandidat_data[candidate_names].interpolate(
-method="linear"
-)
+kanzlerkandidat_data[candidate_names] = kanzlerkandidat_data[candidate_names].interpolate(method="linear")
 
 # Apply EWMA for smoothing and weighting more recent polls higher
 for candidate in candidate_names:
     kanzlerkandidat_data[candidate] = (
         kanzlerkandidat_data[candidate]
-        #.ewm(span=10, adjust=False)
         .rolling(window=10, min_periods=1, center=True)
         .mean()
     )
@@ -813,10 +857,214 @@ for candidate in candidate_names:
 kanzlerkandidat_data["Punkte: einzelne Umfragen"] = np.nan
 kanzlerkandidat_data["Linie: Durchschnitt"] = np.nan
 
+# Drop the 'Befragtenzahl' column if it exists
+if "Befragtenzahl" in kanzlerkandidat_data.columns:
+    kanzlerkandidat_data.drop(columns=["Befragtenzahl"], inplace=True)
+
 # Set the value 0 at the earliest date
 earliest_date_index = kanzlerkandidat_data["Datum"].idxmin()
 kanzlerkandidat_data.at[earliest_date_index, "Punkte: einzelne Umfragen"] = 0
 kanzlerkandidat_data.at[earliest_date_index, "Linie: Durchschnitt"] = 0
+
+kanzlerkandidat_data_all = kanzlerkandidat_data.copy()
+
+# === SAME AS ABOVE BUT WITH WEIDEL ===
+
+def fetch_kanzlerkandidat_data(candidate_names):
+    # Define the URL for the Google Sheet
+    sheet_url = "https://docs.google.com/spreadsheets/d/1aT2f8yc8p9-XjOqFCTQ1nDeP5GEORu9QZDOtUwF8smI/export?format=csv&gid=1579897364"
+
+    # Retry logic
+    max_retries = 5
+    for attempt in range(max_retries):
+        try:
+            # Attempt to fetch the data
+            response = requests.get(sheet_url)
+            response.raise_for_status()  # Raise an error for HTTP issues
+            csv_data = response.content.decode("utf-8")
+            break  # Successfully fetched data, break out of the retry loop
+        except requests.RequestException as e:
+            print(f"Attempt {attempt + 1} of {max_retries} failed: {e}")
+            if attempt < max_retries - 1:
+                time.sleep(1)  # Pause for 1 second before retrying
+            else:
+                print("Failed to fetch Google Sheet data after 5 attempts. Aborting script.")
+                exit(1)  # Exit the script with error status
+
+    # Read the CSV data into a DataFrame
+    df = pd.read_csv(StringIO(csv_data), skiprows=5)  # Skip metadata rows
+    df = df.reset_index(drop=True)
+
+    # Rename the first row as the header if it contains column names
+    header_row = df.iloc[0]
+    if header_row.isnull().sum() < len(header_row) / 2:  # Heuristic: Mostly non-null
+        df.columns = header_row
+        df = df[1:].reset_index(drop=True)
+
+    # Ensure consistent column naming
+    df.columns = [str(col).strip() for col in df.columns]
+
+    # Drop the first row after the header as it contains irrelevant data
+    df = df.iloc[1:].reset_index(drop=True)
+
+    # Rename and clean up the date column
+    if "Datum" not in df.columns:
+        df = df.rename(columns={df.columns[0]: "Datum"})
+    
+    # Ensure the "Institut" column exists, rename dynamically if needed
+    if "Institut" not in df.columns:
+        potential_institut_column = next((col for col in df.columns if "Institut" in col), None)
+        if potential_institut_column:
+            df = df.rename(columns={potential_institut_column: "Institut"})
+        else:
+            raise ValueError("The 'Institut' column is missing and could not be identified.")
+
+    # Handle 'Befragtenzahl\nNo. of respondents' column
+    if "Befragtenzahl\nNo. of respondents" in df.columns:
+        df["Befragtenzahl"] = df["Befragtenzahl\nNo. of respondents"].apply(convert_befragtenzahl)
+    else:
+        df["Befragtenzahl"] = np.nan
+
+    # Forward-fill missing dates and institute names
+    df["Datum"] = df["Datum"].ffill()
+    df["Datum"] = pd.to_datetime(df["Datum"], format="%d.%m.%Y", errors="coerce")
+    df["Institut"] = df["Institut"].ffill()
+
+    # Drop everything below the date "19.07.2022" (new header appears afterwards with other candidates)
+    cutoff_date = pd.to_datetime("19.07.2022", format="%d.%m.%Y")
+    df = df[df["Datum"] >= cutoff_date]
+
+    # Dynamically find relevant candidate columns
+    candidate_columns = {}
+    for candidate in candidate_names:
+        matched_column = next((col for col in df.columns if candidate in str(col)), None)
+        if matched_column:
+            candidate_columns[candidate] = matched_column
+
+    if not candidate_columns:
+        raise ValueError("No matching candidate columns found in the dataset.")
+
+    # List of columns to clean, including candidates and exclusion columns
+    exclusion_candidates = ["Wagenknecht", "Pistorius", "Söder", "Wüst", "Baerbock"]
+    columns_to_clean = list(candidate_columns.values()) + exclusion_candidates
+    columns_to_clean = [col for col in columns_to_clean if col in df.columns]  # Ensure these columns exist
+
+    # Replace "—" with NaN and clean up numeric columns
+    for col in columns_to_clean:
+        df[col] = (
+            df[col].astype(str)
+            .replace("nan", "")
+            .replace("—", np.nan)
+            .str.replace("%", "", regex=False)
+            .str.strip()
+        )
+        df[col] = pd.to_numeric(df[col], errors="coerce")  # Convert back to numeric
+
+    # Ensure that rows with all key candidates present are retained
+    key_candidates = ["Scholz", "Habeck", "Merz", "Weidel"]
+    key_columns = [candidate_columns[c] for c in key_candidates if c in candidate_columns]
+    df = df.dropna(subset=key_columns, how="any")
+
+    # Exclude polls with non-NaN values in exclusion columns
+    exclusion_columns = [col for col in exclusion_candidates if col in df.columns]
+    if exclusion_columns:
+        df = df[df[exclusion_columns].isna().all(axis=1)]
+
+    # Create a new DataFrame for output
+    output = pd.DataFrame()
+    output["Datum"] = df["Datum"]
+
+    # Add 'Befragtenzahl' column to output
+    output["Befragtenzahl"] = df["Befragtenzahl"]
+
+    # Process each candidate's data
+    for candidate, column in candidate_columns.items():
+        output[candidate] = pd.to_numeric(df[column], errors="coerce")
+        output[f"{candidate}_real"] = output[candidate]
+
+    return output
+
+# Define the candidate names to include in the analysis
+candidate_names = ["Merz", "Habeck", "Scholz", "Weidel"]
+
+# Fetch and process the data
+kanzlerkandidat_data = fetch_kanzlerkandidat_data(candidate_names)
+
+# No weighing by "Befragtenzahl" in this example
+"""
+# Ensure there are no duplicate dates by calculating averages first
+kanzlerkandidat_data = (
+    kanzlerkandidat_data.groupby("Datum", as_index=False)
+    .mean(numeric_only=True)  # Compute the mean for numeric columns
+)
+"""
+
+# Calculate weighted averages by "Befragtenzahl" for each candidate
+weighted_data = []
+for candidate in candidate_names:
+    # Filter for non-NaN values in the candidate's column
+    valid_data = kanzlerkandidat_data.loc[kanzlerkandidat_data[candidate].notna()]
+    
+    # Group by 'Datum' and compute the weighted average
+    weighted_avg = (
+        valid_data
+        .groupby("Datum", as_index=False)[[candidate, "Befragtenzahl"]]
+        .apply(lambda g: pd.Series({
+            candidate: np.sum(g[candidate] * g["Befragtenzahl"].fillna(1)) / np.sum(g["Befragtenzahl"].fillna(1))
+        }))
+    )
+    weighted_data.append(weighted_avg)
+
+# Merge weighted averages for all candidates
+weighted_kanzlerkandidat_data = pd.DataFrame({"Datum": kanzlerkandidat_data["Datum"].unique()})
+for weighted_avg in weighted_data:
+    weighted_kanzlerkandidat_data = weighted_kanzlerkandidat_data.merge(weighted_avg, on="Datum", how="left")
+
+# Replace the main DataFrame with weighted results
+kanzlerkandidat_data = weighted_kanzlerkandidat_data
+
+# Generate a complete range of dates from the minimum to the maximum
+date_range = pd.date_range(
+    start=kanzlerkandidat_data["Datum"].min(),
+    end=kanzlerkandidat_data["Datum"].max(),
+    freq="D"  # Daily frequency
+)
+
+# Reindex the DataFrame to include all dates in the range
+kanzlerkandidat_data = kanzlerkandidat_data.set_index("Datum").reindex(date_range)
+
+# Reset the index and rename it to "Datum"
+kanzlerkandidat_data = kanzlerkandidat_data.reset_index().rename(columns={"index": "Datum"})
+
+# Interpolate missing values linearly for candidate columns
+kanzlerkandidat_data[candidate_names] = kanzlerkandidat_data[candidate_names].interpolate(method="linear")
+
+# Apply EWMA for smoothing and weighting recent polls higher
+for candidate in candidate_names:
+    kanzlerkandidat_data[candidate] = (
+        kanzlerkandidat_data[candidate]
+        .ewm(span=10, adjust=False)  # Span adjusts the weighting; smaller = more weight on recent data
+        .mean()
+    )
+
+# Add two new columns with NaN initially
+kanzlerkandidat_data["Punkte: einzelne Umfragen"] = np.nan
+kanzlerkandidat_data["Linie: Durchschnitt"] = np.nan
+
+# Define the new cutoff date
+new_cutoff_date = pd.to_datetime("2024-10-16", format="%Y-%m-%d")
+
+# Set the value 0 after the second cut-off
+first_valid_index_after_cutoff = kanzlerkandidat_data.index[kanzlerkandidat_data["Datum"] >= new_cutoff_date].min()
+kanzlerkandidat_data.at[first_valid_index_after_cutoff, "Punkte: einzelne Umfragen"] = 0
+kanzlerkandidat_data.at[first_valid_index_after_cutoff, "Linie: Durchschnitt"] = 0
+
+# Filter the data to include only rows from the new cutoff date onward
+kanzlerkandidat_data = kanzlerkandidat_data[kanzlerkandidat_data["Datum"] >= new_cutoff_date].reset_index(drop=True)
+
+# Drop the 'Befragtenzahl' column if it exists
+if "Befragtenzahl" in kanzlerkandidat_data.columns:
+    kanzlerkandidat_data.drop(columns=["Befragtenzahl"], inplace=True)
 
 # prepare data for q.config.json
 assets = [
@@ -834,20 +1082,29 @@ assets = [
         ]
 
 # create dates for chart notes
+timecode_all = kanzlerkandidat_data_all["Datum"].iloc[-1]
 timecode = kanzlerkandidat_data["Datum"].iloc[-1]
 full_line_chart_data["date"] = pd.to_datetime(full_line_chart_data["date"])
 timecode_line = full_line_chart_data["date"].iloc[-1]
+timecode_str_all = timecode_all.strftime("%-d. %-m. %Y")
 timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
-notes_chart = "Stand: " + timecode_str
 notes_chart_line = "Stand: " + timecode_str_line
 
-# update Kanzlerfragen chart
-dw_chart = dw.add_data(chart_id=dw_id, data=kanzlerkandidat_data)
+# update Kanzlerfragen chart #1
+dw_chart = dw.add_data(chart_id=dw_id, data=kanzlerkandidat_data_all)
+date = {"annotate": {
+    "notes": f"Stand: {timecode_str_all}"}}
+dw.update_metadata(chart_id=dw_id, metadata=date)
+dw.update_description(chart_id=dw_id, source_name="@Wahlen_DE, eigene Berechnungen", intro="So würden die Befragten bei einer Direktwahl des Kanzlers abstimmen")
+dw.publish_chart(chart_id=dw_id, display=False)
+
+# update Kanzlerfragen chart #2
+dw_chart = dw.add_data(chart_id=dw_id_weidel, data=kanzlerkandidat_data)
 date = {"annotate": {
     "notes": f"Stand: {timecode_str}"}}
 dw.update_metadata(chart_id=dw_id, metadata=date)
-dw.update_description(chart_id=dw_id, source_name="@Wahlen_DE, eigene Berechnungen", intro="So würden die Befragten bei einer Direktwahl des Kanzlers abstimmen")
+dw.update_description(chart_id=dw_id, source_name="@Wahlen_DE, eigene Berechnungen", intro="So würden die Befragten bei einer Direktwahl des Kanzlers abstimmen, würde auch Alice Weidel zur Wahl stehen")
 dw.publish_chart(chart_id=dw_id, display=False)
 
 """
