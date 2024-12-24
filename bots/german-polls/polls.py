@@ -1115,9 +1115,9 @@ dw.publish_chart(chart_id=dw_id, display=False)
 dw_chart = dw.add_data(chart_id=dw_id_weidel, data=kanzlerkandidat_data)
 date = {"annotate": {
     "notes": f"Stand: {timecode_str}"}}
-dw.update_metadata(chart_id=dw_id, metadata=date)
-dw.update_description(chart_id=dw_id, source_name="@Wahlen_DE, eigene Berechnungen", intro="So würden die Befragten bei einer Direktwahl des Kanzlers abstimmen, würde auch Alice Weidel zur Wahl stehen")
-dw.publish_chart(chart_id=dw_id, display=False)
+dw.update_metadata(chart_id=dw_id_weidel, metadata=date)
+dw.update_description(chart_id=dw_id_weidel, source_name="@Wahlen_DE, eigene Berechnungen", intro="So würden die Befragten bei einer Direktwahl des Kanzlers abstimmen, würde auch Alice Weidel zur Wahl stehen")
+dw.publish_chart(chart_id=dw_id_weidel, display=False)
 
 """
 # OLD update table
