@@ -990,17 +990,14 @@ candidate_names = ["Merz", "Habeck", "Scholz", "Weidel"]
 # Fetch and process the data
 kanzlerkandidat_data = fetch_kanzlerkandidat_data(candidate_names)
 
-# No weighing by "Befragtenzahl" in this example
-"""
-# Ensure there are no duplicate dates by calculating averages first
-kanzlerkandidat_data = (
-    kanzlerkandidat_data.groupby("Datum", as_index=False)
-    .mean(numeric_only=True)  # Compute the mean for numeric columns
-)
-"""
+# Create a new DataFrame for the weighted data to store the weighted averages
+weighted_kanzlerkandidat_data = pd.DataFrame({"Datum": kanzlerkandidat_data["Datum"].unique()})
+
+# Add the real data (e.g., 'Merz_real', 'Habeck_real', etc.)
+for candidate in candidate_names:
+    weighted_kanzlerkandidat_data[f"{candidate}_real"] = kanzlerkandidat_data[f"{candidate}_real"]
 
 # Calculate weighted averages by "Befragtenzahl" for each candidate
-weighted_data = []
 for candidate in candidate_names:
     # Filter for non-NaN values in the candidate's column
     valid_data = kanzlerkandidat_data.loc[kanzlerkandidat_data[candidate].notna()]
@@ -1013,15 +1010,27 @@ for candidate in candidate_names:
             candidate: np.sum(g[candidate] * g["Befragtenzahl"].fillna(1)) / np.sum(g["Befragtenzahl"].fillna(1))
         }))
     )
-    weighted_data.append(weighted_avg)
+    
+    # Merge the weighted averages into the DataFrame
+    weighted_kanzlerkandidat_data = weighted_kanzlerkandidat_data.merge(weighted_avg[["Datum", candidate]], on="Datum", how="left")
 
-# Merge weighted averages for all candidates
-weighted_kanzlerkandidat_data = pd.DataFrame({"Datum": kanzlerkandidat_data["Datum"].unique()})
-for weighted_avg in weighted_data:
-    weighted_kanzlerkandidat_data = weighted_kanzlerkandidat_data.merge(weighted_avg, on="Datum", how="left")
+# Reset the index and rename columns as needed
+weighted_kanzlerkandidat_data = weighted_kanzlerkandidat_data.set_index("Datum")
 
-# Replace the main DataFrame with weighted results
-kanzlerkandidat_data = weighted_kanzlerkandidat_data
+# Add the 'Punkte: einzelne Umfragen' and 'Linie: Durchschnitt' columns with NaN initially
+weighted_kanzlerkandidat_data["Punkte: einzelne Umfragen"] = np.nan
+weighted_kanzlerkandidat_data["Linie: Durchschnitt"] = np.nan
+
+# Define the new cutoff date
+new_cutoff_date = pd.to_datetime("2024-10-16", format="%Y-%m-%d")
+
+# Set the value 0 after the second cut-off
+first_valid_index_after_cutoff = weighted_kanzlerkandidat_data.index[weighted_kanzlerkandidat_data.index >= new_cutoff_date].min()
+weighted_kanzlerkandidat_data.at[first_valid_index_after_cutoff, "Punkte: einzelne Umfragen"] = 0
+weighted_kanzlerkandidat_data.at[first_valid_index_after_cutoff, "Linie: Durchschnitt"] = 0
+
+# Filter the data to include only rows from the new cutoff date onward
+weighted_kanzlerkandidat_data = weighted_kanzlerkandidat_data[weighted_kanzlerkandidat_data.index >= new_cutoff_date].reset_index(drop=True)
 
 # Generate a complete range of dates from the minimum to the maximum
 date_range = pd.date_range(
@@ -1030,7 +1039,10 @@ date_range = pd.date_range(
     freq="D"  # Daily frequency
 )
 
-# Reindex the DataFrame to include all dates in the range
+# Drop duplicates based on "Datum" before reindexing
+kanzlerkandidat_data = kanzlerkandidat_data.drop_duplicates(subset=["Datum"])
+
+# Now, set "Datum" as the index and reindex
 kanzlerkandidat_data = kanzlerkandidat_data.set_index("Datum").reindex(date_range)
 
 # Reset the index and rename it to "Datum"
