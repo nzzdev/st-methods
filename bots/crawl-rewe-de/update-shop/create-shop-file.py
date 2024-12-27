@@ -373,17 +373,18 @@ final_prices = [
 
 # Create a DataFrame for the new products with final prices
 new_products = pd.DataFrame({
-    'id': ['999999', '999990', '999991', '999992'],
-    'brand': [1, 1, 1, 1],
-    'name': ['Bier (Discounter-Pils)', 'Bier (Discounter-Pils)', 'Baby Windeln, diverse Grössen (Aldi)', 'Baby Feuchttücher (Aldi)'],
-    'weight': ['0,5l', '6x0,5l', '32 bis 46 Stück', '3x80'],
-    'first_price': [36, 179, 525, 248],
+    'id': ['999999', '999990', '999991', '999992', '9021241'],
+    'brand': [1, 1, 1, 1, 1],
+    'name': ['Bier (Discounter-Pils)', 'Bier (Discounter-Pils)', 'Baby Windeln, diverse Grössen (Aldi)', 'Baby Feuchttücher (Aldi)', 'Senf scharf'],
+    'weight': ['0,5l', '6x0,5l', '32 bis 46 Stück', '3x80', '200ml'],
+    'first_price': [36, 179, 525, 248, 49],
     'last_price': final_prices,  # Use final prices here
-    'first_seen': [first_seen_date, first_seen_date, first_seen_date, first_seen_date], # Ensure datetime format
-    'last_seen': [last_seen_date, last_seen_date, last_seen_date, last_seen_date], # Ensure datetime format
-    'cat': ['drinks', 'drinks', 'drugstore', 'drugstore'],
-    'icon': [11, 24, 18, 18]
+    'first_seen': [first_seen_date, first_seen_date, first_seen_date, first_seen_date, first_seen_date], # Ensure datetime format
+    'last_seen': [last_seen_date, last_seen_date, last_seen_date, last_seen_date, last_seen_date], # Ensure datetime format
+    'cat': ['drinks', 'drinks', 'drugstore', 'drugstore', 'cooking'],
+    'icon': [11, 24, 18, 18, 16]
 })
+# Source Senf ("Kim"): https://www.1prospekte.de/i/aldi-sud/kim-delikatess-senf-157745
 
 # Append the new products to the merged_result DataFrame
 merged_result = pd.concat([merged_result, new_products], ignore_index=True)
