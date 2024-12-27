@@ -146,10 +146,11 @@ merged_df['Name'] = merged_df['Name'].apply(clean_start_of_name)
 # In case REWE changed the ID, update it here #
 ###############################################
 id_replacements = {
-    9689079: 8994273,  # Toilettenpapier 16x200, now 10x200 (update new weight and calculate new price later)
-    5499259: 7642029,  # Toilettenpapier 16x200, now 10x200 (update new weight and calculate new price later)
+    9689079: 8994273, # Toilettenpapier 16x200, now 10x200 (update new weight and calculate new price later)
+    5499259: 7642029, # Toilettenpapier 16x200, now 10x200 (update new weight and calculate new price later)
     6697038: 7568160, # Schalotten bio
-    1311281: 8919738  # Rote Zwiebeln bio
+    1311281: 8919738, # Rote Zwiebeln bio
+    8280234: 9021241  # Senf mittelscharf
 }
 # Replace 'id' values in the DataFrame using the dictionary
 merged_df['ID'] = merged_df['ID'].replace(id_replacements)
@@ -373,18 +374,17 @@ final_prices = [
 
 # Create a DataFrame for the new products with final prices
 new_products = pd.DataFrame({
-    'id': ['999999', '999990', '999991', '999992', '9021241'],
-    'brand': [1, 1, 1, 1, 1],
-    'name': ['Bier (Discounter-Pils)', 'Bier (Discounter-Pils)', 'Baby Windeln, diverse Grössen (Aldi)', 'Baby Feuchttücher (Aldi)', 'Senf scharf'],
-    'weight': ['0,5l', '6x0,5l', '32 bis 46 Stück', '3x80', '200ml'],
-    'first_price': [36, 179, 525, 248, 49],
+    'id': ['999999', '999990', '999991', '999992'],
+    'brand': [1, 1, 1, 1],
+    'name': ['Bier (Discounter-Pils)', 'Bier (Discounter-Pils)', 'Baby Windeln, diverse Grössen (Aldi)', 'Baby Feuchttücher (Aldi)'],
+    'weight': ['0,5l', '6x0,5l', '32 bis 46 Stück', '3x80'],
+    'first_price': [36, 179, 525, 248],
     'last_price': final_prices,  # Use final prices here
-    'first_seen': [first_seen_date, first_seen_date, first_seen_date, first_seen_date, first_seen_date], # Ensure datetime format
-    'last_seen': [last_seen_date, last_seen_date, last_seen_date, last_seen_date, last_seen_date], # Ensure datetime format
-    'cat': ['drinks', 'drinks', 'drugstore', 'drugstore', 'cooking'],
-    'icon': [11, 24, 18, 18, 16]
+    'first_seen': [first_seen_date, first_seen_date, first_seen_date, first_seen_date], # Ensure datetime format
+    'last_seen': [last_seen_date, last_seen_date, last_seen_date, last_seen_date], # Ensure datetime format
+    'cat': ['drinks', 'drinks', 'drugstore', 'drugstore'],
+    'icon': [11, 24, 18, 18]
 })
-# Source Senf ("Kim"): https://www.1prospekte.de/i/aldi-sud/kim-delikatess-senf-157745
 
 # Append the new products to the merged_result DataFrame
 merged_result = pd.concat([merged_result, new_products], ignore_index=True)
