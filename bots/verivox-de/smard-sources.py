@@ -370,7 +370,8 @@ if __name__ == '__main__':
         df_spot_old = pd.read_csv(
             './data/smard_spot_historical.tsv', sep='\t', index_col=None)
         df_spot_old['Datum'] = pd.to_datetime(df_spot_old['Datum'])
-        year = datetime.now().year
+        yesterday_year = datetime.now() - timedelta(days=1)
+        year = yesterday_year.year
         df_spot_new = df_spot.copy()[df_spot.index >= f'{year}-01-01']
         df_spot_new = df_spot_new.rename(
             columns={f'Deutschland/Luxemburg [€/MWh] Originalauflösungen': f'{year}'})
