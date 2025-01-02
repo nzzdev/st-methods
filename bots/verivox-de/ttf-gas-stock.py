@@ -4,7 +4,7 @@ import os
 from user_agent import generate_user_agent
 import yfinance as yf
 import numpy as np
-from datetime import datetime
+from datetime import datetime, timedelta
 from datawrapper import Datawrapper
 
 if __name__ == '__main__':
@@ -60,10 +60,11 @@ if __name__ == '__main__':
         # create chart with comparison
         dfold = pd.read_csv(
             './data/ttf-gas-stock-historical.tsv', sep='\t', index_col=None)
-        year = datetime.now().year
+        yesterday_year = datetime.now() - timedelta(days=1)
+        year = yesterday_year.year
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
         dfnew = dfold.merge(df, on='Datum', how='left')
-        dfnew = dfnew[['Datum', 'Kosten', '2023', '2022', 'Vorkrisenniveau²']]
+        dfnew = dfnew[['Datum', 'Kosten', '2024', '2023', '2022', 'Vorkrisenniveau²']]
         dfnew = dfnew.rename(columns={'Kosten': f'{year}'})
         dfnew.set_index('Datum', inplace=True)
         dfnew[f'{year}'] = dfnew[f'{year}'].replace(
@@ -71,6 +72,7 @@ if __name__ == '__main__':
         dfnew[f'{year}'] = dfnew[f'{year}'].interpolate(
             method='linear', limit_direction='backward')  # for wrong dates
         dfnew = dfnew.drop('2023', axis=1)
+        dfnew = dfnew.drop('2024', axis=1)
 
         # round values further for normal line chart
         df['Kosten'] = df['Kosten'].round(0).astype(int)
