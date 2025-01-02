@@ -651,8 +651,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-01-02;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-01-02;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2025-01-02;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2025-01-02;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-01-02;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;129;1l
+2025-01-02;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-01-02;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-01-02;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-01-02;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1386,6 +1386,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-01-02;200347;REWE Bio;REWE Bio Gouda 150g;199;150g (1 kg = 13,27 €)
 2025-01-02;7715074;REWE Bio;REWE Bio Gouda Holland jung 250g;289;250g (1 kg = 11,56 €)
 2025-01-02;7743850;REWE Bio;REWE Bio Gouda Mittelalt pikant 150g;259;150g (1 kg = 17,27 €)
+2025-01-02;7814263;REWE Bio;REWE Bio Gouda gerieben 150g;179;150g (1 kg = 11,93 €)
 2025-01-02;4623991;REWE Bio;REWE Bio Grapefruit 1 Stück;169;1 Stück
 2025-01-02;281097;REWE Bio;REWE Bio Grüne Erbsen 500g;189;500g (1 kg = 3,78 €)
 2025-01-02;8295555;REWE Bio;REWE Bio Grüne Oliven 180g;189;180g (1 kg = 10,50 €)
