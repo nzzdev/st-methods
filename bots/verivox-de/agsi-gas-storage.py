@@ -65,7 +65,7 @@ if __name__ == '__main__':
         # create dates
         today = date.today()
         todaystr = today.strftime('%Y-%m-%d')
-        endstr = '2022-01-01'
+        endstr = '2023-01-01'
 
         # calculate number of pages needed
         start = datetime.strptime(todaystr, "%Y-%m-%d") + timedelta(days=300)
@@ -81,8 +81,10 @@ if __name__ == '__main__':
                         status_forcelist=[502, 503, 504])
         s.mount('https://', HTTPAdapter(max_retries=retries))
 
-        # create header and get data from 2023
-        header = (f"Datum,2024²,Trend"+'\n')
+        # create header and get data from current year
+        yesterday_year = datetime.now() - timedelta(days=1)
+        year = yesterday_year.year
+        header = (f"Datum,{year}²,Trend"+'\n')
         with open(f'./data/{todaystr}-gasspeicher.csv', 'w') as file:
             file.write(header)
             for n in range(1, pages):
@@ -111,7 +113,7 @@ if __name__ == '__main__':
                 # original query
                 # https://agsi.gie.eu/api?country=DE&from=2013-04-15&to=2022-05-16&page=1&size=300
 
-        # retrieve data from 2011-2024
+        # retrieve data starting at 2011
         dfnew = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dftrend = pd.read_csv(
@@ -119,9 +121,10 @@ if __name__ == '__main__':
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
-         # temporary fix for wrong storage data
+        """
+        # temporary fix for wrong storage data
         dfnew.set_index('Datum', inplace=True)
-        dfnew.at['2024-10-31', '2024²'] = 98.04
+        dfnew.at[f'2024-10-31', '2024²'] = 98.04
         dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
@@ -135,6 +138,7 @@ if __name__ == '__main__':
 
         # fix for seemingly wrong >100% data
         #dfnew.loc[dfnew['2024²'] > 100, '2024²'] = 100
+        """
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
@@ -165,7 +169,7 @@ if __name__ == '__main__':
         # merge dataframes
         df = dfold.merge(dfnew, on='Datum', how='left')
         df.rename(columns={'Min': ''}, inplace=True)
-        df['2024²'].fillna('', inplace=True)
+        df[f'{year}²'].fillna('', inplace=True)
         df.set_index('Datum', inplace=True)
         dftrend.set_index('Datum', inplace=True)
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
@@ -188,7 +192,7 @@ if __name__ == '__main__':
         dftrend = dftrend[(dftrend.index.get_level_values(0) >= '2022-05-01')]
 
         # banker's rounding
-        title_perc = dfnew['2024²'].iloc[-1].round(
+        title_perc = dfnew[f'{year}²'].iloc[-1].round(
             1).astype(str).replace('.', ',')
         title = f'Gasspeicher zu {title_perc} Prozent gefüllt'
 
