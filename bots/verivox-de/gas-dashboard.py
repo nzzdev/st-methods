@@ -17,9 +17,11 @@ if __name__ == '__main__':
         # get current date
         today = date.today()
         todaystr = today.strftime('%Y-%m-%d')
+        yesterday_year = datetime.now() - timedelta(days=1)
+        year = yesterday_year.year
 
         df_storage = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', '2024²'])
+            f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', f'{year}'])
         df_storage_trend = pd.read_csv(
             f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8', index_col='Datum', usecols=['Datum', 'Trend'])
         df_gas = pd.read_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t',
@@ -90,7 +92,7 @@ if __name__ == '__main__':
             df_strom_mean.index.get_level_values(0) >= '2024-01-01')]
         # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2022-01-01')]
         df_storage.index = df_storage.index.rename('date')
-        df_storage = df_storage.rename(columns={'2024²': 'Gasspeicher'})
+        df_storage = df_storage.rename(columns={f'{year}': 'Gasspeicher'})
         df_storage_trend.index = df_storage_trend.index.rename('date')
         df_super.index = df_super.index.rename('date')
         df_super = df_super.rename(columns={'Mittlerer Preis': 'Benzinpreis'})
