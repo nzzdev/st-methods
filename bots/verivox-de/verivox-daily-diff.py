@@ -28,24 +28,37 @@ if __name__ == '__main__':
         # Remove spikes due to missing suppliers in the Verivox database, see also gas-dashboard.py
         # Make sure data is sorted by date (if not already)
         df.sort_index(inplace=True)
-        df.sort_index(inplace=True)
-        # Overwrite outliers in the 'Strom' column
-        for i in range(1, len(df) - 1):
-            prev_val = df['Strom'].iloc[i - 1]
-            current_val = df['Strom'].iloc[i]
-            next_val = df['Strom'].iloc[i + 1]
-            # If today's value is more than 10% greater than both the previous and next day's values,
-            # treat it as an outlier and replace it with the average of the previous and next day's values.
-            if (current_val > 1.1 * prev_val) and (current_val > 1.1 * next_val):
-                df.at[df.index[i], 'Strom'] = (prev_val + next_val) / 2
-        # Overwrite outliers in the 'Gas' column
-        for i in range(1, len(df) - 1):
-            prev_val = df['Gas'].iloc[i - 1]
-            current_val = df['Gas'].iloc[i]
-            next_val = df['Gas'].iloc[i + 1]
-            # Same logic for detecting and correcting outliers
-            if (current_val > 1.1 * prev_val) and (current_val > 1.1 * next_val):
-                df.at[df.index[i], 'Gas'] = (prev_val + next_val) / 2
+        # Define threshold percentages
+        increase_threshold = 1.05  # 5% increase
+        decrease_threshold = 0.95  # 5% decrease
+        def clean_outliers(df, column, inc_thresh=1.05, dec_thresh=0.95):
+            """
+            Detects and replaces both upward and downward isolated outliers in the specified column.
+            """
+            # Convert column to float for accurate calculations
+            df[column] = df[column].astype(float)
+            # Create shifted series for previous and next values
+            prev = df[column].shift(1)
+            next_ = df[column].shift(-1)
+            prev_prev = df[column].shift(2)
+            next_next = df[column].shift(-2)
+            # Detect upward outliers
+            upward_outliers = (df[column] > inc_thresh * prev) & (df[column] > inc_thresh * next_)
+            # Ensure isolation: neither previous nor next day is also an upward outlier
+            upward_isolated = upward_outliers & ~((prev > inc_thresh * prev_prev) | (next_ > inc_thresh * next_next))
+            # Detect downward outliers
+            downward_outliers = (df[column] < dec_thresh * prev) & (df[column] < dec_thresh * next_)
+            # Ensure isolation: neither previous nor next day is also a downward outlier
+            downward_isolated = downward_outliers & ~((prev < dec_thresh * prev_prev) | (next_ < dec_thresh * next_next))
+            # Combine isolated outliers
+            isolated_outliers = upward_isolated | downward_isolated
+            # Replace outliers with the average of previous and next day's values
+            df.loc[isolated_outliers, column] = (prev + next_) / 2
+            # Round the values and convert back to integer
+            df[column] = df[column].round().astype(int)
+        # Apply the cleaning function to both 'Strom' and 'Gas' columns
+        clean_outliers(df, 'Strom', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
+        clean_outliers(df, 'Gas', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         # Round the final values and convert to integer
         df['Strom'] = df['Strom'].round().astype(int)
         df['Gas'] = df['Gas'].round().astype(int)
