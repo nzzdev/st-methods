@@ -24,6 +24,32 @@ if __name__ == '__main__':
         df = pd.read_csv(
             './data/gas-strom-bundesschnitt.tsv', sep='\t', index_col='date')
         df.index = pd.to_datetime(df.index)
+
+        # Remove spikes due to missing suppliers in the Verivox database, see also gas-dashboard.py
+        # Make sure data is sorted by date (if not already)
+        df.sort_index(inplace=True)
+        df.sort_index(inplace=True)
+        # Overwrite outliers in the 'Strom' column
+        for i in range(1, len(df) - 1):
+            prev_val = df['Strom'].iloc[i - 1]
+            current_val = df['Strom'].iloc[i]
+            next_val = df['Strom'].iloc[i + 1]
+            # If today's value is more than 10% greater than both the previous and next day's values,
+            # treat it as an outlier and replace it with the average of the previous and next day's values.
+            if (current_val > 1.1 * prev_val) and (current_val > 1.1 * next_val):
+                df.at[df.index[i], 'Strom'] = (prev_val + next_val) / 2
+        # Overwrite outliers in the 'Gas' column
+        for i in range(1, len(df) - 1):
+            prev_val = df['Gas'].iloc[i - 1]
+            current_val = df['Gas'].iloc[i]
+            next_val = df['Gas'].iloc[i + 1]
+            # Same logic for detecting and correcting outliers
+            if (current_val > 1.1 * prev_val) and (current_val > 1.1 * next_val):
+                df.at[df.index[i], 'Gas'] = (prev_val + next_val) / 2
+        # Round the final values and convert to integer
+        df['Strom'] = df['Strom'].round().astype(int)
+        df['Gas'] = df['Gas'].round().astype(int)
+
         df = df.rolling(window=7).mean().dropna()
         df = df[~(df.index < f'{lasty}')]
         df['Gas'] = (df['Gas'] / gasavg) * 100

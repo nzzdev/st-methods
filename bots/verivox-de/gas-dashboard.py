@@ -69,6 +69,32 @@ if __name__ == '__main__':
         df_gasstock.index = pd.to_datetime(df_gasstock.index)
         df_acstockeex.index = pd.to_datetime(df_acstockeex.index)
         df_acstock.index = pd.to_datetime(df_acstock.index)
+
+        # Remove spikes due to missing suppliers in the Verivox database, see also verivox-daily-diff.py
+        # Make sure data is sorted by date (if not already)
+        df_strom.sort_index(inplace=True)
+        df_gas.sort_index(inplace=True)
+        # Overwrite outliers in the 'Strom' column
+        for i in range(1, len(df_strom) - 1):
+            prev_val = df_strom['Strom'].iloc[i - 1]
+            current_val = df_strom['Strom'].iloc[i]
+            next_val = df_strom['Strom'].iloc[i + 1]
+            # If today's value is more than 10% greater than both the previous and next day's values,
+            # treat it as an outlier and replace it with the average of the previous and next day's values.
+            if (current_val > 1.1 * prev_val) and (current_val > 1.1 * next_val):
+                df_strom.at[df_strom.index[i], 'Strom'] = (prev_val + next_val) / 2
+        # Overwrite outliers in the 'Gas' column
+        for i in range(1, len(df_gas) - 1):
+            prev_val = df_gas['Gas'].iloc[i - 1]
+            current_val = df_gas['Gas'].iloc[i]
+            next_val = df_gas['Gas'].iloc[i + 1]
+            # Same logic for detecting and correcting outliers
+            if (current_val > 1.1 * prev_val) and (current_val > 1.1 * next_val):
+                df_gas.at[df_gas.index[i], 'Gas'] = (prev_val + next_val) / 2
+        # Round the final values and convert to integer
+        df_strom['Strom'] = df_strom['Strom'].round().astype(int)
+        df_gas['Gas'] = df_gas['Gas'].round().astype(int)
+
         df_gas_mean = df_gas.rolling(window=7).mean().dropna()
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
         df_strom_mean = df_strom.rolling(window=7).mean().dropna()
