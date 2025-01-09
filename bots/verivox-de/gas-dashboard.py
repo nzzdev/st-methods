@@ -90,7 +90,7 @@ if __name__ == '__main__':
         df_gas = df_gas[(df_gas.index.get_level_values(0) >= f'2024-01-01')]
         df_strom_mean = df_strom_mean[(
             df_strom_mean.index.get_level_values(0) >= '2024-01-01')]
-        # df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2022-01-01')]
+        df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2024-01-01')]
         df_storage.index = df_storage.index.rename('date')
         df_storage = df_storage.rename(columns={f'{year}²': 'Gasspeicher'})
         df_storage_trend.index = df_storage_trend.index.rename('date')
@@ -384,8 +384,9 @@ if __name__ == '__main__':
         # dict_gas = df.drop(df.columns[[2, 3]], axis=1).rename(columns={df.columns[1]: 'value'}).dropna().to_dict(orient='records')
         dict_gas = df_gas.rename(
             columns={df_gas.columns[1]: 'value'}).to_dict(orient='records')
-        dict_strom = df.drop(df.columns[[1, 3]], axis=1).rename(
-            columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')
+        dict_strom = df_strom.rename(
+            columns={df_strom.columns[1]: 'value'}).to_dict(orient='records')
+        #dict_strom = df.drop(df.columns[[1, 3]], axis=1).rename(columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')
         dict_fossile = df_fossile.rename(
             columns={df_fossile.columns[1]: 'value'}).to_dict(orient='records')
         # dict_usage = df_usage.rename(columns={df_usage.columns[2]: 'value'}).to_dict(orient='records')
@@ -417,7 +418,7 @@ if __name__ == '__main__':
         storage_ytick = [0, 25, 50, 75, 100]
         # gas_ytick = [0, 15, 30, 45] # from January 2021
         gas_ytick = [6, 8, 10, 12]
-        strom_ytick = [0, 20, 40, 60]
+        strom_ytick = [10, 20, 40]
         ns_ytick = [0, 0.5, 1, 1.5]
         fossile_ytick = [20, 35, 50, 65]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
@@ -471,7 +472,7 @@ if __name__ == '__main__':
         # merge dictionaries
         # STORAGE meta_storage['chartData'] = dict_storage
         meta_gas['chartData'] = dict_gas
-        meta_strom['chartData'] = []
+        meta_strom['chartData'] = dict_strom
         meta_fossile['chartData'] = []
         # meta_imports['chartData'] = []
         meta_importsshare['chartData'] = []
