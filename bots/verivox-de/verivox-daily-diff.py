@@ -17,8 +17,8 @@ if __name__ == '__main__':
         dw_id = 'sgFfi'
 
         # pre-crisis average 2018-2020
-        gasavg = 969.63 # with bonus: 874.75
-        acavg = 1081.66 # with bonus: 956.56
+        gasavg = 969.58 # with bonus: 874.75
+        acavg = 1090.16 # with bonus: 956.56
 
         # create indexed time series
         df = pd.read_csv(
