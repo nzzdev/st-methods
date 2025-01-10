@@ -115,8 +115,8 @@ if __name__ == '__main__':
             # Overwrite the original column with the smoothed data, rounding and converting to int
             df[column] = smoothed.round().astype(int)
         # Create backup with real data
-        df_strom_real = df_strom['Strom'].copy()
-        df_gas_real = df_gas['Gas'].copy()
+        df_strom_real = df_strom[['Strom']].copy()
+        df_gas_real = df_gas[['Gas']].copy()
         # Apply the cleaning function to both 'Strom' and 'Gas' columns
         clean_outliers(df_strom, 'Strom', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         clean_outliers(df_gas, 'Gas', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
