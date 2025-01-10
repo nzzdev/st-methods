@@ -60,8 +60,8 @@ if __name__ == '__main__':
         clean_outliers(df, 'Strom', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         clean_outliers(df, 'Gas', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         # Round the final values and convert to integer
-        df['Strom'] = df['Strom'].round().astype(int)
-        df['Gas'] = df['Gas'].round().astype(int)
+        #df['Strom'] = df['Strom'].round().astype(int)
+        #df['Gas'] = df['Gas'].round().astype(int)
 
         df = df.rolling(window=7).mean().dropna()
         df = df[~(df.index < f'{lasty}')]

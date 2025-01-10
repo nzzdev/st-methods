@@ -102,16 +102,31 @@ if __name__ == '__main__':
             df.loc[isolated_outliers, column] = (prev + next_) / 2
             # Round the values and convert back to integer
             df[column] = df[column].round().astype(int)
+        # Smooth line chart data with a moving average
+        def smooth_moving_average(df, column, window=7):
+            """
+            Smooths a time series column using a moving average, overwriting the original column,
+            and keeping the last value unchanged.
+            """
+            # Calculate the moving average
+            smoothed = df[column].rolling(window=window, min_periods=1).mean()
+            # Replace the last value with the original value using .loc
+            smoothed.loc[df.index[-1]] = df.loc[df.index[-1], column]
+            # Overwrite the original column with the smoothed data, rounding and converting to int
+            df[column] = smoothed.round().astype(int)
+        # Create backup with real data
+        df_strom_real = df_strom['Strom'].copy()
+        df_gas_real = df_gas['Gas'].copy()
         # Apply the cleaning function to both 'Strom' and 'Gas' columns
         clean_outliers(df_strom, 'Strom', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         clean_outliers(df_gas, 'Gas', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
-        # Round the final values and convert to integer
-        df_strom['Strom'] = df_strom['Strom'].round().astype(int)
-        df_gas['Gas'] = df_gas['Gas'].round().astype(int)
+        # Apply the smoothing function to both 'Strom' and 'Gas' columns
+        smooth_moving_average(df_strom, 'Strom', window=7)
+        smooth_moving_average(df_gas, 'Gas', window=7)
 
-        df_gas_mean = df_gas.rolling(window=7).mean().dropna()
+        df_gas_mean = df_gas_real.rolling(window=7).mean().dropna()
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
-        df_strom_mean = df_strom.rolling(window=7).mean().dropna()
+        df_strom_mean = df_strom_real.rolling(window=7).mean().dropna()
         df_strom_mean.index = pd.to_datetime(df_strom_mean.index)
         df_fossile.index = pd.to_datetime(df_fossile.index)
         df_fossile = df_fossile.sort_index().round(1)
@@ -128,9 +143,11 @@ if __name__ == '__main__':
         # lasty = today - timedelta(days=365) # alternative with last year
         # lasty = lasty.strftime('%Y-%m-%d') # alternative with last year
         df_gas = df_gas[(df_gas.index.get_level_values(0) >= f'2024-01-01')]
+        df_gas_real = df_gas_real[(df_gas_real.index.get_level_values(0) >= f'2024-01-01')]
         df_strom_mean = df_strom_mean[(
             df_strom_mean.index.get_level_values(0) >= '2024-01-01')]
         df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2024-01-01')]
+        df_strom_real = df_strom_real[(df_strom_real.index.get_level_values(0) >= '2024-01-01')]
         df_storage.index = df_storage.index.rename('date')
         df_storage = df_storage.rename(columns={f'{year}²': 'Gasspeicher'})
         df_storage_trend.index = df_storage_trend.index.rename('date')
@@ -139,8 +156,10 @@ if __name__ == '__main__':
         df_super = df_super[~df_super.index.duplicated(
             keep='last')]  # drop duplicates
         df_gas = df_gas.rename(columns={'Gas': 'Gaspreis'})
+        df_gas_real = df_gas_real.rename(columns={'Gas': 'Gaspreis'})
         df_gas_mean = df_gas_mean.rename(columns={'Gas': 'Gaspreis'})
         df_strom = df_strom.rename(columns={'Strom': 'Strompreis'})
+        df_strom_real = df_strom_real.rename(columns={'Strom': 'Strompreis'})
         df_strom_mean = df_strom_mean.rename(columns={'Strom': 'Strompreis'})
         df_acstock.rename(
             columns={df_acstock.columns[0]: 'Strom-Börsenpreis'}, inplace=True)
@@ -157,8 +176,10 @@ if __name__ == '__main__':
 
         # convert 20 MWh to 20000 kWh and euro to cent / 4 MWh to 4000 kWh
         df_gas = (df_gas / 200).round(2)
+        df_gas_real = (df_gas_real / 200).round(2)
         df_gas_mean = (df_gas_mean / 200).round(2)
         df_strom = (df_strom / 40).round(2)
+        df_strom_real = (df_strom_real / 40).round(2)
         df_strom_mean = (df_strom_mean / 40).round(2)
 
         # convert KWh to GWh and calculate share of imports of power consumption
@@ -189,7 +210,7 @@ if __name__ == '__main__':
         gasstock_time = gasstock_time.strftime('%-d. %-m., %k Uhr')
 
         # merge dataframes
-        df = pd.concat([df_gas, df_strom, df_fossile,
+        df = pd.concat([df_gas_real, df_strom_real, df_fossile,
                        df_storage, df_lng['LNG'], df_super, df_gasstock, df_acstock, df_acstockeex], axis=1)
 
         # STORAGE df = pd.concat([df_storage, df_gas, df_strom], axis=1)
