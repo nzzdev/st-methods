@@ -75,8 +75,8 @@ if __name__ == '__main__':
         df_strom.sort_index(inplace=True)
         df_gas.sort_index(inplace=True)
         # Define threshold percentages
-        increase_threshold = 1.05  # 5% increase
-        decrease_threshold = 0.95  # 5% decrease
+        increase_threshold = 1.1  # 10% increase
+        decrease_threshold = 0.9  # 10% decrease
         def clean_outliers(df, column, inc_thresh=1.05, dec_thresh=0.95):
             """
             Detects and replaces both upward and downward isolated outliers in the specified column.
