@@ -458,7 +458,7 @@ if __name__ == '__main__':
         storage_ytick = [0, 25, 50, 75, 100]
         # gas_ytick = [0, 15, 30, 45] # from January 2021
         gas_ytick = [6, 8, 10, 12]
-        strom_ytick = [25, 30, 35, 40]
+        strom_ytick = [24, 28, 32, 36]
         ns_ytick = [0, 0.5, 1, 1.5]
         fossile_ytick = [20, 35, 50, 65]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
