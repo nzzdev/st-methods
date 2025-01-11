@@ -114,8 +114,8 @@ if __name__ == '__main__':
             'sec-fetch-site': 'same-origin',
         }
 
-        today = date.today() - timedelta(days=1)
-        yesterday = date.today() - timedelta(days=2)
+        today = date.today()
+        yesterday = date.today() - timedelta(days=1)
         todaynice = today.strftime('%-d.%-m.')
         todaynicey = today.strftime('%-d. %-m. %Y')
 
