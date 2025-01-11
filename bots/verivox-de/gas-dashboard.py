@@ -327,9 +327,9 @@ if __name__ == '__main__':
         # function for string trends (storage and gas=previous day, petrol=previous week)
         def replace_vals(df_meta):
             for col in cols1:
-                if df_meta[col] >= 0.2:
+                if df_meta[col] >= 0.3:
                     df_meta[col] = 'steigend'
-                elif df_meta[col] <= -0.2:
+                elif df_meta[col] <= -0.3:
                     df_meta[col] = 'fallend'
                 else:
                     df_meta[col] = 'gleichbleibend'
@@ -505,13 +505,13 @@ if __name__ == '__main__':
 
         # {gasstock_time} = date and time for gas stock description
 
-        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': todaystr, 'indicatorSubtitle': f'Füllstand¹; Ziel: min. 40 % am 1. 2.', 'value': diff_storage, 'valueLabel': f'{diff_storage_str} %',
+        meta_storage = {'indicatorTitle': 'Gasspeicher', 'date': todaystr, 'indicatorSubtitle': f'Füllstand¹', 'value': diff_storage, 'valueLabel': f'{diff_storage_str} %',
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
-        meta_gas = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
+        meta_gas = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden, ohne Bonus', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
         meta_gasstock = {'indicatorTitle': 'Gas im Grosshandel', 'date': todaystr, 'indicatorSubtitle': f'je kWh, mittelfristige Lieferung', 'value': diff_gasstock, 'valueLabel': f'{diff_gasstock_str} Cent',
                          'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gasstock, 'chartType': 'line'}
-        meta_strom = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
+        meta_strom = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden, ohne Bonus', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_stromstockeex = {'indicatorTitle': 'Strom im Grosshandel', 'date': todaystr, 'indicatorSubtitle': f'je kWh, langfristige Lieferung', 'value': diff_acstockeex, 'valueLabel': f'{diff_acstockeex_str} Cent',
                               'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstockeex, 'chartType': 'line'}
