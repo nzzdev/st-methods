@@ -121,8 +121,8 @@ if __name__ == '__main__':
         clean_outliers(df_strom, 'Strom', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         clean_outliers(df_gas, 'Gas', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         # Apply the smoothing function to both 'Strom' and 'Gas' columns
-        smooth_moving_average(df_strom, 'Strom', window=3)
-        smooth_moving_average(df_gas, 'Gas', window=3)
+        #smooth_moving_average(df_strom, 'Strom', window=3)
+        #smooth_moving_average(df_gas, 'Gas', window=3)
 
         df_gas_mean = df_gas_real.rolling(window=7).mean().dropna()
         df_gas_mean.index = pd.to_datetime(df_gas_mean.index)
