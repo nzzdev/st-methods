@@ -327,9 +327,9 @@ if __name__ == '__main__':
         # function for string trends (storage and gas=previous day, petrol=previous week)
         def replace_vals(df_meta):
             for col in cols1:
-                if df_meta[col] >= 0.3:
+                if df_meta[col] >= 0.2:
                     df_meta[col] = 'steigend'
-                elif df_meta[col] <= -0.3:
+                elif df_meta[col] <= -0.2:
                     df_meta[col] = 'fallend'
                 else:
                     df_meta[col] = 'gleichbleibend'
