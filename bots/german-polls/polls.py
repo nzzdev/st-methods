@@ -1078,28 +1078,31 @@ kanzlerkandidat_data = kanzlerkandidat_data[kanzlerkandidat_data["Datum"] >= new
 if "Befragtenzahl" in kanzlerkandidat_data.columns:
     kanzlerkandidat_data.drop(columns=["Befragtenzahl"], inplace=True)
 
-def adjust_consecutive_dates(df, column):
-    """
-    Adjust consecutive dates where there is a value in the specified column 
-    to ensure the latter date matches the earlier one due to Datawrapper limitations.
-    """
-    for i in range(1, len(df)):
-        # Check for consecutive dates and non-null values in the specified column
+# Function to check consecutive days and set "_real" columns to NaN due to Datawrapper limitations
+def handle_consecutive_days(data, real_columns):
+    # Sort by date to ensure consecutive checking works
+    data = data.sort_values("Datum").reset_index(drop=True)
+
+    # Iterate through rows and check for consecutive days
+    for i in range(1, len(data)):
+        # Check if the current and previous rows have consecutive dates and non-NaN values in any "_real" column
         if (
-            (df.loc[i, "Datum"] - df.loc[i - 1, "Datum"]).days == 1
-            and not pd.isna(df.loc[i, column])
-            and not pd.isna(df.loc[i - 1, column])
+            (data.loc[i, "Datum"] - data.loc[i - 1, "Datum"]).days == 1
+            and any(~data.loc[i, real_columns].isna())
+            and any(~data.loc[i - 1, real_columns].isna())
         ):
-            # Adjust the current date to match the previous date
-            df.loc[i, "Datum"] = df.loc[i - 1, "Datum"]
-    return df
-# Adjust dates in kanzlerkandidat_data
-kanzlerkandidat_data = adjust_consecutive_dates(kanzlerkandidat_data, "Merz_real")
-# Adjust dates in kanzlerkandidat_data_all
-kanzlerkandidat_data_all = adjust_consecutive_dates(kanzlerkandidat_data_all, "Merz_real")
-# Ensure there are no duplicate rows after the adjustment
-kanzlerkandidat_data = kanzlerkandidat_data.drop_duplicates(subset=["Datum", "Merz_real"])
-kanzlerkandidat_data_all = kanzlerkandidat_data_all.drop_duplicates(subset=["Datum", "Merz_real"])
+            # Set "_real" columns to NaN for the current row
+            data.loc[i, real_columns] = np.nan
+
+    return data
+
+# List of "_real" columns
+real_columns = [col for col in kanzlerkandidat_data.columns if col.endswith("_real")]
+real_columns_all = [col for col in kanzlerkandidat_data_all.columns if col.endswith("_real")]
+
+# Handle consecutive days in both datasets
+kanzlerkandidat_data = handle_consecutive_days(kanzlerkandidat_data, real_columns)
+kanzlerkandidat_data_all = handle_consecutive_days(kanzlerkandidat_data_all, real_columns_all)
 
 # prepare data for q.config.json
 assets = [
