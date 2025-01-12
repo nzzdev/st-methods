@@ -1101,8 +1101,6 @@ kanzlerkandidat_data_all = adjust_consecutive_dates(kanzlerkandidat_data_all, "M
 kanzlerkandidat_data = kanzlerkandidat_data.drop_duplicates(subset=["Datum", "Merz_real"])
 kanzlerkandidat_data_all = kanzlerkandidat_data_all.drop_duplicates(subset=["Datum", "Merz_real"])
 
-kanzlerkandidat_data.to_clipboard()
-
 # prepare data for q.config.json
 assets = [
             {
