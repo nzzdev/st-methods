@@ -1078,6 +1078,31 @@ kanzlerkandidat_data = kanzlerkandidat_data[kanzlerkandidat_data["Datum"] >= new
 if "Befragtenzahl" in kanzlerkandidat_data.columns:
     kanzlerkandidat_data.drop(columns=["Befragtenzahl"], inplace=True)
 
+def adjust_consecutive_dates(df, column):
+    """
+    Adjust consecutive dates where there is a value in the specified column 
+    to ensure the latter date matches the earlier one due to Datawrapper limitations.
+    """
+    for i in range(1, len(df)):
+        # Check for consecutive dates and non-null values in the specified column
+        if (
+            (df.loc[i, "Datum"] - df.loc[i - 1, "Datum"]).days == 1
+            and not pd.isna(df.loc[i, column])
+            and not pd.isna(df.loc[i - 1, column])
+        ):
+            # Adjust the current date to match the previous date
+            df.loc[i, "Datum"] = df.loc[i - 1, "Datum"]
+    return df
+# Adjust dates in kanzlerkandidat_data
+kanzlerkandidat_data = adjust_consecutive_dates(kanzlerkandidat_data, "Merz_real")
+# Adjust dates in kanzlerkandidat_data_all
+kanzlerkandidat_data_all = adjust_consecutive_dates(kanzlerkandidat_data_all, "Merz_real")
+# Ensure there are no duplicate rows after the adjustment
+kanzlerkandidat_data = kanzlerkandidat_data.drop_duplicates(subset=["Datum", "Merz_real"])
+kanzlerkandidat_data_all = kanzlerkandidat_data_all.drop_duplicates(subset=["Datum", "Merz_real"])
+
+kanzlerkandidat_data.to_clipboard()
+
 # prepare data for q.config.json
 assets = [
             {
