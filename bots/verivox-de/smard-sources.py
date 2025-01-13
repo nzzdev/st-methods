@@ -195,7 +195,7 @@ if __name__ == '__main__':
         df_nogas = df_nogas.rename(columns={'Erdgas': 'Fossile',
                                             'Sonstige EE': 'Sonstige'})
         # drop unused rows and convert to terawatt
-        df_nogas = df_nogas[~(df_nogas.index < '2021-12-12 00:00:00')]
+        df_nogas = df_nogas[~(df_nogas.index < '2023-01-01 00:00:00')] # old: 2021-12-12, always pick sunday of last week
         df_nogas = df_nogas.div(1000000)
 
         # OLD fossile with gas
@@ -203,7 +203,7 @@ if __name__ == '__main__':
         df['Sonstige'] = df['Sonstige'] + df['Sonstige EE']
         df = df.drop(['Sonstige EE'], axis=1)
         # drop unused rows and convert to terawatt
-        df = df[~(df.index < '2021-12-12 00:00:00')]
+        df = df[~(df.index < '2023-01-01 00:00:00')] # old: 2021-12-12, always pick sunday of last week
         df = df.div(1000000)
 
         df_dash.to_csv('./data/smard_percentage.csv')
