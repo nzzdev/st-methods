@@ -9,7 +9,7 @@ if __name__ == '__main__':
         # set working directory, change if necessary; get dates
         os.chdir(os.path.dirname(__file__))
         today = date.today()
-        lasty = today - timedelta(days=365)
+        lasty = today - timedelta(days=731)
 
         # Datawrapper API key
         dw_key = os.environ['DATAWRAPPER_API']
@@ -97,7 +97,7 @@ if __name__ == '__main__':
         timecode = df.index[-1]
         timecode_str = timecode.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Bei einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom. Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Boni).<br>Stand: ' + timecode_str
-
+        
         # update Datawrapper chart
         df.reset_index(inplace=True)
         dw_chart = dw.add_data(chart_id=dw_id, data=df)
