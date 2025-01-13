@@ -776,6 +776,9 @@ def fetch_kanzlerkandidat_data(candidate_names):
     # Drop rows where any of the key candidates has no valid value
     df = df.dropna(subset=key_columns, how="any")  # Drop if any key candidate value is missing
 
+    # Exclude rows where "Institut" contains "INSA" or "Ipsos"
+    df = df[~df["Institut"].str.contains("INSA|Ipsos", case=False, na=False)]
+
     # Create a new DataFrame for output
     output = pd.DataFrame()
     output["Datum"] = df["Datum"]
@@ -849,7 +852,7 @@ kanzlerkandidat_data[candidate_names] = kanzlerkandidat_data[candidate_names].in
 for candidate in candidate_names:
     kanzlerkandidat_data[candidate] = (
         kanzlerkandidat_data[candidate]
-        .rolling(window=10, min_periods=1, center=True)
+        .ewm(span=14, adjust=False) 
         .mean()
     )
 
@@ -930,8 +933,8 @@ def fetch_kanzlerkandidat_data(candidate_names):
     df["Datum"] = pd.to_datetime(df["Datum"], format="%d.%m.%Y", errors="coerce")
     df["Institut"] = df["Institut"].ffill()
 
-    # Drop everything below the date "19.07.2022" (new header appears afterwards with other candidates)
-    cutoff_date = pd.to_datetime("19.07.2022", format="%d.%m.%Y")
+    # Drop everything below the date "01.04.2024" (new header appears afterwards with other candidates)
+    cutoff_date = pd.to_datetime("01.04.2024", format="%d.%m.%Y")
     df = df[df["Datum"] >= cutoff_date]
 
     # Dynamically find relevant candidate columns
@@ -970,6 +973,9 @@ def fetch_kanzlerkandidat_data(candidate_names):
     if exclusion_columns:
         df = df[df[exclusion_columns].isna().all(axis=1)]
 
+    # Exclude rows where "Institut" contains "INSA" or "Ipsos"
+    df = df[~df["Institut"].str.contains("INSA|Ipsos", case=False, na=False)]
+
     # Create a new DataFrame for output
     output = pd.DataFrame()
     output["Datum"] = df["Datum"]
@@ -989,6 +995,10 @@ candidate_names = ["Merz", "Habeck", "Scholz", "Weidel"]
 
 # Fetch and process the data
 kanzlerkandidat_data = fetch_kanzlerkandidat_data(candidate_names)
+
+# Define the new cutoff date
+new_cutoff_date = pd.to_datetime("2024-12-10", format="%Y-%m-%d")
+kanzlerkandidat_data = kanzlerkandidat_data[kanzlerkandidat_data["Datum"] >= cutoff_date]
 
 # Create a new DataFrame for the weighted data to store the weighted averages
 weighted_kanzlerkandidat_data = pd.DataFrame({"Datum": kanzlerkandidat_data["Datum"].unique()})
@@ -1021,9 +1031,6 @@ weighted_kanzlerkandidat_data = weighted_kanzlerkandidat_data.set_index("Datum")
 weighted_kanzlerkandidat_data["Punkte: einzelne Umfragen"] = np.nan
 weighted_kanzlerkandidat_data["Linie: Durchschnitt"] = np.nan
 
-# Define the new cutoff date
-new_cutoff_date = pd.to_datetime("2024-10-16", format="%Y-%m-%d")
-
 # Set the value 0 after the second cut-off
 first_valid_index_after_cutoff = weighted_kanzlerkandidat_data.index[weighted_kanzlerkandidat_data.index >= new_cutoff_date].min()
 weighted_kanzlerkandidat_data.at[first_valid_index_after_cutoff, "Punkte: einzelne Umfragen"] = 0
@@ -1055,16 +1062,13 @@ kanzlerkandidat_data[candidate_names] = kanzlerkandidat_data[candidate_names].in
 for candidate in candidate_names:
     kanzlerkandidat_data[candidate] = (
         kanzlerkandidat_data[candidate]
-        .ewm(span=10, adjust=False)  # Span adjusts the weighting; smaller = more weight on recent data
+        .ewm(span=14, adjust=False)  # Span adjusts the weighting; smaller = more weight on recent data
         .mean()
     )
 
 # Add two new columns with NaN initially
 kanzlerkandidat_data["Punkte: einzelne Umfragen"] = np.nan
 kanzlerkandidat_data["Linie: Durchschnitt"] = np.nan
-
-# Define the new cutoff date
-new_cutoff_date = pd.to_datetime("2024-10-16", format="%Y-%m-%d")
 
 # Set the value 0 after the second cut-off
 first_valid_index_after_cutoff = kanzlerkandidat_data.index[kanzlerkandidat_data["Datum"] >= new_cutoff_date].min()
