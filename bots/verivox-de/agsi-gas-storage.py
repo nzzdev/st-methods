@@ -121,7 +121,7 @@ if __name__ == '__main__':
         dfold = pd.read_csv(
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
-        """
+
         # temporary fix for wrong storage data
         dfnew.set_index('Datum', inplace=True)
         dfnew.at[f'2024-10-31', '2024²'] = 98.04
@@ -131,14 +131,15 @@ if __name__ == '__main__':
 
         # temporary fix for wrong trend data
         dftrend.set_index('Datum', inplace=True)
-        dftrend.at['2024-03-31', 'Trend'] = 0.0  # do not show April update
-        dftrend.at['2024-04-01', 'Trend'] = -0.0  # do not show April update
+        dftrend.at['2024-03-31', 'Trend'] = 0.0
+        dftrend.at['2024-04-01', 'Trend'] = 0.0 
+        dftrend.at['2024-06-16', 'Trend'] = 0.3
+        dftrend.at['2024-06-17', 'Trend'] = 0.3
         dftrend = dftrend.reset_index()
         dftrend.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8')
 
         # fix for seemingly wrong >100% data
         #dfnew.loc[dfnew['2024²'] > 100, '2024²'] = 100
-        """
 
         # convert date column to datetime
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
