@@ -122,12 +122,14 @@ if __name__ == '__main__':
             './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
 
+        """
         # temporary fix for wrong storage data
         dfnew.set_index('Datum', inplace=True)
-        dfnew.at[f'2024-10-31', '2024²'] = 98.04
+        dfnew.at[f'2024-10-31', '2025²'] = 98.04
         dfnew.to_csv(f'./data/{todaystr}-gasspeicher.csv',
                      encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
+        """
 
         # temporary fix for wrong trend data
         dftrend.set_index('Datum', inplace=True)
