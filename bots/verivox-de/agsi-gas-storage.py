@@ -65,7 +65,7 @@ if __name__ == '__main__':
         # create dates
         today = date.today()
         todaystr = today.strftime('%Y-%m-%d')
-        endstr = '2023-01-01'
+        endstr = '2024-01-01'
 
         # calculate number of pages needed
         start = datetime.strptime(todaystr, "%Y-%m-%d") + timedelta(days=300)
