@@ -3,6 +3,7 @@ import pandas as pd
 import sys
 import json
 from datetime import date, timedelta, datetime
+from user_agent import generate_user_agent
 
 if __name__ == '__main__':
     try:
@@ -476,6 +477,7 @@ if __name__ == '__main__':
         importsshare_y = 0
         # RUS GAS rus_y = 0
         super_y = 1.6
+        fueloil_y = 60
         storage_ytick = [0, 25, 50, 75, 100]
         # gas_ytick = [0, 15, 30, 45] # from January 2021
         gas_ytick = [6, 8, 10, 12]
@@ -484,6 +486,7 @@ if __name__ == '__main__':
         fossile_ytick = [20, 35, 50, 65]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
         super_ytick = [1.6, 1.8, 2.0, 2.2, 2.4]
+        fueloil_ytick = [60, 80, 100, 120, 140]
         imports_ytick = [-2000, -1000, 0, 1000, 2000]
         importsshare_ytick = [0, 5, 10, 15, 20]
 
@@ -502,6 +505,79 @@ if __name__ == '__main__':
         diff_acstock_str = diff_acstock.astype(str).replace('.', ',')
         diff_acstockeex_str = diff_acstockeex.astype(str).replace('.', ',')
         diff_importsshare_str = diff_importsshare.astype(str).replace('.', ',')
+
+        def replace_vals(df_meta):
+            """
+            Replaces numeric differences in df_meta with string trends:
+            - >= +0.2 => 'steigend'
+            - <= -0.2 => 'fallend'
+            - otherwise => 'gleichbleibend'
+            """
+            # Example list of columns that contain numeric differences:
+            cols1 = ['Heizoel_diff']  # adjust this to the columns you want to convert
+            
+            for col in cols1:
+                if df_meta.loc[0, col] >= 0.2:
+                    df_meta.loc[0, col] = 'steigend'
+                elif df_meta.loc[0, col] <= -0.2:
+                    df_meta.loc[0, col] = 'fallend'
+                else:
+                    df_meta.loc[0, col] = 'gleichbleibend'
+            return df_meta
+
+        def scrape_esyoil_data():
+            """
+            1) Scrapes JSON data from esyoil.com
+            2) Extracts the last two values in 'year0'
+            3) Creates a mini DataFrame with old/new prices and difference
+            4) Applies the 'replace_vals' function to turn numeric difference into a trend
+            """
+            url = "https://api.esyoil.com/v1/charts/jahresvergleich"
+            
+            # Generate a random user agent and include “no-cache” headers
+            fheaders = {
+                'user-agent': generate_user_agent(),
+                'Cache-Control': 'no-cache',
+                'Pragma': 'no-cache'
+            }
+            
+            # 1) Fetch JSON data
+            response = requests.get(url, headers=fheaders)
+            data = response.json()
+            
+            # 2) Extract "year0" array and grab the last two entries
+            year0_data = data["data"]["year0"]
+            # Example for the final two entries: [1736899200, "101.72"], [1736985600, "102.84"]
+            old_ts, old_str = year0_data[-2]
+            new_ts, new_str = year0_data[-1]
+            
+            old_price = float(old_str)
+            new_price = float(new_str)
+            
+            # Convert UNIX timestamps to human-readable dates (UTC)
+            old_date = datetime.utcfromtimestamp(old_ts).strftime('%Y-%m-%d')
+            new_date = datetime.utcfromtimestamp(new_ts).strftime('%Y-%m-%d')
+            
+            # 3) Build a small DataFrame with old/new prices, difference, etc.
+            df_meta = pd.DataFrame(
+                [[old_ts, old_date, old_price, new_ts, new_date, new_price]],
+                columns=[
+                    'Heizoel_old_ts', 'Heizoel_old_date', 'Heizoel_old_price',
+                    'Heizoel_new_ts', 'Heizoel_new_date', 'Heizoel_new_price'
+                ]
+            )
+            
+            # Create a difference column (new price - old price)
+            df_meta['Heizoel_diff'] = df_meta['Heizoel_new_price'] - df_meta['Heizoel_old_price']
+            
+            # 4) Use the function to convert numeric differences to trends
+            df_meta = replace_vals(df_meta)
+            
+            return df_meta
+        df_fueloil = scrape_esyoil_data()
+        trend_fueloil = df_fueloil.loc[0, 'Heizoel_diff']
+        diff_fueloil = df_fueloil.loc[0, 'Heizoel_new_price']
+        diff_fueloil_str = diff_fueloil.astype(str).replace('.', ',')
 
         # {gasstock_time} = date and time for gas stock description
 
@@ -529,6 +605,8 @@ if __name__ == '__main__':
         # RUS GAS meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse nach Deutschland', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} Mio. m³', 'yAxisStart': rus_y, 'yAxisLabels': rus_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_rus, 'chartType': 'line'}
         meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Super E5', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro',
                       'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
+        meta_fueloil = {'indicatorTitle': 'Heizölpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je 100 Liter', 'value': diff_fueloil, 'valueLabel': f'{diff_fueloil_str} Euro',
+                      'yAxisStart': fueloil_y, 'yAxisLabels': fueloil_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_fueloil, 'chartType': 'line'}
 
         # merge dictionaries
         # STORAGE meta_storage['chartData'] = dict_storage
@@ -543,6 +621,7 @@ if __name__ == '__main__':
         # NS1 meta_ns['chartData'] = dict_ns
         # RUS GAS meta_rus['chartData'] = dict_rus
         meta_super['chartData'] = []
+        meta_fueloil['chartData'] = []
         meta_gasstock['chartData'] = []
         meta_stromstockeex['chartData'] = []
         #meta_stromstock['chartData'] = []
@@ -562,6 +641,7 @@ if __name__ == '__main__':
         dicts.append(meta_importsshare)
         # NS1 dicts.append(meta_ns)
         dicts.append(meta_super)
+        dicts.append(meta_fueloil)
         with open('./data/dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, indent=4)
         file = [{
