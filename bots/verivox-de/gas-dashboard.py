@@ -551,8 +551,9 @@ if __name__ == '__main__':
             old_ts, old_str = year0_data[-2]
             new_ts, new_str = year0_data[-1]
             
-            old_price = float(old_str)
-            new_price = float(new_str)
+            # Convert prices to float and round to 1 decimal place
+            old_price = round(float(old_str), 1)
+            new_price = round(float(new_str), 1)
             
             # Convert UNIX timestamps to human-readable dates (UTC)
             old_date = datetime.utcfromtimestamp(old_ts).strftime('%Y-%m-%d')
