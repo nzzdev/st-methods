@@ -517,9 +517,11 @@ if __name__ == '__main__':
             cols1 = ['Heizoel_diff']  # adjust this to the columns you want to convert
             
             for col in cols1:
-                if df_meta.loc[0, col] >= 0.2:
+                # Round the difference to 1 decimal place before comparison
+                rounded_diff = round(df_meta.loc[0, col], 1)
+                if rounded_diff >= 0.1:
                     df_meta.loc[0, col] = 'steigend'
-                elif df_meta.loc[0, col] <= -0.2:
+                elif rounded_diff <= -0.1:
                     df_meta.loc[0, col] = 'fallend'
                 else:
                     df_meta.loc[0, col] = 'gleichbleibend'
@@ -547,7 +549,6 @@ if __name__ == '__main__':
             
             # 2) Extract "year0" array and grab the last two entries
             year0_data = data["data"]["year0"]
-            # Example for the final two entries: [1736899200, "101.72"], [1736985600, "102.84"]
             old_ts, old_str = year0_data[-2]
             new_ts, new_str = year0_data[-1]
             
