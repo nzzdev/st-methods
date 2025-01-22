@@ -409,7 +409,7 @@ institute_mapping = {
     'Allensb.': 'allensbach',
     'GMS': 'gms',
     'Infratest': 'infratest',
-    'YouGov': 'yougov',
+    # 'YouGov': 'yougov',
     'average': 'average'
 }
 
