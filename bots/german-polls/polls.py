@@ -1132,6 +1132,7 @@ timecode_str_all = timecode_all.strftime("%-d. %-m. %Y")
 timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
 notes_chart_line = "Stand: " + timecode_str_line
+notes_chart_seats = "Ohne Berücksichtigung der Grundmandatsklausel.<br>Stand: " + timecode_str_line
 
 # update Kanzlerfragen chart #1
 dw_chart = dw.add_data(chart_id=dw_id, data=kanzlerkandidat_data_all)
@@ -1164,4 +1165,4 @@ update_chart(id="94c15a6eadd659eb977086455eb67467",data=wide_polls_table, notes=
 update_chart(id="ef14d4bef9f51a1c17bc9cb6e2f8a8d0",assetGroups=assets)
 
 # run Q function for coalition chart
-update_chart(id="0d50b45e538faa45f768d3204450d0e7",parties=coalitionSeats, possibleCoalitions=coalition_set, notes=notes_chart_line)
+update_chart(id="0d50b45e538faa45f768d3204450d0e7",parties=coalitionSeats, possibleCoalitions=coalition_set, notes=notes_chart_seats)
