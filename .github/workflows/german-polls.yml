@@ -1,4 +1,4 @@
-name: Update German Polls
+name: Update Polls DE
 
 on:
   # Schedule makes this bot run in regular intervals, without any interventions (GMT timezone)
