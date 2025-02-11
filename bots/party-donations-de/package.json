@@ -1,0 +1,22 @@
+{
+  "name": "dataunwrapper",
+  "version": "0.0.6",
+  "bin": {
+    "dataunwrapper": "./dataunwrapper.js"
+  },
+  "description": "extract inline data from datawrapper",
+  "main": "dataunwrapper.js",
+  "author": "yetzt <dataunwrapper@yetzt.me>",
+  "contributors": [
+    "stekhn (https://github.com/stekhn)"
+  ],
+  "keywords": [
+    "datawrapper",
+    "scraper"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yetzt/node-dataunwrapper"
+  },
+  "license": "Unlicense"
+}

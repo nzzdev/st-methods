@@ -1,0 +1,50 @@
+name: Update German Party Donations
+
+on:
+  # Schedule makes this bot run in regular intervals, without any interventions (GMT timezone)
+  schedule:
+    - cron: "15 8,10,12,14,16,18,20 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bots/party-donations-de/
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libxml2-dev libcurl4-openssl-dev libssl-dev
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10.x"
+      - name: Get pip cache dir
+        id: pip-cache
+        run: |
+          echo "dir=$(pip cache dir)" >> $GITHUB_OUTPUT
+      - name: Cache python packages
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pip-cache.outputs.dir }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('./bots/party-donations-de/requirements.txt') }}
+      - name: Install python packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run python scripts
+        run: |
+          python donations.py
+        env:
+          DATAWRAPPER_API: ${{ secrets.DATAWRAPPER_API }}
+      - name: Log failure to slack
+        if: always()
+        uses: ravsamhq/notify-slack-action@2.5.0
+        with:
+          status: ${{ job.status }}
+          notify_when: "failure"
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.ACTION_MONITORING_DE_SLACK }}
