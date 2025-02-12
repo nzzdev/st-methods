@@ -648,15 +648,24 @@ for party_name, metadata in party_metadata.items():
 # Check for the presence of FDP and BSW in the coalition_data
 has_fdp = "FDP" in coalition_data['Partei'].values and coalition_data.loc[coalition_data['Partei'] == "FDP", 'seats'].iloc[0] > 0
 has_bsw = "BSW" in coalition_data['Partei'].values and coalition_data.loc[coalition_data['Partei'] == "BSW", 'seats'].iloc[0] > 0
+has_linke = "Linke" in coalition_data['Partei'].values and coalition_data.loc[coalition_data['Partei'] == "Linke", 'seats'].iloc[0] > 0
 
 # Determine the file to load based on the conditions
 if not has_fdp and not has_bsw:
-    coalition_file = "./data/coalitions_nofdp_nobsw.json"
+    if has_linke:
+        coalition_file = "./data/coalitions_nofdp_nobsw_linke.json"
+    else:
+        coalition_file = "./data/coalitions_nofdp_nobsw.json"
 elif not has_fdp and has_bsw:
-    coalition_file = "./data/coalitions_nofdp.json"
+    if has_linke:
+        coalition_file = "./data/coalitions_nofdp_linke.json"
+    else:
+        coalition_file = "./data/coalitions_nofdp.json"
 elif has_fdp and not has_bsw:
+    # If needed, you can add a nested condition for has_linke here too
     coalition_file = "./data/coalitions_nobsw.json"
 elif has_fdp and has_bsw:
+    # If needed, you can add a nested condition for has_linke here as well
     coalition_file = "./data/coalitions_fdp_bsw.json"
 
 # Load the selected JSON file into a variable
