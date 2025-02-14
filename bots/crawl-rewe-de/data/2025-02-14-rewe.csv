@@ -653,8 +653,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-02-14;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-02-14;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2025-02-14;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2025-02-14;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-02-14;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2025-02-14;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-02-14;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-02-14;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-02-14;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1502,7 +1502,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-02-14;8109111;REWE Bio;REWE Bio Kräutertee 35g, 20 Beutel;95;35g (1 kg = 27,14 €)
 2025-02-14;8877187;REWE Bio;REWE Bio Kurkuma Shot mit Orangensaft 150ml;129;150ml (1 l = 8,60 €)
 2025-02-14;8819370;REWE Bio;REWE Bio Kurkuma gemahlen 45g;299;45g (1 kg = 66,44 €)
-2025-02-14;1906432;REWE Bio;REWE Bio Körniger Frischkäse 200g;119;200g (1 kg = 5,95 €)
 2025-02-14;198343;REWE Bio;REWE Bio Kürbiskern-Brötchen 300g;289;300g (1 kg = 9,63 €)
 2025-02-14;8820911;REWE Bio;REWE Bio Kürbiskerne 200g;199;200g (1 kg = 9,95 €)
 2025-02-14;8872847;REWE Bio;REWE Bio Kürbiskernöl 250ml;599;250ml (1 l = 23,96 €)
