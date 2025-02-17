@@ -334,7 +334,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-02-17;2296035;ja!;ja! Käseaufschnitt leicht 250g;199;250g (1 kg = 7,96 €)
 2025-02-17;8291601;ja!;ja! Käsesnack Gouda Maasdamer 220g;279;220g (1 kg = 12,68 €)
 2025-02-17;2045420;ja!;ja! Königsberger Klopse 450g;199;450g (1 kg = 4,42 €)
-2025-02-17;7030814;ja!;ja! Körniger Frischkäse Halbfettstufe 200g;99;200g (1 kg = 4,95 €)
 2025-02-17;8081196;ja!;ja! Küchenmesser 2 Stück;199;2 Stück
 2025-02-17;7862977;ja!;ja! Küchentücher 4x128 Blatt;285;4x128 Stück
 2025-02-17;8639885;ja!;ja! LED Kerze E14 470 Lumen 40 Watt 2 Stück;499;2 Stück
@@ -653,8 +652,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-02-17;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-02-17;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
 2025-02-17;157075;REWE Beste Wahl;REWE Beste Wahl Apfelrotkohl 450g;179;450g (1 kg = 3,98 €)
-2025-02-17;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-02-17;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2025-02-17;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-02-17;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-02-17;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-02-17;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -854,6 +853,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-02-17;8980987;REWE Beste Wahl;REWE Beste Wahl High Protein Wraps 320g;169;320g (1 kg = 5,28 €)
 2025-02-17;708264;REWE Beste Wahl;REWE Beste Wahl Himbeer-Getränkesirup 0,5l;179;0,50l (1 l = 3,58 €)
 2025-02-17;7158180;REWE Beste Wahl;REWE Beste Wahl Himbeer-Heidelbeer-Mix 300g;249;300g (1 kg = 8,30 €)
+2025-02-17;7091046;REWE Beste Wahl;REWE Beste Wahl Himbeeren 500g;369;500g (1 kg = 7,38 €)
 2025-02-17;185597;REWE Beste Wahl;REWE Beste Wahl Himbeeren gezuckert 130g;219;130g (1 kg = 16,85 €)
 2025-02-17;975749;REWE Beste Wahl;REWE Beste Wahl Hirtenkäse 280g;299;280g (1 kg = 10,68 €)
 2025-02-17;7631064;REWE Beste Wahl;REWE Beste Wahl Hirtensalat mit Oliven 150g;229;150g (1 kg = 15,27 €)
