@@ -29,10 +29,26 @@ if __name__ == '__main__':
 
         # download historical data from Yahoo
         df = yf.download('TTF=F', period='5y')
-        df = df['Close'][df.index >= '2020-12-31'].to_frame().dropna()
-        df.rename(columns={'Close': 'Kosten'}, inplace=True)
+        # extract the Series
+        df = df[('Close', 'TTF=F')]
+        df = df[df.index >= '2020-12-31'].dropna()
+        # rename the Series name (instead of using 'columns')
+        df.rename('Kosten', inplace=True)
+        df.index.rename('Datum', inplace=True)
+        # apply rounding and conversion
+        df = df.round(2).astype(float)
+
+        """
+        # as Dataframe instead of Series
+        # extract the Series and convert to DataFrame
+        df = df[('Close', 'TTF=F')]
+        df = df[df.index >= '2020-12-31'].dropna()
+        df = df.to_frame(name='Kosten')
+
+        # rename the index and adjust values
         df.index.rename('Datum', inplace=True)
         df['Kosten'] = df['Kosten'].round(2).astype(float)
+        """
         # drop last buggy value from Yahoo if current day
         today = datetime.today().strftime('%Y-%m-%d')
         if today == df.index[-1].strftime('%Y-%m-%d'):
