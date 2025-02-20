@@ -8,7 +8,7 @@ filelock<4,>=3.0.0
 geopandas==1.0.1
 numpy==1.26.4
 oauthlib==3.1.1
-pandas==1.4.2
+pandas==2.2.3
 pipenv==2020.11.15
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
