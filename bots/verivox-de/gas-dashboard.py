@@ -58,6 +58,7 @@ if __name__ == '__main__':
         df_acconsumption = pd.read_csv(
             './data/power_consumption.tsv', sep='\t', encoding='utf-8', index_col='Datum')
 
+        print("All files loaded")
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
         df_storage.index = pd.to_datetime(df_storage.index)
         df_storage = df_storage.sort_index().round(1)
@@ -122,6 +123,7 @@ if __name__ == '__main__':
         # Apply the cleaning function to both 'Strom' and 'Gas' columns
         clean_outliers(df_strom, 'Strom', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         clean_outliers(df_gas, 'Gas', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
+        print("Outliers removed")
         # Apply the smoothing function to both 'Strom' and 'Gas' columns
         #smooth_moving_average(df_strom, 'Strom', window=3)
         #smooth_moving_average(df_gas, 'Gas', window=3)
@@ -210,7 +212,7 @@ if __name__ == '__main__':
         gasstock_time = gasstock_time + \
             timedelta(minutes=1) + timedelta(hours=1)  # GMT+1
         gasstock_time = gasstock_time.strftime('%-d. %-m., %k Uhr')
-
+        print("Fallback with daily data if hourly data above is not available")
         # merge dataframes
         df = pd.concat([df_gas_real, df_strom_real, df_fossile,
                        df_storage, df_lng['LNG'], df_super, df_gasstock, df_acstock, df_acstockeex], axis=1)
@@ -347,7 +349,7 @@ if __name__ == '__main__':
             """
             return df_meta
         df_meta = df_meta.apply(replace_vals, axis=1)
-
+        print("Trends calculated")
         # get last values of df_meta as objects
         df_meta = df_meta.iloc[0]
         trend_storage = df_meta['Trend Speicher']
@@ -577,10 +579,12 @@ if __name__ == '__main__':
             df_meta = replace_vals(df_meta)
             
             return df_meta
+        print("Scraping esyoil data")
         df_fueloil = scrape_esyoil_data()
         trend_fueloil = df_fueloil.loc[0, 'Heizoel_diff']
         diff_fueloil = df_fueloil.loc[0, 'Heizoel_new_price']
         diff_fueloil_str = diff_fueloil.astype(str).replace('.', ',')
+        print("Scraped esyoil data")
 
         # {gasstock_time} = date and time for gas stock description
 
