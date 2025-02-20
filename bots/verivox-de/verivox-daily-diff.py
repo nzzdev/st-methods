@@ -5,7 +5,7 @@ from datawrapper import Datawrapper
 
 if __name__ == '__main__':
     try:
-
+        print("debug verivox daily")
         # set working directory, change if necessary; get dates
         os.chdir(os.path.dirname(__file__))
         today = date.today()
