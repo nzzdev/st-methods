@@ -99,12 +99,13 @@ if __name__ == '__main__':
         notes_chart = '¹ Bei einem Jahresverbrauch von 20 MWh Gas bzw. 4 MWh Strom. Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Boni).<br>Stand: ' + timecode_str
         
         # update Datawrapper chart
+        print("before update")
         df.reset_index(inplace=True)
         dw_chart = dw.add_data(chart_id=dw_id, data=df)
         dw.update_chart(chart_id=dw_id, title=title_chart)
         date = {'annotate': {'notes': f'{notes_chart}'}}
         dw.update_metadata(chart_id=dw_id, metadata=date)
         dw.publish_chart(chart_id=dw_id, display=False)
-
+        print("after update")
     except:
         raise
