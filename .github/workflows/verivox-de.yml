@@ -47,19 +47,19 @@ jobs:
       - name: Run python scripts
         # execute smard-sources.py after imports-countries.py
         run: |
-          python agsi-gas-storage.py
-          python entsog-imports.py
-          python bnetza-exporte.py
-          python ttf-gas-stock.py
+          timeout 100 python -u agsi-gas-storage.py
+          timeout 100 python -u entsog-imports.py
+          timeout 100 python -u bnetza-exporte.py
+          timeout 100 python -u ttf-gas-stock.py
           # python epex-spot-ac.py
-          python bkarta-sprit.py
+          timeout 100 python -u bkarta-sprit.py
           # python bnetza-verbrauch.py
-          python verivox-daily-new.py
-          python imports-countries.py
-          python smard-sources.py
-          python eex-futures.py
-          python verivox-daily-diff.py
-          python gas-dashboard.py
+          timeout 100 python -u verivox-daily-new.py
+          timeout 100 python -u imports-countries.py
+          timeout 200 python -u smard-sources.py
+          timeout 100 python -u eex-futures.py
+          timeout 100 python -u verivox-daily-diff.py
+          timeout 100 python -u gas-dashboard.py
         env:
           DATAWRAPPER_API: ${{ secrets.DATAWRAPPER_API }}
           VERIVOX_SNOWFLAKE_USER: ${{ secrets.VERIVOX_SNOWFLAKE_USER }}
