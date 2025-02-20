@@ -155,6 +155,5 @@ if __name__ == '__main__':
         date = {'annotate': {'notes': f'{notes_chart}'}}
         dw.update_metadata(chart_id=dw_id, metadata=date)
         dw.publish_chart(chart_id=dw_id, display=False)
-        print("debug verivox daily")
     except:
         raise
