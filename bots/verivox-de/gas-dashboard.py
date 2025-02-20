@@ -9,7 +9,6 @@ if __name__ == '__main__':
     try:
 
         # add parent directory to path so helpers file can be referenced
-        print('gas-dashboard.py started')
         sys.path.append(os.path.dirname((os.path.dirname(__file__))))
         from helpers import *
 
@@ -58,7 +57,6 @@ if __name__ == '__main__':
         df_acconsumption = pd.read_csv(
             './data/power_consumption.tsv', sep='\t', encoding='utf-8', index_col='Datum')
 
-        print("All files loaded")
         # sort, round, calculate mvg avg and convert index to DatetimeIndex
         df_storage.index = pd.to_datetime(df_storage.index)
         df_storage = df_storage.sort_index().round(1)
@@ -123,7 +121,6 @@ if __name__ == '__main__':
         # Apply the cleaning function to both 'Strom' and 'Gas' columns
         clean_outliers(df_strom, 'Strom', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
         clean_outliers(df_gas, 'Gas', inc_thresh=increase_threshold, dec_thresh=decrease_threshold)
-        print("Outliers removed")
         # Apply the smoothing function to both 'Strom' and 'Gas' columns
         #smooth_moving_average(df_strom, 'Strom', window=3)
         #smooth_moving_average(df_gas, 'Gas', window=3)
@@ -212,7 +209,7 @@ if __name__ == '__main__':
         gasstock_time = gasstock_time + \
             timedelta(minutes=1) + timedelta(hours=1)  # GMT+1
         gasstock_time = gasstock_time.strftime('%-d. %-m., %k Uhr')
-        print("Fallback with daily data if hourly data above is not available")
+
         # merge dataframes
         df = pd.concat([df_gas_real, df_strom_real, df_fossile,
                        df_storage, df_lng['LNG'], df_super, df_gasstock, df_acstock, df_acstockeex], axis=1)
@@ -221,7 +218,6 @@ if __name__ == '__main__':
         # BENZIN df = pd.concat([df_storage, df_gas, df_super], axis=1)
 
         # create temporary dataframe for old data in gas storage and Russian gas
-        print("Create temporary dataframe for old data in gas storage and Russian gas")
         df_temp = df.copy().tail(90)
 
         # check if last row in gas fossile(2)/storage (3)/usage(4) column is NaN, then shift numbers
@@ -242,8 +238,6 @@ if __name__ == '__main__':
             df_temp.iloc[:, 8] = df_temp.iloc[:, 8].shift(1)  # AC EEX stock
         # RUS GAS while pd.isna(df_temp.iloc[-1:, 1].item()) == True:
            # df_temp.iloc[:, 1] = df_temp.iloc[:, 1].shift(1)
-
-        print("NaN values shifted")
 
         # calculate imports diff
         df_imports_meta = df_imports.copy().tail(1)
@@ -270,7 +264,7 @@ if __name__ == '__main__':
             df_importsshare['Trend Import-Anteil'] = 'fallend'
         else:
             df_importsshare['Trend Import-Anteil'] = 'gleichbleibend'
-        print("Calculating imports diff and imports share diff")
+
         # calculate gas savings
         """
         u_diff = ((df_usage['Gasverbrauch'].iloc[-1] /
@@ -289,7 +283,7 @@ if __name__ == '__main__':
 
         # create new dataframe for trends and find last non NaN value (ICU with iloc)
         df_meta = df_temp.copy().tail(1)
-        print("create new dataframe for trends and find last non NaN value")
+
         # on Mondays there's no new gas and electricity price data; use last friday for comparison instead
         if datetime.today().weekday() == 0:
             df_meta['Trend Gas'] = ((df['Gaspreis'].loc[~df['Gaspreis'].isnull()].iloc[-1] - df['Gaspreis'].loc[~df['Gaspreis'].isnull(
@@ -302,9 +296,6 @@ if __name__ == '__main__':
             df_meta['Trend Strom'] = ((df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-1] - df['Strompreis'].loc[~df['Strompreis'].isnull(
             )].iloc[-2]) / df['Strompreis'].loc[~df['Strompreis'].isnull()].iloc[-2]) * 100  # diff previous day
 
-        print("Trend Gas and Strom calculated")
-
-        print("Calculating other trends")
         # other trends not affected by this
         df_meta['Trend Fossile'] = ((df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull(
         )].iloc[-1] - df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull()].iloc[-2]) / df['Fossile Abhängigkeit'].loc[~df['Fossile Abhängigkeit'].isnull()].iloc[-2]) * 100
@@ -355,7 +346,7 @@ if __name__ == '__main__':
             """
             return df_meta
         df_meta = df_meta.apply(replace_vals, axis=1)
-        print("All trends calculated")
+
         # get last values of df_meta as objects
         df_meta = df_meta.iloc[0]
         trend_storage = df_meta['Trend Speicher']
@@ -585,12 +576,10 @@ if __name__ == '__main__':
             df_meta = replace_vals(df_meta)
             
             return df_meta
-        print("Scraping esyoil data")
         df_fueloil = scrape_esyoil_data()
         trend_fueloil = df_fueloil.loc[0, 'Heizoel_diff']
         diff_fueloil = df_fueloil.loc[0, 'Heizoel_new_price']
         diff_fueloil_str = diff_fueloil.astype(str).replace('.', ',')
-        print("Scraped esyoil data")
 
         # {gasstock_time} = date and time for gas stock description
 
@@ -678,6 +667,6 @@ if __name__ == '__main__':
             if item.endswith('.csv') or item.endswith('.geojson'):
                 os.remove(os.path.join(dir, item))
         # os.remove(os.path.join(dir, 'dashboard_de.json'))
-        print('gas-dashboard.py successfully executed')
+
     except:
         raise
