@@ -7,7 +7,7 @@ from user_agent import generate_user_agent
 
 if __name__ == '__main__':
     try:
-        print("start dashboard")
+
         # add parent directory to path so helpers file can be referenced
         sys.path.append(os.path.dirname((os.path.dirname(__file__))))
         from helpers import *
@@ -667,6 +667,6 @@ if __name__ == '__main__':
             if item.endswith('.csv') or item.endswith('.geojson'):
                 os.remove(os.path.join(dir, item))
         # os.remove(os.path.join(dir, 'dashboard_de.json'))
-        print("end dashboard")
+
     except:
         raise
