@@ -115,7 +115,7 @@ if __name__ == '__main__':
                     sumnan = dfac[(dfac['id'] == plz)].count()['id']
                 # average persons per household 2021
                 res = ((pop / 2.02) - sumhh) / sumnan
-                dfac.loc[i, 'hh'] = max(int(res), 0)
+                dfac.loc[i, 'hh'] = max(int(res.iloc[0]), 0)
                 old_plz = plz
         # gas
         old_plz = 0
@@ -129,7 +129,7 @@ if __name__ == '__main__':
                     sumnan = dfgas[(dfgas['id'] == plz)].count()['id']
                 # average persons per household 2021
                 res = ((pop / 2.02) - sumhh) / sumnan
-                dfgas.loc[i, 'hh'] = max(int(res), 0)
+                dfgas.loc[i, 'hh'] = max(int(res.iloc[0]), 0)
                 old_plz = plz
 
         # calculate weighted mean for Germany
