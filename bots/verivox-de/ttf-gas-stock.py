@@ -90,7 +90,8 @@ if __name__ == '__main__':
         dfnew = dfnew.drop('2023', axis=1)
         dfnew = dfnew.drop('2024', axis=1)
 
-        # round values further for normal line chart
+        # ensure non-finite values are dropped
+        df = df.dropna(subset=['Kosten'])
         df['Kosten'] = df['Kosten'].round(0).astype(int)
 
         """
