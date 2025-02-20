@@ -7,6 +7,7 @@ if __name__ == '__main__':
     try:
 
         # set working directory, change if necessary; get dates
+        print('Verivox-daily-diff.py started')
         os.chdir(os.path.dirname(__file__))
         today = date.today()
         lasty = today - timedelta(days=731)
@@ -105,6 +106,6 @@ if __name__ == '__main__':
         date = {'annotate': {'notes': f'{notes_chart}'}}
         dw.update_metadata(chart_id=dw_id, metadata=date)
         dw.publish_chart(chart_id=dw_id, display=False)
-
+        print('Datawrapper chart updated successfully in verivox-daily-diff.py')
     except:
         raise
