@@ -156,8 +156,8 @@ for row in urls:
         },
         inplace=True
     )
-
-    # Extract "BSW" percentage from "Sonstige" for "GMS" polls
+    """
+    # Extract "BSW" percentage from "Sonstige" for "GMS" polls (NO LONGER NEEDED DUE TO NEW BSW COLUMN)
     if institut == "GMS" and "Sonstige" in data.columns:
         def extract_bsw(sonstige):
             match = re.search(r"BSW (\d+)(,(\d+))?", str(sonstige))
@@ -167,6 +167,7 @@ for row in urls:
 
         data["BSW"] = data["Sonstige"].apply(extract_bsw)
         data["Sonstige"] = data["Sonstige"].apply(lambda x: re.sub(r"BSW \d+(,\d+)? %?", "", str(x)).strip())
+    """
 
     # Extract party names and variable columns
     parteinamen = [x for x in data.columns if x not in ["Datum", "Befragte", "Zeitraum"]]
