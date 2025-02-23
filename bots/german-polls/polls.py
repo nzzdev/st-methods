@@ -156,6 +156,7 @@ for row in urls:
         },
         inplace=True
     )
+    
     """
     # Extract "BSW" percentage from "Sonstige" for "GMS" polls (NO LONGER NEEDED DUE TO NEW BSW COLUMN)
     if institut == "GMS" and "Sonstige" in data.columns:
@@ -196,6 +197,7 @@ for row in urls:
     data.Datum = data.Datum.apply(
         lambda x: "27.09.1998" if x == "Wahl 1998" else x
     )
+    data.drop(data[data["Datum"] == "23.02.2025"].index, inplace=True) # DROP ELECTION DATE
     if institut == "INSA / YouGov":
         data.drop(data[data["Datum"] == "02.02.2017"].index, inplace=True)
 
