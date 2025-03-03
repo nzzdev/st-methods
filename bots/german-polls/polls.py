@@ -284,7 +284,8 @@ complete_data["Datum"] = pd.to_datetime(
 # === Start cleaning for charts ===
 
 # Adjust desired_parties to include 'Übrige' and 'BSW'
-desired_parties = ['Union', 'SPD', 'Grüne', 'FDP', 'Linke', 'AfD', 'Übrige', 'BSW']
+# desired_parties = ['Union', 'SPD', 'Grüne', 'FDP', 'Linke', 'AfD', 'Übrige', 'BSW'] # 2021
+desired_parties = ['Union', 'AfD', 'SPD', 'Grüne', 'Linke', 'BSW', 'FDP', 'Übrige']
 
 # Exclude 'FW', 'Nichtwähler/ Unentschl.', and 'PIRATEN'
 filtered_data = complete_data[~complete_data["Partei"].isin(["FW", "Nichtwähler/ Unentschl.", "PIRATEN"])].copy()
@@ -557,7 +558,10 @@ projection_data['lowerBound'] = projection_data['average'] - projection_data['me
 # Create last election results DataFrame, manually update with last election
 last_election_results = pd.DataFrame({
     'party': desired_parties,
-    'lastElection': [24.1, 25.7, 14.8, 11.5, 4.9, 10.3, 8.7, 0.0]
+    # 'lastElection': [24.1, 25.7, 14.8, 11.5, 4.9, 10.3, 8.7, 0.0] #2021
+    # order 2021: ['Union', 'SPD', 'Grüne', 'FDP', 'Linke', 'AfD', 'Übrige', 'BSW']
+    # order 2025: ['Union', 'AfD', 'SPD', 'Grüne', 'Linke', 'BSW', 'FDP', 'Übrige']
+    'lastElection': [28.5, 20.8, 16.4, 11.6, 8.8, 4.97, 4.3, 4.5]
 })
 
 # Add last election results
