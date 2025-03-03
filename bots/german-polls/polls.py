@@ -304,7 +304,7 @@ print("Available parties after mapping:", filtered_data['Partei'].unique())
 filtered_data = filtered_data[filtered_data['Partei'].isin(desired_parties)].copy()
 
 # Filter data
-cutoff_date = pd.to_datetime("2019-01-01")
+cutoff_date = pd.to_datetime("2021-07-12")
 filtered_data = filtered_data[filtered_data["Datum"] > cutoff_date]
 
 # Convert 'Ergebnis' and 'Befragte' to numeric
@@ -492,7 +492,7 @@ print("JSON file 'lineChart.json' has been created successfully.")
 filtered_data_nonan = filtered_data.dropna(subset=['Ergebnis', 'Befragte']).copy()
 
 # Define eligible voters size N in 2021 with underscores for readability (update for 2025)
-N = 60_400_000
+N = 59_200_000
 
 # Compute proportions and standard error
 p = filtered_data_nonan['Ergebnis'] / 100
@@ -535,7 +535,7 @@ mean_ci_per_party = (
 )
 
 # moe formula derived from https://goodcalculators.com/margin-of-error-calculator/
-# population size (german eligible voters) derived from https://www.bundeswahlleiter.de/info/presse/mitteilungen/bundestagswahl-2021/01_21_wahlberechtigte-geschaetzt.html
+# population size (german eligible voters) derived from https://www.destatis.de/DE/Presse/Pressemitteilungen/2024/12/PD24_460_14.html
 
 # === Projection Chart ===
 
