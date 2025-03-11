@@ -812,6 +812,7 @@ def fetch_kanzlerkandidat_data(candidate_names):
 
     return output
 
+""" DISABLE FOR NOW
 # Define the candidate names to include in the analysis, optional: include Weidel
 candidate_names = ["Merz", "Habeck", "Scholz"]
 
@@ -1124,6 +1125,8 @@ real_columns_all = [col for col in kanzlerkandidat_data_all.columns if col.endsw
 kanzlerkandidat_data = handle_consecutive_days(kanzlerkandidat_data, real_columns)
 kanzlerkandidat_data_all = handle_consecutive_days(kanzlerkandidat_data_all, real_columns_all)
 
+"""
+
 # prepare data for q.config.json
 assets = [
             {
@@ -1140,16 +1143,17 @@ assets = [
         ]
 
 # create dates for chart notes
-timecode_all = kanzlerkandidat_data_all["Datum"].iloc[-1]
-timecode = kanzlerkandidat_data["Datum"].iloc[-1]
+#timecode_all = kanzlerkandidat_data_all["Datum"].iloc[-1]
+#timecode = kanzlerkandidat_data["Datum"].iloc[-1]
 full_line_chart_data["date"] = pd.to_datetime(full_line_chart_data["date"])
 timecode_line = full_line_chart_data["date"].iloc[-1]
-timecode_str_all = timecode_all.strftime("%-d. %-m. %Y")
-timecode_str = timecode.strftime("%-d. %-m. %Y")
+#timecode_str_all = timecode_all.strftime("%-d. %-m. %Y")
+#timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
 notes_chart_line = "Stand: " + timecode_str_line
 notes_chart_seats = "Ohne Berücksichtigung der Grundmandatsklausel.<br>Stand: " + timecode_str_line
 
+""" DISABLE FOR NOW
 # update Kanzlerfragen chart #1
 dw_chart = dw.add_data(chart_id=dw_id, data=kanzlerkandidat_data_all)
 date = {"annotate": {
@@ -1165,6 +1169,7 @@ date = {"annotate": {
 dw.update_metadata(chart_id=dw_id_weidel, metadata=date)
 dw.update_description(chart_id=dw_id_weidel, source_name="@Wahlen_DE, eigene Berechnungen", intro="So würden die Befragten bei einer Direktwahl des Kanzlers abstimmen, würde auch Alice Weidel zur Wahl stehen")
 dw.publish_chart(chart_id=dw_id_weidel, display=False)
+"""
 
 """
 # OLD update table
