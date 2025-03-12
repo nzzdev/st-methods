@@ -47,6 +47,7 @@ if __name__ == '__main__':
         user_env = os.environ['VERIVOX_SNOWFLAKE_USER']
         acc_env = os.environ['VERIVOX_SNOWFLAKE_ACC'] # xy.eu-central-1
         private_key_file = os.environ['VERIVOX_SNOWFLAKE_KEY'] # path to private key
+        # private_key_file = 'private_key.pem'
         private_key_file_pwd = os.environ.get('VERIVOX_SNOWFLAKE_KEY_PASS', '')
 
         con = snowflake.connector.connect(
