@@ -44,8 +44,12 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+      - name: Create Snowflake Private Key File
+        run: echo "$VERIVOX_SNOWFLAKE_PRIVATE_KEY" > private_key.pem
+        shell: bash
+        env:
+          VERIVOX_SNOWFLAKE_PRIVATE_KEY: ${{ secrets.VERIVOX_SNOWFLAKE_PRIVATE_KEY }}
       - name: Run python scripts
-        # execute smard-sources.py after imports-countries.py
         run: |
           timeout 100 python -u agsi-gas-storage.py
           timeout 100 python -u entsog-imports.py
@@ -57,14 +61,16 @@ jobs:
           timeout 100 python -u verivox-daily-new.py
           timeout 100 python -u imports-countries.py
           timeout 200 python -u smard-sources.py
+          # execute smard-sources.py after imports-countries.py
           timeout 100 python -u eex-futures.py
           timeout 100 python -u verivox-daily-diff.py
           timeout 100 python -u gas-dashboard.py
         env:
           DATAWRAPPER_API: ${{ secrets.DATAWRAPPER_API }}
           VERIVOX_SNOWFLAKE_USER: ${{ secrets.VERIVOX_SNOWFLAKE_USER }}
-          VERIVOX_SNOWFLAKE_PASS: ${{ secrets.VERIVOX_SNOWFLAKE_PASS }}
           VERIVOX_SNOWFLAKE_ACC: ${{ secrets.VERIVOX_SNOWFLAKE_ACC }}
+          VERIVOX_SNOWFLAKE_KEY: "private_key.pem"
+          VERIVOX_SNOWFLAKE_KEY_PASS: ${{ secrets.VERIVOX_SNOWFLAKE_KEY_PASS }}
       - name: Run Q cli
         run: Q update-item
         env:

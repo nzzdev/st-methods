@@ -45,13 +45,15 @@ if __name__ == '__main__':
         os.chdir(os.path.dirname(__file__))
 
         user_env = os.environ['VERIVOX_SNOWFLAKE_USER']
-        pass_env = os.environ['VERIVOX_SNOWFLAKE_PASS']
         acc_env = os.environ['VERIVOX_SNOWFLAKE_ACC'] # xy.eu-central-1
+        private_key_file = os.environ['VERIVOX_SNOWFLAKE_KEY'] # path to private key
+        private_key_file_pwd = os.environ.get('VERIVOX_SNOWFLAKE_KEY_PASS', '')
 
         con = snowflake.connector.connect(
             user=user_env,
-            password=pass_env,
             account=acc_env,
+            private_key_file=private_key_file,
+            private_key_file_pwd=private_key_file_pwd,
             warehouse='COMPUTE_WH',
             database='PRESS',
             schema='PRESS_PARTNERS'
