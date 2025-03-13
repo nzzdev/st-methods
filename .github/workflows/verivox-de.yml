@@ -51,20 +51,20 @@ jobs:
           VERIVOX_SNOWFLAKE_KEY: ${{ secrets.VERIVOX_SNOWFLAKE_KEY }}
       - name: Run python scripts
         run: |
-          timeout 100 python -u agsi-gas-storage.py
-          timeout 100 python -u entsog-imports.py
-          timeout 100 python -u bnetza-exporte.py
-          timeout 100 python -u ttf-gas-stock.py
+          timeout 200 python -u agsi-gas-storage.py
+          timeout 200 python -u entsog-imports.py
+          timeout 200 python -u bnetza-exporte.py
+          timeout 200 python -u ttf-gas-stock.py
           # python epex-spot-ac.py
-          timeout 100 python -u bkarta-sprit.py
+          timeout 200 python -u bkarta-sprit.py
           # python bnetza-verbrauch.py
-          timeout 100 python -u verivox-daily-new.py
-          timeout 100 python -u imports-countries.py
-          timeout 200 python -u smard-sources.py
+          timeout 200 python -u verivox-daily-new.py
+          timeout 200 python -u imports-countries.py
+          timeout 400 python -u smard-sources.py
           # execute smard-sources.py after imports-countries.py
-          timeout 100 python -u eex-futures.py
-          timeout 100 python -u verivox-daily-diff.py
-          timeout 100 python -u gas-dashboard.py
+          timeout 200 python -u eex-futures.py
+          timeout 200 python -u verivox-daily-diff.py
+          timeout 200 python -u gas-dashboard.py
         env:
           DATAWRAPPER_API: ${{ secrets.DATAWRAPPER_API }}
           VERIVOX_SNOWFLAKE_USER: ${{ secrets.VERIVOX_SNOWFLAKE_USER }}
