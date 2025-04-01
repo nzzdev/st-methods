@@ -636,8 +636,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-01;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-04-01;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-04-01;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-04-01;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-04-01;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
+2025-04-01;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-04-01;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-04-01;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-04-01;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -816,7 +816,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-01;8351000;REWE Beste Wahl;REWE Beste Wahl Gyros Gewürzsalz 48g;199;48g (1 kg = 41,46 €)
 2025-04-01;8767175;REWE Beste Wahl;REWE Beste Wahl Gyros vegan 300g;229;300g (1 kg = 7,63 €)
 2025-04-01;2821417;REWE Beste Wahl;REWE Beste Wahl H-Sahne zum Kochen 15% 200g;85;200g (1 kg = 4,25 €)
-2025-04-01;7677904;REWE Beste Wahl;REWE Beste Wahl Haehnchengeschnetzeltes in Champignonrahmsauce 400g;359;400g (1 kg = 8,98 €)
 2025-04-01;8330642;REWE Beste Wahl;REWE Beste Wahl Haselnusskerne geröstet & gehackt 100g;199;100g (1 kg = 19,90 €)
 2025-04-01;9103009;REWE Beste Wahl;REWE Beste Wahl Haselnussröllchen 400g;219;400g (1 kg = 5,48 €)
 2025-04-01;9943669;REWE Beste Wahl;REWE Beste Wahl Hauchzarter Aufschnitt Typ Hähnchen Klassik vegan 100g;129;100g (1 kg = 12,90 €)
