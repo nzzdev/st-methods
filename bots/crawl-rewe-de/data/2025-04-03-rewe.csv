@@ -709,6 +709,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-03;2261993;REWE Beste Wahl;REWE Beste Wahl Chili sin Carne vegan 400g;189;400g (1 kg = 4,73 €)
 2025-04-03;8333001;REWE Beste Wahl;REWE Beste Wahl Chiliflocken geschrotet 26g;169;26g (1 kg = 65 €)
 2025-04-03;7679946;REWE Beste Wahl;REWE Beste Wahl Chocolate Cream Cookies 210g;169;210g (1 kg = 8,05 €)
+2025-04-03;1076627;REWE Beste Wahl;REWE Beste Wahl Ciabatta 300g;139;300g (1 kg = 4,63 €)
 2025-04-03;1079129;REWE Beste Wahl;REWE Beste Wahl Ciabatta-Brötchen 420g;199;420g (1 kg = 4,74 €)
 2025-04-03;9028783;REWE Beste Wahl;REWE Beste Wahl Cinnamon Roll Eiscreme 500ml;249;500ml (1 l = 4,98 €)
 2025-04-03;2060201;REWE Beste Wahl;REWE Beste Wahl Cocktail-Cornichons 95g;129;95g (1 kg = 13,58 €)
@@ -1001,8 +1002,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-03;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-04-03;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;239;1l
 2025-04-03;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-04-03;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-03;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-04-03;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-03;1206377;REWE Beste Wahl;REWE Beste Wahl Osterhase Vollmilch 70g;139;70g (1 kg = 19,86 €)
 2025-04-03;2015999;REWE Beste Wahl;REWE Beste Wahl Osterhäschen 125g;249;125g (1 kg = 19,92 €)
 2025-04-03;8048646;REWE Beste Wahl;REWE Beste Wahl Ostern Blätterkrokanteier 150g;199;150g (1 kg = 13,27 €)
@@ -1421,6 +1422,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-03;7956836;REWE Bio;REWE Bio Hafer-Schoko Riegel 3x35g;189;3x35g (1 kg = 18 €)
 2025-04-03;7205443;REWE Bio;REWE Bio Hafercookie 300g;149;300g (1 kg = 4,97 €)
 2025-04-03;7206215;REWE Bio;REWE Bio Hafercookie Vollmilch 300g;329;300g (1 kg = 10,97 €)
+2025-04-03;8877863;REWE Bio;REWE Bio Hafercookies Zartbitter vegan 300g;329;300g (1 kg = 10,97 €)
 2025-04-03;7732292;REWE Bio;REWE Bio Haferflocken kernig 500g;89;500g (1 kg = 1,78 €)
 2025-04-03;8933690;REWE Bio;REWE Bio Haferkleie 500g;189;500g (1 kg = 3,78 €)
 2025-04-03;1267687;REWE Bio;REWE Bio Halbes Hähnchen 850g;1182;1 Stück ca. 850 g (1 kg = 13,90 €)
