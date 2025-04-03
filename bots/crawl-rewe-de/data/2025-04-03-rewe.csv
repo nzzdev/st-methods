@@ -526,7 +526,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-03;8923624;ja!;ja! Spaghetti Bolognese 350g;249;350g (1 kg = 7,11 €)
 2025-04-03;8924618;ja!;ja! Spaghetti Carbonara 350g;249;350g (1 kg = 7,11 €)
 2025-04-03;2309834;ja!;ja! Spaghetti Eis 3x167ml;179;3x170ml (1 l = 3,57 €)
-2025-04-03;9944007;ja!;ja! Spaghetti Eishörnchen 4x130ml;229;4x130ml (1 l = 4,40 €)
 2025-04-03;2696946;ja!;ja! Spaghetti mit Tomatensauce 400g;159;400g (1 kg = 3,98 €)
 2025-04-03;8779675;ja!;ja! Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
 2025-04-03;7845627;ja!;ja! Speiseeis nach Fürst Pückler Art 2500ml;379;2500ml (1 l = 1,52 €)
@@ -646,8 +645,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-03;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-04-03;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-04-03;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-04-03;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-04-03;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
+2025-04-03;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-04-03;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-04-03;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-04-03;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -839,6 +838,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-03;8519217;REWE Beste Wahl;REWE Beste Wahl High Protein Pudding Salted Caramel 200g;99;200g (1 kg = 4,95 €)
 2025-04-03;8410940;REWE Beste Wahl;REWE Beste Wahl High Protein Pudding Schoko 200g;99;200g (1 kg = 4,95 €)
 2025-04-03;8029347;REWE Beste Wahl;REWE Beste Wahl High Protein Pudding Vanille 200g;99;200g (1 kg = 4,95 €)
+2025-04-03;8980987;REWE Beste Wahl;REWE Beste Wahl High Protein Wraps 320g;169;320g (1 kg = 5,28 €)
 2025-04-03;708264;REWE Beste Wahl;REWE Beste Wahl Himbeer-Getränkesirup 0,5l;179;0,50l (1 l = 3,58 €)
 2025-04-03;7091046;REWE Beste Wahl;REWE Beste Wahl Himbeeren 500g;369;500g (1 kg = 7,38 €)
 2025-04-03;975749;REWE Beste Wahl;REWE Beste Wahl Hirtenkäse 280g;299;280g (1 kg = 10,68 €)
@@ -1001,8 +1001,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-03;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-04-03;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;239;1l
 2025-04-03;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-04-03;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-03;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-04-03;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-03;1206377;REWE Beste Wahl;REWE Beste Wahl Osterhase Vollmilch 70g;139;70g (1 kg = 19,86 €)
 2025-04-03;2015999;REWE Beste Wahl;REWE Beste Wahl Osterhäschen 125g;249;125g (1 kg = 19,92 €)
 2025-04-03;8048646;REWE Beste Wahl;REWE Beste Wahl Ostern Blätterkrokanteier 150g;199;150g (1 kg = 13,27 €)
