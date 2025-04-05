@@ -326,6 +326,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-05;8444273;ja!;ja! Kräuterquark 200g;69;200g (1 kg = 3,45 €)
 2025-04-05;7994929;ja!;ja! Kräuterquark leicht 200g;69;200g (1 kg = 3,45 €)
 2025-04-05;8484216;ja!;ja! Kugelschreiber blau 4 Stück;199;4 Stück
+2025-04-05;2030321;ja!;ja! Käse-Gebäckstangen 150g;159;150g (1 kg = 10,60 €)
 2025-04-05;7149379;ja!;ja! Käseaufschnitt 250g;199;250g (1 kg = 7,96 €)
 2025-04-05;2296035;ja!;ja! Käseaufschnitt leicht 250g;199;250g (1 kg = 7,96 €)
 2025-04-05;8291601;ja!;ja! Käsesnack Gouda Maasdamer 220g;279;220g (1 kg = 12,68 €)
@@ -645,8 +646,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-05;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-04-05;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-04-05;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-04-05;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-04-05;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
+2025-04-05;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-04-05;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-04-05;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-04-05;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1602,6 +1603,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-05;7823085;REWE Bio;REWE Bio Reinweinstein Backpulver vegan 4x16g;69;4x16g (1 kg = 10,78 €)
 2025-04-05;8094126;REWE Bio;REWE Bio Reiswaffeln Vollmilch 100g;169;100g (1 kg = 16,90 €)
 2025-04-05;8281895;REWE Bio;REWE Bio Reiswaffeln Zartbitter 100g;169;100g (1 kg = 16,90 €)
+2025-04-05;7046256;REWE Bio;REWE Bio Reiswaffeln glutenfrei 100g;69;100g (1 kg = 6,90 €)
 2025-04-05;7046681;REWE Bio;REWE Bio Reiswaffeln mit Hirse und Mais 100g;99;100g (1 kg = 9,90 €)
 2025-04-05;7046872;REWE Bio;REWE Bio Reiswaffeln mit Meersalz 100g;69;100g (1 kg = 6,90 €)
 2025-04-05;7293092;REWE Bio;REWE Bio Rhabarber-Schorle 0,75l;199;0,75l (1 l = 2,65 €)
