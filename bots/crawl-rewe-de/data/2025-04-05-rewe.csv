@@ -646,8 +646,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-05;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-04-05;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-04-05;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-04-05;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-04-05;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2025-04-05;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-04-05;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-04-05;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-04-05;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1505,6 +1505,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-05;8962009;REWE Bio;REWE Bio Linsenwaffeln mit Meersalz 90g;139;90g (1 kg = 15,44 €)
 2025-04-05;1424811;REWE Bio;REWE Bio Lorbeerblätter ganz 5g;249;5g
 2025-04-05;7584527;REWE Bio;REWE Bio Maisflips 80g;99;80g (1 kg = 12,38 €)
+2025-04-05;8016170;REWE Bio;REWE Bio Maiswaffeln mit Meersalz 120g;79;120g (1 kg = 6,58 €)
 2025-04-05;7988732;REWE Bio;REWE Bio Mandeln 200g;299;200g (1 kg = 14,95 €)
 2025-04-05;3402061;REWE Bio;REWE Bio Mango 1 Stück;249;1 Stück
 2025-04-05;7244322;REWE Bio;REWE Bio Mango Lassi 250g;89;250g (1 kg = 3,56 €)
