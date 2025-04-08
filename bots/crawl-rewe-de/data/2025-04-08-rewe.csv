@@ -944,7 +944,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-08;8320249;REWE Beste Wahl;REWE Beste Wahl Linsen Chips 90g;119;90g (1 kg = 13,22 €)
 2025-04-08;2348312;REWE Beste Wahl;REWE Beste Wahl Linseneintopf 800g;229;800g (1 kg = 2,86 €)
 2025-04-08;9973531;REWE Beste Wahl;REWE Beste Wahl Lychees geschält & entsteint 195g;209;195g (1 kg = 10,72 €)
-2025-04-08;9901840;REWE Beste Wahl;REWE Beste Wahl Lyoner Paprika vegan 100g;105;100g (1 kg = 10,50 €)
 2025-04-08;8003683;REWE Beste Wahl;REWE Beste Wahl Madeleines 250g;219;250g (1 kg = 8,76 €)
 2025-04-08;117180;REWE Beste Wahl;REWE Beste Wahl Maiskölbchen 190g;109;190g (1 kg = 5,74 €)
 2025-04-08;8414775;REWE Beste Wahl;REWE Beste Wahl Majoran gerebelt 8g;199;8g
@@ -996,8 +995,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-08;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-04-08;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;239;1l
 2025-04-08;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-04-08;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-08;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-04-08;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-08;1206377;REWE Beste Wahl;REWE Beste Wahl Osterhase Vollmilch 70g;139;70g (1 kg = 19,86 €)
 2025-04-08;2015999;REWE Beste Wahl;REWE Beste Wahl Osterhäschen 125g;249;125g (1 kg = 19,92 €)
 2025-04-08;8048646;REWE Beste Wahl;REWE Beste Wahl Ostern Blätterkrokanteier 150g;199;150g (1 kg = 13,27 €)
@@ -1485,7 +1484,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-08;8884075;REWE Bio;REWE Bio Kritharaki Nudeln 500g;169;500g (1 kg = 3,38 €)
 2025-04-08;9983676;REWE Bio;REWE Bio Kräuter italienischer Art 20g;199;20g (1 kg = 99,50 €)
 2025-04-08;7643892;REWE Bio;REWE Bio Kräuterquark 40% 200g;115;200g (1 kg = 5,75 €)
-2025-04-08;8109111;REWE Bio;REWE Bio Kräutertee 35g, 20 Beutel;95;35g (1 kg = 27,14 €)
 2025-04-08;8877187;REWE Bio;REWE Bio Kurkuma Shot mit Orangensaft 150ml;129;150ml (1 l = 8,60 €)
 2025-04-08;8819370;REWE Bio;REWE Bio Kurkuma gemahlen 45g;299;45g (1 kg = 66,44 €)
 2025-04-08;1906432;REWE Bio;REWE Bio Körniger Frischkäse 200g;119;200g (1 kg = 5,95 €)
