@@ -645,8 +645,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-09;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-04-09;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-04-09;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-04-09;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-04-09;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2025-04-09;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-04-09;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-04-09;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-04-09;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -996,8 +996,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-09;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-04-09;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;239;1l
 2025-04-09;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-04-09;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-09;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-04-09;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-09;1206377;REWE Beste Wahl;REWE Beste Wahl Osterhase Vollmilch 70g;139;70g (1 kg = 19,86 €)
 2025-04-09;8048646;REWE Beste Wahl;REWE Beste Wahl Ostern Blätterkrokanteier 150g;199;150g (1 kg = 13,27 €)
 2025-04-09;764067;REWE Beste Wahl;REWE Beste Wahl Ostern Schichtnougat-Eier 105g;229;105g (1 kg = 21,81 €)
@@ -1186,6 +1186,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-09;157178;REWE Beste Wahl;REWE Beste Wahl Wok-Mix 750g;199;750g (1 kg = 2,65 €)
 2025-04-09;8736168;REWE Beste Wahl;REWE Beste Wahl Wäscheparfüm Breeze 210g;329;210g (1 kg = 15,67 €)
 2025-04-09;754918;REWE Beste Wahl;REWE Beste Wahl Zartbitter-Kuvertüre 200g;219;200g (1 kg = 10,95 €)
+2025-04-09;7626003;REWE Beste Wahl;REWE Beste Wahl Zartbitterschokolade 50% Kakao 100g;179;100g (1 kg = 17,90 €)
 2025-04-09;8951668;REWE Beste Wahl;REWE Beste Wahl Zitrone Aroma 8g;79;8g
 2025-04-09;8324624;REWE Beste Wahl;REWE Beste Wahl Zitronenkuchen Backmischung 490g;249;510g (1 kg = 5,08 €)
 2025-04-09;877331;REWE Beste Wahl;REWE Beste Wahl Zitronensaft 0,75l;199;0,75l (1 l = 2,65 €)
@@ -1592,7 +1593,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-09;871212;REWE Bio;REWE Bio Rahmspinat 450g;169;450g (1 kg = 3,76 €)
 2025-04-09;201435;REWE Bio;REWE Bio Rapsöl nativ 500ml;185;500ml (1 l = 3,70 €)
 2025-04-09;7823085;REWE Bio;REWE Bio Reinweinstein Backpulver vegan 4x16g;69;4x16g (1 kg = 10,78 €)
-2025-04-09;8094126;REWE Bio;REWE Bio Reiswaffeln Vollmilch 100g;169;100g (1 kg = 16,90 €)
 2025-04-09;8281895;REWE Bio;REWE Bio Reiswaffeln Zartbitter 100g;169;100g (1 kg = 16,90 €)
 2025-04-09;7046256;REWE Bio;REWE Bio Reiswaffeln glutenfrei 100g;69;100g (1 kg = 6,90 €)
 2025-04-09;7046681;REWE Bio;REWE Bio Reiswaffeln mit Hirse und Mais 100g;99;100g (1 kg = 9,90 €)
