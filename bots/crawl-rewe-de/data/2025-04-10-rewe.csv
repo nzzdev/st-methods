@@ -996,8 +996,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-10;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-04-10;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;239;1l
 2025-04-10;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-04-10;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-10;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-04-10;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-04-10;1206377;REWE Beste Wahl;REWE Beste Wahl Osterhase Vollmilch 70g;139;70g (1 kg = 19,86 €)
 2025-04-10;8048646;REWE Beste Wahl;REWE Beste Wahl Ostern Blätterkrokanteier 150g;199;150g (1 kg = 13,27 €)
 2025-04-10;764067;REWE Beste Wahl;REWE Beste Wahl Ostern Schichtnougat-Eier 105g;229;105g (1 kg = 21,81 €)
@@ -1487,7 +1487,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-10;9983676;REWE Bio;REWE Bio Kräuter italienischer Art 20g;199;20g (1 kg = 99,50 €)
 2025-04-10;8877187;REWE Bio;REWE Bio Kurkuma Shot mit Orangensaft 150ml;129;150ml (1 l = 8,60 €)
 2025-04-10;8819370;REWE Bio;REWE Bio Kurkuma gemahlen 45g;299;45g (1 kg = 66,44 €)
-2025-04-10;1906432;REWE Bio;REWE Bio Körniger Frischkäse 200g;119;200g (1 kg = 5,95 €)
 2025-04-10;198343;REWE Bio;REWE Bio Kürbiskern-Brötchen 300g;289;300g (1 kg = 9,63 €)
 2025-04-10;8820911;REWE Bio;REWE Bio Kürbiskerne 200g;199;200g (1 kg = 9,95 €)
 2025-04-10;8872847;REWE Bio;REWE Bio Kürbiskernöl 250ml;599;250ml (1 l = 23,96 €)
