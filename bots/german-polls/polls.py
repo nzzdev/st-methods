@@ -438,7 +438,7 @@ daily_party_means.sort_values(by=['Partei', 'Datum'], inplace=True)
 
 # Calculate Exponentially Weighted Moving Average (EWMA)
 daily_party_means['Ergebnis_RA'] = daily_party_means.groupby('Partei', group_keys=False)['Ergebnis']\
-    .apply(lambda x: x.ewm(span=8, adjust=False).mean())
+    .apply(lambda x: x.ewm(span=7, adjust=False).mean())
 
 # Round 'Ergebnis_RA' to one decimal place
 daily_party_means['Ergebnis_RA'] = daily_party_means['Ergebnis_RA'].round(1)
