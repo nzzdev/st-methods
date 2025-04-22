@@ -251,13 +251,14 @@ for row in urls:
         inplace=True
     )
 
-    # Backfill missing years
-    data["Jahr"] = data["Jahr"].bfill()
+    # Propagate the publication date (Datum) to all party rows of the same poll
+    # so that every row keeps the correct release day, month and year.
+    # Forward‑fill takes the date from the first row in a poll block and copies it down.
+    data[["Tag", "Monat", "Jahr"]] = data[["Tag", "Monat", "Jahr"]].ffill()
 
-    # Fill available days and months from Zeitraum
-    if not data.Zeitraum.isnull().all():
-        data["Tag"] = data["Tag"].fillna(pd.to_numeric(data["Zeitraum"].str[-6:-4], errors="coerce"))
-        data["Monat"] = data["Monat"].fillna(pd.to_numeric(data["Zeitraum"].str[-3:-1], errors="coerce"))
+    # As a safety net, if any component is still missing (very rare for older polls),
+    # back‑fill remaining gaps from below.
+    data[["Tag", "Monat", "Jahr"]] = data[["Tag", "Monat", "Jahr"]].bfill()
 
     # Convert day, month, and year to integers
     data.Tag = data.Tag.astype("int")
