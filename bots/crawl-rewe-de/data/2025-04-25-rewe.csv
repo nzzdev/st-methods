@@ -640,8 +640,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-25;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-04-25;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-04-25;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-04-25;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-04-25;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
+2025-04-25;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-04-25;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-04-25;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-04-25;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1357,6 +1357,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-04-25;8381730;REWE Bio;REWE Bio Erbseneintopf 400g;129;400g (1 kg = 3,23 €)
 2025-04-25;7713845;REWE Bio;REWE Bio Erdnussbutter Crunchy vegan 250g;199;250g (1 kg = 7,96 €)
 2025-04-25;8753645;REWE Bio;REWE Bio Erdnüsse gesalzen 150g;149;150g (1 kg = 9,93 €)
+2025-04-25;8764704;REWE Bio;REWE Bio Espresso ganze Bohnen 1000g;1395;1000g
 2025-04-25;8255376;REWE Bio;REWE Bio Fenchel-Anis-Kümmel Tee 40g;129;40g (1 kg = 32,25 €)
 2025-04-25;8960794;REWE Bio;REWE Bio Feta 200g;279;200g (1 kg = 13,95 €)
 2025-04-25;197877;REWE Bio;REWE Bio Fettarme H-Milch 1,5% 1l;105;1l
