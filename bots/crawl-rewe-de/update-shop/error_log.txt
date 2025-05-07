@@ -1,3 +1,4 @@
 ID 8729533 in persona 'bio' has no valid alternative.
 ID 7257960 in persona 'bio' has no valid alternative.
 ID 1202493 in persona 'bio' has no valid alternative.
+ID 2424540 in persona 'bachelor' has no valid alternative.
