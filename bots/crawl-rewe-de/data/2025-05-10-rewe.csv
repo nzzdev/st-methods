@@ -427,6 +427,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-05-10;7920165;ja!;ja! Pfeffer schwarz ganz 50g;99;50g (1 kg = 19,80 €)
 2025-05-10;546040;ja!;ja! Pfefferminztee 56g, 25 Beutel;89;56,25g (1 kg = 15,82 €)
 2025-05-10;7163656;ja!;ja! Pflanzencreme 500ml;149;500ml (1 l = 2,98 €)
+2025-05-10;2325000;ja!;ja! Pinienkerne 50g;229;50g (1 kg = 45,80 €)
 2025-05-10;3182684;ja!;ja! Pistazien geröstet & gesalzen 250g;389;250g (1 kg = 15,56 €)
 2025-05-10;8884094;ja!;ja! Pistazien geröstet & ungesalzen 250g;389;250g (1 kg = 15,56 €)
 2025-05-10;8623800;ja!;ja! Pizza Teig XXL 550g;129;550g (1 kg = 2,35 €)
@@ -639,8 +640,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-05-10;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-05-10;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-05-10;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-05-10;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-05-10;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2025-05-10;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;149;1l
 2025-05-10;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-05-10;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-05-10;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
