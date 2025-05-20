@@ -138,6 +138,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-05-20;8686936;ja!;ja! Duftlichte Rote Früchte 18 Stück;179;18 Stück
 2025-05-20;298424;ja!;ja! Edelsalami 500g;445;500g (1 kg = 8,90 €)
 2025-05-20;2135703;ja!;ja! Edle Matjesfilets Nordische Art 251g;179;251g (1 kg = 7,13 €)
+2025-05-20;7833020;ja!;ja! Einmalhandschuhe Größe M/L 100 Stück;695;100 Stück
+2025-05-20;8642283;ja!;ja! Einmalhandschuhe Größe S/M 100 Stück;695;100 Stück
 2025-05-20;8475648;ja!;ja! Eis Walnuss 1000ml;219;1000ml
 2025-05-20;8354622;ja!;ja! Eis am Stiel Fruit Surfer 6x60ml;199;360ml (1 l = 5,53 €)
 2025-05-20;9942568;ja!;ja! Eis am Stiel Mandel Maxi 6x100ml;349;6x100ml
@@ -1178,6 +1180,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-05-20;185596;REWE Beste Wahl;REWE Beste Wahl Waldheidelbeeren 125g;159;125g (1 kg = 12,72 €)
 2025-05-20;708265;REWE Beste Wahl;REWE Beste Wahl Waldmeister-Getränkesirup 0,5l;179;0,50l (1 l = 3,58 €)
 2025-05-20;2775275;REWE Beste Wahl;REWE Beste Wahl Wasabi Erdnüsse 150g;179;150g (1 kg = 11,93 €)
+2025-05-20;7066219;REWE Beste Wahl;REWE Beste Wahl Wassereis Polar Sticks 10x40ml;139;400ml (1 l = 3,48 €)
 2025-05-20;8045202;REWE Beste Wahl;REWE Beste Wahl Weide Vollmilch 3,5% 1l;125;1l
 2025-05-20;7077819;REWE Beste Wahl;REWE Beste Wahl Weidebutter Süßrahm 250g;259;250g (1 kg = 10,36 €)
 2025-05-20;8044698;REWE Beste Wahl;REWE Beste Wahl Weidemilch 1,5% 1l;115;1l
@@ -1326,6 +1329,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-05-20;7794507;REWE Bio;REWE Bio Bunter Pfeffer ganz 60g;299;60g (1 kg = 49,83 €)
 2025-05-20;1136740;REWE Bio;REWE Bio Buttergemüse 300g;169;300g (1 kg = 5,63 €)
 2025-05-20;901435;REWE Bio;REWE Bio Caffè Crema 219g, 30 Pads;449;210g (1 kg = 21,38 €)
+2025-05-20;2557918;REWE Bio;REWE Bio Caffè Crema ganze Bohne 1kg;1395;1000g
 2025-05-20;1323529;REWE Bio;REWE Bio Caffè Latte 250ml;99;250ml (1 l = 3,96 €)
 2025-05-20;7677900;REWE Bio;REWE Bio Café Crema Gustoso ganze Bohnen 1000g;1375;1000g
 2025-05-20;578901;REWE Bio;REWE Bio Camembert 150g;199;150g (1 kg = 13,27 €)
