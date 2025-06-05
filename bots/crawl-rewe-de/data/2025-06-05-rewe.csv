@@ -318,6 +318,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-06-05;8291601;ja!;ja! Käsesnack Gouda Maasdamer 220g;289;220g (1 kg = 13,14 €)
 2025-06-05;2045420;ja!;ja! Königsberger Klopse 450g;219;450g (1 kg = 4,87 €)
 2025-06-05;8081196;ja!;ja! Küchenmesser 2 Stück;199;2 Stück
+2025-06-05;7862977;ja!;ja! Küchentücher 4x128 Blatt;285;4x128 Stück
 2025-06-05;8639885;ja!;ja! LED Kerze E14 470 Lumen 40 Watt 2 Stück;499;2 Stück
 2025-06-05;8643461;ja!;ja! LED Leuchtmittel E27 1055 Lumen 75 Watt 2 Stück;599;2 Stück
 2025-06-05;7861437;ja!;ja! LED Leuchtmittel G9 320 Lumen 26 Watt 1 Stück;399;1 Stück
@@ -828,7 +829,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-06-05;7631064;REWE Beste Wahl;REWE Beste Wahl Hirtensalat mit Oliven 150g;229;150g (1 kg = 15,27 €)
 2025-06-05;9907751;REWE Beste Wahl;REWE Beste Wahl Holland Gouda jung Scheiben 175g;199;175g (1 kg = 11,37 €)
 2025-06-05;1229039;REWE Beste Wahl;REWE Beste Wahl Holunderblüten-Getränkesirup 0,5l;179;0,50l (1 l = 3,58 €)
-2025-06-05;8996883;REWE Beste Wahl;REWE Beste Wahl Honey Peppers mit Frischkäsecreme 150g;229;150g (1 kg = 15,27 €)
 2025-06-05;8549587;REWE Beste Wahl;REWE Beste Wahl Honig Senf Sauce 300ml;139;300ml (1 l = 4,63 €)
 2025-06-05;8273841;REWE Beste Wahl;REWE Beste Wahl Hot Dog Rolls Brioche 6 Stück;249;270g (1 kg = 9,22 €)
 2025-06-05;7636592;REWE Beste Wahl;REWE Beste Wahl Hummus Mango-Curry vegan 200g;169;200g (1 kg = 8,45 €)
@@ -1554,6 +1554,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-06-05;2029541;REWE Bio;REWE Bio Naturland Wild-Heidelbeeren 300g;319;300g (1 kg = 10,63 €)
 2025-06-05;7794367;REWE Bio;REWE Bio Naturland Zimt gemahlen 30g;269;30g (1 kg = 89,67 €)
 2025-06-05;7718265;REWE Bio;REWE Bio Naturland Zitronenschale gerieben 5g;99;2x5g (1 kg = 99 €)
+2025-06-05;7660983;REWE Bio;REWE Bio Naturland weißes Mandelmus vegan 250g;699;250g (1 kg = 27,96 €)
 2025-06-05;8032052;REWE Bio;REWE Bio Naturreis Spitzen-Langkorn 1kg;259;1kg
 2025-06-05;9869839;REWE Bio;REWE Bio Nektarine 350g;299;350g (1 kg = 8,54 €)
 2025-06-05;7795278;REWE Bio;REWE Bio Nelken ganz 30g;299;30g (1 kg = 99,67 €)
@@ -1692,6 +1693,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-06-05;7831134;REWE Bio;REWE Bio Tomatensuppe 375ml;199;375ml (1 l = 5,31 €)
 2025-06-05;187641;REWE Bio;REWE Bio Tortelloni Käse-Kräuter 250g;219;250g (1 kg = 8,76 €)
 2025-06-05;8960250;REWE Bio;REWE Bio Tortiglioni 500g;85;500g (1 kg = 1,70 €)
+2025-06-05;9949902;REWE Bio;REWE Bio Tortilla Chips gesalzen 125g;129;125g (1 kg = 10,32 €)
 2025-06-05;877993;REWE Bio;REWE Bio Traubensaft Direktsaft 1l;229;1l
 2025-06-05;8041125;REWE Bio;REWE Bio Vanille Pudding 35g;249;3x35g (1 kg = 23,71 €)
 2025-06-05;8891488;REWE Bio;REWE Bio Vitalgebäck mit Sonnenblumenkernen 200g;279;200g (1 kg = 13,95 €)
