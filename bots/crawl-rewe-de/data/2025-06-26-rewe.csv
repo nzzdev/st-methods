@@ -140,6 +140,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-06-26;5910480;ja!;ja! Eiscreme Bourbon-Vanille 2500ml;349;2500ml (1 l = 1,40 €)
 2025-06-26;8132504;ja!;ja! Eiskonfekt 4x10 Stück 400ml;269;4x100ml (1 l = 6,73 €)
 2025-06-26;1037883;ja!;ja! Eistee Pfirsich 6x1,5l;474;6x1,50l (1 l = 0,53 €)
+2025-06-26;7862416;ja!;ja! Eistee Pfirsich zero 6x1,5l;474;6x1,50l (1 l = 0,53 €)
 2025-06-26;1037880;ja!;ja! Eistee Zitrone 6x1,5l;474;6x1,50l (1 l = 0,53 €)
 2025-06-26;8403948;ja!;ja! Elektronische Feuerzeuge 3 Stück;75;3 Stück
 2025-06-26;3016679;ja!;ja! Emmentaler 250g;279;250g (1 kg = 11,16 €)
@@ -356,6 +357,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-06-26;7774531;ja!;ja! Milch Schoko & Keks Sticks 90g;119;90g (1 kg = 13,22 €)
 2025-06-26;2107010;ja!;ja! Milchreis 500g;99;500g (1 kg = 1,98 €)
 2025-06-26;7164812;ja!;ja! Milchreis mit Kirschen 400g;249;400g (1 kg = 6,23 €)
+2025-06-26;8125487;ja!;ja! Milder Röstkaffee 500g;599;500g (1 kg = 11,98 €)
 2025-06-26;9004553;ja!;ja! Milky Sticks Vanille 8x42ml;149;8x336ml
 2025-06-26;7682608;ja!;ja! Mini Berliner 300g;299;300g (1 kg = 9,97 €)
 2025-06-26;7659604;ja!;ja! Mini Brotchips Knoblauch 250g;179;250g (1 kg = 7,16 €)
@@ -1098,6 +1100,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-06-26;8015140;REWE Beste Wahl;REWE Beste Wahl Schoko Tröpfchen Zartbitter 100g;199;100g (1 kg = 19,90 €)
 2025-06-26;7273139;REWE Beste Wahl;REWE Beste Wahl Schokobrötchen 360g;199;360g (1 kg = 5,53 €)
 2025-06-26;7658617;REWE Beste Wahl;REWE Beste Wahl Schokodrink weniger Zucker 400g;329;400g (1 kg = 8,23 €)
+2025-06-26;920085;REWE Beste Wahl;REWE Beste Wahl Schwarze Bohnen in Chilisauce 400g;149;400g (1 kg = 3,73 €)
 2025-06-26;135299;REWE Beste Wahl;REWE Beste Wahl Schwarzer Johannisbeer-Nektar 1l;199;1l
 2025-06-26;8564269;REWE Beste Wahl;REWE Beste Wahl Schwarzkirschen gezuckert 360g;259;360g (1 kg = 7,19 €)
 2025-06-26;117509;REWE Beste Wahl;REWE Beste Wahl Schwarzwurzeln 290g;169;290g (1 kg = 5,83 €)
@@ -1286,6 +1289,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-06-26;208859;REWE Bio;REWE Bio Apfelmark 700g;149;700g (1 kg = 2,13 €)
 2025-06-26;7604362;REWE Bio;REWE Bio Apfelmus 360g;99;360g (1 kg = 2,75 €)
 2025-06-26;7650152;REWE Bio;REWE Bio Apfelrotkohl 680g;149;650g (1 kg = 2,19 €)
+2025-06-26;8387482;REWE Bio;REWE Bio Apfelsaft naturtrüb 1l;179;1l
 2025-06-26;7292476;REWE Bio;REWE Bio Apfelschorle naturtrüb 0,75l;129;0,75l (1 l = 1,72 €)
 2025-06-26;2478116;REWE Bio;REWE Bio Aprikosen 400g;299;400g (1 kg = 7,48 €)
 2025-06-26;8861892;REWE Bio;REWE Bio Artischocken gegrillt 180g;349;180g (1 kg = 19,39 €)
