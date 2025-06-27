@@ -28,15 +28,13 @@ if __name__ == '__main__':
         }
 
         # download historical data from Yahoo
-        df = yf.download('TTF=F', period='5y')
-        # extract the Series
+        df = yf.download('TTF=F', period='5y', auto_adjust=False)
+        # extract the 'Close' column and convert to DataFrame
         df = df[('Close', 'TTF=F')]
         df = df[df.index >= '2020-12-31'].dropna()
-        # rename the Series name (instead of using 'columns')
-        df.rename('Kosten', inplace=True)
+        df = df.to_frame(name='Kosten')
         df.index.rename('Datum', inplace=True)
-        # apply rounding and conversion
-        df = df.round(2).astype(float)
+        df['Kosten'] = df['Kosten'].round(2).astype(float)
 
         """
         # as Dataframe instead of Series
@@ -60,18 +58,33 @@ if __name__ == '__main__':
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
-        df_ice = pd.DataFrame(full_data['bars'], columns=[
-            'Datum', 'Kosten'])
-        df_ice = df_ice.tail(1)
-        df_ice['Datum'] = pd.to_datetime(df_ice['Datum'])
-        df_ice['Datum'] = df_ice['Datum'].dt.strftime('%Y-%m-%d')
-        df_ice['Datum'] = pd.to_datetime(df_ice['Datum'])
-        df_ice.set_index('Datum', inplace=True)
-        df_ice['Kosten'] = df_ice['Kosten'].round(
-            2).astype(float)
-        df = pd.concat([df, df_ice], axis=0)  # add value from ICE
-        df = df[~df.index.duplicated(keep='last')]  # drop value from Yahoo
-        df = df.sort_index()  # sort if older value is inserted due to wrong market ID
+
+        # Determine bars data in ICE response (key may vary)
+        bars = None
+        for key in ['bars', 'data']:
+            if key in full_data and full_data[key]:
+                bars = full_data[key]
+                break
+        if not bars and isinstance(full_data.get('series'), list):
+            for series_entry in full_data['series']:
+                if 'bars' in series_entry and series_entry['bars']:
+                    bars = series_entry['bars']
+                    break
+
+        # If no ICE data found, skip merging ICE price
+        if not bars:
+            print("Warning: No ICE data found; skipping ICE update")
+        else:
+            df_ice = pd.DataFrame(bars, columns=['Datum', 'Kosten'])
+            df_ice = df_ice.tail(1)
+            df_ice['Datum'] = pd.to_datetime(df_ice['Datum']).dt.strftime('%Y-%m-%d')
+            df_ice['Datum'] = pd.to_datetime(df_ice['Datum'])
+            df_ice.set_index('Datum', inplace=True)
+            df_ice['Kosten'] = df_ice['Kosten'].round(2).astype(float)
+            # merge with main DataFrame, avoiding duplicates
+            df = pd.concat([df, df_ice], axis=0)
+            df = df[~df.index.duplicated(keep='last')]
+            df = df.sort_index()
 
         # create chart with comparison
         dfold = pd.read_csv(
