@@ -783,6 +783,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-01;8724436;ja!;ja! Party Servietten 40 Stück;99;40 Stück
 2025-07-01;7224493;ja!;ja! Party-Nüsse Paprika 200g;129;200g (1 kg = 6,45 €)
 2025-07-01;8988614;ja!;ja! Partygarnelen gekocht & geschält 100g;199;100g (1 kg = 19,90 €)
+2025-07-01;9920010;ja!;ja! Peanut Eisriegel 6x53ml;249;6x53ml
 2025-07-01;7925338;ja!;ja! Peanut Mini Schokoriegel 400g;349;400g (1 kg = 8,73 €)
 2025-07-01;8721437;ja!;ja! Pekan-Nusskerne naturbelassen 200g;349;200g (1 kg = 17,45 €)
 2025-07-01;7857524;ja!;ja! Penne Gorgonzola mit feinem Blattspinat 750g;299;750g (1 kg = 3,99 €)
@@ -917,8 +918,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-01;2386812;ja!;ja! Schnittlauch gefriergetrocknet 12,5g;119;12,50g (1 kg = 95,20 €)
 2025-07-01;8992743;ja!;ja! Schoko & Keks Sticks 90g;119;90g (1 kg = 13,22 €)
 2025-07-01;7681830;ja!;ja! Schoko Granduett mit Sahne 190g;49;190g (1 kg = 2,58 €)
-2025-07-01;3004038;ja!;ja! Schoko Müsli 750g;229;750g (1 kg = 3,05 €)
 2025-07-01;9903504;ja!;ja! Schoko Müsli 750g;229;750g
+2025-07-01;3004038;ja!;ja! Schoko Müsli 750g;229;750g (1 kg = 3,05 €)
 2025-07-01;9101021;ja!;ja! Schoko Snack Milch & Kakao 30g;199;8x30g
 2025-07-01;8187916;ja!;ja! Schoko-Drink 0,5l;79;0,50l (1 l = 1,58 €)
 2025-07-01;8989043;ja!;ja! Schoko-Spritzgebäck 250g;159;250g (1 kg = 6,36 €)
