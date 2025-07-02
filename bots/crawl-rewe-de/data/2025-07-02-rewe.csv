@@ -416,7 +416,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-02;2325000;ja!;ja! Pinienkerne 50g;229;50g (1 kg = 45,80 €)
 2025-07-02;3182684;ja!;ja! Pistazien geröstet & gesalzen 250g;349;250g (1 kg = 13,96 €)
 2025-07-02;8884094;ja!;ja! Pistazien geröstet & ungesalzen 250g;349;250g (1 kg = 13,96 €)
-2025-07-02;8623800;ja!;ja! Pizza Teig XXL 550g;129;550g (1 kg = 2,35 €)
 2025-07-02;9035193;ja!;ja! Pommes Frites Feinschnitt 1kg;169;1000g
 2025-07-02;2123526;ja!;ja! Pommes Frites Wellenschnitt 1kg;169;1000g
 2025-07-02;8457317;ja!;ja! Prospekthüllen DINA4 matt 30 Stück;119;30 Stück
@@ -1069,7 +1068,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-02;8857163;REWE Beste Wahl;REWE Beste Wahl Räucherlaxxs vegan 100g;209;100g (1 kg = 20,90 €)
 2025-07-02;1209186;REWE Beste Wahl;REWE Beste Wahl Röstzwiebeln 150g;119;150g (1 kg = 7,93 €)
 2025-07-02;8904431;REWE Beste Wahl;REWE Beste Wahl Rührkuchen Schokolade 400g;169;400g (1 kg = 4,23 €)
-2025-07-02;7956293;REWE Beste Wahl;REWE Beste Wahl Rührkuchen Zitrone 400g;169;400g (1 kg = 4,23 €)
 2025-07-02;8686876;REWE Beste Wahl;REWE Beste Wahl Sahne Toffees 400g;259;400g (1 kg = 6,48 €)
 2025-07-02;9088477;REWE Beste Wahl;REWE Beste Wahl Sahnepudding Schokolade 150g;79;150g (1 kg = 5,27 €)
 2025-07-02;7582979;REWE Beste Wahl;REWE Beste Wahl Sahnepudding Vanille 150g;79;150g (1 kg = 5,27 €)
@@ -1197,6 +1195,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-02;7626003;REWE Beste Wahl;REWE Beste Wahl Zartbitterschokolade 50% Kakao 100g;179;100g (1 kg = 17,90 €)
 2025-07-02;8951668;REWE Beste Wahl;REWE Beste Wahl Zitrone Aroma 8g;79;8g
 2025-07-02;8324624;REWE Beste Wahl;REWE Beste Wahl Zitronenkuchen Backmischung 490g;249;510g (1 kg = 5,08 €)
+2025-07-02;877331;REWE Beste Wahl;REWE Beste Wahl Zitronensaft 0,75l;199;0,75l (1 l = 2,65 €)
 2025-07-02;114109;REWE Beste Wahl;REWE Beste Wahl Zucker-Sticks 250g;189;250g (1 kg = 7,56 €)
 2025-07-02;1293391;REWE Beste Wahl;REWE Beste Wahl Zupfkuchen 500g;379;500g (1 kg = 7,58 €)
 2025-07-02;8308124;REWE Beste Wahl;REWE Beste Wahl Zwiebelbaguette 250g;199;250g (1 kg = 7,96 €)
