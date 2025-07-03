@@ -614,8 +614,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-03;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-07-03;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-07-03;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-07-03;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-07-03;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
+2025-07-03;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-07-03;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-07-03;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-07-03;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -718,6 +718,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-03;1413012;REWE Beste Wahl;REWE Beste Wahl Duo Schoko-Creme 400g;219;400g (1 kg = 5,48 €)
 2025-07-03;2331793;REWE Beste Wahl;REWE Beste Wahl Duo-Muffins Backmischung 335g;249;380g (1 kg = 6,55 €)
 2025-07-03;8652016;REWE Beste Wahl;REWE Beste Wahl Düngestäbchen 30 Stück;109;30 Stück
+2025-07-03;9115920;REWE Beste Wahl;REWE Beste Wahl Edel-Bitterschokolade 80% 100g;179;100g (1 kg = 17,90 €)
 2025-07-03;8209143;REWE Beste Wahl;REWE Beste Wahl Eier Freilandhaltung 6 Stück;199;6 Stück
 2025-07-03;7194888;REWE Beste Wahl;REWE Beste Wahl Eiernudeln Spiralen 500g;159;500g (1 kg = 3,18 €)
 2025-07-03;7857695;REWE Beste Wahl;REWE Beste Wahl Eis Bourbon Vanille vegan 500ml;279;500ml (1 l = 5,58 €)
