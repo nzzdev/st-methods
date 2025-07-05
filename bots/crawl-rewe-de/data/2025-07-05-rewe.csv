@@ -1237,6 +1237,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-05;9909212;REWE Bio;REWE Bio + vegan Hafercreme Cuisine 200ml;79;200ml (1 l = 3,95 €)
 2025-07-05;8774648;REWE Bio;REWE Bio + vegan Hummus Natur 200g;149;200g (1 kg = 7,45 €)
 2025-07-05;7781674;REWE Bio;REWE Bio + vegan Jackfruit natur 230g;179;230g (1 kg = 7,78 €)
+2025-07-05;8167502;REWE Bio;REWE Bio + vegan Kekse & Waffeln 250g;299;250g (1 kg = 11,96 €)
 2025-07-05;7963454;REWE Bio;REWE Bio + vegan Kokos Natur 400g;135;400g (1 kg = 3,38 €)
 2025-07-05;8778407;REWE Bio;REWE Bio + vegan Kokos Reis Drink 1l;135;1l
 2025-07-05;8090294;REWE Bio;REWE Bio + vegan Mandel Drink Natur 1l;179;1l
@@ -1532,6 +1533,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-05;7186200;REWE Bio;REWE Bio Milchreis 500g;159;500g (1 kg = 3,18 €)
 2025-07-05;8277549;REWE Bio;REWE Bio Mini Berner Würstchen Schwein 185g;299;185g (1 kg = 16,16 €)
 2025-07-05;8831096;REWE Bio;REWE Bio Mini Mozzarella 125g;149;125g (1 kg = 11,92 €)
+2025-07-05;199016;REWE Bio;REWE Bio Mini Wassermelone 1 Stück;499;1 Stück
 2025-07-05;8498663;REWE Bio;REWE Bio Mini-Kartoffel-Taschen 300g;329;300g (1 kg = 10,97 €)
 2025-07-05;200385;REWE Bio;REWE Bio Mozzarella 125g;129;125g (1 kg = 10,32 €)
 2025-07-05;1424821;REWE Bio;REWE Bio Muskatnuss 12,5g;349;12,50g (1 kg = 279,20 €)
