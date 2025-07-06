@@ -96,8 +96,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-06;342931;ja!;ja! Cornichons süß-sauer 370g;129;370g (1 kg = 3,49 €)
 2025-07-06;8311334;ja!;ja! Criss Cross Pommes pikant gewürzt 600g;199;600g (1 kg = 3,32 €)
 2025-07-06;8444108;ja!;ja! Crème Fraîche Classic 30% Fett 200g;109;200g (1 kg = 5,45 €)
-2025-07-06;9918039;ja!;ja! Cuorino 225g;199;225g (1 kg = 8,84 €)
 2025-07-06;8645285;ja!;ja! Cuorino 225g;199;225g (1 kg = 8,84 €)
+2025-07-06;9918039;ja!;ja! Cuorino 225g;199;225g (1 kg = 8,84 €)
 2025-07-06;8074238;ja!;ja! Curly Fries pikant gewürzt 600g;199;600g (1 kg = 3,32 €)
 2025-07-06;8973540;ja!;ja! Delikatess Bierschinken 150g;119;150g (1 kg = 7,93 €)
 2025-07-06;8243243;ja!;ja! Delikatess Edelsalami mild geräuchert 150g;179;150g (1 kg = 11,93 €)
@@ -374,7 +374,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-06;7801213;ja!;ja! Mozzarella light 125g;85;125g (1 kg = 6,80 €)
 2025-07-06;8084761;ja!;ja! Muffinförmchen 200 Stück weiß;199;200 Stück
 2025-07-06;8667375;ja!;ja! Muffins Schoko & Stracciatella 360g;189;360g (1 kg = 5,25 €)
-2025-07-06;8595091;ja!;ja! Multivitaminsaft 6x1l;870;6x1l (1 l = 1,45 €)
 2025-07-06;2773176;ja!;ja! Müllbeutel mit Tragegriff 50l 20 Stück;55;20 Stück
 2025-07-06;119149;ja!;ja! Müllbeutel mit Zugband 60l, 30 Stück;165;30 Stück
 2025-07-06;1947887;ja!;ja! Mülleimer-Beutel + Tragegriff 35l, 25 Stück;119;25 Stück
@@ -619,8 +618,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-06;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-07-06;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-07-06;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-07-06;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-07-06;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
+2025-07-06;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-07-06;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-07-06;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-07-06;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
