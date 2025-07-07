@@ -1,6 +1,5 @@
 Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-07;455217;ja!;Banane ca. 200g;26;1 Stück ca. 200 g (1 kg = 1,29 €)
-2025-07-07;8602177;ja!;Ja! Apfelnektar 1,5l;159;1,50l (1 l = 1,06 €)
 2025-07-07;8595513;ja!;Ja! Apfelsaft 1l;109;1l
 2025-07-07;8021806;ja!;Ja! Barbecue Sauce 250ml;99;250ml (1 l = 3,96 €)
 2025-07-07;8014425;ja!;Ja! Cappuccino Classic 200g;229;200g (1 kg = 11,45 €)
@@ -8,7 +7,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-07;7225094;ja!;Ja! Cashewkerne Pikant 150g;219;150g (1 kg = 14,60 €)
 2025-07-07;8445118;ja!;Ja! Crème Fraîche mit Kräutern 200g;109;200g (1 kg = 5,45 €)
 2025-07-07;8443313;ja!;Ja! Crème leicht 14,5% Fett 200g;109;200g (1 kg = 5,45 €)
-2025-07-07;8471628;ja!;Ja! Essigessenz 400g;79;400g (1 kg = 1,98 €)
 2025-07-07;8032788;ja!;Ja! Kartoffelknödel halb und halb 309g;99;309g (1 kg = 3,20 €)
 2025-07-07;8288407;ja!;Ja! Pizza Salami 3x350g;399;3x350g (1 kg = 3,80 €)
 2025-07-07;7097534;ja!;Ja! Prinzessbohnen 1000g;239;1000g
@@ -44,6 +42,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-07;7776564;ja!;ja! Apfel Streuselkuchen 1250g;499;1250g (1 kg = 3,99 €)
 2025-07-07;2394735;ja!;ja! Apfel-Holunderblüte Erfrischungsgetränk 0,5l;45;0,50l (1 l = 0,90 €)
 2025-07-07;3026485;ja!;ja! Apfelmus 710g;99;710g (1 kg = 1,39 €)
+2025-07-07;8602177;ja!;ja! Apfelnektar 1,5l;159;1,50l (1 l = 1,06 €)
 2025-07-07;7892514;ja!;ja! Apfelnektar 6x1,5l;954;6x1,50l (1 l = 1,06 €)
 2025-07-07;7898682;ja!;ja! Apfelsaft 6x1l;654;6x1l (1 l = 1,09 €)
 2025-07-07;518565;ja!;ja! Apfelschorle 0,5l;45;0,50l (1 l = 0,90 €)
@@ -286,6 +285,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-07;7004010;ja!;ja! Erdnüsse pikant gewürzt 150g;99;150g (1 kg = 6,60 €)
 2025-07-07;2394742;ja!;ja! Erfrischungsgetränk Apfel-Rhabarber 0,5l;45;0,50l (1 l = 0,90 €)
 2025-07-07;9998530;ja!;ja! Erythrit 500g;375;500g (1 kg = 7,50 €)
+2025-07-07;8471628;ja!;ja! Essigessenz 400g;79;400g (1 kg = 1,98 €)
 2025-07-07;7900645;ja!;ja! Essigreiniger 1l;75;1l
 2025-07-07;7585069;ja!;ja! Euka Menthol Bonbons 300g;99;300g
 2025-07-07;7632588;ja!;ja! Exotischer Fruchtcocktail 4x113g;179;4x280g
