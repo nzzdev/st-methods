@@ -616,8 +616,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-09;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-07-09;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-07-09;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-07-09;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
 2025-07-09;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2025-07-09;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
 2025-07-09;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-07-09;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-07-09;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1565,6 +1565,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-09;8819950;REWE Bio;REWE Bio Naturland Schwarzkümmel ganz 60g;199;60g (1 kg = 33,17 €)
 2025-07-09;7602709;REWE Bio;REWE Bio Naturland Schweinebraten 80g;279;80g (1 kg = 34,88 €)
 2025-07-09;8822896;REWE Bio;REWE Bio Naturland Spaghetti Vollkorn 500g;85;500g (1 kg = 1,70 €)
+2025-07-09;8679654;REWE Bio;REWE Bio Naturland Tomatensauce Arrabbiata 350g;189;345g (1 kg = 5,48 €)
 2025-07-09;8680956;REWE Bio;REWE Bio Naturland Tomatensauce Kräuter 350g;189;350g (1 kg = 5,40 €)
 2025-07-09;7843639;REWE Bio;REWE Bio Naturland Tomatensauce Ricotta 350g;189;350g (1 kg = 5,40 €)
 2025-07-09;7690011;REWE Bio;REWE Bio Naturland Tortelloni Tomate Mozzarella 250g;219;250g (1 kg = 8,76 €)
