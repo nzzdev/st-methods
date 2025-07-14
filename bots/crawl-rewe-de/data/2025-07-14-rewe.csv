@@ -484,7 +484,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-14;2234973;ja!;ja! Schweine-Nackenkotelett 4 Stück, 700g;475;700g (1 kg = 6,79 €)
 2025-07-14;2080727;ja!;ja! Schweine-Schinkenschnitzel;599;600g (1 kg = 9,98 €)
 2025-07-14;2314012;ja!;ja! Schweine-Stielkotelett 700g;475;700g (1 kg = 6,79 €)
-2025-07-14;7702698;ja!;ja! Schweinefilet ca. 580g;724;1 Stück ca. 580 g (1 kg = 12,49 €)
 2025-07-14;3155797;ja!;ja! Semmelknödel 6er 200g;99;200g (1 kg = 4,95 €)
 2025-07-14;7895784;ja!;ja! Senf-Honig Dressing 250ml;99;250ml (1 l = 3,96 €)
 2025-07-14;875402;ja!;ja! Servietten champagner 30 Stück;85;30 Stück
@@ -615,8 +614,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-14;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-07-14;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-07-14;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-07-14;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
 2025-07-14;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2025-07-14;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
 2025-07-14;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-07-14;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-07-14;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -990,8 +989,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-14;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-07-14;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;219;1l
 2025-07-14;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-07-14;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-07-14;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-07-14;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-07-14;8013483;REWE Beste Wahl;REWE Beste Wahl Oregano gerebelt 11g;199;11g (1 kg = 180,91 €)
 2025-07-14;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2025-07-14;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
