@@ -998,8 +998,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-21;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2025-07-21;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-07-21;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;219;1l
-2025-07-21;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-07-21;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-07-21;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-07-21;8013483;REWE Beste Wahl;REWE Beste Wahl Oregano gerebelt 11g;199;11g (1 kg = 180,91 €)
 2025-07-21;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2025-07-21;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1630,7 +1630,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-21;7997796;REWE Bio;REWE Bio Quetschie Apfel-Pfirsich-Mango 90g;59;90g (1 kg = 6,56 €)
 2025-07-21;2695741;REWE Bio;REWE Bio Quinoa Tricolore 500g;229;500g
 2025-07-21;9029547;REWE Bio;REWE Bio Quinoa Weiß 500g;229;500g (1 kg = 4,58 €)
-2025-07-21;871212;REWE Bio;REWE Bio Rahmspinat 450g;169;450g (1 kg = 3,76 €)
 2025-07-21;201435;REWE Bio;REWE Bio Rapsöl nativ 500ml;165;500ml (1 l = 3,30 €)
 2025-07-21;7823085;REWE Bio;REWE Bio Reinweinstein Backpulver vegan 4x16g;89;4x16g (1 kg = 13,91 €)
 2025-07-21;8094126;REWE Bio;REWE Bio Reiswaffeln Vollmilch 100g;169;100g (1 kg = 16,90 €)
