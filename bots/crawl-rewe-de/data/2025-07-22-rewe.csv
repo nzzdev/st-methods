@@ -467,8 +467,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-22;8231192;ja!;ja! Schmelzkäsescheiben Toast 250g;179;250g (1 kg = 7,16 €)
 2025-07-22;8135665;ja!;ja! Schmelzkäsescheiben mit Chester 250g;179;250g (1 kg = 7,16 €)
 2025-07-22;7971810;ja!;ja! Schnellhefter A4 in 10 Farben 10 Stück;209;10 Stück
-2025-07-22;9903504;ja!;ja! Schoko Müsli 750g;229;750g (1 kg = 3,05 €)
 2025-07-22;3004038;ja!;ja! Schoko Müsli 750g;229;750g (1 kg = 3,05 €)
+2025-07-22;9903504;ja!;ja! Schoko Müsli 750g;229;750g (1 kg = 3,05 €)
 2025-07-22;8989043;ja!;ja! Schoko-Spritzgebäck 250g;159;250g (1 kg = 6,36 €)
 2025-07-22;2724101;ja!;ja! Schokolade Ganze Nuss 100g;139;100g (1 kg = 13,90 €)
 2025-07-22;7091553;ja!;ja! Schokorosinen 200g;169;200g (1 kg = 8,45 €)
@@ -995,8 +995,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-22;7288865;REWE Beste Wahl;REWE Beste Wahl Olivenöl raffiniert 500ml;749;500ml (1 l = 14,98 €)
 2025-07-22;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-07-22;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;219;1l
-2025-07-22;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-07-22;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-07-22;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-07-22;8013483;REWE Beste Wahl;REWE Beste Wahl Oregano gerebelt 11g;199;11g (1 kg = 180,91 €)
 2025-07-22;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2025-07-22;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1407,7 +1407,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-22;7829813;REWE Bio;REWE Bio Geflügel Wiener 200g;399;200g (1 kg = 19,95 €)
 2025-07-22;7183743;REWE Bio;REWE Bio Geflügelbratwurst 160g;349;160g (1 kg = 21,81 €)
 2025-07-22;7634526;REWE Bio;REWE Bio Geflügelfond 400g;219;400g (1 kg = 5,48 €)
-2025-07-22;1267801;REWE Bio;REWE Bio Geflügelfrikadellen 200g;299;200g (1 kg = 14,95 €)
 2025-07-22;1267875;REWE Bio;REWE Bio Geflügelhackbällchen 300g;499;300g (1 kg = 16,63 €)
 2025-07-22;1396702;REWE Bio;REWE Bio Geflügelsalami mit Palmfett 70g;195;70g (1 kg = 27,86 €)
 2025-07-22;9015821;REWE Bio;REWE Bio Gegrillte Artischocken 125g;269;125g (1 kg = 21,52 €)
