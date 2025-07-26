@@ -343,8 +343,7 @@ if __name__ == '__main__':
                     f'Am {todaynice} änderte Rewe {count} ja! Preise:\n\n']
             else:
                 intro = [f'Am {todaynice} änderte Rewe 1 ja! Preis:\n\n']
-            df_ja = pd.DataFrame([intro], index=[
-                '0000000'], columns=['Tweet']).append(df_ja)
+            df_ja = pd.concat([pd.DataFrame([intro], index=['0000000'], columns=['Tweet']), df_ja], axis=0)
             # df_ja.to_csv(f'./data/{today}-ja-diff.csv', sep=';', index=False)
             df_ja.to_json(f'./data/{today}-ja-diff.json', orient='values')
 
@@ -473,8 +472,7 @@ if __name__ == '__main__':
             count = dftop_ja.shape[0]
             intro = [
                 f'Top 10 Preiserhöhungen bei #Rewe und #Aldi im {month_nice}:\n\n']
-            dftop_ja = pd.DataFrame([intro], index=['0000000'], columns=[
-                                    'Tweet']).append(dftop_ja)
+            dftop_ja = pd.concat([pd.DataFrame([intro], index=['0000000'], columns=['Tweet']), dftop_ja], axis=0)
 
             dftop_ja.to_json(
                 f'./data/{month_file}-ja-diff-monthly.json', orient='values')
@@ -688,8 +686,7 @@ if __name__ == '__main__':
                     f'Am {todaynice} änderte Rewe {count} ja! Preise:\n\n']
             else:
                 intro = [f'Am {todaynice} änderte Rewe 1 ja! Preis:\n\n']
-            df_ja = pd.DataFrame([intro], index=[
-                '0000000'], columns=['Tweet']).append(df_ja)
+            df_ja = pd.concat([pd.DataFrame([intro], index=['0000000'], columns=['Tweet']), df_ja], axis=0)
             df_ja.to_json(
                 f'./data/{today}-ja-diff-pickup.json', orient='values')
 
@@ -894,8 +891,7 @@ if __name__ == '__main__':
             count = dftop_ja.shape[0]
             intro = [
                 f'Top 10 Preiserhöhungen bei #Rewe und #Aldi im {month_nice}:\n\n']
-            dftop_ja = pd.DataFrame([intro], index=['0000000'], columns=[
-                                    'Tweet']).append(dftop_ja)
+            dftop_ja = pd.concat([pd.DataFrame([intro], index=['0000000'], columns=['Tweet']), dftop_ja], axis=0)
 
             dftop_ja.to_json(
                 f'./data/{month_file}-ja-diff-monthly-pickup.json', orient='values')
