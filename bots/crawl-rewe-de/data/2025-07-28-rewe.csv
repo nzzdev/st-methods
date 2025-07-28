@@ -465,7 +465,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-28;7043484;ja!;ja! Salami Sticks Classic 100g;199;100g (1 kg = 19,90 €)
 2025-07-28;6878636;ja!;ja! Salzstangen mit Meersalz 250g;69;250g (1 kg = 2,76 €)
 2025-07-28;7122765;ja!;ja! Sandwich Eis Classic 8x90ml;199;8x90ml (1 l = 2,76 €)
-2025-07-28;7121696;ja!;ja! Sandwich Eis Fürst Pückler Art 8x90ml;199;8x90ml (1 l = 2,76 €)
 2025-07-28;8294791;ja!;ja! Sardinen in Sonnenblumenöl 90g;99;90g (1 kg = 11 €)
 2025-07-28;7011318;ja!;ja! Sauerkirschen entsteint & gezuckert 350g;199;350g (1 kg = 5,69 €)
 2025-07-28;4507940;ja!;ja! Saure Sahne 200g;69;200g (1 kg = 3,45 €)
@@ -630,8 +629,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-28;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-07-28;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-07-28;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-07-28;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
 2025-07-28;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
+2025-07-28;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
 2025-07-28;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-07-28;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-07-28;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -1440,7 +1439,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-28;281097;REWE Bio;REWE Bio Grüne Erbsen 500g;189;500g (1 kg = 3,78 €)
 2025-07-28;8295555;REWE Bio;REWE Bio Grüne Oliven 180g;189;180g (1 kg = 10,50 €)
 2025-07-28;7359497;REWE Bio;REWE Bio Gurke 1 Stück;159;1 Stück
-2025-07-28;197889;REWE Bio;REWE Bio H-Vollmilch 3,8% 1l;125;1l
 2025-07-28;1287065;REWE Bio;REWE Bio Hackfleisch gemischt zum Braten 400g;849;400g (1 kg = 21,23 €)
 2025-07-28;8514209;REWE Bio;REWE Bio Hafer-Crunchy 500g;259;500g (1 kg = 5,18 €)
 2025-07-28;7205443;REWE Bio;REWE Bio Hafercookie 300g;149;300g (1 kg = 4,97 €)
