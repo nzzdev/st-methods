@@ -628,8 +628,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-29;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-07-29;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-07-29;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-07-29;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-07-29;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
+2025-07-29;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-07-29;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-07-29;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-07-29;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -845,6 +845,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-29;7636592;REWE Beste Wahl;REWE Beste Wahl Hummus Mango-Curry vegan 200g;169;200g (1 kg = 8,45 €)
 2025-07-29;7636594;REWE Beste Wahl;REWE Beste Wahl Hummus Pinienkerne vegan 200g;169;200g (1 kg = 8,45 €)
 2025-07-29;7580090;REWE Beste Wahl;REWE Beste Wahl Hummus getrocknete Tomate vegan 200g;169;200g (1 kg = 8,45 €)
+2025-07-29;8079152;REWE Beste Wahl;REWE Beste Wahl Hygienereiniger 1,5l;165;1,50l (1 l = 1,10 €)
 2025-07-29;7259597;REWE Beste Wahl;REWE Beste Wahl Hygienetücher 15 Stück;149;15 Stück
 2025-07-29;9960502;REWE Beste Wahl;REWE Beste Wahl Hähnchen Gärtnerin mit Gemüse & Sahne 450g;289;450g (1 kg = 6,42 €)
 2025-07-29;9955447;REWE Beste Wahl;REWE Beste Wahl Hähnchen Mediterran mit Pasta & Gemüse 400g;249;400g (1 kg = 6,23 €)
@@ -1057,7 +1058,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-07-29;2241405;REWE Beste Wahl;REWE Beste Wahl Raspelschokolade Vollmilch 100g;199;100g (1 kg = 19,90 €)
 2025-07-29;2241414;REWE Beste Wahl;REWE Beste Wahl Raspelschokolade edelherb 100g;199;100g (1 kg = 19,90 €)
 2025-07-29;8247853;REWE Beste Wahl;REWE Beste Wahl Regenbogen-Forellen 2 Stück, 500g;599;500g (1 kg = 11,98 €)
-2025-07-29;7624895;REWE Beste Wahl;REWE Beste Wahl Reines Rapsöl 750ml;249;750ml (1 l = 3,32 €)
 2025-07-29;7529560;REWE Beste Wahl;REWE Beste Wahl Reispapier ø22cm 100g;89;100g (1 kg = 8,90 €)
 2025-07-29;8470640;REWE Beste Wahl;REWE Beste Wahl Respeggt Eier Freilandhaltung 10 Stück;269;10 Stück
 2025-07-29;7166365;REWE Beste Wahl;REWE Beste Wahl Rinder-Gulasch mit Spätzle in pikanter Sauce 400g;399;400g (1 kg = 9,98 €)
