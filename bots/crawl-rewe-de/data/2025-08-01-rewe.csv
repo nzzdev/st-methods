@@ -1012,8 +1012,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-01;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-08-01;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;219;1l
 2025-08-01;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-08-01;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-08-01;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-08-01;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-08-01;8013483;REWE Beste Wahl;REWE Beste Wahl Oregano gerebelt 11g;199;11g (1 kg = 180,91 €)
 2025-08-01;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2025-08-01;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1415,6 +1415,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-01;9015066;REWE Bio;REWE Bio Fruchtpüree Apfel Pfirsich Mango 400g;219;400g (1 kg = 5,48 €)
 2025-08-01;8936906;REWE Bio;REWE Bio Fruchtschnitte Banane Maracuja 150g;289;150g (1 kg = 19,27 €)
 2025-08-01;7681325;REWE Bio;REWE Bio Fruchtschnitte Cranberry-Kirsch 150g;289;150g (1 kg = 19,27 €)
+2025-08-01;9050225;REWE Bio;REWE Bio Früchtetee 40g 20 Beutel;95;40g (1 kg = 23,75 €)
 2025-08-01;7547590;REWE Bio;REWE Bio Frühstücksdirektsaft 1l;259;1l
 2025-08-01;7050770;REWE Bio;REWE Bio Fusilli Vollkorn Dinkel 500g;155;500g (1 kg = 3,10 €)
 2025-08-01;8822460;REWE Bio;REWE Bio Garam Masala gemahlen 30g;259;30g (1 kg = 86,33 €)
