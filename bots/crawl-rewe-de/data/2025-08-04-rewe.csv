@@ -1012,8 +1012,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-04;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-08-04;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;219;1l
 2025-08-04;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-08-04;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-08-04;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-08-04;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-08-04;8013483;REWE Beste Wahl;REWE Beste Wahl Oregano gerebelt 11g;199;11g (1 kg = 180,91 €)
 2025-08-04;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2025-08-04;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1620,6 +1620,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-04;294936;REWE Bio;REWE Bio Passata passierte Tomaten 700g;159;700g (1 kg = 2,27 €)
 2025-08-04;9922622;REWE Bio;REWE Bio Passierte Tomaten 500g;69;500g (1 kg = 1,38 €)
 2025-08-04;7713655;REWE Bio;REWE Bio Penne Vollkorn 500g;85;500g (1 kg = 1,70 €)
+2025-08-04;8488972;REWE Bio;REWE Bio Pesto Rosso 130g;249;130g (1 kg = 19,15 €)
 2025-08-04;8486583;REWE Bio;REWE Bio Pesto Verde vegan 130g;249;130g (1 kg = 19,15 €)
 2025-08-04;184650;REWE Bio;REWE Bio Petersilie 50g;99;50g (1 kg = 19,80 €)
 2025-08-04;577536;REWE Bio;REWE Bio Pfeffer Mühle schwarz ganz 45g;349;45g (1 kg = 77,56 €)
