@@ -16,7 +16,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;8626092;ja!;ja! Back-Camembert 300g;259;300g (1 kg = 8,63 €)
 2025-08-09;8543757;ja!;ja! Backcamembert mit Wild-Preiselbeerdip 350g;299;350g (1 kg = 8,54 €)
 2025-08-09;2236174;ja!;ja! Backfertiger Pizzateig mit Sauce 600g;199;600g (1 kg = 3,32 €)
-2025-08-09;8633310;ja!;ja! Backfisch Stäbchen 15 Stück 405g;249;405g (1 kg = 6,15 €)
 2025-08-09;1317360;ja!;ja! Backpapierzuschnitte 30 Stück;95;30 Stück
 2025-08-09;1478263;ja!;ja! Backpulver 10x15g;59;10x15g (1 kg = 3,93 €)
 2025-08-09;7955686;ja!;ja! Bacon in Streifen 250g;279;250g (1 kg = 11,16 €)
@@ -249,6 +248,353 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;2025529;ja!;ja! Hundesticks mit Wild 8x11g;95;8x11g (1 kg = 10,80 €)
 2025-08-09;7955894;ja!;ja! Hähnchen;659;1 Stück ca. 1100 g (1 kg = 5,99 €)
 2025-08-09;7879677;ja!;ja! Hähnchen Drumsticks BBQ Texas Style 750g;399;750g (1 kg = 5,32 €)
+2025-08-09;2198857;ja!;ja! Hähnchen Filetsteaks 400g;499;400g (1 kg = 12,48 €)
+2025-08-09;8371596;ja!;ja! Hähnchen Filetstreifen 250g;279;250g (1 kg = 11,16 €)
+2025-08-09;8540960;ja!;ja! Hähnchen Flügel ohne Spitze 480g;278;1 Stück ca. 480 g (1 kg = 5,80 €)
+2025-08-09;8611852;ja!;ja! Hähnchen Schnitzel XXL 500g;449;500g (1 kg = 8,98 €)
+2025-08-09;8468236;ja!;ja! Hähnchen-Brustfilet 600g;679;600g (1 kg = 11,32 €)
+2025-08-09;7980552;ja!;ja! Hähnchen-Innenbrustfilet 400g;499;400g (1 kg = 12,48 €)
+2025-08-09;3252334;ja!;ja! Hähnchenbrustfilet Paprika 150g;239;150g (1 kg = 15,93 €)
+2025-08-09;2198745;ja!;ja! Hähnchenschenkel natur 1kg;379;1000g
+2025-08-09;2202616;ja!;ja! Hähnchenschnitten Cordon Bleu 500g;469;500g (1 kg = 9,38 €)
+2025-08-09;8573928;ja!;ja! Hähnchenschnitzel 300g;349;300g (1 kg = 11,63 €)
+2025-08-09;7196141;ja!;ja! Hörnchen Frischei Nudeln 500g;119;500g (1 kg = 2,38 €)
+2025-08-09;8359468;ja!;ja! Irische Butter aus Weidemilch 250g;269;250g (1 kg = 10,76 €)
+2025-08-09;2239595;ja!;ja! Jaffa Cake Orange 300g;199;300g (1 kg = 6,63 €)
+2025-08-09;6387918;ja!;ja! Jagdwurst 200g;119;200g (1 kg = 5,95 €)
+2025-08-09;8350407;ja!;ja! Jasmin Reis 1kg;249;1000g
+2025-08-09;8601073;ja!;ja! Joghurt Dressing 250ml;99;250ml (1 l = 3,96 €)
+2025-08-09;8514626;ja!;ja! Joghurt Griechischer Art Natur 4x150g;149;4x600g (1 kg = 2,48 €)
+2025-08-09;8600575;ja!;ja! Joghurt Light Dressing 250ml;99;250ml (1 l = 3,96 €)
+2025-08-09;754432;ja!;ja! Joghurt mild 0,1% 500g;89;500g (1 kg = 1,78 €)
+2025-08-09;8324448;ja!;ja! Joghurt mild 3,5 % Fett 500g;99;500g (1 kg = 1,98 €)
+2025-08-09;7683149;ja!;ja! Joghurt-Erzeugnis griechischer Art 2% 1kg;229;1kg
+2025-08-09;9045552;ja!;ja! Jumbo Fries 1kg;179;1000g
+2025-08-09;8985374;ja!;ja! Junge Erbsen sehr fein 1kg;239;1000g
+2025-08-09;7691883;ja!;ja! Kaffe Klassik 40 Pads, 280g;539;280g (1 kg = 19,25 €)
+2025-08-09;7691945;ja!;ja! Kaffee Pads 280g, 40 Pads;539;280g (1 kg = 19,25 €)
+2025-08-09;2755729;ja!;ja! Kaffee-Filter Größe 4, 100 Stück;79;NaN
+2025-08-09;7690248;ja!;ja! Kaffeepads mild 40 Stück, 280g;539;280g (1 kg = 19,25 €)
+2025-08-09;8187738;ja!;ja! Kaffeesahne 20x10g;99;200g (1 kg = 4,95 €)
+2025-08-09;8187754;ja!;ja! Kaffeeweißer 250g;159;250g (1 kg = 6,36 €)
+2025-08-09;2290204;ja!;ja! Kaisergemüse 1kg;239;1000g
+2025-08-09;7257866;ja!;ja! Kakaopulver Instant 800g;429;800g (1 kg = 5,36 €)
+2025-08-09;546026;ja!;ja! Kamillentee 37,5g, 25 Beutel;89;37,50g (1 kg = 23,73 €)
+2025-08-09;7999173;ja!;ja! Karteikarten DIN A6 100 Stück;249;100 Stück
+2025-08-09;8553081;ja!;ja! Kartoffel Wedges 750g;179;750g (1 kg = 2,39 €)
+2025-08-09;7923861;ja!;ja! Kartoffelpuffer 600g;179;600g (1 kg = 2,98 €)
+2025-08-09;210205;ja!;ja! Katzenfutter Feine Häppchen 4 Sorten 8x100g;240;8x100g (1 kg = 3 €)
+2025-08-09;210260;ja!;ja! Katzenfutter Feine Pasteten 4 Sorten 8x100g;240;8x100g (1 kg = 3 €)
+2025-08-09;8059113;ja!;ja! Kaugummi white Minze zuckerfrei 50 Stück;155;50 Stück
+2025-08-09;1395504;ja!;ja! Kaustreifen mit Rind 20 Stück;59;200g (1 kg = 2,95 €)
+2025-08-09;9157630;ja!;ja! Kefir Natur 500g;89;500g (1 kg = 1,78 €)
+2025-08-09;7814109;ja!;ja! Kichererbsen 265g;59;265g (1 kg = 2,23 €)
+2025-08-09;8867056;ja!;ja! Kichererbsen 390g;169;390g (1 kg = 4,33 €)
+2025-08-09;914670;ja!;ja! Kidney-Bohnen rot 255g;69;255g (1 kg = 2,71 €)
+2025-08-09;2565945;ja!;ja! King Prawns Garnelen 225g;349;225g (1 kg = 15,51 €)
+2025-08-09;8725350;ja!;ja! Kirsch Grütze 500g;219;500g (1 kg = 4,38 €)
+2025-08-09;2737743;ja!;ja! Knabberbox 300g;169;300g (1 kg = 5,63 €)
+2025-08-09;7951974;ja!;ja! Knoblauchbrot 250g;139;250g (1 kg = 5,56 €)
+2025-08-09;2360956;ja!;ja! Knoblauchbutter-Baguette 175g;99;175g (1 kg = 5,66 €)
+2025-08-09;8395317;ja!;ja! Knusper Müsli weniger süss 600g;229;600g (1 kg = 3,82 €)
+2025-08-09;7891291;ja!;ja! Knusperfilet im Backteig 400g;279;400g (1 kg = 6,98 €)
+2025-08-09;9929445;ja!;ja! Knusperkissen Käse & Huhn 150g;95;150g (1 kg = 6,33 €)
+2025-08-09;9015171;ja!;ja! Knäckebrot Sesam 250g;139;250g (1 kg = 5,56 €)
+2025-08-09;1008594;ja!;ja! Kokosraspeln 200g;129;200g (1 kg = 6,45 €)
+2025-08-09;7642029;ja!;ja! Komfort Toilettenpapier 3-lagig 10x220 Blatt;395;10x220 Stück
+2025-08-09;8192570;ja!;ja! Kondensmilch 4% Fett 340g;79;340g (1 kg = 2,32 €)
+2025-08-09;6621155;ja!;ja! Kondensmilch 7,5% Fett 340g;89;340g (1 kg = 2,62 €)
+2025-08-09;1956646;ja!;ja! Kosmetikeimer-Beutel 75 Stück;65;75 Stück
+2025-08-09;6322379;ja!;ja! Kroketten 750g;179;750g (1 kg = 2,39 €)
+2025-08-09;2421604;ja!;ja! Kräuter-Frischkäse 300g;169;300g (1 kg = 5,63 €)
+2025-08-09;6714161;ja!;ja! Kräuterbutter-Baguette 175g;99;175g (1 kg = 5,66 €)
+2025-08-09;8484216;ja!;ja! Kugelschreiber blau 4 Stück;199;4 Stück
+2025-08-09;2030321;ja!;ja! Käse-Gebäckstangen 150g;159;150g (1 kg = 10,60 €)
+2025-08-09;7149379;ja!;ja! Käseaufschnitt 250g;219;250g (1 kg = 8,76 €)
+2025-08-09;2296035;ja!;ja! Käseaufschnitt leicht 250g;219;250g (1 kg = 8,76 €)
+2025-08-09;8291601;ja!;ja! Käsesnack Gouda Maasdamer 220g;289;220g (1 kg = 13,14 €)
+2025-08-09;2045420;ja!;ja! Königsberger Klopse 450g;229;450g (1 kg = 5,09 €)
+2025-08-09;7030814;ja!;ja! Körniger Frischkäse Halbfettstufe 200g;119;200g (1 kg = 5,95 €)
+2025-08-09;8081196;ja!;ja! Küchenmesser 2 Stück;199;2 Stück
+2025-08-09;7862977;ja!;ja! Küchentücher 4x128 Blatt;275;4x128 Stück
+2025-08-09;8639885;ja!;ja! LED Kerze E14 470 Lumen 40 Watt 2 Stück;499;2 Stück
+2025-08-09;8643461;ja!;ja! LED Leuchtmittel E27 1055 Lumen 75 Watt 2 Stück;599;2 Stück
+2025-08-09;7861437;ja!;ja! LED Leuchtmittel G9 320 Lumen 26 Watt 1 Stück;399;1 Stück
+2025-08-09;7249172;ja!;ja! Lachsforelle 100g;299;100g (1 kg = 29,90 €)
+2025-08-09;8307611;ja!;ja! Landschinken luftgetrocknet 150g;225;150g (1 kg = 15 €)
+2025-08-09;1062430;ja!;ja! Langkorn-Spitzenreis im Kochbeutel 4x125g;99;4x125g (1 kg = 1,98 €)
+2025-08-09;1007001;ja!;ja! Lasagne Bolognese 1kg;399;1kg
+2025-08-09;2269278;ja!;ja! Lasagne Bolognese 400g;199;400g (1 kg = 4,98 €)
+2025-08-09;8484122;ja!;ja! Lasagne Gemüse 400g;199;400g (1 kg = 4,98 €)
+2025-08-09;2464033;ja!;ja! Latte Espresso 250ml;75;250ml (1 l = 3 €)
+2025-08-09;2462970;ja!;ja! Latte Macchiato 250ml;75;250ml (1 l = 3 €)
+2025-08-09;7722035;ja!;ja! Latte Macchiato weniger süß 250ml;75;250ml (1 l = 3 €)
+2025-08-09;2888923;ja!;ja! Leberwurst fein 175g;139;175g (1 kg = 7,94 €)
+2025-08-09;7818635;ja!;ja! Linsen mit Suppengrün 530g;119;530g (1 kg = 2,25 €)
+2025-08-09;7668461;ja!;ja! Lungo Intenso 20 Kapseln, 100g;399;100g (1 kg = 39,90 €)
+2025-08-09;2223785;ja!;ja! Löffelbiskuit 400g;149;400g (1 kg = 3,73 €)
+2025-08-09;6337295;ja!;ja! Maasdamer 300g;269;300g (1 kg = 8,97 €)
+2025-08-09;8002548;ja!;ja! Macadamia geröstet & gesalzen 125g;269;125g (1 kg = 21,52 €)
+2025-08-09;7197142;ja!;ja! Maccronelli Frischei Nudeln 500g;119;500g (1 kg = 2,38 €)
+2025-08-09;8483301;ja!;ja! Makkaroni Auflauf 400g;199;400g (1 kg = 4,98 €)
+2025-08-09;7011210;ja!;ja! Mandarin-Orangen 175g;89;175g (1 kg = 5,09 €)
+2025-08-09;1008576;ja!;ja! Mandeln ganze Kerne 200g;229;200g (1 kg = 11,45 €)
+2025-08-09;1008584;ja!;ja! Mandeln gehackt 100g;99;100g (1 kg = 9,90 €)
+2025-08-09;1008585;ja!;ja! Mandeln gehobelt 100g;99;100g (1 kg = 9,90 €)
+2025-08-09;1008588;ja!;ja! Mandeln gemahlen 200g;199;200g (1 kg = 9,95 €)
+2025-08-09;1008582;ja!;ja! Mandeln gestiftelt 100g;99;100g (1 kg = 9,90 €)
+2025-08-09;7799478;ja!;ja! Margherita Mini Pizza 360g;249;360g (1 kg = 6,92 €)
+2025-08-09;5883121;ja!;ja! Markenbutter mild gesäuert 250g;199;250g (1 kg = 7,96 €)
+2025-08-09;8155103;ja!;ja! Mascarpone 250g;229;250g (1 kg = 9,16 €)
+2025-08-09;7835907;ja!;ja! Maxi Teelichter 12 Stück;349;12 Stück
+2025-08-09;8602560;ja!;ja! Meersalz 110g;99;110g (1 kg = 9 €)
+2025-08-09;7914158;ja!;ja! Mehrkornbrötchen 8 Stück 560g;129;560g (1 kg = 2,30 €)
+2025-08-09;1374472;ja!;ja! Mett-Enden geräuchert 300g;279;300g (1 kg = 9,30 €)
+2025-08-09;9971307;ja!;ja! Mignonwaffeln vegan 400g;299;400g (1 kg = 7,48 €)
+2025-08-09;7774531;ja!;ja! Milch Schoko & Keks Sticks 90g;149;90g (1 kg = 16,56 €)
+2025-08-09;2107010;ja!;ja! Milchreis 500g;99;500g (1 kg = 1,98 €)
+2025-08-09;7164812;ja!;ja! Milchreis mit Kirschen 400g;249;400g (1 kg = 6,23 €)
+2025-08-09;8125487;ja!;ja! Milder Röstkaffee 500g;699;500g (1 kg = 13,98 €)
+2025-08-09;9004553;ja!;ja! Milky Sticks Vanille 8x42ml;149;8x336ml (1 l = 0,55 €)
+2025-08-09;7682608;ja!;ja! Mini Berliner 300g;299;300g (1 kg = 9,97 €)
+2025-08-09;7659604;ja!;ja! Mini Brotchips Knoblauch 250g;179;250g (1 kg = 7,16 €)
+2025-08-09;9940657;ja!;ja! Mini Chinois mit Cremefüllung 6 Stück 300g;299;300g
+2025-08-09;8038378;ja!;ja! Mini Cordon Bleu 400g;399;400g (1 kg = 9,98 €)
+2025-08-09;8066826;ja!;ja! Mini Mozzarella 125g;129;125g (1 kg = 10,32 €)
+2025-08-09;8168436;ja!;ja! Mini Mozzarella Light 250g;129;125g (1 kg = 10,32 €)
+2025-08-09;7928306;ja!;ja! Mini Pizza Salami 360g;249;360g (1 kg = 6,92 €)
+2025-08-09;8401219;ja!;ja! Mini Schokoriegel Mix 500g;349;500g (1 kg = 6,98 €)
+2025-08-09;8481166;ja!;ja! Mini Textmarker 4 Stück;299;4 Stück
+2025-08-09;2407834;ja!;ja! Mini Wiener Würstchen 2x160g;249;2x160g (1 kg = 7,78 €)
+2025-08-09;165932;ja!;ja! Mini-Brezeln 250g;99;250g (1 kg = 3,96 €)
+2025-08-09;8267887;ja!;ja! Mini-Cabanossi 250g;289;250g (1 kg = 11,56 €)
+2025-08-09;2318701;ja!;ja! Mini-Geflügelfrikadellen 500g;319;500g (1 kg = 6,38 €)
+2025-08-09;2146675;ja!;ja! Mini-Windbeutel 250g;149;250g (1 kg = 5,96 €)
+2025-08-09;891930;ja!;ja! Mini-Zimtos 750g;249;750g (1 kg = 3,32 €)
+2025-08-09;8434947;ja!;ja! Mozzarella 125g;85;125g (1 kg = 6,80 €)
+2025-08-09;9027434;ja!;ja! Mozzarella Maxi Rolle 330g;129;200g (1 kg = 6,45 €)
+2025-08-09;8836740;ja!;ja! Mozzarella Sticks 250g;219;250g (1 kg = 8,76 €)
+2025-08-09;7801213;ja!;ja! Mozzarella light 125g;85;125g (1 kg = 6,80 €)
+2025-08-09;8084761;ja!;ja! Muffinförmchen 200 Stück weiß;199;200 Stück
+2025-08-09;8667375;ja!;ja! Muffins Schoko & Stracciatella 360g;189;360g (1 kg = 5,25 €)
+2025-08-09;8595091;ja!;ja! Multivitaminsaft 6x1l;870;6x1l (1 l = 1,45 €)
+2025-08-09;2773176;ja!;ja! Müllbeutel mit Tragegriff 50l 20 Stück;55;20 Stück
+2025-08-09;119149;ja!;ja! Müllbeutel mit Zugband 60l, 30 Stück;165;30 Stück
+2025-08-09;1947887;ja!;ja! Mülleimer-Beutel + Tragegriff 35l, 25 Stück;119;25 Stück
+2025-08-09;1098419;ja!;ja! Mülleimer-Beutel mit Tragegriff 25l, 30 Stück;65;30 Stück
+2025-08-09;8083764;ja!;ja! Müllsäcke 30l mit Zugband 25 Stück;199;NaN
+2025-08-09;8303970;ja!;ja! Müllsäcke 60l mit Zugbeutel 25 Stück;249;25 Stück
+2025-08-09;8051487;ja!;ja! Nasi Goreng 750g;349;750g (1 kg = 4,65 €)
+2025-08-09;420386;ja!;ja! Natives Olivenöl extra 750ml;599;750ml (1 l = 7,99 €)
+2025-08-09;9112460;ja!;ja! Neapolitaner Waffeln 4x65g;149;4x65g (1 kg = 5,73 €)
+2025-08-09;7959110;ja!;ja! Nougat Hörnchen 240g;159;240g (1 kg = 6,63 €)
+2025-08-09;7693773;ja!;ja! Nudel Frikadellen Pfanne 600g;299;600g (1 kg = 4,98 €)
+2025-08-09;8726700;ja!;ja! Nudeltopf in Rahmsauce 63g;89;63g (1 kg = 14,13 €)
+2025-08-09;3151703;ja!;ja! Nusskernmischung naturell ungesalzen & ungeröstet 200g;299;200g (1 kg = 14,95 €)
+2025-08-09;7709655;ja!;ja! Nussmix geröstet und gesalzen 150g;139;150g (1 kg = 9,27 €)
+2025-08-09;7776207;ja!;ja! Nut Flakes 750g;249;750g (1 kg = 3,32 €)
+2025-08-09;2949713;ja!;ja! Ofenkäse würzig 180g;229;180g (1 kg = 12,72 €)
+2025-08-09;9851541;ja!;ja! Onigiri Chicken-Teriyaki 100g;219;100g (1 kg = 21,90 €)
+2025-08-09;9851227;ja!;ja! Onigiri Lachs-Teriyaki 100g;219;100g (1 kg = 21,90 €)
+2025-08-09;9067754;ja!;ja! Onion Rings 250g;219;250g (1 kg = 8,76 €)
+2025-08-09;518913;ja!;ja! Orangen-Limonade 6x1,5l;390;6x1,50l (1 l = 0,43 €)
+2025-08-09;7226202;ja!;ja! Orangenlimonade 0% Zucker 6x1,5l;390;6x1,50l (1 l = 0,43 €)
+2025-08-09;8582624;ja!;ja! Orangennektar 6x1,5l;1194;6x1,50l (1 l = 1,33 €)
+2025-08-09;8596615;ja!;ja! Orangensaft 6x1l;1314;6x1l (1 l = 2,19 €)
+2025-08-09;8309744;ja!;ja! Original Nürnberger Rostbratwürstchen 300g;329;300g (1 kg = 10,97 €)
+2025-08-09;9967582;ja!;ja! Packband braun 66m x 50mm;299;1 Stück
+2025-08-09;9953470;ja!;ja! Packband transparent 66m x 50mm;299;1 Stück
+2025-08-09;8455387;ja!;ja! Paella Pfanne mit Meeresfrüchten, Seelachsfilet und Hähnchenbrust 750g;349;750g (1 kg = 4,65 €)
+2025-08-09;5905605;ja!;ja! Paniermehl 1kg;159;1000g
+2025-08-09;6953115;ja!;ja! Paprika Chips 200g;109;200g (1 kg = 5,45 €)
+2025-08-09;7227868;ja!;ja! Parboiled Spitzenreis Langkornreis 1kg;159;1000g
+2025-08-09;7224493;ja!;ja! Party-Nüsse Paprika 200g;129;200g (1 kg = 6,45 €)
+2025-08-09;9901873;ja!;ja! Peanut Snack 300g;229;300g (1 kg = 7,63 €)
+2025-08-09;7857524;ja!;ja! Penne Gorgonzola mit feinem Blattspinat 750g;299;750g (1 kg = 3,99 €)
+2025-08-09;688014;ja!;ja! Penne Rigate 500g;79;500g (1 kg = 1,58 €)
+2025-08-09;8100989;ja!;ja! Pesto Rosso 190g;99;190g (1 kg = 5,21 €)
+2025-08-09;8101877;ja!;ja! Pesto Verde 190g;99;190g (1 kg = 5,21 €)
+2025-08-09;7920165;ja!;ja! Pfeffer Mühle schwarz ganz 50g;99;50g (1 kg = 19,80 €)
+2025-08-09;546040;ja!;ja! Pfefferminztee 56g, 25 Beutel;89;56,25g (1 kg = 15,82 €)
+2025-08-09;7163656;ja!;ja! Pflanzencreme 500ml;149;500ml (1 l = 2,98 €)
+2025-08-09;2325000;ja!;ja! Pinienkerne 50g;229;50g (1 kg = 45,80 €)
+2025-08-09;3182684;ja!;ja! Pistazien geröstet & gesalzen 250g;349;250g (1 kg = 13,96 €)
+2025-08-09;8884094;ja!;ja! Pistazien geröstet & ungesalzen 250g;349;250g (1 kg = 13,96 €)
+2025-08-09;8288407;ja!;ja! Pizza Salami 3x350g;399;3x350g (1 kg = 3,80 €)
+2025-08-09;8623800;ja!;ja! Pizza Teig XXL 550g;129;550g (1 kg = 2,35 €)
+2025-08-09;9035193;ja!;ja! Pommes Frites Feinschnitt 1kg;169;1000g
+2025-08-09;2123526;ja!;ja! Pommes Frites Wellenschnitt 1kg;169;1000g
+2025-08-09;7097534;ja!;ja! Prinzessbohnen 1000g;239;1000g
+2025-08-09;8457317;ja!;ja! Prospekthüllen DINA4 matt 30 Stück;119;30 Stück
+2025-08-09;8130280;ja!;ja! Präge-Servietten weiß 100 Stück;99;100 Stück
+2025-08-09;7877621;ja!;ja! Pute-Ei Sandwich 185g;199;185g (1 kg = 10,76 €)
+2025-08-09;9939987;ja!;ja! Puten-Schnitzel 500g;599;500g (1 kg = 11,98 €)
+2025-08-09;5966590;ja!;ja! Putenbrustfilet 100g;149;100g (1 kg = 14,90 €)
+2025-08-09;9097966;ja!;ja! Putenbrustfilet frisch ca. 800g;949;1 Stück ca. 800 g (1 kg = 11,86 €)
+2025-08-09;7942517;ja!;ja! Putenbrustfilet gepökelt, gebacken 150g;189;150g (1 kg = 12,60 €)
+2025-08-09;5249473;ja!;ja! Raffinade-Zucker 1kg;89;1000g
+2025-08-09;207470;ja!;ja! Rahmspinat 450g;89;450g (1 kg = 1,98 €)
+2025-08-09;8433245;ja!;ja! Reibekäse leicht 30% Fett 250g;199;250g (1 kg = 7,96 €)
+2025-08-09;5724546;ja!;ja! Reine Buttermilch 500g;59;500g (1 kg = 1,18 €)
+2025-08-09;7049625;ja!;ja! Reines Pflanzenfett 1kg;279;1000g
+2025-08-09;6801447;ja!;ja! Reines Rapsöl 1l;149;1l
+2025-08-09;1312921;ja!;ja! Remoulade 500ml;159;500ml (1 l = 3,18 €)
+2025-08-09;7978794;ja!;ja! Rinder-Hackfleisch 500g;619;500g (1 kg = 12,38 €)
+2025-08-09;2432136;ja!;ja! Rindfleisch-Hamburger 400g;549;400g (1 kg = 13,73 €)
+2025-08-09;7125770;ja!;ja! Rosenkohl tiefgefroren 1kg;239;1000g
+2025-08-09;7105464;ja!;ja! Rote Bete Scheiben 430g;109;430g (1 kg = 2,53 €)
+2025-08-09;8671841;ja!;ja! Rote Grütze 500g;219;500g (1 kg = 4,38 €)
+2025-08-09;8705451;ja!;ja! Rote Paprika in Streifen 165g;99;165g (1 kg = 6 €)
+2025-08-09;349396;ja!;ja! Rotkohl 650g;119;650g (1 kg = 1,83 €)
+2025-08-09;7621888;ja!;ja! Rührteig-Tortenboden 300g;179;300g (1 kg = 5,97 €)
+2025-08-09;7163701;ja!;ja! Saftige Brocken 3 Sorten 1240g;149;1240g (1 kg = 1,20 €)
+2025-08-09;7180200;ja!;ja! Saftige Brocken mit Geflügel 1240g;149;1240g (1 kg = 1,20 €)
+2025-08-09;3156228;ja!;ja! Saftige Pastete mit Rind & Leber 300g;75;300g (1 kg = 2,50 €)
+2025-08-09;3156235;ja!;ja! Saftige Pastete mit Wild & Geflügel 300g;75;300g (1 kg = 2,50 €)
+2025-08-09;7938679;ja!;ja! Sahne Pudding Schoko 200g;49;200g (1 kg = 2,45 €)
+2025-08-09;8529987;ja!;ja! Sahne Pudding Vanillegeschmack 200g;49;200g (1 kg = 2,45 €)
+2025-08-09;7204582;ja!;ja! Sahne-Heringsfilets 400g;199;400g (1 kg = 4,98 €)
+2025-08-09;8271521;ja!;ja! Sahnejoghurt nach griechischer Art 1kg;229;1kg
+2025-08-09;8295809;ja!;ja! Sahnesteif 5x8g;39;5x8g (1 kg = 9,75 €)
+2025-08-09;8939449;ja!;ja! Salami Baguette 125g;299;6x125g (1 kg = 3,99 €)
+2025-08-09;7043484;ja!;ja! Salami Sticks Classic 100g;199;100g (1 kg = 19,90 €)
+2025-08-09;6878636;ja!;ja! Salzstangen mit Meersalz 250g;69;250g (1 kg = 2,76 €)
+2025-08-09;7122765;ja!;ja! Sandwich Eis Classic 8x90ml;199;8x90ml (1 l = 2,76 €)
+2025-08-09;7121696;ja!;ja! Sandwich Eis Fürst Pückler Art 8x90ml;199;8x90ml (1 l = 2,76 €)
+2025-08-09;8294791;ja!;ja! Sardinen in Sonnenblumenöl 90g;99;90g (1 kg = 11 €)
+2025-08-09;7011318;ja!;ja! Sauerkirschen entsteint & gezuckert 350g;319;350g (1 kg = 9,11 €)
+2025-08-09;4507940;ja!;ja! Saure Sahne 200g;69;200g (1 kg = 3,45 €)
+2025-08-09;8100477;ja!;ja! Schaschlikspieße 20cm 125 Stück;149;125 Stück
+2025-08-09;8895117;ja!;ja! Schinkenbockwurst 500g;375;500g (1 kg = 7,50 €)
+2025-08-09;6387934;ja!;ja! Schinkenwurst 200g;99;200g (1 kg = 4,95 €)
+2025-08-09;6320406;ja!;ja! Schinkenwürfel 2x125g;239;2x125g (1 kg = 9,56 €)
+2025-08-09;64840;ja!;ja! Schlagsahne 200g;99;200g (1 kg = 4,95 €)
+2025-08-09;8187819;ja!;ja! Schmand 200g;99;200g (1 kg = 4,95 €)
+2025-08-09;43593;ja!;ja! Schmelzkäse sahnig 200g;169;200g (1 kg = 8,45 €)
+2025-08-09;8130752;ja!;ja! Schmelzkäsescheiben Allgäuer Art 250g;179;250g (1 kg = 7,16 €)
+2025-08-09;8231192;ja!;ja! Schmelzkäsescheiben Toast 250g;179;250g (1 kg = 7,16 €)
+2025-08-09;8135665;ja!;ja! Schmelzkäsescheiben mit Chester 250g;179;250g (1 kg = 7,16 €)
+2025-08-09;7971810;ja!;ja! Schnellhefter A4 in 10 Farben 10 Stück;209;10 Stück
+2025-08-09;9903504;ja!;ja! Schoko Müsli 750g;229;750g (1 kg = 3,05 €)
+2025-08-09;8989043;ja!;ja! Schoko-Spritzgebäck 250g;159;250g (1 kg = 6,36 €)
+2025-08-09;2724101;ja!;ja! Schokolade Ganze Nuss 100g;139;100g (1 kg = 13,90 €)
+2025-08-09;7091553;ja!;ja! Schokorosinen 200g;169;200g (1 kg = 8,45 €)
+2025-08-09;2411380;ja!;ja! Schupfnudeln 500g;179;500g (1 kg = 3,58 €)
+2025-08-09;702501;ja!;ja! Schwammtuch 5 Stück;85;5 Stück
+2025-08-09;7009593;ja!;ja! Schwarzwälder Schinken 200g;249;200g (1 kg = 12,45 €)
+2025-08-09;8038162;ja!;ja! Schweine Mini Schnitzel 400g;399;400g (1 kg = 9,98 €)
+2025-08-09;8501490;ja!;ja! Schweine Pfannengyros 500g;479;500g (1 kg = 9,58 €)
+2025-08-09;8489310;ja!;ja! Schweine Schnitzel Wiener Art 750g;599;750g (1 kg = 7,99 €)
+2025-08-09;8615856;ja!;ja! Schweine Schnitzel Wiener Art XXL 500g;479;500g (1 kg = 9,58 €)
+2025-08-09;5490332;ja!;ja! Schweine-Bratwurst grob 4x100g;289;400g (1 kg = 7,23 €)
+2025-08-09;1437254;ja!;ja! Schweine-Geschnetzeltes nach Gyros-Art 500g;429;500g (1 kg = 8,58 €)
+2025-08-09;8457562;ja!;ja! Schweine-Gulasch 500g;419;500g (1 kg = 8,38 €)
+2025-08-09;2080731;ja!;ja! Schweine-Minutensteaks aus dem Rücken 400g;379;400g (1 kg = 9,48 €)
+2025-08-09;2234973;ja!;ja! Schweine-Nackenkotelett 4 Stück, 700g;499;700g (1 kg = 7,13 €)
+2025-08-09;2080727;ja!;ja! Schweine-Schinkenschnitzel;599;600g (1 kg = 9,98 €)
+2025-08-09;2314012;ja!;ja! Schweine-Stielkotelett 700g;499;700g (1 kg = 7,13 €)
+2025-08-09;7702698;ja!;ja! Schweinefilet ca. 580g;724;1 Stück ca. 580 g (1 kg = 12,49 €)
+2025-08-09;3155797;ja!;ja! Semmelknödel 6er 200g;99;200g (1 kg = 4,95 €)
+2025-08-09;7895784;ja!;ja! Senf-Honig Dressing 250ml;99;250ml (1 l = 3,96 €)
+2025-08-09;875402;ja!;ja! Servietten champagner 30 Stück;75;30 Stück
+2025-08-09;6966314;ja!;ja! Servietten rot 30 Stück;75;30 Stück
+2025-08-09;8130620;ja!;ja! Servietten weiß 30 Stück;75;1 Stück
+2025-08-09;8245760;ja!;ja! Skyr Natur 500g;149;500g (1 kg = 2,98 €)
+2025-08-09;7774209;ja!;ja! Snow Flakes 750g;249;750g (1 kg = 3,32 €)
+2025-08-09;5805210;ja!;ja! Sonnenblumenmargarine 500g;159;500g (1 kg = 3,18 €)
+2025-08-09;6928242;ja!;ja! Sonnenblumenöl 1l;149;1l
+2025-08-09;8832074;ja!;ja! Sonntagsbrötchen 560g;129;560g (1 kg = 2,30 €)
+2025-08-09;8923624;ja!;ja! Spaghetti Bolognese 350g;249;350g (1 kg = 7,11 €)
+2025-08-09;8924618;ja!;ja! Spaghetti Carbonara 350g;249;350g (1 kg = 7,11 €)
+2025-08-09;2309834;ja!;ja! Spaghetti Eis 3x167ml;179;3x170ml (1 l = 3,51 €)
+2025-08-09;9944007;ja!;ja! Spaghetti Eishörnchen 4x130ml;229;4x130ml (1 l = 4,40 €)
+2025-08-09;8779675;ja!;ja! Spargelabschnitte mit Köpfen 170g;129;170g (1 kg = 7,59 €)
+2025-08-09;8269673;ja!;ja! Sparschäler;199;1 Stück
+2025-08-09;7845627;ja!;ja! Speiseeis nach Fürst Pückler Art 2500ml;349;2500ml (1 l = 1,40 €)
+2025-08-09;9393935;ja!;ja! Speisequark 20% Fett i. Tr. 250g;79;250g (1 kg = 3,16 €)
+2025-08-09;9394010;ja!;ja! Speisequark 250g;89;250g (1 kg = 3,56 €)
+2025-08-09;7915060;ja!;ja! Speisequark Magerstufe 250g;69;250g (1 kg = 2,76 €)
+2025-08-09;9393595;ja!;ja! Speisequark Magerstufe 500g;129;500g (1 kg = 2,58 €)
+2025-08-09;8187959;ja!;ja! Sprühsahne 250ml;229;250ml (1 l = 9,16 €)
+2025-08-09;8531592;ja!;ja! Sprühsahne Fettreduziert 250ml;229;250ml (1 l = 9,16 €)
+2025-08-09;6564984;ja!;ja! Spätzle Frischei Nudeln 500g;139;500g (1 kg = 2,78 €)
+2025-08-09;9932451;ja!;ja! Spülbürste rund;79;1 Stück
+2025-08-09;8060267;ja!;ja! Spülmittel Acai Blaubeere 500ml;95;500ml (1 l = 1,90 €)
+2025-08-09;8336275;ja!;ja! Spülmittel Sweet Orange 500ml;95;500ml (1 l = 1,90 €)
+2025-08-09;6475973;ja!;ja! Stapelchips Paprika 175g;149;175g (1 kg = 8,51 €)
+2025-08-09;1091822;ja!;ja! Stapelchips Sour Cream & Onion 175g;149;175g (1 kg = 8,51 €)
+2025-08-09;8469409;ja!;ja! Staubwischer Set 1 Griff + 10 Bezüge 1 Stück;269;1 Stück
+2025-08-09;7916381;ja!;ja! Steinofen Baguette 250g;119;250g (1 kg = 4,76 €)
+2025-08-09;8378374;ja!;ja! Steinofen Pizza 4 Formaggi 2X340g;349;2x340g (1 kg = 5,13 €)
+2025-08-09;8089206;ja!;ja! Steinofen Pizza Margherita 3x300g;299;3x300g (1 kg = 3,32 €)
+2025-08-09;8021080;ja!;ja! Steinofen Pizza Thunfisch 2x355g;349;2x355g (1 kg = 4,92 €)
+2025-08-09;2662089;ja!;ja! Streichgut gesalzen 250g;179;250g (1 kg = 7,16 €)
+2025-08-09;2662082;ja!;ja! Streichgut ungesalzen 250g;179;250g (1 kg = 7,16 €)
+2025-08-09;8431040;ja!;ja! Streichhölzer 3er Pack 100 Stück;69;3x100 Stück
+2025-08-09;2317787;ja!;ja! Studentenfutter vegan 200g;229;200g (1 kg = 11,45 €)
+2025-08-09;7073947;ja!;ja! Super Sweet Gemüsemais 285g;99;285g (1 kg = 3,47 €)
+2025-08-09;8994273;ja!;ja! Super-Soft Toilettenpapier 4-lagig 10x200 Blatt;495;10x200 Stück
+2025-08-09;2290213;ja!;ja! Suppengemüse 1kg;149;1000g
+2025-08-09;9703764;ja!;ja! Süßstoff Tabletten Spender 1200 Stück;95;1200 Stück
+2025-08-09;7772289;ja!;ja! Süßstoff flüssig 300ml;89;300ml (1 l = 2,97 €)
+2025-08-09;8043572;ja!;ja! Tafelsalz 500g;25;500g (1 kg = 0,50 €)
+2025-08-09;7203709;ja!;ja! Taschentücher super-soft 4-lagig 15x10 Stück;175;15x10 Stück
+2025-08-09;8881363;ja!;ja! Teegetränk Pfirsich 400g;189;400g (1 kg = 4,73 €)
+2025-08-09;8356551;ja!;ja! Tellerset 6 Stück;249;1 Stück
+2025-08-09;1979570;ja!;ja! Thai-Suppe 400ml;139;400ml (1 l = 3,48 €)
+2025-08-09;8945706;ja!;ja! Thunfisch Filets in nativem Olivenöl extra 185g;169;185g (1 kg = 9,14 €)
+2025-08-09;8622326;ja!;ja! Thunfisch Sandwich 185g;199;185g (1 kg = 10,76 €)
+2025-08-09;8496746;ja!;ja! Thunfisch mit Gemüse in Dressing 150g;129;150g (1 kg = 8,60 €)
+2025-08-09;2063281;ja!;ja! Thunfischfilets in Sonnenblumenöl 195g;129;140g (1 kg = 9,21 €)
+2025-08-09;2063277;ja!;ja! Thunfischfilets in eigenem Saft geschnitten 150g;129;150g (1 kg = 8,60 €)
+2025-08-09;8055493;ja!;ja! Tilsiter in Scheiben 400g;299;400g (1 kg = 7,48 €)
+2025-08-09;3280994;ja!;ja! Tomate-Basilikum Pasta-Sauce 400g;145;400ml (1 l = 3,63 €)
+2025-08-09;5636442;ja!;ja! Tomaten passiert 500g;65;500g (1 kg = 1,30 €)
+2025-08-09;7291190;ja!;ja! Tomaten-Ketchup 500ml;129;500ml (1 l = 2,58 €)
+2025-08-09;7724372;ja!;ja! Tomatenmark 140g;79;140g (1 kg = 5,64 €)
+2025-08-09;8746686;ja!;ja! Tomatenmark 70g;49;70g (1 kg = 7 €)
+2025-08-09;8515630;ja!;ja! Tortellini in Sahnesauce 400g;199;400g (1 kg = 4,98 €)
+2025-08-09;688048;ja!;ja! Tortelloni Prosciutto 250g;99;250g (1 kg = 3,96 €)
+2025-08-09;2272449;ja!;ja! Tortelloni Ricotta Spinat 250g;99;250g (1 kg = 3,96 €)
+2025-08-09;8457946;ja!;ja! Tortenunterlagen 28cm 6 Stück;149;6 Stück
+2025-08-09;2502892;ja!;ja! Tortilla Chips Nacho Cheese 300g;159;300g (1 kg = 5,30 €)
+2025-08-09;3043322;ja!;ja! Tortilla Chips mit Salz 300g;159;300g (1 kg = 5,30 €)
+2025-08-09;1478286;ja!;ja! Trockenbackhefe 6x7g;79;6x7g (1 kg = 18,81 €)
+2025-08-09;8972047;ja!;ja! Türkischer Apfel Tee 62,5g 25 Beutel;169;62,50g (1 kg = 27,04 €)
+2025-08-09;8281200;ja!;ja! Universalverschlüsse 10 Stück;149;10 Stück
+2025-08-09;8370556;ja!;ja! Vanille Haselnuss Hörnchen 6 Stück;219;6x120ml (1 l = 3,04 €)
+2025-08-09;1478252;ja!;ja! Vanillinzucker 15x8g;45;15x8g (1 kg = 3,75 €)
+2025-08-09;8089931;ja!;ja! Versandtasche B4 ohne Fenster haftklebend 10 Stück;249;10 Stück
+2025-08-09;8090834;ja!;ja! Versandtaschen DIN C4 ohne Fenster 10 Stück;219;10 Stück
+2025-08-09;706663;ja!;ja! Vlies- und Scheuertuch;69;1 Stück
+2025-08-09;8357472;ja!;ja! Vollkorntoastbrot 500g;79;500g (1 kg = 1,58 €)
+2025-08-09;7698252;ja!;ja! Vollmilch Schoko Waffelröllchen 125g;199;125g (1 kg = 15,92 €)
+2025-08-09;8912235;ja!;ja! Vollmilch Schokokeks 125g;159;125g (1 kg = 12,72 €)
+2025-08-09;8909742;ja!;ja! Vollmilch Schokowaffeln 175g;289;175g (1 kg = 16,51 €)
+2025-08-09;5880459;ja!;ja! Vollmilch-Joghurt 4x150g;99;4x150g (1 kg = 1,65 €)
+2025-08-09;8152779;ja!;ja! Vollwaschmittel 1,1l 20WL;315;1,10l (1 l = 2,86 €)
+2025-08-09;8421295;ja!;ja! WC-Reiniger Tabs 400g;179;400g (1 kg = 4,48 €)
+2025-08-09;201434;ja!;ja! Waffelröllchen 200g;199;200g (1 kg = 9,95 €)
+2025-08-09;8605199;ja!;ja! Waldbeere Tee 62,5g, 25 Beutel;139;62,50g (1 kg = 22,24 €)
+2025-08-09;1008842;ja!;ja! Walnüsse ganze Kerne 200g;299;200g (1 kg = 14,95 €)
+2025-08-09;7678412;ja!;ja! Walnüsse in der Schale 500g;249;500g (1 kg = 4,98 €)
+2025-08-09;7848384;ja!;ja! Weichweizengriess 500g;69;500g (1 kg = 1,38 €)
+2025-08-09;8842634;ja!;ja! Weizen Tortillas 372g;129;372g (1 kg = 3,47 €)
+2025-08-09;6729550;ja!;ja! Weizenmehl Type 405 1kg;59;1000g
+2025-08-09;547663;ja!;ja! Weiße Schokolade 100g;129;100g (1 kg = 12,90 €)
+2025-08-09;8036008;ja!;ja! Western Pfanne 750g;349;750g (1 kg = 4,65 €)
+2025-08-09;2655152;ja!;ja! Wiener Würstchen 400g;299;8x50g (1 kg = 7,48 €)
+2025-08-09;901819;ja!;ja! Wildlachsfilet tiefgefroren 2x125g;369;250g (1 kg = 14,76 €)
+2025-08-09;6353606;ja!;ja! Würfelzucker 1kg;129;1kg
+2025-08-09;8100302;ja!;ja! Zahnstocher 450 Stück;179;450 Stück
+2025-08-09;7695822;ja!;ja! Zartbitter Schokokeks 125g;159;125g (1 kg = 12,72 €)
+2025-08-09;6261175;ja!;ja! Zartbitter-Schokolade 100g;129;100g (1 kg = 12,90 €)
+2025-08-09;2815942;ja!;ja! Zaziki 500g;165;500g (1 kg = 3,30 €)
+2025-08-09;8078567;ja!;ja! Ziegenkäse in Scheiben Laktosefrei 150g;259;150g (1 kg = 17,27 €)
+2025-08-09;518816;ja!;ja! Zitronen-Limonade 6x1,5l;390;6x1,50l (1 l = 0,43 €)
+2025-08-09;7226874;ja!;ja! Zitronenlimonade 0% Zucker 6x1,5l;390;6x1,50l (1 l = 0,43 €)
+2025-08-09;713079;ja!;ja! Zitronentee löslich 400g;189;400g (1 kg = 4,73 €)
+2025-08-09;7981351;ja!;ja! entrahmte H-Milch 1l;99;1l
 2025-08-09;1098643;REWE Beste Wahl;Erdbeeren Premium 250g;379;250g (1 kg = 15,16 €)
 2025-08-09;1045111;REWE Beste Wahl;Karotten 1kg;129;1kg
 2025-08-09;1040657;REWE Beste Wahl;Paprika Mix 500g;199;500g (1 kg = 3,98 €)
@@ -276,8 +622,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;8273879;REWE Beste Wahl;REWE Beste Wahl Apfel schwarze Johannisbeere Himbeere 1l;189;1l
 2025-08-09;8331440;REWE Beste Wahl;REWE Beste Wahl Apfelessig klar 1l;159;1l
 2025-08-09;130632;REWE Beste Wahl;REWE Beste Wahl Apfelmus 355g;109;355g (1 kg = 3,07 €)
-2025-08-09;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-08-09;135202;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;139;1l
+2025-08-09;8032701;REWE Beste Wahl;REWE Beste Wahl Apfelsaft naturtrüb 1l;179;1l
 2025-08-09;2181717;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x0,5l;414;6x0,50l (1 l = 1,38 €)
 2025-08-09;2181725;REWE Beste Wahl;REWE Beste Wahl Apfelschorle 6x1l;594;6x1l (1 l = 0,99 €)
 2025-08-09;137830;REWE Beste Wahl;REWE Beste Wahl Aprikosen halbe Frucht 475g;269;475g (1 kg = 5,66 €)
@@ -834,6 +1180,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;8045202;REWE Beste Wahl;REWE Beste Wahl Weide Vollmilch 3,5% 1l;135;1l
 2025-08-09;7077819;REWE Beste Wahl;REWE Beste Wahl Weidebutter Süßrahm 250g;259;250g (1 kg = 10,36 €)
 2025-08-09;8044698;REWE Beste Wahl;REWE Beste Wahl Weidemilch 1,5% 1l;125;1l
+2025-08-09;9022742;REWE Beste Wahl;REWE Beste Wahl Weizen Tortillas mit Leinsamen 372g;129;372g (1 kg = 3,47 €)
 2025-08-09;1211124;REWE Beste Wahl;REWE Beste Wahl Weizenmehl Type 405 1kg;89;1000g
 2025-08-09;9959918;REWE Beste Wahl;REWE Beste Wahl Weizenmehl Type 550 1kg;89;1000g
 2025-08-09;9923126;REWE Beste Wahl;REWE Beste Wahl Weiße Riesenbohnen extra groß 400g;149;240g (1 kg = 6,21 €)
@@ -986,6 +1333,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;8042389;REWE Bio;REWE Bio Brot mit Sonnenblumenkernen 500g;239;500g (1 kg = 4,78 €)
 2025-08-09;7171655;REWE Bio;REWE Bio Bulgur 500g;139;500g (1 kg = 2,78 €)
 2025-08-09;7794507;REWE Bio;REWE Bio Bunter Pfeffer ganz 60g;299;60g (1 kg = 49,83 €)
+2025-08-09;1136740;REWE Bio;REWE Bio Buttergemüse 300g;169;300g (1 kg = 5,63 €)
 2025-08-09;9873900;REWE Bio;REWE Bio Butterkäse Scheiben 200g;239;200g (1 kg = 11,95 €)
 2025-08-09;901435;REWE Bio;REWE Bio Caffè Crema 219g, 30 Pads;389;210g (1 kg = 18,52 €)
 2025-08-09;2557918;REWE Bio;REWE Bio Caffè Crema ganze Bohne 1kg;1395;1000g
