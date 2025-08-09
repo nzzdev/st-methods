@@ -320,6 +320,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;8639885;ja!;ja! LED Kerze E14 470 Lumen 40 Watt 2 Stück;499;2 Stück
 2025-08-09;8643461;ja!;ja! LED Leuchtmittel E27 1055 Lumen 75 Watt 2 Stück;599;2 Stück
 2025-08-09;7861437;ja!;ja! LED Leuchtmittel G9 320 Lumen 26 Watt 1 Stück;399;1 Stück
+2025-08-09;6343066;ja!;ja! Lachsfilet 250g;549;250g (1 kg = 21,96 €)
 2025-08-09;7249172;ja!;ja! Lachsforelle 100g;299;100g (1 kg = 29,90 €)
 2025-08-09;8307611;ja!;ja! Landschinken luftgetrocknet 150g;225;150g (1 kg = 15 €)
 2025-08-09;1062430;ja!;ja! Langkorn-Spitzenreis im Kochbeutel 4x125g;99;4x125g (1 kg = 1,98 €)
@@ -567,6 +568,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;8089931;ja!;ja! Versandtasche B4 ohne Fenster haftklebend 10 Stück;249;10 Stück
 2025-08-09;8090834;ja!;ja! Versandtaschen DIN C4 ohne Fenster 10 Stück;219;10 Stück
 2025-08-09;706663;ja!;ja! Vlies- und Scheuertuch;69;1 Stück
+2025-08-09;7734626;ja!;ja! Vollkorn Tortillas 372g;129;372g (1 kg = 3,47 €)
 2025-08-09;8357472;ja!;ja! Vollkorntoastbrot 500g;79;500g (1 kg = 1,58 €)
 2025-08-09;7698252;ja!;ja! Vollmilch Schoko Waffelröllchen 125g;199;125g (1 kg = 15,92 €)
 2025-08-09;8912235;ja!;ja! Vollmilch Schokokeks 125g;159;125g (1 kg = 12,72 €)
@@ -826,6 +828,7 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;8518472;REWE Beste Wahl;REWE Beste Wahl High Protein Pudding Haselnuss 200g;99;200g (1 kg = 4,95 €)
 2025-08-09;8410940;REWE Beste Wahl;REWE Beste Wahl High Protein Pudding Schoko 200g;99;200g (1 kg = 4,95 €)
 2025-08-09;8029347;REWE Beste Wahl;REWE Beste Wahl High Protein Pudding Vanille 200g;99;200g (1 kg = 4,95 €)
+2025-08-09;8980987;REWE Beste Wahl;REWE Beste Wahl High Protein Wraps 320g;169;320g (1 kg = 5,28 €)
 2025-08-09;708264;REWE Beste Wahl;REWE Beste Wahl Himbeer-Getränkesirup 0,5l;179;0,50l (1 l = 3,58 €)
 2025-08-09;7158180;REWE Beste Wahl;REWE Beste Wahl Himbeer-Heidelbeer-Mix 300g;249;300g (1 kg = 8,30 €)
 2025-08-09;7091046;REWE Beste Wahl;REWE Beste Wahl Himbeeren 500g;369;500g (1 kg = 7,38 €)
@@ -1005,8 +1008,8 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;7580631;REWE Beste Wahl;REWE Beste Wahl Orange-Apfel 1l;199;1l
 2025-08-09;1389554;REWE Beste Wahl;REWE Beste Wahl Orange-Mango-Ananas 1l;219;1l
 2025-08-09;7877254;REWE Beste Wahl;REWE Beste Wahl Orangensaft 1l;299;1l
-2025-08-09;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-08-09;8626551;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
+2025-08-09;989114;REWE Beste Wahl;REWE Beste Wahl Orangensaft mit Fruchtfleisch 1l;299;1l
 2025-08-09;8013483;REWE Beste Wahl;REWE Beste Wahl Oregano gerebelt 11g;199;11g (1 kg = 180,91 €)
 2025-08-09;3064278;REWE Beste Wahl;REWE Beste Wahl Pangasiusfilets tiefgefroren 3-4 Filets 475g;399;475g (1 kg = 8,40 €)
 2025-08-09;2666357;REWE Beste Wahl;REWE Beste Wahl Panko Paniermehl 140g;129;140g (1 kg = 9,21 €)
@@ -1607,7 +1610,6 @@ Datum;ID;Marke;Name;Preis;Gewicht
 2025-08-09;8621478;REWE Bio;REWE Bio Orangensaft 1l;349;1l
 2025-08-09;7717266;REWE Bio;REWE Bio Orangenschale gerieben 2x5g;99;2x5g (1 kg = 99 €)
 2025-08-09;333139;REWE Bio;REWE Bio Original Nürnberger Rostbratwürstchen 8 Stück 160g;349;160g (1 kg = 21,81 €)
-2025-08-09;9897677;REWE Bio;REWE Bio Paprika spitz rot 180g;249;180g (1 kg = 13,83 €)
 2025-08-09;8683343;REWE Bio;REWE Bio Parmigiano Reggiano 150g;449;150g (1 kg = 29,93 €)
 2025-08-09;8986815;REWE Bio;REWE Bio Party Garnelen 80g;249;80g (1 kg = 31,13 €)
 2025-08-09;294936;REWE Bio;REWE Bio Passata passierte Tomaten 700g;159;700g (1 kg = 2,27 €)
