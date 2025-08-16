@@ -401,7 +401,8 @@ if __name__ == '__main__':
             title = f'Strom kostet am Spotmarkt im Schnitt {title_mwh} Euro je MWh – {abs(title_mwh_diff)} Euro weniger als vor der Krise'
 
         # run Q function
-        #update_chart(id='90005812afc9964bbfe4f952f51d6a57', title=title_old, notes=notes_chart, data=df_spot)
+        update_chart(id='90005812afc9964bbfe4f952f51d6a57',
+                     title=title_old, notes=notes_chart, data=df_spot)
         # run Q function
         update_chart(id='cc0c892a4433991f1c77c35df8beaff3',
                      title=title, notes=notes_chart_compare, data=df_spot_compare)
