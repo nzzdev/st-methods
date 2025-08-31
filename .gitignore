@@ -21,8 +21,10 @@ bots/crawl-rewe-de/data/products.csv
 bots/verivox-de/private_key.pem
 .github/workflows/crawl-rewe-de-local.yml
 bots/crawl-rewe-de/crawl-rewe-local.py
+bots/crawl-rewe-de/crawl-rewe-local-schweiz.py
 bots/crawl-rewe-de/run-local.command
 bots/crawl-rewe-de/ch.nzz.rewe.fetch.plist
 bots/crawl-rewe-de/rewe-wrapper.sh
 bots/crawl-rewe-de/WORKFLOW IN DER USER LIBRARY
 bots/crawl-rewe-de/_README_FOR_LOCAL_RUN.txt
+bots/crawl-rewe-de/data-schweiz/
