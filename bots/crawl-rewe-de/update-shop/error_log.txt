@@ -1,4 +1,8 @@
 ID 136053 in persona 'general' has no valid alternative.
+ID 8661897 in persona 'general' has no valid alternative.
+ID 166440 in persona 'general' has no valid alternative.
 ID 136053 in persona 'bio' has no valid alternative.
 ID 8729533 in persona 'bio' has no valid alternative.
 ID 1279059 in persona 'bio' has no valid alternative.
+ID 166440 in persona 'bachelor' has no valid alternative.
+ID 2424540 in persona 'bachelor' has no valid alternative.
