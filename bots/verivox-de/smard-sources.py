@@ -94,6 +94,8 @@ if __name__ == '__main__':
                 df = smard.requestSmardData(
                     modulIDs=modules, timestamp_from_in_milliseconds=1609095600000)  # last week of 2020
             if ('Datum bis' in df.columns):
+                # flag for incomplete-week check
+                _incomplete_week_flag = False
                 # fix wrong decimal
                 df = df.replace('-', '', regex=False)
                 df = df.rename(columns={'Datum von': 'Datum'})
@@ -109,6 +111,25 @@ if __name__ == '__main__':
                 # convert dates
                 df['Datum'] = pd.to_datetime(
                     df['Datum'], format="%d.%m.%Y %H:%M")
+
+                # --- Incomplete-week check over previous (second-last) week; exclude nuclear ---
+                # determine columns to evaluate (all except date and nuclear original column)
+                _value_cols = [c for c in df.columns if c not in ['Datum', 'Kernenergie [MWh] Originalauflösungen']]
+                # coerce to numeric; non-numeric/empties become NaN
+                _df_num = df[_value_cols].apply(pd.to_numeric, errors='coerce')
+                # identify weekly bins like resample('W') (weeks end on Sunday)
+                _weekly_index_tmp = df.resample('W', on='Datum').sum().index
+                if len(_weekly_index_tmp) >= 2:
+                    _target_week_end = _weekly_index_tmp[-2]
+                    _target_mask = df['Datum'].dt.to_period('W-SUN') == _target_week_end.to_period('W-SUN')
+                else:
+                    # fallback: use last available week if only one week present
+                    _target_mask = df['Datum'].dt.to_period('W-SUN') == df['Datum'].dt.to_period('W-SUN').iloc[-1]
+                # count non-numeric/empty entries per column within target week
+                _non_numeric_counts = _df_num[_target_mask].isna().sum()
+                # threshold strictly greater than 95 missing quarter-hours in any column triggers drop
+                if (_non_numeric_counts > 95).any():
+                    _incomplete_week_flag = True
 
                 # old decimal fix
                 #df.loc[:, df.columns != 'Datum'] = df.loc[:, df.columns != 'Datum'].replace('\,', '.', regex=True).astype(float)
@@ -140,7 +161,10 @@ if __name__ == '__main__':
                 df.drop(df.head(1).index, inplace=True)
 
                 # drop last row if faulty data
-                if df['Biomasse'][-1] < 200000.00:
+                if df['Biomasse'].iloc[-1] < 200000.00:
+                    df.drop(df.tail(1).index, inplace=True)
+                # drop last row if previous week's data is incomplete across any column (excluding nuclear)
+                if _incomplete_week_flag:
                     df.drop(df.tail(1).index, inplace=True)
 
                 # save tsv
@@ -1050,6 +1074,20 @@ if __name__ == '__main__':
                 df_trade['Datum'] = pd.to_datetime(
                     df_trade['Datum'], format="%d.%m.%Y %H:%M")
 
+                # --- Incomplete-week check (TRADE ALL): evaluate 'Nettoexport [MWh] Originalauflösungen' only ---
+                _incomplete_week_trade_all = False
+                _series_num = pd.to_numeric(df_trade['Nettoexport [MWh] Originalauflösungen'], errors='coerce')
+                _weekly_index_tmp_tr_all = df_trade.resample('W', on='Datum').sum().index
+                if len(_weekly_index_tmp_tr_all) >= 2:
+                    _target_week_end_tr_all = _weekly_index_tmp_tr_all[-2]
+                    _target_mask_tr_all = df_trade['Datum'].dt.to_period('W-SUN') == _target_week_end_tr_all.to_period('W-SUN')
+                else:
+                    # fallback: use last available week if only one week present
+                    _target_mask_tr_all = df_trade['Datum'].dt.to_period('W-SUN') == df_trade['Datum'].dt.to_period('W-SUN').iloc[-1]
+                _non_numeric_count_tr_all = _series_num[_target_mask_tr_all].isna().sum()
+                if _non_numeric_count_tr_all > 95:
+                    _incomplete_week_trade_all = True
+
                 # convert to gigawatt
                 df_trade['Saldo'] = df_trade['Nettoexport [MWh] Originalauflösungen'].div(
                     1000)
@@ -1059,6 +1097,10 @@ if __name__ == '__main__':
                 df_trade = df_trade.resample('W', on='Datum').sum()
                 df_trade.drop(df_trade.head(1).index, inplace=True)
                 #df_trade.drop(df_trade.tail(1).index, inplace=True)
+
+                # drop second-last row if previous week's data is incomplete (preserve last placeholder week)
+                if _incomplete_week_trade_all and len(df_trade.index) >= 2:
+                    df_trade.drop(df_trade.index[-2], inplace=True)
 
                 # update last row for step-after chart (avoid constant commits)
                 df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
@@ -1109,7 +1151,18 @@ if __name__ == '__main__':
 
         # update last row for step-after chart (avoid constant commits)
         df_trade.at[df_trade.index[-1], 'Saldo'] = 0.0
-        df_trade.to_csv('./data/smard_trade_fixed_all.tsv', sep='\t', encoding='utf-8', index=True)
+        # Align saved trade weeks to consumption weeks (robust share calc) and drop placeholder week
+        try:
+            _cons = pd.read_csv('./data/power_consumption.tsv', sep='\t', index_col='Datum')
+            _cons.index = pd.to_datetime(_cons.index)
+            _common = df_trade.index.intersection(_cons.index)
+            if len(_common) > 0:
+                _to_save = df_trade.loc[_common]
+            else:
+                _to_save = df_trade.drop(df_trade.tail(1).index)
+        except Exception:
+            _to_save = df_trade.drop(df_trade.tail(1).index)
+        _to_save.to_csv('./data/smard_trade_fixed_all.tsv', sep='\t', encoding='utf-8', index=True)
 
         # get current date for chart notes
         time_dt_notes = df_trade.index[-2] + timedelta(days=1)

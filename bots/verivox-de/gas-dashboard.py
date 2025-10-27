@@ -185,9 +185,24 @@ if __name__ == '__main__':
 
         # convert KWh to GWh and calculate share of imports of power consumption
         df_acconsumption = (df_acconsumption / 1000)
-        df_importsshare = df_acconsumption.copy().tail(2)
-        share = [df_imports['value'].iloc[-2], (df_imports['value'].iloc[-1])]
-        df_importsshare['Import-Anteil'] = share
+        # Align import saldo to consumption weeks by date intersection (robust against stale files)
+        if 'date' in df_imports.columns:
+            df_imports['date'] = pd.to_datetime(df_imports['date'], errors='coerce')
+            _imp_series = df_imports.set_index('date')['value']
+        else:
+            # Fallback: try to interpret current index as dates
+            _imp_series = df_imports['value']
+            _imp_series.index = pd.to_datetime(df_imports.index, errors='coerce')
+        _common = _imp_series.index.intersection(df_acconsumption.index)
+        if len(_common) >= 2:
+            _common = _common.sort_values()
+            _last_two = _common[-2:]
+            df_importsshare = df_acconsumption.loc[_last_two].copy()
+            df_importsshare['Import-Anteil'] = _imp_series.loc[_last_two].values
+        else:
+            # Hard fallback to avoid crash: positional last two, may be misaligned but keeps pipeline running
+            df_importsshare = df_acconsumption.tail(2).copy()
+            df_importsshare['Import-Anteil'] = _imp_series.tail(2).values
         # Import-Export-Saldo -> Export-Import-Saldo
         df_importsshare['Import-Anteil'] = -df_importsshare['Import-Anteil']
         df_importsshare['Import-Anteil'] = round(
@@ -426,12 +441,11 @@ if __name__ == '__main__':
         timestamp_str_storage = df_storage['date'].tail(1).item()
         timestamp_str_storage = pd.to_datetime(
             timestamp_str_storage).strftime('%-d. %-m.')
-        timestamp_str_fossile = (pd.to_datetime(
-            df_fossile['date'].tail(1).item())).strftime('KW %U')
+        timestamp_str_fossile = f"KW {pd.to_datetime(df_fossile['date'].tail(1).item()).isocalendar().week:02d}"
         timestamp_str_lng = df_lng['date'].tail(1).item()
         timestamp_str_lng = pd.to_datetime(
             timestamp_str_lng).strftime('%-d. %-m.')
-        timestamp_str_imports = df_imports['date'].tail(1).item()
+        timestamp_str_imports = pd.to_datetime(df_importsshare.index[-1]).strftime('%Y-%m-%d')
 
         # OLD replace NaN with empty string for old storage data
         # df['Gasspeicher'] = df['Gasspeicher'].fillna(0).astype(int).astype(str)
