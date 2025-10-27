@@ -445,7 +445,7 @@ if __name__ == '__main__':
         timestamp_str_lng = df_lng['date'].tail(1).item()
         timestamp_str_lng = pd.to_datetime(
             timestamp_str_lng).strftime('%-d. %-m.')
-        timestamp_str_imports = pd.to_datetime(df_importsshare.index[-1]).strftime('%Y-%m-%d')
+        timestamp_str_imports = f"KW {pd.to_datetime(df_importsshare.index[-1]).isocalendar().week:02d}"
 
         # OLD replace NaN with empty string for old storage data
         # df['Gasspeicher'] = df['Gasspeicher'].fillna(0).astype(int).astype(str)
