@@ -194,13 +194,31 @@ if __name__ == '__main__':
         """
 
         # calculate percentage for chart title
-        df_perc = df.tail(1).div(df.tail(1).sum(axis=1), axis=0)
-        perc_fossile = ((df_perc['Erdgas'].iloc[-1] + df_perc['Kohle'].iloc[-1] +
-                        df_perc['Sonstige'].iloc[-1])*100).round(0).astype(int)
-        if perc_fossile > 1:
-            title_chart = f'{perc_fossile} Prozent des Stroms stammten vergangene Woche aus fossilen Quellen'
+        _last = df.tail(1)
+        df_perc = _last.div(_last.sum(axis=1), axis=0)
+        perc_fossile = int(round(((df_perc['Erdgas'].iloc[-1] + df_perc['Kohle'].iloc[-1] + df_perc['Sonstige'].iloc[-1]) * 100), 0))
+
+        # determine if last available week equals the immediately previous ISO week
+        _today = pd.Timestamp.today().normalize()
+        _start_this_week = _today - pd.Timedelta(days=_today.dayofweek)  # Monday of this week
+        _end_prev_week = _start_this_week - pd.Timedelta(days=1)         # Sunday of previous week
+
+        _row_ts = pd.to_datetime(_last.index[-1])
+        _row_iso = _row_ts.isocalendar()
+        _prev_iso = _end_prev_week.isocalendar()
+
+        if (_row_iso.year == _prev_iso.year) and (_row_iso.week == _prev_iso.week):
+            title_chart = (
+                f'{perc_fossile} Prozent des Stroms stammten vergangene Woche aus fossilen Quellen'
+                if perc_fossile > 1 else
+                f'{perc_fossile} Prozent des Stroms stammte vergangene Woche aus fossilen Quellen'
+            )
         else:
-            title_chart = f'{perc_fossile} Prozent des Stroms stammte vergangene Woche aus fossilen Quellen'
+            title_chart = (
+                f'{perc_fossile} Prozent des Stroms stammten in der KW {_row_iso.week:02d} aus fossilen Quellen'
+                if perc_fossile > 1 else
+                f'{perc_fossile} Prozent des Stroms stammte in der KW {_row_iso.week:02d} aus fossilen Quellen'
+            )
 
         # calculate percentage for dashboard
         df_dash = df.div(df.sum(axis=1), axis=0)
