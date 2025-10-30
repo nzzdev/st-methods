@@ -222,7 +222,7 @@ if __name__ == '__main__':
             acstock_time = acstock_time.strftime('%-d. %-m.')
         gasstock_time = df_gasstock.index[-1]
         gasstock_time = gasstock_time + \
-            timedelta(minutes=1) + timedelta(hours=1)  # GMT+1
+            timedelta(minutes=1) + timedelta(hours=2)  # GMT+2
         gasstock_time = gasstock_time.strftime('%-d. %-m., %k Uhr')
 
         # merge dataframes
