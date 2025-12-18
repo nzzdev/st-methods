@@ -13,14 +13,38 @@ import time
 # === Helper Functions ===
 
 def convert_percentage_to_float(value):
+    """Parse percentage-like cells from wahlrecht.de tables.
+
+    - '', '-', '—', '–', '..' -> NaN (NOT 0)
+    - ranges like '2-4' or '2,0–4,0' -> midpoint
+    - single values -> float
+    """
     if pd.isna(value):
         return np.nan
-    value_str = str(value)  # Ensure the input is a string
-    p_strings = re.findall(r"\d+,\d", value_str)
-    if len(p_strings) == 0:
-        p_strings = re.findall(r"\d+", value_str)
-    p_floats = [float(s.replace(",", ".")) for s in p_strings]
-    return sum(p_floats) if "-" not in value_str else sum(p_floats) / 2
+
+    s = str(value).strip()
+    s_lower = s.lower()
+
+    # Censored / not explicitly reported (e.g. "<3", "≤3", "unter 3") -> treat as missing value
+    if "<" in s or "≤" in s or "unter" in s_lower:
+        return np.nan
+
+    if s in {"", "-", "—", "–", ".."}:
+        return np.nan
+
+    # normalize unicode dashes
+    s = s.replace("–", "-").replace("—", "-")
+
+    nums = re.findall(r"\d+(?:,\d+)?", s)
+    if not nums:
+        return np.nan
+
+    vals = [float(x.replace(",", ".")) for x in nums]
+
+    if "-" in s and len(vals) >= 2:
+        return (vals[0] + vals[1]) / 2
+
+    return vals[0]
 
 def convert_befragte(str):
     if str == "Bundestagswahl" or "?" in str:
@@ -69,7 +93,7 @@ def update_chart(id, title="", subtitle="", notes="", data="", parties="", possi
                     item.get("item").update({"notes": notes})
                 if len(data) > 0:
                     # reset_index() and T (for transpose) are used to bring column names into the first row
-                    transformed_data = data.applymap(str).reset_index(
+                    transformed_data = data.astype(str).reset_index(
                         drop=False).T.reset_index().T.apply(list, axis=1).to_list()
                     if 'table' in item.get('item').get('data'):
                         item.get('item').get('data').update(
@@ -187,6 +211,26 @@ for row in urls:
         value_name="Ergebnis"
     )
 
+    # Preserve raw cell values and flag whether a party was explicitly reported (numeric) in that poll
+    data["Ergebnis_raw"] = data["Ergebnis"]
+
+    def _is_reported_cell(x):
+        if pd.isna(x):
+            return False
+        s = str(x).strip()
+        s_lower = s.lower()
+        # Censored / not explicitly reported
+        if "<" in s or "≤" in s or "unter" in s_lower:
+            return False
+        if s in {"", "-", "—", "–", ".."}:
+            return False
+        return bool(re.search(r"\d", s))
+
+    data["reported"] = data["Ergebnis_raw"].apply(_is_reported_cell)
+
+    # Convert percentage strings to floats (unreported cells become NaN)
+    data["Ergebnis"] = data["Ergebnis_raw"].apply(convert_percentage_to_float)
+
     # Remove entries without a clear date
     data["Datum"] = data["Datum"].fillna("..")
     data.Datum = data.Datum.apply(
@@ -215,8 +259,6 @@ for row in urls:
         inplace=True
     )
 
-    # Convert percentage strings to floats
-    data.Ergebnis = data.Ergebnis.apply(convert_percentage_to_float)
 
     # Add Befragte column if it doesn't exist
     if "Befragte" not in data:
@@ -299,8 +341,6 @@ filtered_data['Partei'] = filtered_data['Partei'].replace({
     'Sonstige': 'Übrige'
 })
 
-# Optional: Print unique party names to verify
-print("Available parties after mapping:", filtered_data['Partei'].unique())
 
 # Keep only desired parties
 filtered_data = filtered_data[filtered_data['Partei'].isin(desired_parties)].copy()
@@ -426,63 +466,166 @@ data_pivot[desired_parties] = data_pivot[desired_parties].round(1)
 
 # --- Proceed with the line chart calculations ---
 
-# === Calculate Rolling Average ===
+# === Calculate Rolling Average (robust, responsive, handles censored "Sonstige") ===
 
-# Group by 'Datum' and 'Partei' and calculate mean 'Ergebnis' per date per party
-daily_party_means = filtered_data.groupby(['Datum', 'Partei'])['Ergebnis'].mean().reset_index()
+# Parameters (simple + explainable)
+HALF_LIFE_DAYS = 10.0  # polls from 10 days ago count only half as much
+U_CENSORED = 3.0       #  "not reported" means: value is below the display threshold; assume < 3.0%
 
-# Sort by 'Partei' and 'Datum'
-daily_party_means.sort_values(by=['Partei', 'Datum'], inplace=True)
+# Build observations from poll releases
+obs = filtered_data[["Datum", "Partei", "Ergebnis", "Befragte", "reported"]].copy()
+obs["Befragte"] = pd.to_numeric(obs["Befragte"], errors="coerce")
 
-# OLD Compute rolling average with window=10
-# daily_party_means['Ergebnis_RA'] = daily_party_means.groupby('Partei', group_keys=False)['Ergebnis'].rolling(window=10, min_periods=1).mean().reset_index(level=0, drop=True)
+fallback_n = float(np.nanmedian(obs["Befragte"])) if pd.notna(np.nanmedian(obs["Befragte"])) else 2000.0
+obs["w"] = np.sqrt(obs["Befragte"].fillna(fallback_n).clip(lower=200.0))
 
-# Calculate Exponentially Weighted Moving Average (EWMA)
-daily_party_means['Ergebnis_RA'] = daily_party_means.groupby('Partei', group_keys=False)['Ergebnis']\
-    .apply(lambda x: x.ewm(span=10, adjust=False).mean())
+# Aggregate per day & party (pandas 2.x/3.x safe):
+# - if at least one institute reports a numeric value: weighted mean of reported values
+# - otherwise (poll day but not reported): mark as censored
+rep = obs["reported"] & obs["Ergebnis"].notna()
 
-# Round 'Ergebnis_RA' to one decimal place
-daily_party_means['Ergebnis_RA'] = daily_party_means['Ergebnis_RA'].round(1)
+reported_only = obs.loc[rep, ["Datum", "Partei", "Ergebnis", "w"]].copy()
+if len(reported_only) > 0:
+    reported_only["wx"] = reported_only["Ergebnis"] * reported_only["w"]
+    rep_sum = reported_only.groupby(["Datum", "Partei"], as_index=False).agg(
+        w_sum=("w", "sum"),
+        wx_sum=("wx", "sum")
+    )
+    rep_sum["Ergebnis_obs"] = rep_sum["wx_sum"] / rep_sum["w_sum"]
+    rep_sum = rep_sum[["Datum", "Partei", "Ergebnis_obs"]]
+else:
+    rep_sum = pd.DataFrame(columns=["Datum", "Partei", "Ergebnis_obs"])
 
-# Replace NaN with None for JSON serialization
-daily_party_means['Ergebnis_RA'] = daily_party_means['Ergebnis_RA'].where(pd.notnull(daily_party_means['Ergebnis_RA']), None)
+poll_count = obs.groupby(["Datum", "Partei"], as_index=False).size().rename(columns={"size": "poll_count"})
 
-# Pivot the data to have 'Datum' as index, 'Partei' as columns, 'Ergebnis_RA' as values
-data_pivot_ra = daily_party_means.pivot(index='Datum', columns='Partei', values='Ergebnis_RA').reset_index()
+state = poll_count.merge(rep_sum, on=["Datum", "Partei"], how="left")
+state["censored"] = state["Ergebnis_obs"].isna()
 
-# Add 'Institut' column with value 'average'
-data_pivot_ra['Institut'] = 'average'
+poll_dates = pd.Index(sorted(state["Datum"].dropna().unique()))
 
-# Combine data_pivot (individual institutes) and data_pivot_ra (rolling averages)
-# First, prepare data_pivot for merging
+obs_wide = state.pivot(index="Datum", columns="Partei", values="Ergebnis_obs").reindex(poll_dates)
+cen_wide = state.pivot(index="Datum", columns="Partei", values="censored").reindex(poll_dates)
+cnt_wide = state.pivot(index="Datum", columns="Partei", values="poll_count").reindex(poll_dates)
 
-# Rename 'Institut' to 'institute' and 'Datum' to 'date'
-data_pivot.rename(columns={'Institut': 'institute', 'Datum': 'date'}, inplace=True)
-data_pivot_ra.rename(columns={'Institut': 'institute', 'Datum': 'date'}, inplace=True)
+# Ensure all desired parties exist as columns
+for pty in desired_parties:
+    if pty not in obs_wide.columns:
+        obs_wide[pty] = np.nan
+    if pty not in cen_wide.columns:
+        cen_wide[pty] = False
+    if pty not in cnt_wide.columns:
+        cnt_wide[pty] = 0
 
-# Convert 'date' to string in 'YYYY-MM-DD' format in both DataFrames
-data_pivot['date'] = pd.to_datetime(data_pivot['date']).dt.strftime('%Y-%m-%d')
-data_pivot_ra['date'] = pd.to_datetime(data_pivot_ra['date']).dt.strftime('%Y-%m-%d')
+obs_wide = obs_wide[desired_parties]
+cen_wide = cen_wide[desired_parties].astype("boolean").fillna(False)
+cnt_wide = cnt_wide[desired_parties].astype("Int64").fillna(0).astype(int)
 
-# Reorder columns to match desired_parties
-data_pivot = data_pivot[['institute', 'date'] + desired_parties]
-data_pivot_ra = data_pivot_ra[['institute', 'date'] + desired_parties]
+# Time-based exponential smoothing with half-life
+k = np.log(2.0) / HALF_LIFE_DAYS
+trend_wide = pd.DataFrame(index=poll_dates, columns=desired_parties, dtype="float")
+trend_wide.index.name = "Datum"
 
-# Concatenate the DataFrames
-full_line_chart_data = pd.concat([data_pivot, data_pivot_ra], ignore_index=True)
+for pty in desired_parties:
+    x = obs_wide[pty]
+    cens = cen_wide[pty]
+    cnt = cnt_wide[pty]
 
-# Sort the data by date and institute
-full_line_chart_data.sort_values(by=['date', 'institute'], inplace=True)
+    # Start the trend only once the party is explicitly reported (numeric).
+    # Purely censored observations before the first reported value do NOT initialize the series.
+    reported_mask = (cnt > 0) & (~cens) & x.notna()
+    first_reported_date = x.index[reported_mask].min() if reported_mask.any() else None
 
-# Replace NaN values with 0.0
-full_line_chart_data.fillna(0.0, inplace=True)
+    s = []
+    last = np.nan
+    last_date = None
 
-# Convert the DataFrame to a list of dictionaries for JSON output
-json_data = full_line_chart_data.to_dict(orient='records')
+    for dt in poll_dates:
+        poll_today = cnt.loc[dt] > 0
 
-# Save the data in a JSON file
-with open('./data/lineChart.json', 'w', encoding='utf-8') as f:
-    json.dump(json_data, f, ensure_ascii=False, indent=1)
+        # initialization: stay missing until first reported value exists
+        if pd.isna(last):
+            if first_reported_date is None or dt < first_reported_date:
+                s.append(np.nan)
+                continue
+            if dt == first_reported_date:
+                last = float(x.loc[dt])
+                last_date = dt
+                s.append(last)
+                continue
+            # safety net (should not happen)
+            s.append(np.nan)
+            continue
+
+        # elapsed days since last update point
+        delta_days = (dt - last_date).days
+        if delta_days < 1:
+            delta_days = 1
+        alpha = 1.0 - np.exp(-k * delta_days)
+
+        # Determine today's input
+        if not poll_today:
+            current_input = last  # no new information
+        else:
+            if (not cens.loc[dt]) and pd.notna(x.loc[dt]):
+                current_input = float(x.loc[dt])
+            else:
+                # censored / "not reported": keep stable below U; pull down towards U if the trend is above U
+                current_input = float(U_CENSORED) if last > U_CENSORED else float(last)
+
+        # Update trend
+        last = last + alpha * (current_input - last)
+        last_date = dt
+        s.append(last)
+
+    trend_wide[pty] = s
+
+# Long format for downstream usage
+# (this replaces the old event-based EWMA series)
+daily_party_means = trend_wide.reset_index().melt(
+    id_vars=["Datum"],
+    value_vars=desired_parties,
+    var_name="Partei",
+    value_name="Ergebnis_RA"
+)
+
+daily_party_means["Ergebnis_RA"] = daily_party_means["Ergebnis_RA"].round(1)
+
+# === Build lineChart.json (institute lines + average line) ===
+
+# Rename for export (guarded to avoid double-renaming)
+if "Institut" in data_pivot.columns:
+    data_pivot.rename(columns={"Institut": "institute"}, inplace=True)
+if "Datum" in data_pivot.columns:
+    data_pivot.rename(columns={"Datum": "date"}, inplace=True)
+
+# Ensure party columns exist in the institute table
+for pty in desired_parties:
+    if pty not in data_pivot.columns:
+        data_pivot[pty] = np.nan
+
+# Average line from trend
+avg_line = trend_wide.reset_index().rename(columns={"Datum": "date"})
+avg_line["institute"] = "average"
+
+# Convert dates to strings
+avg_line["date"] = pd.to_datetime(avg_line["date"]).dt.strftime("%Y-%m-%d")
+data_pivot["date"] = pd.to_datetime(data_pivot["date"]).dt.strftime("%Y-%m-%d")
+
+# Reorder columns
+inst_lines = data_pivot[["institute", "date"] + desired_parties]
+avg_line = avg_line[["institute", "date"] + desired_parties]
+
+# Concatenate and serialize
+full_line_chart_data = pd.concat([inst_lines, avg_line], ignore_index=True)
+full_line_chart_data.sort_values(by=["date", "institute"], inplace=True)
+
+# Keep missing values as null in JSON (strict JSON: no NaN)
+# NOTE: `.where(..., None)` keeps NaN in float columns; `.replace({np.nan: None})` forces proper nulls.
+full_line_chart_data = full_line_chart_data.replace({np.nan: None})
+json_data = full_line_chart_data.to_dict(orient="records")
+
+with open("./data/lineChart.json", "w", encoding="utf-8") as f:
+    json.dump(json_data, f, ensure_ascii=False, indent=1, allow_nan=False)
 
 print("JSON file 'lineChart.json' has been created successfully.")
 
@@ -494,7 +637,7 @@ print("JSON file 'lineChart.json' has been created successfully.")
 filtered_data_nonan = filtered_data.dropna(subset=['Ergebnis', 'Befragte']).copy()
 
 # Define eligible voters size N in 2021 with underscores for readability (update for 2025)
-N = 59_200_000
+N = 60_510_631
 
 # Compute proportions and standard error
 p = filtered_data_nonan['Ergebnis'] / 100
@@ -585,10 +728,11 @@ projection_data[['lowerBound', 'average', 'upperBound']] = projection_data[['low
 projection_chart_data = projection_data.to_dict(orient='records')
 
 with open('./data/projectionChart.json', 'w', encoding='utf-8') as f:
-    json.dump(projection_chart_data, f, ensure_ascii=False, indent=1)
+    json.dump(projection_chart_data, f, ensure_ascii=False, indent=1, allow_nan=False)
 
 print("JSON file 'projectionChart.json' has been created successfully.")
 
+notes_chart_seats_extra = ""
 # === Coalition Seats Calculation ===
 
 # Map party names to color codes and Q IDs
@@ -602,67 +746,111 @@ party_metadata = {
     "BSW": {"id": "0d50b45e538faa45f768d3204450d0e7-1732637074764-908994801", "colorCode": "#da467d"}
 }
 
-# Use the latest rolling averages for coalition calculations
-coalition_data = latest_rolling_averages[(latest_rolling_averages['Partei'] != 'Übrige') & 
-                                         (latest_rolling_averages['average'] >= 5)].copy()
+# --- Coalition scenarios around the 5%-threshold ---
+# Baseline seats stay "hard" (point estimate). We additionally compute Low/High scenarios
+# for parties close to 5% to label coalitions as stabil / wacklig / unmöglich.
 
-# Compute value_5pct
-value_sum = coalition_data['average'].sum()
-coalition_data['value_5pct'] = 100 * coalition_data['average'] / value_sum
+TOTAL_SEATS = 630
+MAJORITY = 316
 
-# Compute seats projected to 630 seats
-total_seats = 630  # Maximum allowed seats
-coalition_data['seats'] = (coalition_data['value_5pct'] * total_seats / 100).round(0).astype(int)
+# Party stats: latest trend + per-party mean CI
+party_stats = latest_rolling_averages[latest_rolling_averages["Partei"] != "Übrige"].merge(
+    mean_ci_per_party, left_on="Partei", right_on="Partei", how="left"
+)
+party_stats["mean_ci"] = pd.to_numeric(party_stats["mean_ci"], errors="coerce")
 
-# Adjust the seats to ensure the total matches total_seats
-seats_difference = total_seats - coalition_data['seats'].sum()
-if seats_difference != 0:
-    # Sort by fractional part of seat allocation to decide which party to adjust
-    coalition_data['fraction'] = coalition_data['value_5pct'] * total_seats / 100 - coalition_data['seats']
-    coalition_data = coalition_data.sort_values(by='fraction', ascending=(seats_difference < 0))
-    
-    # Adjust seats one by one
-    for i in range(abs(seats_difference)):
-        idx = coalition_data.index[i % len(coalition_data)]
-        coalition_data.at[idx, 'seats'] += int(np.sign(seats_difference))
-    
-    # Drop the 'fraction' column after adjustment
-    coalition_data = coalition_data.drop(columns=['fraction'])
+# If a party has no CI (should be rare), fall back to 3.0pp
+party_stats["mean_ci"] = party_stats["mean_ci"].fillna(3.0)
 
-# Generate the coalitionSeats as a list of dictionaries
+# "Wacklig" if the CI interval around the point estimate crosses the 5%-threshold
+party_stats["wacklig"] = (party_stats["average"] - 5.0).abs() <= party_stats["mean_ci"]
+
+# Scenario membership rules
+in_base = party_stats.loc[party_stats["average"] >= 5.0, ["Partei", "average"]].set_index("Partei")["average"]
+in_low = party_stats.loc[(party_stats["average"] >= 5.0) & (~party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
+in_high = party_stats.loc[(party_stats["average"] >= 5.0) | (party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
+
+
+def _allocate_seats(avgs: pd.Series, total_seats: int = TOTAL_SEATS):
+    """Allocate seats using Sainte-Laguë/Schepers (divisor method with standard rounding).
+
+    We implement it via the equivalent highest-averages procedure (Webster/Sainte-Laguë):
+    assign seats one-by-one to the party with the highest quotient votes/(2*s+1).
+
+    Returns (seats_by_party, wasted_votes_pct).
+    """
+    seats_by_party = {p: 0 for p in party_metadata.keys()}
+
+    if avgs is None or len(avgs) == 0:
+        return seats_by_party, 100.0
+
+    avgs = pd.to_numeric(avgs, errors="coerce").dropna()
+    avgs = avgs[avgs > 0]
+    if len(avgs) == 0 or float(avgs.sum()) <= 0:
+        return seats_by_party, 100.0
+
+    value_sum = float(avgs.sum())
+    wasted = float(100.0 - value_sum)
+
+    # Normalize to the in-parliament vote pool (as before)
+    votes = (avgs / value_sum) * 100.0
+
+    # Sainte-Laguë seat assignment
+    s = pd.Series(0, index=votes.index, dtype="int64")
+
+    for _ in range(int(total_seats)):
+        quot = votes / (2 * s + 1)
+        m = quot.max()
+        top = quot[quot == m].index
+        if len(top) > 1:
+            # deterministic tie-break: higher votes, then name
+            top_votes = votes.loc[top]
+            mv = top_votes.max()
+            top2 = top_votes[top_votes == mv].index
+            winner = sorted(list(top2))[0]
+        else:
+            winner = top[0]
+        s.loc[winner] += 1
+
+    for p, seat_count in s.items():
+        seats_by_party[str(p)] = int(seat_count)
+
+    return seats_by_party, wasted
+
+
+seats_base, wasted_base = _allocate_seats(in_base)
+seats_low, wasted_low = _allocate_seats(in_low)
+seats_high, wasted_high = _allocate_seats(in_high)
+
+# Baseline coalitionSeats (this is what the chart uses for bars)
 coalitionSeats = []
+for party_name, meta in party_metadata.items():
+    coalitionSeats.append({
+        "id": meta["id"],
+        "color": {"colorCode": meta["colorCode"]},
+        "name": party_name,
+        "seats": int(seats_base.get(party_name, 0))
+    })
 
-# Add parties with >= 5% and their calculated seats
-for _, row in coalition_data.iterrows():
-    party_name = row['Partei']
-    if party_name in party_metadata:
-        coalitionSeats.append({
-            "id": party_metadata[party_name]["id"],
-            "color": {"colorCode": party_metadata[party_name]["colorCode"]},
-            "name": party_name,
-            "seats": int(row['seats'])
-        })
+# Add wasted-votes info to notes (keeps the chart itself unchanged)
+def _fmt_pct_de(x):
+    try:
+        return f"{float(x):.1f}".replace(".", ",")
+    except Exception:
+        return ""
 
-# Add parties with <5% and assign 0 seats
-for party_name, metadata in party_metadata.items():
-    if party_name not in coalition_data['Partei'].values:
-        coalitionSeats.append({
-            "id": metadata["id"],
-            "color": {"colorCode": metadata["colorCode"]},
-            "name": party_name,
-            "seats": 0
-        })
+notes_chart_seats_extra = "«Stabil/wackelig/unrealistisch» geprüft anhand von Modellrechnung für Parteien nahe der 5-Prozent-Hürde.<br>"
 
-# Check for the presence of FDP and BSW in the coalition_data
-has_fdp = "FDP" in coalition_data['Partei'].values and coalition_data.loc[coalition_data['Partei'] == "FDP", 'seats'].iloc[0] > 0
-has_bsw = "BSW" in coalition_data['Partei'].values and coalition_data.loc[coalition_data['Partei'] == "BSW", 'seats'].iloc[0] > 0
-has_linke = "Linke" in coalition_data['Partei'].values and coalition_data.loc[coalition_data['Partei'] == "Linke", 'seats'].iloc[0] > 0
+# Check for the presence of parties in baseline parliament (used for picking the coalition template)
+has_fdp = int(seats_base.get("FDP", 0)) > 0
+has_bsw = int(seats_base.get("BSW", 0)) > 0
+has_linke = int(seats_base.get("Linke", 0)) > 0
 
 # Determine the file to load based on the conditions
 if not has_fdp and not has_bsw:
     if has_linke:
         coalition_file = "./data/coalitions_nofdp_nobsw_linke.json"
-    else:
+    else: 
         coalition_file = "./data/coalitions_nofdp_nobsw.json"
 elif not has_fdp and has_bsw:
     if has_linke:
@@ -681,6 +869,49 @@ with open(coalition_file, 'r', encoding='utf-8') as f:
     coalition_set = json.load(f)
 
 print(f"Loaded coalition file: {coalition_file}")
+
+# --- Label each coalition as stabil / wacklig / unmöglich based on Low/Base/High scenarios ---
+id_to_party = {meta["id"]: party for party, meta in party_metadata.items()}
+
+for c in coalition_set:
+    party_ids = [p.get("id") for p in c.get("parties", []) if isinstance(p, dict)]
+    party_names = [id_to_party.get(pid) for pid in party_ids]
+    party_names = [p for p in party_names if p is not None]
+
+    base_total = sum(int(seats_base.get(p, 0)) for p in party_names)
+    low_total = sum(int(seats_low.get(p, 0)) for p in party_names)
+    high_total = sum(int(seats_high.get(p, 0)) for p in party_names)
+
+    if low_total >= MAJORITY:
+        status = "stabil"
+    elif high_total < MAJORITY:
+        status = "unmöglich"
+    else:
+        status = "wacklig"
+
+    label_map = {
+        "stabil": "stabile Mehrheit",
+        "wacklig": "wackelige Mehrheit",
+        "unmöglich": "Mehrheit unrealistisch",
+    }
+    label = label_map.get(status, status)
+
+    # Replace any existing guillemet placeholder like «…» with a parenthetical label
+    name = c.get("name", "")
+    if isinstance(name, str):
+        if "«" in name and "»" in name:
+            # Remove the guillemet segment entirely and append the label
+            name_clean = re.sub(r"\s*«.*?»\s*", "", name).strip()
+            c["name"] = f"{name_clean} {label}".strip()
+        else:
+            c["name"] = f"{name} {label}".strip()
+    else:
+        c["name"] = f"{label}"
+
+    # Optional: store totals for debugging/QA (chart will ignore unknown keys)
+    c["_seats_base"] = int(base_total)
+    c["_seats_low"] = int(low_total)
+    c["_seats_high"] = int(high_total)
 
 def convert_befragtenzahl(value):
     """
@@ -1152,7 +1383,7 @@ timecode_line = full_line_chart_data["date"].iloc[-1]
 #timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
 notes_chart_line = "Stand: " + timecode_str_line
-notes_chart_seats = "Ohne Berücksichtigung der Grundmandatsklausel.<br>Stand: " + timecode_str_line
+notes_chart_seats = "Ohne Berücksichtigung der Grundmandatsklausel.<br>" + notes_chart_seats_extra + "Stand: " + timecode_str_line
 
 """ DISABLE FOR NOW
 # update Kanzlerfragen chart #1
