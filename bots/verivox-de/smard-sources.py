@@ -427,11 +427,12 @@ if __name__ == '__main__':
             'Datum', f'{year}', '2022', 'Vorkrisenniveau²']]
         df_spot_compare.set_index('Datum', inplace=True)
         # get pre-crisis value
-        mwh_new = df_spot_compare[f'{year}'].loc[df_spot_compare[f'{year}'].last_valid_index(
-        )]
-        mwh_new_pos = df_spot_compare[f'{year}'].index.get_loc(
-            df_spot_compare[f'{year}'].last_valid_index())
-        mwh_old = df_spot_compare.iloc[mwh_new_pos]['Vorkrisenniveau²']
+        if df_spot_new.empty:
+            raise ValueError(f'No spot market data available for year {year}')
+
+        _last_date = df_spot_new['Datum'].iloc[-1]
+        mwh_new = df_spot_new[f'{year}'].iloc[-1]
+        mwh_old = df_spot_compare.loc[_last_date, 'Vorkrisenniveau²']
         title_mwh_diff = round((mwh_new - mwh_old), 0).astype(int)
         title_mwh = round(mwh_new, 0).astype(int)
         df_spot_compare[f'{year}'] = df_spot_compare[f'{year}'].fillna('')
