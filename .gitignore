@@ -9,6 +9,12 @@ __pycache__
 .idea/
 .github/workflows/verivox-de.yml
 bots/verivox-de/data/backup_2022/
+bots/verivox-de/data/eex-power-stock-historical_2025.tsv
+bots/verivox-de/data/smard_spot_historical.py
+bots/verivox-de/data/smard_spot_historical_2025.tsv
+bots/verivox-de/data/eex-power-stock-historical.py
+bots/verivox-de/data/ttf-gas-stock-historical.py
+bots/verivox-de/data/ttf-gas-stock-historical_2025.tsv
 bots/verivox-de/data/gas-strom-bundesschnitt-old.tsv
 bots/verivox-de/data/strom-strom-bundesschnitt-2022-orig.csv
 bots/verivox-de/data/gas-strom-bundesschnitt-2022-orig.csv
