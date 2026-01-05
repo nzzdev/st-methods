@@ -92,12 +92,20 @@ if __name__ == '__main__':
         # GeoJSON with postal codes
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5-min.json')
 
-        # current date
         dfac['Datum'] = pd.to_datetime(dfac['Datum'])
         dfgas['Datum'] = pd.to_datetime(dfgas['Datum'])
-        time_dt = dfac['Datum'].iloc[-1]
-        time_str = time_dt.strftime('%Y-%m-%d %H:%M:%SZ')
-        time_str_notes = time_dt.strftime('%-d. %-m. %Y')
+
+        # Snapshot date for the PLZ map/card must reflect the newest Snowflake delivery,
+        # not the bundled national time series (dfavg).
+        snapshot_dt = max(pd.Timestamp(dfac['Datum'].max()), pd.Timestamp(dfgas['Datum'].max()))
+        snapshot_dt = snapshot_dt.normalize()
+        time_dt = snapshot_dt.to_pydatetime()
+        time_str = snapshot_dt.strftime('%Y-%m-%d %H:%M:%SZ')
+        time_str_notes = snapshot_dt.strftime('%-d.\u2009%-m.\u2009%Y')
+
+        # dfavg is only for the national-series chart; keep it sorted for later.
+        dfavg['date'] = pd.to_datetime(dfavg['date'])
+        dfavg = dfavg.sort_values('date').reset_index(drop=True)
 
         # rename column headers
         dfac.rename(columns={'Postleitzahl': 'id', 'Anzahl Haushalte': 'hh',
@@ -160,8 +168,8 @@ if __name__ == '__main__':
         # merge gas and electricity and append current average for Germany
         #df = dfac.join(dfgas.set_index('id'), on='id')
         df = dfac.merge(dfgas, on='id', how='outer')
-        dfavg['date'] = pd.to_datetime(dfavg['date'])
-        datediff = time_dt - dfavg['date'].iloc[-1]
+        # New national-series point? Compare Snowflake snapshot day vs latest day stored in dfavg.
+        datediff = snapshot_dt.to_pydatetime() - pd.Timestamp(dfavg['date'].max()).normalize().to_pydatetime()
 
         if datediff >= timedelta(days=1):  # check if there's new data
             dfavg2 = pd.DataFrame()
@@ -180,8 +188,10 @@ if __name__ == '__main__':
                 dfavg = dfavg.round(0).astype(int)
 
             #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
+            # "Stand" for the national-series chart is the newest date in dfavg (after appending/interpolation)
+            stand_series_dt = pd.Timestamp(dfavg.index.max()).normalize()
             notes_chart = '¹ Im Vergleich zu den durchschnittlichen Kosten im Jahr 2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Boni).<br>Stand: ' + \
-                str(time_str_notes)
+                str(stand_series_dt.strftime('%-d.\u2009%-m.\u2009%Y'))
             dfavg.to_csv('./data/gas-strom-bundesschnitt.tsv', sep='\t')
             gas_new = dfavg['Gas'].iloc[-1]
             ac_new = dfavg['Strom'].iloc[-1]
@@ -203,12 +213,10 @@ if __name__ == '__main__':
             update_chart(id='4acf1a0fd4dd89aef4abaeefd05b7aa7',
                          data=dfavg, notes=notes_chart, title=title_chart)
         else:
-            time_dt_notes = dfavg['date'].iloc[-1]
-            time_str_notes = time_dt_notes.strftime('%-d. %-m. %Y')
             dfavg.set_index('date', inplace=True)
-            #dfavg.index = dfavg.index.strftime('%Y-%m-%d')
+            stand_series_dt = pd.Timestamp(dfavg.index.max()).normalize()
             notes_chart = '¹ Im Vergleich zu den durchschnittlichen Kosten im Jahr 2020.<br>² Gewichteter Bundesdurchschnitt der jeweils günstigsten Tarife (Preisgarantie mindestens 12 Monate, ohne Boni).<br>Stand: ' + \
-                str(time_str_notes)
+                str(stand_series_dt.strftime('%-d.\u2009%-m.\u2009%Y'))
             gas_new = dfavg['Gas'].iloc[-1]
             ac_new = dfavg['Strom'].iloc[-1]
             gas_old = 931  # average 2020 (with bonus: 842)
