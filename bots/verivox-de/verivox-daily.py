@@ -93,15 +93,20 @@ if __name__ == '__main__':
                 page += 1
 
         # generate file names ('Strom_Zeit_online_kw15_2.zip' etc.)
+        # Verivox sometimes uses zero-padded ISO week numbers (kw01_1.zip). Accept both.
         strom_names = []
         gas_names = []
         spacetime = 10
         day = datetime.today()
         for i in range(spacetime):
-            ending = str(day.isocalendar().week) + '_' + \
-                str(day.isocalendar().weekday) + '.zip'
+            week = day.isocalendar().week
+            weekday = day.isocalendar().weekday
+            ending = f"{week}_{weekday}.zip"
+            ending_padded = f"{week:02d}_{weekday}.zip"
             strom_names.append('Strom_Zeit_online_kw' + ending)
+            strom_names.append('Strom_Zeit_online_kw' + ending_padded)
             gas_names.append('Gas_Zeit_online_kw' + ending)
+            gas_names.append('Gas_Zeit_online_kw' + ending_padded)
             day = day - timedelta(days=1)
 
         # get file ids
@@ -147,12 +152,6 @@ if __name__ == '__main__':
         # GeoJSON with postal codes
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5.json')
 
-        # current date
-        # time_str = (dfac.iat[0, 3]) # export date from csv file
-        # time_dt = datetime.strptime(time_str, '%d.%m.%y')
-        time_str = time_dt.strftime(
-            '%Y-%m-%d %H:%M:%SZ')  # %Y-%m-%dT%H:%M:%S.%fZ
-        time_str_notes = time_dt.strftime('%-d. %-m. %Y')
 
         # rename column headers
         dfac.rename(columns={'Postleitzahl': 'id', 'Anzahl Haushalte': 'hh',
@@ -190,6 +189,18 @@ if __name__ == '__main__':
         #df = dfac.join(dfgas.set_index('id'), on='id')
         df = dfac.merge(dfgas, on='id', how='outer')
         dfavg['date'] = pd.to_datetime(dfavg['date'])
+
+        # If the downloaded zip is older than what we already have in dfavg,
+        # do not move the dashboard "Stand" backwards.
+        latest_dt = pd.Timestamp(dfavg['date'].iloc[-1]).to_pydatetime()
+        latest_dt = pd.Timestamp(latest_dt).replace(hour=0, minute=0, second=0, microsecond=0)
+        if time_dt < latest_dt:
+            time_dt = latest_dt
+
+        # current date strings for notes / lastUpdatedAt
+        time_str = time_dt.strftime('%Y-%m-%d %H:%M:%SZ')  # %Y-%m-%dT%H:%M:%S.%fZ
+        time_str_notes = time_dt.strftime('%-d.\u2009%-m.\u2009%Y')
+
         datediff = time_dt - dfavg['date'].iloc[-1]
 
         if datediff >= timedelta(days=1):  # check if there's new data

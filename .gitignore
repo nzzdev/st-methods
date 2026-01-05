@@ -14,6 +14,8 @@ bots/verivox-de/data/smard_spot_historical.py
 bots/verivox-de/data/smard_spot_historical_2025.tsv
 bots/verivox-de/data/eex-power-stock-historical.py
 bots/verivox-de/data/ttf-gas-stock-historical.py
+bots/verivox-de/data/gas-storage-current.py
+bots/verivox-de/data/gas-storage-current_2025.tsv
 bots/verivox-de/data/ttf-gas-stock-historical_2025.tsv
 bots/verivox-de/data/gas-strom-bundesschnitt-old.tsv
 bots/verivox-de/data/strom-strom-bundesschnitt-2022-orig.csv
