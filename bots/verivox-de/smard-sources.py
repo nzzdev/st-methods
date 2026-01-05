@@ -412,9 +412,12 @@ if __name__ == '__main__':
         df_spot_old = pd.read_csv(
             './data/smard_spot_historical.tsv', sep='\t', index_col=None)
         df_spot_old['Datum'] = pd.to_datetime(df_spot_old['Datum'])
-        yesterday_year = datetime.now() - timedelta(days=1)
-        year = yesterday_year.year
-        df_spot_new = df_spot.copy()[df_spot.index >= f'{year}-01-01']
+
+        # Determine the "current year" from the last available spot date.
+        # This prevents failures around New Year when there is no data yet for the new year.
+        year = q_date.year
+        df_spot_new = df_spot.copy()
+        df_spot_new = df_spot_new[df_spot_new.index >= pd.Timestamp(year=year, month=1, day=1)]
         df_spot_new = df_spot_new.rename(
             columns={f'Deutschland/Luxemburg [€/MWh] Originalauflösungen': f'{year}'})
         df_spot_new = df_spot_new.reset_index()
