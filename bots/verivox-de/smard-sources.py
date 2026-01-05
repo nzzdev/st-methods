@@ -411,7 +411,7 @@ if __name__ == '__main__':
         # create dataframe for chart with crisis and pre-crisis level
         df_spot_old = pd.read_csv(
             './data/smard_spot_historical.tsv', sep='\t', index_col=None)
-        df_spot_old['Datum'] = pd.to_datetime(df_spot_old['Datum'])
+        df_spot_old['Datum'] = pd.to_datetime(df_spot_old['Datum']).dt.normalize()
 
         # Determine the "current year" from the last available spot date.
         # This prevents failures around New Year when there is no data yet for the new year.
@@ -421,11 +421,16 @@ if __name__ == '__main__':
         df_spot_new = df_spot_new.rename(
             columns={f'Deutschland/Luxemburg [€/MWh] Originalauflösungen': f'{year}'})
         df_spot_new = df_spot_new.reset_index()
-        df_spot_compare = df_spot_old.merge(
-            df_spot_new, on='Datum', how='left')  # int will be float due to NaN
-        df_spot_compare = df_spot_compare[[
-            'Datum', f'{year}', '2022', 'Vorkrisenniveau²']]
+        df_spot_new['Datum'] = pd.to_datetime(df_spot_new['Datum']).dt.normalize()
+
+        # Use an outer merge so new-year dates that do not exist in the historical file are still included.
+        df_spot_compare = pd.merge(df_spot_old, df_spot_new, on='Datum', how='outer')  # int will be float due to NaN
+        df_spot_compare = df_spot_compare[['Datum', f'{year}', '2022', 'Vorkrisenniveau²']]
+        df_spot_compare = df_spot_compare.drop_duplicates(subset=['Datum'], keep='last').sort_values('Datum')
         df_spot_compare.set_index('Datum', inplace=True)
+
+        # Extend the pre-crisis level to new dates (historical file may stop before the current year).
+        df_spot_compare['Vorkrisenniveau²'] = df_spot_compare['Vorkrisenniveau²'].ffill().bfill()
         # get pre-crisis value
         if df_spot_new.empty:
             raise ValueError(f'No spot market data available for year {year}')
