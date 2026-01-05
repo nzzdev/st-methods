@@ -7,6 +7,7 @@ from datetime import datetime, date, timedelta
 from time import sleep
 import pandas as pd
 import math
+import calendar
 
 
 def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options=""):  # Q helper function
@@ -65,14 +66,16 @@ if __name__ == '__main__':
         # create dates
         today = date.today()
         todaystr = today.strftime('%Y-%m-%d')
-        endstr = '2024-01-01'
+        year = today.year
 
-        # calculate number of pages needed
-        start = datetime.strptime(todaystr, "%Y-%m-%d") + timedelta(days=300)
-        end = datetime.strptime(endstr, "%Y-%m-%d")
-        pages = (end - start) / timedelta(days=300)
-        pages = abs(int(math.floor(pages)))  # round and remove negative sign
-        futurestr = start.strftime('%Y-%m-%d')
+        # we fetch enough history for the trend chart; the main chart will later be filtered to the current year
+        api_from = '2022-05-01'
+
+        # calculate number of pages needed (AGSI uses page=1 as first page; max size is 300)
+        start = datetime.strptime(api_from, "%Y-%m-%d")
+        end = datetime.strptime(todaystr, "%Y-%m-%d")
+        pages = int(math.ceil((end - start) / timedelta(days=300)))
+        pages = max(pages, 1)
 
         # retry if error
         logging.basicConfig(level=logging.INFO)
@@ -81,17 +84,15 @@ if __name__ == '__main__':
                         status_forcelist=[502, 503, 504])
         s.mount('https://', HTTPAdapter(max_retries=retries))
 
-        # create header and get data from current year
-        yesterday_year = datetime.now() - timedelta(days=1)
-        year = yesterday_year.year
+        # create header and fetch data (year is based on "today" so it switches correctly on Jan 1st)
         header = (f"Datum,{year}²,Trend"+'\n')
         with open(f'./data/{todaystr}-gasspeicher.csv', 'w') as file:
             file.write(header)
-            for n in range(1, pages):
+            for n in range(1, pages + 1):
                 params = (
                     ('country', 'DE'),
-                    ('from', endstr),
-                    ('to', futurestr),
+                    ('from', api_from),
+                    ('to', todaystr),
                     ('page', n),
                     ('size', '300'),  # max. 300
                 )
@@ -113,13 +114,15 @@ if __name__ == '__main__':
                 # original query
                 # https://agsi.gie.eu/api?country=DE&from=2013-04-15&to=2022-05-16&page=1&size=300
 
-        # retrieve data starting at 2011
-        dfnew = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', index_col=None)
-        dftrend = pd.read_csv(
-            f'./data/{todaystr}-gasspeicher.csv', index_col=None, usecols=['Datum', 'Trend'])
-        dfold = pd.read_csv(
-            './data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
+        # read fetched data once, then split into: current-year series (main chart) and full trend series
+        dfall = pd.read_csv(f'./data/{todaystr}-gasspeicher.csv', index_col=None)
+        dfall['Datum'] = pd.to_datetime(dfall['Datum'])
+        dfall = dfall.sort_values(by='Datum', ascending=True)
+
+        dfnew = dfall[dfall['Datum'].dt.year == year].copy()
+        dftrend = dfall[['Datum', 'Trend']].copy()
+
+        dfold = pd.read_csv('./data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
 
 
         """
@@ -131,22 +134,33 @@ if __name__ == '__main__':
         dfnew = dfnew.reset_index(level=0)
         """
 
-        # temporary fix for wrong trend data
+        # temporary fix for wrong trend data (guarded so it won't crash when the date isn't present)
         dftrend.set_index('Datum', inplace=True)
-        dftrend.at['2024-03-31', 'Trend'] = 0.0
-        dftrend.at['2024-04-01', 'Trend'] = 0.0 
-        dftrend.at['2024-06-16', 'Trend'] = 0.3
-        dftrend.at['2024-06-17', 'Trend'] = 0.3
+        _trend_fixes = {
+            '2024-03-31': 0.0,
+            '2024-04-01': 0.0,
+            '2024-06-16': 0.3,
+            '2024-06-17': 0.3,
+        }
+        for _d, _v in _trend_fixes.items():
+            _ts = pd.to_datetime(_d)
+            if _ts in dftrend.index:
+                dftrend.at[_ts, 'Trend'] = _v
         dftrend = dftrend.reset_index()
-        dftrend.to_csv(f'./data/{todaystr}-gasspeicher.csv', encoding='utf-8')
 
         # fix for seemingly wrong >100% data
         #dfnew.loc[dfnew['2024²'] > 100, '2024²'] = 100
 
-        # convert date column to datetime
+        # convert / normalize date columns
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
-        dfnew['Datum'] = pd.to_datetime(dfnew['Datum'])
-        dftrend['Datum'] = pd.to_datetime(dftrend['Datum'])
+
+        # anchor the seasonal baseline (dfold) to the current year so the time series restarts on Jan 1
+        _md = dfold['Datum'].dt.strftime('%m-%d')
+        if not calendar.isleap(year):
+            _md = _md.where(_md != '02-29', '02-28')
+        dfold['Datum'] = pd.to_datetime(_md.map(lambda s: f"{year}-{s}"))
+
+        # dfnew and dftrend already have parsed dates, just sort them
         dfnew = dfnew.sort_values(by='Datum', ascending=True)
         dftrend = dftrend.sort_values(by='Datum', ascending=True)
 
@@ -172,7 +186,7 @@ if __name__ == '__main__':
         # merge dataframes
         df = dfold.merge(dfnew, on='Datum', how='left')
         df.rename(columns={'Min': ''}, inplace=True)
-        df[f'{year}²'].fillna('', inplace=True)
+        df[f'{year}²'] = df[f'{year}²'].fillna('')
         df.set_index('Datum', inplace=True)
         dftrend.set_index('Datum', inplace=True)
         # df.index = df.index.strftime('%Y-%m-%d') # convert datetime to string
