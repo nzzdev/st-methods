@@ -20,6 +20,8 @@ bots/verivox-de/data/ttf-gas-stock-historical_2025.tsv
 bots/verivox-de/data/gas-strom-bundesschnitt-old.tsv
 bots/verivox-de/data/strom-strom-bundesschnitt-2022-orig.csv
 bots/verivox-de/data/gas-strom-bundesschnitt-2022-orig.csv
+bots/verivox-de/data/agsi-gas-storage-cleaning.py
+bots/verivox-de/data/StorageData_GIE_2017-01-01_2021-12-31.csv
 bots/verivox-de/imports-countries-test.py
 bots/verivox-de/datawrapper/
 bots/crawl-rewe-de/create-shop-file-local

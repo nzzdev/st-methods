@@ -122,7 +122,7 @@ if __name__ == '__main__':
         dfnew = dfall[dfall['Datum'].dt.year == year].copy()
         dftrend = dfall[['Datum', 'Trend']].copy()
 
-        dfold = pd.read_csv('./data/gas-storage-2011-2021.tsv', sep='\t', index_col=None)
+        dfold = pd.read_csv('./data/gas-storage-2017-2021.tsv', sep='\t', index_col=None)
 
 
         """
@@ -133,7 +133,7 @@ if __name__ == '__main__':
                      encoding='utf-8', index=True)
         dfnew = dfnew.reset_index(level=0)
         """
-
+        """
         # temporary fix for wrong trend data (guarded so it won't crash when the date isn't present)
         dftrend.set_index('Datum', inplace=True)
         _trend_fixes = {
@@ -147,6 +147,7 @@ if __name__ == '__main__':
             if _ts in dftrend.index:
                 dftrend.at[_ts, 'Trend'] = _v
         dftrend = dftrend.reset_index()
+        """
 
         # fix for seemingly wrong >100% data
         #dfnew.loc[dfnew['2024²'] > 100, '2024²'] = 100
@@ -180,7 +181,7 @@ if __name__ == '__main__':
         # get latest date for chart notes
         timecode = dfnew['Datum'].iloc[-1]
         timecodestr = timecode.strftime('%-d. %-m. %Y')
-        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2011-2021. ² Die Prozent-Angabe bezieht sich auf die gesicherte Kapazität, unter optimalen Bedingungen kann diese die Marke von 100 Prozent überschreiten.<br>Stand: ' + timecodestr
+        notes_chart = '¹ Maximum/Minimum der Vorkrisen-Füllstände 2017-2021. ² Die Prozent-Angabe bezieht sich auf die gesicherte Kapazität, unter optimalen Bedingungen kann diese die Marke von 100 Prozent überschreiten.<br>Stand: ' + timecodestr
         notes_chart_trend = 'Stand: ' + timecodestr
 
         # merge dataframes
