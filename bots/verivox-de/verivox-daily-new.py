@@ -89,6 +89,64 @@ if __name__ == '__main__':
         dfpop = pd.read_csv('./data/plz_einwohner.tsv',
                             sep='\t', index_col=None, dtype={'plz': 'string'})
 
+        # normalize PLZ/population lookup and build an interpolator for missing PLZs
+        dfpop['plz'] = dfpop['plz'].astype('string').str.strip()
+        if 'einwohner' in dfpop.columns:
+            dfpop['einwohner'] = pd.to_numeric(dfpop['einwohner'], errors='coerce')
+        else:
+            raise ValueError("plz_einwohner.tsv must contain a column named 'einwohner'")
+
+        # numeric PLZ for interpolation (keep original string for exact matches)
+        dfpop['plz_int'] = pd.to_numeric(dfpop['plz'], errors='coerce')
+        dfpop = dfpop.dropna(subset=['plz_int', 'einwohner']).copy()
+        dfpop['plz_int'] = dfpop['plz_int'].astype(int)
+        dfpop = dfpop.sort_values('plz_int')
+
+        _plz_ints = dfpop['plz_int'].to_numpy()
+        _pops = dfpop['einwohner'].to_numpy()
+
+        def _pop_for_plz(plz_str: str):
+            """Return population for PLZ.
+            - exact match if present in dfpop
+            - otherwise linear interpolation between nearest lower/upper PLZ by numeric code
+            - if only one neighbor exists, fall back to that neighbor
+            """
+            if plz_str is None:
+                return np.nan
+            plz_str = str(plz_str).strip()
+
+            exact = dfpop.loc[dfpop['plz'] == plz_str, 'einwohner']
+            if not exact.empty:
+                return float(exact.iloc[0])
+
+            try:
+                plz_int = int(plz_str)
+            except ValueError:
+                return np.nan
+
+            # find insertion position
+            pos = np.searchsorted(_plz_ints, plz_int)
+
+            # lower and upper neighbors
+            lower_idx = pos - 1
+            upper_idx = pos
+
+            has_lower = lower_idx >= 0
+            has_upper = upper_idx < len(_plz_ints)
+
+            if has_lower and has_upper:
+                x0, y0 = _plz_ints[lower_idx], _pops[lower_idx]
+                x1, y1 = _plz_ints[upper_idx], _pops[upper_idx]
+                if x1 == x0:
+                    return float(y0)
+                # linear interpolation
+                return float(y0 + (y1 - y0) * (plz_int - x0) / (x1 - x0))
+            if has_lower:
+                return float(_pops[lower_idx])
+            if has_upper:
+                return float(_pops[upper_idx])
+            return np.nan
+
         # GeoJSON with postal codes
         gdf = gpd.read_file('./data/plz_vereinfacht_1.5-min.json')
 
@@ -121,12 +179,27 @@ if __name__ == '__main__':
             if x == 0:
                 plz = dfac.loc[i, 'id']
                 if old_plz != plz:
-                    pop = dfpop[dfpop['plz'] == plz]['einwohner']
+                    pop_val = _pop_for_plz(plz)
+                    if pd.isna(pop_val):
+                        # if we cannot get population at all, fall back to a conservative estimate
+                        # (keep hh at 0 rather than crashing)
+                        dfac.loc[i, 'hh'] = 0
+                        old_plz = plz
+                        continue
+                    pop = pd.Series([pop_val])
                     sumhh = dfac[dfac['id'] == plz]['hh'].sum()
                     sumnan = dfac[(dfac['id'] == plz)].count()['id']
+                if sumnan == 0:
+                    # nothing to distribute; keep at 0
+                    dfac.loc[i, 'hh'] = 0
+                    old_plz = plz
+                    continue
                 # average persons per household 2021
                 res = ((pop / 2.02) - sumhh) / sumnan
-                dfac.loc[i, 'hh'] = max(int(res.iloc[0]), 0)
+                if res.empty or pd.isna(res.iloc[0]):
+                    dfac.loc[i, 'hh'] = 0
+                else:
+                    dfac.loc[i, 'hh'] = max(int(res.iloc[0]), 0)
                 old_plz = plz
         # gas
         old_plz = 0
@@ -135,12 +208,25 @@ if __name__ == '__main__':
             if x == 0:
                 plz = dfgas.loc[i, 'id']
                 if old_plz != plz:
-                    pop = dfpop[dfpop['plz'] == plz]['einwohner']
+                    pop_val = _pop_for_plz(plz)
+                    if pd.isna(pop_val):
+                        dfgas.loc[i, 'hh'] = 0
+                        old_plz = plz
+                        continue
+                    pop = pd.Series([pop_val])
                     sumhh = dfgas[dfgas['id'] == plz]['hh'].sum()
                     sumnan = dfgas[(dfgas['id'] == plz)].count()['id']
+                if sumnan == 0:
+                    # nothing to distribute; keep at 0
+                    dfgas.loc[i, 'hh'] = 0
+                    old_plz = plz
+                    continue
                 # average persons per household 2021
                 res = ((pop / 2.02) - sumhh) / sumnan
-                dfgas.loc[i, 'hh'] = max(int(res.iloc[0]), 0)
+                if res.empty or pd.isna(res.iloc[0]):
+                    dfgas.loc[i, 'hh'] = 0
+                else:
+                    dfgas.loc[i, 'hh'] = max(int(res.iloc[0]), 0)
                 old_plz = plz
 
         # calculate weighted mean for Germany
