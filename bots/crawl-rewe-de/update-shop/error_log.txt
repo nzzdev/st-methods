@@ -1,5 +1,4 @@
 ID 136053 in persona 'general' has no valid alternative.
-ID 8661897 in persona 'general' has no valid alternative.
 ID 136053 in persona 'bio' has no valid alternative.
 ID 200347 in persona 'bio' has no valid alternative.
 ID 8729533 in persona 'bio' has no valid alternative.
