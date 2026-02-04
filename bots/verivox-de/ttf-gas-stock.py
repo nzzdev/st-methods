@@ -53,8 +53,8 @@ if __name__ == '__main__':
             df.drop(df.tail(1).index, inplace=True)
 
         # get latest data from ICE (avoid errors with Yahoo Finance)
-        url = 'https://www.theice.com/marketdata/DelayedMarkets.shtml?getHistoricalChartDataAsJson=&marketId=' + \
-            market_id + '&historicalSpan=1'
+        url = 'https://www.ice.com/marketdata/api/productguide/charting/data/historical?marketId=' + \
+            market_id + '&historicalSpan=2'
         resp = download_data(url, headers=fheaders)
         json_file = resp.text
         full_data = json.loads(json_file)
