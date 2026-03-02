@@ -305,6 +305,8 @@ dw_id_table = "G0FzZ"
 
 # Set the working directory
 os.chdir(os.path.dirname(__file__))
+# Ensure output directory exists (GitHub Actions runner starts from a clean workspace)
+os.makedirs("./data", exist_ok=True)
 
 with open("urls.csv") as f:
     reader = csv.DictReader(f)
