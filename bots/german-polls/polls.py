@@ -5,10 +5,145 @@ import csv
 from io import StringIO
 import json
 import re
-from scipy.ndimage import uniform_filter1d
 import requests
 from datawrapper import Datawrapper
 import time
+
+# ============================================================
+# README (manuelle Einstellungen)
+# ============================================================
+# Koalitionen (Templates werden pro Lauf automatisch erzeugt)
+#
+# 1) Varianten-Parteien (rein/raus):
+#    - COALITION_VARIANT_PARTIES: Für diese Parteien gibt es Koalitions-Varianten-Dateien.
+#      Beispiel: ["FDP","BSW","Linke"] erzeugt bis zu 2^3 Dateien:
+#      coalitions.json, coalitions_fdp.json, coalitions_bsw.json, coalitions_fdp_bsw.json, ...
+#      Geladen wird die Variante, die zum Basisszenario (Sitze > 0) passt.
+#
+# 2) Koalitions-Prioritäten:
+#    - COALITIONS_SPEC: Liste der Koalitionen in gewünschter Reihenfolge.
+#      Jede Koalition ist: {"name": "...", "parties": ["Union","SPD", ...]}
+#
+# 3) Ausgabeordner:
+#    - COALITION_TEMPLATES_DIR: Hierhin werden die coalitions*.json geschrieben.
+# ============================================================
+
+COALITION_TEMPLATES_DIR = "./data"
+COALITION_VARIANT_PARTIES = ["FDP", "BSW", "Linke"]
+
+# Koalitionen in gewünschter Reihenfolge (Beispiel; hier nach Bedarf pflegen)
+COALITIONS_SPEC = [
+    {"name": "", "parties": ["Union", "SPD"]},
+    {"name": "", "parties": ["Union", "Grüne"]},
+    {"name": "", "parties": ["Union", "FDP"]},
+    {"name": "", "parties": ["Union", "AfD"]},
+    {"name": "", "parties": ["SPD", "Grüne"]},
+    {"name": "", "parties": ["SPD", "Grüne", "Linke"]},
+    {"name": "", "parties": ["SPD", "Grüne", "Linke", "BSW"]},
+    {"name": "", "parties": ["SPD", "Grüne", "BSW"]},
+    {"name": "", "parties": ["SPD", "Grüne", "FDP"]},
+]
+
+# Optional: Untervarianten unterdrücken, wenn eine "erweiterte" Variante existiert.
+# Beispiel: SPD+Grüne nur anzeigen, wenn keine der Varianten mit Linke/BSW existiert.
+COALITION_DEDUPE_BASES = [
+    ["SPD", "Grüne"],
+]
+
+SWITCH_PARTIES = COALITION_VARIANT_PARTIES
+
+def write_coalition_templates(data_dir: str = COALITION_TEMPLATES_DIR):
+    """Schreibt coalitions*.json aus COALITIONS_SPEC (in definierter Reihenfolge).
+
+    Pro Kombination der Varianten-Parteien wird eine Datei erzeugt.
+    Eine Koalition wird nur dann in eine Variante geschrieben, wenn keine fehlende Varianten-Partei
+    in der Koalition vorkommt.
+    """
+    os.makedirs(data_dir, exist_ok=True)
+
+    from itertools import combinations
+
+    switch = [p for p in SWITCH_PARTIES if p in party_metadata]
+
+    # map party name -> id
+    name_to_id = {name: meta["id"] for name, meta in party_metadata.items()}
+
+    scenarios = []
+    for r in range(0, len(switch) + 1):
+        for comb in combinations(switch, r):
+            scenarios.append(set(comb))
+
+    for present_set in scenarios:
+        suffix = "_" + "_".join(sorted([p.lower() for p in present_set])) if present_set else ""
+        out_path = os.path.join(data_dir, f"coalitions{suffix}.json")
+
+        out = []
+        for c in COALITIONS_SPEC:
+            parties = c.get("parties", [])
+            if not parties:
+                continue
+
+            # Koalitionen überspringen, wenn eine Varianten-Partei fehlt
+            if any((p in switch and p not in present_set) for p in parties):
+                continue
+
+            ids = []
+            ok = True
+            for p in parties:
+                pid = name_to_id.get(p)
+                if not pid:
+                    ok = False
+                    break
+                ids.append({"id": pid})
+            if not ok:
+                continue
+
+            out.append({"name": c.get("name", ""), "parties": ids})
+
+        # Dedupe: Basiskoalitionen unterdrücken, wenn eine erweiterte Variante in derselben Datei existiert
+        if COALITION_DEDUPE_BASES and out:
+            # Build name-sets for each coalition
+            # (COALITIONS_SPEC and out match in order and count, but out may be filtered by present_set)
+            # So, we need to reconstruct the party name set for each out entry from ids.
+            # Attach name sets to out entries for pruning
+            out2 = []
+            for entry in out:
+                # reconstruct names from ids
+                ids_here = [p.get("id") for p in entry.get("parties", []) if isinstance(p, dict)]
+                names_here = []
+                for nm, meta in party_metadata.items():
+                    if meta.get("id") in ids_here:
+                        names_here.append(nm)
+                entry2 = dict(entry)
+                entry2["_names"] = names_here
+                out2.append(entry2)
+
+            # Compute drop indices
+            dedupe_bases = [set(x) for x in COALITION_DEDUPE_BASES]
+            drop_idx = set()
+            name_sets = [set(e.get("_names", [])) for e in out2]
+            for i, si in enumerate(name_sets):
+                if si in dedupe_bases:
+                    for j, sj in enumerate(name_sets):
+                        if i == j:
+                            continue
+                        if si < sj:
+                            # Only prune if extras are variant parties present in this scenario
+                            extra = sj - si
+                            # Only consider extra parties that are in switch and present_set
+                            if extra and all((e in switch and e in present_set) for e in extra):
+                                drop_idx.add(i)
+                                break
+            if drop_idx:
+                out2 = [e for k, e in enumerate(out2) if k not in drop_idx]
+            # Remove helper field
+            out = []
+            for e in out2:
+                e.pop("_names", None)
+                out.append(e)
+
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(out, f, ensure_ascii=False, indent=2)
 
 # === Helper Functions ===
 
@@ -76,6 +211,35 @@ def convert_weird_date_to_date(str):
         return f"15.{months[str[:3]]}.{str[-4:]}"
     else:
         return str
+
+# Helper: parse end of fieldwork period from Zeitraum (for trend weighting)
+def parse_fieldwork_end_date(zeitraum, pub_date):
+    """Parse the last day of the fieldwork period from `Zeitraum` and return a Timestamp.
+
+    Expects patterns like '23.02.–26.02.' or '23.2.–26.2.' (often without year).
+    Uses the year from `pub_date` as default; if pub_date is Jan and end month is Dec, assumes previous year.
+    Returns NaT if parsing fails.
+    """
+    if pd.isna(zeitraum) or pd.isna(pub_date):
+        return pd.NaT
+
+    s = str(zeitraum).replace("\xa0", " ").strip()
+    # Match 'dd.mm.–dd.mm.' / 'd.m.-d.m.'
+    m = re.search(r"(\d{1,2})\.(\d{1,2})\.?\s*[–-]\s*(\d{1,2})\.(\d{1,2})\.?", s)
+    if not m:
+        return pd.NaT
+
+    end_day = int(m.group(3))
+    end_month = int(m.group(4))
+    pub_dt = pd.to_datetime(pub_date)
+    year = int(pub_dt.year)
+    if int(pub_dt.month) == 1 and end_month == 12:
+        year -= 1
+
+    try:
+        return pd.Timestamp(year=year, month=end_month, day=end_day)
+    except Exception:
+        return pd.NaT
     
 def update_chart(id, title="", subtitle="", notes="", data="", parties="", possibleCoalitions="", assetGroups="", options=""):  # Q helper function
     # read qConfig file
@@ -132,9 +296,9 @@ def fetch_html_table(url, max_retries=5, pause=1):
                 print(f"Failed to fetch HTML table from {url} after {max_retries} attempts. Aborting script.")
                 exit(1)  # Exit the script with error status
 
-# Datawrapper API key
-dw_key = os.environ["DATAWRAPPER_API"]
-dw = Datawrapper(access_token=dw_key)
+# Datawrapper API key (optional; keep script runnable even if not set)
+dw_key = os.getenv("DATAWRAPPER_API")
+dw = Datawrapper(access_token=dw_key) if dw_key else None
 dw_id = "IWzhE"
 dw_id_weidel = "hDqW6"
 dw_id_table = "G0FzZ"
@@ -353,6 +517,14 @@ filtered_data = filtered_data[filtered_data["Datum"] > cutoff_date]
 filtered_data['Ergebnis'] = pd.to_numeric(filtered_data['Ergebnis'], errors='coerce')
 filtered_data['Befragte'] = pd.to_numeric(filtered_data['Befragte'], errors='coerce')
 
+# Effective date for weighting: use end of fieldwork period when available, otherwise publication date
+filtered_data["effective_date"] = filtered_data.apply(
+    lambda r: parse_fieldwork_end_date(r.get("Zeitraum"), r.get("Datum")), axis=1
+)
+filtered_data["effective_date"] = filtered_data["effective_date"].where(
+    filtered_data["effective_date"].notna(), filtered_data["Datum"]
+)
+
 # === Create the Latest Polls Table ===
 
 # Format party colors
@@ -433,9 +605,6 @@ for party, color in party_colors.items():
 # Rename columns with formatted party headers
 wide_polls_table.rename(columns={"Institut": "Institut", **formatted_columns}, inplace=True)
 
-# Rename columns with formatted party headers
-wide_polls_table.rename(columns={"Institut": "Institut", **formatted_columns}, inplace=True)
-
 # --- Compute data_pivot and average_data for individual institutes ---
 
 # Pivot the data to have parties as columns
@@ -472,8 +641,10 @@ data_pivot[desired_parties] = data_pivot[desired_parties].round(1)
 HALF_LIFE_DAYS = 10.0  # polls from 10 days ago count only half as much
 U_CENSORED = 3.0       #  "not reported" means: value is below the display threshold; assume < 3.0%
 
-# Build observations from poll releases
-obs = filtered_data[["Datum", "Partei", "Ergebnis", "Befragte", "reported"]].copy()
+#
+# Build observations from polls; weight by end of fieldwork period (effective_date)
+obs = filtered_data[["effective_date", "Partei", "Ergebnis", "Befragte", "reported"]].copy()
+obs.rename(columns={"effective_date": "Datum"}, inplace=True)
 obs["Befragte"] = pd.to_numeric(obs["Befragte"], errors="coerce")
 
 fallback_n = float(np.nanmedian(obs["Befragte"])) if pd.notna(np.nanmedian(obs["Befragte"])) else 2000.0
@@ -721,7 +892,7 @@ projection_data = projection_data[['party', 'lastElection', 'lowerBound', 'avera
 # Exclude 'Übrige' from the projection data
 projection_data = projection_data[projection_data['party'] != 'Übrige']
 
-# Round values
+# Round values (keep decimals)
 projection_data[['lowerBound', 'average', 'upperBound']] = projection_data[['lowerBound', 'average', 'upperBound']].round(4)
 
 # Write to JSON
@@ -732,18 +903,36 @@ with open('./data/projectionChart.json', 'w', encoding='utf-8') as f:
 
 print("JSON file 'projectionChart.json' has been created successfully.")
 
-notes_chart_seats_extra = ""
-# === Coalition Seats Calculation ===
-
 # Map party names to color codes and Q IDs
 party_metadata = {
-    "Union": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909830-658639605", "colorCode": "#0a0a0a"},
-    "SPD": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909830-820461104", "colorCode": "#c31906"},
-    "Grüne": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909830-681841949", "colorCode": "#66a622"},
-    "FDP": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909831-568178765", "colorCode": "#d1cc00"},
-    "Linke": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909831-21531609", "colorCode": "#8440a3"},
-    "AfD": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909831-211145954", "colorCode": "#0084c7"},
-    "BSW": {"id": "0d50b45e538faa45f768d3204450d0e7-1732637074764-908994801", "colorCode": "#da467d"}
+    "Union": {
+        "colorCode": "#0a0a0a",
+        "id": "cdu_csu"
+    },
+    "AfD": {
+        "colorCode": "#0084c7",
+        "id": "afd"
+    },
+    "SPD": {
+        "colorCode": "#c31906",
+        "id": "spd"
+    },
+    "Grüne": {
+        "colorCode": "#66a622",
+        "id": "gruene"
+    },
+    "Linke": {
+        "colorCode": "#8440a3",
+        "id": "linke"
+    },
+    "BSW": {
+        "colorCode": "#da467d",
+        "id": "bsw"
+    },
+    "FDP": {
+        "colorCode": "#d1cc00",
+        "id": "fdp"
+    }
 }
 
 # --- Coalition scenarios around the 5%-threshold ---
@@ -839,33 +1028,24 @@ def _fmt_pct_de(x):
     except Exception:
         return ""
 
-notes_chart_seats_extra = "«Stabil/wackelig/unrealistisch» geprüft anhand von Modellrechnung für Parteien nahe der 5-Prozent-Hürde.<br>"
+notes_chart_seats_extra = "««Stabile/wackelige/unrealistische» Mehrheit geprüft anhand von Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
 
-# Check for the presence of parties in baseline parliament (used for picking the coalition template)
-has_fdp = int(seats_base.get("FDP", 0)) > 0
-has_bsw = int(seats_base.get("BSW", 0)) > 0
-has_linke = int(seats_base.get("Linke", 0)) > 0
+# Koalitions-Templates schreiben (pro Lauf neu)
+write_coalition_templates(data_dir=COALITION_TEMPLATES_DIR)
 
-# Determine the file to load based on the conditions
-if not has_fdp and not has_bsw:
-    if has_linke:
-        coalition_file = "./data/coalitions_nofdp_nobsw_linke.json"
-    else: 
-        coalition_file = "./data/coalitions_nofdp_nobsw.json"
-elif not has_fdp and has_bsw:
-    if has_linke:
-        coalition_file = "./data/coalitions_nofdp_linke.json"
-    else:
-        coalition_file = "./data/coalitions_nofdp.json"
-elif has_fdp and not has_bsw:
-    # If needed, you can add a nested condition for has_linke here too
-    coalition_file = "./data/coalitions_nobsw.json"
-elif has_fdp and has_bsw:
-    # If needed, you can add a nested condition for has_linke here as well
-    coalition_file = "./data/coalitions_fdp_bsw.json"
+# Pick coalition template file based on switch parties present in baseline parliament
+present = [p.lower() for p in SWITCH_PARTIES if int(seats_base.get(p, 0)) > 0]
+if present:
+    suffix = "_" + "_".join(sorted(present))
+else:
+    suffix = ""
 
-# Load the selected JSON file into a variable
-with open(coalition_file, 'r', encoding='utf-8') as f:
+coalition_file = os.path.join(COALITION_TEMPLATES_DIR, f"coalitions{suffix}.json")
+
+if not os.path.exists(coalition_file):
+    raise FileNotFoundError(f"Missing coalition template: {coalition_file}")
+
+with open(coalition_file, "r", encoding="utf-8") as f:
     coalition_set = json.load(f)
 
 print(f"Loaded coalition file: {coalition_file}")
@@ -1383,7 +1563,7 @@ timecode_line = full_line_chart_data["date"].iloc[-1]
 #timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
 notes_chart_line = "Stand: " + timecode_str_line
-notes_chart_seats = "Ohne Berücksichtigung der Grundmandatsklausel.<br>" + notes_chart_seats_extra + "Stand: " + timecode_str_line
+notes_chart_seats = "Ohne Berücksichtigung der Grundmandatsklausel. " + notes_chart_seats_extra + "Stand: " + timecode_str_line
 
 """ DISABLE FOR NOW
 # update Kanzlerfragen chart #1
