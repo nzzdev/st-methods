@@ -93,14 +93,36 @@ if __name__ == '__main__':
             method='linear', limit_direction='backward')  # for wrong dates
 
         # generate csv for dashboard
-        df_dash = dfnew.copy()
-        df_dash = df_dash[[f'{year}']]
-        df_dash.replace(r'^\s*$', np.nan, regex=True)
-        df_dash = df_dash[df_dash[f'{year}'].notna()]
-        df_dash = df_dash.rename(
-            columns={df_dash.columns[0]: 'Strom-Terminmarkt'})
-        df_dash = pd.concat([df_dash.tail(2)])
-        df_dash.to_csv('./data/eex-ac-stock-dash.csv')
+        # Time series must start at 2025-01-01.
+        # Use column "2025" for 2025 and column "2026" for 2026.
+        # Drop non-trading days / holidays (rows without data).
+
+        df_dash_src = dfold.copy()
+        for _col in ['2025', '2026']:
+            if _col not in df_dash_src.columns:
+                df_dash_src[_col] = np.nan
+
+        def _anchor_year(_s: pd.Series, _year: int) -> pd.Series:
+            _s = pd.to_numeric(_s, errors='coerce')
+            _md = _s.index.strftime('%m-%d')
+            # 2025/2026 are not leap years; guard against 02-29 in templates
+            _md = pd.Series(_md, index=_s.index).where(_md != '02-29', '02-28')
+            _s.index = pd.to_datetime(_md.map(lambda d: f"{_year}-{d}"))
+            _s = _s.sort_index()
+            return _s[~_s.index.duplicated(keep='last')]
+
+        s2025 = _anchor_year(df_dash_src['2025'], 2025)
+        s2026 = _anchor_year(df_dash_src['2026'], 2026)
+
+        df_dash = pd.concat([s2025, s2026]).to_frame(name='Strom-Terminmarkt')
+        df_dash = df_dash.sort_index()
+        df_dash = df_dash[df_dash.index >= pd.Timestamp('2025-01-01')]
+
+        # Drop non-trading days / holidays
+        df_dash = df_dash[df_dash['Strom-Terminmarkt'].notna()]
+
+        df_dash.to_csv('./data/eex-ac-stock-dash_full.csv')
+        df_dash.tail(2).to_csv('./data/eex-ac-stock-dash.csv')
 
         # convert Euro / MWh to Cent / kWh
         dfnew[f'{year}'] = dfnew[f'{year}'].replace(

@@ -142,6 +142,24 @@ if __name__ == '__main__':
             [df_intra_today.tail(2)])
         df_intra_today.to_csv('./data/ttf-gas-stock-dash.csv')
 
+        # generate additional dashboard time series starting 2025-01-01 (2025 + 2026)
+        # Use df (Yahoo + last ICE point). This already contains 2025/2026 trading days.
+        df_dash_full = df.copy()
+
+        # ensure clean index and column name for dashboard
+        df_dash_full = df_dash_full[~df_dash_full.index.duplicated(keep='last')].sort_index()
+
+        # keep from 2025-01-01 onward
+        df_dash_full = df_dash_full[df_dash_full.index >= pd.Timestamp('2025-01-01')]
+
+        # rename to dashboard column name
+        df_dash_full = df_dash_full.rename(columns={'Kosten': 'Gas-Börsenpreis'})
+
+        # drop non-trading days / holidays (rows without data)
+        df_dash_full = df_dash_full[df_dash_full['Gas-Börsenpreis'].notna()]
+
+        df_dash_full.to_csv('./data/ttf-gas-stock-dash_full.csv')
+
         """
         # START hourly prices (not reliable)
         # save current price as csv for dashboard
