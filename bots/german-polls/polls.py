@@ -1037,7 +1037,7 @@ def _fmt_pct_de(x):
     except Exception:
         return ""
 
-notes_chart_seats_extra = "««Stabile/wackelige/unrealistische» Mehrheit geprüft anhand von Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
+notes_chart_seats_extra = "«Stabile/wackelige/unrealistische» Mehrheit geprüft anhand von Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
 
 # Koalitions-Templates schreiben (pro Lauf neu)
 write_coalition_templates(data_dir=COALITION_TEMPLATES_DIR)
