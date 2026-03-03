@@ -536,7 +536,7 @@ party_colors = {
     "SPD": "#c31906",
     "Grüne": "#66a622",
     "BSW": "#da467d",
-    "FDP": "#d1cc00",
+    "FDP": "#F3B030",
     "Linke": "#8440a3"
 }
 
@@ -641,7 +641,8 @@ data_pivot[desired_parties] = data_pivot[desired_parties].round(1)
 
 # Parameters (simple + explainable)
 HALF_LIFE_DAYS = 10.0  # polls from 10 days ago count only half as much
-U_CENSORED = 3.0       #  "not reported" means: value is below the display threshold; assume < 3.0%
+U_CENSORED = 3.0       # "not reported" means: value is below the display threshold (<3%)
+U_CENSORED_EXPECTED = 2.0  # plausibler Erwartungswert unterhalb der Schwelle (zieht zensierte Werte Richtung ~2%)
 
 #
 # Build observations from polls; weight by end of fieldwork period (effective_date)
@@ -742,8 +743,14 @@ for pty in desired_parties:
             if (not cens.loc[dt]) and pd.notna(x.loc[dt]):
                 current_input = float(x.loc[dt])
             else:
-                # censored / "not reported": keep stable below U; pull down towards U if the trend is above U
-                current_input = float(U_CENSORED) if last > U_CENSORED else float(last)
+                # censored / "not reported": treat as left-censored (<U).
+                # If the trend is above U, pull it down to U. If it is already below U,
+                # shrink it gently towards a plausible sub-threshold value (~2%) to avoid
+                # artificially keeping rarely-reported small parties near 3%.
+                if last > U_CENSORED:
+                    current_input = float(U_CENSORED)
+                else:
+                    current_input = float(min(last, U_CENSORED_EXPECTED))
 
         # Update trend
         last = last + alpha * (current_input - last)
@@ -932,7 +939,7 @@ party_metadata = {
         "id": "bsw"
     },
     "FDP": {
-        "colorCode": "#d1cc00",
+        "colorCode": "#F3B030",
         "id": "fdp"
     }
 }

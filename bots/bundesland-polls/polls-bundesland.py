@@ -70,6 +70,12 @@ TARGET_ENV = "production"  # production | staging (Staging-Test-ID: d8380f0f8c7e
 HALF_LIFE_HOT = 30.0
 HALF_LIFE_COLD = 180.0
 
+# Zensierte Werte ("unter Sonstige" / nicht explizit ausgewiesen):
+# U_CENSORED: Schwelle, unter der Institute oft nicht mehr ausweisen (typisch 3%)
+# U_CENSORED_EXPECTED: plausibler Erwartungswert darunter (zieht selten ausgewiesene Kleinparteien Richtung ~2%)
+U_CENSORED = 3.0
+U_CENSORED_EXPECTED = 2.0
+
 # Only up to the last election row
 ELECTION_CUTOFF_PATTERN = r"Landtagswahl"
 
@@ -251,6 +257,24 @@ def convert_percentage_to_float(value):
         return (vals[0] + vals[1]) / 2
 
     return vals[0]
+
+
+# --- Helper for censored/unter Sonstige logic ---
+def is_censored_cell(value) -> bool:
+    """True, wenn eine Tabellenzelle eine zensierte Angabe enthält (z.B. '<3', '≤3', 'unter 3')."""
+    if pd.isna(value):
+        return False
+    s = str(value).strip()
+    s_lower = s.lower()
+    return ("<" in s) or ("≤" in s) or ("unter" in s_lower)
+
+
+def token_present_in_sonstige(sonstige_cell: str, token: str) -> bool:
+    """True, wenn in 'Sonstige' das Token vorkommt (auch ohne Zahl)."""
+    if pd.isna(sonstige_cell):
+        return False
+    s = str(sonstige_cell)
+    return re.search(rf"\b{re.escape(token)}\b", s, flags=re.IGNORECASE) is not None
 
 
 def parse_method_code_and_n(befragte_cell: str):
@@ -455,11 +479,64 @@ def run_state(state_key: str):
     # Restliche Sonstige (optional)
     df["Sonstige_rest"] = df[sonstige_col].apply(extract_son_value)
 
+    # Flags: pro Partei markieren, ob der Wert explizit ausgewiesen (reported) oder zensiert/unter Sonstige (censored) ist.
+    # Das verhindert, dass selten ausgewiesene Kleinparteien durch "nur hohe" Beobachtungen künstlich nach oben verzerrt werden.
+    for src_col, party in PARTY_MAP.items():
+        rep_col = f"_reported_{party}"
+        cen_col = f"_censored_{party}"
+
+        # reported: numerischer Wert vorhanden
+        df[rep_col] = pd.to_numeric(df.get(party), errors="coerce").notna()
+
+        # censored: eigene Spalte vorhanden und zensiert (<3/≤3/unter3)
+        cens = False
+        if src_col in df.columns:
+            cens = df[src_col].apply(is_censored_cell)
+        else:
+            cens = pd.Series(False, index=df.index)
+
+        df[cen_col] = (~df[rep_col]) & cens
+
+    # Extra Parteien (FW/BSW) können eigene Spalten haben
+    for extra in ["FW", "BSW"]:
+        rep_col = f"_reported_{extra}"
+        cen_col = f"_censored_{extra}"
+        df[rep_col] = pd.to_numeric(df.get(extra), errors="coerce").notna()
+
+        cens = pd.Series(False, index=df.index)
+        if extra in df.columns:
+            cens = df[extra].apply(is_censored_cell)
+
+        df[cen_col] = (~df[rep_col]) & cens
+
+    # Wenn eine Partei nur in 'Sonstige' genannt wird (Token vorhanden), aber kein expliziter Wert da ist,
+    # behandeln wir das ebenfalls als zensiert.
+    for token, party in EMBEDDED_TOKENS.items():
+        rep_col = f"_reported_{party}"
+        cen_col = f"_censored_{party}"
+        if rep_col not in df.columns:
+            df[rep_col] = pd.to_numeric(df.get(party), errors="coerce").notna()
+        if cen_col not in df.columns:
+            df[cen_col] = False
+
+        token_present = df[sonstige_col].apply(lambda x, t=token: token_present_in_sonstige(x, t))
+        df[cen_col] = df[cen_col] | ((~df[rep_col]) & token_present)
+
+    # Presence flag used for "last two polls" inclusion: reported OR censored
+    for p in set(list(PARTY_MAP.values()) + ["FW", "BSW"]):
+        rep_col = f"_reported_{p}"
+        cen_col = f"_censored_{p}"
+        if rep_col in df.columns and cen_col in df.columns:
+            df[f"_present_{p}"] = df[rep_col] | df[cen_col]
+
     # Nur Parteien behalten, die in den zwei neuesten Umfragen vorkommen
     last_dates = sorted(df["Datum"].dropna().unique())[-2:]
     recent_df = df[df["Datum"].isin(last_dates)].copy()
 
     def _present_in_recent(party_name: str) -> bool:
+        flag = f"_present_{party_name}"
+        if flag in recent_df.columns:
+            return recent_df[flag].fillna(False).astype(bool).sum() >= 2
         if party_name not in recent_df.columns:
             return False
         return pd.to_numeric(recent_df[party_name], errors="coerce").notna().sum() >= 2
@@ -504,12 +581,25 @@ def run_state(state_key: str):
 
     avg = {}
     for p in parties_out:
-        vals = pd.to_numeric(df[p], errors="coerce")
-        m = vals.notna()
+        vals = pd.to_numeric(df.get(p), errors="coerce")
+        if vals is None:
+            avg[p] = None
+            continue
+
+        rep_col = f"_reported_{p}"
+        cen_col = f"_censored_{p}"
+        cens_mask = df[cen_col].fillna(False).astype(bool) if cen_col in df.columns else pd.Series(False, index=df.index)
+
+        # Imputation: zensierte Werte (<U) werden als plausibler Erwartungswert (~2%) behandelt,
+        # damit selten ausgewiesene Parteien nicht durch wenige hohe Beobachtungen verzerrt werden.
+        vals_filled = vals.copy()
+        vals_filled.loc[cens_mask & vals_filled.isna()] = float(U_CENSORED_EXPECTED)
+
+        m = vals_filled.notna()
         if m.sum() == 0:
             avg[p] = None
         else:
-            avg[p] = float(np.average(vals[m], weights=w[m]))
+            avg[p] = float(np.average(vals_filled[m], weights=w[m]))
 
     # ---- data.json schreiben (Schema fürs Balkendiagramm) ----
     survey_date = latest_date.strftime("%Y-%m-%d")
