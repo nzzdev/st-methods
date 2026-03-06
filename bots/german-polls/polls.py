@@ -644,14 +644,33 @@ HALF_LIFE_DAYS = 10.0  # polls from 10 days ago count only half as much
 U_CENSORED = 3.0       # "not reported" means: value is below the display threshold (<3%)
 U_CENSORED_EXPECTED = 2.0  # plausibler Erwartungswert unterhalb der Schwelle (zieht zensierte Werte Richtung ~2%)
 
+# Sequenzgewicht pro Institut: verhindert, dass sehr aktive Institute den Trend dominieren.
+# Neueste Umfrage eines Instituts: 1.0, zweitneueste: 0.5, drittneueste: 0.25, ...
+USE_POLLSTER_SEQ_WEIGHT = True
+
 #
 # Build observations from polls; weight by end of fieldwork period (effective_date)
-obs = filtered_data[["effective_date", "Partei", "Ergebnis", "Befragte", "reported"]].copy()
+obs = filtered_data[["effective_date", "Institut", "Partei", "Ergebnis", "Befragte", "reported"]].copy()
 obs.rename(columns={"effective_date": "Datum"}, inplace=True)
 obs["Befragte"] = pd.to_numeric(obs["Befragte"], errors="coerce")
 
+# Sequenzgewicht (wSeq): pro Institut nur die neueste Umfrage voll zählen lassen.
+# Ranking auf Poll-Ebene (Institut + Datum), dann auf alle Parteizeilen gemappt.
+if USE_POLLSTER_SEQ_WEIGHT:
+    poll_level = (
+        obs[["Institut", "Datum"]]
+        .drop_duplicates()
+        .sort_values(["Institut", "Datum"], ascending=[True, False])
+        .copy()
+    )
+    poll_level["_rank_inst"] = poll_level.groupby("Institut").cumcount() + 1
+    poll_level["_w_seq"] = np.power(2.0, 1.0 - poll_level["_rank_inst"].astype(float))
+    obs = obs.merge(poll_level[["Institut", "Datum", "_w_seq"]], on=["Institut", "Datum"], how="left")
+else:
+    obs["_w_seq"] = 1.0
+
 fallback_n = float(np.nanmedian(obs["Befragte"])) if pd.notna(np.nanmedian(obs["Befragte"])) else 2000.0
-obs["w"] = np.sqrt(obs["Befragte"].fillna(fallback_n).clip(lower=200.0))
+obs["w"] = np.sqrt(obs["Befragte"].fillna(fallback_n).clip(lower=200.0)) * pd.to_numeric(obs["_w_seq"], errors="coerce").fillna(1.0)
 
 # Aggregate per day & party (pandas 2.x/3.x safe):
 # - if at least one institute reports a numeric value: weighted mean of reported values
@@ -1071,7 +1090,7 @@ for c in coalition_set:
     low_total = sum(int(seats_low.get(p, 0)) for p in party_names)
     high_total = sum(int(seats_high.get(p, 0)) for p in party_names)
 
-    if low_total >= MAJORITY:
+    if base_total >= MAJORITY and low_total >= MAJORITY:
         status = "stabil"
     elif high_total < MAJORITY:
         status = "unmöglich"

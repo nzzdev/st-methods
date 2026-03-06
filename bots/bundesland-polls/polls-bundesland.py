@@ -75,6 +75,10 @@ HALF_LIFE_COLD = 180.0
 WINDOW_HOT_DAYS = 90
 WINDOW_COLD_DAYS = 730
 
+# Sequenzgewicht pro Institut: verhindert, dass sehr aktive Institute den Schnitt dominieren.
+# Neueste Umfrage eines Instituts: 1.0, zweitneueste: 0.5, drittneueste: 0.25, ...
+USE_POLLSTER_SEQ_WEIGHT = True
+
 # Zensierte Werte ("unter Sonstige" / nicht explizit ausgewiesen):
 # U_CENSORED: Schwelle, unter der Institute oft nicht mehr ausweisen (typisch 3%)
 # U_CENSORED_EXPECTED: plausibler Erwartungswert darunter (zieht selten ausgewiesene Kleinparteien Richtung ~2%)
@@ -591,13 +595,23 @@ def run_state(state_key: str):
     cutoff_eff = latest_effective - pd.Timedelta(days=int(window_days))
     df_avg = df[df["effective_date"] >= cutoff_eff].copy()
 
+    # Sequenzgewicht: pro Institut nur die neueste Umfrage voll zählen lassen
+    if USE_POLLSTER_SEQ_WEIGHT:
+        inst_col = institute_col  # Originalspalte aus der Tabelle
+        # Sortierung: neueste effektive_date zuerst; Ties stabil auf Basis der Zeile
+        df_avg = df_avg.sort_values([inst_col, "effective_date", "Datum"], ascending=[True, False, False]).copy()
+        df_avg["_rank_inst"] = df_avg.groupby(inst_col).cumcount() + 1
+        df_avg["_w_seq"] = np.power(2.0, 1.0 - df_avg["_rank_inst"].astype(float))
+    else:
+        df_avg["_w_seq"] = 1.0
+
     age_days = (latest_effective - df_avg["effective_date"]).dt.days.astype(float)
     w_time = np.power(0.5, age_days / HALF_LIFE_DAYS)
 
     fallback_n = float(np.nanmedian(df_avg["n"])) if pd.notna(np.nanmedian(df_avg["n"])) else 1000.0
     w_n = np.sqrt(pd.to_numeric(df_avg["n"], errors="coerce").fillna(fallback_n).clip(lower=200.0))
 
-    w = w_time * w_n
+    w = w_time * w_n * pd.to_numeric(df_avg["_w_seq"], errors="coerce").fillna(1.0)
 
     avg = {}
     for p in parties_out:
@@ -1007,10 +1021,11 @@ def run_state(state_key: str):
         party_names = [id_to_party.get(pid) for pid in party_ids]
         party_names = [p for p in party_names if p is not None]
 
-        low_total = sum(int(seats_low.get(p, 0)) for p in party_names)
+        base_total = sum(int(seats_base.get(p, 0)) for p in party_names)
+        low_total  = sum(int(seats_low.get(p, 0))  for p in party_names)
         high_total = sum(int(seats_high.get(p, 0)) for p in party_names)
 
-        if low_total >= MAJORITY:
+        if base_total >= MAJORITY and low_total >= MAJORITY:
             label = "stabile Mehrheit"
         elif high_total < MAJORITY:
             label = "Mehrheit unrealistisch"
