@@ -1025,10 +1025,16 @@ def run_state(state_key: str):
         low_total  = sum(int(seats_low.get(p, 0))  for p in party_names)
         high_total = sum(int(seats_high.get(p, 0)) for p in party_names)
 
-        if base_total >= MAJORITY and low_total >= MAJORITY:
+        worst_total = min(low_total, high_total)
+        best_total = max(low_total, high_total)
+
+        # Stabil: hat bereits im Basisszenario eine Mehrheit und behaelt sie auch im schlechtesten Huerden-Szenario.
+        if base_total >= MAJORITY and worst_total >= MAJORITY:
             label = "stabile Mehrheit"
-        elif high_total < MAJORITY:
+        # Unrealistisch: selbst im guenstigsten Huerden-Szenario keine Mehrheit.
+        elif best_total < MAJORITY:
             label = "Mehrheit unrealistisch"
+        # Wackelig: Mehrheit haengt von Huerden-Szenarien ab (rein/raus von Parteien nahe 5%).
         else:
             label = "wackelige Mehrheit"
 

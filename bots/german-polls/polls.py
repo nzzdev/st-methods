@@ -1090,9 +1090,13 @@ for c in coalition_set:
     low_total = sum(int(seats_low.get(p, 0)) for p in party_names)
     high_total = sum(int(seats_high.get(p, 0)) for p in party_names)
 
-    if base_total >= MAJORITY and low_total >= MAJORITY:
+    # Use best/worst-case across LOW and HIGH scenarios for coalition status
+    worst_total = min(low_total, high_total)
+    best_total = max(low_total, high_total)
+
+    if base_total >= MAJORITY and worst_total >= MAJORITY:
         status = "stabil"
-    elif high_total < MAJORITY:
+    elif best_total < MAJORITY:
         status = "unmöglich"
     else:
         status = "wacklig"
