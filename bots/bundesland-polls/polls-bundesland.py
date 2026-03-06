@@ -5,6 +5,7 @@ import os
 import json
 import re
 import time
+from decimal import Decimal, ROUND_HALF_UP
 
 # ============================================================
 # README (manuelle Einstellungen)
@@ -69,6 +70,10 @@ TARGET_ENV = "production"  # production | staging (Staging-Test-ID: d8380f0f8c7e
 
 HALF_LIFE_HOT = 30.0
 HALF_LIFE_COLD = 180.0
+
+# Zusätzliches Zeitfenster für den Schnitt:
+WINDOW_HOT_DAYS = 90
+WINDOW_COLD_DAYS = 730
 
 # Zensierte Werte ("unter Sonstige" / nicht explizit ausgewiesen):
 # U_CENSORED: Schwelle, unter der Institute oft nicht mehr ausweisen (typisch 3%)
@@ -269,12 +274,22 @@ def is_censored_cell(value) -> bool:
     return ("<" in s) or ("≤" in s) or ("unter" in s_lower)
 
 
+
 def token_present_in_sonstige(sonstige_cell: str, token: str) -> bool:
     """True, wenn in 'Sonstige' das Token vorkommt (auch ohne Zahl)."""
     if pd.isna(sonstige_cell):
         return False
     s = str(sonstige_cell)
     return re.search(rf"\b{re.escape(token)}\b", s, flags=re.IGNORECASE) is not None
+
+
+# --- Helper for round-half-up (kaufmännisch runden, nicht Banker's Rounding) ---
+def round_half_up(x, ndigits=0):
+    """Rundet kaufmännisch (0,5 immer weg von 0), nicht Banker's Rounding wie Python round()."""
+    if x is None or (isinstance(x, float) and np.isnan(x)):
+        return np.nan
+    q = Decimal("1") if ndigits == 0 else Decimal("1").scaleb(-ndigits)
+    return float(Decimal(str(x)).quantize(q, rounding=ROUND_HALF_UP))
 
 
 def parse_method_code_and_n(befragte_cell: str):
@@ -571,24 +586,29 @@ def run_state(state_key: str):
     latest_date = df["Datum"].max()  # publication date for notes/stand
     latest_effective = df["effective_date"].max()  # fieldwork end for weighting
 
-    age_days = (latest_effective - df["effective_date"]).dt.days.astype(float)
+    # Zeitfenster: in der heissen Phase alte Umfragen ausblenden:
+    window_days = WINDOW_HOT_DAYS if HOT_PHASE else WINDOW_COLD_DAYS
+    cutoff_eff = latest_effective - pd.Timedelta(days=int(window_days))
+    df_avg = df[df["effective_date"] >= cutoff_eff].copy()
+
+    age_days = (latest_effective - df_avg["effective_date"]).dt.days.astype(float)
     w_time = np.power(0.5, age_days / HALF_LIFE_DAYS)
 
-    fallback_n = float(np.nanmedian(df["n"])) if pd.notna(np.nanmedian(df["n"])) else 1000.0
-    w_n = np.sqrt(pd.to_numeric(df["n"], errors="coerce").fillna(fallback_n).clip(lower=200.0))
+    fallback_n = float(np.nanmedian(df_avg["n"])) if pd.notna(np.nanmedian(df_avg["n"])) else 1000.0
+    w_n = np.sqrt(pd.to_numeric(df_avg["n"], errors="coerce").fillna(fallback_n).clip(lower=200.0))
 
     w = w_time * w_n
 
     avg = {}
     for p in parties_out:
-        vals = pd.to_numeric(df.get(p), errors="coerce")
+        vals = pd.to_numeric(df_avg.get(p), errors="coerce")
         if vals is None:
             avg[p] = None
             continue
 
         rep_col = f"_reported_{p}"
         cen_col = f"_censored_{p}"
-        cens_mask = df[cen_col].fillna(False).astype(bool) if cen_col in df.columns else pd.Series(False, index=df.index)
+        cens_mask = df_avg[cen_col].fillna(False).astype(bool) if cen_col in df_avg.columns else pd.Series(False, index=df_avg.index)
 
         # Imputation: zensierte Werte (<U) werden als plausibler Erwartungswert (~2%) behandelt,
         # damit selten ausgewiesene Parteien nicht durch wenige hohe Beobachtungen verzerrt werden.
@@ -609,16 +629,16 @@ def run_state(state_key: str):
         if avg.get(p) is None:
             continue
 
-        # Compute with one decimal first (no pseudo-precision in the final display)
-        result_raw = round(float(avg[p]), 1)
-        prev_raw = round(float(LAST_ELECTION.get(p, 0.0)), 1)
+        # Erst mit Nachkommastelle rechnen, dann Differenz bilden, erst danach fürs Display runden (kaufmännisch)
+        result_raw = round_half_up(float(avg[p]), 1)
+        prev_raw = round_half_up(float(LAST_ELECTION.get(p, 0.0)), 1)
 
         change_raw = result_raw - prev_raw
 
-        # Final display values: round to whole percentage points
-        result_disp = int(round(result_raw))
-        prev_disp = int(round(prev_raw))
-        change_disp = int(round(change_raw))
+        # Display: ganze Prozentpunkte (kaufmännisch)
+        result_disp = int(round_half_up(result_raw, 0))
+        prev_disp = int(round_half_up(prev_raw, 0))
+        change_disp = int(round_half_up(change_raw, 0))
 
         parties_payload.append({
             "id": p,
@@ -741,9 +761,9 @@ def run_state(state_key: str):
                 return ""
 
         if float(x).is_integer():
-            s = f"{int(round(x)):,}".replace(",", " ") + "%"
+            s = f"{int(round_half_up(x, 0)):,}".replace(",", " ") + "%"
         else:
-            s = f"{x:.1f}".replace(".", ",") + "%"
+            s = f"{round_half_up(x, 1):.1f}".replace(".", ",") + "%"
         return f'<span style="color:{color}">{s}</span>'
 
     for p in table_party_order:
