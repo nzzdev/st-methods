@@ -526,7 +526,7 @@ if __name__ == '__main__':
         ns_ytick = [0, 0.5, 1, 1.5]
         fossile_ytick = [20, 35, 50, 65]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
-        super_ytick = [1.6, 1.8, 2.0]
+        super_ytick = [1.6, 2.0, 2.4]
         fueloil_ytick = [60, 80, 100, 120, 140]
         imports_ytick = [-2000, -1000, 0, 1000, 2000]
         importsshare_ytick = [0, 5, 10, 15, 20]
