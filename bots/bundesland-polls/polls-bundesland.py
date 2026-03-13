@@ -1050,7 +1050,7 @@ def run_state(state_key: str):
 
     notes_chart_seats = (
         "«Stabile/wackelige/unrealistische» Mehrheit geprüft anhand einer Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
-        "Sitzverteilung gemäss Mindestsitzzahl, ohne Berücksichtigung einer etwaigen Grundmandatsklausel. "
+        "Sitzverteilung gemäss Regelgrösse, ohne Berücksichtigung einer etwaigen Grundmandatsklausel. "
         "Stand: " + latest_date.strftime("%-d. %-m. %Y")
     )
 
