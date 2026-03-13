@@ -700,9 +700,23 @@ def run_state(state_key: str):
         if pd.isna(x):
             return ""
         s = str(x).strip()
+
+        # Normalize whitespace and hyphenation artifacts from HTML line breaks, e.g.
+        # "Forschungs-\ngruppe Wahlen" or "Forschungs- gruppe Wahlen".
+        s = s.replace("\xa0", " ")
+        s = re.sub(r"\s+", " ", s)
+        s = re.sub(r"-\s+", "", s)  # remove hyphen + following whitespace
+        s = s.strip()
+
+        s_l = s.lower()
+
+        # Match by prefix for common broken labels (e.g. starts with 'forschung')
+        if s_l.startswith("forschung"):
+            return "FG Wahl."
+
         # normalize common variants/case
         for k, v in institute_rename.items():
-            if s.lower() == k.lower():
+            if s_l == str(k).lower():
                 return v
         return s
 
