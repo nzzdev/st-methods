@@ -75,23 +75,23 @@ if __name__ == '__main__':
         gas_new = df['Gas'].iloc[-1].round(0).astype(int)
         ac_new = df['Strom'].iloc[-1].round(0).astype(int)
         if gas_new > 0 and ac_new > 0:
-            title_chart = f'Gas ist {abs(gas_new)} Prozent, Strom {abs(ac_new)} Prozent teurer als vor der Krise'
+            title_chart = f'Gas ist {abs(gas_new)} Prozent, Strom {abs(ac_new)} Prozent teurer als vor dem Ukraine-Krieg'
         elif gas_new < 0 and ac_new < 0:
-            title_chart = f'Gas ist {abs(gas_new)} Prozent, Strom {abs(ac_new)} Prozent billiger als vor der Krise'
+            title_chart = f'Gas ist {abs(gas_new)} Prozent, Strom {abs(ac_new)} Prozent billiger als vor dem Ukraine-Krieg'
         elif gas_new == 0 and ac_new == 0:
-            title_chart = f'Gas und Strom kosten so viel wie vor der Krise'
+            title_chart = f'Gas und Strom kosten so viel wie vor dem Ukraine-Krieg'
         elif gas_new == 0 and ac_new > 0:
-            title_chart = f'Nur Strom ist noch {abs(ac_new)} Prozent teurer als vor der Krise'
+            title_chart = f'Nur Strom ist noch {abs(ac_new)} Prozent teurer als vor dem Ukraine-Krieg'
         elif ac_new == 0 and gas_new > 0:
-            title_chart = f'Nur Gas ist noch {abs(gas_new)} Prozent teurer als vor der Krise'
+            title_chart = f'Nur Gas ist noch {abs(gas_new)} Prozent teurer als vor dem Ukraine-Krieg'
         elif gas_new == 0 and ac_new < 0:
-            title_chart = f'Gas kostet so viel wie vor der Krise, Strom ist {abs(ac_new)} Prozent billiger'
+            title_chart = f'Gas kostet so viel wie vor dem Ukraine-Krieg, Strom ist {abs(ac_new)} Prozent billiger'
         elif ac_new == 0 and gas_new < 0:
-            title_chart = f'Strom kostet so viel wie vor der Krise, Gas ist {abs(gas_new)} Prozent billiger'
+            title_chart = f'Strom kostet so viel wie vor dem Ukraine-Krieg, Gas ist {abs(gas_new)} Prozent billiger'
         elif gas_new > 0 and ac_new < 0:
-            title_chart = f'Gas ist {abs(gas_new)} Prozent teurer als vor der Krise, Strom {abs(ac_new)} Prozent billiger'
+            title_chart = f'Gas ist {abs(gas_new)} Prozent teurer als vor dem Ukraine-Krieg, Strom {abs(ac_new)} Prozent billiger'
         elif ac_new > 0 and gas_new < 0:
-            title_chart = f'Strom ist {abs(ac_new)} Prozent teurer als vor der Krise, Gas {abs(gas_new)} Prozent billiger'
+            title_chart = f'Strom ist {abs(ac_new)} Prozent teurer als vor dem Ukraine-Krieg, Gas {abs(gas_new)} Prozent billiger'
 
         # create notes
         timecode = df.index[-1]
