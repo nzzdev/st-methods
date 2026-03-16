@@ -653,8 +653,8 @@ if __name__ == '__main__':
 
         # merge dictionaries
         # STORAGE meta_storage['chartData'] = dict_storage
-        meta_gas['chartData'] = [] #dict_gas
-        meta_strom['chartData'] = [] #dict_strom
+        meta_gas['chartData'] = dict_gas
+        meta_strom['chartData'] = dict_strom
         meta_fossile['chartData'] = []
         # meta_imports['chartData'] = []
         meta_importsshare['chartData'] = []
@@ -665,21 +665,21 @@ if __name__ == '__main__':
         # RUS GAS meta_rus['chartData'] = dict_rus
         meta_super['chartData'] = dict_super
         meta_fueloil['chartData'] = []
-        meta_gasstock['chartData'] = dict_gasstock
-        meta_stromstockeex['chartData'] = dict_acstockeex
+        meta_gasstock['chartData'] = [] # dict_gasstock
+        meta_stromstockeex['chartData'] = [] # dict_acstockeex
         #meta_stromstock['chartData'] = []
         dicts = []
         # STORAGE dicts.append(meta_storage)
         # RUS GAS dicts.append(meta_rus)
-        dicts.append(meta_gasstock)
         dicts.append(meta_gas)
+        dicts.append(meta_gasstock)
         dicts.append(meta_storage)
         dicts.append(meta_lng)
         dicts.append(meta_super)
         dicts.append(meta_fueloil)
         # dicts.append(meta_usage)
-        dicts.append(meta_stromstockeex)
         dicts.append(meta_strom)
+        dicts.append(meta_stromstockeex)
         # dicts.append(meta_stromstock)
         dicts.append(meta_fossile)
         # dicts.append(meta_imports)
