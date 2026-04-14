@@ -520,7 +520,7 @@ if __name__ == '__main__':
         storage_ytick = [0, 25, 50, 75, 100]
         # gas_ytick = [0, 15, 30, 45] # from January 2021
         gas_ytick = [6, 8, 10, 12]
-        gasstock_ytick = [2, 4, 6]
+        gasstock_ytick = [2, 4, 6, 8]
         acstock_ytick = [7, 9, 11]
         strom_ytick = [24, 28, 32, 36]
         ns_ytick = [0, 0.5, 1, 1.5]
