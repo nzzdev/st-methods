@@ -750,11 +750,12 @@ if __name__ == '__main__':
         
 
         # delete all csv and geojson files
-        for dir in ['./data', './data_alt']:
-            extracted = os.listdir(dir)
-            for item in extracted:
-                if item.endswith('.csv') or item.endswith('.geojson') or item == 'dashboard_de.json':
-                    os.remove(os.path.join(dir, item))
+        for dir in ['./data', './data_front']:
+            if os.path.isdir(dir):
+                extracted = os.listdir(dir)
+                for item in extracted:
+                    if item.endswith('.csv') or item.endswith('.geojson') or item == 'dashboard_de.json':
+                        os.remove(os.path.join(dir, item))
 
     except:
         raise
