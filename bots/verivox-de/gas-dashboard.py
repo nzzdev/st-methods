@@ -37,6 +37,8 @@ if __name__ == '__main__':
             './data/german-imports.tsv', sep='\t', encoding='utf-8', index_col='Datum')
         df_super = pd.read_csv('./data/node_super.csv', encoding='utf-8',
                                usecols=['meldedatum', 'Mittlerer Preis'], index_col='meldedatum')
+        df_diesel = pd.read_csv('./data/node_diesel.csv', encoding='utf-8',
+                                usecols=['meldedatum', 'Mittlerer Preis'], index_col='meldedatum')
         df_imports = pd.read_csv(
             './data/imports-countries-dash.csv', encoding='utf-8')
         df_gasstock = pd.read_csv(
@@ -71,6 +73,8 @@ if __name__ == '__main__':
         # df_ns.index = pd.to_datetime(df_ns.index)
         df_super.index = pd.to_datetime(df_super.index)
         df_super = df_super.round(2)
+        df_diesel.index = pd.to_datetime(df_diesel.index)
+        df_diesel = df_diesel.round(2)
         df_gasstock.index = pd.to_datetime(df_gasstock.index)
         df_acstockeex.index = pd.to_datetime(df_acstockeex.index)
         df_acstockeex_full.index = pd.to_datetime(df_acstockeex_full.index)
@@ -143,24 +147,27 @@ if __name__ == '__main__':
         df_lng = df_lng.sort_index()
         df_acconsumption.index = pd.to_datetime(df_acconsumption.index)
 
-        # rename columns and remove dates before 2024-01-01
+        # get last 365 days and adjust time range
+        lasty = today - timedelta(days=365)
+        lasty = lasty.strftime('%Y-%m-%d')
         df_gas_mean = df_gas_mean[(
-            df_gas_mean.index.get_level_values(0) >= '2024-01-01')]
-        # get last year and adjust time range
-        # lasty = today - timedelta(days=365) # alternative with last year
-        # lasty = lasty.strftime('%Y-%m-%d') # alternative with last year
-        df_gas = df_gas[(df_gas.index.get_level_values(0) >= f'2024-01-01')]
-        df_gas_real = df_gas_real[(df_gas_real.index.get_level_values(0) >= f'2024-01-01')]
+            df_gas_mean.index.get_level_values(0) >= lasty)]
+        df_gas = df_gas[(df_gas.index.get_level_values(0) >= lasty)]
+        df_gas_real = df_gas_real[(df_gas_real.index.get_level_values(0) >= lasty)]
         df_strom_mean = df_strom_mean[(
-            df_strom_mean.index.get_level_values(0) >= '2024-01-01')]
-        df_strom = df_strom[(df_strom.index.get_level_values(0) >= '2024-01-01')]
-        df_strom_real = df_strom_real[(df_strom_real.index.get_level_values(0) >= '2024-01-01')]
+            df_strom_mean.index.get_level_values(0) >= lasty)]
+        df_strom = df_strom[(df_strom.index.get_level_values(0) >= lasty)]
+        df_strom_real = df_strom_real[(df_strom_real.index.get_level_values(0) >= lasty)]
         df_storage.index = df_storage.index.rename('date')
         df_storage = df_storage.rename(columns={f'{year}²': 'Gasspeicher'})
         df_storage_trend.index = df_storage_trend.index.rename('date')
         df_super.index = df_super.index.rename('date')
         df_super = df_super.rename(columns={'Mittlerer Preis': 'Benzinpreis'})
         df_super = df_super[~df_super.index.duplicated(
+            keep='last')]  # drop duplicates
+        df_diesel.index = df_diesel.index.rename('date')
+        df_diesel = df_diesel.rename(columns={'Mittlerer Preis': 'Dieselpreis'})
+        df_diesel = df_diesel[~df_diesel.index.duplicated(
             keep='last')]  # drop duplicates
         df_gas = df_gas.rename(columns={'Gas': 'Gaspreis'})
         df_gas_real = df_gas_real.rename(columns={'Gas': 'Gaspreis'})
@@ -428,6 +435,7 @@ if __name__ == '__main__':
         # df_usage = df_usage.reset_index()
         df_lng = df_lng.reset_index()
         df_super = df_super.reset_index()
+        df_diesel = df_diesel.reset_index()
         df['date'] = pd.to_datetime(
             df['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_storage['date'] = pd.to_datetime(
@@ -442,13 +450,16 @@ if __name__ == '__main__':
         # df_usage['date'] = pd.to_datetime( df_usage['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         df_lng['date'] = pd.to_datetime(
             df_lng['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
-        df_super = df_super[df_super['date'] >= pd.Timestamp('2025-01-01')] 
+        df_super = df_super[df_super['date'] >= pd.Timestamp(lasty)]
         df_super['date'] = pd.to_datetime(
             df_super['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
-        df_gasstock_full = df_gasstock_full[df_gasstock_full['date'] >= pd.Timestamp('2025-01-01')] 
+        df_diesel = df_diesel[df_diesel['date'] >= pd.Timestamp(lasty)]
+        df_diesel['date'] = pd.to_datetime(
+            df_diesel['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
+        df_gasstock_full = df_gasstock_full[df_gasstock_full['date'] >= pd.Timestamp(lasty)]
         df_gasstock_full['date'] = pd.to_datetime(
             df_gasstock_full['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
-        df_acstockeex_full = df_acstockeex_full[df_acstockeex_full['date'] >= pd.Timestamp('2025-01-01')] 
+        df_acstockeex_full = df_acstockeex_full[df_acstockeex_full['date'] >= pd.Timestamp(lasty)]
         df_acstockeex_full['date'] = pd.to_datetime(
             df_acstockeex_full['date'], dayfirst=True).dt.strftime('%Y-%m-%d')
         timestamp_str = df_gas['date'].tail(1).item()
@@ -478,6 +489,8 @@ if __name__ == '__main__':
         #dict_super = df.drop(df.columns[[1, 2, 3, 4, 5, 7, 8, 9]], axis=1).rename(columns={df.columns[3]: 'value'}).to_dict(orient='records')
         dict_super = df_super.rename(
             columns={df_super.columns[1]: 'value'}).to_dict(orient='records')
+        dict_diesel = df_diesel.rename(
+            columns={df_diesel.columns[1]: 'value'}).to_dict(orient='records')
         dict_storage = df_storage.rename(
             columns={df_storage.columns[1]: 'value'}).to_dict(orient='records')
         # dict_gas = df.drop(df.columns[[2, 3]], axis=1).rename(columns={df.columns[1]: 'value'}).dropna().to_dict(orient='records')
@@ -517,17 +530,19 @@ if __name__ == '__main__':
         # RUS GAS rus_y = 0
         super_y = 1.6
         fueloil_y = 60
+        diesel_y = 1.5
         storage_ytick = [0, 25, 50, 75, 100]
         # gas_ytick = [0, 15, 30, 45] # from January 2021
-        gas_ytick = [6, 8, 10, 12]
+        gas_ytick = [8, 10, 12]
         gasstock_ytick = [2, 4, 6, 8]
         acstock_ytick = [7, 9, 11]
-        strom_ytick = [24, 28, 32, 36]
+        strom_ytick = [28, 30, 32, 34]
         ns_ytick = [0, 0.5, 1, 1.5]
         fossile_ytick = [20, 35, 50, 65]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
         super_ytick = [1.6, 2, 2.4]
         fueloil_ytick = [60, 80, 100, 120, 140]
+        diesel_ytick = [1.4, 2.0, 2.6]
         imports_ytick = [-2000, -1000, 0, 1000, 2000]
         importsshare_ytick = [0, 5, 10, 15, 20]
 
@@ -542,6 +557,9 @@ if __name__ == '__main__':
         diff_lng_str = diff_lng.astype(str).replace('.', ',')
         # RUS GAS diff_rus_str = diff_rus.round(0).astype(int)
         diff_super_str = diff_super.astype(str).replace('.', ',')
+        diff_diesel = df_diesel['Dieselpreis'].iloc[-1]
+        diff_diesel_str = diff_diesel.astype(str).replace('.', ',')
+        trend_diesel = trend_super
         diff_gasstock_str = diff_gasstock.astype(str).replace('.', ',')
         diff_acstock_str = diff_acstock.astype(str).replace('.', ',')
         diff_acstockeex_str = diff_acstockeex.astype(str).replace('.', ',')
@@ -628,9 +646,13 @@ if __name__ == '__main__':
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden, ohne Bonus', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
+        meta_gas_front = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
+                    'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
         meta_gasstock = {'indicatorTitle': 'Gas im Grosshandel', 'date': todaystr, 'indicatorSubtitle': f'je kWh, mittelfristige Lieferung', 'value': diff_gasstock, 'valueLabel': f'{diff_gasstock_str} Cent',
                          'yAxisStart': gasstock_y, 'yAxisLabels': gasstock_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gasstock, 'chartType': 'line'}
         meta_strom = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden, ohne Bonus', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
+                      'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
+        meta_strom_front = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
         meta_stromstockeex = {'indicatorTitle': 'Strom im Grosshandel', 'date': todaystr, 'indicatorSubtitle': f'je kWh, langfristige Lieferung', 'value': diff_acstockeex, 'valueLabel': f'{diff_acstockeex_str} Cent',
                               'yAxisStart': acstock_y, 'yAxisLabels': acstock_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstockeex, 'chartType': 'line'}
@@ -648,13 +670,17 @@ if __name__ == '__main__':
         # RUS GAS meta_rus = {'indicatorTitle': 'Russisches Gas', 'date': timestamp_str, 'indicatorSubtitle': 'Gasflüsse nach Deutschland', 'value': diff_rus, 'valueLabel': f'{diff_rus_str} Mio. m³', 'yAxisStart': rus_y, 'yAxisLabels': rus_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_rus, 'chartType': 'line'}
         meta_super = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Super E5', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro',
                       'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
+        meta_diesel = {'indicatorTitle': 'Dieselpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Diesel', 'value': diff_diesel, 'valueLabel': f'{diff_diesel_str} Euro',
+                       'yAxisStart': diesel_y, 'yAxisLabels': diesel_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_diesel, 'chartType': 'line'}
         meta_fueloil = {'indicatorTitle': 'Heizölpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je 100 Liter', 'value': diff_fueloil, 'valueLabel': f'{diff_fueloil_str} Euro',
                       'yAxisStart': fueloil_y, 'yAxisLabels': fueloil_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_fueloil, 'chartType': 'line'}
 
         # merge dictionaries
         # STORAGE meta_storage['chartData'] = dict_storage
-        meta_gas['chartData'] = [] #dict_gas
-        meta_strom['chartData'] = [] #dict_strom
+        meta_gas['chartData'] = dict_gas
+        meta_gas_front['chartData'] = dict_gas
+        meta_strom['chartData'] = dict_strom
+        meta_strom_front['chartData'] = dict_strom
         meta_fossile['chartData'] = []
         # meta_imports['chartData'] = []
         meta_importsshare['chartData'] = []
@@ -665,26 +691,38 @@ if __name__ == '__main__':
         # RUS GAS meta_rus['chartData'] = dict_rus
         meta_super['chartData'] = dict_super
         meta_fueloil['chartData'] = []
-        meta_gasstock['chartData'] = dict_gasstock
-        meta_stromstockeex['chartData'] = dict_acstockeex
+        meta_diesel['chartData'] = dict_diesel
+        meta_gasstock['chartData'] = [] #dict_gasstock
+        meta_stromstockeex['chartData'] = [] #dict_acstockeex
         #meta_stromstock['chartData'] = []
+
         dicts = []
         # STORAGE dicts.append(meta_storage)
         # RUS GAS dicts.append(meta_rus)
-        dicts.append(meta_gasstock)
         dicts.append(meta_gas)
+        dicts.append(meta_gasstock)
         dicts.append(meta_storage)
         dicts.append(meta_lng)
         dicts.append(meta_super)
+        #dicts.append(meta_diesel)
         dicts.append(meta_fueloil)
         # dicts.append(meta_usage)
-        dicts.append(meta_stromstockeex)
         dicts.append(meta_strom)
+        dicts.append(meta_stromstockeex)
         # dicts.append(meta_stromstock)
         dicts.append(meta_fossile)
         # dicts.append(meta_imports)
         dicts.append(meta_importsshare)
         # NS1 dicts.append(meta_ns)
+
+        dicts_front = []
+        dicts_front.append(meta_strom_front)
+        #dicts_front.append(meta_stromstockeex)
+        dicts_front.append(meta_gas_front)
+        #dicts_front.append(meta_gasstock)
+        dicts_front.append(meta_super)
+        #dicts_front.append(meta_diesel)
+
         with open('./data/dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, indent=4)
         file = [{
@@ -694,20 +732,29 @@ if __name__ == '__main__':
             }
         }]
 
-        # add chart notes
-        # today_str = today.strftime('%-d. %-m. %Y')
-        # notes_chart = f'Stand: {today_str}. Pfeile: Veränderung zum Vortag, beim Sprit zur Vorwoche. Quellen: Agsi, Verivox, Bundeskartellamt'
-
         # run Q function
         update_chart(id='38c6dc628d74a268a1d09ed8065f7803', files=file)
 
+        os.makedirs('./data_front', exist_ok=True)
+        with open('./data_front/dashboard_de.json', 'w') as fp:
+            json.dump(dicts_front, fp, indent=4)
+        file = [{
+            "loadSyncBeforeInit": True,
+            "file": {
+                "path": "./data_front/dashboard_de.json"
+            }
+        }]
+
+        # run Q function
+        update_chart(id='68ae200cc384a18bb319f5840000edbe', files=file)
+        
+
         # delete all csv and geojson files
-        dir = 'data/'
-        extracted = os.listdir(dir)
-        for item in extracted:
-            if item.endswith('.csv') or item.endswith('.geojson'):
-                os.remove(os.path.join(dir, item))
-        # os.remove(os.path.join(dir, 'dashboard_de.json'))
+        for dir in ['./data', './data_alt']:
+            extracted = os.listdir(dir)
+            for item in extracted:
+                if item.endswith('.csv') or item.endswith('.geojson') or item == 'dashboard_de.json':
+                    os.remove(os.path.join(dir, item))
 
     except:
         raise
