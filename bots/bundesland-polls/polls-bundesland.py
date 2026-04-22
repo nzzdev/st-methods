@@ -22,7 +22,10 @@ from decimal import Decimal, ROUND_HALF_UP
 #      - url
 #      - q_ids: {main, table, coalitions}
 #      - seats (Regelgröße/Grundgröße; keine Überhang-/Ausgleichsmandate)
-#      - election_cycle_years (in Deutschland i.d.R. 5)
+#      - election_cycle_years (Regelfall 5; pro Land anpassbar)
+#    Optional:
+#      - next_election_date (exaktes Datum der kommenden Wahl, falls bekannt;
+#        sinnvoll bei abweichendem Zyklus, unbekanntem Standardtermin oder vorgezogener Wahl)
 #    Automatisch aus der Wahlrecht-Tabelle abgeleitet:
 #      - last_election (Ergebnis der letzten Wahl)
 #      - year / previous_year
@@ -30,6 +33,7 @@ from decimal import Decimal, ROUND_HALF_UP
 #      - Zykluslogik:
 #        vor der ersten Nachwahl-Umfrage = alter Vorwahl-Zyklus,
 #        ab der ersten Nachwahl-Umfrage = nur noch Umfragen nach der letzten Wahl
+#    Manuell steuerbar:
 #      - variant_parties: Parteien, für die es "rein/raus"-Varianten der Koalitionsliste geben soll.
 #        Das Skript erzeugt pro Kombination dieser Parteien automatisch eine eigene Koalitionsdatei:
 #        coalitions.json, coalitions_fdp.json, coalitions_fdp_fw.json, ...
@@ -62,7 +66,7 @@ from decimal import Decimal, ROUND_HALF_UP
 # ============================
 # STATES TO RUN (edit here)
 # ============================
-STATES_TO_RUN = ["bw", "rlp"]  # e.g. ["bw"], ["rlp"], or multiple
+STATES_TO_RUN = ["bw", "rlp", "st"]  # e.g. ["bw"], ["rlp"], or multiple
 
 # ============================
 # TARGET ENVIRONMENT (edit here)
@@ -171,7 +175,29 @@ STATES = {
             {"name": "", "parties": ["CDU", "AfD"]},
             {"name": "", "parties": ["CDU", "FW"]},
         ],
-    },
+    }
+    ,"st": {
+        "url": "https://www.wahlrecht.de/umfragen/landtage/sachsen-anhalt.htm",
+        "seats": 83,
+        "election_cycle_years": 5,
+        "next_election_date": "2026-09-06",
+        "q_ids": {
+            "table": "4a85cfcfd9b989f3f6e5c2af5b9e8ae7",
+            "coalitions": "4a85cfcfd9b989f3f6e5c2af5b9e9362",
+            "main": "bbbc7289a6bbe23e1e762510157a2956",
+        },
+        "variant_parties": ["FDP", "BSW", "FW"],
+        "dedupe_bases": [["AfD"], ["CDU", "SPD", "Grüne", "BSW", "Linke"]],
+        "coalitions_spec": [
+            {"name": "", "parties": ["AfD"]},
+            {"name": "", "parties": ["AfD", "CDU"]},
+            {"name": "", "parties": ["AfD", "BSW"]},
+            {"name": "", "parties": ["CDU", "SPD"]},
+            {"name": "", "parties": ["CDU", "SPD", "Grüne"]},
+            {"name": "", "parties": ["CDU", "SPD", "Grüne", "FDP"]},
+            {"name": "", "parties": ["CDU", "SPD", "Grüne", "FDP", "Linke", "BSW", "FW"], "prune_zero_parties": True},
+        ],
+    }
 }
 
 # ---- q.config.json dynamisch aus aktiven Bundesländern bauen ----
@@ -463,6 +489,11 @@ def run_state(state_key: str):
     last_election_year = int(last_election_date.year)
     LAST_ELECTION = _parse_election_result_row(latest_election_row)
 
+    configured_next_election_date = STATES[state_key].get("next_election_date")
+    configured_next_election_date = pd.Timestamp(configured_next_election_date) if configured_next_election_date else None
+    inferred_next_election_date = last_election_date + pd.DateOffset(years=election_cycle_years)
+    cycle_target_date = configured_next_election_date if configured_next_election_date is not None else inferred_next_election_date
+
     # Rohblöcke rund um die neueste Wahlzeile sichern, damit die Tabelle später
     # Nachwahl-Polls + Wahlzeile + Vorwahl-Zyklus zeigen kann, auch wenn df danach
     # für den BAR-Chart strikt auf den neuen Zyklus reduziert wird.
@@ -476,10 +507,21 @@ def run_state(state_key: str):
     above_raw = df.loc[: latest_marker_idx_raw - 1].copy() if latest_marker_idx_raw > 0 else df.iloc[0:0].copy()
     below_all_raw = df.loc[latest_marker_idx_raw + 1 :].copy()
 
+    above_dates_raw = pd.to_datetime(above_raw[date_col], format="%d.%m.%Y", errors="coerce") if (len(above_raw) > 0 and date_col in above_raw.columns) else pd.Series(dtype="datetime64[ns]")
+
+    # Drei Fälle:
+    # 1) Kommende Wahl steht noch bevor -> aktueller Vorwahl-Zyklus liegt OBERHALB der letzten Wahlzeile.
+    # 2) Erste Nachwahl-Umfragen nach einer bereits stattgefundenen Wahl -> OBERHALB beginnt der neue Zyklus.
+    # 3) Fallback ohne obere Polls -> unterhalb bleibt der alte Zyklus.
+    is_current_pre_election_cycle_above = False
     has_post_poll_above_raw = False
-    if len(above_raw) > 0 and date_col in above_raw.columns:
-        above_dates_raw = pd.to_datetime(above_raw[date_col], format="%d.%m.%Y", errors="coerce")
-        has_post_poll_above_raw = (above_dates_raw > latest_marker_date_raw).any()
+
+    if above_dates_raw.notna().any():
+        max_above_date = above_dates_raw.max()
+        if max_above_date < cycle_target_date:
+            is_current_pre_election_cycle_above = True
+        else:
+            has_post_poll_above_raw = (above_dates_raw > latest_marker_date_raw).any()
 
     older_markers_raw = marker_rows_all[marker_rows_all.index > latest_marker_idx_raw].copy()
     if len(older_markers_raw) > 0:
@@ -490,11 +532,11 @@ def run_state(state_key: str):
 
     election_row_raw = df.loc[[latest_marker_idx_raw]].copy()
 
-    # Wahl-Markierungen ("Landtagswahl ...") behandeln:
-    # - Für BAR/Koalitionen strikt nur den aktuell relevanten Zyklus verwenden.
-    # - Vor der ersten Nachwahl-Umfrage: alter Vorwahl-Zyklus unterhalb der neuesten Wahlzeile.
-    # - Ab der ersten Nachwahl-Umfrage: nur der neue Nachwahl-Zyklus oberhalb der neuesten Wahlzeile.
-    if has_post_poll_above_raw:
+    # Für BAR/Koalitionen strikt nur den aktuell relevanten Zyklus verwenden.
+    # - Laufender Vorwahl-Zyklus vor der nächsten Wahl: OBERHALB der letzten Wahlzeile
+    # - Nach einer stattgefundenen Wahl mit erster Nachwahl-Umfrage: ebenfalls OBERHALB
+    # - Nur wenn es oben keinen aktuellen Zyklus gibt, auf den alten Block darunter zurückfallen
+    if is_current_pre_election_cycle_above or has_post_poll_above_raw:
         df = above_raw.copy()
     else:
         df = below_raw.copy()
@@ -508,12 +550,11 @@ def run_state(state_key: str):
 
     # Dynamisch: Zielwahl, Vorwahl, HOT_PHASE aus Polls und Wahltermin ableiten
     latest_poll_date = df["Datum"].max()
-    has_post_election_poll = pd.notna(latest_poll_date) and latest_poll_date > last_election_date
 
-    if has_post_election_poll:
-        ELECTION_YEAR = last_election_year + election_cycle_years
+    if is_current_pre_election_cycle_above or has_post_poll_above_raw:
+        ELECTION_YEAR = int(cycle_target_date.year)
         PREVIOUS_ELECTION_YEAR = last_election_year
-        target_election_date = last_election_date + pd.DateOffset(years=election_cycle_years)
+        target_election_date = cycle_target_date
     else:
         ELECTION_YEAR = last_election_year
         PREVIOUS_ELECTION_YEAR = last_election_year - election_cycle_years
@@ -619,10 +660,13 @@ def run_state(state_key: str):
         if rep_col in df.columns and cen_col in df.columns:
             df[f"_present_{p}"] = df[rep_col] | df[cen_col]
 
-    # Tabellenquelle aus den zuvor gesicherten Rohblöcken bauen:
+    # Tabellenquelle separat vom BAR-Zyklus:
+    # - Vor der nächsten Wahl: nur der laufende Vorwahl-Zyklus oberhalb der letzten Wahlzeile
     # - Nach der Wahl: Nachwahl-Polls oben + Wahlzeile + Vorwahl-Zyklus darunter
-    # - Sonst: nur der laufende Vorwahl-Zyklus
-    if has_post_poll_above_raw:
+    # - Sonst: alter Zyklus darunter
+    if is_current_pre_election_cycle_above:
+        df_table_source = above_raw.copy()
+    elif has_post_poll_above_raw:
         df_table_source = pd.concat([
             above_raw.copy(),
             election_row_raw.copy(),
@@ -630,6 +674,22 @@ def run_state(state_key: str):
         ], axis=0).copy()
     else:
         df_table_source = below_raw.copy()
+
+    # Zusätzliche Absicherung für echte Nachwahl-Fälle: Wenn oberhalb der neuesten Wahlzeile
+    # Umfragen mit Datum NACH der letzten Wahl stehen, soll die Tabelle immer
+    # Nachwahl-Polls + Wahlzeile + letzten Vorwahl-Zyklus zeigen.
+    is_true_post_election_cycle = False
+    if len(above_raw) > 0 and date_col in above_raw.columns:
+        above_dates_tbl = pd.to_datetime(above_raw[date_col], format="%d.%m.%Y", errors="coerce")
+        if above_dates_tbl.notna().any() and above_dates_tbl.max() > last_election_date:
+            is_true_post_election_cycle = True
+
+    if is_true_post_election_cycle:
+        df_table_source = pd.concat([
+            above_raw.copy(),
+            election_row_raw.copy(),
+            below_raw.copy(),
+        ], axis=0).copy()
 
     # Nur Parteien behalten, die in den zwei neuesten Umfragen vorkommen
     last_dates = sorted(df["Datum"].dropna().unique())[-2:]
@@ -778,6 +838,25 @@ def run_state(state_key: str):
             parsed_method_n = table_df.loc[missing_n, befragte_col].apply(parse_method_code_and_n)
             table_df.loc[missing_n, "method"] = [mn[0] for mn in parsed_method_n]
             table_df.loc[missing_n, "n"] = [mn[1] for mn in parsed_method_n]
+
+    # Reihenfolge der Tabelle stabilisieren:
+    # - Nachwahl-Polls zuerst (neu nach alt)
+    # - dann die Wahlzeile
+    # - dann der letzte Vorwahl-Zyklus (neu nach alt)
+    if "Datum" in table_df.columns:
+        table_df["_sort_date"] = pd.to_datetime(table_df["Datum"], errors="coerce")
+        table_df["_is_election_marker_sort"] = table_df[institute_col].astype(str).str.contains(ELECTION_CUTOFF_PATTERN, na=False)
+
+        def _table_bucket(r):
+            if bool(r.get("_is_election_marker_sort", False)):
+                return 1
+            d = r.get("_sort_date")
+            if pd.notna(d) and d > last_election_date:
+                return 0
+            return 2
+
+        table_df["_table_bucket"] = table_df.apply(_table_bucket, axis=1)
+        table_df = table_df.sort_values(["_table_bucket", "_sort_date"], ascending=[True, False]).copy()
 
     # Für die Tabelle dieselbe Parteien-Normalisierung wie im Haupt-df herstellen,
     # da df_table_source aus den rohen Wahlrecht-Zeilen gebaut wird.
@@ -988,8 +1067,11 @@ def run_state(state_key: str):
                 if not parties:
                     continue
 
-                # Skip coalitions that require a switch party not present in this scenario
-                if any((p in switch_parties and p not in present_set) for p in parties):
+                # Normale Koalitionen nur dann schreiben, wenn alle Varianten-Parteien
+                # des Szenarios auch wirklich in dieser Varianten-Datei enthalten sind.
+                # Dynamische Sammelkoalitionen mit prune_zero_parties bleiben dagegen erhalten;
+                # dort werden fehlende bzw. sitzlose Parteien spaeter entfernt.
+                if (not c.get("prune_zero_parties")) and any((p in switch_parties and p not in present_set) for p in parties):
                     continue
 
                 # Convert party names to ids; skip if any id is missing
@@ -1004,7 +1086,10 @@ def run_state(state_key: str):
                 if not ok:
                     continue
 
-                out.append({"name": c.get("name", ""), "parties": ids})
+                out_item = {"name": c.get("name", ""), "parties": ids}
+                if c.get("prune_zero_parties"):
+                    out_item["prune_zero_parties"] = True
+                out.append(out_item)
 
             # Dedupe nur für definierte Basiskoalitionen (z.B. CDU+AfD unterdrücken, wenn CDU+AfD+FW existiert)
             if prune_bases and out:
@@ -1172,6 +1257,28 @@ def run_state(state_key: str):
         coalition_set = json.load(f)
 
     id_to_party = {meta["id"]: party for party, meta in party_metadata.items()}
+
+    # Dynamische Anti-AfD-/Sammelkoalitionen: Parteien ohne Basissitze entfernen,
+    # statt die ganze Koalition zu verwerfen.
+    for c in coalition_set:
+        if c.get("prune_zero_parties"):
+            pruned_parties = []
+            for obj in c.get("parties", []):
+                pid = obj.get("id") if isinstance(obj, dict) else None
+                pname = id_to_party.get(pid)
+                if pname is not None and int(seats_base.get(pname, 0)) > 0:
+                    pruned_parties.append(obj)
+            c["parties"] = pruned_parties
+
+    # Koalitionen mit Parteien ohne Basissitze nicht anzeigen.
+    filtered_coalition_set = []
+    for c in coalition_set:
+        party_ids = [p.get("id") for p in c.get("parties", []) if isinstance(p, dict)]
+        party_names = [id_to_party.get(pid) for pid in party_ids]
+        party_names = [p for p in party_names if p is not None]
+        if party_names and all(int(seats_base.get(p, 0)) > 0 for p in party_names):
+            filtered_coalition_set.append(c)
+    coalition_set = filtered_coalition_set
 
     for c in coalition_set:
         party_ids = [p.get("id") for p in c.get("parties", []) if isinstance(p, dict)]

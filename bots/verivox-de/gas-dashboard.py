@@ -672,6 +672,10 @@ if __name__ == '__main__':
                       'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
         meta_diesel = {'indicatorTitle': 'Dieselpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Diesel', 'value': diff_diesel, 'valueLabel': f'{diff_diesel_str} Euro',
                        'yAxisStart': diesel_y, 'yAxisLabels': diesel_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_diesel, 'chartType': 'line'}
+        meta_super_front = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter E5', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro',
+                      'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
+        meta_diesel_front = {'indicatorTitle': 'Dieselpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter', 'value': diff_diesel, 'valueLabel': f'{diff_diesel_str} Euro',
+                       'yAxisStart': diesel_y, 'yAxisLabels': diesel_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_diesel, 'chartType': 'line'}
         meta_fueloil = {'indicatorTitle': 'Heizölpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je 100 Liter', 'value': diff_fueloil, 'valueLabel': f'{diff_fueloil_str} Euro',
                       'yAxisStart': fueloil_y, 'yAxisLabels': fueloil_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_fueloil, 'chartType': 'line'}
 
@@ -690,8 +694,10 @@ if __name__ == '__main__':
         # NS1 meta_ns['chartData'] = dict_ns
         # RUS GAS meta_rus['chartData'] = dict_rus
         meta_super['chartData'] = dict_super
+        meta_super_front['chartData'] = dict_super
         meta_fueloil['chartData'] = []
         meta_diesel['chartData'] = dict_diesel
+        meta_diesel_front['chartData'] = dict_diesel
         meta_gasstock['chartData'] = [] #dict_gasstock
         meta_stromstockeex['chartData'] = [] #dict_acstockeex
         #meta_stromstock['chartData'] = []
@@ -716,12 +722,12 @@ if __name__ == '__main__':
         # NS1 dicts.append(meta_ns)
 
         dicts_front = []
-        dicts_front.append(meta_strom_front)
         #dicts_front.append(meta_stromstockeex)
         dicts_front.append(meta_gas_front)
+        dicts_front.append(meta_strom_front)
         #dicts_front.append(meta_gasstock)
-        dicts_front.append(meta_super)
-        #dicts_front.append(meta_diesel)
+        dicts_front.append(meta_super_front)
+        dicts_front.append(meta_diesel_front)
 
         with open('./data/dashboard_de.json', 'w') as fp:
             json.dump(dicts, fp, indent=4)
@@ -746,7 +752,7 @@ if __name__ == '__main__':
         }]
 
         # run Q function
-        update_chart(id='68ae200cc384a18bb319f5840000edbe', files=file)
+        update_chart(id='4a85cfcfd9b989f3f6e5c2af5bacdcb4', files=file)
         
 
         # delete all csv and geojson files
