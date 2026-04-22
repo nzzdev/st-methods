@@ -21,11 +21,15 @@ from decimal import Decimal, ROUND_HALF_UP
 #    Pflicht:
 #      - url
 #      - q_ids: {main, table, coalitions}
-#      - year / previous_year
 #      - seats (Regelgröße/Grundgröße; keine Überhang-/Ausgleichsmandate)
+#      - election_cycle_years (in Deutschland i.d.R. 5)
+#    Automatisch aus der Wahlrecht-Tabelle abgeleitet:
 #      - last_election (Ergebnis der letzten Wahl)
-#    Steuerung:
-#      - hot_phase: True (30 Tage) / False (180 Tage)
+#      - year / previous_year
+#      - hot_phase (nahe am Zielwahltermin)
+#      - Zykluslogik:
+#        vor der ersten Nachwahl-Umfrage = alter Vorwahl-Zyklus,
+#        ab der ersten Nachwahl-Umfrage = nur noch Umfragen nach der letzten Wahl
 #      - variant_parties: Parteien, für die es "rein/raus"-Varianten der Koalitionsliste geben soll.
 #        Das Skript erzeugt pro Kombination dieser Parteien automatisch eine eigene Koalitionsdatei:
 #        coalitions.json, coalitions_fdp.json, coalitions_fdp_fw.json, ...
@@ -65,11 +69,13 @@ STATES_TO_RUN = ["bw", "rlp"]  # e.g. ["bw"], ["rlp"], or multiple
 # ============================
 
 TARGET_ENV = "production"  # production | staging (Staging-Test-ID: d8380f0f8c7efbef50a21f6369a9bc0b)
-# WICHTIG: Nach der Wahl `hot_phase` im STATES-Block auf False setzen (HALF_LIFE_COLD = 180), sonst reagiert der Schnitt zu stark auf einzelne Umfragen.
+# HOT_PHASE wird automatisch aus der Nähe zur Zielwahl abgeleitet.
 
 
 HALF_LIFE_HOT = 30.0
 HALF_LIFE_COLD = 180.0
+# Hot phase wird automatisch über die Nähe zur Zielwahl bestimmt.
+HOT_PHASE_DAYS = 60
 
 # Zusätzliches Zeitfenster für den Schnitt:
 WINDOW_HOT_DAYS = 90
@@ -85,8 +91,8 @@ USE_POLLSTER_SEQ_WEIGHT = True
 U_CENSORED = 3.0
 U_CENSORED_EXPECTED = 2.0
 
-# Only up to the last election row
-ELECTION_CUTOFF_PATTERN = r"Landtagswahl"
+# Marker für Wahlzeilen auf Wahlrecht.de (Länder, Hamburg, Berlin)
+ELECTION_CUTOFF_PATTERN = r"(?:Landtagswahl|Bürgerschaftswahl|Abgeordnetenhauswahl)"
 
 # Einheitliches Parteien-Mapping (Wahlrecht-Spalte -> Parteiname)
 # Hinweis: In den Ländern steht meist CDU; nur in Bayern kann CSU separat auftauchen.
@@ -126,24 +132,12 @@ EMBEDDED_TOKENS = {
 STATES = {
     "bw": {
         "url": "https://www.wahlrecht.de/umfragen/landtage/baden-wuerttemberg.htm",
-        "hot_phase": True,
-        "year": 2026,
-        "previous_year": 2021,
         "seats": 120,
+        "election_cycle_years": 5,
         "q_ids": {
             "table": "558bff2bbd2484d3de317f3f2d8d6367",
             "coalitions": "9ca9ff4a991547939c4a542ed29110e2",
             "main": "558bff2bbd2484d3de317f3f2d9147e3",
-        },
-        "last_election": {
-            "Grüne": 32.6,
-            "CDU": 24.1,
-            "SPD": 11.0,
-            "FDP": 10.5,
-            "AfD": 9.7,
-            "Linke": 3.6,
-            "FW": 3.0,
-            "BSW": 0.0,
         },
         "variant_parties": ["FDP", "BSW", "Linke"],
         "dedupe_bases": [["CDU", "AfD"], ["Grüne", "SPD"]],
@@ -159,24 +153,12 @@ STATES = {
     },
     "rlp": {
         "url": "https://www.wahlrecht.de/umfragen/landtage/rheinland-pfalz.htm",
-        "hot_phase": True,
-        "year": 2026,
-        "previous_year": 2021,
         "seats": 101,
+        "election_cycle_years": 5,
         "q_ids": {
             "table": "558bff2bbd2484d3de317f3f2d8d721c",
-            "coalitions": "9ca9ff4a991547939c4a542ed29167ba",
+            "coalitions": "4a85cfcfd9b989f3f6e5c2af5b8bd00a",
             "main": "558bff2bbd2484d3de317f3f2d9164e0",
-        },
-        "last_election": {
-            "SPD": 35.7,
-            "CDU": 27.7,
-            "Grüne": 9.3,
-            "AfD": 8.3,
-            "FDP": 5.5,
-            "FW": 5.4,
-            "Linke": 2.5,
-            "BSW": 0.0,
         },
         "variant_parties": ["FDP", "FW", "Linke"],
         "dedupe_bases": [["CDU", "AfD"], ["SPD", "Grüne"]],
@@ -392,12 +374,7 @@ def run_state(state_key: str):
     Q_ID_COALITIONS = STATES[state_key]["q_ids"]["coalitions"]
     Q_ID_MAIN_CUSTOM = STATES[state_key]["q_ids"]["main"]
 
-    LAST_ELECTION = STATES[state_key]["last_election"]
-    ELECTION_YEAR = int(STATES[state_key].get("year", 0))
-    PREVIOUS_ELECTION_YEAR = int(STATES[state_key].get("previous_year", 0))
-
-    HOT_PHASE = bool(STATES[state_key].get("hot_phase", True))
-    HALF_LIFE_DAYS = HALF_LIFE_HOT if HOT_PHASE else HALF_LIFE_COLD
+    election_cycle_years = int(STATES[state_key].get("election_cycle_years", 5))
     # Per-state output/input directory (contains data.json and coalition template JSONs)
     state_dir = f"./{state_key}"
     os.makedirs(state_dir, exist_ok=True)
@@ -433,17 +410,94 @@ def run_state(state_key: str):
     if befragte_col is None or date_col is None or sonstige_col is None:
         raise KeyError(f"Missing expected columns on {state_key}: befragte_col={befragte_col}, date_col={date_col}, sonstige_col={sonstige_col}. Columns={list(df.columns)}")
 
+    # Dynamische Ableitung der letzten Wahl aus der Wahlrecht-Tabelle
+    def _extract_date_from_marker(text: str) -> pd.Timestamp:
+        if pd.isna(text):
+            return pd.NaT
+        s = str(text)
+        m = re.search(r"(\d{2})\.(\d{2})\.(\d{4})", s)
+        if not m:
+            return pd.NaT
+        return pd.Timestamp(year=int(m.group(3)), month=int(m.group(2)), day=int(m.group(1)))
+
+    def _parse_election_result_row(row: pd.Series) -> dict:
+        res = {}
+
+        # Hauptparteien aus eigenen Spalten
+        for src_col, party in PARTY_MAP.items():
+            if src_col in row.index:
+                res[party] = convert_percentage_to_float(row.get(src_col))
+
+        # Zusatzparteien aus eigenen Spalten
+        for extra in ["FW", "BSW"]:
+            if extra in row.index:
+                res[extra] = convert_percentage_to_float(row.get(extra))
+
+        # Fallback: aus "Sonstige" herausparsen
+        if sonstige_col and sonstige_col in row.index:
+            sonst_cell = row.get(sonstige_col)
+            for token, party in EMBEDDED_TOKENS.items():
+                if party not in res or pd.isna(res.get(party)):
+                    val = extract_embedded_party(sonst_cell, token)
+                    if pd.notna(val):
+                        res[party] = val
+
+        # Fehlende bekannte Parteien mit 0.0 auffuellen
+        for p in ["CDU", "CSU", "SPD", "Grüne", "FDP", "AfD", "Linke", "FW", "BSW"]:
+            if p not in res or pd.isna(res.get(p)):
+                res[p] = 0.0
+
+        return {k: float(v) for k, v in res.items()}
+
+    marker_mask_all = df[institute_col].astype(str).str.contains(ELECTION_CUTOFF_PATTERN, na=False)
+    election_rows = df.loc[marker_mask_all].copy()
+    election_rows["_marker_date"] = election_rows[institute_col].apply(_extract_date_from_marker)
+    election_rows = election_rows[election_rows["_marker_date"].notna()].copy()
+
+    if len(election_rows) == 0:
+        raise ValueError(f"No election row found on {state_key} page. Cannot derive last election automatically.")
+
+    latest_election_idx = election_rows["_marker_date"].idxmax()
+    latest_election_row = df.loc[latest_election_idx].copy()
+    last_election_date = election_rows.loc[latest_election_idx, "_marker_date"]
+    last_election_year = int(last_election_date.year)
+    LAST_ELECTION = _parse_election_result_row(latest_election_row)
+
+    # Rohblöcke rund um die neueste Wahlzeile sichern, damit die Tabelle später
+    # Nachwahl-Polls + Wahlzeile + Vorwahl-Zyklus zeigen kann, auch wenn df danach
+    # für den BAR-Chart strikt auf den neuen Zyklus reduziert wird.
+    marker_rows_all = df.loc[df[institute_col].astype(str).str.contains(ELECTION_CUTOFF_PATTERN, na=False)].copy()
+    marker_rows_all["_marker_date"] = marker_rows_all[institute_col].apply(_extract_date_from_marker)
+    marker_rows_all = marker_rows_all[marker_rows_all["_marker_date"].notna()].copy()
+
+    latest_marker_idx_raw = int(marker_rows_all["_marker_date"].idxmax())
+    latest_marker_date_raw = marker_rows_all.loc[latest_marker_idx_raw, "_marker_date"]
+
+    above_raw = df.loc[: latest_marker_idx_raw - 1].copy() if latest_marker_idx_raw > 0 else df.iloc[0:0].copy()
+    below_all_raw = df.loc[latest_marker_idx_raw + 1 :].copy()
+
+    has_post_poll_above_raw = False
+    if len(above_raw) > 0 and date_col in above_raw.columns:
+        above_dates_raw = pd.to_datetime(above_raw[date_col], format="%d.%m.%Y", errors="coerce")
+        has_post_poll_above_raw = (above_dates_raw > latest_marker_date_raw).any()
+
+    older_markers_raw = marker_rows_all[marker_rows_all.index > latest_marker_idx_raw].copy()
+    if len(older_markers_raw) > 0:
+        next_older_idx_raw = int(older_markers_raw.index.min())
+        below_raw = df.loc[latest_marker_idx_raw + 1 : next_older_idx_raw - 1].copy()
+    else:
+        below_raw = below_all_raw.copy()
+
+    election_row_raw = df.loc[[latest_marker_idx_raw]].copy()
+
     # Wahl-Markierungen ("Landtagswahl ...") behandeln:
-    # - Vor der Wahl: Marker steht unten -> Zeilen OBERHALB behalten.
-    # - Nach der Wahl: Marker kann oben stehen -> Markerzeile(n) entfernen und Zeilen DARUNTER behalten.
-    cut_idx = df[df[institute_col].astype(str).str.contains(ELECTION_CUTOFF_PATTERN, na=False)].index
-    if len(cut_idx) > 0:
-        first_marker = int(cut_idx.min())
-        # Wenn der Marker sehr weit oben steht, sind wir typischerweise im Nachwahl-Abschnitt.
-        if first_marker <= 2:
-            df = df.loc[first_marker + 1 :].copy()
-        else:
-            df = df.loc[: first_marker - 1].copy()
+    # - Für BAR/Koalitionen strikt nur den aktuell relevanten Zyklus verwenden.
+    # - Vor der ersten Nachwahl-Umfrage: alter Vorwahl-Zyklus unterhalb der neuesten Wahlzeile.
+    # - Ab der ersten Nachwahl-Umfrage: nur der neue Nachwahl-Zyklus oberhalb der neuesten Wahlzeile.
+    if has_post_poll_above_raw:
+        df = above_raw.copy()
+    else:
+        df = below_raw.copy()
 
     # Modus + Befragtenzahl aus "Befragte" extrahieren
     df["method"], df["n"] = zip(*df[befragte_col].apply(parse_method_code_and_n))
@@ -451,6 +505,23 @@ def run_state(state_key: str):
     # Veröffentlichungsdatum parsen
     df["Datum"] = pd.to_datetime(df[date_col], format="%d.%m.%Y", errors="coerce")
     df = df[df["Datum"].notna()].copy()
+
+    # Dynamisch: Zielwahl, Vorwahl, HOT_PHASE aus Polls und Wahltermin ableiten
+    latest_poll_date = df["Datum"].max()
+    has_post_election_poll = pd.notna(latest_poll_date) and latest_poll_date > last_election_date
+
+    if has_post_election_poll:
+        ELECTION_YEAR = last_election_year + election_cycle_years
+        PREVIOUS_ELECTION_YEAR = last_election_year
+        target_election_date = last_election_date + pd.DateOffset(years=election_cycle_years)
+    else:
+        ELECTION_YEAR = last_election_year
+        PREVIOUS_ELECTION_YEAR = last_election_year - election_cycle_years
+        target_election_date = last_election_date
+
+    days_to_target_election = (target_election_date - latest_poll_date).days if pd.notna(latest_poll_date) else 99999
+    HOT_PHASE = days_to_target_election <= HOT_PHASE_DAYS
+    HALF_LIFE_DAYS = HALF_LIFE_HOT if HOT_PHASE else HALF_LIFE_COLD
 
     # Letzten Feldtag aus "Befragte" parsen und als effektives Datum fürs Gewichten nutzen
     def _parse_field_end_date(befragte, pub_date):
@@ -547,6 +618,18 @@ def run_state(state_key: str):
         cen_col = f"_censored_{p}"
         if rep_col in df.columns and cen_col in df.columns:
             df[f"_present_{p}"] = df[rep_col] | df[cen_col]
+
+    # Tabellenquelle aus den zuvor gesicherten Rohblöcken bauen:
+    # - Nach der Wahl: Nachwahl-Polls oben + Wahlzeile + Vorwahl-Zyklus darunter
+    # - Sonst: nur der laufende Vorwahl-Zyklus
+    if has_post_poll_above_raw:
+        df_table_source = pd.concat([
+            above_raw.copy(),
+            election_row_raw.copy(),
+            below_raw.copy(),
+        ], axis=0).copy()
+    else:
+        df_table_source = below_raw.copy()
 
     # Nur Parteien behalten, die in den zwei neuesten Umfragen vorkommen
     last_dates = sorted(df["Datum"].dropna().unique())[-2:]
@@ -682,7 +765,41 @@ def run_state(state_key: str):
     print(f"JSON file '{bar_path}' has been created successfully.")
 
     # ---- Umfragetabelle ----
-    table_df = df.copy()
+    table_df = df_table_source.copy()
+
+    if "Datum" in table_df.columns:
+        table_df["Datum"] = pd.to_datetime(table_df["Datum"], errors="coerce", format="%d.%m.%Y")
+
+    if "n" not in table_df.columns:
+        table_df["method"], table_df["n"] = zip(*table_df[befragte_col].apply(parse_method_code_and_n))
+    else:
+        missing_n = table_df["n"].isna()
+        if missing_n.any():
+            parsed_method_n = table_df.loc[missing_n, befragte_col].apply(parse_method_code_and_n)
+            table_df.loc[missing_n, "method"] = [mn[0] for mn in parsed_method_n]
+            table_df.loc[missing_n, "n"] = [mn[1] for mn in parsed_method_n]
+
+    # Für die Tabelle dieselbe Parteien-Normalisierung wie im Haupt-df herstellen,
+    # da df_table_source aus den rohen Wahlrecht-Zeilen gebaut wird.
+    for src_col, party in PARTY_MAP.items():
+        if src_col in table_df.columns:
+            table_df[party] = table_df[src_col].apply(convert_percentage_to_float)
+        else:
+            table_df[party] = np.nan
+
+    for extra_col in ["FW", "BSW"]:
+        if extra_col in table_df.columns:
+            table_df[extra_col] = table_df[extra_col].apply(convert_percentage_to_float)
+        else:
+            table_df[extra_col] = np.nan
+
+    if sonstige_col in table_df.columns:
+        for token, party in EMBEDDED_TOKENS.items():
+            embedded_col = f"_tbl_embedded_{party}"
+            table_df[embedded_col] = table_df[sonstige_col].apply(lambda x, t=token: extract_embedded_party(x, t))
+            if party not in table_df.columns:
+                table_df[party] = np.nan
+            table_df[party] = table_df[party].where(table_df[party].notna(), table_df[embedded_col])
 
     # --- Institutsnamen normalisieren (wie Bundestag) ---
     institute_rename = {
@@ -739,20 +856,46 @@ def run_state(state_key: str):
         return f"{d1}.{m1}.–{d2}.{m2}.{yy:02d}"
 
     table_df["Zeitraum"] = table_df.apply(lambda r: _extract_zeitraum(r.get(befragte_col, ""), r.get("Datum", pd.NaT)), axis=1)
+    # Wahlzeilen in der Tabelle speziell behandeln: Label "Wahl", Datum anzeigen, keine Teilnehmerzahl.
+    election_marker_mask_tbl = table_df[institute_col].astype(str).str.contains(ELECTION_CUTOFF_PATTERN, na=False)
+    table_df["_is_election_row"] = election_marker_mask_tbl
+    table_df["_election_marker_date"] = table_df[institute_col].apply(_extract_date_from_marker)
 
-    table_df["Institut_fmt"] = (
-        table_df["Institut_clean"].astype(str) + "<br>" +
-        '<span style="font-size: x-small; color: #69696c">' +
-        table_df["Zeitraum"].astype(str) + "<br>" +
-        (table_df["n"].fillna("").apply(lambda x: f"{int(x):,}".replace(",", " ") + " Teiln." if str(x) != "" and pd.notna(x) else "")) +
-        "</span>"
-    )
+    def _fmt_institut_row(r):
+        if bool(r.get("_is_election_row", False)):
+            date_txt = ""
+            try:
+                d = r.get("_election_marker_date")
+                if pd.notna(d):
+                    d = pd.to_datetime(d)
+                    date_txt = f"{int(d.day)}.{int(d.month)}.{int(d.year)}"
+                elif pd.notna(r.get("Datum")):
+                    d = pd.to_datetime(r.get("Datum"))
+                    date_txt = f"{int(d.day)}.{int(d.month)}.{int(d.year)}"
+            except Exception:
+                date_txt = ""
+            return "Wahl<br><span style=\"font-size: x-small; color: #69696c\">" + date_txt + "</span>"
 
-    # Reihenfolge wie im Balkendiagramm; Rest hinten anhängen
+        teiln = ""
+        try:
+            if pd.notna(r.get("n")):
+                teiln = f"{int(r.get('n')):,}".replace(",", " ") + " Teiln."
+        except Exception:
+            teiln = ""
+
+        return (
+            str(r.get("Institut_clean", "")) + "<br>" +
+            '<span style="font-size: x-small; color: #69696c">' +
+            str(r.get("Zeitraum", "")) + "<br>" +
+            teiln +
+            "</span>"
+        )
+
+    table_df["Institut_fmt"] = table_df.apply(_fmt_institut_row, axis=1)
+
+    # Tabelle nur für Parteien, die auch im aktuellen Balkendiagramm vorkommen
+    # (also nur Parteien mit gültigem aktuellem Durchschnitt / bar_order).
     table_party_order = [p for p in bar_order if p in table_df.columns]
-    for p in parties_out:
-        if p in table_df.columns and p not in table_party_order:
-            table_party_order.append(p)
 
     wide_polls_table = table_df[["Institut_fmt"] + table_party_order].copy()
     wide_polls_table.rename(columns={"Institut_fmt": "Institut"}, inplace=True)
@@ -814,7 +957,7 @@ def run_state(state_key: str):
         "FDP": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909831-568178765", "colorCode": party_colors["FDP"]},
         "Linke": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909831-21531609", "colorCode": party_colors["Linke"]},
         "AfD": {"id": "0d50b45e538faa45f768d3204450d0e7-1732636909831-211145954", "colorCode": party_colors["AfD"]},
-        "BSW": {"id": "0d50b45e538faa45f768d3204450d0e7-1732637074764-908994801", "colorCode": party_colors["BSW"]},
+        "BSW": {"id": "A6zt3iDyIxG96itQmrhJ3", "colorCode": party_colors["BSW"]},
         "FW": {"id": "0d50b45e538faa45f768d3204450d0e7-1732637074764-908994801", "colorCode": party_colors["FW"]},
     }
 
@@ -1062,7 +1205,11 @@ def run_state(state_key: str):
         else:
             c["name"] = label
 
+    notes_chart_seats_intro = (
+        "Neueste Umfrage. " if len(df_avg) <= 1 else "Gewichteter Durchschnitt der neuesten Umfragen. "
+    )
     notes_chart_seats = (
+        notes_chart_seats_intro +
         "«Stabile/wackelige/unrealistische» Mehrheit geprüft anhand einer Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
         "Sitzverteilung gemäss Regelgrösse, ohne Berücksichtigung einer etwaigen Grundmandatsklausel. "
         "Stand: " + latest_date.strftime("%-d. %-m. %Y")
@@ -1082,8 +1229,12 @@ def run_state(state_key: str):
             {"path": bar_path},
         ]
     }]
-    notes_main = "Gewichteter Durchschnitt der neuesten Umfragen. Stand: " + latest_date.strftime("%-d. %-m. %Y")
-    update_chart(id=Q_ID_MAIN_CUSTOM, assetGroups=assets, notes=notes_main)
+    subtitle_main = f"NZZ-Wahltrend und Veränderung gegenüber der Wahl {PREVIOUS_ELECTION_YEAR}"
+    if len(df_avg) <= 1:
+        notes_main = "Neueste Umfrage. Stand: " + latest_date.strftime("%-d. %-m. %Y")
+    else:
+        notes_main = "Gewichteter Durchschnitt der neuesten Umfragen. Stand: " + latest_date.strftime("%-d. %-m. %Y")
+    update_chart(id=Q_ID_MAIN_CUSTOM, assetGroups=assets, subtitle=subtitle_main, notes=notes_main)
 
     print(f"Done for {state_key}.")
 
