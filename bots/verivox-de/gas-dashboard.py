@@ -735,7 +735,7 @@ if __name__ == '__main__':
         file = [{
             "loadSyncBeforeInit": True,
             "file": {
-                "path": "./data/dashboard_de.json"
+                "path": os.path.abspath('./data/dashboard_de.json')
             }
         }]
 
@@ -748,7 +748,7 @@ if __name__ == '__main__':
         file = [{
             "loadSyncBeforeInit": True,
             "file": {
-                "path": "./data_front/dashboard_de.json"
+                "path": os.path.abspath('./data_front/dashboard_de.json')
             }
         }]
 
