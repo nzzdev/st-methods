@@ -753,13 +753,12 @@ if __name__ == '__main__':
 
         # run Q function
         update_chart(id='4a85cfcfd9b989f3f6e5c2af5bacdcb4', files=file)
-        """
         # delete all csv and geojson files
         dir = 'data/'
         extracted = os.listdir(dir)
         for item in extracted:
             if item.endswith('.csv') or item.endswith('.geojson') or item == 'dashboard_de.json' or item == 'dashboard_front_de.json':
                 os.remove(os.path.join(dir, item))
-        """
+
     except:
         raise
