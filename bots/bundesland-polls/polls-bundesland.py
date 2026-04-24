@@ -66,7 +66,7 @@ from decimal import Decimal, ROUND_HALF_UP
 # ============================
 # STATES TO RUN (edit here)
 # ============================
-STATES_TO_RUN = ["bw", "rlp", "st"]  # e.g. ["bw"], ["rlp"], or multiple
+STATES_TO_RUN = ["bw", "rlp", "st", "mv", "be"]  # e.g. ["bw"], ["rlp"], or multiple
 
 # ============================
 # TARGET ENVIRONMENT (edit here)
@@ -83,7 +83,13 @@ HOT_PHASE_DAYS = 60
 
 # Zusätzliches Zeitfenster für den Schnitt:
 WINDOW_HOT_DAYS = 90
-WINDOW_COLD_DAYS = 730
+
+# In der kalten Phase nicht pauschal zwei Jahre zurückgehen.
+# Standard: 365 Tage; nur bei sehr dünner Datenlage stufenweise erweitern.
+WINDOW_COLD_DAYS_DEFAULT = 365
+WINDOW_COLD_DAYS_EXPANDED = 540
+WINDOW_COLD_DAYS_MAX = 730
+MIN_POLLS_COLD_WINDOW = 6
 
 # Sequenzgewicht pro Institut: verhindert, dass sehr aktive Institute den Schnitt dominieren.
 # Neueste Umfrage eines Instituts: 1.0, zweitneueste: 0.5, drittneueste: 0.25, ...
@@ -196,6 +202,48 @@ STATES = {
             {"name": "", "parties": ["CDU", "SPD", "Grüne"]},
             {"name": "", "parties": ["CDU", "SPD", "Grüne", "FDP"]},
             {"name": "", "parties": ["CDU", "SPD", "Grüne", "FDP", "Linke", "BSW", "FW"], "prune_zero_parties": True},
+        ],
+    }
+    ,"mv": {
+        "url": "https://www.wahlrecht.de/umfragen/landtage/mecklenburg-vorpommern.htm",
+        "seats": 71,
+        "election_cycle_years": 5,
+        "next_election_date": "2026-09-20",
+        "q_ids": {
+            "table": "d6872e1200dd2efc24757afdd3a80d75",
+            "coalitions": "d6872e1200dd2efc24757afdd3a81a0a",
+            "main": "bbbc7289a6bbe23e1e762510157a3061",
+        },
+        "variant_parties": ["FDP", "BSW", "Grüne"],
+        "dedupe_bases": [["SPD", "Linke"], ["SPD", "Linke", "Grüne"]],
+        "coalitions_spec": [
+            {"name": "", "parties": ["AfD", "CDU"]},
+            {"name": "", "parties": ["SPD", "CDU", "Grüne"], "prune_zero_parties": True},
+            {"name": "", "parties": ["SPD", "Grüne", "FDP"]},
+            {"name": "", "parties": ["SPD", "CDU", "FDP"]},
+            {"name": "", "parties": ["SPD", "Grüne", "Linke", "BSW"], "prune_zero_parties": True},
+        ],
+    }
+    ,"be": {
+        "url": "https://www.wahlrecht.de/umfragen/landtage/berlin.htm",
+        "seats": 130,
+        "election_cycle_years": 5,
+        "next_election_date": "2026-09-20",
+        "q_ids": {
+            "table": "d6872e1200dd2efc24757afdd3a82913",
+            "coalitions": "d6872e1200dd2efc24757afdd3a83b87",
+            "main": "1a0f086ae90223c872f47e1dce5ece9a",
+        },
+        "variant_parties": ["FDP", "Grüne", "BSW"],
+        "dedupe_bases": [["CDU", "Grüne"], ["SPD", "Grüne", "Linke"]],
+        "coalitions_spec": [
+            {"name": "", "parties": ["CDU", "SPD"]},
+            {"name": "", "parties": ["CDU", "Grüne"]},
+            {"name": "", "parties": ["CDU", "Grüne", "FDP"]},
+            {"name": "", "parties": ["CDU", "AfD"]},
+            {"name": "", "parties": ["SPD", "Grüne", "Linke"]},
+            {"name": "", "parties": ["SPD", "Grüne", "Linke", "BSW"]},
+            {"name": "", "parties": ["SPD", "Grüne", "FDP"]},
         ],
     }
 }
@@ -511,17 +559,24 @@ def run_state(state_key: str):
 
     # Drei Fälle:
     # 1) Kommende Wahl steht noch bevor -> aktueller Vorwahl-Zyklus liegt OBERHALB der letzten Wahlzeile.
+    #    Das erkennen wir nur dann sicher als Vorwahl-Zyklus, wenn ein EXAKTES kommendes Wahldatum
+    #    konfiguriert ist und die oberen Umfragen noch davor liegen.
     # 2) Erste Nachwahl-Umfragen nach einer bereits stattgefundenen Wahl -> OBERHALB beginnt der neue Zyklus.
+    #    Das gilt insbesondere fuer Laender wie BW nach der Wahl 2026.
     # 3) Fallback ohne obere Polls -> unterhalb bleibt der alte Zyklus.
     is_current_pre_election_cycle_above = False
     has_post_poll_above_raw = False
 
     if above_dates_raw.notna().any():
         max_above_date = above_dates_raw.max()
-        if max_above_date < cycle_target_date:
+
+        # Nur mit explizitem kommendem Wahldatum sicher als Vorwahl-Zyklus klassifizieren.
+        if configured_next_election_date is not None and max_above_date < configured_next_election_date:
             is_current_pre_election_cycle_above = True
         else:
-            has_post_poll_above_raw = (above_dates_raw > latest_marker_date_raw).any()
+            # Sonst gilt: Wenn oberhalb der letzten Wahlzeile bereits Umfragen nach dem Datum
+            # der letzten Wahl stehen, ist das ein echter Nachwahl-Zyklus.
+            has_post_poll_above_raw = max_above_date > last_election_date
 
     older_markers_raw = marker_rows_all[marker_rows_all.index > latest_marker_idx_raw].copy()
     if len(older_markers_raw) > 0:
@@ -531,6 +586,16 @@ def run_state(state_key: str):
         below_raw = below_all_raw.copy()
 
     election_row_raw = df.loc[[latest_marker_idx_raw]].copy()
+
+    # Für die Tabelle im Nachwahl-Fall zusätzlich den letzten vollständigen Vorwahl-Zyklus
+    # unterhalb der aktuellen Wahlzeile sichern. Dieser reicht von der aktuellen Wahlzeile
+    # bis direkt vor die davorliegende Wahlzeile.
+    if len(older_markers_raw) > 0:
+        prev_cycle_start_idx_raw = latest_marker_idx_raw + 1
+        prev_cycle_end_idx_raw = next_older_idx_raw - 1
+        below_prev_cycle_raw = df.loc[prev_cycle_start_idx_raw:prev_cycle_end_idx_raw].copy()
+    else:
+        below_prev_cycle_raw = below_raw.copy()
 
     # Für BAR/Koalitionen strikt nur den aktuell relevanten Zyklus verwenden.
     # - Laufender Vorwahl-Zyklus vor der nächsten Wahl: OBERHALB der letzten Wahlzeile
@@ -551,7 +616,11 @@ def run_state(state_key: str):
     # Dynamisch: Zielwahl, Vorwahl, HOT_PHASE aus Polls und Wahltermin ableiten
     latest_poll_date = df["Datum"].max()
 
-    if is_current_pre_election_cycle_above or has_post_poll_above_raw:
+    if is_current_pre_election_cycle_above:
+        ELECTION_YEAR = int(cycle_target_date.year)
+        PREVIOUS_ELECTION_YEAR = last_election_year
+        target_election_date = cycle_target_date
+    elif has_post_poll_above_raw:
         ELECTION_YEAR = int(cycle_target_date.year)
         PREVIOUS_ELECTION_YEAR = last_election_year
         target_election_date = cycle_target_date
@@ -662,34 +731,43 @@ def run_state(state_key: str):
 
     # Tabellenquelle separat vom BAR-Zyklus:
     # - Vor der nächsten Wahl: nur der laufende Vorwahl-Zyklus oberhalb der letzten Wahlzeile
-    # - Nach der Wahl: Nachwahl-Polls oben + Wahlzeile + Vorwahl-Zyklus darunter
+    # - Frühe Nachwahlphase (< 7 neue Umfragen seit der letzten Wahl):
+    #   Nachwahl-Polls oben + Wahlzeile + letzter Vorwahl-Zyklus darunter
+    # - Späte Nachwahlphase (>= 7 neue Umfragen): nur der neue Nachwahl-Zyklus
     # - Sonst: alter Zyklus darunter
-    if is_current_pre_election_cycle_above:
-        df_table_source = above_raw.copy()
-    elif has_post_poll_above_raw:
-        df_table_source = pd.concat([
-            above_raw.copy(),
-            election_row_raw.copy(),
-            below_raw.copy(),
-        ], axis=0).copy()
-    else:
-        df_table_source = below_raw.copy()
-
-    # Zusätzliche Absicherung für echte Nachwahl-Fälle: Wenn oberhalb der neuesten Wahlzeile
-    # Umfragen mit Datum NACH der letzten Wahl stehen, soll die Tabelle immer
-    # Nachwahl-Polls + Wahlzeile + letzten Vorwahl-Zyklus zeigen.
+    post_election_poll_count = 0
     is_true_post_election_cycle = False
     if len(above_raw) > 0 and date_col in above_raw.columns:
         above_dates_tbl = pd.to_datetime(above_raw[date_col], format="%d.%m.%Y", errors="coerce")
-        if above_dates_tbl.notna().any() and above_dates_tbl.max() > last_election_date:
-            is_true_post_election_cycle = True
+        post_mask_tbl = above_dates_tbl > last_election_date
+        post_election_poll_count = int(post_mask_tbl.fillna(False).sum())
+        is_true_post_election_cycle = post_election_poll_count > 0
 
-    if is_true_post_election_cycle:
-        df_table_source = pd.concat([
-            above_raw.copy(),
-            election_row_raw.copy(),
-            below_raw.copy(),
-        ], axis=0).copy()
+    if is_current_pre_election_cycle_above:
+        # Laufender Vorwahl-Zyklus vor der nächsten Wahl: keine alte Wahlzeile zeigen.
+        df_table_source = above_raw.copy()
+    elif is_true_post_election_cycle:
+        if post_election_poll_count < 7:
+            # Frühe Nachwahlphase: neue Polls + aktuelle Wahl + letzter Vorwahl-Zyklus.
+            df_table_source = pd.concat([
+                above_raw.copy(),
+                election_row_raw.copy(),
+                below_prev_cycle_raw.copy(),
+            ], axis=0).copy()
+        else:
+            # Genug neue Polls seit der Wahl: nur noch der neue Zyklus.
+            df_table_source = above_raw.copy()
+    else:
+        # Kein laufender oberer Zyklus und keine neuen Nachwahl-Polls.
+        # Falls die Wahl schon stattgefunden hat, aktuelle Wahlzeile als Referenz zeigen;
+        # sonst nur den alten Zyklus darunter.
+        if pd.Timestamp.utcnow().tz_localize(None) >= last_election_date:
+            df_table_source = pd.concat([
+                election_row_raw.copy(),
+                below_prev_cycle_raw.copy(),
+            ], axis=0).copy()
+        else:
+            df_table_source = below_raw.copy()
 
     # Nur Parteien behalten, die in den zwei neuesten Umfragen vorkommen
     last_dates = sorted(df["Datum"].dropna().unique())[-2:]
@@ -733,10 +811,29 @@ def run_state(state_key: str):
     latest_date = df["Datum"].max()  # publication date for notes/stand
     latest_effective = df["effective_date"].max()  # fieldwork end for weighting
 
-    # Zeitfenster: in der heissen Phase alte Umfragen ausblenden:
-    window_days = WINDOW_HOT_DAYS if HOT_PHASE else WINDOW_COLD_DAYS
-    cutoff_eff = latest_effective - pd.Timedelta(days=int(window_days))
-    df_avg = df[df["effective_date"] >= cutoff_eff].copy()
+    # Zeitfenster fuer den Schnitt:
+    # - heisse Phase: enges 90-Tage-Fenster
+    # - kalte Phase: standardmaessig 365 Tage; nur bei zu wenigen Polls stufenweise erweitern
+    if HOT_PHASE:
+        window_days = WINDOW_HOT_DAYS
+        cutoff_eff = latest_effective - pd.Timedelta(days=int(window_days))
+        df_avg = df[df["effective_date"] >= cutoff_eff].copy()
+    else:
+        cold_windows = [
+            WINDOW_COLD_DAYS_DEFAULT,
+            WINDOW_COLD_DAYS_EXPANDED,
+            WINDOW_COLD_DAYS_MAX,
+        ]
+        df_avg = df.copy()
+        window_days = WINDOW_COLD_DAYS_MAX
+
+        for wd in cold_windows:
+            cutoff_eff = latest_effective - pd.Timedelta(days=int(wd))
+            df_candidate = df[df["effective_date"] >= cutoff_eff].copy()
+            if len(df_candidate) >= MIN_POLLS_COLD_WINDOW or wd == WINDOW_COLD_DAYS_MAX:
+                df_avg = df_candidate
+                window_days = wd
+                break
 
     # Sequenzgewicht: pro Institut nur die neueste Umfrage voll zählen lassen
     if USE_POLLSTER_SEQ_WEIGHT:
@@ -856,6 +953,7 @@ def run_state(state_key: str):
             return 2
 
         table_df["_table_bucket"] = table_df.apply(_table_bucket, axis=1)
+        table_df = table_df[~(table_df["_is_election_marker_sort"] & (table_df["_sort_date"] < last_election_date))].copy()
         table_df = table_df.sort_values(["_table_bucket", "_sort_date"], ascending=[True, False]).copy()
 
     # Für die Tabelle dieselbe Parteien-Normalisierung wie im Haupt-df herstellen,
@@ -1192,11 +1290,18 @@ def run_state(state_key: str):
 
     party_stats = latest_rolling_averages.merge(mean_ci_per_party, on="Partei", how="left")
     party_stats["mean_ci"] = pd.to_numeric(party_stats["mean_ci"], errors="coerce").fillna(3.0)
-    party_stats["wacklig"] = (party_stats["average"] - 5.0).abs() <= party_stats["mean_ci"]
 
-    in_base = party_stats.loc[party_stats["average"] >= 5.0, ["Partei", "average"]].set_index("Partei")["average"]
-    in_low = party_stats.loc[(party_stats["average"] >= 5.0) & (~party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
-    in_high = party_stats.loc[(party_stats["average"] >= 5.0) | (party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
+    # Für die Hürdenlogik dieselbe FINAL sichtbare Zahl wie im Balkenchart verwenden
+    # (also die ganzzahlig gerundete Anzeige, nicht die Zwischenstufe mit 1 Nachkommastelle).
+    # Damit ist eine Partei, die im Chart als 5% erscheint, auch im Basisszenario im Parlament.
+    party_stats["average_display"] = party_stats["average"].apply(
+        lambda x: round_half_up(round_half_up(float(x), 1), 0) if pd.notna(x) else np.nan
+    )
+    party_stats["wacklig"] = (party_stats["average_display"] - 5.0).abs() <= party_stats["mean_ci"]
+
+    in_base = party_stats.loc[party_stats["average_display"] >= 5.0, ["Partei", "average"]].set_index("Partei")["average"]
+    in_low = party_stats.loc[(party_stats["average_display"] >= 5.0) & (~party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
+    in_high = party_stats.loc[(party_stats["average_display"] >= 5.0) | (party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
 
     def _allocate_seats(avgs: pd.Series, total_seats: int = TOTAL_SEATS):
         """Sainte-Laguë/Schepers via highest-averages (Webster)."""
@@ -1295,9 +1400,9 @@ def run_state(state_key: str):
         # Stabil: hat bereits im Basisszenario eine Mehrheit und behaelt sie auch im schlechtesten Huerden-Szenario.
         if base_total >= MAJORITY and worst_total >= MAJORITY:
             label = "stabile Mehrheit"
-        # Unrealistisch: selbst im guenstigsten Huerden-Szenario keine Mehrheit.
+        # Keine: selbst im guenstigsten Huerden-Szenario keine Mehrheit.
         elif best_total < MAJORITY:
-            label = "Mehrheit unrealistisch"
+            label = "keine Mehrheit"
         # Wackelig: Mehrheit haengt von Huerden-Szenarien ab (rein/raus von Parteien nahe 5%).
         else:
             label = "wackelige Mehrheit"
@@ -1317,7 +1422,7 @@ def run_state(state_key: str):
     )
     notes_chart_seats = (
         notes_chart_seats_intro +
-        "«Stabile/wackelige/unrealistische» Mehrheit geprüft anhand einer Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
+        "«Stabile/wackelige/keine Mehrheit« geprüft anhand einer Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
         "Sitzverteilung gemäss Regelgrösse, ohne Berücksichtigung einer etwaigen Grundmandatsklausel. "
         "Stand: " + latest_date.strftime("%-d. %-m. %Y")
     )
