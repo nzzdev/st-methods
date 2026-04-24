@@ -144,6 +144,7 @@ STATES = {
         "url": "https://www.wahlrecht.de/umfragen/landtage/baden-wuerttemberg.htm",
         "seats": 120,
         "election_cycle_years": 5,
+        #"next_election_date": "2026-09-20",
         "q_ids": {
             "table": "558bff2bbd2484d3de317f3f2d8d6367",
             "coalitions": "9ca9ff4a991547939c4a542ed29110e2",
@@ -165,6 +166,7 @@ STATES = {
         "url": "https://www.wahlrecht.de/umfragen/landtage/rheinland-pfalz.htm",
         "seats": 101,
         "election_cycle_years": 5,
+        #"next_election_date": "2026-09-20",
         "q_ids": {
             "table": "558bff2bbd2484d3de317f3f2d8d721c",
             "coalitions": "4a85cfcfd9b989f3f6e5c2af5b8bd00a",
@@ -539,7 +541,33 @@ def run_state(state_key: str):
 
     configured_next_election_date = STATES[state_key].get("next_election_date")
     configured_next_election_date = pd.Timestamp(configured_next_election_date) if configured_next_election_date else None
+
+    # Plausibilitäts-Check: Wenn next_election_date noch auf die bereits gelaufene Wahl zeigt,
+    # die auch als aktuelle Wahlzeile auf der Seite erkannt wurde, ignorieren wir den Wert
+    # und fallen auf election_cycle_years zurück.
+    if configured_next_election_date is not None and configured_next_election_date == last_election_date:
+        print(
+            f"WARNING [{state_key}]: next_election_date={configured_next_election_date.strftime('%Y-%m-%d')} "
+            f"matches the last election parsed from the current Wahl row. Ignoring stale next_election_date "
+            f"and falling back to election_cycle_years={election_cycle_years}."
+        )
+        configured_next_election_date = None
+
     inferred_next_election_date = last_election_date + pd.DateOffset(years=election_cycle_years)
+
+    # Zusatz-Warnung: Wenn kein exaktes next_election_date gesetzt ist, die naechste Wahl aber
+    # nach election_cycle_years in etwa innerhalb eines Jahres anstehen sollte, Hinweis ausgeben.
+    # Das ist kein Fehlerfall, aber ein Signal, dass ein exaktes Datum jetzt sinnvoll waere.
+    if configured_next_election_date is None:
+        now_naive = pd.Timestamp.utcnow().tz_localize(None)
+        days_to_inferred_election = (inferred_next_election_date - now_naive).days
+        if 0 <= days_to_inferred_election <= 365:
+            print(
+                f"WARNING [{state_key}]: no next_election_date configured. Based on election_cycle_years="
+                f"{election_cycle_years}, the next election is plausibly due in about {days_to_inferred_election} days "
+                f"({inferred_next_election_date.strftime('%Y-%m-%d')}). Consider setting next_election_date exactly."
+            )
+
     cycle_target_date = configured_next_election_date if configured_next_election_date is not None else inferred_next_election_date
 
     # Rohblöcke rund um die neueste Wahlzeile sichern, damit die Tabelle später
@@ -940,6 +968,8 @@ def run_state(state_key: str):
     # - Nachwahl-Polls zuerst (neu nach alt)
     # - dann die Wahlzeile
     # - dann der letzte Vorwahl-Zyklus (neu nach alt)
+    # Wahl-Marker-Datum hier schon erzeugen, weil es unten für den Filter älterer Wahlzeilen gebraucht wird.
+    table_df["_election_marker_date"] = table_df[institute_col].apply(_extract_date_from_marker)
     if "Datum" in table_df.columns:
         table_df["_sort_date"] = pd.to_datetime(table_df["Datum"], errors="coerce")
         table_df["_is_election_marker_sort"] = table_df[institute_col].astype(str).str.contains(ELECTION_CUTOFF_PATTERN, na=False)
@@ -953,7 +983,9 @@ def run_state(state_key: str):
             return 2
 
         table_df["_table_bucket"] = table_df.apply(_table_bucket, axis=1)
-        table_df = table_df[~(table_df["_is_election_marker_sort"] & (table_df["_sort_date"] < last_election_date))].copy()
+        table_df = table_df[
+            ~(table_df["_is_election_marker_sort"] & (pd.to_datetime(table_df["_election_marker_date"], errors="coerce") < last_election_date))
+        ].copy()
         table_df = table_df.sort_values(["_table_bucket", "_sort_date"], ascending=[True, False]).copy()
 
     # Für die Tabelle dieselbe Parteien-Normalisierung wie im Haupt-df herstellen,
@@ -1036,7 +1068,6 @@ def run_state(state_key: str):
     # Wahlzeilen in der Tabelle speziell behandeln: Label "Wahl", Datum anzeigen, keine Teilnehmerzahl.
     election_marker_mask_tbl = table_df[institute_col].astype(str).str.contains(ELECTION_CUTOFF_PATTERN, na=False)
     table_df["_is_election_row"] = election_marker_mask_tbl
-    table_df["_election_marker_date"] = table_df[institute_col].apply(_extract_date_from_marker)
 
     def _fmt_institut_row(r):
         if bool(r.get("_is_election_row", False)):
@@ -1422,7 +1453,7 @@ def run_state(state_key: str):
     )
     notes_chart_seats = (
         notes_chart_seats_intro +
-        "«Stabile/wackelige/keine Mehrheit« geprüft anhand einer Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
+        "«Stabile/wackelige/keine Mehrheit» geprüft anhand einer Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
         "Sitzverteilung gemäss Regelgrösse, ohne Berücksichtigung einer etwaigen Grundmandatsklausel. "
         "Stand: " + latest_date.strftime("%-d. %-m. %Y")
     )
