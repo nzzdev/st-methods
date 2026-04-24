@@ -76,13 +76,13 @@ TARGET_ENV = "production"  # production | staging (Staging-Test-ID: d8380f0f8c7e
 # HOT_PHASE wird automatisch aus der Nähe zur Zielwahl abgeleitet.
 
 
-HALF_LIFE_HOT = 30.0
+HALF_LIFE_HOT = 21.0
 HALF_LIFE_COLD = 180.0
 # Hot phase wird automatisch über die Nähe zur Zielwahl bestimmt.
-HOT_PHASE_DAYS = 60
+HOT_PHASE_DAYS = 45
 
 # Zusätzliches Zeitfenster für den Schnitt:
-WINDOW_HOT_DAYS = 90
+WINDOW_HOT_DAYS = 60
 
 # In der kalten Phase nicht pauschal zwei Jahre zurückgehen.
 # Standard: 365 Tage; nur bei sehr dünner Datenlage stufenweise erweitern.
