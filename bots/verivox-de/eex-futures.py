@@ -34,9 +34,9 @@ if __name__ == '__main__':
         }
         session = requests.Session()
         retry = Retry(
-            total=3,
-            connect=3,
-            read=3,
+            total=2,
+            connect=2,
+            read=2,
             backoff_factor=1,
             status_forcelist=[429, 500, 502, 503, 504],
             allowed_methods=['GET']
@@ -93,37 +93,45 @@ if __name__ == '__main__':
             # increment days_back to check the next previous day if df is still empty
             days_back += 1
 
-        # filter columns if data is found
-        if df.empty:
-            raise RuntimeError('No EEX data received after all attempts.')
-
-        df = df.head(1).filter(['close', 'tradedatetimegmt'])
-        missing_cols = {'close', 'tradedatetimegmt'} - set(df.columns)
-        if missing_cols:
-            raise RuntimeError(f'EEX response is missing expected columns: {missing_cols}')
-
-        # convert to datetimeindex
-        df['tradedatetimegmt'] = pd.to_datetime(df['tradedatetimegmt'])
-        year = df['tradedatetimegmt'].dt.strftime(
-            '%Y').iloc[0]  # get year for column
-        df = df.rename(
-            columns={'tradedatetimegmt': 'Datum', 'close': f'{year}'})
-        df['Datum'] = df['Datum'].dt.strftime('%Y-%m-%d')
-        df['Datum'] = pd.to_datetime(df['Datum'])
-        df.set_index('Datum', inplace=True)
-        df[f'{year}'] = df[f'{year}'].round(2).astype(float)
-
-        # add new close from today and save to tsv
+        # load historical data first so the script can continue if EEX returns nothing
         dfold = pd.read_csv(
             './data/eex-power-stock-historical.tsv', sep='\t', index_col=None)
         dfold['Datum'] = pd.to_datetime(dfold['Datum'])
         dfold.set_index('Datum', inplace=True)
-        # create new column with current year if it does not exist
-        if f'{year}' not in dfold:
-            dfold[f'{year}'] = np.nan
-        dfold.update(df)  # add new value from df
-        dfold.to_csv('./data/eex-power-stock-historical.tsv',
-                     sep='\t', index=True)
+
+        # filter columns if data is found; otherwise keep existing historical data unchanged
+        if df.empty:
+            print('No EEX data received after all attempts. Using existing historical data.')
+            year = str(datetime.today().year)
+            if year not in dfold.columns:
+                year = str(max(int(col) for col in dfold.columns if str(col).isdigit()))
+        else:
+            df = df.head(1).filter(['close', 'tradedatetimegmt'])
+            missing_cols = {'close', 'tradedatetimegmt'} - set(df.columns)
+            if missing_cols:
+                print(f'EEX response is missing expected columns: {missing_cols}. Using existing historical data.')
+                df = pd.DataFrame()
+                year = str(datetime.today().year)
+                if year not in dfold.columns:
+                    year = str(max(int(col) for col in dfold.columns if str(col).isdigit()))
+            else:
+                # convert to datetimeindex
+                df['tradedatetimegmt'] = pd.to_datetime(df['tradedatetimegmt'])
+                year = df['tradedatetimegmt'].dt.strftime(
+                    '%Y').iloc[0]  # get year for column
+                df = df.rename(
+                    columns={'tradedatetimegmt': 'Datum', 'close': f'{year}'})
+                df['Datum'] = df['Datum'].dt.strftime('%Y-%m-%d')
+                df['Datum'] = pd.to_datetime(df['Datum'])
+                df.set_index('Datum', inplace=True)
+                df[f'{year}'] = df[f'{year}'].round(2).astype(float)
+
+                # create new column with current year if it does not exist
+                if f'{year}' not in dfold:
+                    dfold[f'{year}'] = np.nan
+                dfold.update(df)  # add new value from df
+                dfold.to_csv('./data/eex-power-stock-historical.tsv',
+                             sep='\t', index=True)
 
         # create chart with comparison and drop columns with old years if needed
         dfnew = dfold[[f'{year}', '2022', 'Vorkrisenniveau²']]
@@ -199,7 +207,10 @@ if __name__ == '__main__':
         """
 
         # create date for chart notes
-        timecode = df.index[-1]
+        if df.empty:
+            timecode = pd.to_numeric(dfold[f'{year}'], errors='coerce').last_valid_index()
+        else:
+            timecode = df.index[-1]
         timecode_str = timecode.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Preise für die Grundlastlieferung Strom im jeweils nächsten Kalenderjahr («Frontjahr») im deutschen Marktgebiet.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
