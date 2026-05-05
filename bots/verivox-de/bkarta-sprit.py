@@ -57,9 +57,9 @@ if __name__ == '__main__':
         notes_chart = f'¹ Durchschnitt oberstes und unterstes Dezil von rund 15&nbsp;000 Tankstellen.<br>Stand: {timestamp_str}'
 
         # rename column headers
-        mapping = {df_diesel.columns[0]: '', df_diesel.columns[1]: 'Höchster/niedrigster Preis¹', df_diesel.columns[2]: 'Bundesschnitt'}
+        mapping = {df_diesel.columns[0]: '', df_diesel.columns[1]: 'Höchster/tiefster Preis¹', df_diesel.columns[2]: 'Bundesschnitt'}
         df_diesel = df_diesel.rename(columns=mapping)
-        mapping = {df_super.columns[0]: '', df_super.columns[1]: 'Höchster/niedrigster Preis¹', df_super.columns[2]: 'Bundesschnitt'}
+        mapping = {df_super.columns[0]: '', df_super.columns[1]: 'Höchster/tiefster Preis¹', df_super.columns[2]: 'Bundesschnitt'}
         df_super = df_super.rename(columns=mapping)
 
         # get current price for chart title
