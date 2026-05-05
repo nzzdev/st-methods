@@ -1,9 +1,12 @@
 import requests
+import time
+from requests.adapters import HTTPAdapter
+from requests.exceptions import RequestException
+from urllib3.util.retry import Retry
 import os
 import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
-from user_agent import generate_user_agent
 from datawrapper import Datawrapper
 
 if __name__ == '__main__':
@@ -18,51 +21,88 @@ if __name__ == '__main__':
         dw = Datawrapper(access_token=dw_key)
         dw_id = 'QhtLB'
 
-        # generate dates for url
-        tday = datetime.today() - timedelta(days=1)
-        yday = datetime.today() - timedelta(days=2)
-        tdayurl = tday.strftime('%Y/%m/%d')
-        tdayurl = tdayurl.replace('/', '%2F')
-        ydayurl = yday.strftime('%Y/%m/%d')
-        ydayurl = ydayurl.replace('/', '%2F')
 
         headers = {
-            'user-agent': generate_user_agent(),
+            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
+            'Accept': 'application/json, text/plain, */*',
+            'Accept-Language': 'de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7',
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache',
-            'Referer': 'https://www.eex.com/',
+            'Referer': 'https://www.eex.com/en/market-data/power/futures',
             'Origin': 'https://www.eex.com',
-            'Host': 'webservice-eex.gvsi.com'
+            'Connection': 'close'
         }
+        session = requests.Session()
+        retry = Retry(
+            total=3,
+            connect=3,
+            read=3,
+            backoff_factor=1,
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=['GET']
+        )
+        adapter = HTTPAdapter(max_retries=retry)
+        session.mount('https://', adapter)
+        session.mount('http://', adapter)
+        session.headers.update(headers)
+
+        try:
+            session.get(
+                'https://www.eex.com/en/market-data/power/futures',
+                timeout=20
+            )
+        except RequestException as e:
+            print(f'EEX landing page request failed, continuing with API request: {e}')
 
         # attempt to load data for multiple days backward in case of bank holidays or missing data
         df = pd.DataFrame()  # initialize an empty DataFrame
         days_back = 1  # start checking from one day before today
-        max_attempts = 5  # maximum number of days to go back
+        max_attempts = 10  # maximum number of days to go back
+        api_url = 'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/'
 
         while df.empty and days_back <= max_attempts:
-            # generate URLs for the current attempt day
-            tday = datetime.today() - timedelta(days=days_back)
-            yday = datetime.today() - timedelta(days=days_back + 1)
-            tdayurl = tday.strftime('%Y/%m/%d').replace('/', '%2F')
-            ydayurl = yday.strftime('%Y/%m/%d').replace('/', '%2F')
-            
-            url = f'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/?optionroot=%22%2FE.DEBY%22&expirationdate={ydayurl}&onDate={tdayurl}'
+            # the EEX Ajax endpoint expects the selected table date as expirationdate
+            selected_date = datetime.today() - timedelta(days=days_back)
+            params = {
+                'optionroot': '"/E.DEBY"',
+                'expirationdate': selected_date.strftime('%Y/%m/%d')
+            }
             
             # send request to the API
-            r = requests.get(url, headers=headers)
-            dictr = r.json()
-            recs = dictr.get('results', {}).get('items', [])
-            df = pd.json_normalize(recs)
+            try:
+                r = session.get(api_url, params=params, timeout=20)
+                r.raise_for_status()
+                dictr = r.json()
+                recs = dictr.get('results', {}).get('items', [])
+                df = pd.json_normalize(recs)
+
+                if not df.empty:
+                    if 'tradedatetimegmt' not in df.columns:
+                        raise RuntimeError('EEX response is missing expected column: tradedatetimegmt')
+                    df['tradedatetimegmt'] = pd.to_datetime(df['tradedatetimegmt'], errors='coerce')
+                    df = df[df['tradedatetimegmt'].notna()]
+                    if not df.empty:
+                        df = df.sort_values('tradedatetimegmt', ascending=False)
+            except RequestException as e:
+                print(f'EEX request failed for expirationdate={selected_date.date()}: {e}')
+                time.sleep(3)
+            except ValueError as e:
+                print(f'EEX returned non-JSON response for expirationdate={selected_date.date()}: {e}')
+                time.sleep(3)
             
             # increment days_back to check the next previous day if df is still empty
             days_back += 1
 
         # filter columns if data is found
-        if not df.empty:
-            df = df.head(1).filter(['close', 'tradedatetimegmt'])
+        if df.empty:
+            raise RuntimeError('No EEX data received after all attempts.')
 
-        # convert do datetimeindex
+        df = df.head(1).filter(['close', 'tradedatetimegmt'])
+        missing_cols = {'close', 'tradedatetimegmt'} - set(df.columns)
+        if missing_cols:
+            raise RuntimeError(f'EEX response is missing expected columns: {missing_cols}')
+
+        # convert to datetimeindex
         df['tradedatetimegmt'] = pd.to_datetime(df['tradedatetimegmt'])
         year = df['tradedatetimegmt'].dt.strftime(
             '%Y').iloc[0]  # get year for column
@@ -164,8 +204,7 @@ if __name__ == '__main__':
         notes_chart = '¹ Preise für die Grundlastlieferung Strom im jeweils nächsten Kalenderjahr («Frontjahr») im deutschen Marktgebiet.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
         # run Q function
-        update_chart(id='addc121537e4d1aed887b57de0582f99',
-                     title=title, notes=notes_chart, data=dfnew)
+        #update_chart(id='addc121537e4d1aed887b57de0582f99', title=title, notes=notes_chart, data=dfnew)
 
         # Rename column for Datawrapper
         dfnew = dfnew.rename(columns={'Vorkrisenniveau²': 'Vorkrisen-Niveau²'})
