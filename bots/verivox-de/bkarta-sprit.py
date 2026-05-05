@@ -42,6 +42,7 @@ if __name__ == '__main__':
 
         # get date for chart notes
         df_diesel.index = pd.to_datetime(df_diesel.index)
+        df_super.index = pd.to_datetime(df_super.index)
         timestamp_str = df_diesel.tail(1).index.item().strftime('%-d. %-m. %Y')
 
         # get current hour
@@ -75,6 +76,13 @@ if __name__ == '__main__':
         update_chart(id='458d885de84d6eb558874e221f2c09c0',
                      data=df_super, title=title_chart_s, notes=notes_chart)
 
+        # new Q charts: show only prices from March 31, 2026 onward
+        df_diesel_new_q = df_diesel[df_diesel.index >= pd.Timestamp('2026-03-31')]
+        df_super_new_q = df_super[df_super.index >= pd.Timestamp('2026-03-31')]
+        update_chart(id='c250129ff15f53bb0dc11bd295c817fe',
+                     data=df_diesel_new_q, title=title_chart_d, notes=notes_chart)
+        update_chart(id='11ce8401d5796bfe560bead197ce0d7e',
+                     data=df_super_new_q, title=title_chart_s, notes=notes_chart)
     except:
         raise
     finally:

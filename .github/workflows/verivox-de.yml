@@ -62,7 +62,7 @@ jobs:
           timeout 300 python -u imports-countries.py
           timeout 800 python -u smard-sources.py
           # execute smard-sources.py after imports-countries.py
-          timeout 300 python -u eex-futures.py
+          # timeout 300 python -u eex-futures.py
           timeout 300 python -u verivox-daily-diff.py
           timeout 300 python -u gas-dashboard.py
         env:
