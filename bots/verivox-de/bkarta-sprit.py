@@ -77,8 +77,8 @@ if __name__ == '__main__':
                      data=df_super, title=title_chart_s, notes=notes_chart)
 
         # new Q charts: show only prices from March 31, 2026 onward
-        df_diesel_new_q = df_diesel[df_diesel.index >= pd.Timestamp('2026-03-31')]
-        df_super_new_q = df_super[df_super.index >= pd.Timestamp('2026-03-31')]
+        df_diesel_new_q = df_diesel[df_diesel.index >= pd.Timestamp('2026-01-01')]
+        df_super_new_q = df_super[df_super.index >= pd.Timestamp('2026-01-01')]
         update_chart(id='c250129ff15f53bb0dc11bd295c817fe',
                      data=df_diesel_new_q, title=title_chart_d, notes=notes_chart)
         update_chart(id='11ce8401d5796bfe560bead197ce0d7e',
