@@ -54,7 +54,7 @@ if __name__ == '__main__':
         tcode_h = tcode_h.strftime("%H. %M")
         """
 
-        notes_chart = f'¹ Durchschnitt oberstes und unterstes Dezil von rund 15 000 Tankstellen.<br>Stand: {timestamp_str}'
+        notes_chart = f'¹ Durchschnitt oberstes und unterstes Dezil von rund 15&nbsp;000 Tankstellen.<br>Stand: {timestamp_str}'
 
         # rename column headers
         mapping = {df_diesel.columns[0]: '', df_diesel.columns[1]: 'Höchster/niedrigster Preis¹', df_diesel.columns[2]: 'Bundesschnitt'}
