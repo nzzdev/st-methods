@@ -23,14 +23,17 @@ if __name__ == '__main__':
 
 
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36',
-            'Accept': 'application/json, text/plain, */*',
-            'Accept-Language': 'de-DE,de;q=0.9,en-US;q=0.8,en;q=0.7',
+            'Accept': 'application/json, text/javascript, */*; q=0.01',
+            'Accept-Language': 'de,en-US;q=0.9,en;q=0.8,en-GB;q=0.7',
             'Cache-Control': 'no-cache',
             'Pragma': 'no-cache',
-            'Referer': 'https://www.eex.com/en/market-data/power/futures',
+            'DNT': '1',
             'Origin': 'https://www.eex.com',
-            'Connection': 'close'
+            'Referer': 'https://www.eex.com/',
+            'Sec-Fetch-Dest': 'empty',
+            'Sec-Fetch-Mode': 'cors',
+            'Sec-Fetch-Site': 'cross-site',
+            'User-Agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Mobile Safari/537.36'
         }
         session = requests.Session()
         retry = Retry(
@@ -46,53 +49,50 @@ if __name__ == '__main__':
         session.mount('http://', adapter)
         session.headers.update(headers)
 
-        try:
-            session.get(
-                'https://www.eex.com/en/market-data/power/futures',
-                timeout=20
-            )
-        except RequestException as e:
-            print(f'EEX landing page request failed, continuing with API request: {e}')
 
-        # attempt to load data for multiple days backward in case of bank holidays or missing data
+        # attempt to load the latest front-year German power base future
         df = pd.DataFrame()  # initialize an empty DataFrame
-        days_back = 1  # start checking from one day before today
-        max_attempts = 10  # maximum number of days to go back
-        api_url = 'https://webservice-eex.gvsi.com/query/json/getChain/gv.pricesymbol/gv.displaydate/gv.expirationdate/tradedatetimegmt/gv.eexdeliverystart/ontradeprice/close/onexchsingletradevolume/onexchtradevolumeeex/offexchtradevolumeeex/openinterest/'
+        api_url = 'https://api.eex-group.com/pub/market-data/table-data'
+        today = datetime.today()
+        maturity = f'{today.year + 1}01'
+        params = {
+            'shortCode': 'DEBY',
+            'commodity': 'POWER',
+            'pricing': 'F',
+            'area': 'DE',
+            'product': 'Base',
+            'maturity': maturity,
+            'startDate': (today - timedelta(days=30)).strftime('%Y-%m-%d'),
+            'endDate': today.strftime('%Y-%m-%d'),
+            'maturityType': 'Year',
+            'isRolling': 'true'
+        }
 
-        while df.empty and days_back <= max_attempts:
-            # the EEX Ajax endpoint expects the selected table date as expirationdate
-            selected_date = datetime.today() - timedelta(days=days_back)
-            params = {
-                'optionroot': '"/E.DEBY"',
-                'expirationdate': selected_date.strftime('%Y/%m/%d')
-            }
-            
-            # send request to the API
-            try:
-                r = session.get(api_url, params=params, timeout=20)
-                r.raise_for_status()
-                dictr = r.json()
-                recs = dictr.get('results', {}).get('items', [])
-                df = pd.json_normalize(recs)
+        try:
+            r = session.get(api_url, params=params, timeout=20)
+            r.raise_for_status()
+            dictr = r.json()
+            header = dictr.get('header', [])
+            data = dictr.get('data', [])
+            df = pd.DataFrame(data, columns=header)
 
-                if not df.empty:
-                    if 'tradedatetimegmt' not in df.columns:
-                        raise RuntimeError('EEX response is missing expected column: tradedatetimegmt')
+            if not df.empty:
+                missing_cols = {'tradeDate', 'settlPx'} - set(df.columns)
+                if missing_cols:
+                    print(f'EEX response is missing expected columns: {missing_cols}. Using existing historical data.')
+                    df = pd.DataFrame()
+                else:
+                    df = df.rename(columns={'tradeDate': 'tradedatetimegmt', 'settlPx': 'close'})
                     df['tradedatetimegmt'] = pd.to_datetime(df['tradedatetimegmt'], errors='coerce')
-                    df = df[df['tradedatetimegmt'].notna()]
+                    df['close'] = pd.to_numeric(df['close'], errors='coerce')
+                    df = df[df['tradedatetimegmt'].notna() & df['close'].notna()]
                     if not df.empty:
                         df = df.sort_values('tradedatetimegmt', ascending=False)
-            except RequestException as e:
-                print(f'EEX request failed for expirationdate={selected_date.date()}: {e}')
-                time.sleep(3)
-            except ValueError as e:
-                print(f'EEX returned non-JSON response for expirationdate={selected_date.date()}: {e}')
-                time.sleep(3)
-            
-            # increment days_back to check the next previous day if df is still empty
-            days_back += 1
-
+        except RequestException as e:
+            print(f'EEX request failed: {e}')
+        except ValueError as e:
+            print(f'EEX returned non-JSON response: {e}')
+        
         # load historical data first so the script can continue if EEX returns nothing
         dfold = pd.read_csv(
             './data/eex-power-stock-historical.tsv', sep='\t', index_col=None)
@@ -106,7 +106,7 @@ if __name__ == '__main__':
             if year not in dfold.columns:
                 year = str(max(int(col) for col in dfold.columns if str(col).isdigit()))
         else:
-            df = df.head(1).filter(['close', 'tradedatetimegmt'])
+            df = df.filter(['close', 'tradedatetimegmt'])
             missing_cols = {'close', 'tradedatetimegmt'} - set(df.columns)
             if missing_cols:
                 print(f'EEX response is missing expected columns: {missing_cols}. Using existing historical data.')
@@ -134,7 +134,7 @@ if __name__ == '__main__':
                              sep='\t', index=True)
 
         # create chart with comparison and drop columns with old years if needed
-        dfnew = dfold[[f'{year}', '2022', 'Vorkrisenniveau²']]
+        dfnew = dfold[[f'{year}', '2022', 'Vorkrisenniveau²']].copy()
         dfnew[f'{year}'] = dfnew[f'{year}'].replace(
             r'^\s*$', np.nan, regex=True)  # replace empty string with NaN
         dfnew[f'{year}'] = dfnew[f'{year}'].interpolate(
