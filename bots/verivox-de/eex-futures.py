@@ -54,6 +54,7 @@ if __name__ == '__main__':
         df = pd.DataFrame()  # initialize an empty DataFrame
         api_url = 'https://api.eex-group.com/pub/market-data/table-data'
         today = datetime.today()
+        last_trading_lookup_date = today - timedelta(days=1)
         maturity = f'{today.year + 1}01'
         params = {
             'shortCode': 'DEBY',
@@ -63,7 +64,7 @@ if __name__ == '__main__':
             'product': 'Base',
             'maturity': maturity,
             'startDate': (today - timedelta(days=30)).strftime('%Y-%m-%d'),
-            'endDate': today.strftime('%Y-%m-%d'),
+            'endDate': last_trading_lookup_date.strftime('%Y-%m-%d'),
             'maturityType': 'Year',
             'isRolling': 'true'
         }
@@ -206,11 +207,8 @@ if __name__ == '__main__':
             title = f'Strom kostet im Grosshandel {title_kwh.astype(str).replace(".", ",")} Cent – {abs(title_kwh_diff).astype(str).replace(".", ",")} Cent weniger als vor der Krise'
         """
 
-        # create date for chart notes
-        if df.empty:
-            timecode = pd.to_numeric(dfold[f'{year}'], errors='coerce').last_valid_index()
-        else:
-            timecode = df.index[-1]
+        # create date for chart notes from the latest available historical value
+        timecode = pd.to_numeric(dfold[f'{year}'], errors='coerce').last_valid_index()
         timecode_str = timecode.strftime('%-d. %-m. %Y')
         notes_chart = '¹ Preise für die Grundlastlieferung Strom im jeweils nächsten Kalenderjahr («Frontjahr») im deutschen Marktgebiet.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
