@@ -1056,7 +1056,7 @@ def _fmt_pct_de(x):
     except Exception:
         return ""
 
-notes_chart_seats_extra = "«Stabile/wackelige/keine Mehrheit« geprüft anhand von Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
+notes_chart_seats_extra = "«Stabile/wackelige/keine Mehrheit» geprüft anhand von Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
 
 # Koalitions-Templates schreiben (pro Lauf neu)
 write_coalition_templates(data_dir=COALITION_TEMPLATES_DIR)
@@ -1096,10 +1096,10 @@ for c in coalition_set:
 
     if base_total >= MAJORITY and worst_total >= MAJORITY:
         status = "stabil"
-    elif best_total < MAJORITY:
-        status = "unmöglich"
-    else:
+    elif base_total >= MAJORITY:
         status = "wacklig"
+    else:
+        status = "unmöglich"
 
     label_map = {
         "stabil": "stabile Mehrheit",

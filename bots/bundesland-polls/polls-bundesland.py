@@ -1428,15 +1428,16 @@ def run_state(state_key: str):
         worst_total = min(low_total, high_total)
         best_total = max(low_total, high_total)
 
-        # Stabil: hat bereits im Basisszenario eine Mehrheit und behaelt sie auch im schlechtesten Huerden-Szenario.
+        # Label-Logik immer am sichtbaren Basisszenario ausrichten:
+        # - stabile Mehrheit: aktuelle Basissitze reichen und bleiben auch im schlechtesten Huerden-Szenario erhalten
+        # - wackelige Mehrheit: aktuelle Basissitze reichen, aber die Mehrheit haengt an Huerden-Szenarien
+        # - keine Mehrheit: aktuelle Basissitze reichen nicht
         if base_total >= MAJORITY and worst_total >= MAJORITY:
             label = "stabile Mehrheit"
-        # Keine: selbst im guenstigsten Huerden-Szenario keine Mehrheit.
-        elif best_total < MAJORITY:
-            label = "keine Mehrheit"
-        # Wackelig: Mehrheit haengt von Huerden-Szenarien ab (rein/raus von Parteien nahe 5%).
-        else:
+        elif base_total >= MAJORITY:
             label = "wackelige Mehrheit"
+        else:
+            label = "keine Mehrheit"
 
         name = c.get("name", "")
         if isinstance(name, str):
