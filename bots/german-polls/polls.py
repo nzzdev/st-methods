@@ -317,6 +317,11 @@ yougov_url = "https://www.wahlrecht.de/umfragen/yougov.htm"
 if not any(str(d.get("url", "")).strip() == yougov_url for d in urls):
     urls.append({"Institut": "YouGov", "Region": "Bund", "url": yougov_url})
 
+# Ipsos ergänzen, falls der Eintrag nicht bereits in urls.csv gepflegt ist.
+ipsos_url = "https://www.wahlrecht.de/umfragen/ipsos.htm"
+if not any(str(d.get("url", "")).strip() == ipsos_url for d in urls):
+    urls.append({"Institut": "Ipsos", "Region": "Bund", "url": ipsos_url})
+
 all_data = []
 
 for row in urls:
@@ -631,6 +636,7 @@ institute_mapping = {
     'GMS': 'gms',
     'Infratest': 'infratest',
     'YouGov': 'yougov',
+    'Ipsos': 'ipsos',
     'average': 'average'
 }
 
