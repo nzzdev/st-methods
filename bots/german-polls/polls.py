@@ -584,7 +584,7 @@ formatted_columns = {party: f'<span style="color:{party_colors[party]}">{party}<
 
 # Pivot the filtered_data to wide format
 wide_polls_table = filtered_data.pivot_table(
-    index=["Institut", "Datum", "Zeitraum", "Befragte"],
+    index=["Institut", "Datum", "effective_date", "Zeitraum", "Befragte"],
     columns="Partei",
     values="Ergebnis",
     aggfunc="last"
@@ -595,8 +595,8 @@ wide_polls_table["Befragte"] = wide_polls_table["Befragte"].apply(
     lambda x: f'{int(x):,}'.replace(",", " ") + " Teiln." if pd.notna(x) else ""
 )
 
-# Sort by publication date (Datum) descending
-wide_polls_table.sort_values(by="Datum", ascending=False, inplace=True)
+# Sort by fieldwork end date descending; tie-break by publication date.
+wide_polls_table.sort_values(by=["effective_date", "Datum"], ascending=[False, False], inplace=True)
 
 # Keep only the 300 most recent polls
 wide_polls_table = wide_polls_table.head(300)
