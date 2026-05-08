@@ -312,6 +312,11 @@ with open("urls.csv") as f:
     reader = csv.DictReader(f)
     urls = [d for d in reader]
 
+# YouGov ergänzen, falls der Eintrag nicht bereits in urls.csv gepflegt ist.
+yougov_url = "https://www.wahlrecht.de/umfragen/yougov.htm"
+if not any(str(d.get("url", "")).strip() == yougov_url for d in urls):
+    urls.append({"Institut": "YouGov", "Region": "Bund", "url": yougov_url})
+
 all_data = []
 
 for row in urls:
@@ -625,7 +630,7 @@ institute_mapping = {
     'Allensb.': 'allensbach',
     'GMS': 'gms',
     'Infratest': 'infratest',
-    # 'YouGov': 'yougov',
+    'YouGov': 'yougov',
     'average': 'average'
 }
 
