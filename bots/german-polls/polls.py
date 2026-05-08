@@ -240,6 +240,21 @@ def parse_fieldwork_end_date(zeitraum, pub_date):
         return pd.Timestamp(year=year, month=end_month, day=end_day)
     except Exception:
         return pd.NaT
+
+# Helper: Format Wahlrecht fieldwork periods for the Bundestag table without years.
+def format_zeitraum_without_year(value):
+    """Format Wahlrecht fieldwork periods for the Bundestag table without years.
+
+    Examples:
+    - '27.03.–29.03.2026' -> '27.03.–29.03.'
+    - '10.04.–13.04.' stays unchanged
+    """
+    if pd.isna(value):
+        return ""
+    s = str(value).strip()
+    # Remove a trailing year from periods like '27.03.–29.03.2026'.
+    s = re.sub(r"(\d{1,2}\.\d{1,2}\.)\d{4}$", r"\1", s)
+    return s
     
 def update_chart(id, title="", subtitle="", notes="", data="", parties="", possibleCoalitions="", assetGroups="", options=""):  # Q helper function
     # read qConfig file
@@ -296,6 +311,37 @@ def fetch_html_table(url, max_retries=5, pause=1):
                 print(f"Failed to fetch HTML table from {url} after {max_retries} attempts. Aborting script.")
                 exit(1)  # Exit the script with error status
 
+# Wahlrecht table selection helper
+def select_wahlrecht_poll_table(tables):
+    """Return the poll table from a wahlrecht.de page and normalize column names.
+
+    Some pages return a different table index or MultiIndex-like headers. We select the
+    table by content instead of assuming `table[1]`, and normalize the first column to
+    `Datum`.
+    """
+    for tbl in tables:
+        data = tbl.copy()
+
+        if isinstance(data.columns, pd.MultiIndex):
+            cols = []
+            for col in data.columns:
+                parts = [str(x).strip() for x in col if str(x).strip() and not str(x).startswith("Unnamed") and str(x).lower() != "nan"]
+                cols.append(parts[-1] if parts else str(col[-1]).strip())
+            data.columns = cols
+        else:
+            data.columns = [str(c).strip() for c in data.columns]
+
+        # First column is the date column on Wahlrecht institute pages, but its header is often blank/Unnamed.
+        first_col = data.columns[0]
+        if first_col != "Datum":
+            data.rename(columns={first_col: "Datum"}, inplace=True)
+
+        cols = set(data.columns)
+        if {"Datum", "CDU/CSU", "SPD", "GRÜNE", "AfD", "Sonstige"}.issubset(cols):
+            return data
+
+    raise ValueError("No matching Wahlrecht poll table found on page")
+
 # Datawrapper API key (optional; keep script runnable even if not set)
 dw_key = os.getenv("DATAWRAPPER_API")
 dw = Datawrapper(access_token=dw_key) if dw_key else None
@@ -312,16 +358,6 @@ with open("urls.csv") as f:
     reader = csv.DictReader(f)
     urls = [d for d in reader]
 
-# YouGov ergänzen, falls der Eintrag nicht bereits in urls.csv gepflegt ist.
-yougov_url = "https://www.wahlrecht.de/umfragen/yougov.htm"
-if not any(str(d.get("url", "")).strip() == yougov_url for d in urls):
-    urls.append({"Institut": "YouGov", "Region": "Bund", "url": yougov_url})
-
-# Ipsos ergänzen, falls der Eintrag nicht bereits in urls.csv gepflegt ist.
-ipsos_url = "https://www.wahlrecht.de/umfragen/ipsos.htm"
-if not any(str(d.get("url", "")).strip() == ipsos_url for d in urls):
-    urls.append({"Institut": "Ipsos", "Region": "Bund", "url": ipsos_url})
-
 all_data = []
 
 for row in urls:
@@ -329,7 +365,7 @@ for row in urls:
     region = row["Region"]
     url = row["url"]
     table = fetch_html_table(url)
-    data = table[1]
+    data = select_wahlrecht_poll_table(table)
 
     # Find the index where the table ends
     m = data[data["Sonstige"] == "Sonstige"].index.to_numpy()[0]
@@ -349,13 +385,6 @@ for row in urls:
         inplace=True
     )
 
-    # Rename the first column
-    data.rename(
-        columns={
-            "Unnamed: 0": "Datum"
-        },
-        inplace=True
-    )
     
     """
     # Extract "BSW" percentage from "Sonstige" for "GMS" polls (NO LONGER NEEDED DUE TO NEW BSW COLUMN)
@@ -573,10 +602,11 @@ wide_polls_table.sort_values(by="Datum", ascending=False, inplace=True)
 wide_polls_table = wide_polls_table.head(300)
 
 # Create the formatted "Institut" column
+wide_polls_table["Zeitraum_display"] = wide_polls_table["Zeitraum"].apply(format_zeitraum_without_year)
 wide_polls_table["Institut"] = (
     wide_polls_table["Institut"] + "<br>" +
     '<span style="font-size: x-small; color: #69696c">' +
-    wide_polls_table["Zeitraum"].fillna("") + "<br>" +
+    wide_polls_table["Zeitraum_display"] + "<br>" +
     wide_polls_table["Befragte"] + "</span>"
 )
 
