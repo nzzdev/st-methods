@@ -241,19 +241,49 @@ def parse_fieldwork_end_date(zeitraum, pub_date):
     except Exception:
         return pd.NaT
 
-# Helper: Format Wahlrecht fieldwork periods for the Bundestag table without years.
-def format_zeitraum_without_year(value):
-    """Format Wahlrecht fieldwork periods for the Bundestag table without years.
+ # Helper: format Wahlrecht fieldwork periods for the Bundestag table with two-digit years.
+def format_zeitraum_with_short_year(value, pub_date=None):
+    """Format Wahlrecht fieldwork periods for the Bundestag table with two-digit years.
+
+    Wahlrecht usually omits the year in the `Zeitraum` column. The year comes from
+    the poll publication date (`Datum`), which is in the first table column.
 
     Examples:
-    - '27.03.–29.03.2026' -> '27.03.–29.03.'
-    - '10.04.–13.04.' stays unchanged
+    - Zeitraum '17.03.–24.03.2026' -> '17.3.–24.3.26'
+    - Zeitraum '1.3.–4.3.26' -> '1.3.–4.3.26'
+    - Zeitraum '10.04.–13.04.' with Datum '17.04.2026' -> '10.4.–13.4.26'
     """
     if pd.isna(value):
         return ""
-    s = str(value).strip()
-    # Remove a trailing year from periods like '27.03.–29.03.2026'.
-    s = re.sub(r"(\d{1,2}\.\d{1,2}\.)\d{4}$", r"\1", s)
+    s = str(value).strip().replace(" ", "")
+
+    # Normalize dates with four-digit year at the end: 17.03.–24.03.2026 -> 17.3.–24.3.26
+    m = re.match(r"^(\d{1,2})\.(\d{1,2})\.\s*([–-])\s*(\d{1,2})\.(\d{1,2})\.(\d{4})$", s)
+    if m:
+        d1, m1, dash, d2, m2, year = m.groups()
+        return f"{int(d1)}.{int(m1)}.{dash}{int(d2)}.{int(m2)}.{year[-2:]}"
+
+    # Normalize dates with two-digit year at the end: 01.03.–04.03.26 -> 1.3.–4.3.26
+    m = re.match(r"^(\d{1,2})\.(\d{1,2})\.\s*([–-])\s*(\d{1,2})\.(\d{1,2})\.(\d{2})$", s)
+    if m:
+        d1, m1, dash, d2, m2, year = m.groups()
+        return f"{int(d1)}.{int(m1)}.{dash}{int(d2)}.{int(m2)}.{year}"
+
+    # Wahlrecht often omits the year in Zeitraum; take it from Datum.
+    # If a poll is published in January but fieldwork ended in December, use the previous year.
+    m = re.match(r"^(\d{1,2})\.(\d{1,2})\.\s*([–-])\s*(\d{1,2})\.(\d{1,2})\.$", s)
+    if m:
+        d1, m1, dash, d2, m2 = m.groups()
+        year_suffix = ""
+        if pub_date is not None and pd.notna(pub_date):
+            pub_dt = pd.to_datetime(pub_date)
+            end_month = int(m2)
+            year = int(pub_dt.year)
+            if int(pub_dt.month) == 1 and end_month == 12:
+                year -= 1
+            year_suffix = f"{year % 100:02d}"
+        return f"{int(d1)}.{int(m1)}.{dash}{int(d2)}.{int(m2)}.{year_suffix}"
+
     return s
     
 def update_chart(id, title="", subtitle="", notes="", data="", parties="", possibleCoalitions="", assetGroups="", options=""):  # Q helper function
@@ -602,7 +632,10 @@ wide_polls_table.sort_values(by=["effective_date", "Datum"], ascending=[False, F
 wide_polls_table = wide_polls_table.head(300)
 
 # Create the formatted "Institut" column
-wide_polls_table["Zeitraum_display"] = wide_polls_table["Zeitraum"].apply(format_zeitraum_without_year)
+wide_polls_table["Zeitraum_display"] = wide_polls_table.apply(
+    lambda row: format_zeitraum_with_short_year(row["Zeitraum"], row["Datum"]),
+    axis=1
+)
 wide_polls_table["Institut"] = (
     wide_polls_table["Institut"] + "<br>" +
     '<span style="font-size: x-small; color: #69696c">' +
