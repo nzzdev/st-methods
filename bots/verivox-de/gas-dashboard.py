@@ -757,8 +757,6 @@ if __name__ == '__main__':
         for item in extracted:
             if item.endswith('.csv') or item.endswith('.geojson'):
                 os.remove(os.path.join(dir, item))
-        if os.path.isfile('./dashboard_de.json'):
-            os.remove('./dashboard_de.json')
 
     except:
         raise

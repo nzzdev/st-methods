@@ -76,6 +76,10 @@ jobs:
         env:
           Q_PRODUCTION_SERVER: ${{ secrets.Q_PRODUCTION_SERVER }}
           Q_PRODUCTION_ACCESSTOKEN: ${{ secrets.Q_PRODUCTION_ACCESSTOKEN }}
+      - name: Cleanup dashboard JSON files
+        run: |
+          rm -f ./dashboard_de.json
+          rm -f ./data/dashboard_de.json
       - uses: stefanzweifel/git-auto-commit-action@v5
         with:
           file_pattern: :!*.json
