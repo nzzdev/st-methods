@@ -18,6 +18,7 @@ if __name__ == '__main__':
         # get current date
         today = date.today()
         todaystr = today.strftime('%Y-%m-%d')
+        yesterdaystr = (today - timedelta(days=1)).strftime('%Y-%m-%d')
         yesterday_year = datetime.now() - timedelta(days=1)
         year = yesterday_year.year
 
@@ -498,6 +499,12 @@ if __name__ == '__main__':
             columns={df_gas.columns[1]: 'value'}).to_dict(orient='records')
         dict_strom = df_strom.rename(
             columns={df_strom.columns[1]: 'value'}).to_dict(orient='records')
+        dict_gas_front = [dict(row) for row in dict_gas]
+        dict_strom_front = [dict(row) for row in dict_strom]
+        if dict_gas_front:
+            dict_gas_front[-1]['date'] = yesterdaystr
+        if dict_strom_front:
+            dict_strom_front[-1]['date'] = yesterdaystr
         #dict_strom = df.drop(df.columns[[1, 3]], axis=1).rename(columns={df.columns[2]: 'value'}).dropna().to_dict(orient='records')
         dict_fossile = df_fossile.rename(
             columns={df_fossile.columns[1]: 'value'}).to_dict(orient='records')
@@ -647,13 +654,13 @@ if __name__ == '__main__':
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden, ohne Bonus', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_gas_front = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
+        meta_gas_front = {'indicatorTitle': 'Gaspreis', 'date': yesterdaystr, 'indicatorSubtitle': f'je kWh', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'colorDark': '#FF745F', 'trend': trend_gas, 'chartType': 'line'}
         meta_gasstock = {'indicatorTitle': 'Gas im Grosshandel', 'date': todaystr, 'indicatorSubtitle': f'je kWh, mittelfristige Lieferung', 'value': diff_gasstock, 'valueLabel': f'{diff_gasstock_str} Cent',
                          'yAxisStart': gasstock_y, 'yAxisLabels': gasstock_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gasstock, 'chartType': 'line'}
         meta_strom = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden, ohne Bonus', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
-        meta_strom_front = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
+        meta_strom_front = {'indicatorTitle': 'Strompreis', 'date': yesterdaystr, 'indicatorSubtitle': f'je kWh', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'colorDark': '#8AABFD', 'trend': trend_strom, 'chartType': 'line'}
         meta_stromstockeex = {'indicatorTitle': 'Strom im Grosshandel', 'date': todaystr, 'indicatorSubtitle': f'je kWh, langfristige Lieferung', 'value': diff_acstockeex, 'valueLabel': f'{diff_acstockeex_str} Cent',
                               'yAxisStart': acstock_y, 'yAxisLabels': acstock_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstockeex, 'chartType': 'line'}
@@ -683,9 +690,9 @@ if __name__ == '__main__':
         # merge dictionaries
         # STORAGE meta_storage['chartData'] = dict_storage
         meta_gas['chartData'] = dict_gas
-        meta_gas_front['chartData'] = dict_gas
+        meta_gas_front['chartData'] = dict_gas_front
         meta_strom['chartData'] = dict_strom
-        meta_strom_front['chartData'] = dict_strom
+        meta_strom_front['chartData'] = dict_strom_front
         meta_fossile['chartData'] = []
         # meta_imports['chartData'] = []
         meta_importsshare['chartData'] = []
