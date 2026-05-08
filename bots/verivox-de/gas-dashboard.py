@@ -674,9 +674,9 @@ if __name__ == '__main__':
         meta_diesel = {'indicatorTitle': 'Dieselpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Diesel', 'value': diff_diesel, 'valueLabel': f'{diff_diesel_str} Euro',
                        'yAxisStart': diesel_y, 'yAxisLabels': diesel_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_diesel, 'chartType': 'line'}
         meta_super_front = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro',
-                      'yAxisStart': super_y, 'yAxisLabels': super_front_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'colorDark': '#C9879B', 'trend': trend_super, 'chartType': 'line'}
+                      'yAxisStart': super_y, 'yAxisLabels': super_front_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'colorDark': '#D493A8', 'trend': trend_super, 'chartType': 'line'}
         meta_diesel_front = {'indicatorTitle': 'Dieselpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter', 'value': diff_diesel, 'valueLabel': f'{diff_diesel_str} Euro',
-                       'yAxisStart': diesel_y, 'yAxisLabels': diesel_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'colorDark': '#C9879B', 'trend': trend_diesel, 'chartType': 'line'}
+                       'yAxisStart': diesel_y, 'yAxisLabels': diesel_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'colorDark': '#D493A8', 'trend': trend_diesel, 'chartType': 'line'}
         meta_fueloil = {'indicatorTitle': 'Heizölpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je 100 Liter', 'value': diff_fueloil, 'valueLabel': f'{diff_fueloil_str} Euro',
                       'yAxisStart': fueloil_y, 'yAxisLabels': fueloil_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_fueloil, 'chartType': 'line'}
 
