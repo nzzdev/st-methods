@@ -739,12 +739,12 @@ if __name__ == '__main__':
             }
         }]
 
-        with open('./data/dashboard_front_de.json', 'w') as fp:
+        with open('./dashboard_de.json', 'w') as fp:
             json.dump(dicts_front, fp, indent=4)
         file_front = [{
             "loadSyncBeforeInit": True,
             "file": {
-                "path": "./data/dashboard_front_de.json"
+                "path": "./dashboard_de.json"
             }
         }]
 
@@ -757,6 +757,8 @@ if __name__ == '__main__':
         for item in extracted:
             if item.endswith('.csv') or item.endswith('.geojson'):
                 os.remove(os.path.join(dir, item))
+        if os.path.isfile('./dashboard_de.json'):
+            os.remove('./dashboard_de.json')
 
     except:
         raise
