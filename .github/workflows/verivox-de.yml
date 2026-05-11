@@ -71,6 +71,13 @@ jobs:
           VERIVOX_SNOWFLAKE_ACC: ${{ secrets.VERIVOX_SNOWFLAKE_ACC }}
           VERIVOX_SNOWFLAKE_KEY: "private_key.pem"
           VERIVOX_SNOWFLAKE_KEY_PASS: ${{ secrets.VERIVOX_SNOWFLAKE_KEY_PASS }}
+      - name: Debug Q upload files
+        run: |
+          pwd
+          ls -lh ./data/de-postcode-geographic-1-5.json || true
+          python -m json.tool ./data/de-postcode-geographic-1-5.json > /dev/null
+          grep -n "de-postcode-geographic-1-5.json" q.config.json || true
+          grep -n "dashboard_de.json" q.config.json || true
       - name: Run Q cli
         run: Q update-item
         env:
