@@ -224,7 +224,7 @@ STATES = {
             {"name": "", "parties": ["SPD", "Grüne", "FDP"]},
             {"name": "", "parties": ["SPD", "CDU", "FDP"]},
             {"name": "", "parties": ["SPD", "Grüne", "Linke", "BSW"], "prune_zero_parties": True},
-            {"name": "", "parties": ["SPD", "CDU", "Grüne", "Linke", "BSW", "FDP"], "prune_zero_parties": True},
+            {"name": "", "parties": ["SPD", "CDU", "Grüne", "FDP", "BSW", "Linke"], "prune_zero_parties": True},
         ],
     }
     ,"be": {
