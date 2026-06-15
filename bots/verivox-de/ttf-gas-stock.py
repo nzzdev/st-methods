@@ -310,9 +310,10 @@ if __name__ == '__main__':
 
         df_spacex = df_spacex.sort_index()
         df_spacex[spacex_ticker] = df_spacex[spacex_ticker].round(2).astype(float)
-        spacex_current_value = df_spacex[spacex_ticker].iloc[-1]
-        spacex_current_value_str = f'{spacex_current_value:,.2f}'.replace(',', 'X').replace('.', ',').replace('X', '.')
-        title_spacex = f'Die SpaceX-Aktie steht bei {spacex_current_value_str} Dollar'
+        spacex_current_value = round(df_spacex[spacex_ticker].iloc[-1])
+        spacex_current_value_str = f'{spacex_current_value:,.0f}'.replace(',', '.')
+        # title_spacex = f'Die SpaceX-Aktie steht derzeit bei {spacex_current_value_str} Dollar'
+        title_spacex = 'So hat sich die SpaceX-Aktie entwickelt'
         spacex_timecode = df_spacex.index[-1]
         if intraday_used:
             spacex_timecode_str = spacex_timecode.strftime('%-d. %-m. %Y, %-H Uhr %M')
