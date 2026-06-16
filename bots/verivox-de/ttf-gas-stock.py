@@ -1,7 +1,6 @@
 import json
 import pandas as pd
 import os
-import requests
 from user_agent import generate_user_agent
 import yfinance as yf
 import numpy as np
@@ -244,7 +243,9 @@ if __name__ == '__main__':
         notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im jeweils nächsten Monat.<br>Stand: ' + timecode_str
         notes_chart_new = '¹ Preise für Terminkontrakte mit Lieferung im jeweils nächsten Monat.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
-        # SpaceX stock chart: daily values plus latest intraday value from Yahoo Finance
+        # SpaceX stock chart: historical daily close values from Yahoo Finance.
+        # Do not force an intraday/overnight point: for SPCX, Yahoo's quote and
+        # chart endpoints currently expose inconsistent values or block requests.
         df_spacex = yf.download(spacex_ticker, period='1y', interval='1d', auto_adjust=False)
         df_spacex = df_spacex['Close'].dropna()
         if isinstance(df_spacex, pd.Series):
@@ -252,75 +253,13 @@ if __name__ == '__main__':
         else:
             df_spacex = df_spacex.rename(columns={df_spacex.columns[0]: spacex_ticker})
         df_spacex.index.rename('Date', inplace=True)
-
-        # Add current Yahoo quote only when the quote endpoint provides a price with
-        # a matching timestamp. yfinance.info can expose stale chart values for SPCX.
-        intraday_used = False
-        latest_intraday_value = None
-        latest_intraday_time = None
-        quote_url = 'https://query1.finance.yahoo.com/v7/finance/quote'
-        quote_params = {
-            'symbols': spacex_ticker,
-            'fields': ','.join([
-                'marketState',
-                'regularMarketPrice', 'regularMarketTime',
-                'preMarketPrice', 'preMarketTime',
-                'postMarketPrice', 'postMarketTime'
-            ])
-        }
-        try:
-            quote_resp = requests.get(quote_url, params=quote_params, headers=fheaders, timeout=10)
-            quote_resp.raise_for_status()
-            quote_result = quote_resp.json()['quoteResponse']['result'][0]
-        except Exception:
-            quote_result = {}
-
-        market_state = quote_result.get('marketState')
-        quote_candidates = []
-        if market_state in ['PRE', 'PREPRE']:
-            quote_candidates.append(('preMarketPrice', 'preMarketTime'))
-        elif market_state in ['POST', 'POSTPOST']:
-            quote_candidates.append(('postMarketPrice', 'postMarketTime'))
-        elif market_state == 'REGULAR':
-            quote_candidates.append(('regularMarketPrice', 'regularMarketTime'))
-        else:
-            quote_candidates.extend([
-                ('preMarketPrice', 'preMarketTime'),
-                ('postMarketPrice', 'postMarketTime'),
-                ('regularMarketPrice', 'regularMarketTime')
-            ])
-
-        for price_field, time_field in quote_candidates:
-            quote_value = quote_result.get(price_field)
-            quote_time = quote_result.get(time_field)
-            if quote_value is None or quote_time is None or pd.isna(quote_value):
-                continue
-            quote_datetime = datetime.fromtimestamp(quote_time)
-            if quote_datetime.date() == datetime.today().date():
-                latest_intraday_value = quote_value
-                latest_intraday_time = quote_datetime
-                break
-
-        if latest_intraday_value is not None and latest_intraday_time is not None:
-            latest_daily_value = df_spacex[spacex_ticker].iloc[-1]
-            if round(float(latest_intraday_value), 2) != round(float(latest_daily_value), 2):
-                df_spacex = df_spacex[df_spacex.index.date != latest_intraday_time.date()]
-                df_spacex.loc[pd.Timestamp(latest_intraday_time), spacex_ticker] = latest_intraday_value
-                intraday_used = True
-
         df_spacex = df_spacex.sort_index()
         df_spacex[spacex_ticker] = df_spacex[spacex_ticker].round(2).astype(float)
-        spacex_current_value = round(df_spacex[spacex_ticker].iloc[-1])
-        spacex_current_value_str = f'{spacex_current_value:,.0f}'.replace(',', '.')
-        # title_spacex = f'Die SpaceX-Aktie steht derzeit bei {spacex_current_value_str} Dollar'
-        title_spacex = 'So hat sich die SpaceX-Aktie entwickelt'
+
+        title_spacex = 'So hat sich die SpaceX-Aktie seit Handelsstart entwickelt'
         spacex_timecode = df_spacex.index[-1]
-        if intraday_used:
-            spacex_timecode_str = spacex_timecode.strftime('%-d. %-m. %Y, %-H Uhr %M')
-            notes_spacex = 'Für den laufenden Tag wird der aktuelle Kurs angezeigt (Intraday/Overnight).<br>Stand: ' + spacex_timecode_str
-        else:
-            spacex_timecode_str = spacex_timecode.strftime('%-d. %-m. %Y')
-            notes_spacex = 'Für vergangene Tage werden Schlusskurse angezeigt.<br>Stand: ' + spacex_timecode_str
+        spacex_timecode_str = spacex_timecode.strftime('%-d. %-m. %Y')
+        notes_spacex = 'Für vergangene Tage werden Schlusskurse angezeigt.<br>Stand: ' + spacex_timecode_str
 
         # convert DatetimeIndex
         #df_full.index = df_full.index.strftime('%Y-%m-%d')
