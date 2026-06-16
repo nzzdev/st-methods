@@ -654,13 +654,13 @@ if __name__ == '__main__':
                         'yAxisStart': storage_y, 'yAxisLabels': storage_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_storage, 'chartType': 'area'}
         meta_gas = {'indicatorTitle': 'Gaspreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden, ohne Bonus', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gas, 'chartType': 'line'}
-        meta_gas_front = {'indicatorTitle': 'Gaspreis', 'date': yesterdaystr, 'indicatorSubtitle': f'je kWh', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
+        meta_gas_front = {'indicatorTitle': 'Gas', 'date': yesterdaystr, 'indicatorSubtitle': f'je kWh', 'value': diff_gas, 'valueLabel': f'{diff_gas_str} Cent',
                     'yAxisStart': gas_y, 'yAxisLabels': gas_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'colorDark': '#FF745F', 'trend': trend_gas, 'chartType': 'line'}
         meta_gasstock = {'indicatorTitle': 'Gas im Grosshandel', 'date': todaystr, 'indicatorSubtitle': f'je kWh, mittelfristige Lieferung', 'value': diff_gasstock, 'valueLabel': f'{diff_gasstock_str} Cent',
                          'yAxisStart': gasstock_y, 'yAxisLabels': gasstock_ytick, 'yAxisLabelDecimals': 0, 'color': '#ce4631', 'trend': trend_gasstock, 'chartType': 'line'}
         meta_strom = {'indicatorTitle': 'Strompreis', 'date': todaystr, 'indicatorSubtitle': f'je kWh für Neukunden, ohne Bonus', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_strom, 'chartType': 'line'}
-        meta_strom_front = {'indicatorTitle': 'Strompreis', 'date': yesterdaystr, 'indicatorSubtitle': f'je kWh', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
+        meta_strom_front = {'indicatorTitle': 'Strom', 'date': yesterdaystr, 'indicatorSubtitle': f'je kWh', 'value': diff_strom, 'valueLabel': f'{diff_strom_str} Cent',
                       'yAxisStart': strom_y, 'yAxisLabels': strom_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'colorDark': '#8AABFD', 'trend': trend_strom, 'chartType': 'line'}
         meta_stromstockeex = {'indicatorTitle': 'Strom im Grosshandel', 'date': todaystr, 'indicatorSubtitle': f'je kWh, langfristige Lieferung', 'value': diff_acstockeex, 'valueLabel': f'{diff_acstockeex_str} Cent',
                               'yAxisStart': acstock_y, 'yAxisLabels': acstock_ytick, 'yAxisLabelDecimals': 0, 'color': '#374e8e', 'trend': trend_acstockeex, 'chartType': 'line'}
@@ -680,9 +680,9 @@ if __name__ == '__main__':
                       'yAxisStart': super_y, 'yAxisLabels': super_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_super, 'chartType': 'line'}
         meta_diesel = {'indicatorTitle': 'Dieselpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter Diesel', 'value': diff_diesel, 'valueLabel': f'{diff_diesel_str} Euro',
                        'yAxisStart': diesel_y, 'yAxisLabels': diesel_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_diesel, 'chartType': 'line'}
-        meta_super_front = {'indicatorTitle': 'Benzinpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro',
+        meta_super_front = {'indicatorTitle': 'Benzin', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter', 'value': diff_super, 'valueLabel': f'{diff_super_str} Euro',
                       'yAxisStart': super_y, 'yAxisLabels': super_front_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'colorDark': '#D493A8', 'trend': trend_super, 'chartType': 'line'}
-        meta_diesel_front = {'indicatorTitle': 'Dieselpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter', 'value': diff_diesel, 'valueLabel': f'{diff_diesel_str} Euro',
+        meta_diesel_front = {'indicatorTitle': 'Diesel', 'date': timestamp_str, 'indicatorSubtitle': 'je Liter', 'value': diff_diesel, 'valueLabel': f'{diff_diesel_str} Euro',
                        'yAxisStart': diesel_y, 'yAxisLabels': diesel_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'colorDark': '#D493A8', 'trend': trend_diesel, 'chartType': 'line'}
         meta_fueloil = {'indicatorTitle': 'Heizölpreis', 'date': timestamp_str, 'indicatorSubtitle': 'je 100 Liter', 'value': diff_fueloil, 'valueLabel': f'{diff_fueloil_str} Euro',
                       'yAxisStart': fueloil_y, 'yAxisLabels': fueloil_ytick, 'yAxisLabelDecimals': 1, 'color': '#4d313c', 'trend': trend_fueloil, 'chartType': 'line'}
