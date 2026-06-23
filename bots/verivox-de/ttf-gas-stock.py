@@ -261,13 +261,17 @@ if __name__ == '__main__':
         spacex_timecode_str = spacex_timecode.strftime('%-d. %-m. %Y')
         notes_spacex = 'Für vergangene Tage werden Schlusskurse angezeigt.<br>Stand: ' + spacex_timecode_str
 
+        # Q option: minimal value Y-axis. Keep it below the lowest value in the data.
+        spacex_min_y = int(np.floor(df_spacex[spacex_ticker].min() / 10) * 10)
+
         # convert DatetimeIndex
         #df_full.index = df_full.index.strftime('%Y-%m-%d')
 
         # run Q function
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd', title=title_old, notes=notes_chart, data=df)  # old: df_full
         update_chart(id='74063b3ff77f45a56472a5cc70bb2a93', title=title, notes=notes_chart_new, data=dfnew)
-        update_chart(id=spacex_chart_id, title=title_spacex, data=df_spacex, notes=notes_spacex)
+        update_chart(id=spacex_chart_id, title=title_spacex, data=df_spacex, notes=notes_spacex,
+                     options={'lineChartOptions': {'minValue': spacex_min_y}})
 
         # Rename column for Datawrapper
         dfnew = dfnew.rename(
