@@ -259,7 +259,7 @@ if __name__ == '__main__':
         title_spacex = 'So hat sich die SpaceX-Aktie seit Handelsstart entwickelt'
         spacex_timecode = df_spacex.index[-1]
         spacex_timecode_str = spacex_timecode.strftime('%-d. %-m. %Y')
-        notes_spacex = 'Für vergangene Tage werden Schlusskurse angezeigt.<br>Stand: ' + spacex_timecode_str
+        notes_spacex = 'Schlusskurse.<br>Stand: ' + spacex_timecode_str
 
         # Q option: minimal value Y-axis. Keep it below the lowest value in the data.
         spacex_min_y = int(np.floor(df_spacex[spacex_ticker].min() / 10) * 10)
