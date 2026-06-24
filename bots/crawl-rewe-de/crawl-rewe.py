@@ -109,8 +109,8 @@ if __name__ == '__main__':
             'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36',
             'accept': 'application/vnd.rewe.productlist+json',
-            'referer': 'https://shop.rewe.de/productList?search=k%C3%A4se',
-            'authority': 'shop.rewe.de',
+            'referer': 'https://www.rewe.de/shop',
+            'authority': 'www.rewe.de',
             'sec-fetch-site': 'same-origin',
         }
 
@@ -142,11 +142,11 @@ if __name__ == '__main__':
         with open(f"./data/{today}-rewe.csv", 'w') as file:
             file.write(header)
             for b in brands:
-                # 3 pages max as of April 2022
-                for n in range(1, 6):
+                # REWE no longer accepts objectsPerPage=250; use 80 and allow more pages
+                for n in range(1, 31):
                     params = (
                         ('market', '231006'),
-                        ('objectsPerPage', '250'),
+                        ('objectsPerPage', '80'),
                         ('brand', b),
                         ('page', n),
                         ('serviceTypes', 'DELIVERY'),
@@ -156,7 +156,7 @@ if __name__ == '__main__':
                     )
                     sleep(1)
 
-                    response = s.get('https://shop.rewe.de/api/products',
+                    response = s.get('https://www.rewe.de/shop/api/products',
                                      headers=headers, params=params, cookies=cookies)
 
                     # original query
@@ -164,8 +164,11 @@ if __name__ == '__main__':
 
                     json_response = json.loads(response.content)
 
+                    products = (json_response.get('_embedded') or {}).get('products') or []
+                    if not products:
+                        break
                     # article = {}
-                    for product in json_response['_embedded']['products']:
+                    for product in products:
 
                         if 'grammage' not in product['_embedded']['articles'][0]['_embedded']['listing']['pricing']:
                             product['_embedded']['articles'][0]['_embedded']['listing']['pricing']['grammage'] = 'NaN'
@@ -534,8 +537,8 @@ if __name__ == '__main__':
             'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
             'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36',
             'accept': 'application/vnd.rewe.productlist+json',
-            'referer': 'https://shop.rewe.de/productList?search=k%C3%A4se',
-            'authority': 'shop.rewe.de',
+            'referer': 'https://www.rewe.de/shop',
+            'authority': 'www.rewe.de',
             'sec-fetch-site': 'same-origin',
         }
 
@@ -545,11 +548,11 @@ if __name__ == '__main__':
         # get current prices
         with open(f"./data/{today}-rewe-pickup.csv", 'w') as file:
             file.write(header)
-            # 3 pages max as of April 2022
-            for n in range(1, 6):
+            # REWE no longer accepts objectsPerPage=250; use 80 and allow more pages
+            for n in range(1, 31):
                 params = (
                     ('market', '1931258'),
-                    ('objectsPerPage', '250'),
+                    ('objectsPerPage', '80'),
                     ('brand', 'ja!'),
                     ('page', n),
                     ('serviceTypes', 'PICKUP'),
@@ -559,7 +562,7 @@ if __name__ == '__main__':
                 )
                 sleep(1)
 
-                response = s.get('https://shop.rewe.de/api/products',
+                response = s.get('https://www.rewe.de/shop/api/products',
                                  headers=headers, params=params, cookies=cookies)
 
                 # original query
@@ -567,8 +570,11 @@ if __name__ == '__main__':
 
                 json_response = json.loads(response.content)
 
+                products = (json_response.get('_embedded') or {}).get('products') or []
+                if not products:
+                    break
                 # article = {}
-                for product in json_response['_embedded']['products']:
+                for product in products:
 
                     if 'grammage' not in product['_embedded']['articles'][0]['_embedded']['listing']['pricing']:
                         product['_embedded']['articles'][0]['_embedded']['listing']['pricing']['grammage'] = 'NaN'
@@ -770,7 +776,16 @@ if __name__ == '__main__':
         # monthly summary PICKUP #
         ##########################
         # get first day of current and last month
-        month_first = today.replace(day=1)  # 2022-10-01 etc.
+        # Optional manual override, e.g.:
+        # MONTHLY_PICKUP_DATE=2026-05-31 python crawl-rewe.py
+        # This lets us generate the monthly pickup JSON for a missed month-end run.
+        monthly_pickup_date = today
+        monthly_pickup_override = os.getenv('MONTHLY_PICKUP_DATE', '').strip()
+        if monthly_pickup_override:
+            monthly_pickup_date = date.fromisoformat(monthly_pickup_override)
+            logging.info(f'MONTHLY_PICKUP_DATE override active: {monthly_pickup_date}')
+
+        month_first = monthly_pickup_date.replace(day=1)  # 2022-10-01 etc.
         month_first1 = month_first + timedelta(days=1)
         month_first2 = month_first + timedelta(days=2)
         month_last = (month_first + timedelta(days=32)
@@ -780,21 +795,23 @@ if __name__ == '__main__':
         month_nice = month_first.strftime('%B')  # Oktober etc.
         month_file = month_first.strftime('%Y-%m')  # 2022-10 etc.
 
-        if today == month_last:
+        if monthly_pickup_date == month_last:
+
+            def _read_monthly_pickup_csv(csv_date, usecols):
+                path = f'./data/{csv_date}-rewe-pickup.csv'
+                try:
+                    return pd.read_csv(path, sep=';', usecols=usecols, index_col='ID')
+                except (FileNotFoundError, pd.errors.EmptyDataError):
+                    logging.warning(f'Missing or empty monthly pickup input: {path}')
+                    return pd.DataFrame(columns=[c for c in usecols if c != 'ID']).rename_axis('ID')
 
             # create JSON for monthly price changes
-            o1 = pd.read_csv(f'./data/{month_first}-rewe-pickup.csv',
-                             sep=';', usecols=['ID', 'Preis', 'Marke', 'Name'], index_col='ID')
-            o2 = pd.read_csv(f'./data/{month_first1}-rewe-pickup.csv',
-                             sep=';', usecols=['ID', 'Preis', 'Marke', 'Name'], index_col='ID')
-            o3 = pd.read_csv(f'./data/{month_first2}-rewe-pickup.csv',
-                             sep=';', usecols=['ID', 'Preis', 'Marke', 'Name'], index_col='ID')
-            n1 = pd.read_csv(f'./data/{today}-rewe-pickup.csv',
-                             sep=';', usecols=['ID', 'Preis'], index_col='ID')
-            n2 = pd.read_csv(f'./data/{month_last1}-rewe-pickup.csv',
-                             sep=';', usecols=['ID', 'Preis'], index_col='ID')
-            n3 = pd.read_csv(f'./data/{month_last2}-rewe-pickup.csv',
-                             sep=';', usecols=['ID', 'Preis'], index_col='ID')
+            o1 = _read_monthly_pickup_csv(month_first, ['ID', 'Preis', 'Marke', 'Name'])
+            o2 = _read_monthly_pickup_csv(month_first1, ['ID', 'Preis', 'Marke', 'Name'])
+            o3 = _read_monthly_pickup_csv(month_first2, ['ID', 'Preis', 'Marke', 'Name'])
+            n1 = _read_monthly_pickup_csv(monthly_pickup_date, ['ID', 'Preis'])
+            n2 = _read_monthly_pickup_csv(month_last1, ['ID', 'Preis'])
+            n3 = _read_monthly_pickup_csv(month_last2, ['ID', 'Preis'])
 
             dftopold = o1.combine_first(o2)
             dftopold = dftopold.combine_first(o3)
@@ -802,13 +819,13 @@ if __name__ == '__main__':
             dftopnew = dftopnew.combine_first(n3)
 
             dftopold.rename(columns={'Preis': month_first}, inplace=True)
-            dftopnew.rename(columns={'Preis': today}, inplace=True)
+            dftopnew.rename(columns={'Preis': monthly_pickup_date}, inplace=True)
             dftop = pd.merge(dftopnew, dftopold,
                              left_index=True, right_index=True)
-            dftop[today] = dftop[today] - dftop[month_first]
+            dftop[monthly_pickup_date] = dftop[monthly_pickup_date] - dftop[month_first]
 
             # only keep products with price changes
-            dftop = dftop[dftop[today] != 0]
+            dftop = dftop[dftop[monthly_pickup_date] != 0]
 
             # create new dataframe with ja! products only
             dftop_ja = dftop.copy()
@@ -820,7 +837,7 @@ if __name__ == '__main__':
             dftop_ja.set_index('ID', inplace=True)
 
             # get full prices instead of change - delete for old format
-            dftop_ja[today] = dftop_ja[today] + dftop_ja[month_first]
+            dftop_ja[monthly_pickup_date] = dftop_ja[monthly_pickup_date] + dftop_ja[month_first]
 
             # create dataframe with ja! products and calculate price change
             dftop_ja['Name'] = dftop_ja['Name'].astype(
@@ -847,7 +864,7 @@ if __name__ == '__main__':
 
             # calculate percentage change
             dftop_ja['Marke'] = (
-                ((dftop_ja[today] - dftop_ja[month_first])/dftop_ja[month_first])*100).round(1)
+                ((dftop_ja[monthly_pickup_date] - dftop_ja[month_first])/dftop_ja[month_first])*100).round(1)
 
             # use decimal if > 0.4 / < -0.4
             dftop_ja['Marke'] = dftop_ja['Marke'].apply(
@@ -876,15 +893,15 @@ if __name__ == '__main__':
                 '{0:.2f}'.format)  # 2 decimal places
             dftop_ja[month_first] = dftop_ja[month_first].astype(str).str.replace(
                 '.', ',', regex=False)
-            dftop_ja[today] = dftop_ja[today] / 100.0
-            dftop_ja[today] = dftop_ja[today].apply(
+            dftop_ja[monthly_pickup_date] = dftop_ja[monthly_pickup_date] / 100.0
+            dftop_ja[monthly_pickup_date] = dftop_ja[monthly_pickup_date].apply(
                 '{0:.2f}'.format)  # 2 decimal places
-            dftop_ja[today] = dftop_ja[today].astype(str).str.replace(
+            dftop_ja[monthly_pickup_date] = dftop_ja[monthly_pickup_date].astype(str).str.replace(
                 '.', ',', regex=False)
 
             # join dataframes
             dftop_ja['Tweet'] = dftop_ja['Prozent'] + ' ' + dftop_ja['Name'] + \
-                ': €' + dftop_ja[month_first] + ' » €' + dftop_ja[today] + '\n'
+                ': €' + dftop_ja[month_first] + ' » €' + dftop_ja[monthly_pickup_date] + '\n'
             dftop_ja = dftop_ja[['Tweet']]
 
             # add Tweet intro
