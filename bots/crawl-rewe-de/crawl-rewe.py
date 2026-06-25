@@ -6,6 +6,7 @@ import locale
 import os
 from datetime import date, timedelta
 from time import sleep
+from pathlib import Path
 import pandas as pd
 import gc
 
@@ -53,6 +54,47 @@ def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), optio
         json.dump(qConfig, json_file, ensure_ascii=False,
                   indent=1, default=str)
     json_file.close()
+
+
+def _csv_data_row_count(path: Path) -> int:
+    """Count data rows in a semicolon CSV, excluding the header."""
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            return max(sum(1 for _ in f) - 1, 0)
+    except FileNotFoundError:
+        return 0
+
+
+def _minimum_rows_for(kind: str) -> int:
+    """Minimum acceptable row counts for freshly crawled files.
+    Can be overridden with REWE_MIN_ROWS_DELIVERY / REWE_MIN_ROWS_PICKUP.
+    """
+    if kind == 'rewe':
+        return int(os.getenv('REWE_MIN_ROWS_DELIVERY', '1000'))
+    if kind == 'rewe-pickup':
+        return int(os.getenv('REWE_MIN_ROWS_PICKUP', '1500'))
+    return int(os.getenv('REWE_MIN_ROWS_DEFAULT', '1'))
+
+
+def _tmp_csv_path(final_path: Path) -> Path:
+    return final_path.with_name('.' + final_path.name + '.tmp')
+
+
+def _replace_csv_if_valid(tmp_path: Path, final_path: Path, kind: str) -> None:
+    """Only replace the previous good CSV if the new crawl has enough rows."""
+    rows = _csv_data_row_count(tmp_path)
+    min_rows = _minimum_rows_for(kind)
+    if rows < min_rows:
+        try:
+            tmp_path.unlink(missing_ok=True)
+        except Exception:
+            pass
+        raise RuntimeError(
+            f"Fresh crawl for {kind} produced only {rows} rows; expected at least {min_rows}. "
+            f"Keeping previous file and aborting so the wrapper can retry."
+        )
+    os.replace(tmp_path, final_path)
+    logging.info(f"Validated {final_path}: {rows} data rows")
 
 
 if __name__ == '__main__':
@@ -139,7 +181,9 @@ if __name__ == '__main__':
         # daily prices #
         ################
         # get current prices
-        with open(f"./data/{today}-rewe.csv", 'w') as file:
+        delivery_csv = Path('data') / f'{today}-rewe.csv'
+        delivery_tmp_csv = _tmp_csv_path(delivery_csv)
+        with open(delivery_tmp_csv, 'w') as file:
             file.write(header)
             for b in brands:
                 # REWE no longer accepts objectsPerPage=250; use 80 and allow more pages
@@ -193,6 +237,8 @@ if __name__ == '__main__':
                             ';' +
                             str(product['_embedded']['articles'][0]['_embedded']['listing']['pricing']['grammage']) +
                             '\n')
+
+        _replace_csv_if_valid(delivery_tmp_csv, delivery_csv, 'rewe')
 
         # create dataframes with price changes
         oldcsv = pd.read_csv(f'./data/{yesterday}-rewe.csv',
@@ -546,7 +592,9 @@ if __name__ == '__main__':
         # daily prices PICKUP #
         #######################
         # get current prices
-        with open(f"./data/{today}-rewe-pickup.csv", 'w') as file:
+        pickup_csv = Path('data') / f'{today}-rewe-pickup.csv'
+        pickup_tmp_csv = _tmp_csv_path(pickup_csv)
+        with open(pickup_tmp_csv, 'w') as file:
             file.write(header)
             # REWE no longer accepts objectsPerPage=250; use 80 and allow more pages
             for n in range(1, 31):
@@ -599,6 +647,8 @@ if __name__ == '__main__':
                         ';' +
                         str(product['_embedded']['articles'][0]['_embedded']['listing']['pricing']['grammage']) +
                         '\n')
+
+        _replace_csv_if_valid(pickup_tmp_csv, pickup_csv, 'rewe-pickup')
 
         # create dataframes with price changes
         oldcsv = pd.read_csv(f'./data/{yesterday}-rewe-pickup.csv',
