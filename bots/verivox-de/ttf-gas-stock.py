@@ -20,9 +20,11 @@ if __name__ == '__main__':
         dw = Datawrapper(access_token=dw_key)
         dw_id = 'C3pJx'
 
+        """
         # SpaceX stock chart in Q
         spacex_ticker = 'SPCX'
         spacex_chart_id = 'cd90678a1369ca3d8a0e9f5c2febd9f1'
+        """
 
         # headers for ICE data
         fheaders = {
@@ -243,6 +245,7 @@ if __name__ == '__main__':
         notes_chart = '¹ Preise für Terminkontrakte mit Lieferung im jeweils nächsten Monat.<br>Stand: ' + timecode_str
         notes_chart_new = '¹ Preise für Terminkontrakte mit Lieferung im jeweils nächsten Monat.<br>² Durchschnitt 2018-2020.<br>Stand: ' + timecode_str
 
+        """
         # SpaceX stock chart: historical daily close values from Yahoo Finance.
         # Do not force an intraday/overnight point: for SPCX, Yahoo's quote and
         # chart endpoints currently expose inconsistent values or block requests.
@@ -263,6 +266,7 @@ if __name__ == '__main__':
 
         # Q option: minimal value Y-axis. Keep it below the lowest value in the data.
         spacex_min_y = int(np.floor(df_spacex[spacex_ticker].min() / 10) * 10)
+        """
 
         # convert DatetimeIndex
         #df_full.index = df_full.index.strftime('%Y-%m-%d')
@@ -270,8 +274,10 @@ if __name__ == '__main__':
         # run Q function
         update_chart(id='4decc4d9f742ceb683fd78fa5937acfd', title=title_old, notes=notes_chart, data=df)  # old: df_full
         update_chart(id='74063b3ff77f45a56472a5cc70bb2a93', title=title, notes=notes_chart_new, data=dfnew)
+        """
         update_chart(id=spacex_chart_id, title=title_spacex, data=df_spacex, notes=notes_spacex,
                      options={'lineChartOptions': {'minValue': spacex_min_y}})
+        """
 
         # Rename column for Datawrapper
         dfnew = dfnew.rename(
