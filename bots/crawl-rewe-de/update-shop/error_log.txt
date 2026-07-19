@@ -4,6 +4,7 @@ ID 1994616 in persona 'bio' has no valid alternative.
 ID 204047 in persona 'bio' has no valid alternative.
 ID 8729533 in persona 'bio' has no valid alternative.
 ID 8739580 in persona 'bio' has no valid alternative.
+ID 8066943 in persona 'bio' has no valid alternative.
 ID 8643029 in persona 'bio' has no valid alternative.
 ID 1279059 in persona 'bio' has no valid alternative.
 ID 8381730 in persona 'bio' has no valid alternative.
