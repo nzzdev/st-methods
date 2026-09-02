@@ -1164,11 +1164,29 @@ for c in coalition_set:
     low_total = sum(int(seats_low.get(p, 0)) for p in party_names)
     high_total = sum(int(seats_high.get(p, 0)) for p in party_names)
 
-    # Use best/worst-case across LOW and HIGH scenarios for coalition status
+    # Use worst-case across LOW and HIGH scenarios for coalition status
     worst_total = min(low_total, high_total)
-    best_total = max(low_total, high_total)
 
-    if base_total >= MAJORITY and worst_total >= MAJORITY:
+    # Eine Koalition ist nicht "stabil", wenn einer ihrer eigenen Partner
+    # selbst hürdennah ist und im Low-Szenario aus dem Bundestag fallen kann.
+    wacklig_parties = set(
+        party_stats.loc[party_stats["wacklig"], "Partei"]
+    )
+    coalition_has_wacklig_partner = any(
+        p in wacklig_parties for p in party_names
+    )
+
+    # Label-Logik:
+    # - stabile Mehrheit: Basisszenario hat Mehrheit, Mehrheit bleibt im schlechtesten
+    #   Hürden-Szenario erhalten UND kein Koalitionspartner ist selbst hürdennah
+    # - wackelige Mehrheit: Basisszenario hat Mehrheit, aber mindestens ein Partner
+    #   ist hürdennah oder die Mehrheit geht in einem Hürden-Szenario verloren
+    # - keine Mehrheit: schon im Basisszenario keine Mehrheit
+    if (
+        base_total >= MAJORITY
+        and worst_total >= MAJORITY
+        and not coalition_has_wacklig_partner
+    ):
         status = "stabil"
     elif base_total >= MAJORITY:
         status = "wacklig"
