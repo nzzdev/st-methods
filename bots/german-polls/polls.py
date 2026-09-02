@@ -1038,8 +1038,10 @@ party_metadata = {
 }
 
 # --- Coalition scenarios around the 5%-threshold ---
-# Baseline seats stay "hard" (point estimate). We additionally compute Low/High scenarios
-# for parties close to 5% to label coalitions as stabil / wacklig / unmöglich.
+# Baseline: Eine Partei, die in der finalen Ganzzahl-Anzeige bei mindestens 5% liegt,
+# zählt zunächst als im Parlament. Für Parteien nahe der 5%-Hürde rechnen wir danach
+# ALLE plausiblen Rein-/Raus-Kombinationen durch. Das Koalitionslabel beschreibt die
+# Stabilität der parlamentarischen Mehrheit, nicht die Stabilität der exakten Besetzung.
 
 TOTAL_SEATS = 630
 MAJORITY = 316
@@ -1048,18 +1050,25 @@ MAJORITY = 316
 party_stats = latest_rolling_averages[latest_rolling_averages["Partei"] != "Übrige"].merge(
     mean_ci_per_party, left_on="Partei", right_on="Partei", how="left"
 )
+party_stats["average"] = pd.to_numeric(party_stats["average"], errors="coerce")
 party_stats["mean_ci"] = pd.to_numeric(party_stats["mean_ci"], errors="coerce")
 
 # If a party has no CI (should be rare), fall back to 3.0pp
 party_stats["mean_ci"] = party_stats["mean_ci"].fillna(3.0)
 
-# "Wacklig" if the CI interval around the point estimate crosses the 5%-threshold
+# Baseline membership follows the final whole-number display. Poll percentages are
+# non-negative, so floor(x + 0.5) gives conventional half-up rounding here.
+party_stats["average_display"] = party_stats["average"].apply(
+    lambda x: float(np.floor(float(x) + 0.5)) if pd.notna(x) else np.nan
+)
+
+# Hürdennähe is assessed on the (unrounded) trend value, not on the display rounding.
 party_stats["wacklig"] = (party_stats["average"] - 5.0).abs() <= party_stats["mean_ci"]
 
-# Scenario membership rules
-in_base = party_stats.loc[party_stats["average"] >= 5.0, ["Partei", "average"]].set_index("Partei")["average"]
-in_low = party_stats.loc[(party_stats["average"] >= 5.0) & (~party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
-in_high = party_stats.loc[(party_stats["average"] >= 5.0) | (party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
+# Baseline plus the two extreme scenarios are kept for the displayed seats / QA.
+in_base = party_stats.loc[party_stats["average_display"] >= 5.0, ["Partei", "average"]].set_index("Partei")["average"]
+in_low = party_stats.loc[(party_stats["average_display"] >= 5.0) & (~party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
+in_high = party_stats.loc[(party_stats["average_display"] >= 5.0) | (party_stats["wacklig"]), ["Partei", "average"]].set_index("Partei")["average"]
 
 
 def _allocate_seats(avgs: pd.Series, total_seats: int = TOTAL_SEATS):
@@ -1113,6 +1122,35 @@ seats_base, wasted_base = _allocate_seats(in_base)
 seats_low, wasted_low = _allocate_seats(in_low)
 seats_high, wasted_high = _allocate_seats(in_high)
 
+# Alle Rein-/Raus-Kombinationen der hürdennahen Parteien durchrechnen.
+# So wird z.B. auch "Grüne raus, FDP rein" geprüft und nicht nur "alle raus"/"alle rein".
+from itertools import product
+
+swing_parties = party_stats.loc[party_stats["wacklig"], "Partei"].dropna().tolist()
+fixed_in_parties = set(
+    party_stats.loc[
+        (party_stats["average_display"] >= 5.0) & (~party_stats["wacklig"]),
+        "Partei"
+    ].dropna().tolist()
+)
+
+scenario_seats = []
+for membership in product([False, True], repeat=len(swing_parties)):
+    parties_in = set(fixed_in_parties)
+    parties_in.update(
+        party for party, is_in in zip(swing_parties, membership) if is_in
+    )
+
+    avgs_scenario = (
+        party_stats.loc[
+            party_stats["Partei"].isin(parties_in),
+            ["Partei", "average"]
+        ]
+        .set_index("Partei")["average"]
+    )
+    seats_scenario, _ = _allocate_seats(avgs_scenario)
+    scenario_seats.append(seats_scenario)
+
 # Baseline coalitionSeats (this is what the chart uses for bars)
 coalitionSeats = []
 for party_name, meta in party_metadata.items():
@@ -1130,7 +1168,7 @@ def _fmt_pct_de(x):
     except Exception:
         return ""
 
-notes_chart_seats_extra = "«Stabile/wackelige/keine Mehrheit» geprüft anhand von Modellrechnung für Parteien nahe der 5-Prozent-Hürde. "
+notes_chart_seats_extra = "Stabilität von Mehrheiten anhand einer Modellrechnung für Parteien nahe der 5-Prozent-Hürde geprüft. "
 
 # Koalitions-Templates schreiben (pro Lauf neu)
 write_coalition_templates(data_dir=COALITION_TEMPLATES_DIR)
@@ -1164,29 +1202,23 @@ for c in coalition_set:
     low_total = sum(int(seats_low.get(p, 0)) for p in party_names)
     high_total = sum(int(seats_high.get(p, 0)) for p in party_names)
 
-    # Use worst-case across LOW and HIGH scenarios for coalition status
-    worst_total = min(low_total, high_total)
-
-    # Eine Koalition ist nicht "stabil", wenn einer ihrer eigenen Partner
-    # selbst hürdennah ist und im Low-Szenario aus dem Bundestag fallen kann.
-    wacklig_parties = set(
-        party_stats.loc[party_stats["wacklig"], "Partei"]
-    )
-    coalition_has_wacklig_partner = any(
-        p in wacklig_parties for p in party_names
-    )
+    # Für diese Parteiengruppe die Mehrheit in JEDEM plausiblen Hürden-Szenario prüfen.
+    # Fällt z.B. ein grüner Koalitionspartner heraus, zählen danach die neu verteilten
+    # Sitze der verbleibenden Parteien der Gruppe. Die exakte Viererkoalition muss also
+    # nicht fortbestehen; entscheidend ist, ob die parlamentarische Mehrheit fortbesteht.
+    scenario_totals = [
+        sum(int(seats.get(p, 0)) for p in party_names)
+        for seats in scenario_seats
+    ]
+    worst_total = min(scenario_totals) if scenario_totals else base_total
 
     # Label-Logik:
-    # - stabile Mehrheit: Basisszenario hat Mehrheit, Mehrheit bleibt im schlechtesten
-    #   Hürden-Szenario erhalten UND kein Koalitionspartner ist selbst hürdennah
-    # - wackelige Mehrheit: Basisszenario hat Mehrheit, aber mindestens ein Partner
-    #   ist hürdennah oder die Mehrheit geht in einem Hürden-Szenario verloren
-    # - keine Mehrheit: schon im Basisszenario keine Mehrheit
-    if (
-        base_total >= MAJORITY
-        and worst_total >= MAJORITY
-        and not coalition_has_wacklig_partner
-    ):
+    # - stabile Mehrheit: Basisszenario hat Mehrheit und sie bleibt in ALLEN
+    #   plausiblen Rein-/Raus-Kombinationen hürdennaher Parteien erhalten.
+    # - wackelige Mehrheit: Basisszenario hat Mehrheit, sie geht aber in mindestens
+    #   einer solchen Kombination verloren.
+    # - keine Mehrheit: schon im Basisszenario keine Mehrheit.
+    if base_total >= MAJORITY and worst_total >= MAJORITY:
         status = "stabil"
     elif base_total >= MAJORITY:
         status = "wacklig"
@@ -1216,6 +1248,7 @@ for c in coalition_set:
     c["_seats_base"] = int(base_total)
     c["_seats_low"] = int(low_total)
     c["_seats_high"] = int(high_total)
+    c["_seats_worst"] = int(worst_total)
 
 def convert_befragtenzahl(value):
     """
