@@ -356,7 +356,7 @@ def round_half_up(x, ndigits=0):
 
 
 def parse_method_code_and_n(befragte_cell: str):
-    """Extract method code (TSM/TOM/O/...) and n from Befragte cell."""
+    """Extract method code (TSM/TOM/O/...) and sample size n from Befragte cell."""
     if pd.isna(befragte_cell):
         return None, np.nan
 
@@ -365,10 +365,16 @@ def parse_method_code_and_n(befragte_cell: str):
     m = re.search(r"\b(TSM|TOM|O|T|F)\b", s)
     method = m.group(1) if m else None
 
-    nums = re.findall(r"\d[\d\.]*", s)
+    # Wahlrecht cells contain sample size before the fieldwork dates, e.g.
+    # "O • 1.000 26.08.–01.09.". Parse the first number after the
+    # method code so dates such as 01.09. cannot be mistaken for n=109.
+    search_text = s[m.end():] if m else s
+    n_match = re.search(r"\d[\d\.]*", search_text)
+
     n = np.nan
-    if nums:
-        n = int(nums[-1].replace(".", ""))
+    if n_match:
+        n = int(n_match.group(0).replace(".", ""))
+
     return method, n
 
 
