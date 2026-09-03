@@ -10,6 +10,36 @@ import math
 import calendar
 
 
+# AGSI can legitimately report fill levels slightly above 100 percent.
+# Values above this threshold are treated as data errors and ignored entirely.
+MAX_PLAUSIBLE_FILL_PERCENT = 110.0
+
+
+def drop_implausible_storage_rows(df, fill_column):
+    """Drop AGSI rows with implausible storage fill levels.
+
+    A small overshoot above 100 percent is possible because the published
+    percentage refers to secured capacity. The 110 percent ceiling leaves
+    room for that while filtering obvious API/data errors such as 40613.86%.
+    The entire row is removed so a corrupt trend value from the same gas day
+    cannot leak into the trend chart either.
+    """
+    fill_values = pd.to_numeric(df[fill_column], errors='coerce')
+    valid = fill_values.between(0, MAX_PLAUSIBLE_FILL_PERCENT, inclusive='both')
+
+    if (~valid).any():
+        for _, row in df.loc[~valid, ['Datum', fill_column]].iterrows():
+            logging.warning(
+                'Ignoring implausible AGSI storage value for %s: %s%%',
+                row['Datum'].strftime('%Y-%m-%d'),
+                row[fill_column],
+            )
+
+    filtered = df.loc[valid].copy()
+    filtered[fill_column] = fill_values.loc[valid]
+    return filtered
+
+
 def update_chart(id, title="", subtitle="", notes="", data=pd.DataFrame(), options=""):  # Q helper function
     # read qConfig file
     json_file = open('./q.config.json')
@@ -118,6 +148,10 @@ if __name__ == '__main__':
         dfall = pd.read_csv(f'./data/{todaystr}-gasspeicher.csv', index_col=None)
         dfall['Datum'] = pd.to_datetime(dfall['Datum'])
         dfall = dfall.sort_values(by='Datum', ascending=True)
+
+        # Ignore obviously corrupt AGSI rows before they can affect either chart.
+        # Slightly more than 100% is valid; only values above 110% (or below 0%) are rejected.
+        dfall = drop_implausible_storage_rows(dfall, f'{year}²')
 
         dfnew = dfall[dfall['Datum'].dt.year == year].copy()
         dftrend = dfall[['Datum', 'Trend']].copy()
