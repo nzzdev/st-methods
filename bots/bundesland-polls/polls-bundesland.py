@@ -501,31 +501,45 @@ def run_state(state_key: str):
     # Eine solche Zeile darf weder als letzte Wahl gelten noch in der
     # Tabelle erscheinen. Erst ein plausibel vollstaendiges Ergebnis
     # (mehrere Werte, Summe ungefaehr 100 Prozent) wird verwendet.
-    def _election_marker_has_results(row: pd.Series) -> bool:
-        values = []
+    def _strict_election_result_value(value):
+        """Parse only a real election-result cell, never arbitrary text/dates.
 
-        # Eigene Parteispalten auswerten.
+        Accepted examples: "37,1 %", "8,4%", "3,1", "42 %".
+        Text such as "Landtagswahl am 06.09.2026" is deliberately rejected.
+        """
+        if pd.isna(value):
+            return np.nan
+
+        s = str(value).replace("\xa0", " ").strip()
+        if s in {"", "-", "—", "–", ".."}:
+            return np.nan
+
+        m = re.fullmatch(r"(\d{1,3}(?:[.,]\d+)?)\s*%?", s)
+        if not m:
+            return np.nan
+
+        v = float(m.group(1).replace(",", "."))
+        return v if 0.0 <= v <= 100.0 else np.nan
+
+    def _election_marker_has_results(row: pd.Series) -> bool:
+        # Nur echte Parteispalten pruefen. "Sonstige" wird absichtlich NICHT
+        # fuer die Gueltigkeitspruefung verwendet, weil dort zusammengesetzte Texte
+        # und mehrere Zahlen stehen koennen. Entscheidend ist, dass mehrere
+        # Parteiergebnisse tatsaechlich eingetragen sind.
         result_cols = [c for c in PARTY_MAP.keys() if c in row.index]
         result_cols += [c for c in ["FW", "BSW"] if c in row.index]
 
-        for c in result_cols:
-            v = convert_percentage_to_float(row.get(c))
-            if pd.notna(v):
-                values.append(float(v))
+        values = [
+            _strict_election_result_value(row.get(c))
+            for c in result_cols
+        ]
+        values = [float(v) for v in values if pd.notna(v)]
 
-        # In "Sonstige" koennen mehrere Parteien/Werte zusammen stehen,
-        # z.B. "BSW 4 % Sonst. 2 %". Fuer die Plausibilitaetspruefung
-        # deshalb alle dort vorkommenden Prozentzahlen mitzaehlen.
-        if sonstige_col and sonstige_col in row.index and pd.notna(row.get(sonstige_col)):
-            s_sonst = str(row.get(sonstige_col)).replace("\xa0", " ")
-            sonst_nums = re.findall(r"\d+(?:,\d+)?", s_sonst)
-            values.extend(float(x.replace(",", ".")) for x in sonst_nums)
-
-        if len(values) < 4:
-            return False
-
-        result_sum = float(sum(values))
-        return 95.0 <= result_sum <= 105.0
+        # Vier echte Parteiergebnisse reichen als robuste Vollstaendigkeits-Schwelle.
+        # Eine leere/noch im Aufbau befindliche Wahlzeile bleibt damit draussen,
+        # ohne dass komplexe "Sonstige"-Zellen eine gueltige Wahlzeile faelschlich
+        # verwerfen oder eine Datumsangabe als Ergebnis gelesen wird.
+        return len(values) >= 4
 
     raw_election_marker_mask = (
         df[institute_col]
@@ -635,6 +649,15 @@ def run_state(state_key: str):
     configured_next_election_date = STATES[state_key].get("next_election_date")
     configured_next_election_date = pd.Timestamp(configured_next_election_date) if configured_next_election_date else None
 
+    # Wenn das konfigurierte kommende Wahldatum NACH der letzten gueltigen Wahl liegt,
+    # ist diese Wahl in der Quelle noch nicht als vollstaendiges Wahlergebnis vorhanden.
+    # Das ist insbesondere am Wahltag wichtig: Eine leere/teilweise Wahlzeile wurde oben
+    # entfernt, also muss der laufende Vorwahl-Zyklus weiterhin gegen LAST_ELECTION laufen.
+    configured_election_pending = (
+        configured_next_election_date is not None
+        and configured_next_election_date > last_election_date
+    )
+
     # Plausibilitäts-Check: Wenn next_election_date noch auf die bereits gelaufene Wahl zeigt,
     # die auch als aktuelle Wahlzeile auf der Seite erkannt wurde, ignorieren wir den Wert
     # und fallen auf election_cycle_years zurück.
@@ -676,6 +699,23 @@ def run_state(state_key: str):
     above_raw = df.loc[: latest_marker_idx_raw - 1].copy() if latest_marker_idx_raw > 0 else df.iloc[0:0].copy()
     below_all_raw = df.loc[latest_marker_idx_raw + 1 :].copy()
 
+    # Wenn eine explizit konfigurierte Wahl noch kein gueltiges Ergebnis in der Quelle hat,
+    # bestimmen wir den laufenden Vorwahl-Zyklus zusaetzlich ueber die Datumswerte statt nur
+    # ueber die HTML-Position relativ zur letzten Wahlzeile. Das macht den Wahltag robust
+    # gegen neu eingefuegte leere Wahlzeilen bzw. HTML-Verschiebungen.
+    if configured_election_pending:
+        all_dates_pending = pd.to_datetime(df[date_col], format="%d.%m.%Y", errors="coerce")
+        marker_mask_pending = df[institute_col].astype(str).str.contains(ELECTION_CUTOFF_PATTERN, na=False)
+        pending_poll_mask = (
+            (~marker_mask_pending)
+            & all_dates_pending.notna()
+            & (all_dates_pending > last_election_date)
+            & (all_dates_pending <= configured_next_election_date)
+        )
+        pending_pre_election_raw = df.loc[pending_poll_mask].copy()
+        if len(pending_pre_election_raw) > 0:
+            above_raw = pending_pre_election_raw
+
     above_dates_raw = pd.to_datetime(above_raw[date_col], format="%d.%m.%Y", errors="coerce") if (len(above_raw) > 0 and date_col in above_raw.columns) else pd.Series(dtype="datetime64[ns]")
 
     # Drei Fälle:
@@ -691,8 +731,14 @@ def run_state(state_key: str):
     if above_dates_raw.notna().any():
         max_above_date = above_dates_raw.max()
 
+        # Solange die konfigurierte kommende Wahl noch kein gueltiges Ergebnis hat,
+        # bleibt der aktuelle Block zwingend ein Vorwahl-Zyklus. Dadurch bleibt z.B.
+        # Sachsen-Anhalt 2026 korrekt mit der Wahl 2021 verglichen, auch wenn Wahlrecht
+        # am Wahltag bereits eine leere Wahlzeile eingefuegt hat.
+        if configured_election_pending:
+            is_current_pre_election_cycle_above = True
         # Nur mit explizitem kommendem Wahldatum sicher als Vorwahl-Zyklus klassifizieren.
-        if configured_next_election_date is not None and max_above_date < configured_next_election_date:
+        elif configured_next_election_date is not None and max_above_date < configured_next_election_date:
             is_current_pre_election_cycle_above = True
         else:
             # Sonst gilt: Wenn oberhalb der letzten Wahlzeile bereits Umfragen nach dem Datum
@@ -728,7 +774,11 @@ def run_state(state_key: str):
     #   vorübergehend bei diesem Umfragezyklus und vergleicht ihn mit der Wahl DAVOR.
     # - Ab der ersten echten Nachwahl-Umfrage wechseln Balken und Koalitionen in den
     #   neuen Zyklus und vergleichen mit der gerade stattgefundenen Wahl.
-    if is_current_pre_election_cycle_above or has_post_poll_above_raw:
+    if configured_election_pending:
+        # Explizit konfigurierte Wahl hat noch kein gueltiges Ergebnis:
+        # immer den laufenden Vorwahl-Zyklus verwenden.
+        df = above_raw.copy()
+    elif is_current_pre_election_cycle_above or has_post_poll_above_raw:
         df = above_raw.copy()
     else:
         df = below_raw.copy()
@@ -743,7 +793,14 @@ def run_state(state_key: str):
     # Dynamisch: Zielwahl, Vergleichswahl und HOT_PHASE ableiten.
     latest_poll_date = df["Datum"].max()
 
-    if is_current_pre_election_cycle_above:
+    if configured_election_pending:
+        # Die konfigurierte Wahlzeile ist noch leer/unvollstaendig und wurde entfernt.
+        # Deshalb ist LAST_ELECTION weiterhin die richtige Vergleichswahl.
+        ELECTION_YEAR = int(configured_next_election_date.year)
+        PREVIOUS_ELECTION_YEAR = last_election_year
+        BAR_REFERENCE_ELECTION = LAST_ELECTION
+        target_election_date = configured_next_election_date
+    elif is_current_pre_election_cycle_above:
         # Laufender Vorwahl-Zyklus vor der kommenden Wahl.
         # Vergleich ist die letzte gültige Wahl.
         ELECTION_YEAR = int(cycle_target_date.year)
@@ -764,6 +821,12 @@ def run_state(state_key: str):
         PREVIOUS_ELECTION_YEAR = previous_election_year
         BAR_REFERENCE_ELECTION = PREVIOUS_ELECTION if PREVIOUS_ELECTION is not None else LAST_ELECTION
         target_election_date = last_election_date
+
+    print(
+        f"INFO [{state_key}]: valid last election={last_election_year}, "
+        f"bar reference={PREVIOUS_ELECTION_YEAR}, election year={ELECTION_YEAR}, "
+        f"pending configured election={configured_election_pending}"
+    )
 
     days_to_target_election = (target_election_date - latest_poll_date).days if pd.notna(latest_poll_date) else 99999
     HOT_PHASE = days_to_target_election <= HOT_PHASE_DAYS
@@ -879,8 +942,9 @@ def run_state(state_key: str):
         post_election_poll_count = int(post_mask_tbl.fillna(False).sum())
         is_true_post_election_cycle = post_election_poll_count > 0
 
-    if is_current_pre_election_cycle_above:
-        # Laufender Vorwahl-Zyklus vor der nächsten Wahl: keine alte Wahlzeile zeigen.
+    if configured_election_pending or is_current_pre_election_cycle_above:
+        # Laufender Vorwahl-Zyklus bzw. Wahlzeile noch ohne gueltiges Ergebnis:
+        # keine alte Wahlzeile zeigen.
         df_table_source = above_raw.copy()
     elif is_true_post_election_cycle:
         if post_election_poll_count < 7:
