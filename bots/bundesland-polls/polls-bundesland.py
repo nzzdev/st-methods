@@ -493,6 +493,76 @@ def run_state(state_key: str):
     if befragte_col is None or date_col is None or sonstige_col is None:
         raise KeyError(f"Missing expected columns on {state_key}: befragte_col={befragte_col}, date_col={date_col}, sonstige_col={sonstige_col}. Columns={list(df.columns)}")
 
+    # ------------------------------------------------------------
+    # Leere / noch unvollstaendige Wahlzeilen ignorieren
+    # ------------------------------------------------------------
+    # Wahlrecht.de kann am Wahltag bereits eine neue Wahl-Markerzeile
+    # einfuegen, bevor die Ergebnisse vollstaendig eingetragen sind.
+    # Eine solche Zeile darf weder als letzte Wahl gelten noch in der
+    # Tabelle erscheinen. Erst ein plausibel vollstaendiges Ergebnis
+    # (mehrere Werte, Summe ungefaehr 100 Prozent) wird verwendet.
+    def _election_marker_has_results(row: pd.Series) -> bool:
+        values = []
+
+        # Eigene Parteispalten auswerten.
+        result_cols = [c for c in PARTY_MAP.keys() if c in row.index]
+        result_cols += [c for c in ["FW", "BSW"] if c in row.index]
+
+        for c in result_cols:
+            v = convert_percentage_to_float(row.get(c))
+            if pd.notna(v):
+                values.append(float(v))
+
+        # In "Sonstige" koennen mehrere Parteien/Werte zusammen stehen,
+        # z.B. "BSW 4 % Sonst. 2 %". Fuer die Plausibilitaetspruefung
+        # deshalb alle dort vorkommenden Prozentzahlen mitzaehlen.
+        if sonstige_col and sonstige_col in row.index and pd.notna(row.get(sonstige_col)):
+            s_sonst = str(row.get(sonstige_col)).replace("\xa0", " ")
+            sonst_nums = re.findall(r"\d+(?:,\d+)?", s_sonst)
+            values.extend(float(x.replace(",", ".")) for x in sonst_nums)
+
+        if len(values) < 4:
+            return False
+
+        result_sum = float(sum(values))
+        return 95.0 <= result_sum <= 105.0
+
+    raw_election_marker_mask = (
+        df[institute_col]
+        .astype(str)
+        .str.contains(ELECTION_CUTOFF_PATTERN, na=False)
+    )
+
+    marker_has_results = pd.Series(False, index=df.index, dtype=bool)
+
+    if raw_election_marker_mask.any():
+        marker_has_results.loc[raw_election_marker_mask] = (
+            df.loc[raw_election_marker_mask]
+            .apply(_election_marker_has_results, axis=1)
+            .astype(bool)
+        )
+
+    empty_election_marker_mask = raw_election_marker_mask & ~marker_has_results
+
+    if empty_election_marker_mask.any():
+        ignored_rows = (
+            df.loc[empty_election_marker_mask, institute_col]
+            .astype(str)
+            .tolist()
+        )
+        print(
+            f"INFO [{state_key}]: ignoring election marker without results: "
+            f"{ignored_rows}"
+        )
+
+        # Index neu aufbauen, weil die spaetere Zykluslogik mit
+        # Indexbereichen und .loc-Slices arbeitet.
+        df = (
+            df.loc[~empty_election_marker_mask]
+            .reset_index(drop=True)
+            .copy()
+        )
+
     # Dynamische Ableitung der letzten Wahl aus der Wahlrecht-Tabelle
     def _extract_date_from_marker(text: str) -> pd.Timestamp:
         if pd.isna(text):
@@ -545,6 +615,22 @@ def run_state(state_key: str):
     last_election_date = election_rows.loc[latest_election_idx, "_marker_date"]
     last_election_year = int(last_election_date.year)
     LAST_ELECTION = _parse_election_result_row(latest_election_row)
+
+    # Auch die Wahl davor sichern. Das ist fuer den Uebergang am Wahltag wichtig:
+    # Sobald das neue Wahlergebnis vorhanden ist, ist LAST_ELECTION bereits die neue Wahl.
+    # Solange aber noch keine Nachwahl-Umfrage existiert, zeigt der Balken weiterhin den
+    # letzten Vorwahl-Umfragezyklus. Dieser muss weiterhin mit der WAHL DAVOR verglichen
+    # werden, nicht schon mit dem gerade eingetroffenen Wahlergebnis.
+    previous_election_rows = election_rows[election_rows["_marker_date"] < last_election_date].copy()
+    if len(previous_election_rows) > 0:
+        previous_election_idx = previous_election_rows["_marker_date"].idxmax()
+        previous_election_date = previous_election_rows.loc[previous_election_idx, "_marker_date"]
+        previous_election_year = int(previous_election_date.year)
+        PREVIOUS_ELECTION = _parse_election_result_row(df.loc[previous_election_idx].copy())
+    else:
+        previous_election_date = pd.NaT
+        previous_election_year = last_election_year - election_cycle_years
+        PREVIOUS_ELECTION = None
 
     configured_next_election_date = STATES[state_key].get("next_election_date")
     configured_next_election_date = pd.Timestamp(configured_next_election_date) if configured_next_election_date else None
@@ -632,10 +718,16 @@ def run_state(state_key: str):
     else:
         below_prev_cycle_raw = below_raw.copy()
 
-    # Für BAR/Koalitionen strikt nur den aktuell relevanten Zyklus verwenden.
-    # - Laufender Vorwahl-Zyklus vor der nächsten Wahl: OBERHALB der letzten Wahlzeile
-    # - Nach einer stattgefundenen Wahl mit erster Nachwahl-Umfrage: ebenfalls OBERHALB
-    # - Nur wenn es oben keinen aktuellen Zyklus gibt, auf den alten Block darunter zurückfallen
+    # Für BAR/Koalitionen strikt nur den aktuell relevanten Umfragezyklus verwenden.
+    #
+    # Wichtig für den Wahltag:
+    # - Ist die neue Wahlzeile noch leer, wurde sie oben bereits entfernt. Dann bleibt
+    #   die letzte gültige Wahl die bisherige Wahl und der Vorwahl-Zyklus liegt oben.
+    # - Ist das neue Wahlergebnis vorhanden, aber gibt es noch KEINE Nachwahl-Umfrage,
+    #   liegt der letzte Vorwahl-Zyklus unterhalb der neuen Wahlzeile. Der Balken bleibt
+    #   vorübergehend bei diesem Umfragezyklus und vergleicht ihn mit der Wahl DAVOR.
+    # - Ab der ersten echten Nachwahl-Umfrage wechseln Balken und Koalitionen in den
+    #   neuen Zyklus und vergleichen mit der gerade stattgefundenen Wahl.
     if is_current_pre_election_cycle_above or has_post_poll_above_raw:
         df = above_raw.copy()
     else:
@@ -648,20 +740,29 @@ def run_state(state_key: str):
     df["Datum"] = pd.to_datetime(df[date_col], format="%d.%m.%Y", errors="coerce")
     df = df[df["Datum"].notna()].copy()
 
-    # Dynamisch: Zielwahl, Vorwahl, HOT_PHASE aus Polls und Wahltermin ableiten
+    # Dynamisch: Zielwahl, Vergleichswahl und HOT_PHASE ableiten.
     latest_poll_date = df["Datum"].max()
 
     if is_current_pre_election_cycle_above:
+        # Laufender Vorwahl-Zyklus vor der kommenden Wahl.
+        # Vergleich ist die letzte gültige Wahl.
         ELECTION_YEAR = int(cycle_target_date.year)
         PREVIOUS_ELECTION_YEAR = last_election_year
+        BAR_REFERENCE_ELECTION = LAST_ELECTION
         target_election_date = cycle_target_date
     elif has_post_poll_above_raw:
+        # Neuer Nachwahl-Zyklus: Vergleich ist die gerade stattgefundene Wahl.
         ELECTION_YEAR = int(cycle_target_date.year)
         PREVIOUS_ELECTION_YEAR = last_election_year
+        BAR_REFERENCE_ELECTION = LAST_ELECTION
         target_election_date = cycle_target_date
     else:
+        # Noch keine Nachwahl-Umfrage: Wir zeigen weiterhin den Vorwahl-Zyklus
+        # unterhalb der aktuellen Wahlzeile. Deshalb muss auch die Vergleichswahl
+        # die Wahl DAVOR sein.
         ELECTION_YEAR = last_election_year
-        PREVIOUS_ELECTION_YEAR = last_election_year - election_cycle_years
+        PREVIOUS_ELECTION_YEAR = previous_election_year
+        BAR_REFERENCE_ELECTION = PREVIOUS_ELECTION if PREVIOUS_ELECTION is not None else LAST_ELECTION
         target_election_date = last_election_date
 
     days_to_target_election = (target_election_date - latest_poll_date).days if pd.notna(latest_poll_date) else 99999
@@ -823,7 +924,7 @@ def run_state(state_key: str):
 
     # Große Parteien immer behalten, falls sie in der letzten Wahl >0 hatten
     for p in ["CDU", "CSU", "SPD", "Grüne", "FDP", "AfD", "Linke"]:
-        if float(LAST_ELECTION.get(p, 0.0)) > 0.0:
+        if float(BAR_REFERENCE_ELECTION.get(p, 0.0)) > 0.0:
             present_parties.add(p)
 
     # Ausgabepartien (bundesland-agnostisch)
@@ -920,7 +1021,7 @@ def run_state(state_key: str):
 
         # Erst mit Nachkommastelle rechnen, dann Differenz bilden, erst danach fürs Display runden (kaufmännisch)
         result_raw = round_half_up(float(avg[p]), 1)
-        prev_raw = round_half_up(float(LAST_ELECTION.get(p, 0.0)), 1)
+        prev_raw = round_half_up(float(BAR_REFERENCE_ELECTION.get(p, 0.0)), 1)
 
         change_raw = result_raw - prev_raw
 
