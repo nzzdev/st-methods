@@ -969,29 +969,10 @@ def run_state(state_key: str):
         else:
             df_table_source = below_raw.copy()
 
-    # Nur Parteien behalten, die in den zwei neuesten Umfragen vorkommen
-    last_dates = sorted(df["Datum"].dropna().unique())[-2:]
-    recent_df = df[df["Datum"].isin(last_dates)].copy()
-
-    def _present_in_recent(party_name: str) -> bool:
-        flag = f"_present_{party_name}"
-        if flag in recent_df.columns:
-            return recent_df[flag].fillna(False).astype(bool).sum() >= 2
-        if party_name not in recent_df.columns:
-            return False
-        return pd.to_numeric(recent_df[party_name], errors="coerce").notna().sum() >= 2
-
-    present_parties = set()
-    for p in list(PARTY_MAP.values()) + ["FW", "BSW"]:
-        if _present_in_recent(p):
-            present_parties.add(p)
-
-    # Große Parteien immer behalten, falls sie in der letzten Wahl >0 hatten
-    for p in ["CDU", "CSU", "SPD", "Grüne", "FDP", "AfD", "Linke"]:
-        if float(BAR_REFERENCE_ELECTION.get(p, 0.0)) > 0.0:
-            present_parties.add(p)
-
-    # Ausgabepartien (bundesland-agnostisch)
+    # Output candidates (state-agnostic).
+    # Keep parties in the internal tracking set once they have appeared in the
+    # current cycle or had a non-zero reference-election result. This keeps their
+    # trend and seat calculations alive even when they are temporarily hidden.
     base_parties = [v for k, v in PARTY_MAP.items() if k in original_cols]
     extra_parties = ["FW", "BSW", "FDP", "Linke"]
 
@@ -1004,8 +985,76 @@ def run_state(state_key: str):
     for p in candidates:
         if p not in df.columns:
             df[p] = np.nan
-        if p in present_parties:
+
+        rep_col = f"_reported_{p}"
+        cen_col = f"_censored_{p}"
+
+        has_current_cycle_history = pd.to_numeric(
+            df[p], errors="coerce"
+        ).notna().any()
+
+        if rep_col in df.columns:
+            has_current_cycle_history = has_current_cycle_history or bool(
+                df[rep_col].fillna(False).astype(bool).any()
+            )
+        if cen_col in df.columns:
+            has_current_cycle_history = has_current_cycle_history or bool(
+                df[cen_col].fillna(False).astype(bool).any()
+            )
+
+        had_reference_result = float(BAR_REFERENCE_ELECTION.get(p, 0.0)) > 0.0
+
+        if has_current_cycle_history or had_reference_result:
             parties_out.append(p)
+
+    # Visibility rule for current visuals, applied to every tracked party:
+    # - if the two newest polls both omit an explicit value, hide the party;
+    # - as soon as at least one of the two newest polls reports it again, show it;
+    # - parties_out remains unchanged, so trend/seat tracking continues while hidden.
+    latest_two_polls = (
+        df.sort_values(
+            ["Datum", "effective_date"],
+            ascending=[False, False],
+            kind="stable",
+        )
+        .head(2)
+        .copy()
+    )
+
+    parties_visual = []
+    hidden_parties = []
+
+    for p in parties_out:
+        # With fewer than two polls, there is not yet a two-poll omission streak.
+        if len(latest_two_polls) < 2:
+            parties_visual.append(p)
+            continue
+
+        rep_col = f"_reported_{p}"
+        if rep_col in latest_two_polls.columns:
+            reported_last_two = (
+                latest_two_polls[rep_col]
+                .fillna(False)
+                .astype(bool)
+            )
+        else:
+            if p in latest_two_polls.columns:
+                reported_last_two = pd.to_numeric(
+                    latest_two_polls[p], errors="coerce"
+                ).notna()
+            else:
+                reported_last_two = pd.Series(False, index=latest_two_polls.index)
+
+        if reported_last_two.any():
+            parties_visual.append(p)
+        else:
+            hidden_parties.append(p)
+
+    if hidden_parties:
+        print(
+            f"INFO [{state_key}]: hidden from current visuals after two consecutive "
+            f"polls without an explicit value: {', '.join(hidden_parties)}"
+        )
 
     # ---- Gewichteter Durchschnitt (Balken) ----
     latest_date = df["Datum"].max()  # publication date for notes/stand
@@ -1079,7 +1128,7 @@ def run_state(state_key: str):
     survey_date = latest_date.strftime("%Y-%m-%d")
 
     parties_payload = []
-    for p in parties_out:
+    for p in parties_visual:
         if avg.get(p) is None:
             continue
 
