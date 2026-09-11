@@ -242,6 +242,7 @@ STATES = {
         "coalitions_spec": [
             {"name": "", "parties": ["CDU", "SPD"]},
             {"name": "", "parties": ["CDU", "Grüne"]},
+            {"name": "", "parties": ["CDU", "CDU", "Grüne"]},
             {"name": "", "parties": ["CDU", "Grüne", "FDP"]},
             {"name": "", "parties": ["CDU", "AfD"]},
             {"name": "", "parties": ["SPD", "Grüne", "Linke"]},
