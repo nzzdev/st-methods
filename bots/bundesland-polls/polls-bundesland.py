@@ -1551,10 +1551,6 @@ def run_state(state_key: str):
         lambda x: round_half_up(round_half_up(float(x), 1), 0) if pd.notna(x) else np.nan
     )
 
-    # Hürdennähe auf dem ungerundeten Trendwert bestimmen. Die Display-Rundung
-    # entscheidet nur über das Basisszenario (sichtbare 5% => zunächst im Parlament).
-    party_stats["wacklig"] = (party_stats["average"] - 5.0).abs() <= party_stats["mean_ci"]
-
     in_base = party_stats.loc[party_stats["average_display"] >= 5.0, ["Partei", "average"]].set_index("Partei")["average"]
 
     def _allocate_seats(avgs: pd.Series, total_seats: int = TOTAL_SEATS):
@@ -1615,14 +1611,6 @@ def run_state(state_key: str):
 
     id_to_party = {meta["id"]: party for party, meta in party_metadata.items()}
 
-    # Parteien nahe der 5%-Hürde, die im Basisszenario tatsächlich Sitze haben.
-    wacklig_in_base = set(
-        party_stats.loc[
-            party_stats["wacklig"] & (party_stats["average_display"] >= 5.0),
-            "Partei"
-        ].dropna().tolist()
-    )
-
     # Dynamische Anti-AfD-/Sammelkoalitionen: Parteien ohne Basissitze entfernen,
     # statt die ganze Koalition zu verwerfen.
     for c in coalition_set:
@@ -1652,28 +1640,8 @@ def run_state(state_key: str):
 
         base_total = sum(int(seats_base.get(p, 0)) for p in party_names)
 
-        # Basissitze hürdennaher Koalitionspartner abziehen. Es findet bewusst
-        # KEINE Neuverteilung statt: Entscheidend ist, ob die ausgewiesene
-        # Baseline-Mehrheit auf diesen gefährdeten Sitzen beruht.
-        at_risk_partner_seats = sum(
-            int(seats_base.get(p, 0))
-            for p in party_names
-            if p in wacklig_in_base
-        )
-        base_without_at_risk_partners = base_total - at_risk_partner_seats
-
-        # Label-Logik:
-        # - stabile Mehrheit: Basisszenario hat Mehrheit und sie besteht auch ohne die
-        #   Basissitze aller hürdennahen Koalitionspartner.
-        # - wackelige Mehrheit: Basisszenario hat Mehrheit, ist aber auf mindestens
-        #   einen dieser gefährdeten Sitzblöcke angewiesen.
-        # - keine Mehrheit: schon im Basisszenario keine Mehrheit.
-        if base_total < MAJORITY:
-            label = "keine Mehrheit"
-        elif base_without_at_risk_partners < MAJORITY:
-            label = "wackelige Mehrheit"
-        else:
-            label = "stabile Mehrheit"
+        # Einfache Mehrheitskennzeichnung der dargestellten Sitzverteilung.
+        label = "Mehrheit" if base_total >= MAJORITY else "keine Mehrheit"
 
         name = c.get("name", "")
         if isinstance(name, str):
@@ -1690,7 +1658,6 @@ def run_state(state_key: str):
     )
     notes_chart_seats = (
         notes_chart_seats_intro +
-        "Eine Mehrheit gilt als wackelig, wenn sie auf Sitze von Parteien nahe der 5-Prozent-Hürde angewiesen ist. "
         "Sitzverteilung gemäss Regelgrösse, ohne Berücksichtigung einer etwaigen Grundmandatsklausel. "
         "Stand: " + latest_date.strftime("%-d. %-m. %Y")
     )

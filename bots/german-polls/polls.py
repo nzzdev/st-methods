@@ -1037,11 +1037,10 @@ party_metadata = {
     }
 }
 
-# --- Mehrheitsstabilität rund um die 5%-Hürde ---
+# --- Mehrheitskennzeichnung ---
 # Baseline: Eine Partei, die in der finalen Ganzzahl-Anzeige bei mindestens 5% liegt,
-# zählt zunächst als im Parlament. Eine Mehrheit gilt als wackelig, wenn sie auf den
-# Basissitzen eines Koalitionspartners nahe der 5%-Hürde beruht. Für diesen Test werden
-# diese Sitze bewusst abgezogen, ohne sie an andere Parteien neu zu verteilen.
+# zählt als im Parlament. Koalitionen werden nur als "Mehrheit" oder "keine Mehrheit"
+# gekennzeichnet, abhängig von ihrer Sitzsumme im Basisszenario.
 
 TOTAL_SEATS = 630
 MAJORITY = 316
@@ -1061,9 +1060,6 @@ party_stats["mean_ci"] = party_stats["mean_ci"].fillna(3.0)
 party_stats["average_display"] = party_stats["average"].apply(
     lambda x: float(np.floor(float(x) + 0.5)) if pd.notna(x) else np.nan
 )
-
-# Hürdennähe is assessed on the (unrounded) trend value, not on the display rounding.
-party_stats["wacklig"] = (party_stats["average"] - 5.0).abs() <= party_stats["mean_ci"]
 
 # Baseline-Sitzverteilung für Chart und Mehrheitsprüfung.
 in_base = party_stats.loc[party_stats["average_display"] >= 5.0, ["Partei", "average"]].set_index("Partei")["average"]
@@ -1135,8 +1131,6 @@ def _fmt_pct_de(x):
     except Exception:
         return ""
 
-notes_chart_seats_extra = "Eine Mehrheit gilt als wackelig, wenn sie auf Sitze von Parteien nahe der 5-Prozent-Hürde angewiesen ist. "
-
 # Koalitions-Templates schreiben (pro Lauf neu)
 write_coalition_templates(data_dir=COALITION_TEMPLATES_DIR)
 
@@ -1157,16 +1151,8 @@ with open(coalition_file, "r", encoding="utf-8") as f:
 
 print(f"Loaded coalition file: {coalition_file}")
 
-# --- Label each coalition by whether its baseline majority depends on threshold-risk partners ---
+# --- Label each coalition by its baseline seat majority ---
 id_to_party = {meta["id"]: party for party, meta in party_metadata.items()}
-
-# Parteien nahe der 5%-Hürde, die im Basisszenario tatsächlich Sitze haben.
-wacklig_in_base = set(
-    party_stats.loc[
-        party_stats["wacklig"] & (party_stats["average_display"] >= 5.0),
-        "Partei"
-    ].dropna().tolist()
-)
 
 for c in coalition_set:
     party_ids = [p.get("id") for p in c.get("parties", []) if isinstance(p, dict)]
@@ -1175,35 +1161,8 @@ for c in coalition_set:
 
     base_total = sum(int(seats_base.get(p, 0)) for p in party_names)
 
-    # Basissitze hürdennaher Koalitionspartner abziehen. Es findet bewusst
-    # KEINE Neuverteilung statt: Entscheidend ist, ob die ausgewiesene
-    # Baseline-Mehrheit auf diesen gefährdeten Sitzen beruht.
-    at_risk_partner_seats = sum(
-        int(seats_base.get(p, 0))
-        for p in party_names
-        if p in wacklig_in_base
-    )
-    base_without_at_risk_partners = base_total - at_risk_partner_seats
-
-    # Label-Logik:
-    # - stabile Mehrheit: Basisszenario hat Mehrheit und sie besteht auch ohne die
-    #   Basissitze aller hürdennahen Koalitionspartner.
-    # - wackelige Mehrheit: Basisszenario hat Mehrheit, ist aber auf mindestens
-    #   einen dieser gefährdeten Sitzblöcke angewiesen.
-    # - keine Mehrheit: schon im Basisszenario keine Mehrheit.
-    if base_total < MAJORITY:
-        status = "unmöglich"
-    elif base_without_at_risk_partners < MAJORITY:
-        status = "wacklig"
-    else:
-        status = "stabil"
-
-    label_map = {
-        "stabil": "stabile Mehrheit",
-        "wacklig": "wackelige Mehrheit",
-        "unmöglich": "keine Mehrheit",
-    }
-    label = label_map.get(status, status)
+    # Einfache Mehrheitskennzeichnung der dargestellten Sitzverteilung.
+    label = "Mehrheit" if base_total >= MAJORITY else "keine Mehrheit"
 
     # Replace any existing guillemet placeholder like «…» with a parenthetical label
     name = c.get("name", "")
@@ -1217,10 +1176,8 @@ for c in coalition_set:
     else:
         c["name"] = f"{label}"
 
-    # Optional: store totals for debugging/QA (chart will ignore unknown keys)
+    # Optional: store total for debugging/QA (chart will ignore unknown keys)
     c["_seats_base"] = int(base_total)
-    c["_at_risk_partner_seats"] = int(at_risk_partner_seats)
-    c["_seats_without_at_risk_partners"] = int(base_without_at_risk_partners)
 
 def convert_befragtenzahl(value):
     """
@@ -1692,7 +1649,7 @@ timecode_line = full_line_chart_data["date"].iloc[-1]
 #timecode_str = timecode.strftime("%-d. %-m. %Y")
 timecode_str_line = timecode_line.strftime("%-d. %-m. %Y")
 notes_chart_line = "Stand: " + timecode_str_line
-notes_chart_seats = "Ohne Berücksichtigung der Grundmandatsklausel. " + notes_chart_seats_extra + "Stand: " + timecode_str_line
+notes_chart_seats = "Ohne Berücksichtigung der Grundmandatsklausel. Stand: " + timecode_str_line
 
 """ DISABLE FOR NOW
 # update Kanzlerfragen chart #1
