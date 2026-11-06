@@ -701,7 +701,7 @@ if __name__ == '__main__':
         meta_lng['chartData'] = []
         # NS1 meta_ns['chartData'] = dict_ns
         # RUS GAS meta_rus['chartData'] = dict_rus
-        meta_super['chartData'] = dict_super
+        meta_super['chartData'] = [] #dict_super
         meta_super_front['chartData'] = dict_super
         meta_fueloil['chartData'] = []
         meta_diesel['chartData'] = dict_diesel
