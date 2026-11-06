@@ -540,10 +540,10 @@ if __name__ == '__main__':
         diesel_y = 1.5
         storage_ytick = [0, 25, 50, 75, 100]
         # gas_ytick = [0, 15, 30, 45] # from January 2021
-        gas_ytick = [8, 10, 12, 14]
+        gas_ytick = [8, 12, 16]
         gasstock_ytick = [2, 4, 6, 8]
         acstock_ytick = [7, 9, 11]
-        strom_ytick = [28, 32, 36]
+        strom_ytick = [29, 34, 39]
         ns_ytick = [0, 0.5, 1, 1.5]
         fossile_ytick = [20, 35, 50, 65]
         # RUS GAS rus_ytick = [0, 100, 200, 300]
